@@ -2,20 +2,14 @@
 #include <math.h>
 #include <gsl/gsl_math.h>
 #include <gsl/gsl_sf_bessel.h>
-#include <gsl/gsl_sf_exp.h>
 #include <gsl/gsl_complex.h>
 #include <gsl/gsl_complex_math.h>
+#include "spherical_fun.h"
 #include "numerov_solver.h"
+#include "structure_const.h"
+#include "gaunt.h"
 
-int l = 2;
-
-double real_spherical_hankel(int l, double x)
-{
-  double exp = gsl_sf_exp(-x);
-  double k = gsl_sf_bessel_kl_scaled(l, x);
-
-  return exp*k;
-}
+int l = 1;
 
 double empty_pot(double r)
 {
@@ -82,22 +76,25 @@ std::vector<double> Numerov_solver::solve_right(Logarithmic_mesh &mesh, int i_lr
 int main()
 {
 	uint len = 1000;
-	Logarithmic_mesh mesh(20.0, len);
+	Logarithmic_mesh mesh(50.0, len);
 	Numerov_solver sol;
 
 	std::vector<double> res(len,0);
 
 	std::vector<double> icond { 
-		  gsl_pow_int(sqrt(0.015), l+1)*real_spherical_hankel(l, sqrt(0.015)*mesh.r[len-1])/sqrt(mesh.drx[len-1]),
-		  gsl_pow_int(sqrt(0.015), l+1)*real_spherical_hankel(l, sqrt(0.015)*mesh.r[len-2])/sqrt(mesh.drx[len-2]) }; 
+	/*	  gsl_pow_int(sqrt(0.015), l+1)*real_spherical_hankel(l, sqrt(0.015)*mesh.r[len-1])/sqrt(mesh.drx[len-1]),
+		  gsl_pow_int(sqrt(0.015), l+1)*real_spherical_hankel(l, sqrt(0.015)*mesh.r[len-2])/sqrt(mesh.drx[len-2]) */
+		  gsl_pow_int(sqrt(0.015), -l)*gsl_sf_bessel_jl(l, sqrt(0.015)*mesh.r[len-1])/sqrt(mesh.drx[len-1]),
+		  gsl_pow_int(sqrt(0.015), -l)*gsl_sf_bessel_jl(l, sqrt(0.015)*mesh.r[len-2])/sqrt(mesh.drx[len-2])
+	}; 
 
-	std::vector<double> left = sol.solve_left(mesh, len-25, icond, -0.112);
+	std::vector<double> left = sol.solve_left(mesh, len-25, icond, -0.25);
 
 	icond = { gsl_pow_int(mesh.r[0], l+1)/sqrt(mesh.drx[0]), 
 		  gsl_pow_int(mesh.r[1], l+1)/sqrt(mesh.drx[1]), 
 		  gsl_pow_int(mesh.r[2], l+1)/sqrt(mesh.drx[2]) };
 
-	std::vector<double> right = sol.solve_right(mesh, len-25, icond, -0.112);
+	std::vector<double> right = sol.solve_right(mesh, len-25, icond, -0.25);
 
 	double scale = right[len-25]/left[len-25];
 	left[len-25] *= 0.5; /* Avoid double counting */
@@ -109,6 +106,21 @@ int main()
 	for(uint i = 0; i < len; i++)
  		std::cout << mesh.r[i] << " " << res[i]*sqrt(mesh.drx[i])/mesh.r[i] << std::endl;
 
+	gsl_vector *r = gsl_vector_alloc(3);
+	gsl_vector_set(r, 0, 1.);
+	gsl_vector_set(r, 1, 0.);
+	gsl_vector_set(r, 2, 0.);
+
+	lm l, lp;
+	l.l = 1;
+	l.m = 0;
+	lp.l = 1;
+	lp.m = 0;
+
+	Structure_constant B(l, lp, *r);
+
+
+	std::cout << B.val << std::endl;
 
 	return 0;
 }
