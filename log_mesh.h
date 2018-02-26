@@ -12,7 +12,7 @@ class Logarithmic_mesh {
 
 		double A;
 
-		Logarithmic_mesh(double radius, uint num_points);
-		Logarithmic_mesh(double A, double radius, uint num_points);
+		Logarithmic_mesh(double radius, unsigned int num_points);
+		Logarithmic_mesh(double A, double radius, unsigned int num_points);
 };
 #endif //LOG_MESH_H

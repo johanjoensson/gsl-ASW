@@ -1,11 +1,8 @@
 #ifndef STRUCTURE_CONST_H
 #define STRUCTURE_CONST_H
+#include <iostream>
 #include <gsl/gsl_vector.h>
-
-struct lm {
-	int l;
-	int m;
-};
+#include "spherical_fun.h"
 
 class Structure_constant{
 		int l_int, l_low;
@@ -20,6 +17,9 @@ class Structure_constant{
 
 		double val;
 
+		friend std::ostream& operator << ( std::ostream&, const Structure_constant& );  
 };
+
+std::ostream& operator << ( std::ostream&, const Structure_constant& );  
 
 #endif //STRUCTURE_CONST_H

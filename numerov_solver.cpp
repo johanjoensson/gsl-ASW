@@ -1,45 +1,34 @@
-#include <iostream>
-#include <math.h>
-#include <gsl/gsl_math.h>
-#include <gsl/gsl_sf_bessel.h>
-#include <gsl/gsl_complex.h>
-#include <gsl/gsl_complex_math.h>
-#include "spherical_fun.h"
+#include <cmath>
 #include "numerov_solver.h"
-#include "structure_const.h"
-#include "gaunt.h"
-
-int l = 1;
 
 double empty_pot(double r)
 {
 	return 0.*r;
 }
 
-/* To change later */
-double v_eff(double r)
-{
-	return l*(l+1.)/(r*r) - 2./r;
-}
-
 Numerov_solver::Numerov_solver()
-	: v()
 {
-	this->v_ext = &empty_pot;
+	this->v_at = &empty_pot;
+	this->v_eff = &empty_pot;
 }
 
-void Numerov_solver::set_v_ext(double (*new_v_ext)(double r))
+void Numerov_solver::set_v_eff(double (*new_v_eff)(double r))
 {
-	this->v_ext = new_v_ext;
+	this->v_eff = new_v_eff;
+}
+
+void Numerov_solver::set_v_at(double (*new_v_at)(double r))
+{
+	this->v_at = new_v_at;
 }
 
 std::vector<double> Numerov_solver::solve_left(Logarithmic_mesh &mesh, int i_lr, std::vector<double> &init_cond, double E)
 {
-	uint l = init_cond.size();
+	unsigned int l = init_cond.size();
 	std::vector<double> res(mesh.r.size(),0);
 	double g, g1, g2;
 
-	for(uint i = res.size() - 1; i > res.size() - 1 - l; i--){
+	for(unsigned int i = res.size() - 1; i > res.size() - 1 - l; i--){
 		res[i] = init_cond[res.size() - 1 - i];
 	}
 
@@ -55,11 +44,11 @@ std::vector<double> Numerov_solver::solve_left(Logarithmic_mesh &mesh, int i_lr,
 
 std::vector<double> Numerov_solver::solve_right(Logarithmic_mesh &mesh, int i_lr, std::vector<double> &init_cond, double E)
 {
-	uint l = init_cond.size();
+	unsigned int l = init_cond.size();
 	std::vector<double> res(mesh.r.size(),0);
 	double g, g1, g2;
 
-	for(uint i = 0; i < l; i++){
+	for(unsigned int i = 0; i < l; i++){
 		res[i] = init_cond[i];
 	}
 
@@ -73,54 +62,104 @@ std::vector<double> Numerov_solver::solve_right(Logarithmic_mesh &mesh, int i_lr
 	return res;
 }
 
-int main()
+int sign(double f)
 {
-	uint len = 1000;
-	Logarithmic_mesh mesh(50.0, len);
-	Numerov_solver sol;
+    int res = 1;
+    if(f < 0){
+	    res = -1;
+    }
+    return res;
+}
 
-	std::vector<double> res(len,0);
-
-	std::vector<double> icond { 
-	/*	  gsl_pow_int(sqrt(0.015), l+1)*real_spherical_hankel(l, sqrt(0.015)*mesh.r[len-1])/sqrt(mesh.drx[len-1]),
-		  gsl_pow_int(sqrt(0.015), l+1)*real_spherical_hankel(l, sqrt(0.015)*mesh.r[len-2])/sqrt(mesh.drx[len-2]) */
-		  gsl_pow_int(sqrt(0.015), -l)*gsl_sf_bessel_jl(l, sqrt(0.015)*mesh.r[len-1])/sqrt(mesh.drx[len-1]),
-		  gsl_pow_int(sqrt(0.015), -l)*gsl_sf_bessel_jl(l, sqrt(0.015)*mesh.r[len-2])/sqrt(mesh.drx[len-2])
-	}; 
-
-	std::vector<double> left = sol.solve_left(mesh, len-25, icond, -0.25);
-
-	icond = { gsl_pow_int(mesh.r[0], l+1)/sqrt(mesh.drx[0]), 
-		  gsl_pow_int(mesh.r[1], l+1)/sqrt(mesh.drx[1]), 
-		  gsl_pow_int(mesh.r[2], l+1)/sqrt(mesh.drx[2]) };
-
-	std::vector<double> right = sol.solve_right(mesh, len-25, icond, -0.25);
-
-	double scale = right[len-25]/left[len-25];
-	left[len-25] *= 0.5; /* Avoid double counting */
-	right[len-25] *= 0.5; /* Avoid double counting */
-	for(uint i = 0; i < len; i++ ){
-		res[i] = scale*left[i] + right[i];
+int Numerov_solver::find_inversion_point(Logarithmic_mesh &mesh, double e_trial)
+{
+	int inv = mesh.r.size() - 1;
+	double pot;
+	bool done = false;
+	for(unsigned int i = 0; i < mesh.r.size() && !done; i++){
+		pot = v_at(mesh.r[i]);
+		if(pot > e_trial){
+			inv = i;
+			done = true;
+		}
 	}
+	return inv;
+}
 
-	for(uint i = 0; i < len; i++)
- 		std::cout << mesh.r[i] << " " << res[i]*sqrt(mesh.drx[i])/mesh.r[i] << std::endl;
+int count_nodes(std::vector<double> &fun, int i_inv)
+{
+	int n_nodes = 0;
+	for(int i = 0; i < i_inv; i++){
+		n_nodes += 0.5*(1 - sign(fun[i + 1])/sign(fun[i]));
+	}
+	return n_nodes;
+}
 
-	gsl_vector *r = gsl_vector_alloc(3);
-	gsl_vector_set(r, 0, 1.);
-	gsl_vector_set(r, 1, 0.);
-	gsl_vector_set(r, 2, 0.);
+double Numerov_solver::variational_energy_correction(Logarithmic_mesh &mesh, std::vector<double> &fun, int i_inv, double e_trial)
+{
+	double f_inv, f_m1, f_p1, cusp_val, df;
+	f_inv = 1 + (mesh.drx[i_inv]*mesh.drx[i_inv]*(e_trial - v_eff(mesh.r[i_inv])) - mesh.A*mesh.A/4.)/12.;
+	f_m1 = 1 + (mesh.drx[i_inv-1]*mesh.drx[i_inv-1]*(e_trial - v_eff(mesh.r[i_inv-1])) - mesh.A*mesh.A/4.)/12.;
+	f_p1 = 1 + (mesh.drx[i_inv+1]*mesh.drx[i_inv+1]*(e_trial - v_eff(mesh.r[i_inv+1])) - mesh.A*mesh.A/4.)/12.;
+	cusp_val = (fun[i_inv - 1]*f_m1 + fun[i_inv + 1]*f_p1 + 10*fun[i_inv]*f_inv)/12.;
+	df = f_inv*(fun[i_inv]/cusp_val - 1);
+	return 12.*df*cusp_val*cusp_val/mesh.drx[i_inv];
+}
 
-	lm l, lp;
-	l.l = 1;
-	l.m = 0;
-	lp.l = 1;
-	lp.m = 0;
+std::vector<double> Numerov_solver::solve(Logarithmic_mesh &mesh, std::vector<double> &l_init, std::vector<double> &r_init, double &en, int n_nodes)
+{
+    double e_trial = en;
+    double e_max = en + 2, e_min = en - 2;
+    bool done = false;
+    std::vector<double> res(mesh.r.size(),0), tmp(mesh.r.size(),0);
 
-	Structure_constant B(l, lp, *r);
+    int i_inv = mesh.r.size();
+    int n_tmp = -1;
+
+    double scale = 0;
+    double de = 0;
 
 
-	std::cout << B.val << std::endl;
 
-	return 0;
+    // Loop until we have found a good enough estimate of the energy
+    while(!done){
+	    // Rough estimate of the energy
+	    // MAke sure we have the correct number of nodes
+	    while(n_tmp != n_nodes){	    
+		    i_inv = find_inversion_point(mesh, e_trial);
+		    tmp = this->solve_right(mesh, i_inv, l_init, e_trial);
+		    n_tmp = count_nodes(tmp, i_inv);
+		    if(n_tmp > n_nodes){
+			    e_max = e_trial;
+			    e_trial = 0.5*(e_trial + e_min);
+		    }else if(n_tmp < n_nodes){
+			    e_min = e_trial;
+			    e_trial = 0.5*(e_trial + e_max);
+		    }
+		    if(std::abs(e_max - e_min) < 1E-10){
+			    e_min = e_max - 4;
+			    e_trial = 0.5*(e_max + e_min);
+		    }
+	    }
+	    // Correct number of nodes, now match values at mesh.r[i_inv]
+	    for(int i = 0; i <= i_inv; i++){
+		    res[i] = tmp[i];
+	    }
+	    tmp = this->solve_left(mesh, i_inv, r_init, e_trial);
+	    scale = res[i_inv]/tmp[i_inv];
+	    for(unsigned int i = i_inv + 1; i < res.size(); i++){
+		    res[i] = scale*tmp[i];
+	    }
+	    // Finer corrections to the energy
+	    // Match slope at mesh.r[i_inv]
+	    de = variational_energy_correction(mesh, res, i_inv, e_trial);
+	    if(std::abs(de) < 1E-10){
+		    done = true;
+	    }else{
+		    e_trial += de;
+		    n_tmp = -1; 
+	    }
+    }
+    en = e_trial;
+    return res;
 }
