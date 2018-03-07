@@ -20,7 +20,7 @@ CXXFLAGS = -g -std=c++11 -Wall -Wextra -Werror -W -pedantic
 CFLAGS = -g -std=c11 -Wall -Wextra -Werror -W -pedantic
 
 CXXCHECKS =clang-analyzer-*,-clang-analyzer-cplusplus*,cppcoreguidelines-*,bugprone-* 
-CXXCHECKFLAGS = -checks=$(CXXCHECKS) -- -std=c++11
+CXXCHECKFLAGS = -checks=$(CXXCHECKS) -header-filter=.* -- -std=c++11
 
 # Libraries to link against
 LDFLAGS = -lgsl -lgslcblas -lm
@@ -28,11 +28,13 @@ LDFLAGS = -lgsl -lgslcblas -lm
 # List of all executables in this project
 EXE = numerov_test
 
-NUMEROV_OBJ = numerov_solver.o \
+NUMEROV_OBJ = numerov_solver.o\
 	      spherical_fun.o\
 	      log_mesh.o \
 	      gaunt.o \
 	      structure_const.o\
+	      atom.o\
+	      crystal.o\
 	      main.o
 
 # Targets to always execute, even if new files with the same names exists

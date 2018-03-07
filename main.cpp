@@ -7,8 +7,9 @@
 #include "spherical_fun.h"
 #include "numerov_solver.h"
 #include "structure_const.h"
-#include "gaunt.h"
 #include "numerov_solver.h"
+#include "atom.h"
+#include "crystal.h"
 
 int l;
 int z;
@@ -28,39 +29,30 @@ double v_eff(double r)
 
 int main()
 {
-	z = 8;
-	l = 2;
-	int n = 4;
+	z = 29;
+	gsl_vector *r = gsl_vector_alloc(3*sizeof(double));
 
-	unsigned int len = 1000;
-	Logarithmic_mesh mesh(10.0, len);
-	Numerov_solver sol;
-	sol.set_v_eff(&v_eff);
-	sol.set_v_at(&v_at);
+	Logarithmic_mesh m(1,1000);
+	gsl_vector_set(r, 0, 0.);
+	gsl_vector_set(r, 1, 0.5);
+	gsl_vector_set(r, 2, 0.);
+	Atom a1(1, 1, z, *r, m);
+	gsl_vector_set(r, 0, 0.);
+	gsl_vector_set(r, 1, 0.2);
+	gsl_vector_set(r, 2, 0.);
+	Atom a2(1, 1, z, *r, m);
 
-	// Initial guess of energy eigenvalue (theoretical value = -z^2/n^2)
-	double energy = -z*z*1./(n*n) -2.;
-
-	std::vector<double> res(len,0);
-
-	std::vector<double> icond_r { 
-		  gsl_pow_int(kappa, -l)*gsl_sf_bessel_jl(l, kappa*mesh.r[len-1])/std::sqrt(mesh.drx[len-1]),
-		  gsl_pow_int(kappa, -l)*gsl_sf_bessel_jl(l, kappa*mesh.r[len-2])/std::sqrt(mesh.drx[len-2])
-	}; 
-
-	std::vector<double> icond_l = { gsl_pow_int(mesh.r[0], l+1)/std::sqrt(mesh.drx[0]), 
-		  gsl_pow_int(mesh.r[1], l+1)/std::sqrt(mesh.drx[1]), 
-		  gsl_pow_int(mesh.r[2], l+1)/std::sqrt(mesh.drx[2]) };
-
-	res = sol.solve(mesh, icond_l, icond_r, energy, n - l - 1);
-	std::cout << "Returned energy = " << energy << std::endl;
-
-	std::ofstream file;
-	file.open("WaveFun.dat");
-	for(unsigned int i = 0; i < res.size(); i++ ){
-		file << mesh.r[i] << " " << res[i] << std::endl;
+	gsl_vector tmp;
+	double x = 0., y = 0., z = 0;
+	std::vector<Atom*> atoms {&a1, &a2};
+	for(Atom *at : atoms){
+		tmp = at->get_pos();
+		x = gsl_vector_get(&tmp, 0);
+		y = gsl_vector_get(&tmp, 1);
+		z = gsl_vector_get(&tmp, 2);
+		std::cout << "Atom at position (" << x << ", " << y << ", " << z << ")!" << std::endl;
 	}
-	file.close();
+	gsl_vector_free(r);
 
 	return 0;
 }
