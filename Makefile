@@ -25,6 +25,12 @@ CXXCHECKFLAGS = -checks=$(CXXCHECKS) -- -std=c++11
 # Libraries to link against
 LDFLAGS = -lgsl -lgslcblas -lm
 
+# Source files directory
+SRC_DIR = src
+
+# Build directory
+BUILD_DIR = build
+
 # List of all executables in this project
 EXE = numerov_test
 
@@ -34,6 +40,7 @@ NUMEROV_OBJ = numerov_solver.o \
 	      gaunt.o \
 	      structure_const.o\
 	      main.o
+OBJS = $(addprefix $(BUILD_DIR)/, $(NUMEROV_OBJ))
 
 # Targets to always execute, even if new files with the same names exists
 .PHONY: all clean cleanall
@@ -42,15 +49,15 @@ NUMEROV_OBJ = numerov_solver.o \
 all: $(EXE)
 
 # Create object files from c++ sources
-%.o: %.cpp
-	$(CXX) $(CXXFLAGS) -c $<
+$(BUILD_DIR)/%.o: $(SRC_DIR)/%.cpp
+	$(CXX) $(CXXFLAGS) -c $? -o $@
 
 # Create object files from c sources
-%.o: %.c
-	$(CC) $(CFLAGS) -c $<
+$(BUILD_DIR)/%.o: $(SRC_DIR)/%.c
+	$(CC) $(CFLAGS) -c $< -o $@
 
 # Link numerov_test
-numerov_test: $(NUMEROV_OBJ)
+numerov_test: $(OBJS)
 	$(CXX) $(LDFLAGS) $^ -o $@
 
 checkall: $(NUMEROV_OBJ:o=cpp)
@@ -58,8 +65,8 @@ checkall: $(NUMEROV_OBJ:o=cpp)
 
 # Remove object files
 clean:
-	rm -f *.o
+	rm -f $(BUILD_DIR)/*.o
 
 # Remove executables and object files
 cleanall:
-	rm -f $(EXE) *.o
+	rm -f $(EXE) $(BUILD_DIR)/*.o
