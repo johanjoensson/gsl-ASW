@@ -21,4 +21,4 @@ This is a hobby project for me (Johan Jösson), the goal is to create a working 
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 ### Contact
-email: johanjoensson@gmail.com
+email: johanjoensson [at] gmail.com
