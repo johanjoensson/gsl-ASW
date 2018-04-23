@@ -15,21 +15,21 @@ CC  = clang
 
 CXXCHECK = clang-tidy
 
+# Source files directory
+SRC_DIR = src
+
+# Build directory
+BUILD_DIR = build
+
 # Flags for the above defined compilers
-CXXFLAGS = -g -std=c++11 -Wall -Wextra -Werror -W -pedantic
-CFLAGS = -g -std=c11 -Wall -Wextra -Werror -W -pedantic
+CXXFLAGS = -g -std=c++11 -Wall -Wextra -Werror -W -pedantic -I $(SRC_DIR)
+CFLAGS = -g -std=c11 -Wall -Wextra -Werror -W -pedantic -I $(SRC_DIR)
 
 CXXCHECKS =clang-analyzer-*,-clang-analyzer-cplusplus*,cppcoreguidelines-*,bugprone-* 
 CXXCHECKFLAGS = -checks=$(CXXCHECKS) -header-filter=.* -- -std=c++11
 
 # Libraries to link against
 LDFLAGS = -lgsl -lgslcblas -lm
-
-# Source files directory
-SRC_DIR = src
-
-# Build directory
-BUILD_DIR = build
 
 # List of all executables in this project
 EXE = numerov_test
@@ -41,6 +41,7 @@ NUMEROV_OBJ = numerov_solver.o\
 	      structure_const.o\
 	      atom.o\
 	      crystal.o\
+	      ewald_int.o\
 	      main.o
 
 OBJS = $(addprefix $(BUILD_DIR)/, $(NUMEROV_OBJ))
@@ -63,7 +64,7 @@ $(BUILD_DIR)/%.o: $(SRC_DIR)/%.c
 numerov_test: $(OBJS)
 	$(CXX) $(LDFLAGS) $? -o $@
 
-checkall: $(NUMEROV_OBJ:o=cpp)
+checkall: $(addprefix $(SRC_DIR)/, $(NUMEROV_OBJ:o=cpp))
 	$(CXXCHECK) $^ $(CXXCHECKFLAGS)
 
 # Remove object files

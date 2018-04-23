@@ -15,6 +15,10 @@ void Atom::set_AS(double as)
 	this->AS = as;
 }
 
+void Atom::set_pos(gsl_vector &r)
+{
+	gsl_vector_memcpy(this->pos, &r);
+}
 gsl_vector Atom::get_pos()
 {
 	return *(this->pos);

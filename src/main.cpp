@@ -38,7 +38,7 @@ int main()
 	gsl_vector_set(r, 2, 0.);
 	Atom a1(1, 1, z, *r, m);
 	gsl_vector_set(r, 0, 0.);
-	gsl_vector_set(r, 1, 0.2);
+	gsl_vector_set(r, 1, 1.5);
 	gsl_vector_set(r, 2, 0.);
 	Atom a2(1, 1, z, *r, m);
 
@@ -52,6 +52,12 @@ int main()
 		z = gsl_vector_get(&tmp, 2);
 		std::cout << "Atom at position (" << x << ", " << y << ", " << z << ")!" << std::endl;
 	}
+	Structure_constant b(lm {4, 0}, lm {3, 1}, *r);
+
+	std::cout << "B((4, 0), (3, 1), (0., 1.5, 0.)) = " << b.val << std::endl;
+	std::cout << "dB/dk2((4, 0), (3, 1), (0., 1.5, 0.)) = " << b.dk_val << std::endl;
+
+
 	gsl_vector_free(r);
 
 	return 0;

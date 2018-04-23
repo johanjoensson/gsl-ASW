@@ -26,18 +26,25 @@ Structure_constant::Structure_constant(int l_low, int l_int, double kappa, lm l1
 	}
 
 	// Sum over all intermediate angular momenta
-	double sum = 0., m_sum = 0., a = 0.;
+	double sum = 0., d_sum = 0., m_sum = 0., a = 0., tmp = 0.;
 	for (int lpp = 0; lpp <= l_int; lpp++){
+		m_sum = 0;
 		for (int mpp = -lpp; mpp <= lpp; mpp++){
 			a = gaunt(l1, l2, lm {lpp, mpp});
-			if (a != 0){
+			if (abs(a) > 1E-16){
 			    m_sum += a*cubic_harmonic(lm {lpp, mpp}, r);
 			}
 		}
+		tmp = -(l1.l+l2.l-lpp)/(kappa*kappa)*real_spherical_hankel(lm {lpp, 0}, kappa*r_norm);
+		if(lpp > 0){
+			tmp += r_norm*real_spherical_hankel(lm {lpp - 1, 0}, kappa*r_norm)/kappa;
+		}
 		sum += c*real_spherical_hankel(lm {lpp, 0}, kappa*r_norm)*m_sum;
+		d_sum += c*m_sum*tmp;
 		c *= -1;
 	}
 	this->val = 4*M_PI*k_fac*sum;
+	this->dk_val = 2*M_PI*k_fac*d_sum;
 }
 
 Structure_constant::Structure_constant(int l_low, int l_int, lm l1, lm l2, gsl_vector r)

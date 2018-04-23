@@ -16,6 +16,7 @@ class Structure_constant{
 		Structure_constant(lm l1, lm l2, gsl_vector r);
 
 		double val;
+		double dk_val;
 
 		friend std::ostream& operator << ( std::ostream&, const Structure_constant& );  
 };
