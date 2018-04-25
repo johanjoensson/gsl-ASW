@@ -1,5 +1,5 @@
 #include "ewald_int.h"
-#include <math>
+#include <cmath>
 
 Integral_hankel::Integral_hankel(Logarithmic_mesh &mesh)
     : mesh(mesh)
@@ -8,12 +8,12 @@ Integral_hankel::Integral_hankel(Logarithmic_mesh &mesh)
     this->ewald_param = 1;
 }
 
-Integral_hankel::set_ewald_param(double eta)
+void Integral_hankel::set_ewald_param(double eta)
 {
 	this->ewald_param = eta;
 }
 
-Integral_hankel::set_kappa(double kappa)
+void Integral_hankel::set_kappa(double kappa)
 {
 	this->kappa = kappa;
 }

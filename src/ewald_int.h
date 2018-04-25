@@ -5,7 +5,7 @@
 #include "log_mesh.h"
 
 class Integral_hankel{
-        Logarithmic_mesh &mesh;
+        Logarithmic_mesh mesh;
         double ewald_param;
 	double kappa;
     public:
