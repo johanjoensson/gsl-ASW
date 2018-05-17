@@ -12,7 +12,7 @@ Structure_constant::Structure_constant(int l_low, int l_int, double kappa, lm l1
 	this->kappa = kappa;
 
 	double k_fac = gsl_pow_int(kappa, l1.l + l2.l + 1);
-	
+
 	double x = gsl_vector_get(&r, 0);
 	double y = gsl_vector_get(&r, 1);
 	double z = gsl_vector_get(&r, 2);
@@ -26,21 +26,23 @@ Structure_constant::Structure_constant(int l_low, int l_int, double kappa, lm l1
 	}
 
 	// Sum over all intermediate angular momenta
+	// Calculate both value and energy derivative of structure constant
 	double sum = 0., d_sum = 0., m_sum = 0., a = 0., tmp = 0.;
 	for (int lpp = 0; lpp <= l_int; lpp++){
 		m_sum = 0;
+		tmp = 0;
 		for (int mpp = -lpp; mpp <= lpp; mpp++){
 			a = gaunt(l1, l2, lm {lpp, mpp});
 			if (abs(a) > 1E-16){
 			    m_sum += a*cubic_harmonic(lm {lpp, mpp}, r);
 			}
 		}
-		tmp = -(l1.l+l2.l-lpp)/(kappa*kappa)*real_spherical_hankel(lm {lpp, 0}, kappa*r_norm);
 		if(lpp > 0){
-			tmp += r_norm*real_spherical_hankel(lm {lpp - 1, 0}, kappa*r_norm)/kappa;
+			tmp += r_norm/kappa * real_spherical_hankel(lm {lpp - 1, 0}, kappa*r_norm);
 		}
-		sum += c*real_spherical_hankel(lm {lpp, 0}, kappa*r_norm)*m_sum;
-		d_sum += c*m_sum*tmp;
+		d_sum += (l1.l + l2.l - lpp)/(kappa*kappa)*real_spherical_hankel(lm {lpp, 0}, kappa*r_norm);
+		tmp += c*real_spherical_hankel(lm {lpp, 0}, kappa*r_norm)*m_sum;
+		d_sum += c*tmp*m_sum;
 		c *= -1;
 	}
 	this->val = 4*M_PI*k_fac*sum;
@@ -68,4 +70,3 @@ std::ostream& operator << ( std::ostream& os, const Structure_constant& B)
 	os << "B[(" << B.l1.l << ", " << B.l1.m << "), (" << B.l2.l << ", " << B.l2.m << ")](" << gsl_vector_get(&B.r,0) << ", " << gsl_vector_get(&B.r,1) << ", " << gsl_vector_get(&B.r,2) << ") = " <<B.val;
 	return os;
 }
-
