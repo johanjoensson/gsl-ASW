@@ -29,6 +29,7 @@ class Structure_constant{
 		double val;
 		double dk_val;
 
+		//! Functionality for printing structure constants
 		friend std::ostream& operator << ( std::ostream&, const Structure_constant& );
 };
 
