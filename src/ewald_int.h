@@ -8,8 +8,6 @@
 class Ewald_integral{
         double ewald_param;
         double kappa;
-        double ewald_int(lm l, double r);
-        double comp_ewald_int(lm l, double r);
         double bar_ew_int(lm l, double r);
         double bar_comp_ew_int(lm l, double r);
     public:
@@ -21,6 +19,8 @@ class Ewald_integral{
         Ewald_integral();
         std::vector<double> evaluate(lm l, Logarithmic_mesh &mesh);
         std::vector<double> evaluate_comp(lm l, Logarithmic_mesh &mesh);
+        double ewald_int(lm l, double r);
+        double comp_ewald_int(lm l, double r);
 };
 
 #endif //EWALD_INT_H

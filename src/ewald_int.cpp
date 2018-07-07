@@ -33,21 +33,25 @@ double Ewald_integral::bar_ew_int(lm l, double r){
     double a = sqrt(eta)*r/2.;
     double b = -kappa*kappa*r*r/4.;
     if(l.l == 0){
-        t1 = gsl_sf_exp(-kappa*r) + gsl_sf_exp(kappa*r);
-        t2 = gsl_sf_exp(-kappa*r)*gsl_sf_erf(0.5*sqrt(eta)*r - kappa/sqrt(eta));
-        t3 = gsl_sf_exp(kappa*r)*gsl_sf_erf(0.5*sqrt(eta)*r + kappa/sqrt(eta));
+        t1 = exp_gsl(-kappa*r) + exp_gsl(kappa*r);
+        t2 = exp_gsl(-kappa*r)*gsl_sf_erf(0.5*sqrt(eta)*r - kappa/sqrt(eta));
+        t3 = exp_gsl(kappa*r)*gsl_sf_erf(0.5*sqrt(eta)*r + kappa/sqrt(eta));
 
         res = M_SQRTPI/4*(t1 - t2 - t3);
     }else if(l.l == -1){
-        t1 = gsl_sf_exp(-kappa*r) - gsl_sf_exp(kappa*r);
-        t2 = gsl_sf_exp(-this->kappa*r)*gsl_sf_erf(sqrt(eta)*r/2 - this->kappa/sqrt(eta));
-        t3 = gsl_sf_exp(this->kappa*r)*gsl_sf_erf(sqrt(eta)*r/2 + this->kappa/sqrt(eta));
+        t1 = exp_gsl(-kappa*r) - exp_gsl(kappa*r);
+        t2 = exp_gsl(-this->kappa*r)*gsl_sf_erf(sqrt(eta)*r/2 - this->kappa/sqrt(eta));
+        t3 = exp_gsl(this->kappa*r)*gsl_sf_erf(sqrt(eta)*r/2 + this->kappa/sqrt(eta));
 
         res = M_SQRTPI/(2*kappa)*(t1 - t2 + t3)/r;
     }else if(l.l >= 1){
         t1 = (2*l.l - 1)/2. * bar_ew_int(lm {l.l - 1, l.m}, r);
         t2 = -b*bar_ew_int(lm {l.l - 2, l.m}, r);
-        t3 = gsl_pow_int(a, (2*l.l-1))/2 * gsl_sf_exp(-a*a + b/(a*a));
+        if(-a*a + b/(a*a) > -700){
+            t3 = gsl_pow_int(a, (2*l.l-1))/2 * exp_gsl(-a*a + b/(a*a));
+        }else{
+            t3 = 0;
+        }
         res = t1 + t2 + t3;
     }
     return res;
@@ -67,21 +71,21 @@ double Ewald_integral::bar_comp_ew_int(lm l, double r){
     double b = -kappa*kappa*r*r/4;
 
     if(l.l == 0){
-        t1 = gsl_sf_exp(-kappa*r) - gsl_sf_exp(kappa*r);
-        t2 = gsl_sf_exp(-kappa*r)*gsl_sf_erf(-0.5*sqrt(eta)*r + kappa/sqrt(eta));
-        t3 = gsl_sf_exp(kappa*r)*gsl_sf_erf(0.5*sqrt(eta)*r + kappa/sqrt(eta));
+        t1 = exp_gsl(-kappa*r) - exp_gsl(kappa*r);
+        t2 = exp_gsl(-kappa*r)*gsl_sf_erf(-0.5*sqrt(eta)*r + kappa/sqrt(eta));
+        t3 = exp_gsl(kappa*r)*gsl_sf_erf(0.5*sqrt(eta)*r + kappa/sqrt(eta));
 
         res = M_SQRTPI/4 * (t1 - t2 + t3);
     }else if(l.l == -1){
-        t1 = gsl_sf_exp(-kappa*r) + gsl_sf_exp(kappa*r);
-        t2 = gsl_sf_exp(-kappa*r)*gsl_sf_erf(-0.5*sqrt(eta)*r + kappa/sqrt(eta));
-        t3 = gsl_sf_exp(kappa*r)*gsl_sf_erf(0.5*sqrt(eta)*r + kappa/sqrt(eta));
+        t1 = exp_gsl(-kappa*r) + exp_gsl(kappa*r);
+        t2 = exp_gsl(-kappa*r)*gsl_sf_erf(-0.5*sqrt(eta)*r + kappa/sqrt(eta));
+        t3 = exp_gsl(kappa*r)*gsl_sf_erf(0.5*sqrt(eta)*r + kappa/sqrt(eta));
 
         res = M_SQRTPI/(2*kappa) * (t1 - t2 - t3)/r;
     }else if(l.l >= 1){
         t1 = (2*l.l - 1)/2. * bar_comp_ew_int(lm {l.l - 1, l.m}, r);
         t2 = -b*bar_comp_ew_int(lm {l.l - 2, l.m}, r);
-        t3 = -gsl_pow_int(a, (2*l.l-1))/2 * gsl_sf_exp(-a*a + b/(a*a));
+        t3 = -gsl_pow_int(a, (2*l.l-1))/2 * exp_gsl(-a*a + b/(a*a));
         res = t1 + t2 + t3;
     }
     return res;

@@ -10,8 +10,10 @@
 ################################################################################
 
 # Compilers to use
-CXX = clang++
-CC  = clang
+#CXX = clang++
+CXX = g++
+#CC  = clang
+CC  = gcc
 
 CXXCHECK = clang-tidy
 
@@ -29,7 +31,8 @@ CXXCHECKS =clang-analyzer-*,-clang-analyzer-cplusplus*,cppcoreguidelines-*,bugpr
 CXXCHECKFLAGS = -checks=$(CXXCHECKS) -header-filter=.* -- -std=c++11
 
 # Libraries to link against
-LDFLAGS = -lgsl -lgslcblas -lm -stdlib=libstdc++
+GSLLIBDIR="../GSL-lib/"
+LDFLAGS = -L$(GSLLIBDIR) -Wl,-rpath=$(GSLLIBDIR) -lgsl -lgslcblas -lm -lgsl-lib
 
 # List of all executables in this project
 EXE = numerov_test

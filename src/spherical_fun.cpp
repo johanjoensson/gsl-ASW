@@ -5,9 +5,10 @@
 #include <gsl/gsl_sf_legendre.h>
 #include <gsl/gsl_complex.h>
 #include <gsl/gsl_complex_math.h>
+#include <string>
 #include "spherical_fun.h"
 
-#include <iostream>
+//#include <iostream>
 
 unsigned long int factorial(int n)
 {
@@ -48,25 +49,105 @@ double cubic_harmonic(lm l, gsl_vector r)
 	}else{
 		res = gsl_sf_sin(m_eff*phi)*sqrt(2);
 	}
-/*
-	std::cout << "X = " << x << std::endl;
-	std::cout << "Y = " << y << std::endl;
-	std::cout << "Z = " << z << std::endl;
-	std::cout << "Theta = " << theta << std::endl;
-	std::cout << "Phi = " << phi << std::endl;
-	*/
 	return c*gsl_sf_legendre_sphPlm(l.l, m_eff, cos_theta)*res;
 }
 
 double real_spherical_hankel(lm l, double x)
 {
-  double exp = gsl_sf_exp(-x);
+  double exp = exp_gsl(-x);
   double k = 2./M_PI * gsl_sf_bessel_kl_scaled(l.l, x);
 
   return exp*k;
 }
 
+double exp_gsl(double x)
+{
+	gsl_sf_result res;
+	res.val = 0.;
+	res.err = 0.;
+	int stat = 0;
+	stat = gsl_sf_exp_e(x, &res);
+	if(stat == GSL_EUNDRFLW){
+		res.val = 0.;
+	}else if(stat){
+		std::string error_str =   gsl_strerror(stat);
+		throw std::runtime_error("Error in exponential.\nGSL error: "
+		+ error_str);
+	}
+
+	return res.val;
+}
+
 std::ostream& operator << ( std::ostream& os, const lm& l)
 {
 	return os << "(" << l.l << ", " << l.m << ")";
+}
+
+gsl_complex operator + (gsl_complex a, gsl_complex b)
+{
+	return gsl_complex_add(a, b);
+}
+
+std::ostream& operator << ( std::ostream& os, const gsl_complex& a)
+{
+	if(GSL_IMAG(a) < 0){
+		return os << GSL_REAL(a) << " " << GSL_IMAG(a) << "i";
+	}else{
+		return os << GSL_REAL(a) << "  + " << GSL_IMAG(a) << "i";
+	}
+}
+gsl_complex operator - (gsl_complex a, gsl_complex b)
+{
+	return gsl_complex_sub(a, b);
+}
+gsl_complex operator * (gsl_complex a, gsl_complex b)
+{
+	return gsl_complex_mul(a, b);
+}
+
+gsl_complex operator / (gsl_complex a, gsl_complex b)
+{
+	return gsl_complex_div(a, b);
+}
+
+gsl_complex operator + (gsl_complex a, double b)
+{
+	return gsl_complex_add_real(a, b);
+}
+gsl_complex operator - (gsl_complex a, double b)
+{
+	return gsl_complex_sub_real(a, b);
+}
+gsl_complex operator * (gsl_complex a, double b)
+{
+	return gsl_complex_mul_real(a, b);
+}
+gsl_complex operator / (gsl_complex a, double b)
+{
+	return gsl_complex_div_real(a, b);
+}
+
+gsl_complex operator + (double a, gsl_complex b)
+{
+	return gsl_complex_add_real(b, a);
+}
+gsl_complex operator - (double a, gsl_complex b)
+{
+	return gsl_complex_sub_real(b, a);
+}
+gsl_complex operator * (double a, gsl_complex b)
+{
+	return gsl_complex_mul_real(b, a);
+}
+gsl_complex operator / (double a, gsl_complex b)
+{
+	return gsl_complex_mul_real(gsl_complex_inverse(b), a);
+}
+
+gsl_vector& operator + (gsl_vector& a, gsl_vector& b)
+{
+	gsl_vector *res = gsl_vector_alloc(a.size);
+	gsl_vector_memcpy(res, &a);
+	gsl_vector_add(res, &b);
+	return *res;
 }
