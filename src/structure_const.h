@@ -3,6 +3,8 @@
 #include <iostream>
 #include <gsl/gsl_vector.h>
 #include "spherical_fun.h"
+#include "../../GSL-lib/src/vector.h"
+#include "../../GSL-lib/src/complex.h"
 
 /***************************************************************************//**
 * A class for representing structure constants\n
@@ -19,12 +21,12 @@ class Structure_constant{
 		int l_int, l_low;
 	        lm l1, l2;
 		double kappa;
-		gsl_vector r;
+		GSL::Vector r;
 	public:
-		Structure_constant(int l_low, int l_int, double kappa, lm l1, lm l2, gsl_vector r);
-		Structure_constant(int l_low, int l_int, lm l1, lm l2, gsl_vector r);
-		Structure_constant(int l_low, lm l1, lm l2, gsl_vector r);
-		Structure_constant(lm l1, lm l2, gsl_vector r);
+		Structure_constant(int l_low, int l_int, double kappa, lm l1, lm l2, GSL::Vector& r);
+		Structure_constant(int l_low, int l_int, lm l1, lm l2, GSL::Vector& r);
+		Structure_constant(int l_low, lm l1, lm l2, GSL::Vector& r);
+		Structure_constant(lm l1, lm l2, GSL::Vector& r);
 
 		double val;
 		double dk_val;

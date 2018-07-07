@@ -17,6 +17,8 @@
 #include "atom.h"
 #include "crystal.h"
 #include "ewald_int.h"
+#include "../../GSL-lib/src/vector.h"
+#include "../../GSL-lib/src/complex.h"
 
 
 int l;
@@ -47,72 +49,64 @@ int main()
 	I.set_kappa(sqrt(0.015));
 	I.set_ewald_param(eta);
 
-	gsl_vector *tau, *kp, *R, *a1, *a2, *a3, *tau_orig;
-    gsl_complex d2 = gsl_complex_rect(0., 0.), e = gsl_complex_rect(0., 0.);
+	GSL::Vector tau, kp, R, a1, a2, a3, tau_orig;
+    GSL::Complex d2(0., 0.), e(0., 0.);
 
-	tau_orig = gsl_vector_alloc(3);
-	tau = gsl_vector_alloc(3);
-	kp = gsl_vector_alloc(3);
-	R = gsl_vector_alloc(3);
-	a1 = gsl_vector_alloc(3);
-	a2 = gsl_vector_alloc(3);
-	a3 = gsl_vector_alloc(3);
+	tau_orig = GSL::Vector(3);
+	tau = GSL::Vector(3);
+	kp = GSL::Vector(3);
+	R = GSL::Vector(3);
+	a1 = GSL::Vector(3);
+	a2 = GSL::Vector(3);
+	a3 = GSL::Vector(3);
 
+	a1[0] = 0.5;
+	a1[1] = 0.5;
+	a1[2] = 0;
 
-	double x = 0., y = 0., z = 0, r = 0.;
+	a2[0] = 0;
+	a2[1] = 0.5;
+	a2[2] = 0.5;
+
+	a3[0] = 0.5;
+	a3[1] = 0.5;
+	a3[2] = 0;
 
     double dot = 0.;
+	double r = 0;
 	double tmp = 0.;
 	int l = 5, m = -3;
 
-	gsl_vector_set(kp, 0, 0.5);
-	gsl_vector_set(kp, 1, 0.5);
-	gsl_vector_set(kp, 2, 0.5);
+	kp[0] = 0.125;
+	kp[1] = 0.125;
+	kp[2] = 0.;
 
-	gsl_vector_set(tau, 0, 0.2);
-	gsl_vector_set(tau, 1, 0.86);
-	gsl_vector_set(tau, 2, 0.1);
-	gsl_vector_memcpy(tau_orig, tau);
-	for(int n = 1; n < 100; n++){
-	d2 = gsl_complex_rect(0., 0.);
+	tau[0] = 0.;
+	tau[1] = 0.;
+	tau[2] = 0.;
+
+	tau_orig.copy(tau);
+	for(int n = 1; n < 10; n++){
+	d2 = GSL::Complex(0., 0.);
 	for(int i = 1; i < n; i++){
 		for(int j = 1; j < n; j++){
 			for(int k = 1; k < n; k++){
-				gsl_vector_memcpy(tau, tau_orig);
-				gsl_vector_set_zero(R);
-				gsl_vector_set_basis(a1, 0);
-				gsl_vector_set_basis(a2, 1);
-				gsl_vector_set_basis(a3, 2);
-
-				gsl_vector_scale(a1, double(4*i));
-				gsl_vector_scale(a2, double(4*j));
-				gsl_vector_scale(a3, double(5*k));
-
-/*				R = *a1 + *a2;
-				gsl_vector_ass(R, a3);
-*/
-				gsl_vector_add(R, a1);
-				gsl_vector_add(R, a2);
-				gsl_vector_add(R, a3);
-				gsl_vector_sub(tau, R);
-				x = gsl_vector_get(tau, 0);
-				y = gsl_vector_get(tau, 1);
-				z = gsl_vector_get(tau, 2);
-				r = sqrt(x*x + y*y + z*z);
+				tau = tau_orig - R + i*a1 + j*a2 + k*a3;
+				r = tau.norm();
 
 
-				gsl_blas_ddot(R, kp, &dot);
-				tmp = gsl_pow_int(r, l)*cubic_harmonic(lm {l, m}, *tau)*I.ewald_int(lm {l, m}, r);
-				e = gsl_complex_exp(gsl_complex_rect(0., dot));
-				d2 = gsl_complex_add(d2, gsl_complex_mul_real(e, tmp));
+				dot = GSL::dot(tau, R);
+				tmp = gsl_pow_int(r, l)*cubic_harmonic(lm {l, m}, tau)*I.ewald_int(lm {l, m}, r);
+				e = GSL::exp(GSL::Complex(0., dot));
+				d2 = d2 + e*tmp;
 			}
 		}
 	}
-	d2 = gsl_complex_mul_real(d2, 2./M_SQRTPI*gsl_pow_int(2, l));
+	d2 *= 2./M_SQRTPI*gsl_pow_int(2, l);
 
-	std::cout << "N = " << n << ": D2([";
-	std::cout << gsl_vector_get(tau_orig, 0) << ", " << gsl_vector_get(tau_orig, 1) << ", " << gsl_vector_get(tau_orig, 2) << "], [";
-	std::cout << gsl_vector_get(kp, 0) << ", " << gsl_vector_get(kp, 1) << ", " << gsl_vector_get(kp, 2) << "]) = ";
+	std::cout << "N = " << n << ": D2(";
+	std::cout << tau_orig << ", ";
+	std::cout << kp << ") = ";
 	std::cout << d2<< std::endl;
     }
 /*	ew = I.evaluate(lm {l, 0}, mesh);

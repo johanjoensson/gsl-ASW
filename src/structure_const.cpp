@@ -4,7 +4,7 @@
 #include "gaunt.h"
 #include "spherical_fun.h"
 
-Structure_constant::Structure_constant(int l_low, int l_int, double kappa, lm l1, lm l2, gsl_vector r)
+Structure_constant::Structure_constant(int l_low, int l_int, double kappa, lm l1, lm l2, GSL::Vector& r)
 	: l1(l1), l2(l2), r(r)
 {
 	this->l_low = l_low;
@@ -13,10 +13,7 @@ Structure_constant::Structure_constant(int l_low, int l_int, double kappa, lm l1
 
 	double k_fac = gsl_pow_int(kappa, l1.l + l2.l + 1);
 
-	double x = gsl_vector_get(&r, 0);
-	double y = gsl_vector_get(&r, 1);
-	double z = gsl_vector_get(&r, 2);
-	double r_norm = std::sqrt(x*x + y*y + z*z);
+	double r_norm = r.norm();
 
 
 
@@ -49,17 +46,17 @@ Structure_constant::Structure_constant(int l_low, int l_int, double kappa, lm l1
 	this->dk_val = 2*M_PI*k_fac*d_sum;
 }
 
-Structure_constant::Structure_constant(int l_low, int l_int, lm l1, lm l2, gsl_vector r)
+Structure_constant::Structure_constant(int l_low, int l_int, lm l1, lm l2, GSL::Vector& r)
 	: Structure_constant(l_low, l_int, std::sqrt(0.015), l1, l2, r)
 {
 }
 
-Structure_constant::Structure_constant(int l_low, lm l1, lm l2, gsl_vector r)
+Structure_constant::Structure_constant(int l_low, lm l1, lm l2, GSL::Vector& r)
 	: Structure_constant(l_low, l_low + 1, std::sqrt(0.015), l1, l2, r)
 {
 }
 
-Structure_constant::Structure_constant(lm l1, lm l2, gsl_vector r)
+Structure_constant::Structure_constant(lm l1, lm l2, GSL::Vector& r)
 	: Structure_constant(2, 3, std::sqrt(0.015), l1, l2, r)
 {
 }
@@ -67,6 +64,6 @@ Structure_constant::Structure_constant(lm l1, lm l2, gsl_vector r)
 
 std::ostream& operator << ( std::ostream& os, const Structure_constant& B)
 {
-	os << "B[(" << B.l1.l << ", " << B.l1.m << "), (" << B.l2.l << ", " << B.l2.m << ")](" << gsl_vector_get(&B.r,0) << ", " << gsl_vector_get(&B.r,1) << ", " << gsl_vector_get(&B.r,2) << ") = " <<B.val;
+	os << "B[(" << B.l1.l << ", " << B.l1.m << "), (" << B.l2.l << ", " << B.l2.m << ")]" << B.r <<" = " <<B.val;
 	return os;
 }
