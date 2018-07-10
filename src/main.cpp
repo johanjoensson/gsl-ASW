@@ -17,8 +17,10 @@
 #include "atom.h"
 #include "crystal.h"
 #include "ewald_int.h"
+#include "gaunt.h"
 #include "../../GSL-lib/src/vector.h"
 #include "../../GSL-lib/src/complex.h"
+#include "../../GSL-lib/src/special_functions.h"
 
 
 int l;
@@ -41,7 +43,7 @@ int main()
 {
 //	gsl_set_error_handler_off();
 	double vol = 90;
-	double eta = exp_gsl(gsl_sf_log(6.5) + 2./3*gsl_sf_log(4*M_PI/3) - 2./3*gsl_sf_log(vol));
+	double eta = GSL::exp(gsl_sf_log(6.5) + 2./3*gsl_sf_log(4*M_PI/3) - 2./3*gsl_sf_log(vol)).val;
 	Logarithmic_mesh mesh(0.5, 500);
 	std::vector<double> ew(mesh.r.size(), 0.);
 	std::vector<double> ew_comp(mesh.r.size(), 0.);
@@ -86,7 +88,7 @@ int main()
 	tau[2] = 0.;
 
 	tau_orig.copy(tau);
-	for(int n = 1; n < 10; n++){
+	for(int n = 1; n < 20; n++){
 	d2 = GSL::Complex(0., 0.);
 	for(int i = 1; i < n; i++){
 		for(int j = 1; j < n; j++){
@@ -109,6 +111,7 @@ int main()
 	std::cout << kp << ") = ";
 	std::cout << d2<< std::endl;
     }
+
 /*	ew = I.evaluate(lm {l, 0}, mesh);
 	ew_comp = I.evaluate_comp(lm {l, 0}, mesh);
 	double r = 0, ir = 0, ir2 = 0, ir3 = 0, kappa = sqrt(0.015), kappa_fac = gsl_pow_int(kappa, l+1);

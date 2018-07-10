@@ -31,7 +31,7 @@ CXXCHECKS =clang-analyzer-*,-clang-analyzer-cplusplus*,cppcoreguidelines-*,bugpr
 CXXCHECKFLAGS = -checks=$(CXXCHECKS) -header-filter=.* -- -std=c++11
 
 # Libraries to link against
-GSLLIBDIR="../GSL-lib/"
+GSLLIBDIR="../GSL-lib"
 LDFLAGS = -L$(GSLLIBDIR) -Wl,-rpath=$(GSLLIBDIR) -lgsl -lgslcblas -lm -lgsl-lib
 
 # List of all executables in this project

@@ -50,33 +50,15 @@ double cubic_harmonic(lm l, GSL::Vector& r)
 	}else{
 		res = gsl_sf_sin(m_eff*phi)*sqrt(2);
 	}
-	return c*gsl_sf_legendre_sphPlm(l.l, m_eff, cos_theta)*res;
+	return c*GSL::legendre_sphPlm(l.l, m_eff, cos_theta).val*res;
 }
 
 double real_spherical_hankel(lm l, double x)
 {
-  double exp = exp_gsl(-x);
-  double k = 2./M_PI * std::get<0>(GSL::bessel_kn_scaled(l.l, x));
+  double exp = GSL::exp(-x).val;
+  double k = 2./M_PI * GSL::bessel_kn_scaled(l.l, x).val;
 
   return exp*k;
-}
-
-double exp_gsl(double x)
-{
-	gsl_sf_result res;
-	res.val = 0.;
-	res.err = 0.;
-	int stat = 0;
-	stat = gsl_sf_exp_e(x, &res);
-	if(stat == GSL_EUNDRFLW){
-		res.val = 0.;
-	}else if(stat){
-		std::string error_str =   gsl_strerror(stat);
-		throw std::runtime_error("Error in exponential.\nGSL error: "
-		+ error_str);
-	}
-
-	return res.val;
 }
 
 std::ostream& operator << ( std::ostream& os, const lm& l)
