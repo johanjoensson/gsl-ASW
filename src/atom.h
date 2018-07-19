@@ -2,7 +2,7 @@
 #define ATOM_H
 
 #include <gsl/gsl_math.h>
-#include <gsl/gsl_vector.h>
+#include "../../GSL-lib/src/vector.h"
 #include "log_mesh.h"
 
 /***************************************************************************//**
@@ -23,28 +23,27 @@ class Atom {
 	double MT, AS;
 
 	// Atomic position, cartesian coordinates
-	gsl_vector *pos;
+	GSL::Vector pos;
 	// Logarithmic mesh associated with the atom
 	Logarithmic_mesh mesh;
 	public:
 	//! Get nuclear charge
-	int get_Z(); 
+	int get_Z();
 	//! Set atom position (cartersian)
-	void set_pos(gsl_vector &r); 
+	void set_pos(GSL::Vector &r);
 	//! Set muffin tin radius
-	void set_MT(double mt); 
+	void set_MT(double mt);
 	//! Set atomic sphere radius
-	void set_AS(double as); 
+	void set_AS(double as);
 	//! Get atomic position (cartesian)
-	gsl_vector get_pos();   
+	GSL::Vector get_pos();
 	//! Get muffin tin radius
-	double get_MT(); 
+	double get_MT();
 	//! Get atomic sphere radius
-	double get_AS(); 
+	double get_AS();
 
-	Atom(gsl_vector &r, Logarithmic_mesh &mesh);
-	Atom(double mt, double as, double z, gsl_vector &r, Logarithmic_mesh &mesh);
+	Atom(GSL::Vector &r, Logarithmic_mesh &mesh);
+	Atom(double mt, double as, double z, GSL::Vector &r, Logarithmic_mesh &mesh);
 
-	~Atom();
 };
 #endif //ATOM_H

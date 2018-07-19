@@ -5,7 +5,6 @@
 #include "spherical_fun.h"
 #include "../../GSL-lib/src/special_functions.h"
 
-#include <gsl/gsl_sf_log.h>
 
 #include <chrono>
 
@@ -19,7 +18,7 @@ double stieltjes_ln_factorial(int n)
 	double a6 = 109535241009./48264275462;
 
 	double N =  n+1;
-	return (1./2)*gsl_sf_log(2*M_PI)+(N-1./2)*gsl_sf_log(N)-N +
+	return (1./2)*GSL::log(2*M_PI).val+(N-1./2)*GSL::log(N).val-N +
 	 a0/(N+a1/(N+a2/(N+a3/(N+a4/(N+a5/(N+a6/N)))))) ;
 
 }
@@ -133,42 +132,36 @@ double wigner_3j_0(lm l1, lm l2, lm l3){
 
 }
 
-double gaunt(lm l1, lm l2, lm l3)
+GSL::Result gaunt(lm l1, lm l2, lm l3)
 {
+	GSL::Result res;
 	// Avoid evaluation of the result is going to be zero
-	if ((l1.l + l2.l + l3.l) % 2 != 0){
-		return 0.;
-	}else if(l1.m + l2.m + l3.m != 0){
-		return 0.;
-	}else if (l1.l > l2.l + l3.l){
-		return 0.;
-	}else if (l2.l > l3.l + l1.l){
-		return 0.;
-	}else if (l3.l > l1.l + l2.l){
-		return 0.;
-	}else if (std::abs(l1.m) > l1.l){
-		return 0.;
-	}else if (std::abs(l2.m) > l2.l){
-		return 0.;
-	}else if (std::abs(l3.m) > l3.l){
-		return 0.;
+	if((l1.l + l2.l + l3.l % 2 != 0)
+	 ||(l1.m + l2.m + l3.m != 0)
+	 ||(l1.l > l2.l + l3.l)
+	 ||(l2.l > l3.l + l1.l)
+	 ||(l3.l > l1.l + l2.l)
+	 ||(std::abs(l1.m) > l1.l)
+	 ||(std::abs(l2.m) > l2.l)
+	 ||(std::abs(l3.m) > l3.l)){
+		return res;
 	}
 
 	double C = std::sqrt((2*l1.l + 1)*(2*l2.l + 1)*(2*l3.l + 1)/(4*M_PI));
 
-	double res = C*GSL::wigner_3j(l1.l, l2.l, l3.l, 0, 0, 0).val*
-	  GSL::wigner_3j(l1.l, l2.l, l3.l, l1.m, l2.m, l3.m).val;
+	res = C*GSL::wigner_3j(l1.l, l2.l, l3.l, 0, 0, 0)*
+	  GSL::wigner_3j(l1.l, l2.l, l3.l, l1.m, l2.m, l3.m);
 
 	return res;
 }
 
 /* Not sure if this is needed anymore...
  * Or indeed if it ever was needed... */
-double real_gaunt(lm l1, lm l2, lm l3)
+GSL::Result real_gaunt(lm l1, lm l2, lm l3)
 {
 	int m_max = std::max(l1.m, std::max(l2.m, l3.m));
 	int c = 1;
-	double res = 0.;
+	GSL::Result res;
 
 	if (m_max == l1.m){
 		if (l1.m % 2 != 0){

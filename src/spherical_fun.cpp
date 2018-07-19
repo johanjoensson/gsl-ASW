@@ -1,15 +1,9 @@
 #include <cmath>
-#include <gsl/gsl_sf_bessel.h>
-#include <gsl/gsl_sf_exp.h>
-#include <gsl/gsl_sf_trig.h>
-#include <gsl/gsl_sf_legendre.h>
-#include <gsl/gsl_complex.h>
-#include <gsl/gsl_complex_math.h>
 #include <string>
 #include "spherical_fun.h"
 #include "../../GSL-lib/src/complex.h"
-#include "../../GSL-lib/src/special_functions.h"
 
+#include <iostream>
 
 unsigned long int factorial(int n)
 {
@@ -22,7 +16,7 @@ unsigned long int factorial(int n)
 
 }
 
-double cubic_harmonic(lm l, GSL::Vector& r)
+GSL::Result cubic_harmonic(lm l, GSL::Vector& r)
 {
 	int m_eff = l.m;
 	int c = 1;
@@ -35,28 +29,33 @@ double cubic_harmonic(lm l, GSL::Vector& r)
 	double x = r[0];
 	double y = r[1];
 	double z = r[2];
-	double theta = 0, phi = 0, cos_theta = 0, res = 0;
+	GSL::Result theta, phi, cos_theta, res;
 
 	double r_norm = r.norm();
 
-	theta = (GSL::arccos(z/r_norm)).re;
-	phi = GSL::Complex(x, y).arg();
-	cos_theta = gsl_sf_cos(theta);
+	theta.val = (GSL::arccos(z/r_norm)).re;
+	theta.err = 0.;
+	phi.val = GSL::Complex(x, y).arg();
+	phi.err = 0.;
+	cos_theta = GSL::cos(theta);
+
 
 	if(l.m > 0){
-		res = gsl_sf_cos(m_eff*phi)*sqrt(2);
+		res = GSL::cos(m_eff*phi)*sqrt(2.);
 	}else if (l.m == 0){
-		res = 1.;
+		res.val = 1.;
+		res.err = 0;
 	}else{
-		res = gsl_sf_sin(m_eff*phi)*sqrt(2);
+		res = GSL::sin(m_eff*phi)*sqrt(2.);
 	}
-	return c*GSL::legendre_sphPlm(l.l, m_eff, cos_theta).val*res;
+	
+	return c*GSL::legendre_sphPlm(l.l, m_eff, cos_theta.val)*res;
 }
 
-double real_spherical_hankel(lm l, double x)
+GSL::Result real_spherical_hankel(lm l, double x)
 {
-  double exp = GSL::exp(-x).val;
-  double k = 2./M_PI * GSL::bessel_kn_scaled(l.l, x).val;
+  GSL::Result exp = GSL::exp(-x);
+  GSL::Result k = 2./M_PI * GSL::bessel_kn_scaled(l.l, x);
 
   return exp*k;
 }

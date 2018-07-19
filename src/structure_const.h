@@ -27,6 +27,7 @@ class Structure_constant{
 		Structure_constant(int l_low, int l_int, lm l1, lm l2, GSL::Vector& r);
 		Structure_constant(int l_low, lm l1, lm l2, GSL::Vector& r);
 		Structure_constant(lm l1, lm l2, GSL::Vector& r);
+		Structure_constant();
 
 		double val;
 		double dk_val;
