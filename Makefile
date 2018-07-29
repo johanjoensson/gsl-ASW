@@ -35,12 +35,13 @@ GSLLIBDIR="../GSL-lib"
 LDFLAGS = -L$(GSLLIBDIR) -Wl,-rpath=$(GSLLIBDIR) -lgsl -lgslcblas -lm -lgsl-lib
 
 # List of all executables in this project
-EXE = numerov_test
+EXE = gsl-asw
 
 NUMEROV_OBJ = numerov_solver.o\
 	      spherical_fun.o\
-	      log_mesh.o \
-	      gaunt.o \
+	      log_mesh.o\
+	      bloch_sum.o\
+	      gaunt.o\
 	      structure_const.o\
 	      atom.o\
 	      crystal.o\
@@ -64,7 +65,7 @@ $(BUILD_DIR)/%.o: $(SRC_DIR)/%.c
 	$(CC) $(CFLAGS) -c $? -o $@
 
 # Link numerov_test
-numerov_test: $(OBJS)
+gsl-asw: $(OBJS)
 	$(CXX) $(LDFLAGS) $? -o $@
 
 checkall: $(addprefix $(SRC_DIR)/, $(NUMEROV_OBJ:o=cpp))

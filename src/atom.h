@@ -43,7 +43,9 @@ class Atom {
 	double get_AS();
 
 	Atom(GSL::Vector &r, Logarithmic_mesh &mesh);
+	Atom(const GSL::Vector &r, const Logarithmic_mesh &mesh);
 	Atom(double mt, double as, double z, GSL::Vector &r, Logarithmic_mesh &mesh);
+	Atom(const double mt, const double as, const double z, const GSL::Vector &r, const Logarithmic_mesh &mesh);
 
 };
 #endif //ATOM_H

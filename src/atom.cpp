@@ -43,7 +43,21 @@ Atom::Atom(double mt, double as, double z, GSL::Vector &r, Logarithmic_mesh &mes
 	this->pos.copy(r);
 }
 
+Atom::Atom(const double mt, const double as, const double z, const GSL::Vector &r, const Logarithmic_mesh &mesh)
+	: pos(), mesh(mesh)
+{
+	this->MT = mt;
+	this->AS = as;
+	this->Z = z;
+	this->pos.copy(r);
+}
+
 Atom::Atom(GSL::Vector &r, Logarithmic_mesh &mesh)
+	: Atom(1, 1, 0, r, mesh)
+{
+}
+
+Atom::Atom(const GSL::Vector &r, const Logarithmic_mesh &mesh)
 	: Atom(1, 1, 0, r, mesh)
 {
 }
