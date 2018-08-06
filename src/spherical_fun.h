@@ -11,7 +11,7 @@ struct lm {
 
 unsigned long int factorial(int n);
 GSL::Result real_spherical_hankel(lm l, double x);
-GSL::Result cubic_harmonic(lm l, GSL::Vector& r);
+GSL::Result cubic_harmonic(lm l, const GSL::Vector& r);
 
 std::ostream& operator << ( std::ostream& os, const lm& l);
 #endif //SPHERICAL_FUN_H

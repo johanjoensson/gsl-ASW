@@ -5,17 +5,17 @@ int Atom::get_Z()
 	return Z;
 }
 
-void Atom::set_MT(double mt)
+void Atom::set_MT(const double mt)
 {
 	this->MT = mt;
 }
 
-void Atom::set_AS(double as)
+void Atom::set_AS(const double as)
 {
 	this->AS = as;
 }
 
-void Atom::set_pos(GSL::Vector &r)
+void Atom::set_pos(const GSL::Vector &r)
 {
 	this->pos.copy(r);
 }
@@ -34,30 +34,28 @@ double Atom::get_AS()
 	return this->AS;
 }
 
-Atom::Atom(double mt, double as, double z, GSL::Vector &r, Logarithmic_mesh &mesh)
-	: pos(), mesh(mesh)
+Atom::Atom(double mt, double as, double z, GSL::Vector &r)
+	: pos(r)
 {
 	this->MT = mt;
 	this->AS = as;
 	this->Z = z;
-	this->pos.copy(r);
 }
 
-Atom::Atom(const double mt, const double as, const double z, const GSL::Vector &r, const Logarithmic_mesh &mesh)
-	: pos(), mesh(mesh)
+Atom::Atom(const double mt, const double as, const double z, const GSL::Vector &r)
+	: pos(r)
 {
 	this->MT = mt;
 	this->AS = as;
 	this->Z = z;
-	this->pos.copy(r);
 }
 
-Atom::Atom(GSL::Vector &r, Logarithmic_mesh &mesh)
-	: Atom(1, 1, 0, r, mesh)
+Atom::Atom(GSL::Vector &r)
+	: Atom(1, 1, 0, r)
 {
 }
 
-Atom::Atom(const GSL::Vector &r, const Logarithmic_mesh &mesh)
-	: Atom(1, 1, 0, r, mesh)
+Atom::Atom(const GSL::Vector &r)
+	: Atom(1, 1, 0, r)
 {
 }

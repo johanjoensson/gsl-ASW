@@ -16,7 +16,7 @@ unsigned long int factorial(int n)
 
 }
 
-GSL::Result cubic_harmonic(lm l, GSL::Vector& r)
+GSL::Result cubic_harmonic(lm l, const GSL::Vector& r)
 {
 	int m_eff = l.m;
 	int c = 1;
@@ -26,17 +26,25 @@ GSL::Result cubic_harmonic(lm l, GSL::Vector& r)
 	if(l.m % 2 != 0){
 		c = -1;
 	}
-	double x = r[0];
-	double y = r[1];
-	double z = r[2];
+	if(r.norm() < 1e-12){
+		GSL::Result res;
+		res.val = 0;
+		res.err = 0.;
+		return res;
+	}
+
+	GSL::Vector tmp(3);
+	tmp.copy(r);
+	tmp.normalize();
+	double x = tmp[0];
+	double y = tmp[1];
+	double z = tmp[2];
 	GSL::Result theta, phi, cos_theta, res;
 
-	double r_norm = r.norm();
+	double r_norm = 1.0;
 
-	theta.val = (GSL::arccos(z/r_norm)).re;
-	theta.err = 0.;
-	phi.val = GSL::Complex(x, y).arg();
-	phi.err = 0.;
+	theta = GSL::Result({(GSL::arccos(z/r_norm)).re, 0.});
+	phi = GSL::Result({GSL::Complex(x, y).arg(), 0.});
 	cos_theta = GSL::cos(theta);
 
 
@@ -48,7 +56,7 @@ GSL::Result cubic_harmonic(lm l, GSL::Vector& r)
 	}else{
 		res = GSL::sin(m_eff*phi)*sqrt(2.);
 	}
-	
+
 	return c*GSL::legendre_sphPlm(l.l, m_eff, cos_theta.val)*res;
 }
 

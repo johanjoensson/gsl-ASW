@@ -136,14 +136,14 @@ GSL::Result gaunt(lm l1, lm l2, lm l3)
 {
 	GSL::Result res;
 	// Avoid evaluation of the result is going to be zero
-	if((l1.l + l2.l + l3.l % 2 != 0)
-	 ||(l1.m + l2.m + l3.m != 0)
-	 ||(l1.l > l2.l + l3.l)
-	 ||(l2.l > l3.l + l1.l)
-	 ||(l3.l > l1.l + l2.l)
-	 ||(std::abs(l1.m) > l1.l)
-	 ||(std::abs(l2.m) > l2.l)
-	 ||(std::abs(l3.m) > l3.l)){
+	if(((l1.l + l2.l + l3.l) % 2 != 0)||
+	(l1.m + l2.m + l3.m != 0)||
+	(l1.l > l2.l + l3.l)||
+	(l2.l > l3.l + l1.l)||
+	(l3.l > l1.l + l2.l)||
+	(std::abs(l1.m) > l1.l)||
+	(std::abs(l2.m) > l2.l)||
+	(std::abs(l3.m) > l3.l)){
 		return res;
 	}
 
@@ -151,6 +151,7 @@ GSL::Result gaunt(lm l1, lm l2, lm l3)
 
 	res = C*GSL::wigner_3j(l1.l, l2.l, l3.l, 0, 0, 0)*
 	  GSL::wigner_3j(l1.l, l2.l, l3.l, l1.m, l2.m, l3.m);
+
 
 	return res;
 }

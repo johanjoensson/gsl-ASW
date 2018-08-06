@@ -3,6 +3,7 @@
 #include <iostream>
 #include <gsl/gsl_vector.h>
 #include "spherical_fun.h"
+#include "bloch_sum.h"
 #include "../../GSL-lib/src/vector.h"
 #include "../../GSL-lib/src/complex.h"
 
@@ -35,6 +36,25 @@ class Structure_constant{
 		friend std::ostream& operator << ( std::ostream&, const Structure_constant& );
 };
 
+class Bloch_summed_structure_constant{
+		int l_low, l_int;
+		double kappa;
+		Crystal c;
+	    lm l1, l2;
+	public:
+		Bloch_summed_structure_constant(int l_low, int l_int, double kappa, Crystal& c, lm l1, lm l2);
+		Bloch_summed_structure_constant(int l_low, int l_int, Crystal& c, lm l1, lm l2);
+		Bloch_summed_structure_constant(int l_low, Crystal& c, lm l1, lm l2);
+		Bloch_summed_structure_constant(Crystal& c, lm l1, lm l2);
+		Bloch_summed_structure_constant();
+
+		GSL::Complex evaluate(const GSL::Vector& tau, const GSL::Vector& kp);
+		GSL::Complex dot_evaluate(const GSL::Vector& tau, const GSL::Vector& kp);
+
+		friend std::ostream& operator << ( std::ostream&, const Bloch_summed_structure_constant& );
+};
+
 std::ostream& operator << ( std::ostream&, const Structure_constant& );
+std::ostream& operator << ( std::ostream&, const Bloch_summed_structure_constant& );
 
 #endif //STRUCTURE_CONST_H

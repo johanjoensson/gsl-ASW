@@ -24,13 +24,11 @@ class Atom {
 
 	// Atomic position, cartesian coordinates
 	GSL::Vector pos;
-	// Logarithmic mesh associated with the atom
-	Logarithmic_mesh mesh;
 	public:
 	//! Get nuclear charge
 	int get_Z();
 	//! Set atom position (cartersian)
-	void set_pos(GSL::Vector &r);
+	void set_pos(const GSL::Vector &r);
 	//! Set muffin tin radius
 	void set_MT(double mt);
 	//! Set atomic sphere radius
@@ -42,10 +40,10 @@ class Atom {
 	//! Get atomic sphere radius
 	double get_AS();
 
-	Atom(GSL::Vector &r, Logarithmic_mesh &mesh);
-	Atom(const GSL::Vector &r, const Logarithmic_mesh &mesh);
-	Atom(double mt, double as, double z, GSL::Vector &r, Logarithmic_mesh &mesh);
-	Atom(const double mt, const double as, const double z, const GSL::Vector &r, const Logarithmic_mesh &mesh);
+	Atom(GSL::Vector &r);
+	Atom(const GSL::Vector &r);
+	Atom(double mt, double as, double z, GSL::Vector &r);
+	Atom(const double mt, const double as, const double z, const GSL::Vector &r);
 
 };
 #endif //ATOM_H

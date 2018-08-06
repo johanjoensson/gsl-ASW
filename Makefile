@@ -43,8 +43,10 @@ NUMEROV_OBJ = numerov_solver.o\
 	      bloch_sum.o\
 	      gaunt.o\
 	      structure_const.o\
+	      augmented_spherical_wave.o\
 	      atom.o\
 	      crystal.o\
+	      lattice.o\
 	      ewald_int.o\
 	      main.o
 
