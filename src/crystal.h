@@ -4,7 +4,7 @@
 #include <vector>
 #include "lattice.h"
 #include "atom.h"
-#include "spherical_fun.h"
+#include "utils.h"
 #include "../../GSL-lib/src/matrix.h"
 #include "../../GSL-lib/src/vector.h"
 

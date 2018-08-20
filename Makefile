@@ -43,11 +43,14 @@ NUMEROV_OBJ = numerov_solver.o\
 	      bloch_sum.o\
 	      gaunt.o\
 	      structure_const.o\
+	      augmented_fun.o\
 	      augmented_spherical_wave.o\
+	      atomic_quantity.o\
 	      atom.o\
 	      crystal.o\
 	      lattice.o\
 	      ewald_int.o\
+	      utils.o\
 	      main.o
 
 OBJS = $(addprefix $(BUILD_DIR)/, $(NUMEROV_OBJ))

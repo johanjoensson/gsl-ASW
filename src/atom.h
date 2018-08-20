@@ -16,6 +16,7 @@
 *******************************************************************************/
 
 class Atom {
+	public:
 	// Nuclear charge
 	int Z;
 	// Muffin tin radius (MT) &
@@ -24,7 +25,8 @@ class Atom {
 
 	// Atomic position, cartesian coordinates
 	GSL::Vector pos;
-	public:
+	Logarithmic_mesh mesh;
+	void set_Z(const int Z);
 	//! Get nuclear charge
 	int get_Z();
 	//! Set atom position (cartersian)
@@ -40,10 +42,19 @@ class Atom {
 	//! Get atomic sphere radius
 	double get_AS();
 
-	Atom(GSL::Vector &r);
-	Atom(const GSL::Vector &r);
-	Atom(double mt, double as, double z, GSL::Vector &r);
-	Atom(const double mt, const double as, const double z, const GSL::Vector &r);
+	Atom();
+	Atom(Logarithmic_mesh &mesh, GSL::Vector &r);
+	Atom(const Logarithmic_mesh &mesh, const GSL::Vector &r);
+	Atom(double mt, double as, double z, Logarithmic_mesh &mesh,
+		GSL::Vector &r);
+	Atom(const double mt, const double as, const double z,
+		const Logarithmic_mesh &mesh, const GSL::Vector &r);
+
+	friend bool operator==(const Atom &a, const Atom &b);
+	friend bool operator!=(const Atom &a, const Atom &b);
 
 };
+
+bool operator==(const Atom &a, const Atom &b);
+bool operator!=(const Atom &a, const Atom &b);
 #endif //ATOM_H

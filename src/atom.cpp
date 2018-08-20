@@ -5,6 +5,11 @@ int Atom::get_Z()
 	return Z;
 }
 
+void Atom::set_Z(const int Z)
+{
+	this->Z = Z;
+}
+
 void Atom::set_MT(const double mt)
 {
 	this->MT = mt;
@@ -34,28 +39,48 @@ double Atom::get_AS()
 	return this->AS;
 }
 
-Atom::Atom(double mt, double as, double z, GSL::Vector &r)
-	: pos(r)
+Atom::Atom()
+ : Z(), MT(), AS(), pos(), mesh()
+{}
+
+Atom::Atom(double mt, double as, double z, Logarithmic_mesh &mesh,
+	GSL::Vector &r)
+	: pos(r), mesh(mesh)
 {
 	this->MT = mt;
 	this->AS = as;
 	this->Z = z;
 }
 
-Atom::Atom(const double mt, const double as, const double z, const GSL::Vector &r)
-	: pos(r)
+Atom::Atom(const double mt, const double as, const double z,
+	const Logarithmic_mesh &mesh, const GSL::Vector &r)
+	: pos(r), mesh(mesh)
 {
 	this->MT = mt;
 	this->AS = as;
 	this->Z = z;
 }
 
-Atom::Atom(GSL::Vector &r)
-	: Atom(1, 1, 0, r)
+Atom::Atom(Logarithmic_mesh &mesh, GSL::Vector &r)
+	: Atom(1, 1, 0, mesh, r)
 {
 }
 
-Atom::Atom(const GSL::Vector &r)
-	: Atom(1, 1, 0, r)
+Atom::Atom(const Logarithmic_mesh &mesh, const GSL::Vector &r)
+	: Atom(1, 1, 0, mesh, r)
 {
+}
+
+bool operator==(const Atom &a, const Atom &b)
+{
+	if(a.pos == b.pos && a.Z == b.Z){
+		return true;
+	}else{
+		return false;
+	}
+}
+
+bool operator!=(const Atom &a, const Atom &b)
+{
+	return !(a == b);
 }

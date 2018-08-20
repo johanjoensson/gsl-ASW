@@ -20,7 +20,8 @@ Lattice::Lattice(GSL::Vector& a, GSL::Vector& b, GSL::Vector& c)
     bz_volume = abs(GSL::dot(r_lat[0], GSL::cross(r_lat[1], r_lat[2])));
 }
 
-Lattice::Lattice(const GSL::Vector& a, const GSL::Vector& b, const GSL::Vector& c)
+Lattice::Lattice(const GSL::Vector& a, const GSL::Vector& b,
+    const GSL::Vector& c)
  : lat(3,3), r_lat(3,3), scale(a.norm())
 {
     lat[0] = a/scale;

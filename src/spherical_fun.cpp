@@ -26,10 +26,8 @@ GSL::Result cubic_harmonic(lm l, const GSL::Vector& r)
 	if(l.m % 2 != 0){
 		c = -1;
 	}
-	if(r.norm() < 1e-12){
-		GSL::Result res;
-		res.val = 0;
-		res.err = 0.;
+	if(r.norm() < 1e-16){
+		GSL::Result res(0., 0.);
 		return res;
 	}
 
@@ -43,16 +41,15 @@ GSL::Result cubic_harmonic(lm l, const GSL::Vector& r)
 
 	double r_norm = 1.0;
 
-	theta = GSL::Result({(GSL::arccos(z/r_norm)).re, 0.});
-	phi = GSL::Result({GSL::Complex(x, y).arg(), 0.});
+	theta = GSL::Result((GSL::arccos(z/r_norm)).re, 0.);
+	phi = GSL::Result(GSL::Complex(x, y).arg(), 0.);
 	cos_theta = GSL::cos(theta);
 
 
 	if(l.m > 0){
 		res = GSL::cos(m_eff*phi)*sqrt(2.);
 	}else if (l.m == 0){
-		res.val = 1.;
-		res.err = 0;
+		res = GSL::Result(1., 0.);
 	}else{
 		res = GSL::sin(m_eff*phi)*sqrt(2.);
 	}

@@ -7,7 +7,8 @@
 
 // This needs to be really thoroghly checked!
 // 'cause right now it is definitely wrong!'
-Structure_constant::Structure_constant(int l_low, int l_int, double kappa, lm l1, lm l2, GSL::Vector& r)
+Structure_constant::Structure_constant(int l_low, int l_int,
+	double kappa, lm l1, lm l2, GSL::Vector& r)
 	: l_int(l_int), l_low(l_low), l1(l1), l2(l2), kappa(kappa), r(r)
 {
 	this->r.copy(r);
@@ -33,9 +34,11 @@ Structure_constant::Structure_constant(int l_low, int l_int, double kappa, lm l1
 			}
 		}
 
-		tmp = (l1.l + l2.l - lpp)/(kappa*kappa)*real_spherical_hankel(lm {lpp, 0}, kappa*r_norm);
+		tmp = (l1.l + l2.l - lpp)/
+		(kappa*kappa)*real_spherical_hankel(lm {lpp, 0}, kappa*r_norm);
 		if(lpp > 0){
-			tmp += r_norm/kappa * real_spherical_hankel(lm {lpp - 1, 0}, kappa*r_norm);
+			tmp += r_norm/kappa * real_spherical_hankel(lm {lpp - 1, 0},
+				kappa*r_norm);
 		}
 		sum += c*real_spherical_hankel(lm {lpp, 0}, kappa*r_norm)*m_sum;
 		d_sum += c*tmp*m_sum;
@@ -45,7 +48,8 @@ Structure_constant::Structure_constant(int l_low, int l_int, double kappa, lm l1
 	this->dk_val = (2*M_PI*k_fac*d_sum).val;
 }
 
-Structure_constant::Structure_constant(int l_low, int l_int, lm l1, lm l2, GSL::Vector& r)
+Structure_constant::Structure_constant(int l_low, int l_int, lm l1, lm l2,
+	GSL::Vector& r)
 	: Structure_constant(l_low, l_int, std::sqrt(0.015), l1, l2, r)
 {
 }
@@ -68,26 +72,31 @@ Structure_constant::Structure_constant()
 
 std::ostream& operator << ( std::ostream& os, const Structure_constant& B)
 {
-	os << "B[(" << B.l1.l << ", " << B.l1.m << "), (" << B.l2.l << ", " << B.l2.m << ")]" << B.r <<" = " <<B.val;
+	os << "B[(" << B.l1.l << ", " << B.l1.m << "), (" << B.l2.l << ", "
+	<< B.l2.m << ")]" << B.r <<" = " <<B.val;
 	return os;
 }
 
-Bloch_summed_structure_constant::Bloch_summed_structure_constant(int l_low, int l_int, double kappa, Crystal& c, lm l1, lm l2)
+Bloch_summed_structure_constant::Bloch_summed_structure_constant(int l_low,
+	int l_int, double kappa, Crystal& c, lm l1, lm l2)
 	: l_low(l_low), l_int(l_int), kappa(kappa), c(c), l1(l1), l2(l2)
 {
 }
 
-Bloch_summed_structure_constant::Bloch_summed_structure_constant(int l_low, int l_int, Crystal& c, lm l1, lm l2)
+Bloch_summed_structure_constant::Bloch_summed_structure_constant(int l_low,
+	int l_int, Crystal& c, lm l1, lm l2)
 	: Bloch_summed_structure_constant(l_low, l_int, std::sqrt(0.015), c, l1, l2)
 {
 }
 
-Bloch_summed_structure_constant::Bloch_summed_structure_constant(int l_low, Crystal& c, lm l1, lm l2)
+Bloch_summed_structure_constant::Bloch_summed_structure_constant(int l_low,
+	Crystal& c, lm l1, lm l2)
 	: Bloch_summed_structure_constant(l_low, l_low + 1, std::sqrt(0.015), c, l1, l2)
 {
 }
 
-Bloch_summed_structure_constant::Bloch_summed_structure_constant(Crystal& c, lm l1, lm l2)
+Bloch_summed_structure_constant::Bloch_summed_structure_constant(Crystal& c,
+	lm l1, lm l2)
 	: Bloch_summed_structure_constant(2, 3, std::sqrt(0.015), c, l1, l2)
 {
 }
@@ -97,7 +106,8 @@ Bloch_summed_structure_constant::Bloch_summed_structure_constant()
 {
 }
 
-GSL::Complex Bloch_summed_structure_constant::evaluate(const GSL::Vector& tau, const GSL::Vector& kp)
+GSL::Complex Bloch_summed_structure_constant::evaluate(const GSL::Vector& tau,
+	const GSL::Vector& kp)
 {
 	Bloch_sum bs(lm {0, 0}, kappa, this->c);
 	double k_fac = GSL::pow_int(kappa, l1.l + l2.l);
@@ -123,7 +133,8 @@ GSL::Complex Bloch_summed_structure_constant::evaluate(const GSL::Vector& tau, c
 
 	return 4*M_PI*k_fac*sum;
 }
-GSL::Complex Bloch_summed_structure_constant::dot_evaluate(const GSL::Vector& tau, const GSL::Vector& kp)
+GSL::Complex Bloch_summed_structure_constant::dot_evaluate(
+	const GSL::Vector& tau, const GSL::Vector& kp)
 {
 
 	Bloch_sum bs(lm {0, 0}, kappa, this->c);
@@ -142,7 +153,8 @@ GSL::Complex Bloch_summed_structure_constant::dot_evaluate(const GSL::Vector& ta
 			if (abs(a.val) > 1E-16){
 				bs = Bloch_sum(lm {lpp, mpp}, kappa, this->c);
 			    m_sum += a.val*(2*bs.hankel_envelope_dot(tau, kp) +
-				(l1.l + l2.l - lpp)/GSL::pow_int(kappa, 2)*bs.hankel_envelope(tau, kp));
+				(l1.l + l2.l - lpp)/
+				GSL::pow_int(kappa, 2)*bs.hankel_envelope(tau, kp));
 			}
 		}
 		sum += c/(gsl_pow_int(kappa, lpp))*m_sum;
@@ -151,7 +163,8 @@ GSL::Complex Bloch_summed_structure_constant::dot_evaluate(const GSL::Vector& ta
 	return 2*M_PI*k_fac*sum;
 }
 
-std::ostream& operator << ( std::ostream& os, const Bloch_summed_structure_constant& B)
+std::ostream& operator << ( std::ostream& os,
+	const Bloch_summed_structure_constant& B)
 {
 	os << "B[(" << B.l1.l << ", " << B.l1.m << "), (" << B.l2.l << ", " << B.l2.m << ")]";
 	return os;

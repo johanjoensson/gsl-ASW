@@ -1,6 +1,7 @@
 #include "crystal.h"
 #include <algorithm>
 #include <unordered_set>
+#include "spherical_fun.h"
 #include "../../GSL-lib/src/special_functions.h"
 #include "ewald_int.h"
 
@@ -9,7 +10,8 @@ namespace std {
 	struct hash<GSL::Vector>{
 		size_t operator()(const GSL::Vector &v) const
 		{
-			return std::hash<double>()((v*v).norm()) ^ std::hash<double>()(v.norm());
+			return std::hash<double>()((v*v).norm()) ^
+			std::hash<double>()(v.norm());
 		}
 	};
 }
@@ -20,13 +22,15 @@ bool comp_norm(GSL::Vector& a, GSL::Vector& b)
     return a.norm() < b.norm();
 }
 
-double bisect_q(double tol, double kappa, double eta, lm l, double q_min, double q_max)
+double bisect_q(double tol, double kappa, double eta, lm l, double q_min,
+	double q_max)
 {
 	double q = 0;
 	double ql = q_min, qu = q_max;
 	while(qu - ql > tol){
 		q = (qu + ql)/2;
-		if((-q*q + eta*(l.l*GSL::log(q) + GSL::log(1 + kappa*kappa) - GSL::log(q*q + kappa*kappa) - GSL::log(tol)) + 1).val > 0){
+		if((-q*q + eta*(l.l*GSL::log(q) + GSL::log(1 + kappa*kappa) -
+		GSL::log(q*q + kappa*kappa) - GSL::log(tol)) + 1).val > 0){
 			ql = q;
 		}else{
 			qu = q;
@@ -48,16 +52,19 @@ size_t Crystal::calc_nk(double tol, double kappa, lm l)
 	}
 
 	double q = 1;
-	while((-q*q + eta*(l.l*GSL::log(q) + GSL::log(1 + kappa*kappa) - GSL::log(q*q + kappa*kappa) - GSL::log(tol)) + 1).val*sign > 0)
+	while((-q*q + eta*(l.l*GSL::log(q) + GSL::log(1 + kappa*kappa) -
+	GSL::log(q*q + kappa*kappa) - GSL::log(tol)) + 1).val*sign > 0)
 	{
 		q += sqrt(eta);
 	}
 	q = bisect_q(tol, kappa, eta, l, q - sqrt(eta), q);
 
-	return std::ceil(4*M_PI/3 * GSL::pow_int(q, 3)/GSL::pow_int(2*M_PI, 3)*this->volume);
+	return std::ceil(4*M_PI/3 * GSL::pow_int(q, 3)/
+	GSL::pow_int(2*M_PI, 3)*this->volume);
 }
 
-double bisect_r(double tol, double kappa, double eta, lm l, double r_min, double r_max)
+double bisect_r(double tol, double kappa, double eta, lm l, double r_min,
+	double r_max)
 {
 	double r = 0;
 	double rl = r_min, ru = r_max;
@@ -68,7 +75,8 @@ double bisect_r(double tol, double kappa, double eta, lm l, double r_min, double
 
 	while(ru - rl > tol){
 		r = (ru + rl)/2;
-		if((l.l*GSL::log(r) + GSL::log(I.ewald_int(l, r)) - GSL::log(I.ewald_int(l, 1.)) - GSL::log(tol)).val > 0){
+		if((l.l*GSL::log(r) + GSL::log(I.ewald_int(l, r)) -
+		GSL::log(I.ewald_int(l, 1.)) - GSL::log(tol)).val > 0){
 			rl = r;
 		}else{
 			ru = r;
@@ -94,7 +102,8 @@ size_t Crystal::calc_nr(double tol, double kappa, lm l)
 	}
 
 	double r = 1;
-	while((l.l*GSL::log(r) + GSL::log(I.ewald_int(l, r)) - GSL::log(I.ewald_int(l, 1.)) - GSL::log(tol)).val*sign > 0)
+	while((l.l*GSL::log(r) + GSL::log(I.ewald_int(l, r)) -
+	GSL::log(I.ewald_int(l, 1.)) - GSL::log(tol)).val*sign > 0)
 	{
 		r += 2/sqrt(eta);
 	}
@@ -129,7 +138,8 @@ void Crystal::calc_Rn(size_t num)
 			resort = !resort;
 		}
         tmp.insert(possibles[0]);
-        for(std::unordered_set<GSL::Vector>::const_iterator it = tmp.begin(); it != tmp.end(); it++){
+        for(std::unordered_set<GSL::Vector>::const_iterator it = tmp.begin();
+		it != tmp.end(); it++){
             /* Only consider vectors not already found */
             if(tmp.find(possibles[0] + *it) == tmp.end()){
                 possibles.push_back(possibles[0] + *it);
@@ -228,7 +238,8 @@ void Crystal::calc_Kn(size_t num)
 			resort = ! resort;
 		}
         tmp.insert(possibles[0]);
-        for(std::unordered_set<GSL::Vector>::const_iterator it = tmp.begin(); it != tmp.end(); it++){
+        for(std::unordered_set<GSL::Vector>::const_iterator it = tmp.begin();
+		it != tmp.end(); it++){
             if(tmp.find(possibles[0] + *it) == tmp.end()){
                 possibles.push_back(possibles[0] + *it);
             }
@@ -314,7 +325,7 @@ double Crystal::calc_bz_volume()
 }
 
 Crystal::Crystal()
- : Rn_vecs(), Kn_vecs(), lat(), atoms()
+ : Rn_vecs(), Kn_vecs(), lat(), atoms(), volume(), bz_volume()
 {
 }
 
@@ -374,7 +385,8 @@ Crystal::Crystal(double& a, double& b, double& c)
     bz_volume = lat.bz_volume/GSL::pow_int(lat.scale, 3);
 }
 
-Crystal::Crystal(const GSL::Vector& a, const GSL::Vector& b, const GSL::Vector& c)
+Crystal::Crystal(const GSL::Vector& a, const GSL::Vector& b,
+	const GSL::Vector& c)
  : Rn_vecs(), Kn_vecs(), lat(a, b, c), atoms()
 {
     volume = lat.volume*GSL::pow_int(lat.scale, 3);
@@ -420,7 +432,7 @@ std::vector<std::vector<Atom>> Crystal::calc_nearest_neighbours()
 		ri = this->atoms[i].get_pos();
 		tmp.push_back(this->atoms[i]);
 		tmp.back().set_pos(GSL::Vector(3));
-		for(size_t j = i + 1; j < this->atoms.size(); j++){
+		for(size_t j = 0; j < this->atoms.size(); j++){
 			rj = this->atoms[j].get_pos();
 			tmp.push_back(this->atoms[j]);
 			tmp.back().set_pos(ri - rj);
