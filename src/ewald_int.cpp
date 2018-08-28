@@ -1,10 +1,7 @@
 #include "ewald_int.h"
+#include "../../GSL-lib/src/special_functions.h"
+#include "../../GSL-lib/src/basic_math.h"
 #include <cmath>
-#include <gsl/gsl_math.h>
-#include <gsl/gsl_sf_erf.h>
-#include <gsl/gsl_sf_exp.h>
-#include <gsl/gsl_complex.h>
-#include <gsl/gsl_complex_math.h>
 
 #include <iostream>
 
@@ -33,21 +30,25 @@ double Ewald_integral::bar_ew_int(lm l, double r){
     double a = sqrt(eta)*r/2.;
     double b = -kappa*kappa*r*r/4.;
     if(l.l == 0){
-        t1 = gsl_sf_exp(-kappa*r) + gsl_sf_exp(kappa*r);
-        t2 = gsl_sf_exp(-kappa*r)*gsl_sf_erf(0.5*sqrt(eta)*r - kappa/sqrt(eta));
-        t3 = gsl_sf_exp(kappa*r)*gsl_sf_erf(0.5*sqrt(eta)*r + kappa/sqrt(eta));
+        t1 = GSL::exp(-kappa*r).val + GSL::exp(kappa*r).val;
+        t2 = GSL::exp(-kappa*r).val*GSL::erf(0.5*sqrt(eta)*r - kappa/sqrt(eta)).val;
+        t3 = GSL::exp(kappa*r).val*GSL::erf(0.5*sqrt(eta)*r + kappa/sqrt(eta)).val;
 
         res = M_SQRTPI/4*(t1 - t2 - t3);
     }else if(l.l == -1){
-        t1 = gsl_sf_exp(-kappa*r) - gsl_sf_exp(kappa*r);
-        t2 = gsl_sf_exp(-this->kappa*r)*gsl_sf_erf(sqrt(eta)*r/2 - this->kappa/sqrt(eta));
-        t3 = gsl_sf_exp(this->kappa*r)*gsl_sf_erf(sqrt(eta)*r/2 + this->kappa/sqrt(eta));
+        t1 = GSL::exp(-kappa*r).val - GSL::exp(kappa*r).val;
+        t2 = GSL::exp(-this->kappa*r).val*GSL::erf(sqrt(eta)*r/2 - this->kappa/sqrt(eta)).val;
+        t3 = GSL::exp(this->kappa*r).val*GSL::erf(sqrt(eta)*r/2 + this->kappa/sqrt(eta)).val;
 
         res = M_SQRTPI/(2*kappa)*(t1 - t2 + t3)/r;
     }else if(l.l >= 1){
         t1 = (2*l.l - 1)/2. * bar_ew_int(lm {l.l - 1, l.m}, r);
         t2 = -b*bar_ew_int(lm {l.l - 2, l.m}, r);
-        t3 = gsl_pow_int(a, (2*l.l-1))/2 * gsl_sf_exp(-a*a + b/(a*a));
+        if(-a*a + b/(a*a) > -700){
+            t3 = GSL::pow_int(a, (2*l.l-1))/2 * GSL::exp(-a*a + b/(a*a)).val;
+        }else{
+            t3 = 0;
+        }
         res = t1 + t2 + t3;
     }
     return res;
@@ -55,7 +56,7 @@ double Ewald_integral::bar_ew_int(lm l, double r){
 
 double Ewald_integral::ewald_int(lm l, double r)
 {
-    return bar_ew_int(l, r)/gsl_pow_int(r, 2*l.l + 1);
+    return bar_ew_int(l, r)/GSL::pow_int(r, 2*l.l + 1);
 }
 
 double Ewald_integral::bar_comp_ew_int(lm l, double r){
@@ -67,21 +68,21 @@ double Ewald_integral::bar_comp_ew_int(lm l, double r){
     double b = -kappa*kappa*r*r/4;
 
     if(l.l == 0){
-        t1 = gsl_sf_exp(-kappa*r) - gsl_sf_exp(kappa*r);
-        t2 = gsl_sf_exp(-kappa*r)*gsl_sf_erf(-0.5*sqrt(eta)*r + kappa/sqrt(eta));
-        t3 = gsl_sf_exp(kappa*r)*gsl_sf_erf(0.5*sqrt(eta)*r + kappa/sqrt(eta));
+        t1 = GSL::exp(-kappa*r).val - GSL::exp(kappa*r).val;
+        t2 = GSL::exp(-kappa*r).val*GSL::erf(-0.5*sqrt(eta)*r + kappa/sqrt(eta)).val;
+        t3 = GSL::exp(kappa*r).val*GSL::erf(0.5*sqrt(eta)*r + kappa/sqrt(eta)).val;
 
         res = M_SQRTPI/4 * (t1 - t2 + t3);
     }else if(l.l == -1){
-        t1 = gsl_sf_exp(-kappa*r) + gsl_sf_exp(kappa*r);
-        t2 = gsl_sf_exp(-kappa*r)*gsl_sf_erf(-0.5*sqrt(eta)*r + kappa/sqrt(eta));
-        t3 = gsl_sf_exp(kappa*r)*gsl_sf_erf(0.5*sqrt(eta)*r + kappa/sqrt(eta));
+        t1 = GSL::exp(-kappa*r).val + GSL::exp(kappa*r).val;
+        t2 = GSL::exp(-kappa*r).val*GSL::erf(-0.5*sqrt(eta)*r + kappa/sqrt(eta)).val;
+        t3 = GSL::exp(kappa*r).val*GSL::erf(0.5*sqrt(eta)*r + kappa/sqrt(eta)).val;
 
         res = M_SQRTPI/(2*kappa) * (t1 - t2 - t3)/r;
     }else if(l.l >= 1){
         t1 = (2*l.l - 1)/2. * bar_comp_ew_int(lm {l.l - 1, l.m}, r);
         t2 = -b*bar_comp_ew_int(lm {l.l - 2, l.m}, r);
-        t3 = -gsl_pow_int(a, (2*l.l-1))/2 * gsl_sf_exp(-a*a + b/(a*a));
+        t3 = -GSL::pow_int(a, (2*l.l-1))/2 * GSL::exp(-a*a + b/(a*a)).val;
         res = t1 + t2 + t3;
     }
     return res;
@@ -89,7 +90,7 @@ double Ewald_integral::bar_comp_ew_int(lm l, double r){
 
 double Ewald_integral::comp_ewald_int(lm l, double r)
 {
-    return bar_comp_ew_int(l, r)/gsl_pow_int(r, 2*l.l+1);
+    return bar_comp_ew_int(l, r)/GSL::pow_int(r, 2*l.l+1);
 }
 
 std::vector<double> Ewald_integral::evaluate(lm l, Logarithmic_mesh &mesh)

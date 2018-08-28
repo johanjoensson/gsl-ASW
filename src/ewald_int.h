@@ -31,6 +31,8 @@ class Ewald_integral{
         std::vector<double> evaluate(lm l, Logarithmic_mesh &mesh);
         //! Calculate the complementary Ewald integral for angular quantum number (l.l, l.m) and evaluate it on every point in the mesh
         std::vector<double> evaluate_comp(lm l, Logarithmic_mesh &mesh);
+        double ewald_int(lm l, double r);
+        double comp_ewald_int(lm l, double r);
 };
 
 #endif //EWALD_INT_H

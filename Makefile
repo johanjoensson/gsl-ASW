@@ -10,8 +10,10 @@
 ################################################################################
 
 # Compilers to use
-CXX = clang++
-CC  = clang
+#CXX = clang++
+CXX = g++
+#CC  = clang
+CC  = gcc
 
 CXXCHECK = clang-tidy
 
@@ -22,14 +24,15 @@ SRC_DIR = src
 BUILD_DIR = build
 
 # Flags for the above defined compilers
-CXXFLAGS = -g -std=c++11 -Wall -Wextra -Werror -W -pedantic -I $(SRC_DIR)
-CFLAGS = -g -std=c11 -Wall -Wextra -Werror -W -pedantic -I $(SRC_DIR)
+CXXFLAGS = -g -std=c++11 -Wall -Wextra -Werror -W -pedantic -I $(SRC_DIR) -DDEBUG
+CFLAGS = -g -std=c11 -Wall -Wextra -Werror -W -pedantic -I $(SRC_DIR) -DDEBUG
 
 CXXCHECKS =clang-analyzer-*,-clang-analyzer-cplusplus*,cppcoreguidelines-*,bugprone-* 
 CXXCHECKFLAGS = -checks=$(CXXCHECKS) -header-filter=.* -- -std=c++11
 
 # Libraries to link against
-LDFLAGS = -lgsl -lgslcblas -lm -stdlib=libstdc++
+GSLLIBDIR="../GSL-lib"
+LDFLAGS = -L$(GSLLIBDIR) -Wl,-rpath=$(GSLLIBDIR) -lgsl -lgslcblas -lm -lgsl-lib
 
 # Source files directory
 SRC_DIR = src
@@ -38,16 +41,22 @@ SRC_DIR = src
 BUILD_DIR = build
 
 # List of all executables in this project
-EXE = numerov_test
+EXE = gsl-asw
 
 NUMEROV_OBJ = numerov_solver.o\
 	      spherical_fun.o\
-	      log_mesh.o \
-	      gaunt.o \
+	      log_mesh.o\
+	      bloch_sum.o\
+	      gaunt.o\
 	      structure_const.o\
+	      augmented_fun.o\
+	      augmented_spherical_wave.o\
+	      atomic_quantity.o\
 	      atom.o\
 	      crystal.o\
+	      lattice.o\
 	      ewald_int.o\
+	      utils.o\
 	      main.o
 OBJS = $(addprefix $(BUILD_DIR)/, $(NUMEROV_OBJ))
 
@@ -68,7 +77,7 @@ $(BUILD_DIR)/%.o: $(SRC_DIR)/%.c
 	$(CC) $(CFLAGS) -c $? -o $@
 
 # Link numerov_test
-numerov_test: $(OBJS)
+gsl-asw: $(OBJS)
 	$(CXX) $(LDFLAGS) $? -o $@
 
 checkall: $(addprefix $(SRC_DIR)/, $(NUMEROV_OBJ:o=cpp))
