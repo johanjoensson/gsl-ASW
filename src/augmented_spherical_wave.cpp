@@ -3,6 +3,9 @@
 #include "numerov_solver.h"
 #include "structure_const.h"
 #include <algorithm>
+#include <iostream>
+#include <iomanip>
+#include <fstream>
 
 
 Augmented_spherical_wave::Augmented_spherical_wave()
@@ -15,22 +18,20 @@ Augmented_spherical_wave::Augmented_spherical_wave(double kappa, unsigned int n,
   n(n), l(l), s(s), H(n, l, kappa, center.pos, center.mesh), J(off_centers.size())
 {
     // Set up off-center spheres
-    int l_low = (int) n - 2;
+    int l_low = 2;
     if(center.Z >= 21){
-        l_low = std::min(3, (int)n - 2);
-    }else{
-        l_low = std::min(1, (int)n - 2);
+        l_low = 3;
     }
     Numerov_solver sol;
     Augmented_Bessel tmp;
     std::vector<Atom>::iterator it = find(off_centers.begin(), off_centers.end(),
     center);
-    size_t i = std::distance(off_centers.begin(), it);
+    size_t i;// = std::distance(off_centers.begin(), it);
     for(Atom at : off_centers){
         it = find(off_centers.begin(), off_centers.end(), at);
         i = std::distance(off_centers.begin(), it);
         if(at != center){
-            for(int l = 0; l <= l_low + 1; l++){
+            for(int l = 0; l <= std::min(l_low + 1, (int)n - 1); l++){
                 for(int m = -l; m <= l; m++){
                     lm lp = {l, m};
                     tmp = Augmented_Bessel(n, lp, kappa, at.pos, at.mesh);
@@ -63,6 +64,13 @@ void Augmented_spherical_wave::set_up(Potential &v)
 
     H.update(v_tot, en, core_state);
 
+	std::ofstream out_file;
+	out_file.open("check_Hankel.dat");
+	out_file << "# r\trH" << std::endl;
+	for(size_t i = 0; i < H.val.size(); i++){
+		out_file << std::setprecision(8) << center.mesh.r[i] << " " << v_tot[i] << " " << H.val[i] << std::endl;
+	}
+	out_file.close();
 
     std::unordered_set<Augmented_Bessel> tmp;
     for(Atom at : off_centers){
@@ -70,7 +78,7 @@ void Augmented_spherical_wave::set_up(Potential &v)
         i = std::distance(v.sites.begin(), it);
 
         if(at != center){
-            en = -1.*at.get_Z()*at.get_Z()/(n*n);
+            en =H.EH;
 
             for(Augmented_Bessel Jil : J[i]){
                 v_tot = v_eff(Jil.mesh, v.val[i], Jil.l);

@@ -22,6 +22,11 @@
 
 int main()
 {
+#ifdef DEBUG
+std::ofstream numerov_debug;
+numerov_debug.open("numerov.debug", std::fstream::out);
+numerov_debug.close();
+#endif
 	Logarithmic_mesh mesh(0.5, 500);
 
 	std::cout.precision(12);
@@ -34,15 +39,15 @@ int main()
 	a[0] = 1.; a[1] = 0.; a[2] = 0.;
 	b[0] = 0.; b[1] = 1.; b[2] = 0.;
 	c[0] = 0.; c[1] = 0.; c[2] = 1.;
-	Crystal cr(6*a, 6*b, 6*c);
+	Crystal cr(4*a, 4*b, 4*c);
 
 	std::cout << cr.lat.scale*cr.lat.lat << std::endl;
 	size_t Nk = cr.calc_nk(1e-6, sqrt(0.015), lm {4, 0});
 	size_t Nr = cr.calc_nr(1e-6, sqrt(0.015), lm {4, 0});
 //	std::cout << "Nr = " << Nr << std::endl;
-	cr.calc_Rn(Nr/3);
+	cr.calc_Rn(Nr/2);
 //	std::cout << "Nk = " << Nk << std::endl;
-	cr.calc_Kn(Nk/3);
+	cr.calc_Kn(Nk/2);
 
 
 	GSL::Vector tau(3);
@@ -64,10 +69,10 @@ int main()
 	tau[2] = 0.5;
 	Atom C4(mesh, tau*cr.lat.scale*cr.lat.lat);
 
-	C1.set_Z(6);
-	C2.set_Z(6);
-	C3.set_Z(6);
-	C4.set_Z(6);
+	C1.set_Z(4);
+	C2.set_Z(4);
+	C3.set_Z(4);
+	C4.set_Z(4);
 
 	cr.add_atoms(std::vector<Atom> {C1, C2, C3, C4});
 
@@ -101,18 +106,19 @@ int main()
 	std::cout << "Cell volume = " << cr.volume << " a.u.^3" << std::endl;
 
 
-	cr.atoms[0].mesh = Logarithmic_mesh(cr.atoms[0].get_AS(), 500);
-	cr.atoms[1].mesh = Logarithmic_mesh(cr.atoms[1].get_AS(), 500);
-	cr.atoms[2].mesh = Logarithmic_mesh(cr.atoms[2].get_AS(), 500);
-	cr.atoms[3].mesh = Logarithmic_mesh(cr.atoms[3].get_AS(), 500);
+	cr.atoms[0].mesh = Logarithmic_mesh(cr.atoms[0].get_AS(), 4500);
+	cr.atoms[1].mesh = Logarithmic_mesh(cr.atoms[1].get_AS(), 4500);
+	cr.atoms[2].mesh = Logarithmic_mesh(cr.atoms[2].get_AS(), 4500);
+	cr.atoms[3].mesh = Logarithmic_mesh(cr.atoms[3].get_AS(), 4500);
 
 	double kappa = sqrt(0.015);
 	Augmented_spherical_wave aw1s(kappa, 1, lm {0, 0}, UP, cr.atoms[0], cr.atoms);
 	Augmented_spherical_wave aw2s(kappa, 2, lm {0, 0}, UP, cr.atoms[0], cr.atoms);
 	Augmented_spherical_wave aw2p(kappa, 2, lm {1, 0}, UP, cr.atoms[0], cr.atoms);
-	aw1s.core_state = true;
+//	aw1s.core_state = true;
 	Potential pot(cr.atoms);
 	pot.initial_pot();
+	std::cout << "MT0 = " << pot.MT_0 << std::endl;
 
 	for(size_t idx = 0; idx < cr.atoms.size(); idx++){
 		std::cout << "Muffin-tin radius of atom  " << idx << " : "<< cr.atoms[idx].get_MT()
@@ -133,7 +139,7 @@ int main()
 	out_file << "# r\tV(r)\tr*R1s(r)\tr*R2s(r)\tr*R2p(r)" << std::endl;
 	for(size_t i = 0; i < 2000; i++){
 		r = 0.001*i*tau*cr.lat.scale*cr.lat.lat;
-		out_file << std::setprecision(8) << r.norm() << " " << pot(r)<< " "
+		out_file << std::setprecision(8) << r.norm() << " " << pot(r) - pot.MT_0<< " "
 		<< aw1s(r) << " " << aw2s(r) << " " << aw2p(r) << std::endl;
 	}
 	out_file.close();

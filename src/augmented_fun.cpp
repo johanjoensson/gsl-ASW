@@ -7,15 +7,8 @@ Augmented_function::Augmented_function()
 {}
 
 Augmented_function::Augmented_function(const Augmented_function &a)
-{
-    n = a.n;
-    l = a.l;
-    kappa = a.kappa;
-    radius = a.radius;
-    center = a.center;
-    mesh = a.mesh;
-    val = a.val;
-}
+ : n(a.n), l(a.l), kappa(a.kappa), radius(a.radius), center(a.center), mesh(a.mesh), val(a.val)
+{}
 
 Augmented_function::Augmented_function(Augmented_function &&a)
  : Augmented_function()
@@ -143,18 +136,20 @@ void Augmented_Hankel::update(std::vector<double> v, const double en
     EH = en;
     Numerov_solver sol;
     int nodes = n - l.l - 1;
+    int last = mesh.r.size() - 1, lastbutone = mesh.r.size() - 2;
 
-    std::vector<double> l_init = {GSL::pow_int(mesh.r[0], l.l+1),
-        GSL::pow_int(mesh.r[1], l.l+1),
-        GSL::pow_int(mesh.r[2], l.l+1)};
+    std::vector<double> l_init = {GSL::pow_int(mesh.r[0], l.l+1)/sqrt(mesh.drx[0]),
+        GSL::pow_int(mesh.r[1], l.l+1)/sqrt(mesh.drx[1]),
+        GSL::pow_int(mesh.r[2], l.l+1)/sqrt(mesh.drx[2])};
     std::vector<double> r_init;
     if(core){
-        r_init = {1e-16, 0.};
+        r_init = {1e-24, 0.};
     }else{
-        r_init = {GSL::pow_int(kappa, l.l + 1)*
-            real_spherical_hankel(l, kappa*mesh.r[mesh.r.size()-1]).val,
-                  GSL::pow_int(kappa, l.l+1)*
-            real_spherical_hankel(l, kappa*mesh.r[mesh.r.size()-2]).val};
+        r_init = {-GSL::pow_int(kappa, l.l + 1)*mesh.r[last]*
+            real_spherical_hankel(l, kappa*mesh.r[last]).val/sqrt(mesh.drx[last]),
+                  -GSL::pow_int(kappa, l.l+1)*mesh.r[lastbutone]*
+            real_spherical_hankel(l, kappa*mesh.r[lastbutone]).val
+            /sqrt(mesh.drx[lastbutone])};
     }
     val = sol.solve(mesh, v, l_init, r_init, EH, nodes);
 }
@@ -238,16 +233,18 @@ void Augmented_Bessel::update(std::vector<double> v, const double en
     EJ = en;
     Numerov_solver sol;
     int nodes = n - l.l - 1;
+    int last = mesh.r.size() - 1, lastbutone = mesh.r.size() - 2;
 
     if(!core){
-        std::vector<double> l_init = {GSL::pow_int(mesh.r[0], l.l+1),
-            GSL::pow_int(mesh.r[1], l.l+1),
-            GSL::pow_int(mesh.r[2], l.l+1)};
+        std::vector<double> l_init = {GSL::pow_int(mesh.r[0], l.l+1)/sqrt(mesh.drx[0]),
+            GSL::pow_int(mesh.r[1], l.l+1)/sqrt(mesh.drx[1]),
+            GSL::pow_int(mesh.r[2], l.l+1)/sqrt(mesh.drx[2])};
 
-        std::vector<double> r_init = {GSL::pow_int(1./kappa, l.l)*
-            GSL::bessel_jn(l.l,kappa*mesh.r[mesh.r.size() - 1]).val,
-                  GSL::pow_int(1./kappa, l.l)*
-            GSL::bessel_jn(l.l, kappa*mesh.r[mesh.r.size() - 2]).val};
+        std::vector<double> r_init = {GSL::pow_int(1./kappa, l.l)*mesh.r[last]*
+            GSL::bessel_jn(l.l,kappa*mesh.r[last]).val/sqrt(mesh.drx[last]),
+                  GSL::pow_int(1./kappa, l.l)*mesh.r[lastbutone]*
+            GSL::bessel_jn(l.l, kappa*mesh.r[lastbutone]).val
+            /sqrt(mesh.drx[lastbutone])};
 
         val = sol.solve(mesh, v, l_init, r_init, EJ, nodes);
     }else{

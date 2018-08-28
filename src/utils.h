@@ -8,7 +8,7 @@ enum spin{
 };
 
 struct lm {
-	int l;
+    int l;
 	int m;
 };
 
