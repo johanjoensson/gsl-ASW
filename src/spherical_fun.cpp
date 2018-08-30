@@ -19,6 +19,7 @@ unsigned long int factorial(int n)
 GSL::Result cubic_harmonic(lm l, const GSL::Vector& r)
 {
 	int m_eff = l.m;
+	double r_norm = r.norm();
 	int c = 1;
 	if (l.m < 0){
 		m_eff = -l.m;
@@ -26,7 +27,7 @@ GSL::Result cubic_harmonic(lm l, const GSL::Vector& r)
 	if(l.m % 2 != 0){
 		c = -1;
 	}
-	if(r.norm() < 1e-16){
+	if(r_norm < 1e-16){
 		GSL::Result res(0., 0.);
 		return res;
 	}
@@ -39,7 +40,6 @@ GSL::Result cubic_harmonic(lm l, const GSL::Vector& r)
 	double z = tmp[2];
 	GSL::Result theta, phi, cos_theta, res;
 
-	double r_norm = 1.0;
 
 	theta = GSL::Result((GSL::arccos(z/r_norm)).re, 0.);
 	phi = GSL::Result(GSL::Complex(x, y).arg(), 0.);

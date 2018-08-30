@@ -44,7 +44,7 @@ double Augmented_function::operator()(const GSL::Vector r)
         }
         // r[t - 1] < |ri| and r[t] > |ri|
         if(t < mesh.r.size()){
-            res = lerp(ri.norm(), mesh.r[t - 1], mesh.r[t], val[t - 1], val[t]);
+            res = lerp(ri.norm(), mesh.r[t - 1], mesh.r[t], val[t - 1]*mesh.drx[t-1], val[t]*mesh.drx[t]);
         }
     }
     return res;

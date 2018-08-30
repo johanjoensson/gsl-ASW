@@ -39,7 +39,7 @@ numerov_debug.close();
 	a[0] = 1.; a[1] = 0.; a[2] = 0.;
 	b[0] = 0.; b[1] = 1.; b[2] = 0.;
 	c[0] = 0.; c[1] = 0.; c[2] = 1.;
-	Crystal cr(4*a, 4*b, 4*c);
+	Crystal cr(6*a, 6*b, 6*c);
 
 	std::cout << cr.lat.scale*cr.lat.lat << std::endl;
 	size_t Nk = cr.calc_nk(1e-6, sqrt(0.015), lm {4, 0});
@@ -69,10 +69,10 @@ numerov_debug.close();
 	tau[2] = 0.5;
 	Atom C4(mesh, tau*cr.lat.scale*cr.lat.lat);
 
-	C1.set_Z(4);
-	C2.set_Z(4);
-	C3.set_Z(4);
-	C4.set_Z(4);
+	C1.set_Z(6);
+	C2.set_Z(6);
+	C3.set_Z(6);
+	C4.set_Z(6);
 
 	cr.add_atoms(std::vector<Atom> {C1, C2, C3, C4});
 
@@ -114,8 +114,10 @@ numerov_debug.close();
 	double kappa = sqrt(0.015);
 	Augmented_spherical_wave aw1s(kappa, 1, lm {0, 0}, UP, cr.atoms[0], cr.atoms);
 	Augmented_spherical_wave aw2s(kappa, 2, lm {0, 0}, UP, cr.atoms[0], cr.atoms);
-	Augmented_spherical_wave aw2p(kappa, 2, lm {1, 0}, UP, cr.atoms[0], cr.atoms);
-//	aw1s.core_state = true;
+	Augmented_spherical_wave aw2px(kappa, 2, lm {1, 0}, UP, cr.atoms[0], cr.atoms);
+	Augmented_spherical_wave aw2py(kappa, 2, lm {1, -1}, UP, cr.atoms[0], cr.atoms);
+	Augmented_spherical_wave aw2pz(kappa, 2, lm {1, 1}, UP, cr.atoms[0], cr.atoms);
+	aw1s.core_state = true;
 	Potential pot(cr.atoms);
 	pot.initial_pot();
 	std::cout << "MT0 = " << pot.MT_0 << std::endl;
@@ -129,7 +131,9 @@ numerov_debug.close();
 
 	aw1s.set_up(pot);
 	aw2s.set_up(pot);
-	aw2p.set_up(pot);
+	aw2px.set_up(pot);
+	aw2py.set_up(pot);
+	aw2pz.set_up(pot);
 
 	GSL::Vector r(3);
 
@@ -139,8 +143,9 @@ numerov_debug.close();
 	out_file << "# r\tV(r)\tr*R1s(r)\tr*R2s(r)\tr*R2p(r)" << std::endl;
 	for(size_t i = 0; i < 2000; i++){
 		r = 0.001*i*tau*cr.lat.scale*cr.lat.lat;
-		out_file << std::setprecision(8) << r.norm() << " " << pot(r) - pot.MT_0<< " "
-		<< aw1s(r) << " " << aw2s(r) << " " << aw2p(r) << std::endl;
+		out_file << std::setprecision(8) << r.norm() << " " << pot(r) - pot.MT_0 
+		<< " " << aw1s(r) << " " << aw2s(r) << " " << aw2px(r) << " "
+		<< aw2py(r) << " " << aw2pz(r) << std::endl;
 	}
 	out_file.close();
 
