@@ -3,6 +3,11 @@
 
 This is a hobby project for me (Johan Jösson), the goal is to create a working DFT-code based on the full potential augmented spherical wave method, as described by V. Eyert in "The augmented spherical wave method: A comprehensive treatment", Springer verlag 2013.
 
+## Requirements
+* The GNU Scientific Library, [GSL](https://www.gnu.org/software/gsl/).
+* My own GSL c++ wrapper, [GSL-lib](https://github.com/johanjoensson/GSL-lib).
+* The XCFun DFT library, <http://dftlibs.org/xcfun/>.
+
 ### LICENCE
 
     Copyright (C) 2018  Johan Jönsson

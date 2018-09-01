@@ -39,6 +39,16 @@ class Structure_constant{
 			const Structure_constant& );
 };
 
+/***************************************************************************//**
+* A class for representing Bloch summed structure constants\n
+* Contains:\n
+* __l_int__ - Maximum orbital angular momentum to be included for Bessel
+* expansions\n __l_low__ - Maximumm orbital angular momentum to be included for
+* Hankel expansions\n __l1__, __l2__ - Orbital angular momenta to couple via the
+* structure constant\n
+* __kappa__ - Energy parameter used (usually kappa^2 = -0.015)\n
+* __c__ - Unit cell of the crystal.\n
+*******************************************************************************/
 class Bloch_summed_structure_constant{
 		int l_low, l_int;
 		double kappa;
@@ -53,7 +63,9 @@ class Bloch_summed_structure_constant{
 		Bloch_summed_structure_constant(Crystal& c, lm l1, lm l2);
 		Bloch_summed_structure_constant();
 
+		//! Evaluate the Bloch summed structure constant at point tau for k-point kp
 		GSL::Complex evaluate(const GSL::Vector& tau, const GSL::Vector& kp);
+		//! Evaluate the energy derivative of the Bloch summed structure constant at point tau for k-point kp
 		GSL::Complex dot_evaluate(const GSL::Vector& tau,
 			const GSL::Vector& kp);
 

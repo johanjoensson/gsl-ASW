@@ -25,6 +25,11 @@ class Numerov_solver{
 			std::vector<double> &v, int i_lr, std::vector<double> &init_cond,
 			double E);
 
+		//! Solve radial Schrödinger equation for potential v, on mesh, using
+		//! left initial conditions l_init and right initial conditions r_init
+		//! ensuring the solution has n_nodes on mesh.
+		//! Store energy obtained by smooth continuous matching between right
+		//! and left part of the solution in en.
 		std::vector<double> solve(Logarithmic_mesh &mesh,
 			std::vector<double> &v, std::vector<double> &l_init,
 			std::vector<double> &r_init, double &en, int n_nodes);

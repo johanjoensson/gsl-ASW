@@ -8,6 +8,14 @@
 #include "../../GSL-lib/src/matrix.h"
 #include "../../GSL-lib/src/vector.h"
 
+/***************************************************************************//**
+* Class used to describe the structure of a crystal.\n
+* Contains:\n
+* __Rn_vecs__ - Lattice vectors of the crystal (up to a maximum lentgh).\n
+* __Kn_vecs__ - Reciprocal lattice vectors of the crystal (up to a maximum length).\n
+* __lat__ - The lattice of the crystal.\n
+* __atoms__ - The atoms in the unit cell of the crystal (the base of the crystal).\n
+*******************************************************************************/
 class Crystal {
 
 	double calc_volume();
