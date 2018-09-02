@@ -8,6 +8,9 @@ This is a hobby project for me (Johan Jösson), the goal is to create a working 
 * My own GSL c++ wrapper, [GSL-lib](https://github.com/johanjoensson/GSL-lib).
 * The XCFun DFT library, <http://dftlibs.org/xcfun/>.
 
+## Documentation
+* [Doxygen](docs/html/index.html)
+* [Sphinx](docs/build/sphinx-index.html)
 ### LICENCE
 
     Copyright (C) 2018  Johan Jönsson

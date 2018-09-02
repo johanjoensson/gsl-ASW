@@ -3,6 +3,7 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
+===================================
 Welcome to gsl-ASW's documentation!
 ===================================
 
@@ -10,6 +11,11 @@ Welcome to gsl-ASW's documentation!
    :maxdepth: 2
    :caption: Contents:
 
+   Introduction
+   Requirements
+   Building
+   Greetings
+   License
 
 
 Indices and tables
