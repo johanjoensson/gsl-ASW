@@ -36,13 +36,20 @@ double Atomic_quantity::operator()(const GSL::Vector& r)
 }
 
 Potential::Potential(std::vector<Atom>& atoms)
- : Atomic_quantity(atoms), electrostatic(atoms.size()), exchange_correlation(atoms.size()), MT_0(0)
+ : Atomic_quantity(atoms), electrostatic(atoms.size()), exchange_correlation(atoms.size()), xc_fun(), MT_0(0)
 {
     for(size_t i = 0; i < sites.size(); i++){
         electrostatic[i] = std::vector<double>(sites[i].mesh.r.size(), 0.);
         exchange_correlation[i] = std::vector<double>(sites[i].mesh.r.size(), 0.);
     }
 }
+
+void Potential::set_xc_fun(XC_FUN xc_func)
+{
+    xc_fun.set_xc(xc_func);
+}
+
+
 
 double atomic_potential(const int Z, const double r)
 {
@@ -61,12 +68,14 @@ double Xi0(size_t j, std::vector<Atom> sites, double r)
     return res;
 }
 
-void Potential::initial_pot()
+void Potential::initial_pot(unsigned int nel, double vol)
 {
+    std::vector<double> rho;
     for(size_t i = 0; i < sites.size(); i++){
+        rho = std::vector<double>(sites[i].mesh.r.size(), nel/vol);
+        exchange_correlation[i] = xc_fun.exc(rho);
         for(size_t j = 0; j < sites[i].mesh.r.size(); j++){
             electrostatic[i][j] = atomic_potential(sites[i].get_Z(), sites[i].mesh.r[j]);
-            exchange_correlation[i][j] = 0.;
         }
     }
     std::vector<double> alpha;

@@ -31,7 +31,7 @@ Augmented_spherical_wave::Augmented_spherical_wave(double kappa, unsigned int n,
         it = find(off_centers.begin(), off_centers.end(), at);
         i = std::distance(off_centers.begin(), it);
         if(at != center){
-            for(int l = 0; l <= std::min(l_low + 1, (int)n - 1); l++){
+            for(int l = 0; l <= std::min((int)n - 1, l_low + 1); l++){
                 for(int m = -l; m <= l; m++){
                     lm lp = {l, m};
                     tmp = Augmented_Bessel(n, lp, kappa, at.pos, at.mesh);
@@ -64,6 +64,7 @@ void Augmented_spherical_wave::set_up(Potential &v)
 
     H.update(v_tot, en, core_state);
 
+#ifdef DEBUG
 	std::ofstream out_file;
 	out_file.open("check_Hankel.dat");
 	out_file << "# r\trH" << std::endl;
@@ -71,7 +72,7 @@ void Augmented_spherical_wave::set_up(Potential &v)
 		out_file << std::setprecision(8) << center.mesh.r[i] << " " << v_tot[i] << " " << H.val[i] << std::endl;
 	}
 	out_file.close();
-
+#endif
     std::unordered_set<Augmented_Bessel> tmp;
     for(Atom at : off_centers){
         it = find(v.sites.begin(), v.sites.end(), at);
@@ -97,7 +98,6 @@ double Augmented_spherical_wave::operator()(const GSL::Vector &r)
     // Start with on-center value
     res += H(r)* cubic_harmonic(l, r).val;
 
-
     // Then do off-center contributions
     GSL::Vector R(3);
     Structure_constant B;
@@ -108,7 +108,7 @@ double Augmented_spherical_wave::operator()(const GSL::Vector &r)
             for(Augmented_Bessel Jj : J[j]){
                 R = Jj.center - center.pos;
                 B = Structure_constant( Jj.l, this->l, R);
-                res += Jj(r)*cubic_harmonic(l, r - Jj.center).val*B.val;
+                res += Jj(r)*cubic_harmonic(Jj.l, r - Jj.center).val*B.val;
             }
         }
     }

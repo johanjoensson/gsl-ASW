@@ -38,12 +38,11 @@ GSL::Result cubic_harmonic(lm l, const GSL::Vector& r)
 	double x = tmp[0];
 	double y = tmp[1];
 	double z = tmp[2];
-	GSL::Result theta, phi, cos_theta, res;
+	GSL::Result phi, cos_theta, res;
 
 
-	theta = GSL::Result((GSL::arccos(z/r_norm)).re, 0.);
 	phi = GSL::Result(GSL::Complex(x, y).arg(), 0.);
-	cos_theta = GSL::cos(theta);
+	cos_theta = GSL::Result(z, 0);
 
 
 	if(l.m > 0){

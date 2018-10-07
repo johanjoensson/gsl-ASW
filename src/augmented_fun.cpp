@@ -135,7 +135,7 @@ void Augmented_Hankel::update(std::vector<double> v, const double en
 {
     EH = en;
     Numerov_solver sol;
-    int nodes = n - l.l - 1;
+    int nodes = std::max(0, n - l.l - 1);
     int last = mesh.r.size() - 1, lastbutone = mesh.r.size() - 2;
 
     std::vector<double> l_init = {GSL::pow_int(mesh.r[0], l.l+1)/sqrt(mesh.drx[0]),
@@ -232,7 +232,7 @@ void Augmented_Bessel::update(std::vector<double> v, const double en
 {
     EJ = en;
     Numerov_solver sol;
-    int nodes = n - l.l - 1;
+    int nodes = std::max(0,n - l.l - 1);
     int last = mesh.r.size() - 1, lastbutone = mesh.r.size() - 2;
 
     if(!core){
