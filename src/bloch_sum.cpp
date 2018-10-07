@@ -1,5 +1,6 @@
 #include "bloch_sum.h"
 #include "ewald_int.h"
+#include "envelope_fun.h"
 
 Bloch_sum::Bloch_sum(const lm l, const double kappa, const Crystal c)
  : l(l), kappa(kappa), c(c)
@@ -9,7 +10,6 @@ Bloch_sum::Bloch_sum(const lm l, const double kappa, const Crystal c)
 }
 
 
-/* Something is wrong in this one! d1(tau, -kp) != d1(tau, kp)* */
 GSL::Complex Bloch_sum::calc_d1(const GSL::Vector& tau, const GSL::Vector& kp)
 {
     GSL::Complex d1(0,0), e(0,0);

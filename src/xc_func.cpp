@@ -3,13 +3,19 @@
 
 Xc_func::Xc_func()
 {
-    fun = new xc_func_type;
+    fun = nullptr;
 }
+
 
 void Xc_func::set_xc(XC_FUN xcf)
 {
     int xc_func = 0;
     int xc_spin = 0;
+
+    if(fun == nullptr){
+        fun = new xc_func_type;
+    }
+
     switch(xcf) {
         case LDA :
             xc_func = XC_LDA_X;
@@ -34,6 +40,36 @@ Xc_func::Xc_func(XC_FUN xcf)
 
 }
 
+Xc_func::Xc_func(Xc_func &xcf)
+{
+    this->fun = new xc_func_type;
+    *this->fun = *xcf.fun;
+}
+
+Xc_func::Xc_func(Xc_func &&xcf)
+{
+    fun = nullptr;
+    std::swap(this->fun, xcf.fun);
+}
+
+Xc_func& Xc_func::operator=(const Xc_func &xcf)
+{
+    if(this->fun == nullptr){
+        this->fun = new xc_func_type;
+    }
+    *this->fun = *xcf.fun;
+
+    return *this;
+}
+
+
+Xc_func& Xc_func::operator=(Xc_func &&xcf)
+{
+    std::swap(this->fun, xcf.fun);
+
+    return *this;
+}
+
 Xc_func::~Xc_func()
 {
     xc_func_end(fun);
@@ -41,7 +77,7 @@ Xc_func::~Xc_func()
 }
 
 std::vector<double> Xc_func::exc(std::vector<double> rho)
-{   
+{
     std::vector<double> res(rho.size(), 0);
 
     switch(fun->info->family) {

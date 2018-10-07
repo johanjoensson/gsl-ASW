@@ -5,6 +5,46 @@
 
 #include <iostream>
 
+Spherical_function::Spherical_function()
+ : l()
+{}
+
+Spherical_function::Spherical_function(lm l)
+ : l(l)
+{}
+
+double wronskian(Spherical_function a, Spherical_function b, double r)
+{
+    double res = 0.;
+    double fl = a(r);
+    a.l.l += 1;
+    double flp1 = a(r);
+    double gl = b(r);
+    b.l.l += 1;
+    double glp1 = b(r);
+    res = flp1*gl - fl*glp1;
+
+    return res;
+}
+
+double Hankel_function::operator()(const double x)
+{
+  GSL::Result exp = GSL::exp(-x);
+  GSL::Result k = 2./M_PI * GSL::bessel_kn_scaled(l.l, x);
+
+  return (exp*k).val;
+}
+
+double Bessel_function::operator()(const double x)
+{
+  return GSL::bessel_jn(l.l, x).val;
+}
+
+double Neumann_function::operator()(const double x)
+{
+  return GSL::bessel_yn(l.l, x).val;
+}
+
 unsigned long int factorial(int n)
 {
 	unsigned long int res = 1;
@@ -54,14 +94,6 @@ GSL::Result cubic_harmonic(lm l, const GSL::Vector& r)
 	}
 
 	return c*GSL::legendre_sphPlm(l.l, m_eff, cos_theta.val)*res;
-}
-
-GSL::Result real_spherical_hankel(lm l, double x)
-{
-  GSL::Result exp = GSL::exp(-x);
-  GSL::Result k = 2./M_PI * GSL::bessel_kn_scaled(l.l, x);
-
-  return exp*k;
 }
 
 std::ostream& operator << ( std::ostream& os, const lm& l)

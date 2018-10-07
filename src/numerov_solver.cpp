@@ -154,13 +154,13 @@ std::vector<double> Numerov_solver::solve(Logarithmic_mesh &mesh,
 				e_max = e_trial;
 				de = 0.5*(e_min - e_trial);
 				if(e_max - e_min < 1e-14){
-					e_min -= 0.5*abs(e_min);
+					e_min -= 0.5*std::abs(e_min);
 				}
 		    }else if(n_tmp < n_nodes){
 				e_min = e_trial;
 				de = 0.5*(e_max - e_trial);
 				if(e_max - e_min < 1e-14){
-					e_max += 0.5*abs(e_max);
+					e_max += 0.5*std::abs(e_max);
 				}
 		    }else{
 				de = 0.;
@@ -200,7 +200,7 @@ std::vector<double> Numerov_solver::solve(Logarithmic_mesh &mesh,
 		}
 		e_trial += de;
 
-	    if(std::abs(de) < 1E-14){
+	    if(std::abs(de) < 1E-6){
 		    done = true;
 	    }else{
 

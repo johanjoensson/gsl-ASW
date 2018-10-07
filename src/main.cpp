@@ -163,5 +163,7 @@ numerov_debug.close();
 	}
 	out_file.close();
 
+	std::cout << augmented_integral(aw1sup.H, aw1sup.H) << std::endl;
+
 	return 0;
 }

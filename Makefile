@@ -52,6 +52,7 @@ NUMEROV_OBJ = numerov_solver.o\
 	      ewald_int.o\
 	      utils.o\
 	      xc_func.o\
+	      envelope_fun.o\
 	      main.o
 
 OBJS = $(addprefix $(BUILD_DIR)/, $(NUMEROV_OBJ))

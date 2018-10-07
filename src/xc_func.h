@@ -16,8 +16,14 @@ private:
 public:
     Xc_func();
     Xc_func(XC_FUN xcf);
+    Xc_func(Xc_func &xcf);
+    Xc_func(Xc_func &&xcf);
 
     ~Xc_func();
+
+    Xc_func& operator=(const Xc_func &xcf);
+    Xc_func& operator=(Xc_func &&xcf);
+
     void set_xc(XC_FUN xcf);
 
     std::vector<double> exc(std::vector<double> rho);
