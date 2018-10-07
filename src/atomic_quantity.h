@@ -3,6 +3,7 @@
 #include <vector>
 #include "../../GSL-lib/src/vector.h"
 #include "atom.h"
+#include "xc_func.h"
 
 /***************************************************************************//**
 * Superclass used for representing gengeral properties of atomic quantities.\n
@@ -44,7 +45,8 @@ class Potential : public Atomic_quantity{
     std::vector<std::vector<double>> electrostatic, exchange_correlation;
 
 public:
-    void initial_pot();
+    Xc_func xc_fun;
+    void initial_pot(unsigned int nel, double vol);
 
     double MT_0;
 
@@ -56,6 +58,7 @@ public:
     Potential& operator=(const Potential&) = default;
     Potential& operator=(Potential&&) = default;
 
+    void set_xc_fun(XC_FUN xc_func);
 };
 
 /***************************************************************************//**

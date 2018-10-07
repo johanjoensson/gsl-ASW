@@ -44,7 +44,7 @@ double Augmented_function::operator()(const GSL::Vector r)
         }
         // r[t - 1] < |ri| and r[t] > |ri|
         if(t < mesh.r.size()){
-            res = lerp(ri.norm(), mesh.r[t - 1], mesh.r[t], val[t - 1], val[t]);
+            res = lerp(ri.norm(), mesh.r[t - 1], mesh.r[t], val[t - 1]*mesh.drx[t-1], val[t]*mesh.drx[t]);
         }
     }
     return res;
@@ -78,9 +78,29 @@ Augmented_function& Augmented_function::operator=(Augmented_function&& a)
 
 }
 
+double augmented_integral(Augmented_function &a, Augmented_function &b)
+{
+    double res = 0.;
+    Logarithmic_mesh mesh = a.mesh;
+    int N = mesh.r.size();
+    // Make sure both funcions are centered on the same site
+    if(a.center != b.center){
+        return 0.;
+    }
+    // Use Simpsons rule for integration
+    for(int i = 1; i < (N - 1)/2.; i++){
+        res += a.val[2*i - 1]*b.val[2*i - 1]/**mesh.r2[2*1 - 1]*mesh.drx[2*i-2]*/;
+        res += 4*a.val[2*i]*b.val[2*i]/**mesh.r2[2*1]*mesh.drx[2*i-1]*/;
+        res += a.val[2*i + 1]*b.val[2*i + 1]/**mesh.r2[2*1 + 1]*mesh.drx[2*i]*/;
+    }
+
+    res = 1./3 * res;
+    return res;
+}
+
 bool operator==(const Augmented_function &a, const Augmented_function &b)
 {
-    return a.l == b.l && a.center == b.center;
+    return a.n == b.n && a.l == b.l && a.center == b.center;
 }
 
 bool operator!=(const Augmented_function &a, const Augmented_function &b)
@@ -135,8 +155,10 @@ void Augmented_Hankel::update(std::vector<double> v, const double en
 {
     EH = en;
     Numerov_solver sol;
-    int nodes = n - l.l - 1;
+    int nodes = std::max(0, n - l.l - 1);
     int last = mesh.r.size() - 1, lastbutone = mesh.r.size() - 2;
+
+    Hankel_function H(l);
 
     std::vector<double> l_init = {GSL::pow_int(mesh.r[0], l.l+1)/sqrt(mesh.drx[0]),
         GSL::pow_int(mesh.r[1], l.l+1)/sqrt(mesh.drx[1]),
@@ -146,10 +168,9 @@ void Augmented_Hankel::update(std::vector<double> v, const double en
         r_init = {1e-24, 0.};
     }else{
         r_init = {-GSL::pow_int(kappa, l.l + 1)*mesh.r[last]*
-            real_spherical_hankel(l, kappa*mesh.r[last]).val/sqrt(mesh.drx[last]),
+            H(kappa*mesh.r[last])/sqrt(mesh.drx[last]),
                   -GSL::pow_int(kappa, l.l+1)*mesh.r[lastbutone]*
-            real_spherical_hankel(l, kappa*mesh.r[lastbutone]).val
-            /sqrt(mesh.drx[lastbutone])};
+            H(kappa*mesh.r[lastbutone])/sqrt(mesh.drx[lastbutone])};
     }
     val = sol.solve(mesh, v, l_init, r_init, EH, nodes);
 }
@@ -232,8 +253,9 @@ void Augmented_Bessel::update(std::vector<double> v, const double en
 {
     EJ = en;
     Numerov_solver sol;
-    int nodes = n - l.l - 1;
+    int nodes = std::max(0,n - l.l - 1);
     int last = mesh.r.size() - 1, lastbutone = mesh.r.size() - 2;
+    Bessel_function J(l);
 
     if(!core){
         std::vector<double> l_init = {GSL::pow_int(mesh.r[0], l.l+1)/sqrt(mesh.drx[0]),
@@ -241,10 +263,9 @@ void Augmented_Bessel::update(std::vector<double> v, const double en
             GSL::pow_int(mesh.r[2], l.l+1)/sqrt(mesh.drx[2])};
 
         std::vector<double> r_init = {GSL::pow_int(1./kappa, l.l)*mesh.r[last]*
-            GSL::bessel_jn(l.l,kappa*mesh.r[last]).val/sqrt(mesh.drx[last]),
+            J(kappa*mesh.r[last])/sqrt(mesh.drx[last]),
                   GSL::pow_int(1./kappa, l.l)*mesh.r[lastbutone]*
-            GSL::bessel_jn(l.l, kappa*mesh.r[lastbutone]).val
-            /sqrt(mesh.drx[lastbutone])};
+            J(kappa*mesh.r[lastbutone])/sqrt(mesh.drx[lastbutone])};
 
         val = sol.solve(mesh, v, l_init, r_init, EJ, nodes);
     }else{

@@ -32,7 +32,7 @@ CXXCHECKFLAGS = -checks=$(CXXCHECKS) -header-filter=.* -- -std=c++11
 
 # Libraries to link against
 GSLLIBDIR="../GSL-lib"
-LDFLAGS = -L$(GSLLIBDIR) -Wl,-rpath=$(GSLLIBDIR) -lgsl -lgslcblas -lm -lgsl-lib
+LDFLAGS = -L$(GSLLIBDIR) -Wl,-rpath=$(GSLLIBDIR) -lgsl -lgslcblas -lm -lgsl-lib -lxc
 
 # Source files directory
 SRC_DIR = src
@@ -57,6 +57,8 @@ NUMEROV_OBJ = numerov_solver.o\
 	      lattice.o\
 	      ewald_int.o\
 	      utils.o\
+	      xc_func.o\
+	      envelope_fun.o\
 	      main.o
 OBJS = $(addprefix $(BUILD_DIR)/, $(NUMEROV_OBJ))
 

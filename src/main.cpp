@@ -39,7 +39,7 @@ numerov_debug.close();
 	a[0] = 1.; a[1] = 0.; a[2] = 0.;
 	b[0] = 0.; b[1] = 1.; b[2] = 0.;
 	c[0] = 0.; c[1] = 0.; c[2] = 1.;
-	Crystal cr(4*a, 4*b, 4*c);
+	Crystal cr(3*a, 3*b, 3*c);
 
 	std::cout << cr.lat.scale*cr.lat.lat << std::endl;
 	size_t Nk = cr.calc_nk(1e-6, sqrt(0.015), lm {4, 0});
@@ -69,10 +69,10 @@ numerov_debug.close();
 	tau[2] = 0.5;
 	Atom C4(mesh, tau*cr.lat.scale*cr.lat.lat);
 
-	C1.set_Z(4);
-	C2.set_Z(4);
-	C3.set_Z(4);
-	C4.set_Z(4);
+	C1.set_Z(6);
+	C2.set_Z(6);
+	C3.set_Z(6);
+	C4.set_Z(6);
 
 	cr.add_atoms(std::vector<Atom> {C1, C2, C3, C4});
 
@@ -106,18 +106,26 @@ numerov_debug.close();
 	std::cout << "Cell volume = " << cr.volume << " a.u.^3" << std::endl;
 
 
-	cr.atoms[0].mesh = Logarithmic_mesh(cr.atoms[0].get_AS(), 4500);
-	cr.atoms[1].mesh = Logarithmic_mesh(cr.atoms[1].get_AS(), 4500);
-	cr.atoms[2].mesh = Logarithmic_mesh(cr.atoms[2].get_AS(), 4500);
-	cr.atoms[3].mesh = Logarithmic_mesh(cr.atoms[3].get_AS(), 4500);
+	cr.atoms[0].mesh = Logarithmic_mesh(cr.atoms[0].get_AS(), 500);
+	cr.atoms[1].mesh = Logarithmic_mesh(cr.atoms[1].get_AS(), 500);
+	cr.atoms[2].mesh = Logarithmic_mesh(cr.atoms[2].get_AS(), 500);
+	cr.atoms[3].mesh = Logarithmic_mesh(cr.atoms[3].get_AS(), 500);
 
 	double kappa = sqrt(0.015);
-	Augmented_spherical_wave aw1s(kappa, 1, lm {0, 0}, UP, cr.atoms[0], cr.atoms);
-	Augmented_spherical_wave aw2s(kappa, 2, lm {0, 0}, UP, cr.atoms[0], cr.atoms);
-	Augmented_spherical_wave aw2p(kappa, 2, lm {1, 0}, UP, cr.atoms[0], cr.atoms);
-//	aw1s.core_state = true;
+	Augmented_spherical_wave aw1sup(kappa, 1, lm {0, 0}, UP, cr.atoms[0], cr.atoms);
+	Augmented_spherical_wave aw1sdn(kappa, 1, lm {0, 0}, DOWN, cr.atoms[0], cr.atoms);
+	Augmented_spherical_wave aw2sup(kappa, 2, lm {0, 0}, UP, cr.atoms[0], cr.atoms);
+	Augmented_spherical_wave aw2sdn(kappa, 2, lm {0, 0}, DOWN, cr.atoms[0], cr.atoms);
+	Augmented_spherical_wave aw2pzup(kappa, 2, lm {1, 0}, UP, cr.atoms[0], cr.atoms);
+	Augmented_spherical_wave aw2pzdn(kappa, 2, lm {1, 0}, DOWN, cr.atoms[0], cr.atoms);
+	Augmented_spherical_wave aw2pyup(kappa, 2, lm {1, -1}, UP, cr.atoms[0], cr.atoms);
+	Augmented_spherical_wave aw2pydn(kappa, 2, lm {1, -1}, DOWN, cr.atoms[0], cr.atoms);
+	Augmented_spherical_wave aw2pxup(kappa, 2, lm {1, 1}, UP, cr.atoms[0], cr.atoms);
+	Augmented_spherical_wave aw2pxdn(kappa, 2, lm {1, 1}, DOWN, cr.atoms[0], cr.atoms);
 	Potential pot(cr.atoms);
-	pot.initial_pot();
+	pot.set_xc_fun(LDA);
+
+	pot.initial_pot(6, cr.volume);
 	std::cout << "MT0 = " << pot.MT_0 << std::endl;
 
 	for(size_t idx = 0; idx < cr.atoms.size(); idx++){
@@ -127,9 +135,16 @@ numerov_debug.close();
 		<< std::endl;
 	}
 
-	aw1s.set_up(pot);
-	aw2s.set_up(pot);
-	aw2p.set_up(pot);
+	aw1sup.set_up(pot);
+	aw1sdn.set_up(pot);
+	aw2sup.set_up(pot);
+	aw2sdn.set_up(pot);
+	aw2pxup.set_up(pot);
+	aw2pxdn.set_up(pot);
+	aw2pyup.set_up(pot);
+	aw2pydn.set_up(pot);
+	aw2pzup.set_up(pot);
+	aw2pzdn.set_up(pot);
 
 	GSL::Vector r(3);
 
@@ -137,12 +152,18 @@ numerov_debug.close();
 	std::ofstream out_file;
 	out_file.open("check_ASW.dat");
 	out_file << "# r\tV(r)\tr*R1s(r)\tr*R2s(r)\tr*R2p(r)" << std::endl;
+	tau[0]  = 1.;
+	tau[1]  = 1.;
+	tau[2]  = 0.;
 	for(size_t i = 0; i < 2000; i++){
-		r = 0.001*i*tau*cr.lat.scale*cr.lat.lat;
-		out_file << std::setprecision(8) << r.norm() << " " << pot(r) - pot.MT_0<< " "
-		<< aw1s(r) << " " << aw2s(r) << " " << aw2p(r) << std::endl;
+		r = 0.0005*i*tau*cr.lat.scale*cr.lat.lat;
+		out_file << std::setprecision(8) << r.norm() << " " << pot(r) - pot.MT_0
+		<< " " << aw1sup(r) << " " << aw2sup(r) << " " << aw2pxup(r) << " "
+		<< aw2pyup(r) << " " << aw2pzup(r) << std::endl;
 	}
 	out_file.close();
+
+	std::cout << augmented_integral(aw1sup.H, aw1sup.H) << std::endl;
 
 	return 0;
 }

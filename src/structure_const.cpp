@@ -24,7 +24,9 @@ Structure_constant::Structure_constant(int l_low, int l_int,
 	// Sum over all intermediate angular momenta
 	// Calculate both value and energy derivative of structure constant
 	GSL::Result sum, m_sum, a, tmp, d_sum;
+	Hankel_function H(lm {0, 0});
 	for (int lpp = 0; lpp <= l_int; lpp++){
+		H.l.l = lpp;
 		m_sum = GSL::Result();
 		tmp = GSL::Result();
 		for (int mpp = -lpp; mpp <= lpp; mpp++){
@@ -34,13 +36,17 @@ Structure_constant::Structure_constant(int l_low, int l_int,
 			}
 		}
 
-		tmp = (l1.l + l2.l - lpp)/
-		(kappa*kappa)*real_spherical_hankel(lm {lpp, 0}, kappa*r_norm);
+		tmp.val = (l1.l + l2.l - lpp)/(kappa*kappa)*H(kappa*r_norm);
+		/*real_spherical_hankel(lm {lpp, 0}, kappa*r_norm);*/
 		if(lpp > 0){
-			tmp += r_norm/kappa * real_spherical_hankel(lm {lpp - 1, 0},
-				kappa*r_norm);
+			H.l.l = lpp - 1;
+			tmp += r_norm/kappa * H(kappa*r_norm);
+			/*real_spherical_hankel(lm {lpp - 1, 0},
+				kappa*r_norm);*/
 		}
-		sum += c*real_spherical_hankel(lm {lpp, 0}, kappa*r_norm)*m_sum;
+		H.l.l = lpp;
+		sum += c*H(kappa*r_norm)*m_sum;
+		/*real_spherical_hankel(lm {lpp, 0}, kappa*r_norm)*m_sum;*/
 		d_sum += c*tmp*m_sum;
 		c *= -1;
 	}

@@ -46,8 +46,12 @@ public:
      = 0;
 };
 
-bool operator==(const Augmented_function &a, const Augmented_function &b);
+// Use Simpsons rule to calculate integrals over atomic spheres of augmented functions
+double augmented_integral(Augmented_function &a, Augmented_function &b);
 
+// Compare equality of different augmented funcitons
+// Two agumented functions are equal if they are centered on the same site and have identical quantum numbers
+bool operator==(const Augmented_function &a, const Augmented_function &b);
 bool operator!=(const Augmented_function &a, const Augmented_function &b);
 
 /***************************************************************************//**
