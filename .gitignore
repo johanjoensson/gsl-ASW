@@ -30,3 +30,5 @@
 *.exe
 *.out
 *.app
+gsl-asw
+numerov-test
