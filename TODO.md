@@ -7,6 +7,7 @@
 1. Set up/update electron density
 1. Set up/update potential
 1. Calculate total energies
+1. Update and extend documentation
 
 # Kinda done
 1. XC-potential (using the xcfun library) (LDA only atm)

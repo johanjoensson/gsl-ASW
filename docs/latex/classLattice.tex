@@ -1,0 +1,49 @@
+\hypertarget{classLattice}{}\section{Lattice Class Reference}
+\label{classLattice}\index{Lattice@{Lattice}}
+
+
+{\ttfamily \#include $<$lattice.\+h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classLattice_abb8611ee57bcfd97a471e81451cdf8a7}\label{classLattice_abb8611ee57bcfd97a471e81451cdf8a7}} 
+{\bfseries Lattice} (G\+S\+L\+::\+Vector \&a, G\+S\+L\+::\+Vector \&b, G\+S\+L\+::\+Vector \&c)
+\item 
+\mbox{\Hypertarget{classLattice_adfd826f48fcc01b337477dd54eb39a73}\label{classLattice_adfd826f48fcc01b337477dd54eb39a73}} 
+{\bfseries Lattice} (const G\+S\+L\+::\+Vector \&a, const G\+S\+L\+::\+Vector \&b, const G\+S\+L\+::\+Vector \&c)
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classLattice_adc1824ce4a46c80439562083583462e6}\label{classLattice_adc1824ce4a46c80439562083583462e6}} 
+G\+S\+L\+::\+Matrix {\bfseries lat}
+\item 
+\mbox{\Hypertarget{classLattice_adf55e46c0238b3585962ebd52264f326}\label{classLattice_adf55e46c0238b3585962ebd52264f326}} 
+G\+S\+L\+::\+Matrix {\bfseries r\+\_\+lat}
+\item 
+\mbox{\Hypertarget{classLattice_aca4e74198ee01bbe9e1bb70adc98d904}\label{classLattice_aca4e74198ee01bbe9e1bb70adc98d904}} 
+double {\bfseries scale}
+\item 
+\mbox{\Hypertarget{classLattice_a907782dea80f8e3657afc2bcad10a837}\label{classLattice_a907782dea80f8e3657afc2bcad10a837}} 
+double {\bfseries volume}
+\item 
+\mbox{\Hypertarget{classLattice_a2593512591334fbe6857f2fa6e536469}\label{classLattice_a2593512591334fbe6857f2fa6e536469}} 
+double {\bfseries bz\+\_\+volume}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+A class used to represent lattices, e.\+g. Bravais lattices useful in describing crystals.~\newline
+ Contains\+:~\newline
+ {\bfseries lat} -\/ G\+S\+L\+::\+Matrix constructed from the three lattice vectors (row major). ~\newline
+ {\bfseries r\+\_\+lat} -\/ G\+S\+L\+::\+Matrix constructed from the three reciprocal lattice vectors (row major).~\newline
+ {\bfseries scale} -\/ Scale factor to multiply each lattice vector with.~\newline
+ {\bfseries volume} -\/ Volume of the unit cell.~\newline
+ {\bfseries bz\+\_\+volume} -\/ Volume of the first Brillouin zone.~\newline
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+lattice.\+h\item 
+lattice.\+cpp\end{DoxyCompactItemize}

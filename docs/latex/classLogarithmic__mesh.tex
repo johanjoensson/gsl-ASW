@@ -1,0 +1,49 @@
+\hypertarget{classLogarithmic__mesh}{}\section{Logarithmic\+\_\+mesh Class Reference}
+\label{classLogarithmic__mesh}\index{Logarithmic\+\_\+mesh@{Logarithmic\+\_\+mesh}}
+
+
+{\ttfamily \#include $<$log\+\_\+mesh.\+h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classLogarithmic__mesh_ad9294c2de86a826584489ff2b7dd3963}\label{classLogarithmic__mesh_ad9294c2de86a826584489ff2b7dd3963}} 
+{\bfseries Logarithmic\+\_\+mesh} (double radius, unsigned int num\+\_\+points)
+\item 
+\mbox{\Hypertarget{classLogarithmic__mesh_a3c394001d97d86907ef5e9f61dd680ca}\label{classLogarithmic__mesh_a3c394001d97d86907ef5e9f61dd680ca}} 
+{\bfseries Logarithmic\+\_\+mesh} (double A, double radius, unsigned int num\+\_\+points)
+\item 
+\mbox{\Hypertarget{classLogarithmic__mesh_aa832cd52424296e6d519313558eb3132}\label{classLogarithmic__mesh_aa832cd52424296e6d519313558eb3132}} 
+double {\bfseries radial\+\_\+integral} (std\+::vector$<$ double $>$ f)
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classLogarithmic__mesh_a78084fd600b2ded00b34b5b8f705f5a4}\label{classLogarithmic__mesh_a78084fd600b2ded00b34b5b8f705f5a4}} 
+std\+::vector$<$ double $>$ {\bfseries r}
+\item 
+\mbox{\Hypertarget{classLogarithmic__mesh_a297cb20a293a3ba26250b55fad36f88b}\label{classLogarithmic__mesh_a297cb20a293a3ba26250b55fad36f88b}} 
+std\+::vector$<$ double $>$ {\bfseries r2}
+\item 
+\mbox{\Hypertarget{classLogarithmic__mesh_af7e95466d3c76af1c34c6c014569906c}\label{classLogarithmic__mesh_af7e95466d3c76af1c34c6c014569906c}} 
+std\+::vector$<$ double $>$ {\bfseries drx}
+\item 
+\mbox{\Hypertarget{classLogarithmic__mesh_a879e08e3f2ccc6fe2933110bbe649152}\label{classLogarithmic__mesh_a879e08e3f2ccc6fe2933110bbe649152}} 
+double {\bfseries A}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+A class for representing logarithmic meshes~\newline
+Contains\+:~\newline
+{\bfseries B} -\/ Parameter determining shape of mesh, calculated from {\bfseries num\+\_\+points} and {\bfseries A}~\newline
+{\bfseries r} -\/ r-\/values contained in mesh~\newline
+{\bfseries r2} -\/ r$^\wedge$2-\/values contained in mesh~\newline
+{\bfseries drx} -\/ Derivative dr/dx evaluated in mesh~\newline
+{\bfseries A} -\/ Parameter controlling spacing between points in mesh~\newline
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+log\+\_\+mesh.\+h\item 
+log\+\_\+mesh.\+cpp\end{DoxyCompactItemize}

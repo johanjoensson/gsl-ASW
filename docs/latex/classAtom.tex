@@ -1,0 +1,88 @@
+\hypertarget{classAtom}{}\section{Atom Class Reference}
+\label{classAtom}\index{Atom@{Atom}}
+
+
+{\ttfamily \#include $<$atom.\+h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classAtom_aab0f819ed5580441fbeb6da23b06b35c}\label{classAtom_aab0f819ed5580441fbeb6da23b06b35c}} 
+void {\bfseries set\+\_\+Z} (const int Z)
+\item 
+\mbox{\Hypertarget{classAtom_a02a19ad0654ca16b3f5897418da655ae}\label{classAtom_a02a19ad0654ca16b3f5897418da655ae}} 
+int \hyperlink{classAtom_a02a19ad0654ca16b3f5897418da655ae}{get\+\_\+Z} ()
+\begin{DoxyCompactList}\small\item\em Get nuclear charge. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classAtom_a4882a9c424bd88153205c2692a81d0dd}\label{classAtom_a4882a9c424bd88153205c2692a81d0dd}} 
+void \hyperlink{classAtom_a4882a9c424bd88153205c2692a81d0dd}{set\+\_\+pos} (const G\+S\+L\+::\+Vector \&r)
+\begin{DoxyCompactList}\small\item\em Set atom position (cartersian) \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classAtom_a3295af53c32e694d912f23c3c88e73e3}\label{classAtom_a3295af53c32e694d912f23c3c88e73e3}} 
+void \hyperlink{classAtom_a3295af53c32e694d912f23c3c88e73e3}{set\+\_\+\+MT} (double mt)
+\begin{DoxyCompactList}\small\item\em Set muffin tin radius. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classAtom_a32ee3cf43681e3bc4f4aefe9f515e169}\label{classAtom_a32ee3cf43681e3bc4f4aefe9f515e169}} 
+void \hyperlink{classAtom_a32ee3cf43681e3bc4f4aefe9f515e169}{set\+\_\+\+AS} (double as)
+\begin{DoxyCompactList}\small\item\em Set atomic sphere radius. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classAtom_afa5bc441ca3842cc8ed1995009875dda}\label{classAtom_afa5bc441ca3842cc8ed1995009875dda}} 
+G\+S\+L\+::\+Vector \hyperlink{classAtom_afa5bc441ca3842cc8ed1995009875dda}{get\+\_\+pos} ()
+\begin{DoxyCompactList}\small\item\em Get atomic position (cartesian) \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classAtom_a5fdba4452d97f59c753fd2b197b1b9aa}\label{classAtom_a5fdba4452d97f59c753fd2b197b1b9aa}} 
+double \hyperlink{classAtom_a5fdba4452d97f59c753fd2b197b1b9aa}{get\+\_\+\+MT} ()
+\begin{DoxyCompactList}\small\item\em Get muffin tin radius. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classAtom_a64112539ea5bcc46016b3239636ed6b9}\label{classAtom_a64112539ea5bcc46016b3239636ed6b9}} 
+double \hyperlink{classAtom_a64112539ea5bcc46016b3239636ed6b9}{get\+\_\+\+AS} ()
+\begin{DoxyCompactList}\small\item\em Get atomic sphere radius. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classAtom_aed38fa78a10d65fe59522e9051f88a49}\label{classAtom_aed38fa78a10d65fe59522e9051f88a49}} 
+{\bfseries Atom} (\hyperlink{classLogarithmic__mesh}{Logarithmic\+\_\+mesh} \&mesh, G\+S\+L\+::\+Vector \&r)
+\item 
+\mbox{\Hypertarget{classAtom_af09c6e57ec0e1f90caf52b7ba4e90d15}\label{classAtom_af09c6e57ec0e1f90caf52b7ba4e90d15}} 
+{\bfseries Atom} (const \hyperlink{classLogarithmic__mesh}{Logarithmic\+\_\+mesh} \&mesh, const G\+S\+L\+::\+Vector \&r)
+\item 
+\mbox{\Hypertarget{classAtom_a9f289910e2462671634261562f871903}\label{classAtom_a9f289910e2462671634261562f871903}} 
+{\bfseries Atom} (double mt, double as, double z, \hyperlink{classLogarithmic__mesh}{Logarithmic\+\_\+mesh} \&mesh, G\+S\+L\+::\+Vector \&r)
+\item 
+\mbox{\Hypertarget{classAtom_ab1fe6bd50ca2a6f26f78acedab205267}\label{classAtom_ab1fe6bd50ca2a6f26f78acedab205267}} 
+{\bfseries Atom} (const double mt, const double as, const double z, const \hyperlink{classLogarithmic__mesh}{Logarithmic\+\_\+mesh} \&mesh, const G\+S\+L\+::\+Vector \&r)
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classAtom_a5596bb9320edcecfaa8df97f5d1880fd}\label{classAtom_a5596bb9320edcecfaa8df97f5d1880fd}} 
+int {\bfseries Z}
+\item 
+\mbox{\Hypertarget{classAtom_a7940182ab4aa43283df6020a0f0dd67d}\label{classAtom_a7940182ab4aa43283df6020a0f0dd67d}} 
+double {\bfseries MT}
+\item 
+\mbox{\Hypertarget{classAtom_aea60fa7809c63ccc399467fe8f737e46}\label{classAtom_aea60fa7809c63ccc399467fe8f737e46}} 
+double {\bfseries AS}
+\item 
+\mbox{\Hypertarget{classAtom_ac1c5c0961f23ba8bd1d06f21223b7c87}\label{classAtom_ac1c5c0961f23ba8bd1d06f21223b7c87}} 
+G\+S\+L\+::\+Vector {\bfseries pos}
+\item 
+\mbox{\Hypertarget{classAtom_a91d103a87fcfdc4a6edb8ce01b249a7c}\label{classAtom_a91d103a87fcfdc4a6edb8ce01b249a7c}} 
+\hyperlink{classLogarithmic__mesh}{Logarithmic\+\_\+mesh} {\bfseries mesh}
+\end{DoxyCompactItemize}
+\subsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classAtom_a5e07c0c118320fdc1f667405d874d4d4}\label{classAtom_a5e07c0c118320fdc1f667405d874d4d4}} 
+bool {\bfseries operator==} (const \hyperlink{classAtom}{Atom} \&a, const \hyperlink{classAtom}{Atom} \&b)
+\item 
+\mbox{\Hypertarget{classAtom_a5c6fb2b0ae8e500e98c63ca22091c4a0}\label{classAtom_a5c6fb2b0ae8e500e98c63ca22091c4a0}} 
+bool {\bfseries operator!=} (const \hyperlink{classAtom}{Atom} \&a, const \hyperlink{classAtom}{Atom} \&b)
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+A class for representing atoms in the cell.~\newline
+Contains\+:~\newline
+{\bfseries Z} -\/ Nuclear charge~\newline
+{\bfseries AS} -\/ Atomic sphere radius~\newline
+{\bfseries MT} -\/ Muffin tin radius~\newline
+{\bfseries pos} -\/ position, in cartesian coordinates~\newline
+{\bfseries mesh} -\/ logarithmic mesh to use in intraatomic calculations~\newline
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+atom.\+h\item 
+atom.\+cpp\end{DoxyCompactItemize}

@@ -1,0 +1,87 @@
+\hypertarget{classAugmented__function}{}\section{Augmented\+\_\+function Class Reference}
+\label{classAugmented__function}\index{Augmented\+\_\+function@{Augmented\+\_\+function}}
+
+
+{\ttfamily \#include $<$augmented\+\_\+fun.\+h$>$}
+
+Inheritance diagram for Augmented\+\_\+function\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classAugmented__function}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classAugmented__function_ae9be3ac88a8aaffed7deea457a0650f5}\label{classAugmented__function_ae9be3ac88a8aaffed7deea457a0650f5}} 
+double \hyperlink{classAugmented__function_ae9be3ac88a8aaffed7deea457a0650f5}{operator()} (const G\+S\+L\+::\+Vector r)
+\begin{DoxyCompactList}\small\item\em Obtain value of augmented function at point r. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classAugmented__function_aaef792b83ff2c7a59cbdbf1b40ff08a7}\label{classAugmented__function_aaef792b83ff2c7a59cbdbf1b40ff08a7}} 
+{\bfseries Augmented\+\_\+function} (const \hyperlink{classAugmented__function}{Augmented\+\_\+function} \&)
+\item 
+\mbox{\Hypertarget{classAugmented__function_a782da1c8f31a70fd897cc8c00bbc0c44}\label{classAugmented__function_a782da1c8f31a70fd897cc8c00bbc0c44}} 
+{\bfseries Augmented\+\_\+function} (\hyperlink{classAugmented__function}{Augmented\+\_\+function} \&\&)
+\item 
+\mbox{\Hypertarget{classAugmented__function_af6f0be4a0f6b78def8f923c8a7daea18}\label{classAugmented__function_af6f0be4a0f6b78def8f923c8a7daea18}} 
+{\bfseries Augmented\+\_\+function} (const int n, const \hyperlink{structlm}{lm} l, const double kappa, const G\+S\+L\+::\+Vector center, const \hyperlink{classLogarithmic__mesh}{Logarithmic\+\_\+mesh} mesh)
+\item 
+\mbox{\Hypertarget{classAugmented__function_aa00aea37783023653cd9880277b51278}\label{classAugmented__function_aa00aea37783023653cd9880277b51278}} 
+\hyperlink{classAugmented__function}{Augmented\+\_\+function} \& {\bfseries operator=} (const \hyperlink{classAugmented__function}{Augmented\+\_\+function} \&)
+\item 
+\mbox{\Hypertarget{classAugmented__function_ad1c67ee06b3e97cb031e69329f94f300}\label{classAugmented__function_ad1c67ee06b3e97cb031e69329f94f300}} 
+\hyperlink{classAugmented__function}{Augmented\+\_\+function} \& {\bfseries operator=} (\hyperlink{classAugmented__function}{Augmented\+\_\+function} \&\&)
+\item 
+\mbox{\Hypertarget{classAugmented__function_a087c956ca3c8cc160ceacaa51e054ee8}\label{classAugmented__function_a087c956ca3c8cc160ceacaa51e054ee8}} 
+virtual void {\bfseries update} (std\+::vector$<$ double $>$ v, const double en, const bool core)=0
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classAugmented__function_a8451882862bc85f60a9160c2bfc5e677}\label{classAugmented__function_a8451882862bc85f60a9160c2bfc5e677}} 
+int {\bfseries n}
+\item 
+\mbox{\Hypertarget{classAugmented__function_a85851e9826059061b94dea2dfeae7b09}\label{classAugmented__function_a85851e9826059061b94dea2dfeae7b09}} 
+\hyperlink{structlm}{lm} {\bfseries l}
+\item 
+\mbox{\Hypertarget{classAugmented__function_acbbd8bf7d17a9557a74f531986f9301b}\label{classAugmented__function_acbbd8bf7d17a9557a74f531986f9301b}} 
+double {\bfseries kappa}
+\item 
+\mbox{\Hypertarget{classAugmented__function_af96cf7923c9d5d656235e3d2c739c99f}\label{classAugmented__function_af96cf7923c9d5d656235e3d2c739c99f}} 
+double {\bfseries radius}
+\item 
+\mbox{\Hypertarget{classAugmented__function_abfe2b7d790f5717ba5f403b6779ff627}\label{classAugmented__function_abfe2b7d790f5717ba5f403b6779ff627}} 
+G\+S\+L\+::\+Vector {\bfseries center}
+\item 
+\mbox{\Hypertarget{classAugmented__function_ad7acfd1cf1c5c5cbca70267348fc10f6}\label{classAugmented__function_ad7acfd1cf1c5c5cbca70267348fc10f6}} 
+\hyperlink{classLogarithmic__mesh}{Logarithmic\+\_\+mesh} {\bfseries mesh}
+\item 
+\mbox{\Hypertarget{classAugmented__function_af11b31e3d3a6e798b6982a135684d4ea}\label{classAugmented__function_af11b31e3d3a6e798b6982a135684d4ea}} 
+std\+::vector$<$ double $>$ {\bfseries val}
+\end{DoxyCompactItemize}
+\subsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classAugmented__function_a2ce33222aea67403b16a734072c8a1e0}\label{classAugmented__function_a2ce33222aea67403b16a734072c8a1e0}} 
+bool {\bfseries operator==} (const \hyperlink{classAugmented__function}{Augmented\+\_\+function} \&a, const \hyperlink{classAugmented__function}{Augmented\+\_\+function} \&b)
+\item 
+\mbox{\Hypertarget{classAugmented__function_a7e26f4f6e76afdedf16a6b579fb5913e}\label{classAugmented__function_a7e26f4f6e76afdedf16a6b579fb5913e}} 
+bool {\bfseries operator!=} (const \hyperlink{classAugmented__function}{Augmented\+\_\+function} \&a, const \hyperlink{classAugmented__function}{Augmented\+\_\+function} \&b)
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Superclass used to describe the general behaviour of an augmented function.~\newline
+Contains\+:~\newline
+{\bfseries n} -\/ Principal quantum number of the augmented function.~\newline
+{\bfseries l} -\/ Combined orbital and angular momentum of the augmented function, l = \{l,m\}.~\newline
+{\bfseries kappa} -\/ Energy of waves outside augmentation region, used for matching at sphere boundary.~\newline
+{\bfseries radius} -\/ Radius of augmentation sphere.~\newline
+{\bfseries center} -\/ Position of the center of the augmentation sphere.~\newline
+{\bfseries mesh} -\/ Logarithmic mesh of the augmentation sphere.~\newline
+{\bfseries val} -\/ values of the augmented function at the mesh points.~\newline
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+augmented\+\_\+fun.\+h\item 
+augmented\+\_\+fun.\+cpp\end{DoxyCompactItemize}

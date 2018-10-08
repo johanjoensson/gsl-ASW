@@ -7,5 +7,6 @@ var searchData=
   ['set_5fpos',['set_pos',['../classAtom.html#a4882a9c424bd88153205c2692a81d0dd',1,'Atom']]],
   ['set_5fup',['set_up',['../classAugmented__spherical__wave.html#a765064afaa2abf01c4333bcc687fbf0b',1,'Augmented_spherical_wave']]],
   ['solve',['solve',['../classNumerov__solver.html#a741a9a8a2c7f95db8d4e839f73fa7c72',1,'Numerov_solver']]],
+  ['spherical_5ffunction',['Spherical_function',['../classSpherical__function.html',1,'']]],
   ['structure_5fconstant',['Structure_constant',['../classStructure__constant.html',1,'']]]
 ];

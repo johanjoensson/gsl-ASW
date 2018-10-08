@@ -1,0 +1,58 @@
+\hypertarget{classPotential}{}\section{Potential Class Reference}
+\label{classPotential}\index{Potential@{Potential}}
+
+
+{\ttfamily \#include $<$atomic\+\_\+quantity.\+h$>$}
+
+Inheritance diagram for Potential\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classPotential}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classPotential_a2775f7e77aa0865858d2d2e735e06167}\label{classPotential_a2775f7e77aa0865858d2d2e735e06167}} 
+void {\bfseries initial\+\_\+pot} (unsigned int nel, double vol)
+\item 
+\mbox{\Hypertarget{classPotential_a97ea1890fa2af5471641c82ef9c70402}\label{classPotential_a97ea1890fa2af5471641c82ef9c70402}} 
+{\bfseries Potential} (std\+::vector$<$ \hyperlink{classAtom}{Atom} $>$ \&atoms)
+\item 
+\mbox{\Hypertarget{classPotential_a8dcd5f4bc4085df093c7833ae4aeb5e6}\label{classPotential_a8dcd5f4bc4085df093c7833ae4aeb5e6}} 
+{\bfseries Potential} (\hyperlink{classPotential}{Potential} \&)=default
+\item 
+\mbox{\Hypertarget{classPotential_a92f853f35bf8114439efe62bccde3f83}\label{classPotential_a92f853f35bf8114439efe62bccde3f83}} 
+{\bfseries Potential} (\hyperlink{classPotential}{Potential} \&\&)=default
+\item 
+\mbox{\Hypertarget{classPotential_a09e2051ee4ed86d3d1d300d3b2185c49}\label{classPotential_a09e2051ee4ed86d3d1d300d3b2185c49}} 
+\hyperlink{classPotential}{Potential} \& {\bfseries operator=} (const \hyperlink{classPotential}{Potential} \&)=default
+\item 
+\mbox{\Hypertarget{classPotential_aed71b6948a719fa8b52db91591bb5429}\label{classPotential_aed71b6948a719fa8b52db91591bb5429}} 
+\hyperlink{classPotential}{Potential} \& {\bfseries operator=} (\hyperlink{classPotential}{Potential} \&\&)=default
+\item 
+\mbox{\Hypertarget{classPotential_a6a6eca1dc9b32494f6189404e503eb38}\label{classPotential_a6a6eca1dc9b32494f6189404e503eb38}} 
+void {\bfseries set\+\_\+xc\+\_\+fun} (X\+C\+\_\+\+F\+UN xc\+\_\+func)
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classPotential_a6a99f6673af280be1d6eb3d6e0a963bb}\label{classPotential_a6a99f6673af280be1d6eb3d6e0a963bb}} 
+\hyperlink{classXc__func}{Xc\+\_\+func} {\bfseries xc\+\_\+fun}
+\item 
+\mbox{\Hypertarget{classPotential_ac5b5f48ce4b61208c59282d00d1b0752}\label{classPotential_ac5b5f48ce4b61208c59282d00d1b0752}} 
+double {\bfseries M\+T\+\_\+0}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Class used fof representing the potential.~\newline
+Contains\+:~\newline
+{\bfseries electrostatic} -\/ Electrostatic part of the potential, coming from electrons and ions.~\newline
+{\bfseries exchange\+\_\+correlation} -\/ Exchange-\/correlation contribution of the potential. Calculated using X\+C\+Fun.~\newline
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+atomic\+\_\+quantity.\+h\item 
+atomic\+\_\+quantity.\+cpp\end{DoxyCompactItemize}

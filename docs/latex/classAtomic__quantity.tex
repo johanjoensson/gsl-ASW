@@ -1,0 +1,69 @@
+\hypertarget{classAtomic__quantity}{}\section{Atomic\+\_\+quantity Class Reference}
+\label{classAtomic__quantity}\index{Atomic\+\_\+quantity@{Atomic\+\_\+quantity}}
+
+
+{\ttfamily \#include $<$atomic\+\_\+quantity.\+h$>$}
+
+Inheritance diagram for Atomic\+\_\+quantity\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classAtomic__quantity}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classAtomic__quantity_aec314bd18851f37976c934a9232284ba}\label{classAtomic__quantity_aec314bd18851f37976c934a9232284ba}} 
+{\bfseries Atomic\+\_\+quantity} (\hyperlink{classAtomic__quantity}{Atomic\+\_\+quantity} \&)=default
+\item 
+\mbox{\Hypertarget{classAtomic__quantity_a29d6b9948d6fc78643c95fde1a7b0bdd}\label{classAtomic__quantity_a29d6b9948d6fc78643c95fde1a7b0bdd}} 
+{\bfseries Atomic\+\_\+quantity} (\hyperlink{classAtomic__quantity}{Atomic\+\_\+quantity} \&\&)=default
+\item 
+\mbox{\Hypertarget{classAtomic__quantity_a7b2d3d764b912c188b7adfa46da943e2}\label{classAtomic__quantity_a7b2d3d764b912c188b7adfa46da943e2}} 
+{\bfseries Atomic\+\_\+quantity} (const std\+::vector$<$ \hyperlink{classAtom}{Atom} $>$ atoms)
+\item 
+double \hyperlink{classAtomic__quantity_a5bd9055fdf94e57e54a355d5aa818b6c}{operator()} (const G\+S\+L\+::\+Vector \&r)
+\item 
+\mbox{\Hypertarget{classAtomic__quantity_aeac67658ceec0ba08efc12216933382d}\label{classAtomic__quantity_aeac67658ceec0ba08efc12216933382d}} 
+\hyperlink{classAtomic__quantity}{Atomic\+\_\+quantity} \& {\bfseries operator=} (const \hyperlink{classAtomic__quantity}{Atomic\+\_\+quantity} \&)=default
+\item 
+\mbox{\Hypertarget{classAtomic__quantity_aebbdbfcab61f351c1f43619319d61adc}\label{classAtomic__quantity_aebbdbfcab61f351c1f43619319d61adc}} 
+\hyperlink{classAtomic__quantity}{Atomic\+\_\+quantity} \& {\bfseries operator=} (\hyperlink{classAtomic__quantity}{Atomic\+\_\+quantity} \&\&)=default
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classAtomic__quantity_a1303f629c4a471e75f418c10bc6c20ca}\label{classAtomic__quantity_a1303f629c4a471e75f418c10bc6c20ca}} 
+std\+::vector$<$ \hyperlink{classAtom}{Atom} $>$ {\bfseries sites}
+\item 
+\mbox{\Hypertarget{classAtomic__quantity_a69f4c5e435c8c32883528b7cf2099616}\label{classAtomic__quantity_a69f4c5e435c8c32883528b7cf2099616}} 
+std\+::vector$<$ std\+::vector$<$ double $>$ $>$ {\bfseries val}
+\end{DoxyCompactItemize}
+\subsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classAtomic__quantity_a678ccaacc1630da5784025bf4ba898bb}\label{classAtomic__quantity_a678ccaacc1630da5784025bf4ba898bb}} 
+class {\bfseries Augmented\+\_\+spherical\+\_\+wave}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Superclass used for representing gengeral properties of atomic quantities.~\newline
+Contains\+:~\newline
+{\bfseries sites} -\/ All atoms currently under consideration.~\newline
+{\bfseries val} -\/ Values of the atomic quantities for the atoms under consideration.~\newline
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classAtomic__quantity_a5bd9055fdf94e57e54a355d5aa818b6c}\label{classAtomic__quantity_a5bd9055fdf94e57e54a355d5aa818b6c}} 
+\index{Atomic\+\_\+quantity@{Atomic\+\_\+quantity}!operator()@{operator()}}
+\index{operator()@{operator()}!Atomic\+\_\+quantity@{Atomic\+\_\+quantity}}
+\subsubsection{\texorpdfstring{operator()()}{operator()()}}
+{\footnotesize\ttfamily double Atomic\+\_\+quantity\+::operator() (\begin{DoxyParamCaption}\item[{const G\+S\+L\+::\+Vector \&}]{r }\end{DoxyParamCaption})}
+
+Obtain value of atomic quantity at point r (possibly combining values from several atoms) 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+atomic\+\_\+quantity.\+h\item 
+atomic\+\_\+quantity.\+cpp\end{DoxyCompactItemize}

@@ -1,0 +1,37 @@
+\hypertarget{classNumerov__solver}{}\section{Numerov\+\_\+solver Class Reference}
+\label{classNumerov__solver}\index{Numerov\+\_\+solver@{Numerov\+\_\+solver}}
+
+
+{\ttfamily \#include $<$numerov\+\_\+solver.\+h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classNumerov__solver_ac3fd6c0d81fc0802b9412124fcc6562c}\label{classNumerov__solver_ac3fd6c0d81fc0802b9412124fcc6562c}} 
+std\+::vector$<$ double $>$ {\bfseries solve\+\_\+left} (\hyperlink{classLogarithmic__mesh}{Logarithmic\+\_\+mesh} \&mesh, std\+::vector$<$ double $>$ \&v, int i\+\_\+lr, std\+::vector$<$ double $>$ \&init\+\_\+cond, double E)
+\item 
+\mbox{\Hypertarget{classNumerov__solver_aa4c49693edb195503743448b7e490908}\label{classNumerov__solver_aa4c49693edb195503743448b7e490908}} 
+std\+::vector$<$ double $>$ {\bfseries solve\+\_\+right} (\hyperlink{classLogarithmic__mesh}{Logarithmic\+\_\+mesh} \&mesh, std\+::vector$<$ double $>$ \&v, int i\+\_\+lr, std\+::vector$<$ double $>$ \&init\+\_\+cond, double E)
+\item 
+std\+::vector$<$ double $>$ \hyperlink{classNumerov__solver_a741a9a8a2c7f95db8d4e839f73fa7c72}{solve} (\hyperlink{classLogarithmic__mesh}{Logarithmic\+\_\+mesh} \&mesh, std\+::vector$<$ double $>$ \&v, std\+::vector$<$ double $>$ \&l\+\_\+init, std\+::vector$<$ double $>$ \&r\+\_\+init, double \&en, int n\+\_\+nodes)
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+A class for solving the radial Schrödinger equation using Numerov\textquotesingle{}s method~\newline
+Find approximate energy values using variational method ensuring the solution has the correct number of nodes~\newline
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classNumerov__solver_a741a9a8a2c7f95db8d4e839f73fa7c72}\label{classNumerov__solver_a741a9a8a2c7f95db8d4e839f73fa7c72}} 
+\index{Numerov\+\_\+solver@{Numerov\+\_\+solver}!solve@{solve}}
+\index{solve@{solve}!Numerov\+\_\+solver@{Numerov\+\_\+solver}}
+\subsubsection{\texorpdfstring{solve()}{solve()}}
+{\footnotesize\ttfamily std\+::vector$<$ double $>$ Numerov\+\_\+solver\+::solve (\begin{DoxyParamCaption}\item[{\hyperlink{classLogarithmic__mesh}{Logarithmic\+\_\+mesh} \&}]{mesh,  }\item[{std\+::vector$<$ double $>$ \&}]{v,  }\item[{std\+::vector$<$ double $>$ \&}]{l\+\_\+init,  }\item[{std\+::vector$<$ double $>$ \&}]{r\+\_\+init,  }\item[{double \&}]{en,  }\item[{int}]{n\+\_\+nodes }\end{DoxyParamCaption})}
+
+Solve radial Schrödinger equation for potential v, on mesh, using left initial conditions l\+\_\+init and right initial conditions r\+\_\+init ensuring the solution has n\+\_\+nodes on mesh. Store energy obtained by smooth continuous matching between right and left part of the solution in en. 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+numerov\+\_\+solver.\+h\item 
+numerov\+\_\+solver.\+cpp\end{DoxyCompactItemize}

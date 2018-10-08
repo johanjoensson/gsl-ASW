@@ -1,0 +1,49 @@
+\hypertarget{classBloch__summed__structure__constant}{}\section{Bloch\+\_\+summed\+\_\+structure\+\_\+constant Class Reference}
+\label{classBloch__summed__structure__constant}\index{Bloch\+\_\+summed\+\_\+structure\+\_\+constant@{Bloch\+\_\+summed\+\_\+structure\+\_\+constant}}
+
+
+{\ttfamily \#include $<$structure\+\_\+const.\+h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classBloch__summed__structure__constant_a76a707b0527f92350141011264fa1f29}\label{classBloch__summed__structure__constant_a76a707b0527f92350141011264fa1f29}} 
+{\bfseries Bloch\+\_\+summed\+\_\+structure\+\_\+constant} (int l\+\_\+low, int l\+\_\+int, double kappa, \hyperlink{classCrystal}{Crystal} \&c, \hyperlink{structlm}{lm} l1, \hyperlink{structlm}{lm} l2)
+\item 
+\mbox{\Hypertarget{classBloch__summed__structure__constant_a6a12a7cf46a1a9b52ac6852df7a87c91}\label{classBloch__summed__structure__constant_a6a12a7cf46a1a9b52ac6852df7a87c91}} 
+{\bfseries Bloch\+\_\+summed\+\_\+structure\+\_\+constant} (int l\+\_\+low, int l\+\_\+int, \hyperlink{classCrystal}{Crystal} \&c, \hyperlink{structlm}{lm} l1, \hyperlink{structlm}{lm} l2)
+\item 
+\mbox{\Hypertarget{classBloch__summed__structure__constant_a9ec01b0c1f625a2beec618d6da838b48}\label{classBloch__summed__structure__constant_a9ec01b0c1f625a2beec618d6da838b48}} 
+{\bfseries Bloch\+\_\+summed\+\_\+structure\+\_\+constant} (int l\+\_\+low, \hyperlink{classCrystal}{Crystal} \&c, \hyperlink{structlm}{lm} l1, \hyperlink{structlm}{lm} l2)
+\item 
+\mbox{\Hypertarget{classBloch__summed__structure__constant_a5a0864288d912b93ac8cdb10f55f338d}\label{classBloch__summed__structure__constant_a5a0864288d912b93ac8cdb10f55f338d}} 
+{\bfseries Bloch\+\_\+summed\+\_\+structure\+\_\+constant} (\hyperlink{classCrystal}{Crystal} \&c, \hyperlink{structlm}{lm} l1, \hyperlink{structlm}{lm} l2)
+\item 
+\mbox{\Hypertarget{classBloch__summed__structure__constant_a43503e7c75fb86c7646ec9373c7bd5fc}\label{classBloch__summed__structure__constant_a43503e7c75fb86c7646ec9373c7bd5fc}} 
+G\+S\+L\+::\+Complex \hyperlink{classBloch__summed__structure__constant_a43503e7c75fb86c7646ec9373c7bd5fc}{evaluate} (const G\+S\+L\+::\+Vector \&tau, const G\+S\+L\+::\+Vector \&kp)
+\begin{DoxyCompactList}\small\item\em Evaluate the Bloch summed structure constant at point tau for k-\/point kp. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classBloch__summed__structure__constant_abc1d8c593a9f4e6dca95f969847dfe67}\label{classBloch__summed__structure__constant_abc1d8c593a9f4e6dca95f969847dfe67}} 
+G\+S\+L\+::\+Complex \hyperlink{classBloch__summed__structure__constant_abc1d8c593a9f4e6dca95f969847dfe67}{dot\+\_\+evaluate} (const G\+S\+L\+::\+Vector \&tau, const G\+S\+L\+::\+Vector \&kp)
+\begin{DoxyCompactList}\small\item\em Evaluate the energy derivative of the Bloch summed structure constant at point tau for k-\/point kp. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classBloch__summed__structure__constant_a842c35198ecf8ef46be7efe1471b4809}\label{classBloch__summed__structure__constant_a842c35198ecf8ef46be7efe1471b4809}} 
+std\+::ostream \& {\bfseries operator$<$$<$} (std\+::ostream \&, const \hyperlink{classBloch__summed__structure__constant}{Bloch\+\_\+summed\+\_\+structure\+\_\+constant} \&)
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+A class for representing Bloch summed structure constants~\newline
+Contains\+:~\newline
+{\bfseries l\+\_\+int} -\/ Maximum orbital angular momentum to be included for Bessel expansions~\newline
+ {\bfseries l\+\_\+low} -\/ Maximumm orbital angular momentum to be included for Hankel expansions~\newline
+ {\bfseries l1}, {\bfseries l2} -\/ Orbital angular momenta to couple via the structure constant~\newline
+{\bfseries kappa} -\/ Energy parameter used (usually kappa$^\wedge$2 = -\/0.\+015)~\newline
+{\bfseries c} -\/ Unit cell of the crystal.~\newline
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+structure\+\_\+const.\+h\item 
+structure\+\_\+const.\+cpp\end{DoxyCompactItemize}

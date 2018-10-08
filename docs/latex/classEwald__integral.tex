@@ -1,0 +1,46 @@
+\hypertarget{classEwald__integral}{}\section{Ewald\+\_\+integral Class Reference}
+\label{classEwald__integral}\index{Ewald\+\_\+integral@{Ewald\+\_\+integral}}
+
+
+{\ttfamily \#include $<$ewald\+\_\+int.\+h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classEwald__integral_a81b6312a37021cf8e9a45e417a2c3143}\label{classEwald__integral_a81b6312a37021cf8e9a45e417a2c3143}} 
+void \hyperlink{classEwald__integral_a81b6312a37021cf8e9a45e417a2c3143}{set\+\_\+ewald\+\_\+param} (double eta)
+\begin{DoxyCompactList}\small\item\em Set the Ewald parameter. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classEwald__integral_a61619cc2dbdb9cada4552128277aa390}\label{classEwald__integral_a61619cc2dbdb9cada4552128277aa390}} 
+void \hyperlink{classEwald__integral_a61619cc2dbdb9cada4552128277aa390}{set\+\_\+kappa} (double kappa)
+\begin{DoxyCompactList}\small\item\em Set energy parameter. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classEwald__integral_acb4f3774a2b38c549791d89aa2040143}\label{classEwald__integral_acb4f3774a2b38c549791d89aa2040143}} 
+double {\bfseries ewald\+\_\+int} (\hyperlink{structlm}{lm} l, double r)
+\item 
+\mbox{\Hypertarget{classEwald__integral_adb1795037f6bfbb41a01f15be2ad27b4}\label{classEwald__integral_adb1795037f6bfbb41a01f15be2ad27b4}} 
+double {\bfseries comp\+\_\+ewald\+\_\+int} (\hyperlink{structlm}{lm} l, double r)
+\item 
+\mbox{\Hypertarget{classEwald__integral_ad3f3f659c22073f76bb1262e47e847fd}\label{classEwald__integral_ad3f3f659c22073f76bb1262e47e847fd}} 
+std\+::vector$<$ double $>$ \hyperlink{classEwald__integral_ad3f3f659c22073f76bb1262e47e847fd}{evaluate} (\hyperlink{structlm}{lm} l, \hyperlink{classLogarithmic__mesh}{Logarithmic\+\_\+mesh} \&mesh)
+\begin{DoxyCompactList}\small\item\em Calculate the Ewald integral for angular quantum number (l.\+l, l.\+m) and evaluate it on every point in the mesh. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classEwald__integral_a6cba9e9c66347c0321cd55487304d25a}\label{classEwald__integral_a6cba9e9c66347c0321cd55487304d25a}} 
+std\+::vector$<$ double $>$ \hyperlink{classEwald__integral_a6cba9e9c66347c0321cd55487304d25a}{evaluate\+\_\+comp} (\hyperlink{structlm}{lm} l, \hyperlink{classLogarithmic__mesh}{Logarithmic\+\_\+mesh} \&mesh)
+\begin{DoxyCompactList}\small\item\em Calculate the complementary Ewald integral for angular quantum number (l.\+l, l.\+m) and evaluate it on every point in the mesh. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classEwald__integral_acb4f3774a2b38c549791d89aa2040143}\label{classEwald__integral_acb4f3774a2b38c549791d89aa2040143}} 
+double {\bfseries ewald\+\_\+int} (\hyperlink{structlm}{lm} l, double r)
+\item 
+\mbox{\Hypertarget{classEwald__integral_adb1795037f6bfbb41a01f15be2ad27b4}\label{classEwald__integral_adb1795037f6bfbb41a01f15be2ad27b4}} 
+double {\bfseries comp\+\_\+ewald\+\_\+int} (\hyperlink{structlm}{lm} l, double r)
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+A class for the integral representation of Hankel functions~\newline
+Contains\+:~\newline
+{\bfseries ewald\+\_\+param} -\/ Parameter separating long range part from short range one~\newline
+{\bfseries kappa} -\/ Energy parameter used (usually kappa$^\wedge$2 = -\/0.\+015)~\newline
+{\bfseries h} -\/ 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+ewald\+\_\+int.\+h\item 
+ewald\+\_\+int.\+cpp\end{DoxyCompactItemize}

@@ -1,0 +1,30 @@
+\begin{theindex}
+
+  \item {Atom}, \hyperpage{3}
+
+  \indexspace
+
+  \item {Crystal}, \hyperpage{4}
+
+  \indexspace
+
+  \item {Effective\+\_\+potential}, \hyperpage{4}
+  \item {Ewald\+\_\+integral}, \hyperpage{4}
+
+  \indexspace
+
+  \item {lm}, \hyperpage{5}
+  \item {Logarithmic\+\_\+mesh}, \hyperpage{5}
+
+  \indexspace
+
+  \item {Numerov\+\_\+solver}, \hyperpage{5}
+    \subitem {solve}, \hyperpage{6}
+
+  \indexspace
+
+  \item {solve}
+    \subitem {Numerov\+\_\+solver}, \hyperpage{6}
+  \item {Structure\+\_\+constant}, \hyperpage{6}
+
+\end{theindex}

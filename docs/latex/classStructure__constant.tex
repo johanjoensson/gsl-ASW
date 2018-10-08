@@ -1,0 +1,54 @@
+\hypertarget{classStructure__constant}{}\section{Structure\+\_\+constant Class Reference}
+\label{classStructure__constant}\index{Structure\+\_\+constant@{Structure\+\_\+constant}}
+
+
+{\ttfamily \#include $<$structure\+\_\+const.\+h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classStructure__constant_a3ec54c7f725377c9a0a1c070150ca8ac}\label{classStructure__constant_a3ec54c7f725377c9a0a1c070150ca8ac}} 
+{\bfseries Structure\+\_\+constant} (int l\+\_\+low, int l\+\_\+int, double kappa, \hyperlink{structlm}{lm} l1, \hyperlink{structlm}{lm} l2, G\+S\+L\+::\+Vector \&r)
+\item 
+\mbox{\Hypertarget{classStructure__constant_a0738527824a89745ccfbf5c3574591e2}\label{classStructure__constant_a0738527824a89745ccfbf5c3574591e2}} 
+{\bfseries Structure\+\_\+constant} (int l\+\_\+low, int l\+\_\+int, \hyperlink{structlm}{lm} l1, \hyperlink{structlm}{lm} l2, G\+S\+L\+::\+Vector \&r)
+\item 
+\mbox{\Hypertarget{classStructure__constant_a10517723cc79639846ccbdb08f3c0c3f}\label{classStructure__constant_a10517723cc79639846ccbdb08f3c0c3f}} 
+{\bfseries Structure\+\_\+constant} (int l\+\_\+low, \hyperlink{structlm}{lm} l1, \hyperlink{structlm}{lm} l2, G\+S\+L\+::\+Vector \&r)
+\item 
+\mbox{\Hypertarget{classStructure__constant_aed388efe9aed5398b5a61ee57b269d2f}\label{classStructure__constant_aed388efe9aed5398b5a61ee57b269d2f}} 
+{\bfseries Structure\+\_\+constant} (\hyperlink{structlm}{lm} l1, \hyperlink{structlm}{lm} l2, G\+S\+L\+::\+Vector \&r)
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classStructure__constant_a1155f4863b1c995729abce2c93697595}\label{classStructure__constant_a1155f4863b1c995729abce2c93697595}} 
+double {\bfseries val}
+\item 
+\mbox{\Hypertarget{classStructure__constant_ac361c2fe9165b85c4ffe4d72d323524a}\label{classStructure__constant_ac361c2fe9165b85c4ffe4d72d323524a}} 
+double {\bfseries dk\+\_\+val}
+\end{DoxyCompactItemize}
+\subsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classStructure__constant_af633c21967d44869e756f9f33428cb6a}\label{classStructure__constant_af633c21967d44869e756f9f33428cb6a}} 
+std\+::ostream \& {\bfseries operator$<$$<$} (std\+::ostream \&, const \hyperlink{classStructure__constant}{Structure\+\_\+constant} \&)
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+A class for representing structure constants~\newline
+Contains\+:~\newline
+{\bfseries l\+\_\+int} -\/ Maximum orbital angular momentum to be included for Bessel expansions~\newline
+ {\bfseries l\+\_\+low} -\/ Maximumm orbital angular momentum to be included for Hankel expansions~\newline
+ {\bfseries l1}, {\bfseries l2} -\/ Orbital angular momenta to couple via the structure constant~\newline
+{\bfseries kappa} -\/ Energy parameter used (usually kappa$^\wedge$2 = -\/0.\+015)~\newline
+{\bfseries r} -\/ Position of atom~\newline
+{\bfseries val} -\/ Value of the structure constant~\newline
+{\bfseries dk\+\_\+val} -\/ Value of energy derivative of the structure constant~\newline
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+structure\+\_\+const.\+h\item 
+structure\+\_\+const.\+cpp\end{DoxyCompactItemize}

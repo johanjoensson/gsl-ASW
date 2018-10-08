@@ -1,0 +1,68 @@
+\hypertarget{classAugmented__spherical__wave}{}\section{Augmented\+\_\+spherical\+\_\+wave Class Reference}
+\label{classAugmented__spherical__wave}\index{Augmented\+\_\+spherical\+\_\+wave@{Augmented\+\_\+spherical\+\_\+wave}}
+
+
+{\ttfamily \#include $<$augmented\+\_\+spherical\+\_\+wave.\+h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classAugmented__spherical__wave_a33fca69626caef4bb002fa5251d6bb95}\label{classAugmented__spherical__wave_a33fca69626caef4bb002fa5251d6bb95}} 
+{\bfseries Augmented\+\_\+spherical\+\_\+wave} (double kappa, unsigned int n, \hyperlink{structlm}{lm} l, spin s, \hyperlink{classAtom}{Atom} center, std\+::vector$<$ \hyperlink{classAtom}{Atom} $>$ off\+\_\+centers)
+\item 
+\mbox{\Hypertarget{classAugmented__spherical__wave_a765064afaa2abf01c4333bcc687fbf0b}\label{classAugmented__spherical__wave_a765064afaa2abf01c4333bcc687fbf0b}} 
+void \hyperlink{classAugmented__spherical__wave_a765064afaa2abf01c4333bcc687fbf0b}{set\+\_\+up} (\hyperlink{classPotential}{Potential} \&v)
+\begin{DoxyCompactList}\small\item\em Initialise wave using potential v. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classAugmented__spherical__wave_ab39ad0916daf3a7755597a9ad17c6fd2}\label{classAugmented__spherical__wave_ab39ad0916daf3a7755597a9ad17c6fd2}} 
+double \hyperlink{classAugmented__spherical__wave_ab39ad0916daf3a7755597a9ad17c6fd2}{operator()} (const G\+S\+L\+::\+Vector \&r)
+\begin{DoxyCompactList}\small\item\em Obtain value of wave at point r. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classAugmented__spherical__wave_aecd09481e9003d76036f7592149b1d27}\label{classAugmented__spherical__wave_aecd09481e9003d76036f7592149b1d27}} 
+\hyperlink{classAtom}{Atom} {\bfseries center}
+\item 
+\mbox{\Hypertarget{classAugmented__spherical__wave_a5f9033a60373cacd172d142a87a694f4}\label{classAugmented__spherical__wave_a5f9033a60373cacd172d142a87a694f4}} 
+std\+::vector$<$ \hyperlink{classAtom}{Atom} $>$ {\bfseries off\+\_\+centers}
+\item 
+\mbox{\Hypertarget{classAugmented__spherical__wave_a4ea71ee3db8c61d41f4df3326e56a72d}\label{classAugmented__spherical__wave_a4ea71ee3db8c61d41f4df3326e56a72d}} 
+double {\bfseries kappa}
+\item 
+\mbox{\Hypertarget{classAugmented__spherical__wave_ae6adf9a476a6e1f7be2e21ca5afe7b5b}\label{classAugmented__spherical__wave_ae6adf9a476a6e1f7be2e21ca5afe7b5b}} 
+unsigned int {\bfseries n}
+\item 
+\mbox{\Hypertarget{classAugmented__spherical__wave_afe08877e95bfb68401e5a0f0529fb621}\label{classAugmented__spherical__wave_afe08877e95bfb68401e5a0f0529fb621}} 
+\hyperlink{structlm}{lm} {\bfseries l}
+\item 
+\mbox{\Hypertarget{classAugmented__spherical__wave_aa26003f4ae5783b2da539dabddef7da2}\label{classAugmented__spherical__wave_aa26003f4ae5783b2da539dabddef7da2}} 
+spin {\bfseries s}
+\item 
+\mbox{\Hypertarget{classAugmented__spherical__wave_af4fc69413960bb7e6b77ce16434c51b5}\label{classAugmented__spherical__wave_af4fc69413960bb7e6b77ce16434c51b5}} 
+bool {\bfseries core\+\_\+state} = false
+\item 
+\mbox{\Hypertarget{classAugmented__spherical__wave_a624a1c8999b66228527d3453014dee3c}\label{classAugmented__spherical__wave_a624a1c8999b66228527d3453014dee3c}} 
+\hyperlink{classAugmented__Hankel}{Augmented\+\_\+\+Hankel} {\bfseries H}
+\item 
+\mbox{\Hypertarget{classAugmented__spherical__wave_abd9ef377a44070f9e9a1296531f92c2e}\label{classAugmented__spherical__wave_abd9ef377a44070f9e9a1296531f92c2e}} 
+std\+::vector$<$ std\+::unordered\+\_\+set$<$ \hyperlink{classAugmented__Bessel}{Augmented\+\_\+\+Bessel} $>$ $>$ {\bfseries J}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Class for representing an augmented spherical wave.~\newline
+Contains\+:~\newline
+{\bfseries center} -\/ Atomic site the wave is centered on, on-\/center augmentation sphere.~\newline
+{\bfseries off\+\_\+centers} -\/ Atomic sites where the wave is augmented in off-\/center spheres.~\newline
+\+\_\+\+\_\+kappa\+\_\+ -\/ Energy of waves in interstitial region.~\newline
+{\bfseries n} -\/ principal quantum number of the wave.~\newline
+{\bfseries l} -\/ Combined orbital and magnetic quantum number.~\newline
+{\bfseries s} -\/ Spin direction.~\newline
+\+\_\+\+\_\+core\+\_\+state\+\_\+ -\/ Is this wave describing a core state or not? Core states have no augmentation in off-\/center spheres.~\newline
+{\bfseries H} -\/ On center, augmented Hankel function.~\newline
+{\bfseries J} -\/ Off-\/center, augmented Bessel functions (unsorted).~\newline
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+augmented\+\_\+spherical\+\_\+wave.\+h\item 
+augmented\+\_\+spherical\+\_\+wave.\+cpp\end{DoxyCompactItemize}

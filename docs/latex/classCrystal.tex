@@ -1,0 +1,84 @@
+\hypertarget{classCrystal}{}\section{Crystal Class Reference}
+\label{classCrystal}\index{Crystal@{Crystal}}
+
+
+{\ttfamily \#include $<$crystal.\+h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classCrystal_af60ff2a10146e75a52e6df02c54f35d9}\label{classCrystal_af60ff2a10146e75a52e6df02c54f35d9}} 
+size\+\_\+t {\bfseries calc\+\_\+nk} (double tol, double kappa, \hyperlink{structlm}{lm} l)
+\item 
+\mbox{\Hypertarget{classCrystal_af1c7ecea434e2fd23179c31f4dc293ab}\label{classCrystal_af1c7ecea434e2fd23179c31f4dc293ab}} 
+size\+\_\+t {\bfseries calc\+\_\+nr} (double tol, double kappa, \hyperlink{structlm}{lm} l)
+\item 
+\mbox{\Hypertarget{classCrystal_a7d5661dea0deafd0ec6c9e473fc64903}\label{classCrystal_a7d5661dea0deafd0ec6c9e473fc64903}} 
+void {\bfseries calc\+\_\+\+Kn} (size\+\_\+t num)
+\item 
+\mbox{\Hypertarget{classCrystal_a49ec1aa8a9072ed17bd2fe72fa1a17f5}\label{classCrystal_a49ec1aa8a9072ed17bd2fe72fa1a17f5}} 
+void {\bfseries calc\+\_\+\+Rn} (size\+\_\+t num)
+\item 
+\mbox{\Hypertarget{classCrystal_a48b64a146c0a7d5c535d9810f9a4db0f}\label{classCrystal_a48b64a146c0a7d5c535d9810f9a4db0f}} 
+{\bfseries Crystal} (double \&a)
+\item 
+\mbox{\Hypertarget{classCrystal_a833d7b176886858f4c60783e8a206fca}\label{classCrystal_a833d7b176886858f4c60783e8a206fca}} 
+{\bfseries Crystal} (const double \&a)
+\item 
+\mbox{\Hypertarget{classCrystal_ad3d2d5e6685320d29315645218d9ef3e}\label{classCrystal_ad3d2d5e6685320d29315645218d9ef3e}} 
+{\bfseries Crystal} (double \&a, double \&b, double \&c)
+\item 
+\mbox{\Hypertarget{classCrystal_a7fbd1876776468459c219f3f2682151a}\label{classCrystal_a7fbd1876776468459c219f3f2682151a}} 
+{\bfseries Crystal} (const double \&a, const double \&b, const double \&c)
+\item 
+\mbox{\Hypertarget{classCrystal_a8ce1dcbea5d7044e7c76036539e457ef}\label{classCrystal_a8ce1dcbea5d7044e7c76036539e457ef}} 
+{\bfseries Crystal} (G\+S\+L\+::\+Vector \&a, G\+S\+L\+::\+Vector \&b, G\+S\+L\+::\+Vector \&c)
+\item 
+\mbox{\Hypertarget{classCrystal_a731c41bd979ebae689c9c37546ebcb94}\label{classCrystal_a731c41bd979ebae689c9c37546ebcb94}} 
+{\bfseries Crystal} (const G\+S\+L\+::\+Vector \&a, const G\+S\+L\+::\+Vector \&b, const G\+S\+L\+::\+Vector \&c)
+\item 
+\mbox{\Hypertarget{classCrystal_a5b6c668fc1d66d1069ed4f24348317a9}\label{classCrystal_a5b6c668fc1d66d1069ed4f24348317a9}} 
+void {\bfseries add\+\_\+atoms} (const std\+::vector$<$ \hyperlink{classAtom}{Atom} $>$ \&v)
+\item 
+\mbox{\Hypertarget{classCrystal_ad3d68928046871d142b88bdc98219ff2}\label{classCrystal_ad3d68928046871d142b88bdc98219ff2}} 
+G\+S\+L\+::\+Vector \& {\bfseries get\+\_\+\+Rn} (const size\+\_\+t \&i)
+\item 
+\mbox{\Hypertarget{classCrystal_a87bfc2e2f34dd9c1344ed1aeb4f56d8c}\label{classCrystal_a87bfc2e2f34dd9c1344ed1aeb4f56d8c}} 
+std\+::vector$<$ std\+::vector$<$ \hyperlink{classAtom}{Atom} $>$ $>$ {\bfseries calc\+\_\+nearest\+\_\+neighbours} ()
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classCrystal_ad8a47a7a1bff618d0f8086b0f6dc8923}\label{classCrystal_ad8a47a7a1bff618d0f8086b0f6dc8923}} 
+std\+::vector$<$ G\+S\+L\+::\+Vector $>$ {\bfseries Rn\+\_\+vecs}
+\item 
+\mbox{\Hypertarget{classCrystal_abe2274d5f8cb3f04b86b2f12a41be29e}\label{classCrystal_abe2274d5f8cb3f04b86b2f12a41be29e}} 
+std\+::vector$<$ G\+S\+L\+::\+Vector $>$ {\bfseries Kn\+\_\+vecs}
+\item 
+\mbox{\Hypertarget{classCrystal_a40f8e54181ebde8cbfd5cdfca4c566a0}\label{classCrystal_a40f8e54181ebde8cbfd5cdfca4c566a0}} 
+\hyperlink{classLattice}{Lattice} {\bfseries lat}
+\item 
+\mbox{\Hypertarget{classCrystal_a3bf1b97769d7ebb26f5b0947887c0b3f}\label{classCrystal_a3bf1b97769d7ebb26f5b0947887c0b3f}} 
+std\+::vector$<$ \hyperlink{classAtom}{Atom} $>$ {\bfseries atoms}
+\item 
+\mbox{\Hypertarget{classCrystal_a0a6ca7dd06a76590ce88bfd9140f9441}\label{classCrystal_a0a6ca7dd06a76590ce88bfd9140f9441}} 
+double {\bfseries volume}
+\item 
+\mbox{\Hypertarget{classCrystal_a34c90595f775055b60f929831550d91b}\label{classCrystal_a34c90595f775055b60f929831550d91b}} 
+double {\bfseries bz\+\_\+volume}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Class used to describe the structure of a crystal.~\newline
+Contains\+:~\newline
+{\bfseries Rn\+\_\+vecs} -\/ \hyperlink{classLattice}{Lattice} vectors of the crystal (up to a maximum lentgh).~\newline
+{\bfseries Kn\+\_\+vecs} -\/ Reciprocal lattice vectors of the crystal (up to a maximum length).~\newline
+{\bfseries lat} -\/ The lattice of the crystal.~\newline
+{\bfseries atoms} -\/ The atoms in the unit cell of the crystal (the base of the crystal).~\newline
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+crystal.\+h\item 
+crystal.\+cpp\end{DoxyCompactItemize}
