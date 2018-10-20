@@ -14,6 +14,14 @@ namespace std {
 			std::hash<double>()(v.norm());
 		}
 	};
+	template<>
+	struct hash<Atom>{
+		size_t operator()(const Atom &a) const
+		{
+			return std::hash<GSL::Vector>()(a.pos) ^
+			std::hash<int>()(a.Z);
+		}
+	};
 }
 
 
@@ -113,201 +121,103 @@ size_t Crystal::calc_nr(double tol, double kappa, lm l)
 
 }
 
-void Crystal::calc_Rn(size_t num)
+double Crystal::calc_Rmax(double tol, double kappa, lm l)
 {
-    std::cout << "Calculating lattice vectors" << std::endl;
-    GSL::Vector a1(3);
-    GSL::Vector a2(3);
-    GSL::Vector a3(3);
+	double eta = GSL::exp(GSL::log(6.5) + 2./3*GSL::log(4*M_PI/3) -
+	2./3*GSL::log(this->volume)).val;
 
-    a1 = this->lat.lat[0]*this->lat.scale;
-    a2 = this->lat.lat[1]*this->lat.scale;
-    a3 = this->lat.lat[2]*this->lat.scale;
+	Ewald_integral I;
+	I.set_kappa(kappa);
+	I.set_ewald_param(eta);
 
-    std::vector<GSL::Vector> possibles;
-    std::unordered_set<GSL::Vector> tmp, res;
-    possibles = {a1, a2, a3};
-    size_t n = tmp.size(), prev = 0;
-	bool resort = true;
-    std::cout << "0%| ";
-	bool done = false;
-    while(n < num || !done){
-        n = tmp.size();
-		if(resort){
-			std::sort(possibles.begin(), possibles.end(), comp_norm);
-			resort = !resort;
-		}
-        tmp.insert(possibles[0]);
-        for(std::unordered_set<GSL::Vector>::const_iterator it = tmp.begin();
-		it != tmp.end(); it++){
-            /* Only consider vectors not already found */
-            if(tmp.find(possibles[0] + *it) == tmp.end()){
-                possibles.push_back(possibles[0] + *it);
-            }
-        }
-		if(possibles[0].norm() != possibles[1].norm()){
-			if(n >= num){
-				done = true;
-			}
-			resort = true;
-		}
-        possibles.erase(possibles.begin());
-        if(n - prev > 0.10*num){
-            std::cout << "==" << std::flush;
-            prev = n;
-        }
-    }
-    std::cout << "== |100%" << std::endl << std::endl;
-    /*
-       Above we only find linear combinations with positive integer coefficients
-       we can generate all other linear combinations with the same length by
-       simply mirroring our vectors along the three planes defned by the three
-       lattice vectors.
-    */
-	GSL::Vector e1(3), e2(3), e3(3);
-	e1[0] = 1.0;
-	e2[1] = 1.0;
-	e3[2] = 1.0;
-	GSL::Matrix neg_x(3,3), neg_y(3,3), neg_z(3,3);
-	neg_x[0] = -e1;
-	neg_x[1] = e2;
-	neg_x[2] = e3;
+	int sign = 1.;
 
-	neg_y[0] = e1;
-	neg_y[1] = -e2;
-	neg_y[2] = e3;
-
-	neg_z[0] = e1;
-	neg_z[1] = e2;
-	neg_z[2] = -e3;
-    for(GSL::Vector R : tmp){
-        res.insert(R);
-		if(R[0] > 0){
-			res.insert(neg_x*R);
-			if(R[1] > 0){
-				res.insert(neg_y*R);
-				res.insert(neg_y*neg_x*R);
-				if(R[2] > 0){
-					res.insert(neg_z*R);
-					res.insert(neg_z*neg_y*R);
-					res.insert(neg_z*neg_y*neg_x*R);
-				}
-			}else if(R[2] > 0){
-				res.insert(neg_z*R);
-				res.insert(neg_z*neg_x*R);
-			}
-		}else if(R[1] > 0){
-			res.insert(neg_y*R);
-			if(R[2] > 0){
-				res.insert(neg_z*R);
-				res.insert(neg_z*neg_y*R);
-			}
-		}else if(R[2] > 0){
-			res.insert(neg_z*R);
-		}
-    }
-	for(GSL::Vector R : res){
-		Rn_vecs.push_back(R);
+	if(-GSL::log(tol).val < 0){
+		sign = -1;
 	}
-    std::sort(Rn_vecs.begin(), Rn_vecs.end(), comp_norm);
-    std::cout << "Number of lattice vectors : " << Rn_vecs.size() <<
-	std::endl << std::endl;
+
+	double r = 1;
+	while((l.l*GSL::log(r) + GSL::log(I.ewald_int(l, r)) -
+	GSL::log(I.ewald_int(l, 1.)) - GSL::log(tol)).val*sign > 0)
+	{
+		r += 2/sqrt(eta);
+	}
+	r = bisect_r(tol, kappa, eta, l, r - 2/sqrt(eta), r);
+
+	return r;
+
+}
+void Crystal::set_Rn(double Rmax)
+{
+    GSL::Vector a1(this->lat.lat[0]*this->lat.scale);
+    GSL::Vector a2(this->lat.lat[1]*this->lat.scale);
+    GSL::Vector a3(this->lat.lat[2]*this->lat.scale);
+    GSL::Vector b1(this->lat.r_lat[0]/this->lat.scale);
+    GSL::Vector b2(this->lat.r_lat[1]/this->lat.scale);
+    GSL::Vector b3(this->lat.r_lat[2]/this->lat.scale);
+
+	int N1 = std::ceil(b1.norm()/(2*M_PI)*Rmax);
+	int N2 = std::ceil(b2.norm()/(2*M_PI)*Rmax);
+	int N3 = std::ceil(b3.norm()/(2*M_PI)*Rmax);
+
+	std::unordered_set<GSL::Vector> tmp;
+	for(int n1 = -N1; n1 <= N1; n1++){
+		for(int n2 = -N2; n2 <= N2; n2++){
+			for(int n3 = -N3; n3 <= N3; n3++){
+				tmp.insert(n1*a1 + n2*a2 + n3*a3);
+			}
+		}
+	}
+	Rn_vecs.assign(tmp.begin(), tmp.end());
+	std::sort(Rn_vecs.begin(), Rn_vecs.end(), comp_norm);
 }
 
-void Crystal::calc_Kn(size_t num)
+double Crystal::calc_Kmax(double tol, double kappa, lm l)
 {
-    std::cout << "Calculating reciprocal lattice vectors" << std::endl;
-    GSL::Vector b1(3);
-    GSL::Vector b2(3);
-    GSL::Vector b3(3);
+	double eta = GSL::exp(GSL::log(6.5) + 2./3*GSL::log(4*M_PI/3) -
+	2./3*GSL::log(this->volume)).val;
 
-    b1 = this->lat.r_lat[0]/this->lat.scale;
-    b2 = this->lat.r_lat[1]/this->lat.scale;
-    b3 = this->lat.r_lat[2]/this->lat.scale;
+	int sign = 1.;
 
-    std::vector<GSL::Vector> possibles;
-    std::unordered_set<GSL::Vector> tmp, res;
-    possibles = {b1, b2, b3};
-    size_t n = tmp.size(), prev = 0;
-	bool resort = true, done = false;
-    std::cout << "0%| ";
-    while(n < num || !done){
-        n = tmp.size();
-		if(resort){
-			std::sort(possibles.begin(), possibles.end(), comp_norm);
-			resort = ! resort;
-		}
-        tmp.insert(possibles[0]);
-        for(std::unordered_set<GSL::Vector>::const_iterator it = tmp.begin();
-		it != tmp.end(); it++){
-            if(tmp.find(possibles[0] + *it) == tmp.end()){
-                possibles.push_back(possibles[0] + *it);
-            }
-        }
-		if(possibles[0].norm() != possibles[1].norm()){
-			if(n >= num){
-				done = true;
-			}
-			resort = true;
-		}
-        possibles.erase(possibles.begin());
-        if((n-prev) > 0.10*num){
-            std::cout << "==" << std::flush;
-            prev = n;
-        }
-    }
-    std::cout << "== |100%" << std::endl << std::endl;
-    /*
-       Above we only find linear combinations with positive integer coefficients
-       we can generate all other linear combinations with the same length by
-       simply mirroring our vectors in different planes
-       lattice vectors.
-    */
-	GSL::Vector e1(3), e2(3), e3(3);
-	e1[0] = 1.0;
-	e2[1] = 1.0;
-	e3[2] = 1.0;
-	GSL::Matrix neg_x(3,3), neg_y(3,3), neg_z(3,3);
-	neg_x[0] = -e1;
-	neg_x[1] = e2;
-	neg_x[2] = e3;
-
-	neg_y[0] = e1;
-	neg_y[1] = -e2;
-	neg_y[2] = e3;
-
-	neg_z[0] = e1;
-	neg_z[1] = e2;
-	neg_z[2] = -e3;
-    for(GSL::Vector G : tmp){
-        res.insert(G);
-		if(G[0] > 0){
-			res.insert(neg_x*G);
-			if(G[1] > 0){
-				res.insert(neg_y*G);
-				res.insert(neg_y*neg_x*G);
-				if(G[2] > 0){
-					res.insert(neg_z*G);
-					res.insert(neg_z*neg_y*G);
-					res.insert(neg_z*neg_y*neg_x*G);
-				}
-			}
-		}else if(G[1] > 0){
-			res.insert(neg_y*G);
-			if(G[2] > 0){
-				res.insert(neg_z*G);
-				res.insert(neg_z*neg_y*G);
-			}
-		}else if(G[2] > 0){
-			res.insert(neg_z*G);
-		}
-    }
-	for(GSL::Vector G : res){
-		Kn_vecs.push_back(G);
+	if(-eta*GSL::log(tol).val < 0){
+		sign = -1;
 	}
-    std::sort(Kn_vecs.begin(), Kn_vecs.end(), comp_norm);
-    std::cout << "Number of reciprocal lattice vectors : " << Kn_vecs.size() <<
-	std::endl << std::endl;
+
+	double q = 1;
+	while((-q*q + eta*(l.l*GSL::log(q) + GSL::log(1 + kappa*kappa) -
+	GSL::log(q*q + kappa*kappa) - GSL::log(tol)) + 1).val*sign > 0)
+	{
+		q += sqrt(eta);
+	}
+	q = bisect_q(tol, kappa, eta, l, q - sqrt(eta), q);
+
+	return q;
+}
+
+void Crystal::set_Kn(double Kmax)
+{
+    GSL::Vector a1(this->lat.lat[0]*this->lat.scale);
+    GSL::Vector a2(this->lat.lat[1]*this->lat.scale);
+    GSL::Vector a3(this->lat.lat[2]*this->lat.scale);
+    GSL::Vector b1(this->lat.r_lat[0]/this->lat.scale);
+    GSL::Vector b2(this->lat.r_lat[1]/this->lat.scale);
+    GSL::Vector b3(this->lat.r_lat[2]/this->lat.scale);
+
+	int N1 = std::ceil(a1.norm()/(2*M_PI)*Kmax);
+	int N2 = std::ceil(a2.norm()/(2*M_PI)*Kmax);
+	int N3 = std::ceil(a3.norm()/(2*M_PI)*Kmax);
+
+
+	std::unordered_set<GSL::Vector> tmp;
+	for(int n1 = -N1; n1 <= N1; n1++){
+		for(int n2 = -N2; n2 <= N2; n2++){
+			for(int n3 = -N3; n3 <= N3; n3++){
+				tmp.insert(n1*b1 + n2*b2 + n3*b3);
+			}
+		}
+	}
+	Kn_vecs.assign(tmp.begin(), tmp.end());
+	std::sort(Kn_vecs.begin(), Kn_vecs.end(), comp_norm);
 }
 
 double Crystal::calc_volume()
@@ -321,6 +231,7 @@ double Crystal::calc_bz_volume()
 {
     GSL::Vector tmp;
     tmp = GSL::cross(lat.r_lat[1], lat.r_lat[2]);
+	std::cout << tmp << std::endl;
     return std::abs(GSL::dot(lat.r_lat[0], tmp)/GSL::pow_int(lat.scale, 3));
 }
 
@@ -419,34 +330,46 @@ GSL::Vector& Crystal::get_Rn(const size_t& i)
 
 bool comp_norm_at(Atom& a, Atom& b)
 {
-    return a.get_pos().norm() < b.get_pos().norm();
+    return a.pos.norm() < b.pos.norm();
 }
 
 std::vector<std::vector<Atom>> Crystal::calc_nearest_neighbours()
 {
 	std::vector<std::vector<Atom>> res(this->atoms.size());
 	std::vector<Atom> tmp;
+	std::unordered_set<Atom> pre_res;
+	Atom tmp_at;
 	GSL::Vector ri(3), rj(3);
 	for(size_t i = 0; i < this->atoms.size(); i++){
 		tmp.clear();
-		ri = this->atoms[i].get_pos();
+		pre_res.clear();
+		ri = this->atoms[i].pos;
 		tmp.push_back(this->atoms[i]);
-		tmp.back().set_pos(GSL::Vector(3));
+		tmp.back().pos = GSL::Vector(3);
+		// Calculate all neighbours inside the cell
 		for(size_t j = 0; j < this->atoms.size(); j++){
-			rj = this->atoms[j].get_pos();
+			rj = this->atoms[j].pos;
 			tmp.push_back(this->atoms[j]);
-			tmp.back().set_pos(ri - rj);
+			tmp.back().pos = (ri - rj);
 		}
 		for(Atom a : tmp){
-			if(a.get_pos() != GSL::Vector(3)){
-				res[i].push_back(a);
+			// Do not add the original atom
+			if(a.pos != GSL::Vector(3)){
+				pre_res.insert(a);
 			}
+			// Add all lattice vectors
 			for(GSL::Vector R : this->Rn_vecs){
-				res[i].push_back(a);
-				res[i].back().set_pos(a.get_pos() + R);
+				rj = a.pos + R;
+				if(rj != GSL::Vector(3)){
+					tmp_at = a;
+					tmp_at.pos = rj;
+					pre_res.insert(tmp_at);
+				}
 			}
 		}
+		res[i].assign(pre_res.begin(), pre_res.end());
 		std::sort(res[i].begin(), res[i].end(), comp_norm_at);
 	}
+
 	return res;
 }

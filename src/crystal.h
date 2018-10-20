@@ -21,6 +21,12 @@ public:
 	size_t calc_nk(double tol, double kappa, lm l);
 	size_t calc_nr(double tol, double kappa, lm l);
 
+	double calc_Kmax(double tol, double kappa, lm l);
+	double calc_Rmax(double tol, double kappa, lm l);
+
+	void set_Kn(double Kmax);
+	void set_Rn(double Rmax);
+
 	void calc_Kn(size_t num);
 	void calc_Rn(size_t num);
 
