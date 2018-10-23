@@ -36,13 +36,13 @@ numerov_debug.close();
     GSL::Complex d2(0., 0.), e(0., 0.);
 
 
-	GSL::Vector a(3), b(3), c(3);
-	a[0] = 1.; a[1] = 0.; a[2] = 0.;
-	b[0] = 0.; b[1] = 1.; b[2] = 0.;
-	c[0] = 0.; c[1] = 0.; c[2] = 1.;
+	GSL::Vector a = {1., 0., 0.}, b = {0., 1., 0.}, c = {0., 0., 1.};
+	std::cout << a << std::endl;
+	std::cout << b << std::endl;
+	std::cout << c << std::endl;
 	Crystal cr(3*a, 3*b, 3*c);
 
-	std::cout << cr.lat.lat*cr.lat.scale << std::endl;
+	std::cout << cr.lat.scale*cr.lat.lat << std::endl;
 //	size_t Nk = cr.calc_nk(1e-6, sqrt(0.015), lm {4, 0});
 //	size_t Nr = cr.calc_nr(1e-6, sqrt(0.015), lm {4, 0});
 
@@ -100,7 +100,7 @@ numerov_debug.close();
 		std::cout << std::endl;
 	}
 	*/
-	
+
 	double at_vol = 0;
 	for(size_t idx = 0; idx < cr.atoms.size(); idx++){
 		at_vol += GSL::pow_int(cr.atoms[idx].get_MT(), 3);
@@ -179,8 +179,9 @@ numerov_debug.close();
 	out_file.close();
 
 	std::cout << augmented_integral(aw2sup.H, aw1sup.H) << std::endl;
-	double val = off_atomic_integral(Envelope_Hankel(cr.atoms[0], lm {2,0}, std::sqrt(0.15)),
-	 Envelope_Hankel(cr.atoms[0], lm {2, -1}, std::sqrt(15)));
+	Envelope_Hankel H1(cr.atoms[0], lm {2,0}, std::sqrt(0.15)),
+		H2(cr.atoms[0], lm {2, -1}, std::sqrt(15));
+	double val = off_atomic_integral(H1, H2);
 	std::cout << val << std::endl;
 
 	return 0;

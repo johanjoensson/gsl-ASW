@@ -25,7 +25,7 @@ public:
 
     Augmented_spherical_wave();
     Augmented_spherical_wave(double kappa, unsigned int n, lm l, spin s,
-        Atom center, std::vector<Atom> off_centers);
+        Atom& center, std::vector<Atom>& off_centers);
 
     void set_up(Potential &v);
 

@@ -14,13 +14,13 @@ public:
     Logarithmic_mesh mesh;
     std::vector<double> val;
 
-    double operator()(const GSL::Vector r);
+    double operator()(const GSL::Vector& r);
 
     Augmented_function();
     Augmented_function(const Augmented_function&);
     Augmented_function(Augmented_function&&);
     Augmented_function(const int n, const lm l, const double kappa,
-        const GSL::Vector center, const Logarithmic_mesh mesh);
+        const GSL::Vector& center, const Logarithmic_mesh& mesh);
 
     virtual ~Augmented_function();
     Augmented_function& operator=(const Augmented_function&);
@@ -29,7 +29,7 @@ public:
     friend bool operator==(const Augmented_function &a, const Augmented_function &b);
     friend bool operator!=(const Augmented_function &a, const Augmented_function &b);
 
-    virtual void update(std::vector<double> v, const double en, const bool core)
+    virtual void update(std::vector<double>& v, const double en, const bool core)
      = 0;
 };
 
@@ -48,14 +48,14 @@ public:
     Augmented_Hankel(const Augmented_Hankel& a);
     Augmented_Hankel(Augmented_Hankel&& a);
     Augmented_Hankel(const int n, const lm l, const double kappa,
-        const GSL::Vector center, const Logarithmic_mesh mesh);
+        const GSL::Vector& center, const Logarithmic_mesh& mesh);
 
     ~Augmented_Hankel();
 
     Augmented_Hankel& operator=(const Augmented_Hankel& a);
     Augmented_Hankel& operator=(Augmented_Hankel&& a);
 
-    void update(std::vector<double> v, const double en, const bool core);
+    void update(std::vector<double>& v, const double en, const bool core);
 };
 
 class Augmented_Bessel: public Augmented_function{
@@ -64,14 +64,14 @@ public:
     Augmented_Bessel();
     Augmented_Bessel(const Augmented_Bessel& a);
     Augmented_Bessel(Augmented_Bessel&& a);
-    Augmented_Bessel(const int n, const lm l, const double kappa, const GSL::Vector center, const Logarithmic_mesh mesh);
+    Augmented_Bessel(const int n, const lm l, const double kappa, const GSL::Vector& center, const Logarithmic_mesh& mesh);
 
     ~Augmented_Bessel();
 
     Augmented_Bessel& operator=(const Augmented_Bessel& a);
     Augmented_Bessel& operator=(Augmented_Bessel&& a);
 
-    void update(std::vector<double> v, const double en, const bool core);
+    void update(std::vector<double>& v, const double en, const bool core);
 };
 
 namespace std {

@@ -24,7 +24,7 @@ Augmented_function::Augmented_function(Augmented_function &&a)
 }
 
 Augmented_function::Augmented_function(const int n, const lm l, const double kappa,
-    const GSL::Vector center, const Logarithmic_mesh mesh)
+    const GSL::Vector& center, const Logarithmic_mesh& mesh)
  : n(n), l(l), kappa(kappa), radius(mesh.r.back()), center(center), mesh(mesh),
  val(mesh.r.size())
 {
@@ -33,7 +33,7 @@ Augmented_function::Augmented_function(const int n, const lm l, const double kap
 Augmented_function::~Augmented_function()
 = default;
 
-double Augmented_function::operator()(const GSL::Vector r)
+double Augmented_function::operator()(const GSL::Vector& r)
 {
     double res = 0;
     GSL::Vector ri = r - center;
@@ -143,14 +143,14 @@ Augmented_Hankel::Augmented_Hankel(Augmented_Hankel&& a)
 }
 
 Augmented_Hankel::Augmented_Hankel(const int n, const lm l, const double kappa,
-    const GSL::Vector center, const Logarithmic_mesh mesh)
+    const GSL::Vector& center, const Logarithmic_mesh& mesh)
  : Augmented_function(n, l, kappa, center, mesh), EH()
 {}
 
 Augmented_Hankel::~Augmented_Hankel()
 {}
 
-void Augmented_Hankel::update(std::vector<double> v, const double en
+void Augmented_Hankel::update(std::vector<double>& v, const double en
     , const bool core)
 {
     EH = en;
@@ -241,14 +241,14 @@ Augmented_Bessel::Augmented_Bessel(Augmented_Bessel&& a)
 }
 
 Augmented_Bessel::Augmented_Bessel(const int n, const lm l, const double kappa,
-    const GSL::Vector center, const Logarithmic_mesh mesh)
+    const GSL::Vector& center, const Logarithmic_mesh& mesh)
  : Augmented_function(n, l, kappa, center, mesh), EJ()
 {}
 
 Augmented_Bessel::~Augmented_Bessel()
 {}
 
-void Augmented_Bessel::update(std::vector<double> v, const double en
+void Augmented_Bessel::update(std::vector<double>& v, const double en
     , const bool core)
 {
     EJ = en;

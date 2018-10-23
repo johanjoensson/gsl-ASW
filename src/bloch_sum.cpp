@@ -2,7 +2,7 @@
 #include "ewald_int.h"
 #include "envelope_fun.h"
 
-Bloch_sum::Bloch_sum(const lm l, const double kappa, const Crystal c)
+Bloch_sum::Bloch_sum(const lm l, const double kappa, const Crystal& c)
  : l(l), kappa(kappa), c(c)
 {
 	eta = GSL::exp(GSL::log(6.5) + 2./3*GSL::log(4*M_PI/3) -

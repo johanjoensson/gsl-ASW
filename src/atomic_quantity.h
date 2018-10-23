@@ -14,7 +14,7 @@ public:
     Atomic_quantity(Atomic_quantity&&) = default;
     virtual ~Atomic_quantity() = default;
 
-    Atomic_quantity(const std::vector<Atom> atoms);
+    Atomic_quantity(const std::vector<Atom>& atoms);
 
     std::vector<Atom> sites;
     std::vector<std::vector<double>> val;

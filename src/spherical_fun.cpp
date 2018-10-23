@@ -13,7 +13,7 @@ Spherical_function::Spherical_function(lm l)
  : l(l)
 {}
 
-double wronskian(Spherical_function a, Spherical_function b, double r)
+double wronskian(Spherical_function& a, Spherical_function& b, double r)
 {
     double res = 0.;
     double fl = a(r);

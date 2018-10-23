@@ -2,7 +2,7 @@
 #include "utils.h"
 #include "../../GSL-lib/src/basic_math.h"
 
-Atomic_quantity::Atomic_quantity(const std::vector<Atom> atoms)
+Atomic_quantity::Atomic_quantity(const std::vector<Atom>& atoms)
  : sites(atoms), val(atoms.size())
 {
     for(size_t i = 0; i < sites.size(); i++){

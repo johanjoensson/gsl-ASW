@@ -13,7 +13,7 @@ public:
     double kappa;
 
     Envelope_function();
-    Envelope_function(Atom center, lm l, double kappa);
+    Envelope_function(const Atom& center, lm l, double kappa);
 
     /*
     Envelope_function(Envelope_function &a);
@@ -32,7 +32,7 @@ public:
     Envelope_Hankel()
      :Envelope_function()
      {};
-    Envelope_Hankel(Atom center, lm l, double kappa)
+    Envelope_Hankel(const Atom& center, lm l, double kappa)
      : Envelope_function(center, l, kappa)
      {};
 
@@ -52,7 +52,7 @@ public:
     Envelope_Bessel()
      :Envelope_function()
      {};
-    Envelope_Bessel(Atom center, lm l, double kappa)
+    Envelope_Bessel(const Atom& center, lm l, double kappa)
      : Envelope_function(center, l, kappa)
      {};
     /*
@@ -71,7 +71,7 @@ public:
     Envelope_Neumann()
      :Envelope_function()
      {};
-    Envelope_Neumann(Atom center, lm l, double kappa)
+    Envelope_Neumann(const Atom& center, lm l, double kappa)
      : Envelope_function(center, l, kappa)
      {};
     /*
@@ -89,10 +89,10 @@ public:
 * Hankel functions                                                             *
 *******************************************************************************/
 // One center integral
-double off_atomic_integral(Envelope_Hankel H1, Envelope_Hankel H2);
+double off_atomic_integral(Envelope_Hankel& H1, Envelope_Hankel& H2);
 // Two center integrals
-double atomic_integral(Envelope_Hankel H1, Envelope_Bessel J2);
-double atomic_integral(Envelope_Bessel J1, Envelope_Hankel H2);
+double atomic_integral(Envelope_Hankel& H1, Envelope_Bessel& J2);
+double atomic_integral(Envelope_Bessel& J1, Envelope_Hankel& H2);
 
 /*******************************************************************************
 * Neumann functions                                                            *

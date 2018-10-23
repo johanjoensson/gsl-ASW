@@ -5,7 +5,7 @@ Envelope_function::Envelope_function()
  : center(), l(), kappa()
 {}
 
-Envelope_function::Envelope_function(Atom center, lm l, double kappa)
+Envelope_function::Envelope_function(const Atom& center, lm l, double kappa)
  : center(center), l(l), kappa(kappa)
 {}
 
@@ -62,7 +62,7 @@ double Envelope_Neumann::barred_fun(double x)
     return GSL::pow_int(kappa, l.l+1)*n(kappa*x);
 }
 
-double off_atomic_integral(Envelope_Hankel H1, Envelope_Hankel H2)
+double off_atomic_integral(Envelope_Hankel& H1, Envelope_Hankel& H2)
 {
     double res = 0.;
     double rs = H1.center.mesh.r.back();
@@ -92,7 +92,7 @@ double off_atomic_integral(Envelope_Hankel H1, Envelope_Hankel H2)
     return res;
 }
 
-double atomic_integral(Envelope_Hankel H1, Envelope_Bessel J2)
+double atomic_integral(Envelope_Hankel& H1, Envelope_Bessel& J2)
 {
     double res = 0.;
     double rs = H1.center.mesh.r.back();
@@ -122,12 +122,12 @@ double atomic_integral(Envelope_Hankel H1, Envelope_Bessel J2)
     return res;
 }
 
-double atomic_integral(Envelope_Bessel J1, Envelope_Hankel H2)
+double atomic_integral(Envelope_Bessel& J1, Envelope_Hankel& H2)
 {
     return atomic_integral(H2, J1);
 }
 
-double atomic_integral(Envelope_Bessel J1, Envelope_Bessel J2)
+double atomic_integral(Envelope_Bessel& J1, Envelope_Bessel& J2)
 {
     double res = 0;
     double rs = J1.center.mesh.r.back();

@@ -13,7 +13,7 @@ Augmented_spherical_wave::Augmented_spherical_wave()
 {}
 
 Augmented_spherical_wave::Augmented_spherical_wave(double kappa, unsigned int n,
-     lm l, spin s, Atom center, std::vector<Atom> off_centers)
+     lm l, spin s, Atom& center, std::vector<Atom>& off_centers)
  : center(center), off_centers(off_centers), kappa(kappa),
   n(n), l(l), s(s), H(n, l, kappa, center.pos, center.mesh), J(off_centers.size())
 {

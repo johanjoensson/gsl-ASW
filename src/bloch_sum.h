@@ -20,7 +20,7 @@ class Bloch_sum{
     GSL::Complex calc_d2_dot(const GSL::Vector& tau, const GSL::Vector& kp);
     GSL::Complex calc_d3_dot(const GSL::Vector& tau);
 public:
-    Bloch_sum(const lm l, const double kappa, const Crystal c);
+    Bloch_sum(const lm l, const double kappa, const Crystal& c);
 
     GSL::Complex hankel_envelope(const GSL::Vector& tau, const GSL::Vector& kp);
     GSL::Complex hankel_envelope_dot(const GSL::Vector& tau, const GSL::Vector& kp);

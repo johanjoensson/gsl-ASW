@@ -37,7 +37,7 @@ Logarithmic_mesh::Logarithmic_mesh(double A, double radius,
 }
 
 // Composite Simpson's rule for radial integrals on a logarithmic mesh
-double Logarithmic_mesh::radial_integral(std::vector<double> f)
+double Logarithmic_mesh::radial_integral(std::vector<double>& f)
 {
     double t0 = 0., t1 = 0., t2 = 0., res = 0.;
     for(size_t i = 1; i < (r.size() - 1)/2; i++){
