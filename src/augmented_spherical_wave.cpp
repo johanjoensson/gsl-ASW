@@ -19,7 +19,7 @@ Augmented_spherical_wave::Augmented_spherical_wave(double kappa, unsigned int n,
 {
     // Set up off-center spheres
     int l_low = 2;
-    if(center.Z >= 21){
+    if(center.Z >= 20){
         l_low = 3;
     }
     Numerov_solver sol;
@@ -31,6 +31,11 @@ Augmented_spherical_wave::Augmented_spherical_wave(double kappa, unsigned int n,
         it = find(off_centers.begin(), off_centers.end(), at);
         i = std::distance(off_centers.begin(), it);
         if(at != center){
+            if(at.Z >= 20){
+                l_low = 3;
+            }else{
+                l_low = 2;
+            }
             for(int l = 0; l <= std::min((int)n - 1, l_low + 1); l++){
                 for(int m = -l; m <= l; m++){
                     lm lp = {l, m};
@@ -54,7 +59,7 @@ std::vector<double> v_eff(const Logarithmic_mesh &mesh,
 
 void Augmented_spherical_wave::set_up(Potential &v)
 {
-    double en = -1.*center.get_Z()*center.get_Z()/(n*n) + v.MT_0;
+    double en = -1.*center.get_Z()*center.get_Z()/(n*n);// + v.MT_0;
 
     // On-center expression
     std::vector<Atom>::iterator it = find(v.sites.begin(), v.sites.end(),

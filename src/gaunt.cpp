@@ -113,8 +113,8 @@ double wigner_3j_0(lm l1, lm l2, lm l3){
 		c = -1;
 	}
 
-	unsigned long int f1, f2, f3, fg, f2g = 0;
-	double if2g, if1, if2, if3 = 0;
+	unsigned long int f1 = 0, f2 = 0, f3 = 0, f2g = 0;
+	double if2g = 0, if1 = 0, if2 = 0, if3 = 0, fg = 0;
 	f1 = factorial(-l1.l + l2.l + l3.l);
 	f2 = factorial(l1.l - l2.l + l3.l);
 	f3 = factorial(l1.l + l2.l - l3.l);
@@ -223,6 +223,5 @@ void test_wigner()
 				}
 			}
 		}
-
 	}
 }

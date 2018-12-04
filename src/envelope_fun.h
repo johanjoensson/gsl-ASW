@@ -23,7 +23,7 @@ public:
     Envelope_function& operator=(Envelope_function&& a);
     */
     double operator()(const GSL::Vector r);
-    virtual double barred_fun(double x)
+    virtual double barred_fun(const double x)
         {return 0.*x;}
 };
 
@@ -44,7 +44,7 @@ public:
      : Envelope_function(a)
      {}
      */
-    double barred_fun(double x);
+    double barred_fun(const double x);
 };
 
 class Envelope_Bessel : public Envelope_function{
@@ -63,7 +63,7 @@ public:
      : Envelope_function(a)
      {}
     */
-    double barred_fun(double x);
+    double barred_fun(const double x);
 };
 
 class Envelope_Neumann : public Envelope_function{
@@ -82,7 +82,7 @@ public:
      : Envelope_function(a)
      {}
     */
-    double barred_fun(double x);
+    double barred_fun(const double x);
 };
 
 /*******************************************************************************
@@ -98,12 +98,12 @@ double atomic_integral(Envelope_Bessel& J1, Envelope_Hankel& H2);
 * Neumann functions                                                            *
 *******************************************************************************/
 // One center integral
-double atomic_integral(Envelope_Neumann N1, Envelope_Neumann N2);
+double atomic_integral(Envelope_Neumann& N1, Envelope_Neumann& N2);
 // Two center integrals
-double atomic_integral(Envelope_Neumann N1, Envelope_Bessel J2);
-double atomic_integral(Envelope_Bessel J1, Envelope_Neumann N2);
+double atomic_integral(Envelope_Neumann& N1, Envelope_Bessel& J2);
+double atomic_integral(Envelope_Bessel& J1, Envelope_Neumann& N2);
 
 // Three center integral
-double atomic_integral(Envelope_Bessel J1, Envelope_Bessel J2);
+double atomic_integral(Envelope_Bessel& J1, Envelope_Bessel& J2);
 
 #endif // ENVELOPE_FUN_H

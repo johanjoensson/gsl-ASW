@@ -3,7 +3,7 @@
 #include "../../GSL-lib/src/basic_math.h"
 
 Atomic_quantity::Atomic_quantity(const std::vector<Atom>& atoms)
- : sites(atoms), val(atoms.size())
+ : sites(atoms), val(atoms.size(), std::vector<double>(0,0))
 {
     for(size_t i = 0; i < sites.size(); i++){
         val[i] = std::vector<double>(sites[i].mesh.r.size(), 0.);

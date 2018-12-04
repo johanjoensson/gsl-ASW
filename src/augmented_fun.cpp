@@ -27,8 +27,7 @@ Augmented_function::Augmented_function(const int n, const lm l, const double kap
     const GSL::Vector& center, const Logarithmic_mesh& mesh)
  : n(n), l(l), kappa(kappa), radius(mesh.r.back()), center(center), mesh(mesh),
  val(mesh.r.size())
-{
-}
+{}
 
 Augmented_function::~Augmented_function()
 = default;
@@ -78,7 +77,7 @@ Augmented_function& Augmented_function::operator=(Augmented_function&& a)
 
 }
 
-double augmented_integral(Augmented_function &a, Augmented_function &b)
+double augmented_integral(const Augmented_function &a, const Augmented_function &b)
 {
     double res = 0.;
     Logarithmic_mesh mesh = a.mesh;

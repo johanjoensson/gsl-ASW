@@ -133,7 +133,7 @@ GSL::Complex Bloch_summed_structure_constant::evaluate(const GSL::Vector& tau,
 			    m_sum += a.val*bs.hankel_envelope(tau, kp);
 			}
 		}
-		sum += c/(gsl_pow_int(kappa, lpp))*m_sum;
+		sum += c/(GSL::pow_int(kappa, lpp))*m_sum;
 		c *= -1;
 	}
 
@@ -163,7 +163,7 @@ GSL::Complex Bloch_summed_structure_constant::dot_evaluate(
 				GSL::pow_int(kappa, 2)*bs.hankel_envelope(tau, kp));
 			}
 		}
-		sum += c/(gsl_pow_int(kappa, lpp))*m_sum;
+		sum += c/(GSL::pow_int(kappa, lpp))*m_sum;
 		c *= -1;
 	}
 	return 2*M_PI*k_fac*sum;

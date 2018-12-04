@@ -53,7 +53,7 @@ size_t Crystal::calc_nk(double tol, double kappa, lm l)
 	double eta = GSL::exp(GSL::log(6.5) + 2./3*GSL::log(4*M_PI/3) -
 	2./3*GSL::log(this->volume)).val;
 
-	int sign = 1.;
+	int sign = 1;
 
 	if(-eta*GSL::log(tol).val < 0){
 		sign = -1;
@@ -103,7 +103,7 @@ size_t Crystal::calc_nr(double tol, double kappa, lm l)
 	I.set_kappa(kappa);
 	I.set_ewald_param(eta);
 
-	int sign = 1.;
+	int sign = 1;
 
 	if(-GSL::log(tol).val < 0){
 		sign = -1;
@@ -130,7 +130,7 @@ double Crystal::calc_Rmax(double tol, double kappa, lm l)
 	I.set_kappa(kappa);
 	I.set_ewald_param(eta);
 
-	int sign = 1.;
+	int sign = 1;
 
 	if(-GSL::log(tol).val < 0){
 		sign = -1;
@@ -177,7 +177,7 @@ double Crystal::calc_Kmax(double tol, double kappa, lm l)
 	double eta = GSL::exp(GSL::log(6.5) + 2./3*GSL::log(4*M_PI/3) -
 	2./3*GSL::log(this->volume)).val;
 
-	int sign = 1.;
+	int sign = 1;
 
 	if(-eta*GSL::log(tol).val < 0){
 		sign = -1;
@@ -359,10 +359,9 @@ std::vector<std::vector<Atom>> Crystal::calc_nearest_neighbours()
 			}
 			// Add all lattice vectors
 			for(GSL::Vector R : this->Rn_vecs){
-				rj = a.pos + R;
-				if(rj != GSL::Vector(3)){
+				if(a.pos + R != GSL::Vector(3)){
 					tmp_at = a;
-					tmp_at.pos = rj;
+					tmp_at.pos = a.pos + R;
 					pre_res.insert(tmp_at);
 				}
 			}

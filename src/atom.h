@@ -35,6 +35,7 @@ class Atom {
 	void set_MT(double mt);
 	//! Set atomic sphere radius
 	void set_AS(double as);
+	void set_mesh(const Logarithmic_mesh& mesh);
 	//! Get atomic position (cartesian)
 	GSL::Vector get_pos();
 	//! Get muffin tin radius
@@ -45,9 +46,9 @@ class Atom {
 	Atom();
 	Atom(Logarithmic_mesh &mesh, GSL::Vector &r);
 	Atom(const Logarithmic_mesh &mesh, const GSL::Vector &r);
-	Atom(double mt, double as, double z, Logarithmic_mesh &mesh,
+	Atom(double mt, double as, int z, Logarithmic_mesh &mesh,
 		GSL::Vector &r);
-	Atom(const double mt, const double as, const double z,
+	Atom(const double mt, const double as, const int z,
 		const Logarithmic_mesh &mesh, const GSL::Vector &r);
 
 	friend bool operator==(const Atom &a, const Atom &b);

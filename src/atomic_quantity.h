@@ -9,7 +9,7 @@ class Atomic_quantity{
     friend class Augmented_spherical_wave;
 
 public:
-    Atomic_quantity();
+    Atomic_quantity() : sites(), val(){};
     Atomic_quantity(Atomic_quantity&) = default;
     Atomic_quantity(Atomic_quantity&&) = default;
     virtual ~Atomic_quantity() = default;
@@ -32,8 +32,9 @@ public:
     Xc_func xc_fun;
     void initial_pot(unsigned int nel, double vol);
 
-    double MT_0;
+    double MT_0 = 0;
 
+    Potential() : Atomic_quantity(), electrostatic(), exchange_correlation(), xc_fun(), MT_0(0){};
     Potential(std::vector<Atom>& atoms);
     ~Potential(){};
 
@@ -49,6 +50,7 @@ class Density : public Atomic_quantity{
     std::vector<double> valence, core;
 
 public:
+    Density() : Atomic_quantity(), valence(), core(){};
     ~Density() {};
     Density(Density&) = default;
     Density(Density&&) = default;

@@ -32,7 +32,7 @@ CXXCHECKFLAGS = -checks=$(CXXCHECKS) -header-filter=.* -- -std=c++11
 
 # Libraries to link against
 GSLLIBDIR="../GSL-lib"
-LDFLAGS = -L$(GSLLIBDIR) -Wl,-rpath=$(GSLLIBDIR) -lgsl -lgslcblas -lm -lgsl-lib -lxc
+LDFLAGS = -L$(GSLLIBDIR) -Wl,-rpath=$(GSLLIBDIR) -lm -lgsl-lib -lxc
 
 # List of all executables in this project
 EXE = gsl-asw
@@ -53,6 +53,7 @@ NUMEROV_OBJ = numerov_solver.o\
 	      utils.o\
 	      xc_func.o\
 	      envelope_fun.o\
+	      simulation.o\
 	      main.o
 
 OBJS = $(addprefix $(BUILD_DIR)/, $(NUMEROV_OBJ))

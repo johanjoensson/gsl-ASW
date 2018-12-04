@@ -22,7 +22,7 @@ class Numerov_solver{
 
 		std::vector<double> solve(Logarithmic_mesh &mesh,
 			std::vector<double> &v, std::vector<double> &l_init,
-			std::vector<double> &r_init, double &en, int n_nodes);
+			std::vector<double> &r_init, double& en, int n_nodes);
 };
 
 #endif //NUMEROV_SOLVER_H

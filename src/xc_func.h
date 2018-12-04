@@ -3,6 +3,8 @@
 
 #include <xc.h>
 #include <vector>
+#include <memory>
+#include <functional>
 
 enum XC_FUN{
     LDA,
@@ -12,7 +14,7 @@ enum XC_FUN{
 
 class Xc_func{
 private:
-    xc_func_type *fun;
+    std::unique_ptr<xc_func_type, std::function<void(xc_func_type*)>> fun;
 public:
     Xc_func();
     Xc_func(XC_FUN xcf);

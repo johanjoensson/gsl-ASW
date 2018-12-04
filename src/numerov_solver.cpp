@@ -86,7 +86,7 @@ int count_nodes(std::vector<double> fun, int i_inv)
 {
 	int n_nodes = 0;
 	for(int i = 0; i < i_inv - 1; i++){
-		n_nodes += 0.5*(1 - sign(fun[i + 1])/sign(fun[i]));
+		n_nodes += (1 - sign(fun[i + 1])/sign(fun[i]))/2;
 	}
 	return n_nodes;
 }
@@ -96,11 +96,11 @@ double Numerov_solver::variational_energy_correction(Logarithmic_mesh &mesh,
 {
 	double f_inv, f_m1, f_p1, cusp_val, df;
 	f_inv = 1 + (mesh.drx[i_inv]*mesh.drx[i_inv]*(e_trial - v[i_inv]) -
-	mesh.A*mesh.A/4.)/**mesh.A*mesh.A*//12.;
+	mesh.A*mesh.A/4.)/12.;
 	f_m1 = 1 + (mesh.drx[i_inv-1]*mesh.drx[i_inv-1]*(e_trial - v[i_inv-1]) -
-	mesh.A*mesh.A/4.)/**mesh.A*mesh.A*//12.;
+	mesh.A*mesh.A/4.)/12.;
 	f_p1 = 1 + (mesh.drx[i_inv+1]*mesh.drx[i_inv+1]*(e_trial - v[i_inv+1]) -
-	mesh.A*mesh.A/4.)/**mesh.A*mesh.A*//12.;
+	mesh.A*mesh.A/4.)/12.;
 	cusp_val = (fun[i_inv - 1]*f_m1 + fun[i_inv + 1]*f_p1 +
 		10*fun[i_inv]*f_inv)/12.;
 	df = f_inv*(fun[i_inv]/cusp_val - 1);
@@ -109,7 +109,7 @@ double Numerov_solver::variational_energy_correction(Logarithmic_mesh &mesh,
 
 std::vector<double> Numerov_solver::solve(Logarithmic_mesh &mesh,
 	std::vector<double> &v, std::vector<double> &l_init,
-	std::vector<double> &r_init, double &en, int n_nodes)
+	std::vector<double> &r_init, double& en, int n_nodes)
 {
 
 
@@ -124,8 +124,7 @@ std::vector<double> Numerov_solver::solve(Logarithmic_mesh &mesh,
 		e_min = e_trial;
 	}
 #ifdef DEBUG
-	std::ofstream out_file;
-	out_file.open("numerov.debug", std::fstream::out | std::fstream::app);
+	std::ofstream out_file("numerov.debug", std::fstream::out | std::fstream::app);
 	out_file << std::setprecision(18);
 	out_file << std::string(80, '=') << std::endl;
 	out_file << e_min << " < " << en << " < " << e_max << std::endl;
@@ -199,8 +198,8 @@ std::vector<double> Numerov_solver::solve(Logarithmic_mesh &mesh,
 			e_max = e_trial;
 		}
 		e_trial += de;
-
-	    if(std::abs(de) < 1E-6){
+//		e_trial = (e_min + e_max)/2;
+	    if(std::abs(de) < 1E-9){
 		    done = true;
 	    }else{
 

@@ -29,15 +29,24 @@ double wronskian(Spherical_function& a, Spherical_function& b, double r)
 
 double Hankel_function::operator()(const double x)
 {
-  GSL::Result exp = GSL::exp(-x);
-  GSL::Result k = 2./M_PI * GSL::bessel_kn_scaled(l.l, x);
+    GSL::Result exp = GSL::exp(-x);
+    GSL::Result k;
+    if(l.l >= 0){
+        k = 2./M_PI * GSL::bessel_kn_scaled(l.l, x);
+    }else{
+        k = GSL::Result(0, 0);
+    }
 
   return (exp*k).val;
 }
 
 double Bessel_function::operator()(const double x)
 {
-  return GSL::bessel_jn(l.l, x).val;
+    if(l.l >= 0){
+        return GSL::bessel_jn(l.l, x).val;
+    }else{
+        return 0;
+    }
 }
 
 double Neumann_function::operator()(const double x)

@@ -24,9 +24,15 @@ void Atom::set_pos(const GSL::Vector &r)
 {
 	this->pos.copy(r);
 }
+
+void Atom::set_mesh(const Logarithmic_mesh& mesh)
+{
+	this->mesh = Logarithmic_mesh(mesh);
+}
+
 GSL::Vector Atom::get_pos()
 {
-	return (this->pos);
+	return this->pos;
 }
 
 double Atom::get_MT()
@@ -40,10 +46,10 @@ double Atom::get_AS()
 }
 
 Atom::Atom()
- : Z(), MT(), AS(), pos(), mesh()
+ : Z(), MT(), AS(), pos(3), mesh()
 {}
 
-Atom::Atom(double mt, double as, double z, Logarithmic_mesh &mesh,
+Atom::Atom(double mt, double as, int z, Logarithmic_mesh &mesh,
 	GSL::Vector &r)
 	: pos(r), mesh(mesh)
 {
@@ -52,7 +58,7 @@ Atom::Atom(double mt, double as, double z, Logarithmic_mesh &mesh,
 	this->Z = z;
 }
 
-Atom::Atom(const double mt, const double as, const double z,
+Atom::Atom(const double mt, const double as, const int z,
 	const Logarithmic_mesh &mesh, const GSL::Vector &r)
 	: pos(r), mesh(mesh)
 {
@@ -63,13 +69,11 @@ Atom::Atom(const double mt, const double as, const double z,
 
 Atom::Atom(Logarithmic_mesh &mesh, GSL::Vector &r)
 	: Atom(1, 1, 0, mesh, r)
-{
-}
+{}
 
 Atom::Atom(const Logarithmic_mesh &mesh, const GSL::Vector &r)
 	: Atom(1, 1, 0, mesh, r)
-{
-}
+{}
 
 bool operator==(const Atom &a, const Atom &b)
 {

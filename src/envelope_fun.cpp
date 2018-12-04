@@ -44,19 +44,19 @@ Envelope_function& Envelope_function::operator=(Envelope_function &&a)
     return *this;
 }
 */
-double Envelope_Hankel::barred_fun(double x)
+double Envelope_Hankel::barred_fun(const double x)
 {
     Hankel_function h(l);
     return GSL::pow_int(kappa, l.l+1)*h(kappa*x);
 }
 
-double Envelope_Bessel::barred_fun(double x)
+double Envelope_Bessel::barred_fun(const double x)
 {
     Bessel_function j(l);
     return GSL::pow_int(kappa, -l.l)*j(kappa*x);
 }
 
-double Envelope_Neumann::barred_fun(double x)
+double Envelope_Neumann::barred_fun(const double x)
 {
     Neumann_function n(l);
     return GSL::pow_int(kappa, l.l+1)*n(kappa*x);
