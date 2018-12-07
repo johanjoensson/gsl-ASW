@@ -1,15 +1,5 @@
 language: cpp
 
-os: linux
-
-compiler:
-        - clang
-        - gcc
-
-branches:
-    only:
-        - master
-
 addons:
   apt:
     sources: 
