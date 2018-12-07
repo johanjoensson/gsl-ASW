@@ -15,10 +15,6 @@ matrix:
       sudo: false
       env: GCC_VER="4.9"
       compiler: gcc
-      #    - os: linux
-      #sudo: false
-      #env: GCC_VER="6" CMAKE_OPTIONS="-D DYNLOAD_ENABLED:BOOL=FALSE -D MULTITHREAD_SUPPORT_ENABLED:BOOL=FALSE -D USE_STD_MAKE_SHARED:BOOL=TRUE" BUILD_ONLY=1
-      #compiler: gcc
     - os: linux
       sudo: false
       env: GCC_VER="5"
@@ -27,9 +23,6 @@ matrix:
       sudo: false
       env: GCC_VER="6"
       compiler: gcc
-    - os: linux
-      sudo false
-      compiler: clang
 
 before_install:
   - if [ "${GCC_VER}" != "" ]; then export CXX="g++-$GCC_VER" CC="gcc-$GCC_VER" GCOV="gcov-$GCC_VER" ; fi
@@ -43,5 +36,5 @@ before_install:
   - cp libGSL-lib.so ..
 
 script:
-        - mkdir build
-        - make all
+    - mkdir build
+    - make all
