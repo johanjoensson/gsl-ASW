@@ -13,14 +13,17 @@ class Simulation{
     std::vector<Augmented_spherical_wave> basis_valence;
     std::vector<Augmented_spherical_wave> basis_core;
     GSL::Complex_Matrix H, S;
+    GSL::Matrix XH1, XS1, XH2, XS2;
+    std::vector<GSL::Matrix> XH3, XS3;
 
     void add_states(Atom& at, double kappa);
-    GSL::Complex H_element(const Augmented_spherical_wave& w1, const Augmented_spherical_wave& w2, const GSL::Vector& kp);
-    GSL::Complex S_element(const Augmented_spherical_wave& w1, const Augmented_spherical_wave& w2, const GSL::Vector& kp);
+    GSL::Complex H_element(const size_t i1, const size_t i2, const GSL::Vector& kp);
+    GSL::Complex S_element(const size_t i1, const size_t i2, const GSL::Vector& kp);
 public:
     Simulation();
     Simulation(Crystal& crystal, XC_FUN func, double kappa);
 
+    void set_up_X_matrices();
     void set_up_H(const GSL::Vector& kp);
     void set_up_S(const GSL::Vector& kp);
     void calc_eigen();

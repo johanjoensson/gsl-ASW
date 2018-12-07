@@ -30,13 +30,13 @@ Structure_constant::Structure_constant(int l_low, int l_int,
 		m_sum = GSL::Result();
 		tmp = GSL::Result();
 		for (int mpp = -lpp; mpp <= lpp; mpp++){
-			a = gaunt(l1, l2, lm {lpp, mpp});
+			a = gaunt(l2, l1, lm {lpp, mpp});
 			if (abs(a.val) > 1E-16){
 			    m_sum += a*cubic_harmonic(lm {lpp, mpp}, r);
 			}
 		}
 
-		tmp.val = (l1.l + l2.l - lpp)/(kappa*kappa)*H(kappa*r_norm);
+		tmp.val = (l1.l + l2.l - lpp)/(-kappa*kappa)*H(kappa*r_norm);
 		/*real_spherical_hankel(lm {lpp, 0}, kappa*r_norm);*/
 		if(lpp > 0){
 			H.l.l = lpp - 1;
@@ -127,7 +127,7 @@ GSL::Complex Bloch_summed_structure_constant::evaluate(const GSL::Vector& tau,
 	for (int lpp = 0; lpp <= l_int; lpp++){
 		m_sum = GSL::Complex(0., 0.);
 		for (int mpp = -lpp; mpp <= lpp; mpp++){
-			a = gaunt(l1, l2, lm {lpp, mpp});
+			a = gaunt(l2, l1, lm {lpp, mpp});
 			if (abs(a.val) > 1E-16){
 				bs = Bloch_sum(lm {lpp, mpp}, kappa, this->c);
 			    m_sum += a.val*bs.hankel_envelope(tau, kp);
@@ -155,10 +155,10 @@ GSL::Complex Bloch_summed_structure_constant::dot_evaluate(
 	for (int lpp = 0; lpp <= l_int; lpp++){
 		m_sum = GSL::Complex(0., 0.);
 		for (int mpp = -lpp; mpp <= lpp; mpp++){
-			a = gaunt(l1, l2, lm {lpp, mpp});
+			a = gaunt(l2, l1, lm {lpp, mpp});
 			if (abs(a.val) > 1E-16){
 				bs = Bloch_sum(lm {lpp, mpp}, kappa, this->c);
-			    m_sum += a.val*(2*bs.hankel_envelope_dot(tau, kp) +
+			    m_sum += a.val*(2*bs.hankel_envelope_dot(tau, kp) -
 				(l1.l + l2.l - lpp)/
 				GSL::pow_int(kappa, 2)*bs.hankel_envelope(tau, kp));
 			}

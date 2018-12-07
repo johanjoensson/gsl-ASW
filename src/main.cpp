@@ -23,6 +23,7 @@
 #include "atomic_quantity.h"
 #include "envelope_fun.h"
 #include "xc_func.h"
+#include "k-mesh.h"
 
 int main()
 {
@@ -33,20 +34,26 @@ numerov_debug.close();
 #endif
 	std::cout.precision(12);
 
-	GSL::Vector a = {1., 1., 0.}, b = {1., 0., 1.}, c = {0., 1., 1.};
+	GSL::Vector a = {0.0, 0.5, 0.5}, b = {0.5, 0.0, 0.5}, c = {0.5, 0.5, 0.0};
 	std::cout << a << std::endl;
 	std::cout << b << std::endl;
 	std::cout << c << std::endl;
-	Crystal cr(2*a, 2*b, 2*c);
+	Crystal cr(6*a, 6*b, 6*c);
 
 	std::cout << cr.lat.scale*cr.lat.lat << std::endl;
 
+	std::cout << "Calculating Rmax" << std::endl;
 	double Rmax = cr.calc_Rmax(1e-14, sqrt(0.015), lm {4, 0});
+	std::cout << "Calculating Kmax" << std::endl;
 	double Kmax = cr.calc_Kmax(1e-14, sqrt(0.015), lm {4, 0});
 
+
+	std::cout << "Setting R-vectors" << std::endl;
 	cr.set_Rn(Rmax);
+	std::cout << "Setting K-vectors" << std::endl;
 	cr.set_Kn(Kmax);
 
+	std::cout << "Setting up atoms" << std::endl;
 	GSL::Vector tau(3);
 	Atom C1;
 	C1.set_pos(tau*cr.lat.scale*cr.lat.lat);
@@ -68,18 +75,25 @@ numerov_debug.close();
 	tau[2] = 0.5;
 	Atom C4;
 	C4.set_pos(tau*cr.lat.scale*cr.lat.lat);
-	C1.set_Z(20);
+
+	C1.set_Z(6);
 	C2.set_Z(6);
 	C3.set_Z(6);
 	C4.set_Z(6);
 
 //	cr.add_atoms(std::vector<Atom> {C1, C2, C3, C4});
-	cr.add_atoms(std::vector<Atom> {C1});
+	cr.add_atoms(std::vector<Atom> {C1, C2});
 
 	Simulation sim(cr, LDA, sqrt(0.015));
-	sim.set_up_H(tau);
-	sim.set_up_S(tau);
-	sim.calc_eigen();
+	sim.set_up_X_matrices();
+	K_mesh kmesh(cr.lat.r_lat);
+	kmesh.generate_mesh(16.);
+	for(GSL::Vector& kp : kmesh.k_points){
+		std::cout << kp << std::endl;
+		sim.set_up_H(kp);
+		sim.set_up_S(kp);
+		sim.calc_eigen();
+	}
 
 	return 0;
 }

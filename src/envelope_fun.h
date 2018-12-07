@@ -44,7 +44,7 @@ public:
      : Envelope_function(a)
      {}
      */
-    double barred_fun(const double x);
+    double barred_fun(const double x) const;
 };
 
 class Envelope_Bessel : public Envelope_function{
@@ -63,7 +63,7 @@ public:
      : Envelope_function(a)
      {}
     */
-    double barred_fun(const double x);
+    double barred_fun(const double x) const;
 };
 
 class Envelope_Neumann : public Envelope_function{
@@ -82,28 +82,28 @@ public:
      : Envelope_function(a)
      {}
     */
-    double barred_fun(const double x);
+    double barred_fun(const double x) const;
 };
 
 /*******************************************************************************
 * Hankel functions                                                             *
 *******************************************************************************/
 // One center integral
-double off_atomic_integral(Envelope_Hankel& H1, Envelope_Hankel& H2);
+double off_atomic_integral(const Envelope_Hankel& H1, const Envelope_Hankel& H2);
 // Two center integrals
-double atomic_integral(Envelope_Hankel& H1, Envelope_Bessel& J2);
-double atomic_integral(Envelope_Bessel& J1, Envelope_Hankel& H2);
+double atomic_integral(const Envelope_Hankel& H1, const Envelope_Bessel& J2);
+double atomic_integral(const Envelope_Bessel& J1, const Envelope_Hankel& H2);
 
 /*******************************************************************************
 * Neumann functions                                                            *
 *******************************************************************************/
 // One center integral
-double atomic_integral(Envelope_Neumann& N1, Envelope_Neumann& N2);
+double atomic_integral(const Envelope_Neumann& N1, const Envelope_Neumann& N2);
 // Two center integrals
-double atomic_integral(Envelope_Neumann& N1, Envelope_Bessel& J2);
-double atomic_integral(Envelope_Bessel& J1, Envelope_Neumann& N2);
+double atomic_integral(const Envelope_Neumann& N1, const Envelope_Bessel& J2);
+double atomic_integral(const Envelope_Bessel& J1, const Envelope_Neumann& N2);
 
 // Three center integral
-double atomic_integral(Envelope_Bessel& J1, Envelope_Bessel& J2);
+double atomic_integral(const Envelope_Bessel& J1, const Envelope_Bessel& J2);
 
 #endif // ENVELOPE_FUN_H

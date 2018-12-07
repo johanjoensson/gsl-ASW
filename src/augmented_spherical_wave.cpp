@@ -19,9 +19,6 @@ Augmented_spherical_wave::Augmented_spherical_wave(double kappa, unsigned int n,
 {
     // Set up off-center spheres
     int l_low = 2;
-    if(center.Z >= 20){
-        l_low = 3;
-    }
     Numerov_solver sol;
     Augmented_Bessel tmp;
     std::vector<Atom>::iterator it = find(off_centers.begin(), off_centers.end(),
@@ -36,7 +33,7 @@ Augmented_spherical_wave::Augmented_spherical_wave(double kappa, unsigned int n,
             }else{
                 l_low = 2;
             }
-            for(int l = 0; l <= std::min((int)n - 1, l_low + 1); l++){
+            for(int l = 0; l <= l_low + 1; l++){
                 for(int m = -l; m <= l; m++){
                     lm lp = {l, m};
                     tmp = Augmented_Bessel(n, lp, kappa, at.pos, at.mesh);
@@ -107,12 +104,16 @@ double Augmented_spherical_wave::operator()(const GSL::Vector &r)
     GSL::Vector R(3);
     Structure_constant B;
     Atom at;
+    int l_low = 2;
     for(size_t j = 0; j < off_centers.size(); j++){
         at = off_centers[j];
         if(at.pos != center.pos){
             for(Augmented_Bessel Jj : J[j]){
                 R = Jj.center - center.pos;
-                B = Structure_constant( Jj.l, this->l, R);
+                if(at.Z > 20){
+                    l_low = 3;
+                }
+                B = Structure_constant( l_low, Jj.l, this->l, R);
                 res += Jj(r)*cubic_harmonic(Jj.l, r - Jj.center).val*B.val;
             }
         }

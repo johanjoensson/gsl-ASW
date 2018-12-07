@@ -24,8 +24,8 @@ SRC_DIR = src
 BUILD_DIR = build
 
 # Flags for the above defined compilers
-CXXFLAGS = -g -std=c++11 -Wall -Wextra -Werror -W -pedantic -I $(SRC_DIR) -DDEBUG
-CFLAGS = -g -std=c11 -Wall -Wextra -Werror -W -pedantic -I $(SRC_DIR) -DDEBUG
+CXXFLAGS = -g -pg -std=c++11 -Wall -Wextra -Werror -W -pedantic -I $(SRC_DIR) -DDEBUG
+CFLAGS = -g -pg -std=c11 -Wall -Wextra -Werror -W -pedantic -I $(SRC_DIR) -DDEBUG
 
 CXXCHECKS =clang-analyzer-*,-clang-analyzer-cplusplus*,cppcoreguidelines-*,bugprone-* 
 CXXCHECKFLAGS = -checks=$(CXXCHECKS) -header-filter=.* -- -std=c++11
@@ -54,6 +54,7 @@ NUMEROV_OBJ = numerov_solver.o\
 	      xc_func.o\
 	      envelope_fun.o\
 	      simulation.o\
+	      k-mesh.o\
 	      main.o
 
 OBJS = $(addprefix $(BUILD_DIR)/, $(NUMEROV_OBJ))

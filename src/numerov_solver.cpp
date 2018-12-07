@@ -10,8 +10,7 @@
 #endif
 
 Numerov_solver::Numerov_solver()
-{
-}
+{}
 
 std::vector<double> Numerov_solver::solve_left(Logarithmic_mesh &mesh,
 	std::vector<double> &v, int i_lr, std::vector<double> &init_cond, double E)
@@ -145,31 +144,28 @@ std::vector<double> Numerov_solver::solve(Logarithmic_mesh &mesh,
 	    // Rough estimate of the energy
 	    // Make sure we have the correct number of nodes
 	    it2 = 0;
-	    while(n_tmp != n_nodes){
+	    while(n_tmp != n_nodes && it2 < 10000){
 		    i_inv = find_inversion_point(mesh, v, e_trial);
 		    tmp = this->solve_right(mesh, v, i_inv, l_init, e_trial);
 		    n_tmp = count_nodes(tmp, i_inv);
 			if(n_tmp > n_nodes){
 				e_max = e_trial;
-				de = 0.5*(e_min - e_trial);
-				if(e_max - e_min < 1e-14){
+				e_trial += 0.5*(e_min - e_trial);
+				if(e_max - e_min < 1e-9){
 					e_min -= 0.5*std::abs(e_min);
 				}
 		    }else if(n_tmp < n_nodes){
 				e_min = e_trial;
-				de = 0.5*(e_max - e_trial);
-				if(e_max - e_min < 1e-14){
+				e_trial += 0.5*(e_max - e_trial);
+				if(e_max - e_min < 1e-9){
 					e_max += 0.5*std::abs(e_max);
 				}
-		    }else{
-				de = 0.;
-			}
-			e_trial += de;
+		    }
 #ifdef DEBUG
 			out_file << "# Nodes : " << n_tmp << ", required :  " << n_nodes << std::endl;
-			out_file << "Inner iteration " << it2 << " Node energy correction = " << de << std::endl;
+			out_file << "Inner iteration " << it2 << std::endl;
 #endif
-		it2++;
+			it2++;
 		}
 
 		i_inv = find_inversion_point(mesh, v, e_trial);
@@ -191,40 +187,31 @@ std::vector<double> Numerov_solver::solve(Logarithmic_mesh &mesh,
 		out_file << "Outer iteration  " << it1;
 		out_file << " E_T = " << e_trial;
 		out_file << " de = " << de << std::endl;
+		out_file << " Emax - Emin = " << e_max - e_min << std::endl;
 #endif
 		if(de > 0){
 			e_min = e_trial;
 		}else{
 			e_max = e_trial;
 		}
-		e_trial += de;
-//		e_trial = (e_min + e_max)/2;
-	    if(std::abs(de) < 1E-9){
+
+		if(e_trial + de > e_max){
+			e_max += de/std::abs(e_max - e_min);
+		}else if(e_trial + de < e_min){
+			e_min -= de/std::abs(e_max - e_min);
+		}
+
+		e_trial = (e_min + e_max)/2;
+
+	    if(std::abs(de) < 1E-10){
 		    done = true;
-	    }else{
-
-		    if(e_trial < e_min){
-			    e_trial = e_min;
-		    }else if(e_trial > e_max){
-			    e_max = e_trial;
-		    }
-
-		    n_tmp = -1;
 	    }
+		n_tmp = -1;
 	    it1++;
     }
 
 
 
-/*	// Normalize the function, don't do this?
-	double norm = 0.;
-	for(unsigned int i = 0; i < res.size(); i++){
-		norm += res[i]*res[i]*mesh.drx[i];
-	}
-	for(unsigned int i = 0; i < res.size(); i++){
-		res[i] /= sqrt(norm);
-	}
-*/
     en = e_trial;
 #ifdef DEBUG
 		out_file.close() ;
