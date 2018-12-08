@@ -30,7 +30,7 @@ before_install:
   - sudo apt-get install -y libgsl0-dev libopenblas-dev
   - wget https://github.com/johanjoensson/GSL-lib/archive/master.zip -O GSL-lib.zip
   - unzip GSL-lib.zip
-  - cd GSL-lib
+  - cd GSL-lib-master/
   - mkdir build
   - make all
   - cp libGSL-lib.so ..
