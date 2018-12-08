@@ -119,9 +119,6 @@ GSL::Complex Bloch_summed_structure_constant::evaluate(const GSL::Vector& tau,
 	double k_fac = GSL::pow_int(kappa, l1.l + l2.l);
 
 	int c = 1;
-	if (l1.l % 2 != 0){
-		c = -1;
-	}
 	GSL::Result a;
 	GSL::Complex m_sum(0., 0.), sum(0., 0.);
 	for (int lpp = 0; lpp <= l_int; lpp++){
@@ -137,7 +134,10 @@ GSL::Complex Bloch_summed_structure_constant::evaluate(const GSL::Vector& tau,
 		c *= -1;
 	}
 
-	return 4*M_PI*k_fac*sum;
+	if (l1.l % 2 != 0){
+		c = -1;
+	}
+	return 4*M_PI*c*k_fac*sum;
 }
 GSL::Complex Bloch_summed_structure_constant::dot_evaluate(
 	const GSL::Vector& tau, const GSL::Vector& kp)
@@ -147,9 +147,6 @@ GSL::Complex Bloch_summed_structure_constant::dot_evaluate(
 	double k_fac = GSL::pow_int(kappa, l1.l + l2.l);
 
 	int c = 1;
-	if (l1.l % 2 != 0){
-		c = -1;
-	}
 	GSL::Result a;
 	GSL::Complex m_sum(0., 0.), sum(0., 0.);
 	for (int lpp = 0; lpp <= l_int; lpp++){
@@ -166,7 +163,10 @@ GSL::Complex Bloch_summed_structure_constant::dot_evaluate(
 		sum += c/(GSL::pow_int(kappa, lpp))*m_sum;
 		c *= -1;
 	}
-	return 2*M_PI*k_fac*sum;
+	if (l1.l % 2 != 0){
+		c = -1;
+	}
+	return 2*M_PI*c*k_fac*sum;
 }
 
 std::ostream& operator << ( std::ostream& os,

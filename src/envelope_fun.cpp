@@ -23,8 +23,9 @@ double Envelope_Bessel::barred_fun(const double x) const
 
 double Envelope_Neumann::barred_fun(const double x) const
 {
-    Neumann_function n(l);
-    return GSL::pow_int(kappa, l.l+1)*n(kappa*x);
+    Envelope_Bessel i(center, l, kappa);
+    Envelope_Hankel h(center, l, kappa);
+    return h.barred_fun(x) - -GSL::pow_int(kappa, 2*l.l)*i.barred_fun(x);
 }
 
 double off_atomic_integral(const Envelope_Hankel& H1, const Envelope_Hankel& H2)
@@ -46,7 +47,7 @@ double off_atomic_integral(const Envelope_Hankel& H1, const Envelope_Hankel& H2)
     if(H1.kappa != H2.kappa){
         res = H1.barred_fun(rs)*H2p1.barred_fun(rs) -
               H1p1.barred_fun(rs)*H2.barred_fun(rs);
-        res *= 1./(H1.kappa*H1.kappa - H2.kappa*H2.kappa);
+        res *= 1./(-H1.kappa*H1.kappa - -H2.kappa*H2.kappa);
     }else{
         res = H1.barred_fun(rs)*H1.barred_fun(rs) -
               H1m1.barred_fun(rs)*H2p1.barred_fun(rs);
@@ -73,17 +74,18 @@ double atomic_integral(const Envelope_Hankel& H1, const Envelope_Bessel& J2)
     }
 
     if(H1.kappa != J2.kappa){
-        res = rs*rs*(H1.barred_fun(rs)*J2m1.barred_fun(rs) -
+        res = (H1.barred_fun(rs)*J2m1.barred_fun(rs) -
               H1.kappa*H1.kappa*H1m1.barred_fun(rs)*J2.barred_fun(rs)) - 1;
-        res *= 1./(H1.kappa*H1.kappa - J2.kappa*J2.kappa);
+        res *= 1./(-H1.kappa*H1.kappa - -J2.kappa*J2.kappa);
     }else{
-        res = rs*rs*rs*(2*H1.barred_fun(rs)*J2.barred_fun(rs)-
-              H1.kappa*H1.kappa*H1m1.barred_fun(rs)*J2p1.barred_fun(rs) -
-              1./(H1.kappa*H1.kappa)*H1p1.barred_fun(rs)*J2m1.barred_fun(rs)) +
-              (2*H1.l.l + 1)/(H1.kappa*H1.kappa);
+        res = rs*(2*H1.barred_fun(rs)*J2.barred_fun(rs)-
+              -H1.kappa*H1.kappa*H1m1.barred_fun(rs)*J2p1.barred_fun(rs) -
+              1./(-H1.kappa*H1.kappa)*H1p1.barred_fun(rs)*J2m1.barred_fun(rs)) +
+              (2*H1.l.l + 1)/(-H1.kappa*H1.kappa);
         res *= 1./4;
     }
 
+    res *= rs*rs;
     return res;
 }
 
@@ -109,7 +111,7 @@ double atomic_integral(const Envelope_Bessel& J1, const Envelope_Bessel& J2)
     if(J1.kappa != J2.kappa){
         res = J1.barred_fun(rs)*J2m1.barred_fun(rs) -
               J1m1.barred_fun(rs)*J2.barred_fun(rs);
-        res *= 1./(J1.kappa*J1.kappa - J2.kappa*J2.kappa);
+        res *= 1./(-J1.kappa*J1.kappa - -J2.kappa*J2.kappa);
     }else{
         res = J1.barred_fun(rs)*J1.barred_fun(rs) -
               J1m1.barred_fun(rs)*J1p1.barred_fun(rs);

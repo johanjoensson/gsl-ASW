@@ -32,7 +32,7 @@ double Hankel_function::operator()(const double x)
     GSL::Result exp = GSL::exp(-x);
     GSL::Result k;
     if(l.l >= 0){
-        k = 2./M_PI * GSL::bessel_kn_scaled(l.l, x);
+        k = GSL::bessel_kn_scaled(l.l, x);
     }else{
         k = GSL::Result(0, 0);
     }
@@ -42,16 +42,22 @@ double Hankel_function::operator()(const double x)
 
 double Bessel_function::operator()(const double x)
 {
+    GSL::Result exp = GSL::exp(-x);
+    GSL::Result i;
     if(l.l >= 0){
-        return GSL::bessel_jn(l.l, x).val;
+        i = GSL::bessel_in_scaled(l.l, x);
     }else{
-        return 0;
+        i = GSL::Result(0, 0);
     }
+
+  return (exp*i).val;
 }
 
 double Neumann_function::operator()(const double x)
 {
-  return GSL::bessel_yn(l.l, x).val;
+    GSL::Result n(0,0);
+
+    return n.val*x;
 }
 
 unsigned long int factorial(int n)

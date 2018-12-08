@@ -87,8 +87,8 @@ numerov_debug.close();
 	Simulation sim(cr, LDA, sqrt(0.015));
 	sim.set_up_X_matrices();
 	K_mesh kmesh(cr.lat.r_lat);
-	kmesh.generate_mesh(16.);
-	for(GSL::Vector& kp : kmesh.k_points){
+	kmesh.generate_mesh(2, 2, 2);
+	for(GSL::Vector kp : {GSL::Vector(3)}){
 		std::cout << kp << std::endl;
 		sim.set_up_H(kp);
 		sim.set_up_S(kp);
