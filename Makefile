@@ -81,6 +81,9 @@ gsl-asw: $(OBJS)
 checkall: $(addprefix $(SRC_DIR)/, $(NUMEROV_OBJ:o=cpp))
 	$(CXXCHECK) $^ $(CXXCHECKFLAGS)
 
+travis: CXXFLAGS = -g -std=c++11 -I$(SRC_DIR) -O0 -DHAVE_INLINE -DGSL_RANGE_CHECK_OFF
+travis: all
+
 # Remove object files
 clean:
 	rm -f $(BUILD_DIR)/*.o
