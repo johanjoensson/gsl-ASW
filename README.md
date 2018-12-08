@@ -30,3 +30,9 @@ This is a hobby project for me (Johan Jösson), the goal is to create a working 
 
 ### Contact
 email: johanjoensson [at] gmail.com
+<a href="https://scan.coverity.com/projects/johanjoensson-gsl-asw">
+  <img alt="Coverity Scan Build Status"
+       src="https://img.shields.io/coverity/scan/17408.svg"/>
+</a>
+[![Build Status](https://travis-ci.com/johanjoensson/gsl-ASW.svg?branch=master)](https://travis-ci.com/johanjoensson/gsl-ASW)
+[![Coverage Status](https://coveralls.io/repos/github/johanjoensson/gsl-ASW/badge.svg?branch=master)](https://coveralls.io/github/johanjoensson/gsl-ASW?branch=master)
