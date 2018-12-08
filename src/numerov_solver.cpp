@@ -202,8 +202,7 @@ std::vector<double> Numerov_solver::solve(Logarithmic_mesh &mesh,
 		}
 
 		if(std::abs(e_max - e_min) < 5E-14){
-			out_file << " W! " << std::endl;
-			if(de < 0){
+			if(de < 1){
 				e_min -= 1.5;
 			}else{
 				e_max += 1.5;
