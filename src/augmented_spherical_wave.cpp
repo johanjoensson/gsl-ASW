@@ -12,10 +12,11 @@ Augmented_spherical_wave::Augmented_spherical_wave()
  : center(), off_centers(), kappa(),  n(), l(), s(), H(), J()
 {}
 
-Augmented_spherical_wave::Augmented_spherical_wave(double kappa, unsigned int n,
-     lm l, spin s, Atom& center, std::vector<Atom>& off_centers)
- : center(center), off_centers(off_centers), kappa(kappa),
-  n(n), l(l), s(s), H(n, l, kappa, center.pos, center.mesh), J(off_centers.size())
+Augmented_spherical_wave::Augmented_spherical_wave(double kappa_n, int n_n,
+     lm l_n, spin s_n, const Atom& center_n, const std::vector<Atom>& off_centers_n)
+ : center(center_n), off_centers(off_centers_n), kappa(kappa_n),
+   n(n_n), l(l_n), s(s_n), H(n_n, l_n, kappa_n, center_n.pos, center_n.mesh),
+   J(off_centers_n.size())
 {
     // Set up off-center spheres
     int l_low = 2;
@@ -26,16 +27,16 @@ Augmented_spherical_wave::Augmented_spherical_wave(double kappa, unsigned int n,
     size_t i;// = std::distance(off_centers.begin(), it);
     for(Atom at : off_centers){
         it = find(off_centers.begin(), off_centers.end(), at);
-        i = std::distance(off_centers.begin(), it);
+        i = static_cast<size_t>(std::distance(off_centers.begin(), it));
         if(at != center){
             if(at.Z >= 20){
                 l_low = 3;
             }else{
                 l_low = 2;
             }
-            for(int l = 0; l <= l_low + 1; l++){
-                for(int m = -l; m <= l; m++){
-                    lm lp = {l, m};
+            for(int l_s = 0; l_s <= l_low + 1; l_s++){
+                for(int m = -l_s; m <= l_s; m++){
+                    lm lp = {l_s, m};
                     tmp = Augmented_Bessel(n, lp, kappa, at.pos, at.mesh);
                     J[i].insert(tmp);
                 }
@@ -56,12 +57,13 @@ std::vector<double> v_eff(const Logarithmic_mesh &mesh,
 
 void Augmented_spherical_wave::set_up(Potential &v)
 {
-    double en = -1.*center.get_Z()*center.get_Z()/(n*n);// + v.MT_0;
+    double en = -1.*static_cast<double>(center.get_Z()*center.get_Z())/
+                    static_cast<double>(n*n) + v.MT_0;
 
     // On-center expression
     std::vector<Atom>::iterator it = find(v.sites.begin(), v.sites.end(),
     center);
-    size_t i = std::distance(v.sites.begin(), it);
+    size_t i = static_cast<size_t>(std::distance(v.sites.begin(), it));
     std::vector<double> v_tot = v_eff(center.mesh, v.val[i], l);
 
     H.update(v_tot, en, core_state);
@@ -70,15 +72,15 @@ void Augmented_spherical_wave::set_up(Potential &v)
 	std::ofstream out_file;
 	out_file.open("check_Hankel.dat");
 	out_file << "# r\trH" << std::endl;
-	for(size_t i = 0; i < H.val.size(); i++){
-		out_file << std::setprecision(8) << center.mesh.r[i] << " " << v_tot[i] << " " << H.val[i] << std::endl;
+	for(size_t j = 0; j < H.val.size(); j++){
+		out_file << std::setprecision(8) << center.mesh.r[j] << " " << v_tot[j] << " " << H.val[j] << std::endl;
 	}
 	out_file.close();
 #endif
     std::unordered_set<Augmented_Bessel> tmp;
     for(Atom at : off_centers){
         it = find(v.sites.begin(), v.sites.end(), at);
-        i = std::distance(v.sites.begin(), it);
+        i = static_cast<size_t>(std::distance(v.sites.begin(), it));
 
         if(at != center){
             en =H.EH;

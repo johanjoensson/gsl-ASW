@@ -51,9 +51,9 @@ void Potential::set_xc_fun(XC_FUN xc_func)
 
 
 
-double atomic_potential(const int Z, const double r)
+double atomic_potential(const size_t Z, const double r)
 {
-    return -2.*Z/r;
+    return -2.*static_cast<double>(Z)/r;
 }
 
 double Xi0(size_t j, std::vector<Atom> sites, double r)
@@ -68,11 +68,11 @@ double Xi0(size_t j, std::vector<Atom> sites, double r)
     return res;
 }
 
-void Potential::initial_pot(unsigned int nel, double vol)
+void Potential::initial_pot(size_t nel, double vol)
 {
     std::vector<double> rho;
     for(size_t i = 0; i < sites.size(); i++){
-        rho = std::vector<double>(sites[i].mesh.r.size(), nel/vol);
+        rho = std::vector<double>(sites[i].mesh.r.size(), static_cast<double>(nel)/vol);
         exchange_correlation[i] = xc_fun.exc(rho);
         for(size_t j = 0; j < sites[i].mesh.r.size(); j++){
             electrostatic[i][j] = atomic_potential(sites[i].get_Z(), sites[i].mesh.r[j]);
@@ -109,16 +109,16 @@ void Potential::initial_pot(unsigned int nel, double vol)
     }
 
 
-    double MT_0 = 0, areas = 0;
+    double MT_0_s = 0, areas = 0;
     for(size_t i = 0; i < sites.size(); i++){
         // Add v[rs]*4*Pi*rs^2, the value of the potential integrated over the
         //entire atomic sphere, to V_MT
-        MT_0 += val[i].back()*GSL::pow_int(sites[i].get_AS(), 2);
+        MT_0_s += val[i].back()*GSL::pow_int(sites[i].get_AS(), 2);
         areas += GSL::pow_int(sites[i].get_AS(), 2);
     }
     // Divide V_MT by the total atomic areas in the crystal, thus getting an
     // average of the potential on all spheres
-    this->MT_0 = MT_0/(areas);
+    this->MT_0 = MT_0_s/areas;
 	std::cout << "MT0 = " << this->MT_0 << std::endl;
 }
 

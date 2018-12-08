@@ -6,26 +6,24 @@
 #include <iostream>
 
 Ewald_integral::Ewald_integral()
-{
-    this->kappa = sqrt(0.015);
-    this->ewald_param = 1;
-}
+ : ewald_param(1.), kappa(sqrt(0.015))
+{}
 
 void Ewald_integral::set_ewald_param(double eta)
 {
 	this->ewald_param = eta;
 }
 
-void Ewald_integral::set_kappa(double kappa)
+void Ewald_integral::set_kappa(double kappa_n)
 {
-	this->kappa = kappa;
+	this->kappa = kappa_n;
 }
 
 double Ewald_integral::bar_ew_int(lm l, double r){
 
     double res = 0;
 
-    double eta = this->ewald_param, kappa = this->kappa;
+    double eta = this->ewald_param;
     double t1 = 0., t2 = 0., t3 = 0.;
     double a = sqrt(eta)*r/2.;
     double b = -kappa*kappa*r*r/4.;
@@ -62,7 +60,6 @@ double Ewald_integral::ewald_int(lm l, double r)
 double Ewald_integral::bar_comp_ew_int(lm l, double r){
     double res = 0.;
     double eta = this->ewald_param;
-    double kappa = this->kappa;
     double t1 = 0., t2 = 0., t3 = 0.;
     double a = sqrt(eta)*r/2;
     double b = -kappa*kappa*r*r/4;

@@ -19,6 +19,7 @@
 #include "../../GSL-lib/src/complex_matrix.h"
 #include "../../GSL-lib/src/complex.h"
 #include "../../GSL-lib/src/special_functions.h"
+#include "../../GSL-lib/src/error.h"
 #include "augmented_spherical_wave.h"
 #include "atomic_quantity.h"
 #include "envelope_fun.h"
@@ -33,6 +34,9 @@ numerov_debug.open("numerov.debug", std::fstream::out);
 numerov_debug.close();
 #endif
 	std::cout.precision(12);
+
+	GSL::Error_handler e_handler;
+	e_handler.off();
 
 	GSL::Vector a = {0.0, 0.5, 0.5}, b = {0.5, 0.0, 0.5}, c = {0.5, 0.5, 0.0};
 	std::cout << a << std::endl;
@@ -76,7 +80,7 @@ numerov_debug.close();
 	Atom C4;
 	C4.set_pos(tau*cr.lat.scale*cr.lat.lat);
 
-	C1.set_Z(6);
+	C1.set_Z(16);
 	C2.set_Z(6);
 	C3.set_Z(6);
 	C4.set_Z(6);
@@ -88,7 +92,7 @@ numerov_debug.close();
 	sim.set_up_X_matrices();
 	K_mesh kmesh(cr.lat.r_lat);
 	kmesh.generate_mesh(2, 2, 2);
-	for(GSL::Vector kp : {GSL::Vector(3)}){
+	for(GSL::Vector kp : kmesh.k_points){
 		std::cout << kp << std::endl;
 		sim.set_up_H(kp);
 		sim.set_up_S(kp);

@@ -28,6 +28,7 @@ class Structure_constant{
 		Structure_constant(int l_low, int l_int, double kappa, lm l1, lm l2,
 			GSL::Vector& r);
 		Structure_constant(int l_low, int l_int, lm l1, lm l2, GSL::Vector& r);
+		Structure_constant(int l_low, double kappa, lm l1, lm l2, GSL::Vector& r);
 		Structure_constant(int l_low, lm l1, lm l2, GSL::Vector& r);
 		Structure_constant(lm l1, lm l2, GSL::Vector& r);
 		Structure_constant();
@@ -48,6 +49,8 @@ class Bloch_summed_structure_constant{
 		Bloch_summed_structure_constant(int l_low, int l_int, double kappa,
 			Crystal& c, lm l1, lm l2);
 		Bloch_summed_structure_constant(int l_low, int l_int, Crystal& c, lm l1,
+			lm l2);
+		Bloch_summed_structure_constant(int l_low, double kappa_n, Crystal& c, lm l1,
 			lm l2);
 		Bloch_summed_structure_constant(int l_low, Crystal& c, lm l1, lm l2);
 		Bloch_summed_structure_constant(Crystal& c, lm l1, lm l2);

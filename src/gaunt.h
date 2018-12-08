@@ -6,6 +6,5 @@
 GSL::Result gaunt(lm l1, lm l2, lm l3);
 GSL::Result real_gaunt(lm l1, lm l2, lm l3);
 
-void test_wigner();
 
 #endif //GAUNT_H

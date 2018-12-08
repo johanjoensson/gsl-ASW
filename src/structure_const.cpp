@@ -7,12 +7,11 @@
 
 // This needs to be really thoroghly checked!
 // 'cause right now it is definitely wrong!'
-Structure_constant::Structure_constant(int l_low, int l_int,
-	double kappa, lm l1, lm l2, GSL::Vector& r)
-	: l_int(l_int), l_low(l_low), l1(l1), l2(l2), kappa(kappa), r(r)
+Structure_constant::Structure_constant(int l_low_n, int l_int_n,
+	double kappa_n, lm l1_n, lm l2_n, GSL::Vector& r_n)
+	: l_int(l_int_n), l_low(l_low_n), l1(l1_n), l2(l2_n), kappa(kappa_n),
+	r(r_n), val(0), dk_val(0)
 {
-	this->r.copy(r);
-
 	double k_fac = GSL::pow_int(kappa, l1.l + l2.l + 1);
 
 	double r_norm = r.norm();
@@ -54,19 +53,25 @@ Structure_constant::Structure_constant(int l_low, int l_int,
 	this->dk_val = (2*M_PI*k_fac*d_sum).val;
 }
 
-Structure_constant::Structure_constant(int l_low, int l_int, lm l1, lm l2,
-	GSL::Vector& r)
-	: Structure_constant(l_low, l_int, std::sqrt(0.015), l1, l2, r)
+Structure_constant::Structure_constant(int l_low_n, double kappa_n, lm l1_n, lm l2_n,
+	GSL::Vector& r_n)
+	: Structure_constant(l_low_n, l_low_n +1, kappa_n, l1_n, l2_n, r_n)
 {
 }
 
-Structure_constant::Structure_constant(int l_low, lm l1, lm l2, GSL::Vector& r)
-	: Structure_constant(l_low, l_low + 1, std::sqrt(0.015), l1, l2, r)
+Structure_constant::Structure_constant(int l_low_n, int l_int_n, lm l1_n, lm l2_n,
+	GSL::Vector& r_n)
+	: Structure_constant(l_low_n, l_int_n, std::sqrt(0.015), l1_n, l2_n, r_n)
 {
 }
 
-Structure_constant::Structure_constant(lm l1, lm l2, GSL::Vector& r)
-	: Structure_constant(2, 3, std::sqrt(0.015), l1, l2, r)
+Structure_constant::Structure_constant(int l_low_n, lm l1_n, lm l2_n, GSL::Vector& r_n)
+	: Structure_constant(l_low_n, l_low_n + 1, std::sqrt(0.015), l1_n, l2_n, r_n)
+{
+}
+
+Structure_constant::Structure_constant(lm l1_n, lm l2_n, GSL::Vector& r_n)
+	: Structure_constant(2, 3, std::sqrt(0.015), l1_n, l2_n, r_n)
 {
 }
 
@@ -83,27 +88,33 @@ std::ostream& operator << ( std::ostream& os, const Structure_constant& B)
 	return os;
 }
 
-Bloch_summed_structure_constant::Bloch_summed_structure_constant(int l_low,
-	int l_int, double kappa, Crystal& c, lm l1, lm l2)
-	: l_low(l_low), l_int(l_int), kappa(kappa), c(c), l1(l1), l2(l2)
+Bloch_summed_structure_constant::Bloch_summed_structure_constant(int l_low_n,
+	int l_int_n, double kappa_n, Crystal& c_n, lm l1_n, lm l2_n)
+	: l_low(l_low_n), l_int(l_int_n), kappa(kappa_n), c(c_n), l1(l1_n), l2(l2_n)
 {
 }
 
-Bloch_summed_structure_constant::Bloch_summed_structure_constant(int l_low,
-	int l_int, Crystal& c, lm l1, lm l2)
-	: Bloch_summed_structure_constant(l_low, l_int, std::sqrt(0.015), c, l1, l2)
+Bloch_summed_structure_constant::Bloch_summed_structure_constant(int l_low_n,
+	double kappa_n, Crystal& c_n, lm l1_n, lm l2_n)
+	: Bloch_summed_structure_constant(l_low_n, l_low_n + 1, kappa_n, c_n, l1_n, l2_n)
 {
 }
 
-Bloch_summed_structure_constant::Bloch_summed_structure_constant(int l_low,
-	Crystal& c, lm l1, lm l2)
-	: Bloch_summed_structure_constant(l_low, l_low + 1, std::sqrt(0.015), c, l1, l2)
+Bloch_summed_structure_constant::Bloch_summed_structure_constant(int l_low_n,
+	int l_int_n, Crystal& c_n, lm l1_n, lm l2_n)
+	: Bloch_summed_structure_constant(l_low_n, l_int_n, std::sqrt(0.015), c_n, l1_n, l2_n)
 {
 }
 
-Bloch_summed_structure_constant::Bloch_summed_structure_constant(Crystal& c,
-	lm l1, lm l2)
-	: Bloch_summed_structure_constant(2, 3, std::sqrt(0.015), c, l1, l2)
+Bloch_summed_structure_constant::Bloch_summed_structure_constant(int l_low_n,
+	Crystal& c_n, lm l1_n, lm l2_n)
+	: Bloch_summed_structure_constant(l_low_n, l_low_n + 1, std::sqrt(0.015), c_n, l1_n, l2_n)
+{
+}
+
+Bloch_summed_structure_constant::Bloch_summed_structure_constant(Crystal& c_n,
+	lm l1_n, lm l2_n)
+	: Bloch_summed_structure_constant(2, 3, std::sqrt(0.015), c_n, l1_n, l2_n)
 {
 }
 
@@ -118,7 +129,7 @@ GSL::Complex Bloch_summed_structure_constant::evaluate(const GSL::Vector& tau,
 	Bloch_sum bs(lm {0, 0}, kappa, this->c);
 	double k_fac = GSL::pow_int(kappa, l1.l + l2.l);
 
-	int c = 1;
+	int sign = 1;
 	GSL::Result a;
 	GSL::Complex m_sum(0., 0.), sum(0., 0.);
 	for (int lpp = 0; lpp <= l_int; lpp++){
@@ -130,15 +141,16 @@ GSL::Complex Bloch_summed_structure_constant::evaluate(const GSL::Vector& tau,
 			    m_sum += a.val*bs.hankel_envelope(tau, kp);
 			}
 		}
-		sum += c/(GSL::pow_int(kappa, lpp))*m_sum;
-		c *= -1;
+		sum += sign/(GSL::pow_int(kappa, lpp))*m_sum;
+		sign *= -1;
 	}
 
 	if (l1.l % 2 != 0){
-		c = -1;
+		sign = -1;
 	}
-	return 4*M_PI*c*k_fac*sum;
+	return 4*M_PI*sign*k_fac*sum;
 }
+
 GSL::Complex Bloch_summed_structure_constant::dot_evaluate(
 	const GSL::Vector& tau, const GSL::Vector& kp)
 {
@@ -146,7 +158,7 @@ GSL::Complex Bloch_summed_structure_constant::dot_evaluate(
 	Bloch_sum bs(lm {0, 0}, kappa, this->c);
 	double k_fac = GSL::pow_int(kappa, l1.l + l2.l);
 
-	int c = 1;
+	int sign = 1;
 	GSL::Result a;
 	GSL::Complex m_sum(0., 0.), sum(0., 0.);
 	for (int lpp = 0; lpp <= l_int; lpp++){
@@ -160,13 +172,13 @@ GSL::Complex Bloch_summed_structure_constant::dot_evaluate(
 				GSL::pow_int(kappa, 2)*bs.hankel_envelope(tau, kp));
 			}
 		}
-		sum += c/(GSL::pow_int(kappa, lpp))*m_sum;
-		c *= -1;
+		sum += sign/(GSL::pow_int(kappa, lpp))*m_sum;
+		sign *= -1;
 	}
 	if (l1.l % 2 != 0){
-		c = -1;
+		sign = -1;
 	}
-	return 2*M_PI*c*k_fac*sum;
+	return 2*M_PI*sign*k_fac*sum;
 }
 
 std::ostream& operator << ( std::ostream& os,

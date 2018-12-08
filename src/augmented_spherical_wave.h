@@ -15,7 +15,7 @@ public:
     Atom center;
     std::vector<Atom> off_centers;
     double kappa;
-    unsigned int n;
+    int n;
     lm l;
     spin s;
     bool core_state = false;
@@ -24,8 +24,8 @@ public:
     std::vector<std::unordered_set<Augmented_Bessel>> J;
 
     Augmented_spherical_wave();
-    Augmented_spherical_wave(double kappa, unsigned int n, lm l, spin s,
-        Atom& center, std::vector<Atom>& off_centers);
+    Augmented_spherical_wave(double kappa, int n, lm l, spin s,
+        const Atom& center, const std::vector<Atom>& off_centers);
 
     void set_up(Potential &v);
 

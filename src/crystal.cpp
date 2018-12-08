@@ -19,7 +19,7 @@ namespace std {
 		size_t operator()(const Atom &a) const
 		{
 			return std::hash<GSL::Vector>()(a.pos) ^
-			std::hash<int>()(a.Z);
+			std::hash<size_t>()(a.get_Z());
 		}
 	};
 }
@@ -67,7 +67,7 @@ size_t Crystal::calc_nk(double tol, double kappa, lm l)
 	}
 	q = bisect_q(tol, kappa, eta, l, q - sqrt(eta), q);
 
-	return std::ceil(4*M_PI/3 * GSL::pow_int(q, 3)/
+	return static_cast<size_t>(4*M_PI/3 * GSL::pow_int(q, 3)/
 	GSL::pow_int(2*M_PI, 3)*this->volume);
 }
 
@@ -117,7 +117,7 @@ size_t Crystal::calc_nr(double tol, double kappa, lm l)
 	}
 	r = bisect_r(tol, kappa, eta, l, r - 2/sqrt(eta), r);
 
-	return std::ceil(4*M_PI/3 * GSL::pow_int(r, 3)/this->volume);
+	return static_cast<size_t>(4*M_PI/3 * GSL::pow_int(r, 3)/this->volume);
 
 }
 
@@ -156,9 +156,9 @@ void Crystal::set_Rn(double Rmax)
     GSL::Vector b2(this->lat.r_lat[1]/this->lat.scale);
     GSL::Vector b3(this->lat.r_lat[2]/this->lat.scale);
 
-	int N1 = std::ceil(b1.norm()/(2*M_PI)*Rmax);
-	int N2 = std::ceil(b2.norm()/(2*M_PI)*Rmax);
-	int N3 = std::ceil(b3.norm()/(2*M_PI)*Rmax);
+	int N1 = static_cast<int>(b1.norm()/(2*M_PI)*Rmax);
+	int N2 = static_cast<int>(b2.norm()/(2*M_PI)*Rmax);
+	int N3 = static_cast<int>(b3.norm()/(2*M_PI)*Rmax);
 
 	std::unordered_set<GSL::Vector> tmp;
 	for(int n1 = -N1; n1 <= N1; n1++){
@@ -203,9 +203,9 @@ void Crystal::set_Kn(double Kmax)
     GSL::Vector b2(this->lat.r_lat[1]/this->lat.scale);
     GSL::Vector b3(this->lat.r_lat[2]/this->lat.scale);
 
-	int N1 = std::ceil(a1.norm()/(2*M_PI)*Kmax);
-	int N2 = std::ceil(a2.norm()/(2*M_PI)*Kmax);
-	int N3 = std::ceil(a3.norm()/(2*M_PI)*Kmax);
+	int N1 = static_cast<int>(a1.norm()/(2*M_PI)*Kmax);
+	int N2 = static_cast<int>(a2.norm()/(2*M_PI)*Kmax);
+	int N3 = static_cast<int>(a3.norm()/(2*M_PI)*Kmax);
 
 
 	std::unordered_set<GSL::Vector> tmp;
@@ -240,36 +240,19 @@ Crystal::Crystal()
 {
 }
 
-Crystal::Crystal(double& a)
- : Rn_vecs(), Kn_vecs(), atoms()
-{
-	GSL::Vector a1(3), a2(3), a3(3);
-	a1[0] = a;
-	a2[1] = a;
-	a3[2] = a;
-	lat = Lattice(a1, a2, a3);
-
-    volume = lat.volume*GSL::pow_int(lat.scale, 3);
-
-    bz_volume = lat.bz_volume/GSL::pow_int(lat.scale, 3);
-}
 
 Crystal::Crystal(const double& a)
- : Rn_vecs(), Kn_vecs(), atoms()
+ : Rn_vecs(), Kn_vecs(), lat({a, 0., 0.},{0., a, 0.},{0., 0., a}), atoms(),
+   volume(0), bz_volume(0)
 {
-	GSL::Vector a1(3), a2(3), a3(3);
-	a1[0] = a;
-	a2[1] = a;
-	a3[2] = a;
-	lat = Lattice(a1, a2, a3);
-
     volume = lat.volume*GSL::pow_int(lat.scale, 3);
 
     bz_volume = lat.bz_volume/GSL::pow_int(lat.scale, 3);
 }
 
 Crystal::Crystal(const double& a, const double& b, const double& c)
- : Rn_vecs(), Kn_vecs(), atoms()
+ : Rn_vecs(), Kn_vecs(), lat({a, 0., 0.},{0., b, 0.},{0., 0., c}), atoms(),
+   volume(0), bz_volume(0)
 {
 	GSL::Vector a1(3), a2(3), a3(3);
 	a1[0] = a;
@@ -282,34 +265,11 @@ Crystal::Crystal(const double& a, const double& b, const double& c)
     bz_volume = lat.bz_volume/GSL::pow_int(lat.scale, 3);
 }
 
-Crystal::Crystal(double& a, double& b, double& c)
- : Rn_vecs(), Kn_vecs(), atoms()
-{
-	GSL::Vector a1(3), a2(3), a3(3);
-	a1[0] = a;
-	a2[1] = b;
-	a3[2] = c;
-	lat = Lattice(a1, a2, a3);
-
-    volume = lat.volume*GSL::pow_int(lat.scale, 3);
-
-    bz_volume = lat.bz_volume/GSL::pow_int(lat.scale, 3);
-}
 
 Crystal::Crystal(const GSL::Vector& a, const GSL::Vector& b,
 	const GSL::Vector& c)
- : Rn_vecs(), Kn_vecs(), lat(a, b, c), atoms()
+ : Rn_vecs(), Kn_vecs(), lat(a, b, c), atoms(), volume(0), bz_volume(0)
 {
-    volume = lat.volume*GSL::pow_int(lat.scale, 3);
-
-    bz_volume = lat.bz_volume/GSL::pow_int(lat.scale, 3);
-
-}
-
-Crystal::Crystal(GSL::Vector& a, GSL::Vector& b, GSL::Vector& c)
- : Rn_vecs(), Kn_vecs(), lat(a, b, c), atoms()
-{
-
     volume = lat.volume*GSL::pow_int(lat.scale, 3);
 
     bz_volume = lat.bz_volume/GSL::pow_int(lat.scale, 3);

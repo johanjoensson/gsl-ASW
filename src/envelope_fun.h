@@ -14,6 +14,12 @@ public:
 
     Envelope_function();
     Envelope_function(const Atom& center, lm l, double kappa);
+    Envelope_function(const Envelope_function&) = default;
+    Envelope_function(Envelope_function&&) = default;
+
+    Envelope_function& operator=(const Envelope_function&) = default;
+    Envelope_function& operator=(Envelope_function&&) = default;
+    virtual ~Envelope_function(){};
 
     /*
     Envelope_function(Envelope_function &a);
@@ -23,7 +29,7 @@ public:
     Envelope_function& operator=(Envelope_function&& a);
     */
     double operator()(const GSL::Vector r);
-    virtual double barred_fun(const double x)
+    virtual double barred_fun(const double x) const
         {return 0.*x;}
 };
 
@@ -32,8 +38,8 @@ public:
     Envelope_Hankel()
      :Envelope_function()
      {};
-    Envelope_Hankel(const Atom& center, lm l, double kappa)
-     : Envelope_function(center, l, kappa)
+    Envelope_Hankel(const Atom& center_n, lm l_n, double kappa_n)
+     : Envelope_function(center_n, l_n, kappa_n)
      {};
 
      /*
@@ -52,8 +58,8 @@ public:
     Envelope_Bessel()
      :Envelope_function()
      {};
-    Envelope_Bessel(const Atom& center, lm l, double kappa)
-     : Envelope_function(center, l, kappa)
+    Envelope_Bessel(const Atom& center_n, lm l_n, double kappa_n)
+     : Envelope_function(center_n, l_n, kappa_n)
      {};
     /*
     Envelope_Bessel(Envelope_Bessel& a)
@@ -71,8 +77,8 @@ public:
     Envelope_Neumann()
      :Envelope_function()
      {};
-    Envelope_Neumann(const Atom& center, lm l, double kappa)
-     : Envelope_function(center, l, kappa)
+    Envelope_Neumann(const Atom& center_n, lm l_n, double kappa_n)
+     : Envelope_function(center_n, l_n, kappa_n)
      {};
     /*
     Envelope_Neumann(Envelope_Neumann& a)

@@ -84,7 +84,7 @@ std::vector<double> Xc_func::exc(std::vector<double> rho)
 
     switch(fun->info->family) {
         case XC_FAMILY_LDA:
-            xc_lda_exc(fun.get(), rho.size(), &(*rho.begin()), &(*res.begin()));
+            xc_lda_exc(fun.get(), static_cast<int>(rho.size()), &(*rho.begin()), &(*res.begin()));
             break;
         default:
             break;

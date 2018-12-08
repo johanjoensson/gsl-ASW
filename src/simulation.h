@@ -16,12 +16,12 @@ class Simulation{
     GSL::Matrix XH1, XS1, XH2, XS2;
     std::vector<GSL::Matrix> XH3, XS3;
 
-    void add_states(Atom& at, double kappa);
+    void add_states(const Atom& at, const double kappa);
     GSL::Complex H_element(const size_t i1, const size_t i2, const GSL::Vector& kp);
     GSL::Complex S_element(const size_t i1, const size_t i2, const GSL::Vector& kp);
 public:
     Simulation();
-    Simulation(Crystal& crystal, XC_FUN func, double kappa);
+    Simulation(const Crystal& crystal, const XC_FUN func, const double kappa);
 
     void set_up_X_matrices();
     void set_up_H(const GSL::Vector& kp);

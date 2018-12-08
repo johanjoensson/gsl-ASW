@@ -11,7 +11,6 @@ public:
     double scale, volume, bz_volume;
 
     Lattice();
-    Lattice(GSL::Vector& a, GSL::Vector& b, GSL::Vector& c);
     Lattice(const GSL::Vector& a, const GSL::Vector& b, const GSL::Vector& c);
 };
 #endif // LATTICE_H

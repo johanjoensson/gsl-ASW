@@ -23,14 +23,14 @@ Augmented_function::Augmented_function(Augmented_function &&a)
     std::swap(val, a.val);
 }
 
-Augmented_function::Augmented_function(const int n, const lm l, const double kappa,
-    const GSL::Vector& center, const Logarithmic_mesh& mesh)
- : n(n), l(l), kappa(kappa), radius(mesh.r.back()), center(center), mesh(mesh),
- val(mesh.r.size())
+Augmented_function::Augmented_function(const int n_n, const lm l_n, const double kappa_n,
+    const GSL::Vector& center_n, const Logarithmic_mesh& mesh_n)
+ : n(n_n), l(l_n), kappa(kappa_n), radius(mesh_n.r.back()), center(center_n), mesh(mesh_n),
+ val(mesh_n.r.size())
 {}
 
 Augmented_function::~Augmented_function()
-= default;
+{}
 
 double Augmented_function::operator()(const GSL::Vector& r)
 {
@@ -81,13 +81,13 @@ double augmented_integral(const Augmented_function &a, const Augmented_function 
 {
     double res = 0.;
     Logarithmic_mesh mesh = a.mesh;
-    int N = mesh.r.size();
+    size_t N = mesh.r.size();
     // Make sure both funcions are centered on the same site
     if(a.center != b.center){
         return 0.;
     }
     // Use Simpsons rule for integration
-    for(int i = 1; i < (N - 1)/2.; i++){
+    for(size_t i = 1; i <= (N - 1)/2; i++){
         res += a.val[2*i - 1]*b.val[2*i - 1]/**mesh.r2[2*1 - 1]*mesh.drx[2*i-2]*/;
         res += 4*a.val[2*i]*b.val[2*i]/**mesh.r2[2*1]*mesh.drx[2*i-1]*/;
         res += a.val[2*i + 1]*b.val[2*i + 1]/**mesh.r2[2*1 + 1]*mesh.drx[2*i]*/;
@@ -112,22 +112,11 @@ Augmented_Hankel::Augmented_Hankel()
 {}
 
 Augmented_Hankel::Augmented_Hankel(const Augmented_Hankel& a)
- : Augmented_function(a)
-{
-    n = a.n;
-    l = a.l;
-    kappa = a.kappa;
-    radius = a.radius;
-    center = a.center;
-    mesh = a.mesh;
-    val = a.val;
-
-    EH = a.EH;
-
-}
+ : Augmented_function(a), EH(a.EH)
+{}
 
 Augmented_Hankel::Augmented_Hankel(Augmented_Hankel&& a)
- : Augmented_function(a), EH()
+ : Augmented_function(), EH()
 {
     std::swap(n, a.n);
     std::swap(l, a.l);
@@ -141,9 +130,9 @@ Augmented_Hankel::Augmented_Hankel(Augmented_Hankel&& a)
     std::swap(EH, a.EH);
 }
 
-Augmented_Hankel::Augmented_Hankel(const int n, const lm l, const double kappa,
-    const GSL::Vector& center, const Logarithmic_mesh& mesh)
- : Augmented_function(n, l, kappa, center, mesh), EH()
+Augmented_Hankel::Augmented_Hankel(const int n_n, const lm l_n, const double kappa_n,
+    const GSL::Vector& center_n, const Logarithmic_mesh& mesh_n)
+ : Augmented_function(n_n, l_n, kappa_n, center_n, mesh_n), EH()
 {}
 
 Augmented_Hankel::~Augmented_Hankel()
@@ -155,7 +144,7 @@ void Augmented_Hankel::update(std::vector<double>& v, const double en
     EH = en;
     Numerov_solver sol;
     int nodes = std::max(0, n - l.l - 1);
-    int last = mesh.r.size() - 1, lastbutone = mesh.r.size() - 2;
+    size_t last = mesh.r.size() - 1, lastbutone = mesh.r.size() - 2;
 
     Hankel_function H(l);
 
@@ -211,21 +200,13 @@ Augmented_Bessel::Augmented_Bessel()
 {}
 
 Augmented_Bessel::Augmented_Bessel(const Augmented_Bessel& a)
- : Augmented_function(a)
+ : Augmented_function(a), EJ(a.EJ)
 {
-    n = a.n;
-    l = a.l;
-    kappa = a.kappa;
-    radius = a.radius;
     EJ = a.EJ;
-
-    center = a.center;
-    mesh = a.mesh;
-    val = a.val;
 }
 
 Augmented_Bessel::Augmented_Bessel(Augmented_Bessel&& a)
- : Augmented_function(a), EJ()
+ : Augmented_function(), EJ()
 {
     std::swap(n, a.n);
     std::swap(l, a.l);
@@ -239,9 +220,9 @@ Augmented_Bessel::Augmented_Bessel(Augmented_Bessel&& a)
     std::swap(EJ, a.EJ);
 }
 
-Augmented_Bessel::Augmented_Bessel(const int n, const lm l, const double kappa,
-    const GSL::Vector& center, const Logarithmic_mesh& mesh)
- : Augmented_function(n, l, kappa, center, mesh), EJ()
+Augmented_Bessel::Augmented_Bessel(const int n_n, const lm l_n, const double kappa_n,
+    const GSL::Vector& center_n, const Logarithmic_mesh& mesh_n)
+ : Augmented_function(n_n, l_n, kappa_n, center_n, mesh_n), EJ()
 {}
 
 Augmented_Bessel::~Augmented_Bessel()
@@ -253,7 +234,7 @@ void Augmented_Bessel::update(std::vector<double>& v, const double en
     EJ = en;
     Numerov_solver sol;
     int nodes = std::max(0,n - l.l - 1);
-    int last = mesh.r.size() - 1, lastbutone = mesh.r.size() - 2;
+    size_t last = mesh.r.size() - 1, lastbutone = mesh.r.size() - 2;
     Bessel_function J(l);
 
     if(!core){

@@ -2,37 +2,37 @@
 #include "../../GSL-lib/src/special_functions.h"
 
 Logarithmic_mesh::Logarithmic_mesh()
- : B(), r(), r2(), drx(), A()
+ : A_p(), B_p(), r(), r2(), drx()
 {}
 
-Logarithmic_mesh::Logarithmic_mesh(double radius, unsigned int num_points)
-	: r(num_points,0), r2(num_points,0), drx(num_points,0)
+Logarithmic_mesh::Logarithmic_mesh(double radius, size_t num_points)
+	: A_p(0.02),
+      B_p(radius/(GSL::exp(this->A_p*(static_cast<double>(num_points - 1))).val - 1.)),
+      r(num_points,0), r2(num_points,0), drx(num_points,0)
 {
-	this->A = 0.02;
-	this->B = radius/(GSL::exp(this->A*(num_points - 1)).val - 1.);
-	double tmp;
+	double tmp = 0;
 
-	for(unsigned int i = 0; i < num_points; i++){
-		tmp = B*(GSL::exp(A*i).val - 1);
+	for(size_t i = 0; i < num_points; i++){
+		tmp = B_p*(GSL::exp(A_p*static_cast<double>(i)).val - 1);
 		this->r[i] = tmp;
 		this->r2[i] = tmp*tmp;
-		this->drx[i] = this->A*(tmp + this->B);
+		this->drx[i] = this->A_p*(tmp + this->B_p);
 	}
 }
 
-Logarithmic_mesh::Logarithmic_mesh(double A, double radius,
-    unsigned int num_points)
-	: r(num_points,0), r2(num_points,0), drx(num_points,0)
+Logarithmic_mesh::Logarithmic_mesh(double A_n, double radius,
+    size_t num_points)
+	: A_p(A_n),
+      B_p(radius/(GSL::exp(this->A_p*(static_cast<double>(num_points - 1))).val - 1.)),
+      r(num_points,0), r2(num_points,0), drx(num_points,0)
 {
-	this->A = A;
-	this->B = radius/(GSL::exp(this->A*(num_points - 1)).val - 1.);
 	double tmp;
 
 	for(unsigned int i = 0; i < num_points; i++){
-		tmp = this->B*(GSL::exp(this->A*i).val - 1);
+		tmp = this->B_p*(GSL::exp(this->A_p*i).val - 1);
 		this->r[i] = tmp;
 		this->r2[i] = tmp*tmp;
-		this->drx[i] = this->A*(tmp + this->B);
+		this->drx[i] = this->A_p*(tmp + this->B_p);
 	}
 }
 

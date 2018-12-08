@@ -5,19 +5,19 @@
 #include "log_mesh.h"
 
 class Numerov_solver{
-		unsigned int find_inversion_point(Logarithmic_mesh &mesh,
+		size_t find_inversion_point(Logarithmic_mesh &mesh,
 			std::vector<double> &v, double e_trial);
 		double variational_energy_correction(Logarithmic_mesh &mesh,
-			std::vector<double> &v, std::vector<double> &fun, int i_inv,
+			std::vector<double> &v, std::vector<double> &fun, size_t i_inv,
 			double e_trial);
 	public:
 		Numerov_solver();
 
 		std::vector<double> solve_left(Logarithmic_mesh &mesh,
-			std::vector<double> &v, int i_lr, std::vector<double> &init_cond,
+			std::vector<double> &v, size_t i_lr, std::vector<double> &init_cond,
 			double E);
 		std::vector<double> solve_right(Logarithmic_mesh &mesh,
-			std::vector<double> &v, int i_lr, std::vector<double> &init_cond,
+			std::vector<double> &v, size_t i_lr, std::vector<double> &init_cond,
 			double E);
 
 		std::vector<double> solve(Logarithmic_mesh &mesh,

@@ -11,7 +11,6 @@ class Ewald_integral{
         double bar_ew_int(lm l, double r);
         double bar_comp_ew_int(lm l, double r);
     public:
-        std::vector<double> h;
 
         void set_ewald_param(double eta);
         void set_kappa(double kappa);

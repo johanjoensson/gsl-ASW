@@ -2,12 +2,11 @@
 #include "ewald_int.h"
 #include "envelope_fun.h"
 
-Bloch_sum::Bloch_sum(const lm l, const double kappa, const Crystal& c)
- : l(l), kappa(kappa), c(c)
-{
-	eta = GSL::exp(GSL::log(6.5) + 2./3*GSL::log(4*M_PI/3) -
-	2./3*GSL::log(c.volume)).val;
-}
+Bloch_sum::Bloch_sum(const lm l_n, const double kappa_n, const Crystal& c_n)
+ : l(l_n), kappa(kappa_n), c(c_n),
+   eta(GSL::exp(GSL::log(6.5) + 2./3*GSL::log(4*M_PI/3) -
+   2./3*GSL::log(c.volume)).val)
+{}
 
 
 GSL::Complex Bloch_sum::calc_d1(const GSL::Vector& tau, const GSL::Vector& kp)
@@ -21,7 +20,7 @@ GSL::Complex Bloch_sum::calc_d1(const GSL::Vector& tau, const GSL::Vector& kp)
     double k = kp.norm(), dot = GSL::dot(kp, tau);
     e = GSL::exp(GSL::Complex(0., dot));
     tmp = GSL::pow_int(k, l.l)*cubic_harmonic(l, kp)*
-    GSL::exp((-kappa*kappa - k*k)/eta)/(-kappa*kappa - k*k);
+        GSL::exp((-kappa*kappa - k*k)/eta)/(-kappa*kappa - k*k);
     d1 += e*tmp.val;
     for(size_t i = 0; i < this->c.Kn_vecs.size(); i++){
         kn = kp + this->c.Kn_vecs[i];
@@ -56,7 +55,7 @@ GSL::Complex Bloch_sum::calc_d1_dot(const GSL::Vector& tau, const GSL::Vector& k
         dot = GSL::dot(kn, tau);
         e = GSL::exp(GSL::Complex(0., dot));
         tmp = GSL::pow_int(k, l.l)*cubic_harmonic(l, kn)*
-        GSL::exp((-kappa*kappa - k*k)/eta)/(-kappa*kappa - k*k)*(-kappa*kappa - k*k);
+        GSL::exp((-kappa*kappa - k*k)/eta)/((-kappa*kappa - k*k)*(-kappa*kappa - k*k));
         d1_dot += e*tmp.val;
     }
     if(l.l % 4 == 1){

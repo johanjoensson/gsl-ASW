@@ -5,8 +5,8 @@ Envelope_function::Envelope_function()
  : center(), l(), kappa()
 {}
 
-Envelope_function::Envelope_function(const Atom& center, lm l, double kappa)
- : center(center), l(l), kappa(kappa)
+Envelope_function::Envelope_function(const Atom& center_n, lm l_n, double kappa_n)
+ : center(center_n), l(l_n), kappa(kappa_n)
 {}
 
 double Envelope_Hankel::barred_fun(const double x) const

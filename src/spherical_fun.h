@@ -9,8 +9,19 @@
 class Spherical_function{
 public:
     lm l;
-    Spherical_function();
-    Spherical_function(const lm l);
+    Spherical_function(): l() {};
+    Spherical_function(const lm l_n):l(l_n){};
+    Spherical_function(const Spherical_function& f) : Spherical_function(f.l)
+    {};
+    Spherical_function(Spherical_function&& f) : Spherical_function()
+    {
+        std::swap(l, f.l);
+    };
+
+    Spherical_function& operator=(const Spherical_function& f) = default;
+    Spherical_function& operator=(Spherical_function&& f) = default;
+
+    virtual ~Spherical_function(){};
     virtual double operator()(const double x)
         {return 0.*x;}
 };
@@ -21,7 +32,7 @@ class Hankel_function : public Spherical_function
 {
 public:
     Hankel_function() : Spherical_function(){};
-    Hankel_function(const lm l) : Spherical_function(l){};
+    Hankel_function(const lm l_n) : Spherical_function(l_n){};
     double operator()(const double x);
 };
 
@@ -29,7 +40,7 @@ class Bessel_function : public Spherical_function
 {
 public:
     Bessel_function() : Spherical_function(){};
-    Bessel_function(const lm l) : Spherical_function(l){};
+    Bessel_function(const lm l_n) : Spherical_function(l_n){};
     double operator()(const double x);
 };
 
@@ -37,7 +48,7 @@ class Neumann_function : public Spherical_function
 {
 public:
     Neumann_function() : Spherical_function(){};
-    Neumann_function(const lm l) : Spherical_function(l){};
+    Neumann_function(const lm l_n) : Spherical_function(l_n){};
     double operator()(const double x);
 };
 

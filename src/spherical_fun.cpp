@@ -5,14 +5,6 @@
 
 #include <iostream>
 
-Spherical_function::Spherical_function()
- : l()
-{}
-
-Spherical_function::Spherical_function(lm l)
- : l(l)
-{}
-
 double wronskian(Spherical_function& a, Spherical_function& b, double r)
 {
     double res = 0.;
@@ -58,17 +50,6 @@ double Neumann_function::operator()(const double x)
     GSL::Result n(0,0);
 
     return n.val*x;
-}
-
-unsigned long int factorial(int n)
-{
-	unsigned long int res = 1;
-	for (int i = 1; i <= n; i++){
-		res *= i;
-	}
-
-	return res;
-
 }
 
 GSL::Result cubic_harmonic(lm l, const GSL::Vector& r)
