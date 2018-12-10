@@ -35,10 +35,10 @@ numerov_debug.close();
 #endif
 	std::cout.precision(12);
 
-	GSL::Error_handler e_handler;
-	e_handler.off();
+//	GSL::Error_handler e_handler;
+//	e_handler.off();
 
-	GSL::Vector a = {0.0, 0.5, 0.5}, b = {0.5, 0.0, 0.5}, c = {0.5, 0.5, 0.0};
+	GSL::Vector a = {1.0, 0., 0.}, b = {0., 1.0, 0.}, c = {0., 0., 1.0};
 	std::cout << a << std::endl;
 	std::cout << b << std::endl;
 	std::cout << c << std::endl;
@@ -47,9 +47,9 @@ numerov_debug.close();
 	std::cout << cr.lat.scale*cr.lat.lat << std::endl;
 
 	std::cout << "Calculating Rmax" << std::endl;
-	double Rmax = cr.calc_Rmax(1e-14, sqrt(0.015), lm {4, 0});
+	double Rmax = cr.calc_Rmax(1e-14, sqrt(0.015), lm {5, 0});
 	std::cout << "Calculating Kmax" << std::endl;
-	double Kmax = cr.calc_Kmax(1e-14, sqrt(0.015), lm {4, 0});
+	double Kmax = cr.calc_Kmax(1e-14, sqrt(0.015), lm {5, 0});
 
 
 	std::cout << "Setting R-vectors" << std::endl;
@@ -80,20 +80,18 @@ numerov_debug.close();
 	Atom C4;
 	C4.set_pos(tau*cr.lat.scale*cr.lat.lat);
 
-	C1.set_Z(16);
-	C2.set_Z(6);
+	C1.set_Z(26);
+	C2.set_Z(26);
 	C3.set_Z(6);
 	C4.set_Z(6);
 
-//	cr.add_atoms(std::vector<Atom> {C1, C2, C3, C4});
-	cr.add_atoms(std::vector<Atom> {C1, C2});
+	cr.add_atoms(std::vector<Atom> {C1});
 
 	Simulation sim(cr, LDA, sqrt(0.015));
 	sim.set_up_X_matrices();
 	K_mesh kmesh(cr.lat.r_lat);
 	kmesh.generate_mesh(2, 2, 2);
 	for(GSL::Vector kp : kmesh.k_points){
-		std::cout << kp << std::endl;
 		sim.set_up_H(kp);
 		sim.set_up_S(kp);
 		sim.calc_eigen();

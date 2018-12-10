@@ -25,15 +25,15 @@ BUILD_DIR = build
 
 WFLAGS = -Werror -Wall -Wextra -pedantic -Wshadow -Wnon-virtual-dtor -Wold-style-cast -Wcast-align -Wunused -Woverloaded-virtual -Wpedantic -Wconversion -Wsign-conversion -Wmisleading-indentation -Wduplicated-cond -Wduplicated-branches -Wlogical-op -Wnull-dereference -Wuseless-cast -Wdouble-promotion -Wformat=2 -Weffc++
 # Flags for the above defined compilers
-CXXFLAGS = -g -pg -std=c++11 $(WFLAGS) -I $(SRC_DIR) -DDEBUG
-CFLAGS = -g -pg -std=c11 $(WFLAGS) -I $(SRC_DIR) -DDEBUG
+CXXFLAGS = -std=c++11 $(WFLAGS) -I $(SRC_DIR) -O0 -g -pg
+CFLAGS = -std=c11 $(WFLAGS) -I $(SRC_DIR) -O0 -g -pg
 
 CXXCHECKS =clang-analyzer-*,-clang-analyzer-cplusplus*,cppcoreguidelines-*,bugprone-* 
 CXXCHECKFLAGS = -checks=$(CXXCHECKS) -header-filter=.* -- -std=c++11
 
 # Libraries to link against
 GSLLIBDIR="../GSL-lib"
-LDFLAGS = -L$(GSLLIBDIR) -L. -Wl,-rpath=$(GSLLIBDIR),-rpath=. -lm -lGSLpp -lxc
+LDFLAGS = -pg -L$(GSLLIBDIR) -L. -Wl,-rpath=$(GSLLIBDIR),-rpath=. -lm -lGSLpp -lxc
 
 # List of all executables in this project
 EXE = gsl-asw

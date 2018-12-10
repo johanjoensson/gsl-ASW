@@ -297,6 +297,7 @@ std::vector<std::vector<Atom>> Crystal::calc_nearest_neighbours()
 {
 	std::vector<std::vector<Atom>> res(this->atoms.size());
 	std::vector<Atom> tmp;
+	// Container for storing all neighbours, in all shells
 	std::unordered_set<Atom> pre_res;
 	Atom tmp_at;
 	GSL::Vector ri(3), rj(3);
@@ -314,12 +315,13 @@ std::vector<std::vector<Atom>> Crystal::calc_nearest_neighbours()
 		}
 		for(Atom a : tmp){
 			// Do not add the original atom
-			if(a.pos != GSL::Vector(3)){
+			if(a.pos != this->atoms[i].pos){
 				pre_res.insert(a);
 			}
 			// Add all lattice vectors
 			for(GSL::Vector R : this->Rn_vecs){
-				if(a.pos + R != GSL::Vector(3)){
+				// Insert all atoms in the system, except fot the original one
+				if(a.pos + R != this->atoms[i].pos){
 					tmp_at = a;
 					tmp_at.pos = a.pos + R;
 					pre_res.insert(tmp_at);

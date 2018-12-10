@@ -9,6 +9,7 @@
 #include "structure_const.h"
 #include "../../GSL-lib/src/special_functions.h"
 #include "../../GSL-lib/src/eigen.h"
+#include "../../GSL-lib/src/linalg.h"
 
 Simulation::Simulation()
  : cryst(), pot(), n(), basis_valence(), basis_core(), H(), S(), XH1(), XS1(),
@@ -182,7 +183,7 @@ GSL::Complex Simulation::H_element(const size_t i1, const size_t i2, const GSL::
     if(w1.l == w2.l && w1.center == w2.center){
         res += XH1[i1][i2];
     }
-    if(std::abs(w1.kappa*w1.kappa - w2.kappa*w2.kappa) < 1E-16){
+    if(std::abs(w1.kappa*w1.kappa - w2.kappa*w2.kappa) < 1E-14){
         B1 = Bloch_summed_structure_constant(l_low_1, w1.kappa, cryst, w1.l, w2.l);
         res += -w2.kappa*w2.kappa*B1.dot_evaluate(tau_ij, kp);
     }
@@ -304,6 +305,7 @@ GSL::Complex Simulation::S_element(const size_t i1, const size_t i2, const GSL::
             l++;
         }
     }
+
     B1 = Bloch_summed_structure_constant(l_low_2, w1.kappa, cryst, w1.l, w2.l);
     for(size_t n_s = 0; n_s < cryst.atoms.size(); n_s++){
         l = 0;
@@ -314,7 +316,6 @@ GSL::Complex Simulation::S_element(const size_t i1, const size_t i2, const GSL::
             l++;
         }
     }
-
 
     for(size_t i = 0; i < cryst.atoms.size(); i++){
             k = 0;
@@ -330,8 +331,8 @@ GSL::Complex Simulation::S_element(const size_t i1, const size_t i2, const GSL::
                         B1 = Bloch_summed_structure_constant(l_low, w1.kappa, cryst, J1.l, w1.l);
                         B2 = Bloch_summed_structure_constant(l_low, w2.kappa, cryst, J2.l, w2.l);
                         res += B1.evaluate(J1.center - w1.center.pos, kp).conjugate()*
-                        XS3[i][k][l]*
-                        B2.evaluate(J2.center - w2.center.pos, kp);
+                               XS3[i][k][l]*
+                               B2.evaluate(J2.center - w2.center.pos, kp);
                     }
                     l++;
                 }
@@ -399,7 +400,6 @@ void Simulation::set_up_X_matrices()
 
 void Simulation::set_up_H(const GSL::Vector& kp)
 {
-    this->H = GSL::Complex_Matrix(basis_valence.size(), basis_valence.size());
     std::cout << "Setting up Hamiltonian matrix." << std::endl;
     for(size_t i = 0; i < basis_valence.size(); i++){
         for(size_t j = i; j < basis_valence.size(); j++){
@@ -411,7 +411,6 @@ void Simulation::set_up_H(const GSL::Vector& kp)
 
 void Simulation::set_up_S(const GSL::Vector& kp)
 {
-    this->S = GSL::Complex_Matrix(basis_valence.size(), basis_valence.size());
     std::cout << "Setting up overlap matrix." << std::endl;
     for(size_t i = 0; i < basis_valence.size(); i++){
         for(size_t j = i; j < basis_valence.size(); j++){
@@ -435,27 +434,29 @@ void Simulation::calc_eigen()
     GSL::Complex_Matrix S_down(N, N);
 
     std::cout << "Solving generalized hermitian eigenvalue problem." << std::endl;
-    size_t i_up = 0, i_down = 0;
-    for(size_t i = 0; i < basis_valence.size(); i++){
-        for(size_t j = 0; j <basis_valence.size(); j++){
-            if(basis_valence[i].s == basis_valence[j].s){
-                if(basis_valence[i].s == UP){
-                    H_up[i_up/N].set(i_up%N, H[i][j]);
-                    S_up[i_up/N].set(i_up%N, S[i][j]);
-                    i_up++;
-                }else{
-                    H_down[i_down/N].set(i_down%N, H[i][j]);
-                    S_down[i_down/N].set(i_down%N, S[i][j]);
-                    i_down++;
-                }
-            }
+    for(size_t i = 0; i < basis_valence.size()/2; i++){
+        for(size_t j = 0; j <basis_valence.size()/2; j++){
+            H_up[i].set(j, H[2*i][2*j]);
+            S_up[i].set(j, S[2*i][2*j]);
+            H_down[i].set(j, H[2*i+1][2*j+1]);
+            S_down[i].set(j, S[2*i+1][2*j+1]);
         }
     }
 
-    std::cout << H_up << std::endl << std::endl;
-    std::cout << S_up << std::endl << std::endl;
-    GSL::general_hermitian_eigen(H_up, S_up, eigvecs_up, eigvals_up);
-    GSL::general_hermitian_eigen(H_down, S_down, eigvecs_down, eigvals_down);
+    std::cout << "Overlap matrix" << std::endl;
+    for(size_t i = 0 ; i < N; i++){
+        std::cout << S_up[i] << std::endl;
+    }
+    std::pair<GSL::Complex_Matrix, GSL::Vector> tmp;
+
+    tmp = GSL::hermitian_eigen(S_up);
+    std::cout << "Eigenvalues of S " << tmp.second << std::endl;
+    tmp = GSL::general_hermitian_eigen(H_up, S_up);
+    eigvecs_up = tmp.first;
+    eigvals_up = tmp.second;
+    tmp  = GSL::general_hermitian_eigen(H_down, S_down);
+    eigvecs_down = tmp.first;
+    eigvals_down = tmp.second;
 
     for(size_t i = 0; i < N; i++){
         std::cout << "Eigenvector (spin up) : ";

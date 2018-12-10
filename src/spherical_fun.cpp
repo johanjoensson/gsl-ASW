@@ -63,7 +63,7 @@ GSL::Result cubic_harmonic(lm l, const GSL::Vector& r)
 	if(l.m % 2 != 0){
 		c = -1;
 	}
-	if(r_norm < 1e-16){
+	if(r_norm < 1e-14){
 		GSL::Result res(0., 0.);
 		return res;
 	}
