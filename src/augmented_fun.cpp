@@ -2,6 +2,8 @@
 #include "spherical_fun.h"
 #include "numerov_solver.h"
 
+#include <numeric>
+
 Augmented_function::Augmented_function()
  : n(), l(), kappa(), radius(), center(), mesh(), val()
 {}
@@ -87,10 +89,10 @@ double augmented_integral(const Augmented_function &a, const Augmented_function 
         return 0.;
     }
     // Use Simpsons rule for integration
-    for(size_t i = 1; i <= (N - 1)/2; i++){
-        res += a.val[2*i - 1]*b.val[2*i - 1]/**mesh.r2[2*1 - 1]*mesh.drx[2*i-2]*/;
-        res += 4*a.val[2*i]*b.val[2*i]/**mesh.r2[2*1]*mesh.drx[2*i-1]*/;
-        res += a.val[2*i + 1]*b.val[2*i + 1]/**mesh.r2[2*1 + 1]*mesh.drx[2*i]*/;
+    for(size_t i = 1; i <= (N-2)/2; i++){
+        res += a.val[2*i - 1]*b.val[2*i - 1]*mesh.drx[2*i - 2]*mesh.drx[2*i - 2];
+        res += 4*a.val[2*i]*b.val[2*i]*mesh.drx[2*i - 1]*mesh.drx[2*i - 1];
+        res += a.val[2*i + 1]*b.val[2*i + 1]*mesh.drx[2*i]*mesh.drx[2*i];
     }
 
     res = 1./3 * res;
@@ -148,17 +150,17 @@ void Augmented_Hankel::update(std::vector<double>& v, const double en
 
     Hankel_function H(l);
 
-    std::vector<double> l_init = {GSL::pow_int(mesh.r[0], l.l+1)/sqrt(mesh.drx[0]),
+    std::vector<double> l_init = {0.,
         GSL::pow_int(mesh.r[1], l.l+1)/sqrt(mesh.drx[1]),
         GSL::pow_int(mesh.r[2], l.l+1)/sqrt(mesh.drx[2])};
     std::vector<double> r_init;
     if(core){
-        r_init = {1e-24, 0.};
+        r_init = {0., 0.};
     }else{
-        r_init = {-GSL::pow_int(kappa, l.l + 1)*mesh.r[last]*
-            H(kappa*mesh.r[last])/sqrt(mesh.drx[last]),
-                  -GSL::pow_int(kappa, l.l+1)*mesh.r[lastbutone]*
-            H(kappa*mesh.r[lastbutone])/sqrt(mesh.drx[lastbutone])};
+        r_init = {-GSL::pow_int(kappa, l.l + 1)*mesh.r[lastbutone]*
+            H(kappa*mesh.r[lastbutone])/sqrt(mesh.drx[lastbutone]),
+                  -GSL::pow_int(kappa, l.l+1)*mesh.r[last]*
+            H(kappa*mesh.r[last])/sqrt(mesh.drx[last])};
     }
     val = sol.solve(mesh, v, l_init, r_init, EH, nodes);
 }
@@ -233,19 +235,19 @@ void Augmented_Bessel::update(std::vector<double>& v, const double en
 {
     EJ = en;
     Numerov_solver sol;
-    int nodes = std::max(0,n - l.l - 1);
+    int nodes = std::max(-1, n - l.l - 1);
     size_t last = mesh.r.size() - 1, lastbutone = mesh.r.size() - 2;
     Bessel_function J(l);
 
     if(!core){
-        std::vector<double> l_init = {GSL::pow_int(mesh.r[0], l.l+1)/sqrt(mesh.drx[0]),
+        std::vector<double> l_init = {0.,
             GSL::pow_int(mesh.r[1], l.l+1)/sqrt(mesh.drx[1]),
             GSL::pow_int(mesh.r[2], l.l+1)/sqrt(mesh.drx[2])};
 
-        std::vector<double> r_init = {GSL::pow_int(1./kappa, l.l)*mesh.r[last]*
-            J(kappa*mesh.r[last])/sqrt(mesh.drx[last]),
-                  GSL::pow_int(1./kappa, l.l)*mesh.r[lastbutone]*
-            J(kappa*mesh.r[lastbutone])/sqrt(mesh.drx[lastbutone])};
+        std::vector<double> r_init = {GSL::pow_int(1./kappa, l.l)*mesh.r[lastbutone]*
+            J(kappa*mesh.r[lastbutone])/sqrt(mesh.drx[lastbutone]),
+                  GSL::pow_int(1./kappa, l.l)*mesh.r[last]*
+            J(kappa*mesh.r[last])/sqrt(mesh.drx[last])};
 
         val = sol.solve(mesh, v, l_init, r_init, EJ, nodes);
     }else{

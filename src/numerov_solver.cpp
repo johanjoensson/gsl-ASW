@@ -20,11 +20,12 @@ std::vector<double> Numerov_solver::solve_left(Logarithmic_mesh &mesh,
 	double g, g1, g2;
 	double A = mesh.A();
 
-	for(size_t i = res.size() - 1; i > res.size() - 1 - l; i--){
-		res[i] = init_cond[res.size() - 1 - i];
+	size_t offset = res.size() - l - 1;
+	for(size_t i = 0; i < l; i++){
+		res[offset - i] = init_cond[i];
 	}
 
-	for(size_t i = res.size() - 1 - l; i >= i_lr; i--){
+	for(size_t i = offset; i >= i_lr; i--){
 		g = mesh.drx[i]*mesh.drx[i]*(E - v[i]) - A*A/4.;
 		g1 = mesh.drx[i+1]*mesh.drx[i+1]*(E - v[i+1]) - A*A/4.;
 		g2 = mesh.drx[i+2]*mesh.drx[i+2]*(E - v[i+2]) - A*A/4.;
@@ -105,8 +106,8 @@ double Numerov_solver::variational_energy_correction(Logarithmic_mesh &mesh,
 	A*A/4.)/12.;
 	cusp_val = (fun[i_inv - 1]*f_m1 + fun[i_inv + 1]*f_p1 +
 		10*fun[i_inv]*f_inv)/12.;
-	df = f_inv*(fun[i_inv]/cusp_val - 1);
-	return 6.*df*cusp_val*cusp_val;
+	df = f_inv*fun[i_inv] - f_inv*cusp_val;
+	return 6.*df*cusp_val;
 }
 
 std::vector<double> Numerov_solver::solve(Logarithmic_mesh &mesh,
@@ -123,7 +124,7 @@ std::vector<double> Numerov_solver::solve(Logarithmic_mesh &mesh,
 	}
     double e_trial = en;
 	if(e_trial < e_min){
-		e_min = e_trial;
+		e_trial = e_min;
 	}
 #ifdef DEBUG
 	std::ofstream out_file("numerov.debug", std::fstream::out | std::fstream::app);
@@ -147,7 +148,7 @@ std::vector<double> Numerov_solver::solve(Logarithmic_mesh &mesh,
 	    // Rough estimate of the energy
 	    // Make sure we have the correct number of nodes
 	    it2 = 0;
-	    while(n_tmp != n_nodes && it2 < 10){
+	    while(n_tmp != n_nodes && it2 < 5){
 		    i_inv = find_inversion_point(mesh, v, e_trial);
 		    tmp = this->solve_right(mesh, v, i_inv, l_init, e_trial);
 		    n_tmp = count_nodes(tmp, i_inv);
@@ -202,7 +203,7 @@ std::vector<double> Numerov_solver::solve(Logarithmic_mesh &mesh,
 		}
 
 		if(std::abs(e_max - e_min) < 5E-14){
-			if(de < 1){
+			if(de < 0){
 				e_min -= 1.5;
 			}else{
 				e_max += 1.5;
@@ -210,7 +211,6 @@ std::vector<double> Numerov_solver::solve(Logarithmic_mesh &mesh,
 		}
 
 		e_trial = 0.5*(e_max + e_min);
-
 		n_tmp = -1;
 	    it1++;
     }

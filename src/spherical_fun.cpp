@@ -22,12 +22,8 @@ double wronskian(Spherical_function& a, Spherical_function& b, double r)
 double Hankel_function::operator()(const double x)
 {
     GSL::Result exp = GSL::exp(-x);
-    GSL::Result k;
-    if(l.l >= 0){
-        k = GSL::bessel_kn_scaled(l.l, x);
-    }else{
-        k = GSL::Result(0, 0);
-    }
+    GSL::Result k ;
+    k = GSL::bessel_kn_scaled(l.l, x);
 
   return (exp*k).val;
 }
@@ -35,12 +31,7 @@ double Hankel_function::operator()(const double x)
 double Bessel_function::operator()(const double x)
 {
     GSL::Result exp = GSL::exp(-x);
-    GSL::Result i;
-    if(l.l >= 0){
-        i = GSL::bessel_in_scaled(l.l, x);
-    }else{
-        i = GSL::Result(0, 0);
-    }
+    GSL::Result i = GSL::bessel_in_scaled(l.l, x);
 
   return (exp*i).val;
 }
@@ -54,15 +45,12 @@ double Neumann_function::operator()(const double x)
 
 GSL::Result cubic_harmonic(lm l, const GSL::Vector& r)
 {
-	int m_eff = l.m;
+	int m_eff = std::abs(l.m);
+    int sign = 1;
+    if(m_eff % 2 == 1){
+        sign = -1;
+    }
 	double r_norm = r.norm();
-	int c = 1;
-	if (l.m < 0){
-		m_eff = -l.m;
-	}
-	if(l.m % 2 != 0){
-		c = -1;
-	}
 	if(r_norm < 1e-14){
 		GSL::Result res(0., 0.);
 		return res;
@@ -81,15 +69,15 @@ GSL::Result cubic_harmonic(lm l, const GSL::Vector& r)
 	cos_theta = GSL::Result(z, 0);
 
 
-	if(l.m > 0){
-		res = GSL::cos(m_eff*phi)*sqrt(2.);
-	}else if (l.m == 0){
-		res = GSL::Result(1., 0.);
-	}else{
-		res = GSL::sin(m_eff*phi)*sqrt(2.);
+	if(l.m >= 0){
+		res = GSL::cos(m_eff*phi);
+	}else if (l.m < 0){
+		res = GSL::sin(m_eff*phi);
 	}
-
-	return c*GSL::legendre_sphPlm(l.l, m_eff, cos_theta.val)*res;
+    if(l.m != 0){
+        res *= std::sqrt(2.);
+    }
+	return sign*GSL::legendre_sphPlm(l.l, m_eff, cos_theta.val)*res;
 }
 
 std::ostream& operator << ( std::ostream& os, const lm& l)

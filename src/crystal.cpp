@@ -135,12 +135,11 @@ double Crystal::calc_Rmax(double tol, double kappa, lm l)
 	if(-GSL::log(tol).val < 0){
 		sign = -1;
 	}
-
 	double r = 1;
 	while((l.l*GSL::log(r) + GSL::log(I.ewald_int(l, r)) -
 	GSL::log(I.ewald_int(l, 1.)) - GSL::log(tol)).val*sign > 0)
 	{
-		r += 2/sqrt(eta);
+		r += 2./sqrt(eta);
 	}
 	r = bisect_r(tol, kappa, eta, l, r - 2/sqrt(eta), r);
 
@@ -160,15 +159,15 @@ void Crystal::set_Rn(double Rmax)
 	int N2 = static_cast<int>(b2.norm()/(2*M_PI)*Rmax);
 	int N3 = static_cast<int>(b3.norm()/(2*M_PI)*Rmax);
 
-	std::unordered_set<GSL::Vector> tmp;
-	for(int n1 = -N1; n1 <= N1; n1++){
-		for(int n2 = -N2; n2 <= N2; n2++){
-			for(int n3 = -N3; n3 <= N3; n3++){
-				tmp.insert(n1*a1 + n2*a2 + n3*a3);
+	// std::unordered_set<GSL::Vector> tmp;
+	for(int n1 = -N1/5; n1 <= N1/5; n1++){
+		for(int n2 = -N2/5; n2 <= N2/5; n2++){
+			for(int n3 = -N3/5; n3 <= N3/5; n3++){
+				Rn_vecs.push_back(n1*a1 + n2*a2 + n3*a3);
 			}
 		}
 	}
-	Rn_vecs.assign(tmp.begin(), tmp.end());
+	// Rn_vecs.assign(tmp.begin(), tmp.end());
 	std::sort(Rn_vecs.begin(), Rn_vecs.end(), comp_norm);
 }
 
@@ -306,9 +305,11 @@ std::vector<std::vector<Atom>> Crystal::calc_nearest_neighbours()
 		pre_res.clear();
 		ri = this->atoms[i].pos;
 		tmp.push_back(this->atoms[i]);
-		tmp.back().pos = GSL::Vector(3);
 		// Calculate all neighbours inside the cell
 		for(size_t j = 0; j < this->atoms.size(); j++){
+			if(i == j){
+				continue;
+			}
 			rj = this->atoms[j].pos;
 			tmp.push_back(this->atoms[j]);
 			tmp.back().pos = (ri - rj);

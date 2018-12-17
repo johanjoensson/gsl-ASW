@@ -22,24 +22,18 @@ Augmented_spherical_wave::Augmented_spherical_wave(double kappa_n, int n_n,
     int l_low = 2;
     Numerov_solver sol;
     Augmented_Bessel tmp;
-    std::vector<Atom>::iterator it = find(off_centers.begin(), off_centers.end(),
-    center);
-    size_t i;// = std::distance(off_centers.begin(), it);
-    for(Atom at : off_centers){
-        it = find(off_centers.begin(), off_centers.end(), at);
-        i = static_cast<size_t>(std::distance(off_centers.begin(), it));
-        if(at != center){
-            if(at.Z >= 20){
-                l_low = 3;
-            }else{
-                l_low = 2;
-            }
-            for(int l_s = 0; l_s <= l_low + 1; l_s++){
-                for(int m = -l_s; m <= l_s; m++){
-                    lm lp = {l_s, m};
-                    tmp = Augmented_Bessel(n, lp, kappa, at.pos, at.mesh);
-                    J[i].insert(tmp);
-                }
+    for(size_t i = 0; i < off_centers.size(); i++){
+        Atom at = off_centers[i];
+        if(at.Z >= 20){
+            l_low = 3;
+        }else{
+            l_low = 2;
+        }
+        for(int l_s = 0; l_s <= l_low + 1; l_s++){
+            for(int m_s = -l_s; m_s <= l_s; m_s++){
+                lm lp = {l_s, m_s};
+                tmp = Augmented_Bessel(n, lp, kappa, at.pos, at.mesh);
+                J[i].insert(tmp);
             }
         }
     }
@@ -73,26 +67,20 @@ void Augmented_spherical_wave::set_up(Potential &v)
 	out_file.open("check_Hankel.dat");
 	out_file << "# r\trH" << std::endl;
 	for(size_t j = 0; j < H.val.size(); j++){
-		out_file << std::setprecision(8) << center.mesh.r[j] << " " << v_tot[j] << " " << H.val[j] << std::endl;
+		out_file << std::setprecision(8) << center.mesh.r[j] << " " << v_tot[j] << " " << H.val[j]*center.mesh.drx[j]/(center.mesh.r[j]) << std::endl;
 	}
 	out_file.close();
 #endif
-    std::unordered_set<Augmented_Bessel> tmp;
     for(Atom at : off_centers){
+        std::unordered_set<Augmented_Bessel> Ji_tmp;
         it = find(v.sites.begin(), v.sites.end(), at);
         i = static_cast<size_t>(std::distance(v.sites.begin(), it));
-
-        if(at != center){
-            en =H.EH;
-
-            for(Augmented_Bessel Jil : J[i]){
-                v_tot = v_eff(Jil.mesh, v.val[i], Jil.l);
-                Jil.update(v_tot, en, core_state);
-                tmp.insert(Jil);
-            }
-            J[i].swap(tmp);
-            tmp.clear();
+        for(Augmented_Bessel Jil : J[i]){
+            v_tot = v_eff(Jil.mesh, v.val[i], Jil.l);
+            Jil.update(v_tot, en, core_state);
+            Ji_tmp.insert(Jil);
         }
+        J[i].swap(Ji_tmp);
     }
 }
 

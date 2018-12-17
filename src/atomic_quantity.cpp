@@ -120,6 +120,11 @@ void Potential::initial_pot(size_t nel, double vol)
     // average of the potential on all spheres
     this->MT_0 = MT_0_s/areas;
 	std::cout << "MT0 = " << this->MT_0 << std::endl;
+    for(size_t i = 0; i < sites.size(); i++){
+        for(size_t j = 0; j < sites[i].mesh.r.size(); j++){
+            val[i][j] -= this->MT_0;
+        }
+    }
 }
 
 Density::Density(std::vector<Atom>& atoms)

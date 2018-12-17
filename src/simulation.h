@@ -13,8 +13,7 @@ class Simulation{
     std::vector<Augmented_spherical_wave> basis_valence;
     std::vector<Augmented_spherical_wave> basis_core;
     GSL::Complex_Matrix H, S;
-    GSL::Matrix XH1, XS1, XH2, XS2;
-    std::vector<GSL::Matrix> XH3, XS3;
+    GSL::Matrix XH1, XS1, XH2, XS2, XH3, XS3;
 
     void add_states(const Atom& at, const double kappa);
     GSL::Complex H_element(const size_t i1, const size_t i2, const GSL::Vector& kp);

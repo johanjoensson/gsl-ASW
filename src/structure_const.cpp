@@ -6,7 +6,7 @@
 #include "spherical_fun.h"
 
 // This needs to be really thoroghly checked!
-// 'cause right now it is definitely wrong!'
+// 'cause right now it is almost definitely wrong!'
 Structure_constant::Structure_constant(int l_low_n, int l_int_n,
 	double kappa_n, lm l1_n, lm l2_n, GSL::Vector& r_n)
 	: l_int(l_int_n), l_low(l_low_n), l1(l1_n), l2(l2_n), kappa(kappa_n),
@@ -122,7 +122,7 @@ Bloch_summed_structure_constant::Bloch_summed_structure_constant()
 GSL::Complex Bloch_summed_structure_constant::evaluate(const GSL::Vector& tau,
 	const GSL::Vector& kp)
 {
-	Bloch_sum bs(lm {0, 0}, kappa, this->c);
+	Bloch_sum bloch_sum(lm {0, 0}, kappa, this->c);
 	double k_fac = GSL::pow_int(kappa, l1.l + l2.l);
 
 	int sign = 1;
@@ -132,16 +132,18 @@ GSL::Complex Bloch_summed_structure_constant::evaluate(const GSL::Vector& tau,
 		m_sum = GSL::Complex(0., 0.);
 		for (int mpp = -lpp; mpp <= lpp; mpp++){
 			a = gaunt(l2, l1, lm {lpp, mpp});
-			if (abs(a.val) > 1E-16){
-				bs = Bloch_sum(lm {lpp, mpp}, kappa, this->c);
-			    m_sum += a.val*bs.hankel_envelope(tau, kp);
+			if (abs(a.val) > 1E-14){
+				bloch_sum = Bloch_sum(lm {lpp, mpp}, kappa, this->c);
+			    m_sum += a.val*bloch_sum.hankel_envelope(tau, kp);
 			}
 		}
 		sum += sign/(GSL::pow_int(kappa, lpp))*m_sum;
-		sign *= -1;
+		sign = -sign;
 	}
 
-	if (l2.l % 2 != 0){
+	if (l2.l % 2 == 0){
+		sign = 1;
+	}else{
 		sign = -1;
 	}
 	return 4*M_PI*sign*k_fac*sum;
@@ -150,7 +152,7 @@ GSL::Complex Bloch_summed_structure_constant::evaluate(const GSL::Vector& tau,
 GSL::Complex Bloch_summed_structure_constant::dot_evaluate(
 	const GSL::Vector& tau, const GSL::Vector& kp)
 {
-	Bloch_sum bs(lm {0, 0}, kappa, this->c);
+	Bloch_sum bloch_sum(lm {0, 0}, kappa, this->c);
 	double k_fac = GSL::pow_int(kappa, l1.l + l2.l);
 
 	int sign = 1;
@@ -160,18 +162,20 @@ GSL::Complex Bloch_summed_structure_constant::dot_evaluate(
 		m_sum = GSL::Complex(0., 0.);
 		for (int mpp = -lpp; mpp <= lpp; mpp++){
 			a = gaunt(l2, l1, lm {lpp, mpp});
-			if (abs(a.val) > 1E-16){
-				bs = Bloch_sum(lm {lpp, mpp}, kappa, this->c);
-			    m_sum += a.val*(2*bs.hankel_envelope_dot(tau, kp) -
+			if (abs(a.val) > 1E-14){
+				bloch_sum = Bloch_sum(lm {lpp, mpp}, kappa, this->c);
+			    m_sum += a.val*(2*bloch_sum.hankel_envelope_dot(tau, kp) -
 				(l1.l + l2.l - lpp)/
-				GSL::pow_int(kappa, 2)*bs.hankel_envelope(tau, kp));
+				GSL::pow_int(kappa, 2)*bloch_sum.hankel_envelope(tau, kp));
 			}
 		}
 		sum += sign/(GSL::pow_int(kappa, lpp))*m_sum;
-		sign *= -1;
+		sign = -sign;
 	}
-	if (l2.l % 2 != 0){
-		sign = -1;
+	if (l2.l % 2 == 0){
+		sign = 1;
+	}else{
+		sign  = -1;
 	}
 	return 2*M_PI*sign*k_fac*sum;
 }

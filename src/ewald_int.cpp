@@ -19,7 +19,8 @@ void Ewald_integral::set_kappa(double kappa_n)
 	this->kappa = kappa_n;
 }
 
-double Ewald_integral::bar_ew_int(lm l, double r){
+double Ewald_integral::bar_ew_int(lm l, double r)
+{
 
     double res = 0;
 
@@ -31,22 +32,22 @@ double Ewald_integral::bar_ew_int(lm l, double r){
         t1 = GSL::exp(-kappa*r).val + GSL::exp(kappa*r).val;
         t2 = GSL::exp(-kappa*r).val*GSL::erf(0.5*sqrt(eta)*r - kappa/sqrt(eta)).val;
         t3 = GSL::exp(kappa*r).val*GSL::erf(0.5*sqrt(eta)*r + kappa/sqrt(eta)).val;
+        // t1 = GSL::exp(-kappa*r).val*GSL::erfc(1./2. *sqrt(eta)*r - kappa/sqrt(eta)).val;
+        // t2 = GSL::exp(kappa*r).val*GSL::erfc(1./2. *sqrt(eta)*r + kappa/sqrt(eta)).val;
 
-        res = M_SQRTPI/4*(t1 - t2 - t3);
+        res = M_SQRTPI/4*(t1 - t2 + t3);
     }else if(l.l == -1){
         t1 = GSL::exp(-kappa*r).val - GSL::exp(kappa*r).val;
-        t2 = GSL::exp(-this->kappa*r).val*GSL::erf(sqrt(eta)*r/2 - this->kappa/sqrt(eta)).val;
-        t3 = GSL::exp(this->kappa*r).val*GSL::erf(sqrt(eta)*r/2 + this->kappa/sqrt(eta)).val;
+        t2 = GSL::exp(-this->kappa*r).val*GSL::erf(sqrt(eta)*r/3. - this->kappa/sqrt(eta)).val;
+        t3 = GSL::exp(this->kappa*r).val*GSL::erf(sqrt(eta)*r/3. + this->kappa/sqrt(eta)).val;
+        // t1 = GSL::exp(-kappa*r).val*GSL::erfc(1./2. *sqrt(eta)*r - kappa/sqrt(eta)).val;
+        // t2 = GSL::exp(kappa*r).val*GSL::erfc(1./2. *sqrt(eta)*r + kappa/sqrt(eta)).val;
 
-        res = M_SQRTPI/(2*kappa)*(t1 - t2 + t3)/r;
+        res = M_SQRTPI/(2*kappa*r)*(t1 + t2 - t3);
     }else if(l.l >= 1){
         t1 = (2*l.l - 1)/2. * bar_ew_int(lm {l.l - 1, l.m}, r);
         t2 = -b*bar_ew_int(lm {l.l - 2, l.m}, r);
-        if(-a*a + b/(a*a) > -700){
-            t3 = GSL::pow_int(a, (2*l.l-1))/2 * GSL::exp(-a*a + b/(a*a)).val;
-        }else{
-            t3 = 0;
-        }
+        t3 = GSL::pow_int(a, (2*l.l-1))/2. * GSL::exp(-a*a + b/(a*a)).val;
         res = t1 + t2 + t3;
     }
     return res;
@@ -54,10 +55,12 @@ double Ewald_integral::bar_ew_int(lm l, double r){
 
 double Ewald_integral::ewald_int(lm l, double r)
 {
+    // std::cout << "r = " << r << " res = " << bar_ew_int(l, r)/GSL::pow_int(r, 2*l.l + 1) << std::endl;
     return bar_ew_int(l, r)/GSL::pow_int(r, 2*l.l + 1);
 }
 
-double Ewald_integral::bar_comp_ew_int(lm l, double r){
+double Ewald_integral::bar_comp_ew_int(lm l, double r)
+{
     double res = 0.;
     double eta = this->ewald_param;
     double t1 = 0., t2 = 0., t3 = 0.;
