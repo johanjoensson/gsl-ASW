@@ -29,7 +29,7 @@ Augmented_spherical_wave::Augmented_spherical_wave(double kappa_n, int n_n,
         }else{
             l_low = 2;
         }
-        for(int l_s = 0; l_s <= l_low + 1; l_s++){
+        for(int l_s = 0; l_s <= std::min(l_low + 1, n - 1); l_s++){
             for(int m_s = -l_s; m_s <= l_s; m_s++){
                 lm lp = {l_s, m_s};
                 tmp = Augmented_Bessel(n, lp, kappa, at.pos, at.mesh);
@@ -64,11 +64,12 @@ void Augmented_spherical_wave::set_up(Potential &v)
 
 #ifdef DEBUG
 	std::ofstream out_file;
-	out_file.open("check_Hankel.dat");
-	out_file << "# r\trH" << std::endl;
+	out_file.open("check_Hankel.dat", std::fstream::out|std::fstream::app);
+	out_file << "# r\tV(r)\tH(r)" << "\n";
 	for(size_t j = 0; j < H.val.size(); j++){
-		out_file << std::setprecision(8) << center.mesh.r[j] << " " << v_tot[j] << " " << H.val[j]*center.mesh.drx[j]/(center.mesh.r[j]) << std::endl;
+		out_file << std::setprecision(8) << center.mesh.r[j] << " " << v_tot[j] << " " << H.val[j]/(center.mesh.r[j]*sqrt(center.mesh.drx[j])) << "\n";
 	}
+    out_file << "\n\n";
 	out_file.close();
 #endif
     for(Atom at : off_centers){
@@ -79,6 +80,15 @@ void Augmented_spherical_wave::set_up(Potential &v)
             v_tot = v_eff(Jil.mesh, v.val[i], Jil.l);
             Jil.update(v_tot, en, core_state);
             Ji_tmp.insert(Jil);
+#ifdef DEBUG
+            out_file.open("check_Bessel.dat", std::fstream::out|std::fstream::app);
+            out_file << "# r\tV(r)\tJ(r)" << std::endl;
+            for(size_t j = 0; j < Jil.val.size(); j++){
+                out_file << std::setprecision(8) << at.mesh.r[j] << " " << v_tot[j] << " " << Jil.val[j]/at.mesh.r[j]*sqrt(at.mesh.drx[j]) << "\n";
+            }
+            out_file << "\n\n";
+            out_file.close();
+#endif
         }
         J[i].swap(Ji_tmp);
     }

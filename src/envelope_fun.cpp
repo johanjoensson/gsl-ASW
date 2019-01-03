@@ -12,7 +12,7 @@ Envelope_function::Envelope_function(const Atom& center_n, lm l_n, double kappa_
 double Envelope_Hankel::barred_fun(const double x) const
 {
     lm l_eff = l;
-    double kappa_fac = 1;
+    double kappa_fac = 1.;
     if(l.l < 0){
         l_eff = lm{ -l.l - 1, l.m};
         kappa_fac = 1./GSL::pow_int(kappa, -2*l.l - 1);
@@ -30,7 +30,7 @@ double Envelope_Bessel::barred_fun(const double x) const
         Envelope_Neumann n(center, lm {-l.l - 1, l.m}, kappa);
         int sign = 1;
         if(l.l % 2 == 1){
-            sign = -1;
+//            sign = -1;
         }
         return sign*n.barred_fun(x);
     }
@@ -93,15 +93,15 @@ double atomic_integral(const Envelope_Hankel& H1, const Envelope_Bessel& J2)
     }
 
     if(H1.kappa != J2.kappa){
-        res = rs*rs*(H1.barred_fun(rs)*J2m1.barred_fun(rs) -
-               -H1.kappa*H1.kappa*H1m1.barred_fun(rs)*J2.barred_fun(rs)) - 1;
-        res *= 1./(-H1.kappa*H1.kappa - -J2.kappa*J2.kappa);
+        res = rs*rs*(H1.barred_fun(rs)*J2m1.barred_fun(rs) +
+               H1.kappa*H1.kappa*H1m1.barred_fun(rs)*J2.barred_fun(rs)) - 1;
+        res *= 1./(-H1.kappa*H1.kappa + J2.kappa*J2.kappa);
     }else{
         res = rs*rs*rs*(2*H1.barred_fun(rs)*J2.barred_fun(rs)  +
               H1.kappa*H1.kappa*H1m1.barred_fun(rs)*J2p1.barred_fun(rs) +
               1./(H1.kappa*H1.kappa)*H1p1.barred_fun(rs)*J2m1.barred_fun(rs)) -
               (2*H1.l.l + 1)/(H1.kappa*H1.kappa);
-        res *= 1./4.;
+        res *= 1./4;
     }
 
     return res;

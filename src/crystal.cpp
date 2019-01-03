@@ -160,9 +160,9 @@ void Crystal::set_Rn(double Rmax)
 	int N3 = static_cast<int>(b3.norm()/(2*M_PI)*Rmax);
 
 	// std::unordered_set<GSL::Vector> tmp;
-	for(int n1 = -N1/5; n1 <= N1/5; n1++){
-		for(int n2 = -N2/5; n2 <= N2/5; n2++){
-			for(int n3 = -N3/5; n3 <= N3/5; n3++){
+	for(int n1 = -N1; n1 <= N1; n1++){
+		for(int n2 = -N2; n2 <= N2; n2++){
+			for(int n3 = -N3; n3 <= N3; n3++){
 				Rn_vecs.push_back(n1*a1 + n2*a2 + n3*a3);
 			}
 		}
@@ -211,11 +211,10 @@ void Crystal::set_Kn(double Kmax)
 	for(int n1 = -N1; n1 <= N1; n1++){
 		for(int n2 = -N2; n2 <= N2; n2++){
 			for(int n3 = -N3; n3 <= N3; n3++){
-				tmp.insert(n1*b1 + n2*b2 + n3*b3);
+				Kn_vecs.push_back(n1*b1 + n2*b2 + n3*b3);
 			}
 		}
 	}
-	Kn_vecs.assign(tmp.begin(), tmp.end());
 	std::sort(Kn_vecs.begin(), Kn_vecs.end(), comp_norm);
 }
 

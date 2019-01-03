@@ -25,8 +25,8 @@ BUILD_DIR = build
 
 WFLAGS = -Werror -Wall -Wextra -pedantic -Wshadow -Wnon-virtual-dtor -Wold-style-cast -Wcast-align -Wunused -Woverloaded-virtual -Wpedantic -Wconversion -Wsign-conversion -Wmisleading-indentation -Wduplicated-cond -Wduplicated-branches -Wlogical-op -Wnull-dereference -Wuseless-cast -Wdouble-promotion -Wformat=2 -Weffc++
 # Flags for the above defined compilers
-CXXFLAGS = -std=c++11 $(WFLAGS) -I $(SRC_DIR) -O0 -g -pg
-CFLAGS = -std=c11 $(WFLAGS) -I $(SRC_DIR) -O0 -g -pg
+CXXFLAGS = -std=c++11 $(WFLAGS) -I $(SRC_DIR) -O2 -g -DDEBUG
+CFLAGS = -std=c11 $(WFLAGS) -I $(SRC_DIR) -O0 -g
 
 CXXCHECKS =clang-analyzer-*,-clang-analyzer-cplusplus*,cppcoreguidelines-*,bugprone-* 
 CXXCHECKFLAGS = -checks=$(CXXCHECKS) -header-filter=.* -- -std=c++11

@@ -3,6 +3,7 @@
 #include "numerov_solver.h"
 
 #include <numeric>
+#include <fstream>
 
 Augmented_function::Augmented_function()
  : n(), l(), kappa(), radius(), center(), mesh(), val()
@@ -145,21 +146,22 @@ void Augmented_Hankel::update(std::vector<double>& v, const double en
 {
     EH = en;
     Numerov_solver sol;
-    int nodes = std::max(0, n - l.l - 1);
+    int nodes = n - l.l - 1;
     size_t last = mesh.r.size() - 1, lastbutone = mesh.r.size() - 2;
 
     Hankel_function H(l);
 
-    std::vector<double> l_init = {0.,
+    std::vector<double> l_init = {
+        GSL::pow_int(mesh.r[0], l.l+1)/sqrt(mesh.drx[0]),
         GSL::pow_int(mesh.r[1], l.l+1)/sqrt(mesh.drx[1]),
         GSL::pow_int(mesh.r[2], l.l+1)/sqrt(mesh.drx[2])};
     std::vector<double> r_init;
     if(core){
         r_init = {0., 0.};
     }else{
-        r_init = {-GSL::pow_int(kappa, l.l + 1)*mesh.r[lastbutone]*
+        r_init = {GSL::pow_int(kappa, l.l + 1)*mesh.r[lastbutone]*
             H(kappa*mesh.r[lastbutone])/sqrt(mesh.drx[lastbutone]),
-                  -GSL::pow_int(kappa, l.l+1)*mesh.r[last]*
+                  GSL::pow_int(kappa, l.l+1)*mesh.r[last]*
             H(kappa*mesh.r[last])/sqrt(mesh.drx[last])};
     }
     val = sol.solve(mesh, v, l_init, r_init, EH, nodes);
@@ -235,16 +237,18 @@ void Augmented_Bessel::update(std::vector<double>& v, const double en
 {
     EJ = en;
     Numerov_solver sol;
-    int nodes = std::max(-1, n - l.l - 1);
+    int nodes =  n - l.l - 1;
     size_t last = mesh.r.size() - 1, lastbutone = mesh.r.size() - 2;
     Bessel_function J(l);
 
-    if(!core){
-        std::vector<double> l_init = {0.,
+    if(!core && nodes >= 0){
+        std::vector<double> l_init = {
+            GSL::pow_int(mesh.r[0], l.l+1)/sqrt(mesh.drx[0]),
             GSL::pow_int(mesh.r[1], l.l+1)/sqrt(mesh.drx[1]),
             GSL::pow_int(mesh.r[2], l.l+1)/sqrt(mesh.drx[2])};
 
-        std::vector<double> r_init = {GSL::pow_int(1./kappa, l.l)*mesh.r[lastbutone]*
+        std::vector<double> r_init = {
+                GSL::pow_int(1./kappa, l.l)*mesh.r[lastbutone]*
             J(kappa*mesh.r[lastbutone])/sqrt(mesh.drx[lastbutone]),
                   GSL::pow_int(1./kappa, l.l)*mesh.r[last]*
             J(kappa*mesh.r[last])/sqrt(mesh.drx[last])};

@@ -22,18 +22,21 @@ double wronskian(Spherical_function& a, Spherical_function& b, double r)
 double Hankel_function::operator()(const double x)
 {
     GSL::Result exp = GSL::exp(-x);
-    GSL::Result k ;
+    GSL::Result k;
     k = GSL::bessel_kn_scaled(l.l, x);
-
-  return (exp*k).val;
+    return 2./M_PI*(exp*k).val;
 }
 
 double Bessel_function::operator()(const double x)
 {
-    GSL::Result exp = GSL::exp(-x);
+    GSL::Result exp = GSL::exp(std::abs(x));
     GSL::Result i = GSL::bessel_in_scaled(l.l, x);
+    int sign = 1;
+    // if(l.l % 2 == 1){
+    //     sign = -1;
+    // }
 
-  return (exp*i).val;
+  return (sign*exp*i).val;
 }
 
 double Neumann_function::operator()(const double x)

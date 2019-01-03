@@ -30,7 +30,11 @@ int main()
 {
 #ifdef DEBUG
 std::ofstream numerov_debug;
-numerov_debug.open("numerov.debug", std::fstream::out);
+numerov_debug.open("numerov.debug", std::fstream::out|std::fstream::trunc);
+numerov_debug.close();
+numerov_debug.open("check_Hankel.dat", std::fstream::out|std::fstream::trunc);
+numerov_debug.close();
+numerov_debug.open("check_Bessel.dat", std::fstream::out|std::fstream::trunc);
 numerov_debug.close();
 #endif
 	std::cout.precision(12);
@@ -38,34 +42,35 @@ numerov_debug.close();
 	GSL::Error_handler e_handler;
 	e_handler.off();
 
-	//GSL::Vector a = {0.0, 0.5, 0.5}, b = {0.5, 0.0, 0.5}, c = {0.5, 0.5, 0.0};
-	GSL::Vector a = {1.0, 0.0, 0.0}, b = {0.0, 1.0, 0.0}, c = {0.0, 0.0, 1.0};
-	std::cout << a << std::endl;
-	std::cout << b << std::endl;
-	std::cout << c << std::endl;
-	Crystal cr(14*a, 14*b, 14*c);
+	GSL::Vector a = {0.0, 0.5, 0.5}, b = {0.5, 0.0, 0.5}, c = {0.5, 0.5, 0.0};
+	// GSL::Vector a = {1.0, 0.0, 0.0}, b = {0.0, 1.0, 0.0}, c = {0.0, 0.0, 1.0};
+	std::cout << a << "\n";
+	std::cout << b << "\n";
+	std::cout << c << "\n";
+	Crystal cr(8*a, 8*b, 8*c);
 
-	std::cout << cr.lat.scale*cr.lat.lat << std::endl;
+	std::cout << cr.lat.scale*cr.lat.lat << "\n";
 
-	std::cout << "Calculating Rmax" << std::endl;
-	double Rmax = cr.calc_Rmax(1e-12, sqrt(0.015), lm {4, 0});
-	std::cout << "Calculating Kmax" << std::endl;
-	double Kmax = cr.calc_Kmax(1e-12, sqrt(0.015), lm {4, 0});
+	std::cout << "Calculating Rmax" << "\n";
+	double Rmax = cr.calc_Rmax(1e-14, sqrt(0.015), lm {5, 0});
+	std::cout << "Calculating Kmax" << "\n";
+	double Kmax = cr.calc_Kmax(1e-14, sqrt(0.015), lm {5, 0});
+	std::cout << "Rmax = " << Rmax << ", Kmax = " << Kmax << "\n";
 
 
-	std::cout << "Setting R-vectors" << std::endl;
+	std::cout << "Setting R-vectors" << "\n";
 	cr.set_Rn(Rmax);
-	std::cout << "Setting K-vectors" << std::endl;
+	std::cout << "Setting K-vectors" << "\n";
 	cr.set_Kn(Kmax);
 
-	std::cout << "Setting up atoms" << std::endl;
+	std::cout << "Setting up atoms" << "\n";
 	GSL::Vector tau(3);
 	Atom C1;
 	C1.set_pos(tau*cr.lat.scale*cr.lat.lat);
 
-	tau[0] = 0.5;
-	tau[1] = 0.5;
-	tau[2] = 0.;
+	tau[0] = 0.25;
+	tau[1] = 0.25;
+	tau[2] = 0.25;
 	Atom C2;
 	C2.set_pos(tau*cr.lat.scale*cr.lat.lat);
 
@@ -82,32 +87,25 @@ numerov_debug.close();
 	C4.set_pos(tau*cr.lat.scale*cr.lat.lat);
 
 	C1.set_Z(6);
-	C2.set_Z(1);
+	C2.set_Z(6);
 	C3.set_Z(6);
 	C4.set_Z(6);
 
-	cr.add_atoms(std::vector<Atom> {C1});
+	cr.add_atoms(std::vector<Atom> {C1, C2});
 
 	Simulation sim(cr, LDA, sqrt(0.015));
 	sim.set_up_X_matrices();
 	K_mesh kmesh(cr.lat.r_lat);
 	kmesh.generate_mesh(4, 4, 4);
 
-	// for(GSL::Vector kp : kmesh.k_points){
-	for(GSL::Vector kp : { GSL::Vector {0., 0., 0.}, GSL::Vector {-3.926991, -0.785398, -0.785398}}){
+	for(GSL::Vector kp : kmesh.k_points){
+//	for(GSL::Vector kp : { GSL::Vector {0., 0., 0.}, GSL::Vector {-3.926991, -0.785398, -0.785398}}){
 
-		std::cout << "k-point " << kp << std::endl;
-		// sim.set_up_H(kp);
-		// sim.set_up_S(kp);
-//		sim.calc_eigen();
+		std::cout << "k-point " << kp << "\n";
+	 	sim.set_up_H(kp);
+		sim.set_up_S(kp);
+		sim.calc_eigen();
 	}
 
-	Ewald_integral I;
-	I.set_kappa(sqrt(0.015));
-	I.set_ewald_param(16.5);
-
-	Envelope_Hankel h(C1, lm {0, 0}, sqrt(0.015));
-
-	std::cout << I.ewald_int(lm {0, 0}, 0.5) + 2./M_SQRTPI*I.comp_ewald_int(lm {0, 0}, 0.5) << " " << h.barred_fun(0.5) << std::endl;
 	return 0;
 }

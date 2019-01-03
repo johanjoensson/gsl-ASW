@@ -122,14 +122,14 @@ void Simulation::add_states(const Atom& at, const double kappa)
             std::cout << "valence : ( " << n_s << " " << ln << " )" << std::endl;
             for(int m = -ln; m <= ln; m++){
                 basis_valence.push_back(Augmented_spherical_wave(kappa, n_s, lm {ln, m}, UP, at, cryst.atoms));
-//                basis_valence.push_back(Augmented_spherical_wave(kappa, n_s, lm {ln, m}, DOWN, at, cryst.atoms));
+                basis_valence.push_back(Augmented_spherical_wave(kappa, n_s, lm {ln, m}, DOWN, at, cryst.atoms));
             }
             break;
         }else{
             std::cout << "core : ( " << n_s << " " << ln << " )" << std::endl;
             for(int m = -ln; m <= ln; m++){
                 basis_core.push_back(Augmented_spherical_wave(kappa, n_s, lm {ln, m}, UP, at, cryst.atoms));
-//                basis_core.push_back(Augmented_spherical_wave(kappa, n_s, lm {ln, m}, DOWN, at, cryst.atoms));
+                basis_core.push_back(Augmented_spherical_wave(kappa, n_s, lm {ln, m}, DOWN, at, cryst.atoms));
             }
         }
         nel += static_cast<size_t>(2*(2*ln + 1));
@@ -249,14 +249,15 @@ double X_S2(const Augmented_Hankel& Ht1, const Augmented_Bessel& Jt2, const Atom
     double res = 0;
     const Envelope_Hankel H1(at, Ht1.l, Ht1.kappa);
     const Envelope_Bessel J2(at, Jt2.l, Jt2.kappa);
-    std::cout << "L = " << Ht1.l.l << " " << Ht1.l.m << std::endl;
+    // std::cout << "L = " << Ht1.l.l << " " << Ht1.l.m << std::endl;
     res += augmented_integral(Ht1, Jt2);
-    std::cout << "Augmented integral <Ht|Jt> = " << augmented_integral(Ht1, Jt2) << std::endl;
+    // std::cout << "Augmented integral <Ht|Jt> = " << augmented_integral(Ht1, Jt2) << std::endl;
     res -= atomic_integral(H1, J2);
-    std::cout << "Atomic integral <H|J> = " << atomic_integral(H1, J2) << std::endl;
+    // std::cout << "Atomic integral <H|J> = " << atomic_integral(H1, J2) << std::endl;
     if(Ht1.kappa*Ht1.kappa != Jt2.kappa*Jt2.kappa){
         res += 1./(-Jt2.kappa*Jt2.kappa + Ht1.kappa*Ht1.kappa);
     }
+    // std::cout << "EJ = " << Jt2.EJ << " EH = " << Ht1.EH << std::endl;
     return res;
 }
 
@@ -364,7 +365,6 @@ void Simulation::set_up_X_matrices()
                 if(J2s.l == w1.H.l){
                     XH2[at_i][l_i] = X_H2(w1.H, J2s, w1.center);
                     XS2[at_i][l_i] = X_S2(w1.H, J2s, w1.center);
-                    std::cout << "XS2[" << at_i << "][" << l_i << "] = " << XS2[at_i][l_i] << std::endl;
                 }
             }
             // Find off center expansion on site s of waves w1 ans w2
@@ -383,14 +383,14 @@ void Simulation::set_up_X_matrices()
             }
         }
     }
-    std::cout << "XS1 = " << XS1 << std::endl;
-    std::cout << "XS2 = " << XS2 << std::endl;
-    std::cout << "XS3 = " << XS3 << std::endl;
+    // std::cout << "XS1 = " << XS1 << std::endl;
+    // std::cout << "XS2 = " << XS2 << std::endl;
+    // std::cout << "XS3 = " << XS3 << std::endl;
 }
 
 void Simulation::set_up_H(const GSL::Vector& kp)
 {
-    std::cout << "Setting up Hamiltonian matrix." << std::endl;
+    // std::cout << "Setting up Hamiltonian matrix." << std::endl;
     for(size_t i = 0; i < basis_valence.size(); i++){
         for(size_t j = 0; j < basis_valence.size(); j++){
             this->H[i].set(j, H_element(i, j, kp));
@@ -401,22 +401,22 @@ void Simulation::set_up_H(const GSL::Vector& kp)
 
 void Simulation::set_up_S(const GSL::Vector& kp)
 {
-    std::cout << "Setting up overlap matrix." << std::endl;
+    // std::cout << "Setting up overlap matrix." << std::endl;
     for(size_t i = 0; i < basis_valence.size(); i++){
         for(size_t j = 0; j < basis_valence.size(); j++){
             this->S[i].set(j, S_element(i, j, kp));
 //            this->S[j].set(i, this->S[i][j].conjugate());
         }
     }
-    std::cout << "Overlap matrix" << std::endl;
-    for(size_t i = 0 ; i < basis_valence.size(); i++){
-        std::cout << "  " << S[i] << std::endl;
-    }
+    // std::cout << "Overlap matrix" << std::endl;
+    // for(size_t i = 0 ; i < basis_valence.size(); i++){
+    //     std::cout << "  " << S[i] << std::endl;
+    // }
 }
 
 void Simulation::calc_eigen()
 {
-    size_t N = basis_valence.size();
+    size_t N = basis_valence.size()/2;
     GSL::Complex_Matrix eigvecs_up(N, N);
     GSL::Complex_Matrix eigvecs_down(N, N);
     GSL::Vector eigvals_up(N);
@@ -427,32 +427,30 @@ void Simulation::calc_eigen()
     GSL::Complex_Matrix S_up(N, N);
     GSL::Complex_Matrix S_down(N, N);
 
-    std::cout << "Solving generalized hermitian eigenvalue problem." << std::endl;
     for(size_t i = 0; i < N; i++){
         for(size_t j = 0; j < N; j++){
-            H_up[i].set(j, H[i][j]);
-            S_up[i].set(j, S[i][j]);
-            // H_down[i].set(j, H[2*i+1][2*j+1]);
-            // S_down[i].set(j, S[2*i+1][2*j+1]);
+            H_up[i].set(j, H[2*i][2*j]);
+            S_up[i].set(j, S[2*i][2*j]);
+            H_down[i].set(j, H[2*i+1][2*j+1]);
+            S_down[i].set(j, S[2*i+1][2*j+1]);
         }
     }
 
     std::pair<GSL::Complex_Matrix, GSL::Vector> tmp;
-    tmp = GSL::hermitian_eigen(S_up);
-    std::cout << "Eigenvalues of S " << tmp.second << std::endl;
+    // tmp = GSL::hermitian_eigen(S_up);
+    // std::cout << "Eigenvalues of S " << tmp.second << std::endl;
     tmp = GSL::general_hermitian_eigen(H_up, S_up);
     eigvecs_up = tmp.first;
     eigvals_up = tmp.second;
-    // tmp  = GSL::general_hermitian_eigen(H_down, S_down);
-    // eigvecs_down = tmp.first;
-    // eigvals_down = tmp.second;
+    tmp  = GSL::general_hermitian_eigen(H_down, S_down);
+    eigvecs_down = tmp.first;
+    eigvals_down = tmp.second;
 
     for(size_t i = 0; i < N; i++){
-        std::cout << "Eigenvector (spin up) : ";
-        std::cout << eigvecs_up.get_col(i) << std::endl;
-        std::cout << "Eigenvalue : " << eigvals_up[i] << "Ry" << std::endl;
-        // std::cout << "Eigenvector (spin down) : ";
-        // std::cout << eigvecs_down.get_col(i) << std::endl;
-        // std::cout << "Eigenvalue : " << eigvals_down[i] << "Ry" << std::endl;
+        std::cout << "Eigenvalues (up, down): " << eigvals_up[i] << " " <<
+        eigvals_down[i] << "Ry\n";
+        std::cout << "Eigenvectors (up, down) :\n";
+        std::cout << "  " << eigvecs_up.get_col(i) << "\n";
+        std::cout << "  " << eigvecs_down.get_col(i) << "\n";
     }
 }

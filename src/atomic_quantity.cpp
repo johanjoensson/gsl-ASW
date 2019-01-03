@@ -99,7 +99,7 @@ void Potential::initial_pot(size_t nel, double vol)
             alpha[rj] += 4./6 * drx1 * (Xi0(j, sites, r1) + Xi0(j, sites, -r1));
             alpha[rj] += 1./6 * drx * (Xi0(j, sites, r) + Xi0(j, sites, -r));
 
-            electrostatic[j][rj] += alpha[rj]/r;
+           electrostatic[j][rj] += alpha[rj]/r;
         }
     }
     for(size_t i = 0; i < sites.size(); i++){
