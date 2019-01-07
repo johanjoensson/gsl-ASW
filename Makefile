@@ -82,7 +82,7 @@ gsl-asw: $(OBJS)
 checkall: $(addprefix $(SRC_DIR)/, $(NUMEROV_OBJ:o=cpp))
 	$(CXXCHECK) $^ $(CXXCHECKFLAGS)
 
-travis: GSLLIBROOT = GSL-lib/master
+travis: GSLLIBROOT = GSL-lib-master
 travis: CXXFLAGS = -g -std=c++11 -I$(SRC_DIR) -I $(GSLLIBROOT)/include -O0 -DHAVE_INLINE -DGSL_RANGE_CHECK_OFF
 travis: all
 
