@@ -44,7 +44,8 @@ before_install:
   - mkdir build
   - make travis
   - cp libGSLpp.so ..
+  - cd ..
 
 script:
-    - mkdir build
+    - mkdir -p build
     - make travis
