@@ -2,8 +2,8 @@
 #define K_MESH_H
 
 #include <vector>
-#include "../../GSL-lib/src/vector.h"
-#include "../../GSL-lib/src/matrix.h"
+#include "GSLpp/vector.h"
+#include "GSLpp/matrix.h"
 
 class K_mesh {
 private:

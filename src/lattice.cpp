@@ -1,5 +1,5 @@
 #include "lattice.h"
-#include "../../GSL-lib/src/basic_math.h"
+#include "GSLpp/basic_math.h"
 
 Lattice::Lattice()
  : lat(), r_lat(), scale(), volume(), bz_volume()

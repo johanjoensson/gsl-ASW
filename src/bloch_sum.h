@@ -2,8 +2,8 @@
 #define BLOCH_SUM_H
 #include "spherical_fun.h"
 #include "crystal.h"
-#include "../../GSL-lib/src/vector.h"
-#include "../../GSL-lib/src/complex.h"
+#include "GSLpp/vector.h"
+#include "GSLpp/complex.h"
 
 
 class Bloch_sum{

@@ -2,7 +2,7 @@
 #include <algorithm>
 #include <unordered_set>
 #include "spherical_fun.h"
-#include "../../GSL-lib/src/special_functions.h"
+#include "GSLpp/special_functions.h"
 #include "ewald_int.h"
 
 namespace std {

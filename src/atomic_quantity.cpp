@@ -1,6 +1,6 @@
 #include "atomic_quantity.h"
 #include "utils.h"
-#include "../../GSL-lib/src/basic_math.h"
+#include "GSLpp/basic_math.h"
 
 Atomic_quantity::Atomic_quantity(const std::vector<Atom>& atoms)
  : sites(atoms), val(atoms.size(), std::vector<double>(0,0))

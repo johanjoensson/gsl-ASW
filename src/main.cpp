@@ -14,12 +14,12 @@
 #include "bloch_sum.h"
 #include "ewald_int.h"
 #include "gaunt.h"
-#include "../../GSL-lib/src/vector.h"
-#include "../../GSL-lib/src/matrix.h"
-#include "../../GSL-lib/src/complex_matrix.h"
-#include "../../GSL-lib/src/complex.h"
-#include "../../GSL-lib/src/special_functions.h"
-#include "../../GSL-lib/src/error.h"
+#include "GSLpp/vector.h"
+#include "GSLpp/matrix.h"
+#include "GSLpp/complex_matrix.h"
+#include "GSLpp/complex.h"
+#include "GSLpp/special_functions.h"
+#include "GSLpp/error.h"
 #include "augmented_spherical_wave.h"
 #include "atomic_quantity.h"
 #include "envelope_fun.h"
@@ -101,6 +101,15 @@ numerov_debug.close();
 	K_mesh kmesh(cr.lat.r_lat);
 	kmesh.generate_mesh(4, 4, 4);
 
+	Hankel_function hl(lm {0,0});
+	Integral_Hankel_function ihl(lm {0,0});
+	ihl.set_ewald_param(6.0);
+
+	for(double x = 0.001; x < 5.99; x += 0.01){
+		std::cout << hl(x) - ihl(x) << "\n";
+	}
+
+	exit(0);
 
 	for(GSL::Vector kp : kmesh.k_points){
 //	for(GSL::Vector kp : { GSL::Vector {0., 0., 0.}, GSL::Vector {-3.926991, -0.785398, -0.785398}}){

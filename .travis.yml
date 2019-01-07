@@ -41,9 +41,7 @@ before_install:
   - wget https://github.com/johanjoensson/GSL-lib/archive/master.zip -O GSL-lib.zip
   - unzip GSL-lib.zip
   - cd GSL-lib-master/
-  - mkdir build
   - make travis
-  - cp libGSLpp.so ..
   - cd ..
 
 script:

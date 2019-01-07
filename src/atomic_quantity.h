@@ -1,7 +1,7 @@
 #ifndef ATOMIC_QUANTITY_H
 #define ATOMIC_QUANTITY_H
 #include <vector>
-#include "../../GSL-lib/src/vector.h"
+#include "GSLpp/vector.h"
 #include "atom.h"
 #include "xc_func.h"
 

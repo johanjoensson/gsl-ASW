@@ -3,7 +3,7 @@
 #include "utils.h"
 #include "log_mesh.h"
 #include "atomic_quantity.h"
-#include "../../GSL-lib/src/vector.h"
+#include "GSLpp/vector.h"
 
 class Augmented_function{
 public:

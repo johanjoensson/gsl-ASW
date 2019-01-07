@@ -2,7 +2,7 @@
 #define ATOM_H
 
 #include <gsl/gsl_math.h>
-#include "../../GSL-lib/src/vector.h"
+#include "GSLpp/vector.h"
 #include "log_mesh.h"
 
 /***************************************************************************//**

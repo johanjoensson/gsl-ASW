@@ -1,6 +1,6 @@
 #include "ewald_int.h"
-#include "../../GSL-lib/src/special_functions.h"
-#include "../../GSL-lib/src/basic_math.h"
+#include "GSLpp/special_functions.h"
+#include "GSLpp/basic_math.h"
 #include <cmath>
 
 #include <iostream>

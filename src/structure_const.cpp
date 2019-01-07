@@ -1,7 +1,7 @@
 #include <cmath>
 #include <gsl/gsl_math.h>
 #include "structure_const.h"
-#include "../../GSL-lib/src/special_functions.h"
+#include "GSLpp/special_functions.h"
 #include "gaunt.h"
 #include "spherical_fun.h"
 

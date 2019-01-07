@@ -4,8 +4,8 @@
 #include <gsl/gsl_vector.h>
 #include "utils.h"
 #include "bloch_sum.h"
-#include "../../GSL-lib/src/vector.h"
-#include "../../GSL-lib/src/complex.h"
+#include "GSLpp/vector.h"
+#include "GSLpp/complex.h"
 
 /***************************************************************************//**
 * A class for representing structure constants\n

@@ -7,9 +7,9 @@
 #include "utils.h"
 #include "envelope_fun.h"
 #include "structure_const.h"
-#include "../../GSL-lib/src/special_functions.h"
-#include "../../GSL-lib/src/eigen.h"
-#include "../../GSL-lib/src/linalg.h"
+#include "GSLpp/special_functions.h"
+#include "GSLpp/eigen.h"
+#include "GSLpp/linalg.h"
 
 Simulation::Simulation()
  : cryst(), pot(), n(), basis_valence(), basis_core(), H(), S(), XH1(), XS1(),

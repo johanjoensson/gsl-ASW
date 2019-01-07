@@ -1,6 +1,6 @@
 #ifndef AUGMENTED_SPHERICAL_WAVE_H
 #define AUGMENTED_SPHERICAL_WAVE_H
-#include "../../GSL-lib/src/vector.h"
+#include "GSLpp/vector.h"
 #include "utils.h"
 #include "atomic_quantity.h"
 #include "atom.h"

@@ -1,7 +1,7 @@
 #include <cmath>
 #include <string>
 #include "spherical_fun.h"
-#include "../../GSL-lib/src/complex.h"
+#include "GSLpp/complex.h"
 
 #include <iostream>
 
@@ -40,6 +40,17 @@ double Neumann_function::operator()(const double x)
     GSL::Result n(0,0);
 
     return n.val*x;
+}
+
+double Integral_Hankel_function::operator()(const double x)
+{
+	return I.ewald_int(l, x) + 
+	  2/M_SQRTPI * GSL::pow_int(2*x, l.l)*I.comp_ewald_int(l, x);
+}
+
+void Integral_Hankel_function::set_ewald_param(const double eta)
+{
+	I.set_ewald_param(eta);
 }
 
 GSL::Result cubic_harmonic(lm l, const GSL::Vector& r)

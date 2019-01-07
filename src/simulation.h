@@ -1,6 +1,6 @@
 #ifndef SIMULATION_H
 #define SIMULATION_H
-#include "../../GSL-lib/src/complex_matrix.h"
+#include "GSLpp/complex_matrix.h"
 #include "atomic_quantity.h"
 #include "augmented_spherical_wave.h"
 #include "crystal.h"

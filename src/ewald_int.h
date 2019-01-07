@@ -3,7 +3,7 @@
 
 #include <vector>
 #include "log_mesh.h"
-#include "spherical_fun.h"
+#include "utils.h"
 
 class Ewald_integral{
         double ewald_param;

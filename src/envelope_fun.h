@@ -1,7 +1,7 @@
 #ifndef ENVELOPE_FUN_H
 #define ENVELOPE_FUN_H
-#include "../../GSL-lib/src/vector.h"
-#include "../../GSL-lib/src/special_functions.h"
+#include "GSLpp/vector.h"
+#include "GSLpp/special_functions.h"
 #include "utils.h"
 #include "atom.h"
 

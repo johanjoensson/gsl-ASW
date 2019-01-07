@@ -1,5 +1,5 @@
 #include "log_mesh.h"
-#include "../../GSL-lib/src/special_functions.h"
+#include "GSLpp/special_functions.h"
 
 Logarithmic_mesh::Logarithmic_mesh()
  : A_p(), B_p(), r(), r2(), drx()

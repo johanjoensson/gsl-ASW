@@ -23,17 +23,18 @@ SRC_DIR = src
 # Build directory
 BUILD_DIR = build
 
+GSLLIBROOT="../GSL-lib"
 WFLAGS = -Werror -Wall -Wextra -pedantic -Wshadow -Wnon-virtual-dtor -Wold-style-cast -Wcast-align -Wunused -Woverloaded-virtual -Wpedantic -Wconversion -Wsign-conversion -Wmisleading-indentation -Wduplicated-cond -Wduplicated-branches -Wlogical-op -Wnull-dereference -Wuseless-cast -Wdouble-promotion -Wformat=2 -Weffc++
 # Flags for the above defined compilers
-CXXFLAGS = -std=c++11 $(WFLAGS) -I $(SRC_DIR) -O0 -g -DDEBUG
-CFLAGS = -std=c11 $(WFLAGS) -I $(SRC_DIR) -O0 -g
+CXXFLAGS = -std=c++11 $(WFLAGS) -I $(SRC_DIR) -I $(GSLLIBROOT)/include -O0 -g -DDEBUG
+CFLAGS = -std=c11 $(WFLAGS) -I $(SRC_DIR) -O0 -I $(GSLLIBROOT)/include -g
 
 CXXCHECKS =clang-analyzer-*,-clang-analyzer-cplusplus*,cppcoreguidelines-*,bugprone-* 
 CXXCHECKFLAGS = -checks=$(CXXCHECKS) -header-filter=.* -- -std=c++11
 
 # Libraries to link against
-GSLLIBDIR="../GSL-lib"
-LDFLAGS = -pg -L$(GSLLIBDIR) -L. -Wl,-rpath=$(GSLLIBDIR),-rpath=. -lm -lGSLpp -lxc
+GSLLIBDIR=$(GSLLIBROOT)/lib/GSLpp
+LDFLAGS = -pg -L$(GSLLIBDIR) -L. -Wl,-rpath=$(GSLLIBDIR) -lm -lGSLpp -lxc
 
 # List of all executables in this project
 EXE = gsl-asw
@@ -61,10 +62,10 @@ NUMEROV_OBJ = numerov_solver.o\
 OBJS = $(addprefix $(BUILD_DIR)/, $(NUMEROV_OBJ))
 
 # Targets to always execute, even if new files with the same names exists
-.PHONY: all clean cleanall
+.PHONY: build all clean cleanall 
 
 # Build all executables
-all: $(EXE)
+all: build $(EXE)
 
 # Create object files from c++ sources
 $(BUILD_DIR)/%.o: $(SRC_DIR)/%.cpp
@@ -81,8 +82,12 @@ gsl-asw: $(OBJS)
 checkall: $(addprefix $(SRC_DIR)/, $(NUMEROV_OBJ:o=cpp))
 	$(CXXCHECK) $^ $(CXXCHECKFLAGS)
 
-travis: CXXFLAGS = -g -std=c++11 -I$(SRC_DIR) -O0 -DHAVE_INLINE -DGSL_RANGE_CHECK_OFF
+travis: GSLLIBROOT = GSL-lib/master
+travis: CXXFLAGS = -g -std=c++11 -I$(SRC_DIR) -I $(GSLLIBROOT)/include -O0 -DHAVE_INLINE -DGSL_RANGE_CHECK_OFF
 travis: all
+
+build : 
+	mkdir -p build
 
 # Remove object files
 clean:

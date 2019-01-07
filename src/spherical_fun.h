@@ -2,8 +2,9 @@
 #define SPHERICAL_FUN_H
 #include <ostream>
 #include "utils.h"
-#include "../../GSL-lib/src/vector.h"
-#include "../../GSL-lib/src/special_functions.h"
+#include "ewald_int.h"
+#include "GSLpp/vector.h"
+#include "GSLpp/special_functions.h"
 
 // Functor for representing Spherical Bessel functions
 class Spherical_function{
@@ -50,6 +51,17 @@ public:
     Neumann_function() : Spherical_function(){};
     Neumann_function(const lm l_n) : Spherical_function(l_n){};
     double operator()(const double x);
+};
+
+class Integral_Hankel_function : public Hankel_function
+{
+private:
+    Ewald_integral I;
+public:
+    Integral_Hankel_function() : Hankel_function(), I(){ I.set_kappa(1.0);};
+    Integral_Hankel_function(const lm l_n) : Hankel_function(l_n), I(){};
+    double operator()(const double x);
+    void set_ewald_param(const double eta);
 };
 
 unsigned long int factorial(int n);

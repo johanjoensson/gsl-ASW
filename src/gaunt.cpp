@@ -3,7 +3,7 @@
 #include <cmath>
 #include "gaunt.h"
 #include "spherical_fun.h"
-#include "../../GSL-lib/src/special_functions.h"
+#include "GSLpp/special_functions.h"
 
 
 #include <chrono>
