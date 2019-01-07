@@ -31,12 +31,8 @@ double Bessel_function::operator()(const double x)
 {
     GSL::Result exp = GSL::exp(std::abs(x));
     GSL::Result i = GSL::bessel_in_scaled(l.l, x);
-    int sign = 1;
-    // if(l.l % 2 == 1){
-    //     sign = -1;
-    // }
 
-  return (sign*exp*i).val;
+  return (exp*i).val;
 }
 
 double Neumann_function::operator()(const double x)

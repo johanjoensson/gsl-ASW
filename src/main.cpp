@@ -42,6 +42,9 @@ numerov_debug.close();
 	GSL::Error_handler e_handler;
 	e_handler.off();
 
+
+	double kappa = sqrt(0.015);
+	
 	GSL::Vector a = {0.0, 0.5, 0.5}, b = {0.5, 0.0, 0.5}, c = {0.5, 0.5, 0.0};
 	// GSL::Vector a = {1.0, 0.0, 0.0}, b = {0.0, 1.0, 0.0}, c = {0.0, 0.0, 1.0};
 	std::cout << a << "\n";
@@ -52,9 +55,9 @@ numerov_debug.close();
 	std::cout << cr.lat.scale*cr.lat.lat << "\n";
 
 	std::cout << "Calculating Rmax" << "\n";
-	double Rmax = cr.calc_Rmax(1e-14, sqrt(0.015), lm {5, 0});
+	double Rmax = cr.calc_Rmax(1e-14, kappa, lm {5, 0});
 	std::cout << "Calculating Kmax" << "\n";
-	double Kmax = cr.calc_Kmax(1e-14, sqrt(0.015), lm {5, 0});
+	double Kmax = cr.calc_Kmax(1e-14, kappa, lm {5, 0});
 	std::cout << "Rmax = " << Rmax << ", Kmax = " << Kmax << "\n";
 
 
@@ -93,10 +96,11 @@ numerov_debug.close();
 
 	cr.add_atoms(std::vector<Atom> {C1, C2});
 
-	Simulation sim(cr, LDA, sqrt(0.015));
+	Simulation sim(cr, LDA, kappa);
 	sim.set_up_X_matrices();
 	K_mesh kmesh(cr.lat.r_lat);
 	kmesh.generate_mesh(4, 4, 4);
+
 
 	for(GSL::Vector kp : kmesh.k_points){
 //	for(GSL::Vector kp : { GSL::Vector {0., 0., 0.}, GSL::Vector {-3.926991, -0.785398, -0.785398}}){

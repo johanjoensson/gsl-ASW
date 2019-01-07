@@ -87,7 +87,7 @@ size_t Numerov_solver::find_inversion_point(Logarithmic_mesh &mesh,
 int count_nodes(std::vector<double> fun, size_t i_inv)
 {
 	int n_nodes = 0;
-	for(size_t i = 0; i < i_inv - 1; i++){
+	for(size_t i = 0; i < i_inv; i++){
 		n_nodes += (1 - sign(fun[i + 1])/sign(fun[i]))/2;
 	}
 	return n_nodes;
@@ -116,21 +116,21 @@ double Numerov_solver::variational_energy_correction(Logarithmic_mesh &mesh,
 }
 
 std::vector<double> Numerov_solver::solve(Logarithmic_mesh &mesh,
-	std::vector<double> &v, std::vector<double> &l_init,
-	std::vector<double> &r_init, double& en, int n_nodes)
+		std::vector<double> &v, std::vector<double> &l_init,
+		std::vector<double> &r_init, double& en, int n_nodes)
 {
 
 
-    double e_max = 0, e_min = e_max;
+	double e_max = 0, e_min = e_max;
 	// maximum energy for a bound state is the edge value of the potential
-    // double e_max = std::abs(v.back()), e_min = e_max;
+	// double e_max = std::abs(v.back()), e_min = e_max;
 	// minimum energy for a bound state is the depth of the potential well
 	for(size_t i = 1; i < mesh.r.size(); i++){
 		if(e_min > v[i] + 0.25/mesh.r2[i]){
 			e_min = v[i] + 0.25/mesh.r2[i];
 		}
 	}
-    double e_trial = en;
+	double e_trial = en;
 	if(e_trial < e_min){
 		e_trial = e_min;
 	}
@@ -140,35 +140,35 @@ std::vector<double> Numerov_solver::solve(Logarithmic_mesh &mesh,
 	out_file << std::string(80, '=') << "\n";
 	out_file << e_min << " < " << en << " < " << e_max << "\n";
 #endif
-    bool done = false;
-    std::vector<double> res(mesh.r.size(),0), tmp(mesh.r.size(),0);
+	bool done = false;
+	std::vector<double> res(mesh.r.size(),0), tmp(mesh.r.size(),0);
 
-    size_t i_inv = 0, it1 = 0, it2 = 0;
-    int n_tmp = -1;
+	size_t i_inv = 0, it1 = 0, it2 = 0;
+	int n_tmp = -1;
 
-    double scale = 0;
-    double de = 0;
+	double scale = 0;
+	double de = 0;
 
 
 
-    // Loop until we have found a good enough estimate of the energy
-    while(!done){
-	    // Rough estimate of the energy
-	    // Make sure we have the correct number of nodes
-	    it2 = 0;
+	// Loop until we have found a good enough estimate of the energy
+	while(!done){
+		// Rough estimate of the energy
+		// Make sure we have the correct number of nodes
+		it2 = 0;
 
-	    while(n_tmp != n_nodes && it2 < 500){
-		    i_inv = find_inversion_point(mesh, v, e_trial);
-		    tmp = this->solve_right(mesh, v, i_inv, l_init, e_trial);
-		    n_tmp = count_nodes(tmp, i_inv);
+		while(n_tmp != n_nodes && it2 < 500){
+			i_inv = find_inversion_point(mesh, v, e_trial);
+			tmp = this->solve_right(mesh, v, i_inv, l_init, e_trial);
+			n_tmp = count_nodes(tmp, i_inv);
 			de = 0.;
 			if(n_tmp > n_nodes){
 				e_max = e_trial;
 				de = 0.5*(e_min - e_trial);
-		    }else if(n_tmp < n_nodes){
+			}else if(n_tmp < n_nodes){
 				e_min = e_trial;
 				de = 0.5*(e_max - e_trial);
-		    }
+			}
 			e_trial += de;
 #ifdef DEBUG
 			if(it2 % 50 == 1){
@@ -179,31 +179,26 @@ std::vector<double> Numerov_solver::solve(Logarithmic_mesh &mesh,
 			it2++;
 		}
 
-		// If we did not need any node corrections, solve to the right
-		if(it2 == 0){
-			i_inv = find_inversion_point(mesh, v, e_trial);
-			tmp = this->solve_right(mesh, v, i_inv, l_init, e_trial);
-		}
 
-	    // Now match values at mesh.r[i_inv]
-	    for(size_t i = 0; i <= i_inv; i++){
-		    res[i] = tmp[i];
-	    }
-	    tmp = this->solve_left(mesh, v, i_inv, r_init, e_trial);
+		// Now match values at mesh.r[i_inv]
+		for(size_t i = 0; i <= i_inv; i++){
+			res[i] = tmp[i];
+		}
+		tmp = this->solve_left(mesh, v, i_inv, r_init, e_trial);
 		if(std::abs(tmp[i_inv]) < 1E-15){
 			tmp[i_inv] = 1E-15*sign(res[i_inv]);
 		}
-		scale = std::abs(res[i_inv]/tmp[i_inv]);
+		scale = res[i_inv]/tmp[i_inv];
 		for(size_t i = i_inv; i < res.size(); i++){
 			res[i] = scale*tmp[i];
 		}
 
 		// Finer corrections to the energy
-	    // Match slope at mesh.r[i_inv]
+		// Match slope at mesh.r[i_inv]
 		de = variational_energy_correction(mesh, v, res, i_inv, e_trial);
-	    if(std::abs(de) < 5E-14 || std::abs(e_max - e_min) < 5E-14){
-		    done = true;
-	    }
+		if(std::abs(de) < 5E-14 || std::abs(e_max - e_min) < 5E-14){
+			done = true;
+		}
 
 #ifdef DEBUG
 		if(it1 % 100 == 0){
@@ -224,19 +219,10 @@ std::vector<double> Numerov_solver::solve(Logarithmic_mesh &mesh,
 			e_max = e_trial;
 		}
 
-		// if(std::abs(e_max - e_min) < 1E-14){
-		// 	if(de < 0){
-		// 		e_min -= 1.5*std::abs(e_min);
-		// 	}else{
-		// 		e_max += 1.5*std::abs(e_max);
-		// 	}
-		// }
-
-//		e_trial += de;
 		e_trial = 0.5*(e_max + e_min);
 		n_tmp = -1;
-	    it1++;
-    }
+		it1++;
+	}
 
 	// Make sure to scale solution to match boundary conditions
 	if(std::abs(r_init.back()) > 1E-15){
@@ -245,25 +231,21 @@ std::vector<double> Numerov_solver::solve(Logarithmic_mesh &mesh,
 		// Core states, normalize to unity
 		scale = 0;
 		for(size_t i = 0; i < res.size(); i++){
-			scale += mesh.drx[i]*res[i]*res[i];
+			scale += res[i]*res[i];
 		}
 		scale = 1./scale;
 	}
 	// Scale or normalize solution
 	for(size_t i = 0; i < res.size(); i++){
-		 res[i] *= scale;
-	}
-	if(res.back() != r_init.back()){
-		std::cout << "Boundary condition not met!\n";
+		res[i] *= scale;
 	}
 
-    en = e_trial;
+	en = e_trial;
 #ifdef DEBUG
-		out_file << "Inversion point = " << mesh.r[i_inv] << "\n";
-		out_file << "Right-most value: r = " << mesh.r.back() << " F = " << res.back() << "\n";
-		out_file << "Initial condition: rightmost value = " << r_init.back() << "\n";
-		out_file.close();
+	out_file << "Inversion point = " << mesh.r[i_inv] << "\n";
+	out_file << "Right-most value: r = " << mesh.r.back() << " F = " << res.back() << "\n";
+	out_file << "Initial condition: rightmost value = " << r_init.back() << "\n";
+	out_file.close();
 #endif
-//	std::cout << "r_init[last] = " << r_init[r_init.size() - 1] << " - " << " res[last] = " << res[res.size() - 1] << "\n";
-    return res;
+	return res;
 }

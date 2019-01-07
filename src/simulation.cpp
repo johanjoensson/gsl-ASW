@@ -118,13 +118,12 @@ void Simulation::add_states(const Atom& at, const double kappa)
     for(std::pair<int, int> tmp : p){
         n_s = tmp.first;
         ln = tmp.second;
-        if(nel + static_cast<size_t>(2*(2*ln + 1)) >= Z){
+        if(nel + static_cast<size_t>(2*n_s*n_s) >= Z){
             std::cout << "valence : ( " << n_s << " " << ln << " )" << std::endl;
             for(int m = -ln; m <= ln; m++){
                 basis_valence.push_back(Augmented_spherical_wave(kappa, n_s, lm {ln, m}, UP, at, cryst.atoms));
                 basis_valence.push_back(Augmented_spherical_wave(kappa, n_s, lm {ln, m}, DOWN, at, cryst.atoms));
             }
-            break;
         }else{
             std::cout << "core : ( " << n_s << " " << ln << " )" << std::endl;
             for(int m = -ln; m <= ln; m++){
@@ -383,9 +382,9 @@ void Simulation::set_up_X_matrices()
             }
         }
     }
-    // std::cout << "XS1 = " << XS1 << std::endl;
-    // std::cout << "XS2 = " << XS2 << std::endl;
-    // std::cout << "XS3 = " << XS3 << std::endl;
+    std::cout << "XS1 = " << XS1 << std::endl;
+    std::cout << "XS2 = " << XS2 << std::endl;
+    std::cout << "XS3 = " << XS3 << std::endl;
 }
 
 void Simulation::set_up_H(const GSL::Vector& kp)
@@ -408,10 +407,10 @@ void Simulation::set_up_S(const GSL::Vector& kp)
 //            this->S[j].set(i, this->S[i][j].conjugate());
         }
     }
-    // std::cout << "Overlap matrix" << std::endl;
-    // for(size_t i = 0 ; i < basis_valence.size(); i++){
-    //     std::cout << "  " << S[i] << std::endl;
-    // }
+//    std::cout << "Overlap matrix" << std::endl;
+//    for(size_t i = 0 ; i < basis_valence.size(); i++){
+//        std::cout << "  " << S[i] << std::endl;
+//    }
 }
 
 void Simulation::calc_eigen()
@@ -437,8 +436,12 @@ void Simulation::calc_eigen()
     }
 
     std::pair<GSL::Complex_Matrix, GSL::Vector> tmp;
-    // tmp = GSL::hermitian_eigen(S_up);
-    // std::cout << "Eigenvalues of S " << tmp.second << std::endl;
+    tmp = GSL::hermitian_eigen(S_up);
+//    std::cout << "Overlap matrix" << std::endl;
+//    for(size_t i = 0 ; i < N; i++){
+//        std::cout << "  " << S_up[i] << std::endl;
+//    }
+    std::cout << "Eigenvalues of S " << tmp.second << std::endl;
     tmp = GSL::general_hermitian_eigen(H_up, S_up);
     eigvecs_up = tmp.first;
     eigvals_up = tmp.second;
