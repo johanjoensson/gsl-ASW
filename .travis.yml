@@ -45,5 +45,4 @@ before_install:
   - cd ..
 
 script:
-    - mkdir -p build
     - make travis
