@@ -15,7 +15,7 @@ matrix:
             sudo: false
             env: 
               - MATRIX_EVAL="CC=gcc-4.9 && CXX=g++-4.9"
-        include:
+
           - os: linux
             addons:
               apt:
@@ -27,8 +27,7 @@ matrix:
             sudo: false
             env: 
               - MATRIX_EVAL="CC=gcc-5 && CXX=g++-5"
-
-        include:
+          
           - os: linux
             addons:
               apt:
@@ -41,7 +40,6 @@ matrix:
             env: 
               - MATRIX_EVAL="CC=gcc-6 && CXX=g++-6"
 
-        include:
           - os: linux
             addons:
               apt:
@@ -54,7 +52,6 @@ matrix:
             env: 
               - MATRIX_EVAL="CC=gcc-7 && CXX=g++-7"
 
-        include:
           - os: linux
             addons:
               apt:
