@@ -23,7 +23,7 @@ SRC_DIR = src
 # Build directory
 BUILD_DIR = build
 
-GSLLIBROOT="../GSL-lib"
+GSLLIBROOT=../GSL-lib
 WFLAGS = -Werror -Wall -Wextra -pedantic -Wshadow -Wnon-virtual-dtor -Wold-style-cast -Wcast-align -Wunused -Woverloaded-virtual -Wpedantic -Wconversion -Wsign-conversion -Wmisleading-indentation -Wduplicated-cond -Wduplicated-branches -Wlogical-op -Wnull-dereference -Wuseless-cast -Wdouble-promotion -Wformat=2 -Weffc++
 # Flags for the above defined compilers
 CXXFLAGS = -std=c++11 $(WFLAGS) -I $(SRC_DIR) -I $(GSLLIBROOT)/include -O0 -g -DDEBUG
@@ -33,14 +33,12 @@ CXXCHECKFLAGS = -checks=$(CXXCHECKS) -header-filter=.* -- -std=c++11
 
 # Libraries to link against
 GSLLIBDIR=$(GSLLIBROOT)/lib/GSLpp
-LDFLAGS = -pg -L$(GSLLIBDIR) -L. -Wl,-rpath=$(GSLLIBDIR) -lm -lGSLpp -lxc
+LDFLAGS = -pg -L$(GSLLIBDIR) -L. -Wl,-rpath=$(GSLLIBDIR) -lGSLpp -lxc -lm 
 
 # List of all executables in this project
 EXE = gsl-asw
 
-NUMEROV_OBJ = numerov_solver.o\
-	      spherical_fun.o\
-	      log_mesh.o\
+ASW_OBJ =     main.o\
 	      bloch_sum.o\
 	      gaunt.o\
 	      structure_const.o\
@@ -56,9 +54,12 @@ NUMEROV_OBJ = numerov_solver.o\
 	      envelope_fun.o\
 	      simulation.o\
 	      k-mesh.o\
-	      main.o
+	      log_mesh.o\
+	      spherical_fun.o\
+              numerov_solver.o\
 
-OBJS = $(addprefix $(BUILD_DIR)/, $(NUMEROV_OBJ))
+
+OBJS = $(addprefix $(BUILD_DIR)/, $(ASW_OBJ))
 
 # Targets to always execute, even if new files with the same names exists
 .PHONY: build all clean cleanall 
@@ -76,7 +77,7 @@ $(BUILD_DIR)/%.o: $(SRC_DIR)/%.c
 
 # Link numerov_test
 gsl-asw: $(OBJS)
-	$(CXX) $(LDFLAGS) $? -o $@
+	$(CXX) $? -o $@ $(LDFLAGS)
 
 checkall: $(addprefix $(SRC_DIR)/, $(NUMEROV_OBJ:o=cpp))
 	$(CXXCHECK) $^ $(CXXCHECKFLAGS)
