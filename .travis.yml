@@ -67,6 +67,7 @@ matrix:
 
 before_install:
   - eval "${MATRIX_EVAL}"
+  - $CXX --version
   - pip install --user cpp-coveralls
   - sudo apt-get install -y libgsl0-dev libopenblas-dev libxc-dev
   - wget https://github.com/johanjoensson/GSL-lib/archive/master.zip -O GSL-lib.zip
