@@ -1,4 +1,5 @@
 #include "crystal.h"
+#include <cmath>
 #include <algorithm>
 #include <unordered_set>
 #include "spherical_fun.h"

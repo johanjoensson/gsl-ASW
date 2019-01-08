@@ -1,4 +1,5 @@
 #include "simulation.h"
+#include <cmath>
 #include <iostream>
 #include <stdexcept>
 #include <set>

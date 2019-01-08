@@ -1,4 +1,5 @@
 #include "lattice.h"
+#include <cmath>
 #include "GSLpp/basic_math.h"
 
 Lattice::Lattice()
