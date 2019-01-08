@@ -27,7 +27,6 @@ GSLLIBROOT="../GSL-lib"
 WFLAGS = -Werror -Wall -Wextra -pedantic -Wshadow -Wnon-virtual-dtor -Wold-style-cast -Wcast-align -Wunused -Woverloaded-virtual -Wpedantic -Wconversion -Wsign-conversion -Wmisleading-indentation -Wduplicated-cond -Wduplicated-branches -Wlogical-op -Wnull-dereference -Wuseless-cast -Wdouble-promotion -Wformat=2 -Weffc++
 # Flags for the above defined compilers
 CXXFLAGS = -std=c++11 $(WFLAGS) -I $(SRC_DIR) -I $(GSLLIBROOT)/include -O0 -g -DDEBUG
-CFLAGS = -std=c11 $(WFLAGS) -I $(SRC_DIR) -O0 -I $(GSLLIBROOT)/include -g
 
 CXXCHECKS =clang-analyzer-*,-clang-analyzer-cplusplus*,cppcoreguidelines-*,bugprone-* 
 CXXCHECKFLAGS = -checks=$(CXXCHECKS) -header-filter=.* -- -std=c++11
@@ -83,7 +82,7 @@ checkall: $(addprefix $(SRC_DIR)/, $(NUMEROV_OBJ:o=cpp))
 	$(CXXCHECK) $^ $(CXXCHECKFLAGS)
 
 travis: GSLLIBROOT = GSL-lib-master
-travis: CXXFLAGS = -g -std=c++11 -I$(SRC_DIR) -I $(GSLLIBROOT)/include -O0 -DHAVE_INLINE -DGSL_RANGE_CHECK_OFF
+travis: CXXFLAGS = -std=c++11 -I$(SRC_DIR) -I $(GSLLIBROOT)/include -O0
 travis: all
 
 build : 
