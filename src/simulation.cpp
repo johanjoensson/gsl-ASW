@@ -209,7 +209,7 @@ GSL::Complex Simulation::H_element(const size_t i1, const size_t i2, const GSL::
 
     B1 = Bloch_summed_structure_constant(l_low_1, w1.kappa, cryst, w1.l, w2.l);
     res += B1.evaluate(tau_ij, kp)*XH2[at_j][l_j];
-    if(abs(w1.kappa*w1.kappa - w2.kappa*w2.kappa) < 1E15){
+    if(std::abs(w1.kappa*w1.kappa - w2.kappa*w2.kappa) < 1E15){
         res += B1.evaluate(tau_ij, kp);
     }
 

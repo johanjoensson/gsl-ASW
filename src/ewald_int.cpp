@@ -25,29 +25,23 @@ double Ewald_integral::bar_ew_int(lm l, double r)
     double res = 0;
 
     double eta = this->ewald_param;
-    double t1 = 0., t2 = 0., t3 = 0.;
-    double a = sqrt(eta)*r/2.;
-    double b = -kappa*kappa*r*r/4.;
+    double t1 = 0., t2 = 0., t3 = 0;
+    double a = 0.5*sqrt(eta)*r;
+    double b = -0.25*kappa*kappa*r*r;
     if(l.l == 0){
-        t1 = GSL::exp(-kappa*r).val + GSL::exp(kappa*r).val;
-        t2 = GSL::exp(-kappa*r).val*GSL::erf(0.5*sqrt(eta)*r - kappa/sqrt(eta)).val;
-        t3 = GSL::exp(kappa*r).val*GSL::erf(0.5*sqrt(eta)*r + kappa/sqrt(eta)).val;
-        // t1 = GSL::exp(-kappa*r).val*GSL::erfc(1./2. *sqrt(eta)*r - kappa/sqrt(eta)).val;
-        // t2 = GSL::exp(kappa*r).val*GSL::erfc(1./2. *sqrt(eta)*r + kappa/sqrt(eta)).val;
+        t1 = ( GSL::exp(-kappa*r)*GSL::erfc(0.5*sqrt(eta)*r - kappa/sqrt(eta)) ).val;
+        t2 = ( GSL::exp( kappa*r)*GSL::erfc(0.5*sqrt(eta)*r + kappa/sqrt(eta)) ).val;
 
-        res = M_SQRTPI/4*(t1 - t2 - t3);
+        res = M_SQRTPI/4*(t1 + t2 );
     }else if(l.l == -1){
-        t1 = (GSL::exp(-kappa*r) - GSL::exp(kappa*r)).val;
-        t2 = GSL::exp(-this->kappa*r).val*GSL::erf(sqrt(eta)*r/2. - this->kappa/sqrt(eta)).val;
-        t3 = GSL::exp(this->kappa*r).val*GSL::erf(sqrt(eta)*r/2. + this->kappa/sqrt(eta)).val;
-        // t1 = GSL::exp(-kappa*r).val*GSL::erfc(1./2. *sqrt(eta)*r - kappa/sqrt(eta)).val;
-        // t2 = GSL::exp(kappa*r).val*GSL::erfc(1./2. *sqrt(eta)*r + kappa/sqrt(eta)).val;
+         t1 = GSL::exp(-kappa*r).val*GSL::erfc(0.5*sqrt(eta)*r - kappa/sqrt(eta)).val;
+         t2 = GSL::exp( kappa*r).val*GSL::erfc(0.5*sqrt(eta)*r + kappa/sqrt(eta)).val;
 
-        res = M_SQRTPI/(2*kappa*r)*(t1 - t2 + t3);
+        res = M_SQRTPI/(2*kappa*r)*(t1 - t2);
     }else if(l.l >= 1){
         t1 = (2*l.l - 1)/2. * bar_ew_int(lm {l.l - 1, l.m}, r);
         t2 = -b*bar_ew_int(lm {l.l - 2, l.m}, r);
-        t3 = GSL::pow_int(a, (2*l.l-1))/2. * GSL::exp(-a*a + b/(a*a)).val;
+        t3 = 0.5*GSL::pow_int(a, (2*l.l-1)) * GSL::exp(-a*a + b/(a*a)).val;
         res = t1 + t2 + t3;
     }
     return res;
@@ -67,17 +61,15 @@ double Ewald_integral::bar_comp_ew_int(lm l, double r)
     double b = -kappa*kappa*r*r/4;
 
     if(l.l == 0){
-        t1 = GSL::exp(-kappa*r).val - GSL::exp(kappa*r).val;
-        t2 = GSL::exp(-kappa*r).val*GSL::erf(-0.5*sqrt(eta)*r + kappa/sqrt(eta)).val;
-        t3 = GSL::exp(kappa*r).val*GSL::erf(0.5*sqrt(eta)*r + kappa/sqrt(eta)).val;
+        t1 = GSL::exp(-kappa*r).val*GSL::erfc(-0.5*sqrt(eta)*r + kappa/sqrt(eta)).val;
+        t2 = GSL::exp(kappa*r).val*GSL::erfc(0.5*sqrt(eta)*r + kappa/sqrt(eta)).val;
 
-        res = M_SQRTPI/4 * (t1 - t2 + t3);
+        res = M_SQRTPI/4. * (t1 - t2);
     }else if(l.l == -1){
-        t1 = GSL::exp(-kappa*r).val + GSL::exp(kappa*r).val;
-        t2 = GSL::exp(-kappa*r).val*GSL::erf(-0.5*sqrt(eta)*r + kappa/sqrt(eta)).val;
-        t3 = GSL::exp(kappa*r).val*GSL::erf(0.5*sqrt(eta)*r + kappa/sqrt(eta)).val;
+        t1 = GSL::exp(-kappa*r).val*GSL::erfc(-0.5*sqrt(eta)*r + kappa/sqrt(eta)).val;
+        t2 = GSL::exp(kappa*r).val*GSL::erfc(0.5*sqrt(eta)*r + kappa/sqrt(eta)).val;
 
-        res = M_SQRTPI/(2*kappa*r) * (t1 - t2 - t3);
+        res = M_SQRTPI/(2*kappa*r) * (t1 + t2);
     }else if(l.l >= 1){
         t1 = (2*l.l - 1)/2. * bar_comp_ew_int(lm {l.l - 1, l.m}, r);
         t2 = -b*bar_comp_ew_int(lm {l.l - 2, l.m}, r);

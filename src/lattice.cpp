@@ -14,10 +14,10 @@ Lattice::Lattice(const GSL::Vector& a, const GSL::Vector& b,
     lat[2] = c;
     lat *= 1./scale;
 
-    volume = abs(GSL::dot(lat[0], GSL::cross(lat[1], lat[2])));
+    volume = std::abs(GSL::dot(lat[0], GSL::cross(lat[1], lat[2])));
     r_lat[0] = 2*M_PI * GSL::cross(b/scale, c/scale)/volume;
     r_lat[1] = 2*M_PI * GSL::cross(c/scale, a/scale)/volume;
     r_lat[2] = 2*M_PI * GSL::cross(a/scale, b/scale)/volume;
 
-    bz_volume = abs(GSL::dot(r_lat[0], GSL::cross(r_lat[1], r_lat[2])));
+    bz_volume = std::abs(GSL::dot(r_lat[0], GSL::cross(r_lat[1], r_lat[2])));
 }

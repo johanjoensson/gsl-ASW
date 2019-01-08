@@ -77,7 +77,7 @@ $(BUILD_DIR)/%.o: $(SRC_DIR)/%.c
 
 # Link numerov_test
 gsl-asw: $(OBJS)
-	$(CXX) $? -o $@ $(LDFLAGS)
+	$(CXX) $^ -o $@ $(LDFLAGS)
 
 checkall: $(addprefix $(SRC_DIR)/, $(NUMEROV_OBJ:o=cpp))
 	$(CXXCHECK) $^ $(CXXCHECKFLAGS)

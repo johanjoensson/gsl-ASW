@@ -103,7 +103,6 @@ numerov_debug.close();
 
 	Hankel_function hl(lm {0,0});
 	Integral_Hankel_function ihl(lm {0,0});
-	ihl.set_ewald_param(6.0);
 
 	for(double x = 0.001; x < 5.99; x += 0.01){
 		std::cout << hl(x) - ihl(x) << "\n";

@@ -30,7 +30,7 @@ Structure_constant::Structure_constant(int l_low_n, int l_int_n,
 		tmp = GSL::Result();
 		for (int mpp = -lpp; mpp <= lpp; mpp++){
 			a = gaunt(l2, l1, lm {lpp, mpp});
-			if (abs(a.val) > 1E-15){
+			if (std::abs(a.val) > 1E-15){
 			    m_sum += a*cubic_harmonic(lm {lpp, mpp}, r);
 			}
 		}
@@ -132,7 +132,7 @@ GSL::Complex Bloch_summed_structure_constant::evaluate(const GSL::Vector& tau,
 		m_sum = GSL::Complex(0., 0.);
 		for (int mpp = -lpp; mpp <= lpp; mpp++){
 			a = gaunt(l2, l1, lm {lpp, mpp});
-			if (abs(a.val) > 1E-14){
+			if (std::abs(a.val) > 1E-14){
 				bloch_sum = Bloch_sum(lm {lpp, mpp}, kappa, this->c);
 			    m_sum += a.val*bloch_sum.hankel_envelope(tau, kp);
 			}
@@ -162,7 +162,7 @@ GSL::Complex Bloch_summed_structure_constant::dot_evaluate(
 		m_sum = GSL::Complex(0., 0.);
 		for (int mpp = -lpp; mpp <= lpp; mpp++){
 			a = gaunt(l2, l1, lm {lpp, mpp});
-			if (abs(a.val) > 1E-14){
+			if (std::abs(a.val) > 1E-14){
 				bloch_sum = Bloch_sum(lm {lpp, mpp}, kappa, this->c);
 			    m_sum += a.val*(2*bloch_sum.hankel_envelope_dot(tau, kp) -
 				(l1.l + l2.l - lpp)/

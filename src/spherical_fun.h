@@ -59,7 +59,7 @@ private:
     Ewald_integral I;
 public:
     Integral_Hankel_function() : Hankel_function(), I(){ I.set_kappa(1.0);};
-    Integral_Hankel_function(const lm l_n) : Hankel_function(l_n), I(){};
+    Integral_Hankel_function(const lm l_n) : Hankel_function(l_n), I(){ I.set_kappa(1.0);};
     double operator()(const double x);
     void set_ewald_param(const double eta);
 };
