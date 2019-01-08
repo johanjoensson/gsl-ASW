@@ -1,6 +1,7 @@
 #ifndef LOG_MESH_H
 #define LOG_MESH_H
 
+#include <cstddef>
 #include <vector>
 
 class Logarithmic_mesh {
