@@ -126,11 +126,16 @@ GSL::Complex Bloch_sum::calc_d2_dot(const GSL::Vector& tau, const GSL::Vector& k
 
 GSL::Complex Bloch_sum::calc_d3(const GSL::Vector& tau)
 {
+    // delta(tau) * delta(l, 0)
     if(tau != GSL::Vector(3) || l.l != 0){
         return GSL::Complex(0., 0.);
     }
-    GSL::Result d3 = kappa/(2*M_SQRTPI)*GSL::erf(-kappa/sqrt(eta)) -
-        sqrt(eta)/(2*M_PI)*GSL::exp(-kappa*kappa/eta) + kappa/(2*M_SQRTPI);
+
+    GSL::Result d3 = -kappa/(4*M_SQRTPI)*(GSL::erfc(-kappa/std::sqrt(eta)) -
+		     GSL::erfc(kappa/std::sqrt(eta))) - 
+		     std::sqrt(eta)/(2*M_PI)*GSL::exp(-kappa*kappa/eta) +
+		     kappa/(2*M_SQRTPI);
+
     return GSL::Complex(d3.val, 0);
 }
 

@@ -101,19 +101,11 @@ numerov_debug.close();
 	K_mesh kmesh(cr.lat.r_lat);
 	kmesh.generate_mesh(4, 4, 4);
 
-	Hankel_function hl(lm {0,0});
-	Integral_Hankel_function ihl(lm {0,0});
+	std::cout << "\n";
+//	for(GSL::Vector kp : kmesh.k_points){
+	for(GSL::Vector kp : { GSL::Vector {0., 0., 0.}, GSL::Vector {0.555360, -1.666081, -3.887523}}){
 
-	for(double x = 0.001; x < 5.99; x += 0.01){
-		std::cout << hl(x) - ihl(x) << "\n";
-	}
-
-	exit(0);
-
-	for(GSL::Vector kp : kmesh.k_points){
-//	for(GSL::Vector kp : { GSL::Vector {0., 0., 0.}, GSL::Vector {-3.926991, -0.785398, -0.785398}}){
-
-		std::cout << "k-point " << kp << "\n";
+		std::cout << "k-point " << kp << "\n******************************************************************************************************\n";
 	 	sim.set_up_H(kp);
 		sim.set_up_S(kp);
 		sim.calc_eigen();

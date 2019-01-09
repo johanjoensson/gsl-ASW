@@ -451,10 +451,11 @@ void Simulation::calc_eigen()
     eigvals_down = tmp.second;
 
     for(size_t i = 0; i < N; i++){
-        std::cout << "Eigenvalues (up, down): " << eigvals_up[i] << " " <<
+        std::cout << "  Eigenvalues (up, down): " << eigvals_up[i] << " " <<
         eigvals_down[i] << "Ry\n";
-        std::cout << "Eigenvectors (up, down) :\n";
-        std::cout << "  " << eigvecs_up.get_col(i) << "\n";
-        std::cout << "  " << eigvecs_down.get_col(i) << "\n";
+        std::cout << "  Eigenvectors (up, down) :\n";
+        std::cout << "\t" << eigvecs_up.get_col(i) << "\n";
+        std::cout << "\t" << eigvecs_down.get_col(i) << "\n";
     }
+    std::cout << "\n\n";
 }
