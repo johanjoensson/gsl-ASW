@@ -49,20 +49,19 @@ double bisect_q(double tol, double kappa, double eta, lm l, double q_min,
 	return q;
 }
 
+double Crystal::calc_eta() const
+{
+	return GSL::exp(GSL::log(6.5) + 2./3*GSL::log(4*M_PI/3) -
+			2./3*GSL::log(this->volume)).val;
+}
+
 size_t Crystal::calc_nk(double tol, double kappa, lm l)
 {
-	double eta = GSL::exp(GSL::log(6.5) + 2./3*GSL::log(4*M_PI/3) -
-	2./3*GSL::log(this->volume)).val;
 
-	int sign = 1;
-
-	if(-eta*GSL::log(tol).val < 0){
-		sign = -1;
-	}
-
+	double eta = calc_eta();
 	double q = 1;
 	while((-q*q + eta*(l.l*GSL::log(q) + GSL::log(1 + kappa*kappa) -
-	GSL::log(q*q + kappa*kappa) - GSL::log(tol)) + 1).val*sign > 0)
+	GSL::log(q*q + kappa*kappa) - GSL::log(tol)) + 1).val > 0)
 	{
 		q += sqrt(eta);
 	}
@@ -82,7 +81,7 @@ double bisect_r(double tol, double kappa, double eta, lm l, double r_min,
 	I.set_kappa(kappa);
 	I.set_ewald_param(eta);
 
-	while(ru - rl > tol){
+	while(std::abs(ru - rl) > tol){
 		r = (ru + rl)/2;
 		if((l.l*GSL::log(r) + GSL::log(I.ewald_int(l, r)) -
 		GSL::log(I.ewald_int(l, 1.)) - GSL::log(tol)).val > 0){
@@ -97,22 +96,15 @@ double bisect_r(double tol, double kappa, double eta, lm l, double r_min,
 
 size_t Crystal::calc_nr(double tol, double kappa, lm l)
 {
-	double eta = GSL::exp(GSL::log(6.5) + 2./3*GSL::log(4*M_PI/3) -
-	2./3*GSL::log(this->volume)).val;
+	double eta = calc_eta();
 
 	Ewald_integral I;
 	I.set_kappa(kappa);
 	I.set_ewald_param(eta);
 
-	int sign = 1;
-
-	if(-GSL::log(tol).val < 0){
-		sign = -1;
-	}
-
 	double r = 1;
 	while((l.l*GSL::log(r) + GSL::log(I.ewald_int(l, r)) -
-	GSL::log(I.ewald_int(l, 1.)) - GSL::log(tol)).val*sign > 0)
+	GSL::log(I.ewald_int(l, 1.)) - GSL::log(tol)).val > 0)
 	{
 		r += 2/sqrt(eta);
 	}
@@ -124,25 +116,21 @@ size_t Crystal::calc_nr(double tol, double kappa, lm l)
 
 double Crystal::calc_Rmax(double tol, double kappa, lm l)
 {
-	double eta = GSL::exp(GSL::log(6.5) + 2./3*GSL::log(4*M_PI/3) -
-	2./3*GSL::log(this->volume)).val;
+	double eta = calc_eta();
 
 	Ewald_integral I;
 	I.set_kappa(kappa);
 	I.set_ewald_param(eta);
 
-	int sign = 1;
-
-	if(-GSL::log(tol).val < 0){
-		sign = -1;
-	}
 	double r = 1;
 	while((l.l*GSL::log(r) + GSL::log(I.ewald_int(l, r)) -
-	GSL::log(I.ewald_int(l, 1.)) - GSL::log(tol)).val*sign > 0)
+	GSL::log(I.ewald_int(l, 1.)) - GSL::log(tol)).val > 0)
 	{
 		r += 2./sqrt(eta);
 	}
-	r = bisect_r(tol, kappa, eta, l, r - 2/sqrt(eta), r);
+	std::cout << r << " " << (l.l*GSL::log(r) + GSL::log(I.ewald_int(l, r)) -
+        GSL::log(I.ewald_int(l, 1.)) - GSL::log(tol)).val << "\n";
+	r = bisect_r(tol, kappa, eta, l, r - 2./sqrt(eta), r);
 
 	return r;
 
@@ -174,18 +162,11 @@ void Crystal::set_Rn(double Rmax)
 
 double Crystal::calc_Kmax(double tol, double kappa, lm l)
 {
-	double eta = GSL::exp(GSL::log(6.5) + 2./3*GSL::log(4*M_PI/3) -
-	2./3*GSL::log(this->volume)).val;
-
-	int sign = 1;
-
-	if(-eta*GSL::log(tol).val < 0){
-		sign = -1;
-	}
+	double eta = calc_eta();
 
 	double q = 1;
 	while((-q*q + eta*(l.l*GSL::log(q) + GSL::log(1 + kappa*kappa) -
-	GSL::log(q*q + kappa*kappa) - GSL::log(tol)) + 1).val*sign > 0)
+	GSL::log(q*q + kappa*kappa) - GSL::log(tol)) + 1).val > 0)
 	{
 		q += sqrt(eta);
 	}
@@ -208,7 +189,6 @@ void Crystal::set_Kn(double Kmax)
 	int N3 = static_cast<int>(a3.norm()/(2*M_PI)*Kmax);
 
 
-	std::unordered_set<GSL::Vector> tmp;
 	for(int n1 = -N1; n1 <= N1; n1++){
 		for(int n2 = -N2; n2 <= N2; n2++){
 			for(int n3 = -N3; n3 <= N3; n3++){
@@ -219,14 +199,14 @@ void Crystal::set_Kn(double Kmax)
 	std::sort(Kn_vecs.begin(), Kn_vecs.end(), comp_norm);
 }
 
-double Crystal::calc_volume()
+double Crystal::calc_volume() 
 {
-    GSL::Vector tmp;
-    tmp = GSL::cross(lat.lat[1], lat.lat[2]);
+    GSL::Vector tmp, tmp1 = lat.lat[1], tmp2 = lat.lat[2];
+    tmp = GSL::cross(tmp1, tmp2);
     return std::abs(GSL::dot(lat.lat[0], tmp)*GSL::pow_int(lat.scale, 3));
 }
 
-double Crystal::calc_bz_volume()
+double Crystal::calc_bz_volume() 
 {
     GSL::Vector tmp;
     tmp = GSL::cross(lat.r_lat[1], lat.r_lat[2]);
@@ -301,30 +281,26 @@ std::vector<std::vector<Atom>> Crystal::calc_nearest_neighbours()
 	Atom tmp_at;
 	GSL::Vector ri(3), rj(3);
 	for(size_t i = 0; i < this->atoms.size(); i++){
+
 		tmp.clear();
 		pre_res.clear();
 		ri = this->atoms[i].pos;
 		tmp.push_back(this->atoms[i]);
 		// Calculate all neighbours inside the cell
 		for(size_t j = 0; j < this->atoms.size(); j++){
-			if(i == j){
-				continue;
+			if(i != j){
+				rj = this->atoms[j].pos;
+				tmp.push_back(this->atoms[j]);
 			}
-			rj = this->atoms[j].pos;
-			tmp.push_back(this->atoms[j]);
-			tmp.back().pos = (ri - rj);
 		}
+
 		for(Atom a : tmp){
-			// Do not add the original atom
-			if(a.pos != this->atoms[i].pos){
-				pre_res.insert(a);
-			}
 			// Add all lattice vectors
 			for(GSL::Vector R : this->Rn_vecs){
 				// Insert all atoms in the system, except fot the original one
-				if(a.pos + R != this->atoms[i].pos){
-					tmp_at = a;
-					tmp_at.pos = a.pos + R;
+				tmp_at = a;
+				tmp_at.set_pos(a.pos + R - ri);
+				if(tmp_at.get_pos() != GSL::Vector(3)){
 					pre_res.insert(tmp_at);
 				}
 			}

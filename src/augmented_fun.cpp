@@ -152,7 +152,7 @@ void Augmented_Hankel::update(std::vector<double>& v, const double en
     Hankel_function H(l);
 
     std::vector<double> l_init = {
-        GSL::pow_int(mesh.r[0], l.l+1)/sqrt(mesh.drx[0]),
+        0,
         GSL::pow_int(mesh.r[1], l.l+1)/sqrt(mesh.drx[1]),
         GSL::pow_int(mesh.r[2], l.l+1)/sqrt(mesh.drx[2])};
     std::vector<double> r_init;
@@ -243,7 +243,7 @@ void Augmented_Bessel::update(std::vector<double>& v, const double en
 
     if(!core && nodes >= 0){
         std::vector<double> l_init = {
-            GSL::pow_int(mesh.r[0], l.l+1)/sqrt(mesh.drx[0]),
+            0,
             GSL::pow_int(mesh.r[1], l.l+1)/sqrt(mesh.drx[1]),
             GSL::pow_int(mesh.r[2], l.l+1)/sqrt(mesh.drx[2])};
 

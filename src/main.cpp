@@ -50,14 +50,14 @@ numerov_debug.close();
 	std::cout << a << "\n";
 	std::cout << b << "\n";
 	std::cout << c << "\n";
-	Crystal cr(8*a, 8*b, 8*c);
+	Crystal cr(48*a, 48*b, 48*c);
 
 	std::cout << cr.lat.scale*cr.lat.lat << "\n";
 
 	std::cout << "Calculating Rmax" << "\n";
-	double Rmax = cr.calc_Rmax(1e-14, kappa, lm {5, 0});
+	double Rmax = cr.calc_Rmax(5e-14, kappa, lm {5, 0});
 	std::cout << "Calculating Kmax" << "\n";
-	double Kmax = cr.calc_Kmax(1e-14, kappa, lm {5, 0});
+	double Kmax = cr.calc_Kmax(5e-14, kappa, lm {5, 0});
 	std::cout << "Rmax = " << Rmax << ", Kmax = " << Kmax << "\n";
 
 
@@ -89,8 +89,8 @@ numerov_debug.close();
 	Atom C4;
 	C4.set_pos(tau*cr.lat.scale*cr.lat.lat);
 
-	C1.set_Z(6);
-	C2.set_Z(6);
+	C1.set_Z(1);
+	C2.set_Z(1);
 	C3.set_Z(6);
 	C4.set_Z(6);
 
@@ -100,15 +100,6 @@ numerov_debug.close();
 	sim.set_up_X_matrices();
 	K_mesh kmesh(cr.lat.r_lat);
 	kmesh.generate_mesh(4, 4, 4);
-
-	Hankel_function hl(lm {0,0});
-	Integral_Hankel_function ihl(lm {0,0});
-
-	for(double x = 0.001; x < 5.99; x += 0.01){
-		std::cout << hl(x) - ihl(x) << "\n";
-	}
-
-	exit(0);
 
 	for(GSL::Vector kp : kmesh.k_points){
 //	for(GSL::Vector kp : { GSL::Vector {0., 0., 0.}, GSL::Vector {-3.926991, -0.785398, -0.785398}}){
