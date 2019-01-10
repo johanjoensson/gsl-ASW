@@ -40,19 +40,12 @@ Logarithmic_mesh::Logarithmic_mesh(double A_n, double radius,
 double Logarithmic_mesh::radial_integral(std::vector<double>& f)
 {
     double t0 = 0., t1 = 0., t2 = 0., res = 0.;
-    for(size_t i = 1; i < (r.size() - 1)/2; i++){
+    for(size_t i = 1; i < (r.size() - 2)/2; i++){
         // i is an integer, 2*i has to be even.
         // This part is 2*i even
         t2 = f[2*i - 1]*r2[2*i - 1]*drx[2*i - 2];
         t1 = f[2*i]*r2[2*i - 1]*drx[2*i - 1];
         t0 = f[2*i + 1]*r2[2*i + 1]*drx[2*i];
-        res += t2 + 4*t1 + t0;
-        // We need to make sure we include the cases where 2*i _should
-        // be odd.
-        // This part is 2*i odd
-        t2 = f[2*i]*r2[2*i]*drx[2*i - 1];
-        t1 = f[2*i]*r2[2*i]*drx[2*i];
-        t0 = f[2*i + 2]*r2[2*i + 2]*drx[2*i + 1];
         res += t2 + 4*t1 + t0;
     }
     return 1./3 * res;

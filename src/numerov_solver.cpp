@@ -231,13 +231,13 @@ std::vector<double> Numerov_solver::solve(Logarithmic_mesh &mesh,
 		// Core states, normalize to unity
 		scale = 0;
 		for(size_t i = 0; i < res.size(); i++){
-			scale += res[i]*res[i];
+			scale += res[i]*res[i]*mesh.drx[i]*mesh.drx[i];
 		}
 		scale = 1./scale;
 	}
 	// Scale or normalize solution
 	for(size_t i = 0; i < res.size(); i++){
-		res[i] *= scale;
+		res[i] *= std::sqrt(mesh.drx[i])*scale;
 	}
 
 	en = e_trial;

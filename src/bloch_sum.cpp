@@ -129,8 +129,12 @@ GSL::Complex Bloch_sum::calc_d3(const GSL::Vector& tau)
     if(tau != GSL::Vector(3) || l.l != 0){
         return GSL::Complex(0., 0.);
     }
-    GSL::Result d3 = kappa/(2*M_SQRTPI)*GSL::erf(-kappa/sqrt(eta)) -
-        sqrt(eta)/(2*M_PI)*GSL::exp(-kappa*kappa/eta) + kappa/(2*M_SQRTPI);
+//    GSL::Result d3 = kappa/(2*M_SQRTPI)*GSL::erf(-kappa/sqrt(eta)) -
+//        sqrt(eta)/(2*M_PI)*GSL::exp(-kappa*kappa/eta) + kappa/(2*M_SQRTPI);
+    GSL::Result d3 = -kappa/(4*M_PI) * (GSL::erfc(-kappa/std::sqrt(eta)) - 
+        GSL::erfc(kappa/std::sqrt(eta))) - 
+	std::sqrt(eta)/(2*M_PI)*GSL::exp(-kappa*kappa/eta) + 
+	kappa/(2*M_SQRTPI);
     return GSL::Complex(d3.val, 0);
 }
 
@@ -139,8 +143,9 @@ GSL::Complex Bloch_sum::calc_d3_dot(const GSL::Vector& tau)
     if(tau != GSL::Vector(3) || l.l != 0){
         return GSL::Complex(0., 0.);
     }
-    GSL::Result d3_dot = -1./(4*M_SQRTPI*kappa)*GSL::erf(-kappa/sqrt(eta)) -
-        1./(4*M_SQRTPI*kappa);
+    GSL::Result d3_dot = 1/(8*M_SQRTPI*kappa) * (GSL::erfc(-kappa/std::sqrt(eta)) - 
+        GSL::erfc(kappa/std::sqrt(eta))) - 
+	1./(4*M_SQRTPI*kappa);
     return GSL::Complex(d3_dot.val, 0);
 }
 
