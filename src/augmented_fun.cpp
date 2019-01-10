@@ -164,9 +164,9 @@ void Augmented_Hankel::update(std::vector<double>& v, const double en
         r_init = {0., 0.};
     }else{
         r_init = {GSL::pow_int(kappa, l.l + 1)*H(kappa*mesh.r[lastbutone])
-		    *mesh.r[lastbutone]/sqrt(mesh.drx[lastbutone]),
+		    *mesh.r[lastbutone],
                   GSL::pow_int(kappa, l.l+1)*H(kappa*mesh.r[last])
-		    *mesh.r[last]/sqrt(mesh.drx[last])};
+		    *mesh.r[last]};
     }
     val = sol.solve(mesh, v, l_init, r_init, EH, nodes);
 }
@@ -253,10 +253,9 @@ void Augmented_Bessel::update(std::vector<double>& v, const double en
 
         std::vector<double> r_init = {
                 GSL::pow_int(kappa, -l.l)*j(kappa*mesh.r[lastbutone])
-		  *mesh.r[lastbutone]/sqrt(mesh.drx[lastbutone]),
+		  *mesh.r[lastbutone],
 		GSL::pow_int(kappa, -l.l)*j(kappa*mesh.r[last])
-		  *mesh.r[last]/sqrt(mesh.drx[last])};
-
+		  *mesh.r[last]};
         val = sol.solve(mesh, v, l_init, r_init, EJ, nodes);
     }else{
         EJ = 0.;
