@@ -147,21 +147,25 @@ void Augmented_Hankel::update(std::vector<double>& v, const double en
     EH = en;
     Numerov_solver sol;
     int nodes = n - l.l - 1;
+    int sign = 1;
+    if(nodes % 2 == 1){
+//	    sign = -1;
+    }
     size_t last = mesh.r.size() - 1, lastbutone = mesh.r.size() - 2;
 
     Hankel_function H(l);
 
     std::vector<double> l_init = {
-        GSL::pow_int(mesh.r[0], l.l+1)/sqrt(mesh.drx[0]),
+        0,
         GSL::pow_int(mesh.r[1], l.l+1)/sqrt(mesh.drx[1]),
         GSL::pow_int(mesh.r[2], l.l+1)/sqrt(mesh.drx[2])};
     std::vector<double> r_init;
     if(core){
         r_init = {0., 0.};
     }else{
-        r_init = {GSL::pow_int(kappa, l.l + 1)*H(kappa*mesh.r[lastbutone])
+        r_init = {sign*GSL::pow_int(kappa, l.l + 1)*H(kappa*mesh.r[lastbutone])
 		    *mesh.r[lastbutone]/sqrt(mesh.drx[lastbutone]),
-                  GSL::pow_int(kappa, l.l+1)*H(kappa*mesh.r[last])
+                  sign*GSL::pow_int(kappa, l.l+1)*H(kappa*mesh.r[last])
 		    *mesh.r[last]/sqrt(mesh.drx[last])};
     }
     val = sol.solve(mesh, v, l_init, r_init, EH, nodes);
@@ -238,19 +242,23 @@ void Augmented_Bessel::update(std::vector<double>& v, const double en
     EJ = en;
     Numerov_solver sol;
     int nodes =  n - l.l - 1;
+    int sign = 1;
+    if(nodes % 2 == 1){
+//	    sign = -1;
+    }
     size_t last = mesh.r.size() - 1, lastbutone = mesh.r.size() - 2;
     Bessel_function j(l);
 
     if(!core && nodes >= 0){
         std::vector<double> l_init = {
-            GSL::pow_int(mesh.r[0], l.l+1)/sqrt(mesh.drx[0]),
+            0,
             GSL::pow_int(mesh.r[1], l.l+1)/sqrt(mesh.drx[1]),
             GSL::pow_int(mesh.r[2], l.l+1)/sqrt(mesh.drx[2])};
 
         std::vector<double> r_init = {
-                GSL::pow_int(kappa, -l.l)*j(kappa*mesh.r[lastbutone])
+                sign*GSL::pow_int(kappa, -l.l)*j(kappa*mesh.r[lastbutone])
 		  *mesh.r[lastbutone]/sqrt(mesh.drx[lastbutone]),
-		GSL::pow_int(kappa, -l.l)*j(kappa*mesh.r[last])
+		sign*GSL::pow_int(kappa, -l.l)*j(kappa*mesh.r[last])
 		  *mesh.r[last]/sqrt(mesh.drx[last])};
 
         val = sol.solve(mesh, v, l_init, r_init, EJ, nodes);

@@ -49,7 +49,6 @@ Simulation::Simulation(const Crystal& crystal, const XC_FUN func, const double k
     pot = Potential(cryst.atoms);
     pot.set_xc_fun(func);
     pot.initial_pot(nel, cryst.volume);
-    std::vector<Augmented_spherical_wave> tmp;
     // Divide electrons into core and valence states
     for(Atom& at: cryst.atoms){
         add_states(at, kappa);
@@ -75,15 +74,13 @@ Simulation::Simulation(const Crystal& crystal, const XC_FUN func, const double k
     size_t N = basis_valence.size();
     H = GSL::Complex_Matrix(N, N);
     S = GSL::Complex_Matrix(N, N);
+
     // Reserve space for each atom ad each 0 <= l <= l_low, -l <= m <= l
-    // XH1 = GSL::Matrix(cryst.atoms.size(), (l_low + 1)*(l_low + 1));
-    // XS1 = GSL::Matrix(cryst.atoms.size(), (l_low + 1)*(l_low + 1));
-    // XH2 = GSL::Matrix(cryst.atoms.size(), (l_low + 1)*(l_low + 1));
-    // XS2 = GSL::Matrix(cryst.atoms.size(), (l_low + 1)*(l_low + 1));
     XH1 = GSL::Matrix(cryst.atoms.size(),(l_low + 1)*(l_low + 1));
     XS1 = GSL::Matrix(cryst.atoms.size(),(l_low + 1)*(l_low + 1));
     XH2 = GSL::Matrix(cryst.atoms.size(),(l_low + 1)*(l_low + 1));
     XS2 = GSL::Matrix(cryst.atoms.size(),(l_low + 1)*(l_low + 1));
+
     // Reserve space for each atom and each 0<= l <= l_int = l_low + 1, -l <= m <= l
     XH3 = GSL::Matrix(cryst.atoms.size(),(l_low + 2)*(l_low + 2));
     XS3 = GSL::Matrix(cryst.atoms.size(),(l_low + 2)*(l_low + 2));

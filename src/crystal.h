@@ -10,8 +10,9 @@
 
 class Crystal {
 
-	double calc_volume();
-	double calc_bz_volume();
+	double calc_volume() ;
+	double calc_bz_volume() ;
+	double calc_eta() const;
 public:
 	std::vector<GSL::Vector> Rn_vecs;
 	std::vector<GSL::Vector> Kn_vecs;

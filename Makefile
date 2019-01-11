@@ -23,6 +23,8 @@ SRC_DIR = src
 # Build directory
 BUILD_DIR = build
 
+# Test directory
+TEST_DIR = test
 GSLLIBROOT=../GSL-lib
 WFLAGS = -Werror -Wall -Wextra -pedantic -Wshadow -Wnon-virtual-dtor -Wold-style-cast -Wcast-align -Wunused -Woverloaded-virtual -Wpedantic -Wconversion -Wsign-conversion -Wmisleading-indentation -Wduplicated-cond -Wduplicated-branches -Wlogical-op -Wnull-dereference -Wuseless-cast -Wdouble-promotion -Wformat=2 -Weffc++
 # Flags for the above defined compilers
@@ -58,8 +60,11 @@ ASW_OBJ =     main.o\
 	      spherical_fun.o\
               numerov_solver.o\
 
+TEST_OBJ =	
+
 
 OBJS = $(addprefix $(BUILD_DIR)/, $(ASW_OBJ))
+TEST_OBJS = $(addprefix $(TEST_DIR)/, $(TEST_OBJ))
 
 # Targets to always execute, even if new files with the same names exists
 .PHONY: build all clean cleanall 
@@ -83,8 +88,13 @@ checkall: $(addprefix $(SRC_DIR)/, $(NUMEROV_OBJ:o=cpp))
 	$(CXXCHECK) $^ $(CXXCHECKFLAGS)
 
 travis: GSLLIBROOT = GSL-lib-master
-travis: CXXFLAGS = -std=c++11 -I$(SRC_DIR) -I $(GSLLIBROOT)/include -O0
+travis: CXXFLAGS = -std=c++11 -I$(SRC_DIR) -I$(GSLLIBROOT)/include -O0
 travis: all
+
+tests: 	CXXFLAGS = -std=c++11 -I$(SRC_DIR) -I$(GSLLIBROOT)/include -I$(TEST_DIR) -O0 -fprofile-arcs -ftest-coverage
+tests:  LDFLAGS = -lgcov -lgtest -L$(GSLLIBDIR) -L. -Wl,-rpath=$(GSLLIBDIR) -lGSLpp -lxc -lm 
+tests: 	clean $(TEST_OBJS)
+	$(CXX) $(TEST_OBJS) -o $@  $(LDFLAGS)
 
 build : 
 	mkdir -p build

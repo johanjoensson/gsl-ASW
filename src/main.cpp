@@ -50,14 +50,14 @@ numerov_debug.close();
 	std::cout << a << "\n";
 	std::cout << b << "\n";
 	std::cout << c << "\n";
-	Crystal cr(8*a, 8*b, 8*c);
+	Crystal cr(48*a, 48*b, 48*c);
 
 	std::cout << cr.lat.scale*cr.lat.lat << "\n";
 
 	std::cout << "Calculating Rmax" << "\n";
-	double Rmax = cr.calc_Rmax(1e-14, kappa, lm {5, 0});
+	double Rmax = cr.calc_Rmax(5e-14, kappa, lm {5, 0});
 	std::cout << "Calculating Kmax" << "\n";
-	double Kmax = cr.calc_Kmax(1e-14, kappa, lm {5, 0});
+	double Kmax = cr.calc_Kmax(5e-14, kappa, lm {5, 0});
 	std::cout << "Rmax = " << Rmax << ", Kmax = " << Kmax << "\n";
 
 
@@ -89,8 +89,8 @@ numerov_debug.close();
 	Atom C4;
 	C4.set_pos(tau*cr.lat.scale*cr.lat.lat);
 
-	C1.set_Z(6);
-	C2.set_Z(6);
+	C1.set_Z(1);
+	C2.set_Z(1);
 	C3.set_Z(6);
 	C4.set_Z(6);
 
