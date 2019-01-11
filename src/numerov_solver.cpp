@@ -22,7 +22,7 @@ std::vector<double> Numerov_solver::solve_left(Logarithmic_mesh &mesh,
 
 	size_t offset = res.size() - l;
 	for(size_t i = 0; i < l; i++){
-		res[offset + i] = init_cond[i];
+		res[offset + i] = init_cond[i]/std::sqrt(mesh.drx[i]);
 	}
 
 	for(size_t i = offset - 1; i >= i_lr; i--){
@@ -43,7 +43,7 @@ std::vector<double> Numerov_solver::solve_right(Logarithmic_mesh &mesh,
 	double g, g1, g2;
 
 	for(size_t i = 0; i < l; i++){
-		res[i] = init_cond[i];
+		res[i] = init_cond[i]/std::sqrt(mesh.drx[i]);
 	}
 
 	double A = mesh.A();
@@ -231,13 +231,13 @@ std::vector<double> Numerov_solver::solve(Logarithmic_mesh &mesh,
 		// Core states, normalize to unity
 		scale = 0;
 		for(size_t i = 0; i < res.size(); i++){
-			scale += res[i]*res[i];
+			scale += res[i]*res[i]*mesh.drx[i]*mesh.drx[i];
 		}
 		scale = 1./scale;
 	}
 	// Scale or normalize solution
 	for(size_t i = 0; i < res.size(); i++){
-		res[i] *= scale;
+		res[i] *= std::sqrt(mesh.drx[i])*scale;
 	}
 
 	en = e_trial;

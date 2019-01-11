@@ -128,8 +128,6 @@ double Crystal::calc_Rmax(double tol, double kappa, lm l)
 	{
 		r += 2./sqrt(eta);
 	}
-	std::cout << r << " " << (l.l*GSL::log(r) + GSL::log(I.ewald_int(l, r)) -
-        GSL::log(I.ewald_int(l, 1.)) - GSL::log(tol)).val << "\n";
 	r = bisect_r(tol, kappa, eta, l, r - 2./sqrt(eta), r);
 
 	return r;

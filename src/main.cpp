@@ -50,7 +50,7 @@ numerov_debug.close();
 	std::cout << a << "\n";
 	std::cout << b << "\n";
 	std::cout << c << "\n";
-	Crystal cr(48*a, 48*b, 48*c);
+	Crystal cr(18*a, 18*b, 18*c);
 
 	std::cout << cr.lat.scale*cr.lat.lat << "\n";
 

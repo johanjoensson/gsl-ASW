@@ -82,22 +82,26 @@ Augmented_function& Augmented_function::operator=(Augmented_function&& a)
 
 double augmented_integral(const Augmented_function &a, const Augmented_function &b)
 {
-    double res = 0.;
+//    double res = 0.;
     Logarithmic_mesh mesh = a.mesh;
-    size_t N = mesh.r.size();
+//    size_t N = mesh.r.size();
     // Make sure both funcions are centered on the same site
     if(a.center != b.center){
         return 0.;
     }
     // Use Simpsons rule for integration
-    for(size_t i = 1; i <= (N-2)/2; i++){
-        res += a.val[2*i - 1]*b.val[2*i - 1]*mesh.drx[2*i - 2]*mesh.drx[2*i - 2];
-        res += 4*a.val[2*i]*b.val[2*i]*mesh.drx[2*i - 1]*mesh.drx[2*i - 1];
-        res += a.val[2*i + 1]*b.val[2*i + 1]*mesh.drx[2*i]*mesh.drx[2*i];
-    }
+//    for(size_t i = 1; i <= (N-2)/2; i++){
+//        res += a.val[2*i - 1]*b.val[2*i - 1]*mesh.drx[2*i - 1]*mesh.drx[2*i - 2];
+//        res += 4*a.val[2*i]*b.val[2*i]*mesh.drx[2*i ]*mesh.drx[2*i - 1];
+//        res += a.val[2*i + 1]*b.val[2*i + 1]*mesh.drx[2*i + 1]*mesh.drx[2*i];
+//    }
 
-    res = 1./3 * res;
-    return res;
+//    res = 1./3 * res;
+    std::vector<double> integrand(a.val.size(), 0);
+    for(size_t i = 0; i < integrand.size(); i++){
+    	integrand[i] = a.val[i]*b.val[i];
+    }
+    return mesh.radial_integral(integrand);
 }
 
 bool operator==(const Augmented_function &a, const Augmented_function &b)
@@ -164,9 +168,9 @@ void Augmented_Hankel::update(std::vector<double>& v, const double en
         r_init = {0., 0.};
     }else{
         r_init = {sign*GSL::pow_int(kappa, l.l + 1)*H(kappa*mesh.r[lastbutone])
-		    *mesh.r[lastbutone]/sqrt(mesh.drx[lastbutone]),
+		    *mesh.r[lastbutone],
                   sign*GSL::pow_int(kappa, l.l+1)*H(kappa*mesh.r[last])
-		    *mesh.r[last]/sqrt(mesh.drx[last])};
+		    *mesh.r[last]};
     }
     val = sol.solve(mesh, v, l_init, r_init, EH, nodes);
 }
@@ -257,9 +261,9 @@ void Augmented_Bessel::update(std::vector<double>& v, const double en
 
         std::vector<double> r_init = {
                 sign*GSL::pow_int(kappa, -l.l)*j(kappa*mesh.r[lastbutone])
-		  *mesh.r[lastbutone]/sqrt(mesh.drx[lastbutone]),
+		  *mesh.r[lastbutone],
 		sign*GSL::pow_int(kappa, -l.l)*j(kappa*mesh.r[last])
-		  *mesh.r[last]/sqrt(mesh.drx[last])};
+		  *mesh.r[last]};
 
         val = sol.solve(mesh, v, l_init, r_init, EJ, nodes);
     }else{

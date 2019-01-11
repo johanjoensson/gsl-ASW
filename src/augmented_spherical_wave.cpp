@@ -65,9 +65,9 @@ void Augmented_spherical_wave::set_up(Potential &v)
 #ifdef DEBUG
 	std::ofstream out_file;
 	out_file.open("check_Hankel.dat", std::fstream::out|std::fstream::app);
-	out_file << "# r\tV(r)\tH(r)" << "\n";
+	out_file << "# r\tV(r)\trH(r)" << "\n";
 	for(size_t j = 0; j < H.val.size(); j++){
-		out_file << std::setprecision(8) << center.mesh.r[j] << " " << v_tot[j] << " " << H.val[j]/(center.mesh.r[j]*sqrt(center.mesh.drx[j])) << "\n";
+		out_file << std::setprecision(8) << center.mesh.r[j] << " " << v_tot[j] << " " << H.val[j] << "\n";
 	}
     out_file << "\n\n";
 	out_file.close();
@@ -82,9 +82,9 @@ void Augmented_spherical_wave::set_up(Potential &v)
             Ji_tmp.insert(Jil);
 #ifdef DEBUG
             out_file.open("check_Bessel.dat", std::fstream::out|std::fstream::app);
-            out_file << "# r\tV(r)\tJ(r)" << std::endl;
+            out_file << "# r\tV(r)\trJ(r)" << std::endl;
             for(size_t j = 0; j < Jil.val.size(); j++){
-                out_file << std::setprecision(8) << at.mesh.r[j] << " " << v_tot[j] << " " << Jil.val[j]/at.mesh.r[j]*sqrt(at.mesh.drx[j]) << "\n";
+                out_file << std::setprecision(8) << at.mesh.r[j] << " " << v_tot[j] << " " << Jil.val[j] << "\n";
             }
             out_file << "\n\n";
             out_file.close();
