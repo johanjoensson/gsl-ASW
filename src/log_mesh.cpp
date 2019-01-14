@@ -43,9 +43,9 @@ double Logarithmic_mesh::radial_integral(std::vector<double>& f)
     for(size_t i = 1; i < (r.size() - 2)/2; i++){
         // i is an integer, 2*i has to be even.
         // This part is 2*i even
-        t2 = f[2*i - 1]*r2[2*i - 1]*drx[2*i - 2];
-        t1 = f[2*i]*r2[2*i - 1]*drx[2*i - 1];
-        t0 = f[2*i + 1]*r2[2*i + 1]*drx[2*i];
+        t2 = f[2*i - 1]/*r2[2*i - 1]*/*drx[2*i - 2];
+        t1 = f[2*i - 0]/*r2[2*i - 1]*/*drx[2*i - 1];
+        t0 = f[2*i + 1]/*r2[2*i + 1]*/*drx[2*i];
         res += t2 + 4*t1 + t0;
     }
     return 1./3 * res;

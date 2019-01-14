@@ -226,7 +226,7 @@ std::vector<double> Numerov_solver::solve(Logarithmic_mesh &mesh,
 
 	// Make sure to scale solution to match boundary conditions
 	if(std::abs(r_init.back()) > 1E-15){
-		scale = r_init.back()/res.back();
+		scale = r_init.back()/(res.back()*mesh.drx.back());
 	}else{
 		// Core states, normalize to unity
 		scale = 0;

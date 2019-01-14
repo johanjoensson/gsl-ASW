@@ -98,6 +98,7 @@ double augmented_integral(const Augmented_function &a, const Augmented_function 
 
 //    res = 1./3 * res;
     std::vector<double> integrand(a.val.size(), 0);
+    // integrand = r*f(r)*r*g(r) = r^2*f(r)*g(r)
     for(size_t i = 0; i < integrand.size(); i++){
     	integrand[i] = a.val[i]*b.val[i];
     }
@@ -161,8 +162,8 @@ void Augmented_Hankel::update(std::vector<double>& v, const double en
 
     std::vector<double> l_init = {
         0,
-        GSL::pow_int(mesh.r[1], l.l+1)/sqrt(mesh.drx[1]),
-        GSL::pow_int(mesh.r[2], l.l+1)/sqrt(mesh.drx[2])};
+        GSL::pow_int(mesh.r[1], l.l+1),
+        GSL::pow_int(mesh.r[2], l.l+1)};
     std::vector<double> r_init;
     if(core){
         r_init = {0., 0.};
@@ -256,8 +257,8 @@ void Augmented_Bessel::update(std::vector<double>& v, const double en
     if(!core && nodes >= 0){
         std::vector<double> l_init = {
             0,
-            GSL::pow_int(mesh.r[1], l.l+1)/sqrt(mesh.drx[1]),
-            GSL::pow_int(mesh.r[2], l.l+1)/sqrt(mesh.drx[2])};
+            GSL::pow_int(mesh.r[1], l.l+1),
+            GSL::pow_int(mesh.r[2], l.l+1)};
 
         std::vector<double> r_init = {
                 sign*GSL::pow_int(kappa, -l.l)*j(kappa*mesh.r[lastbutone])

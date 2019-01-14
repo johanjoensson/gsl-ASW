@@ -50,7 +50,7 @@ numerov_debug.close();
 	std::cout << a << "\n";
 	std::cout << b << "\n";
 	std::cout << c << "\n";
-	Crystal cr(18*a, 18*b, 18*c);
+	Crystal cr(8*a, 8*b, 8*c);
 
 	std::cout << cr.lat.scale*cr.lat.lat << "\n";
 
@@ -89,8 +89,8 @@ numerov_debug.close();
 	Atom C4;
 	C4.set_pos(tau*cr.lat.scale*cr.lat.lat);
 
-	C1.set_Z(1);
-	C2.set_Z(1);
+	C1.set_Z(6);
+	C2.set_Z(6);
 	C3.set_Z(6);
 	C4.set_Z(6);
 
@@ -102,8 +102,8 @@ numerov_debug.close();
 	kmesh.generate_mesh(4, 4, 4);
 
 	std::cout << "\n";
-//	for(GSL::Vector kp : kmesh.k_points){
-	for(GSL::Vector kp : { GSL::Vector {0., 0., 0.}, GSL::Vector {0.555360, -1.666081, -3.887523}}){
+	for(GSL::Vector kp : kmesh.k_points){
+//	for(GSL::Vector kp : { GSL::Vector {0., 0., 0.}, GSL::Vector {0.555360, -1.666081, -3.887523}}){
 
 		std::cout << "k-point " << kp << "\n******************************************************************************************************\n";
 	 	sim.set_up_H(kp);
