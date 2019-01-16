@@ -41,7 +41,7 @@ Simulation::Simulation(const Crystal& crystal, const XC_FUN func, const double k
         cryst.atoms[i].mesh = Logarithmic_mesh(cryst.atoms[i].get_AS(),
             500 + static_cast<size_t>(std::ceil(
                 1000*(static_cast<double>(cryst.atoms[i].get_Z())/118.)
-            ))
+            /2))*2
             );
         nel += cryst.atoms[i].get_Z();
     }
@@ -323,8 +323,8 @@ GSL::Complex Simulation::S_element(const size_t i1, const size_t i2, const GSL::
                     B1 = Bloch_summed_structure_constant(l_low, w1.kappa, cryst, J1.l, w1.l);
                     B2 = Bloch_summed_structure_constant(l_low, w2.kappa, cryst, J2.l, w2.l);
                     res += B1.evaluate(J1.center - w1.center.pos, kp).conjugate()*
-                    XS3[at_m][ipp]*
-                    B2.evaluate(J2.center - w2.center.pos, kp);
+	                   XS3[at_m][ipp]*
+        	           B2.evaluate(J2.center - w2.center.pos, kp);
                 }
             }
         }
@@ -448,8 +448,8 @@ void Simulation::calc_eigen()
     eigvals_down = tmp.second;
 
     for(size_t i = 0; i < N; i++){
-        std::cout << "  Eigenvalues (up, down): " << eigvals_up[i] << " " <<
-        eigvals_down[i] << "Ry\n";
+        std::cout << "  Eigenvalues (up, down): " << eigvals_up[i] << ", " <<
+        eigvals_down[i] << " (Ry)\n";
         std::cout << "  Eigenvectors (up, down) :\n";
         std::cout << "\t" << eigvecs_up.get_col(i) << "\n";
         std::cout << "\t" << eigvecs_down.get_col(i) << "\n";

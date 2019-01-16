@@ -46,11 +46,11 @@ numerov_debug.close();
 	double kappa = sqrt(0.015);
 	
 	GSL::Vector a = {0.0, 0.5, 0.5}, b = {0.5, 0.0, 0.5}, c = {0.5, 0.5, 0.0};
-	// GSL::Vector a = {1.0, 0.0, 0.0}, b = {0.0, 1.0, 0.0}, c = {0.0, 0.0, 1.0};
+//	GSL::Vector a = {1.0, 0.0, 0.0}, b = {0.0, 1.0, 0.0}, c = {0.0, 0.0, 1.0};
 	std::cout << a << "\n";
 	std::cout << b << "\n";
 	std::cout << c << "\n";
-	Crystal cr(8*a, 8*b, 8*c);
+	Crystal cr(6.7463222980989*a, 6.7463222980989*b, 6.7463222980989*c);
 
 	std::cout << cr.lat.scale*cr.lat.lat << "\n";
 
@@ -99,13 +99,21 @@ numerov_debug.close();
 	Simulation sim(cr, LDA, kappa);
 	sim.set_up_X_matrices();
 	K_mesh kmesh(cr.lat.r_lat);
-	kmesh.generate_mesh(4, 4, 4);
+	kmesh.generate_mesh(5, 5, 5);
 
-	std::cout << "\n";
-	for(GSL::Vector kp : kmesh.k_points){
-//	for(GSL::Vector kp : { GSL::Vector {0., 0., 0.}, GSL::Vector {0.555360, -1.666081, -3.887523}}){
+	Logarithmic_mesh test(10, 10000);
+	std::vector<double> f(10000, 0.0);
+	auto func = [](double x){ return x*x;};
+	for(size_t i = 0; i < test.r.size(); i++){
+		f[i] = func(test.r[i]);
+	}
+	std::cout << "Trapezoid = " << test.integrate(f) << " Simpson's = " << test.integrate_simpson(f) << "\n";
+
+//	for(GSL::Vector kp : kmesh.k_points){
+	for(GSL::Vector kp : { GSL::Vector {0., 0., 0.}, GSL::Vector { -1.777153, -3.554306, -1.777153 } }){
 
 		std::cout << "k-point " << kp << "\n******************************************************************************************************\n";
+
 	 	sim.set_up_H(kp);
 		sim.set_up_S(kp);
 		sim.calc_eigen();

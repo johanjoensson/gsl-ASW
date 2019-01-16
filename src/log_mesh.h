@@ -14,10 +14,10 @@ class Logarithmic_mesh {
 
 
 		Logarithmic_mesh();
-		Logarithmic_mesh(double radius, size_t num_points);
-		Logarithmic_mesh(double A, double radius, size_t num_points);
+		Logarithmic_mesh(double radius, size_t num_points, double A = 0.02);
 
-		double radial_integral(std::vector<double>& f);
+		double integrate(std::vector<double>& f);
+		double integrate_simpson(std::vector<double>& f);
 
 		double A() const {return A_p;};
 		double B() const {return B_p;};

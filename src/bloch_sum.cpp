@@ -3,6 +3,7 @@
 #include "envelope_fun.h"
 
 #include <cmath>
+#include <string>
 
 Bloch_sum::Bloch_sum(const lm l_n, const double kappa_n, const Crystal& c_n)
  : l(l_n), kappa(kappa_n), c(c_n),
@@ -19,8 +20,9 @@ GSL::Complex Bloch_sum::calc_d1(const GSL::Vector& tau, const GSL::Vector& kp)
     GSL::Complex c_fac(-1.0, 0.0);
 
     double k = kp.norm(), dot = GSL::dot(kp, tau);
-    for(size_t i = 0; i < this->c.Kn_vecs.size(); i++){
-        kn = kp + this->c.Kn_vecs[i];
+    // Loop over all K-vectors, including (0, 0,0)
+    for(auto Kn : c.Kn_vecs){
+        kn = kp + Kn;
         k = kn.norm();
         dot = GSL::dot(kn, tau);
         e = GSL::exp(GSL::Complex(0., dot));
@@ -47,8 +49,8 @@ GSL::Complex Bloch_sum::calc_d1_dot(const GSL::Vector& tau, const GSL::Vector& k
     GSL::Complex c_fac(1.0, 0.0);
     double k = kp.norm(), dot = GSL::dot(kp, tau);
     // Loop over all K-vectors, including (0, 0,0)
-    for(size_t i = 0; i < this->c.Kn_vecs.size(); i++){
-        kn = kp + this->c.Kn_vecs[i];
+    for(auto Kn : c.Kn_vecs){
+        kn = kp + Kn;
         k = kn.norm();
         dot = GSL::dot(kn, tau);
         e = GSL::exp(GSL::Complex(0., dot));
@@ -80,12 +82,12 @@ GSL::Complex Bloch_sum::calc_d2(const GSL::Vector& tau, const GSL::Vector& kp)
     GSL::Result tmp;
     GSL::Vector tau_mu;
     // Loop over all lattice vectors
-    for(size_t i = 0; i < this->c.Rn_vecs.size(); i++){
+    for(auto Rn : c.Rn_vecs){
         // Do not add unit cell contribution at (0, 0, 0)
-        if(this->c.Rn_vecs[i] == GSL::Vector(3) && tau == GSL::Vector(3)){
+        if(Rn == GSL::Vector(3) && tau == GSL::Vector(3)){
             continue;
         }
-        tau_mu = tau - this->c.Rn_vecs[i];
+        tau_mu = tau - Rn;
         t = tau_mu.norm();
         dot = GSL::dot(kp, tau_mu);
         tmp = GSL::pow_int(t, l.l)*cubic_harmonic(l, tau_mu)*I.ewald_int(l, t);
@@ -107,11 +109,12 @@ GSL::Complex Bloch_sum::calc_d2_dot(const GSL::Vector& tau, const GSL::Vector& k
     GSL::Result tmp;
     GSL::Vector tau_mu = tau;
     // Loop over all lattice vectors
-    for(size_t i = 0; i < this->c.Rn_vecs.size(); i++){
-        if(this->c.Rn_vecs[i] == GSL::Vector(3) && tau == GSL::Vector(3)){
+    for(auto Rn : c.Rn_vecs){
+        // Do not add unit cell contribution at (0, 0, 0)
+        if(Rn == GSL::Vector(3) && tau == GSL::Vector(3)){
             continue;
         }
-        tau_mu = tau - this->c.Rn_vecs[i];
+        tau_mu = tau - Rn;
         t = tau_mu.norm();
         dot = GSL::dot(kp, tau_mu);
         tmp = GSL::pow_int(t, l.l)*cubic_harmonic(l, tau_mu)*
@@ -143,6 +146,7 @@ GSL::Complex Bloch_sum::calc_d3_dot(const GSL::Vector& tau)
     if(tau != GSL::Vector(3) || l.l != 0){
         return GSL::Complex(0., 0.);
     }
+    // delta(tau) * delta(l, 0)
     GSL::Result d3_dot = 1/(8*M_SQRTPI*kappa) * (GSL::erfc(-kappa/std::sqrt(eta)) - 
         GSL::erfc(kappa/std::sqrt(eta))) - 
 	1./(4*M_SQRTPI*kappa);

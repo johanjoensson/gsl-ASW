@@ -229,11 +229,11 @@ std::vector<double> Numerov_solver::solve(Logarithmic_mesh &mesh,
 		scale = r_init.back()/(res.back()*mesh.drx.back());
 	}else{
 		// Core states, normalize to unity
-		scale = 0;
+		std::vector<double> t(res.size(), 0.);
 		for(size_t i = 0; i < res.size(); i++){
-			scale += res[i]*res[i]*mesh.drx[i]*mesh.drx[i];
+			t[i] = res[i]*res[i]*mesh.drx[i];
 		}
-		scale = 1./scale;
+		scale = 1./std::sqrt(mesh.integrate(t));
 	}
 	// Scale or normalize solution
 	for(size_t i = 0; i < res.size(); i++){

@@ -15,7 +15,7 @@ double Envelope_Hankel::barred_fun(const double x) const
     double kappa_fac = 1.;
     if(l.l < 0){
         l_eff = lm{ -l.l - 1, l.m};
-        kappa_fac = 1./GSL::pow_int(kappa, -2*l.l - 1);
+        kappa_fac = GSL::pow_int(kappa, 2*l.l + 1);
     }
     Hankel_function h(l_eff);
     return GSL::pow_int(kappa, l_eff.l+1)*kappa_fac*h(kappa*x);
@@ -49,6 +49,12 @@ double Envelope_Neumann::barred_fun(const double x) const
 
 double off_atomic_integral(const Envelope_Hankel& H1, const Envelope_Hankel& H2) 
 {
+    if(H1.l.l != H2.l.l){
+        return 0.;
+    }else if(H1.center != H2.center){
+        return 0.;
+    }
+
     double res = 0.;
     double rs = H1.center.mesh.r.back();
     Envelope_Hankel H1m1, H2m1, H1p1, H2p1;
@@ -57,20 +63,14 @@ double off_atomic_integral(const Envelope_Hankel& H1, const Envelope_Hankel& H2)
     H1m1 = Envelope_Hankel(H1.center, lm {H1.l.l - 1, H1.l.m}, H1.kappa);
     H2m1 = Envelope_Hankel(H2.center, lm {H2.l.l - 1, H2.l.m}, H2.kappa);
 
-    if(H1.l.l != H2.l.l){
-        return 0.;
-    }else if(H1.center != H2.center){
-        return 0.;
-    }
 
     if(H1.kappa != H2.kappa){
         res = H1.barred_fun(rs)*H2p1.barred_fun(rs) -
               H1p1.barred_fun(rs)*H2.barred_fun(rs);
         res *= 1./(-H1.kappa*H1.kappa + H2.kappa*H2.kappa);
     }else{
-        res = H1.barred_fun(rs)*H1.barred_fun(rs) -
-              H1m1.barred_fun(rs)*H2p1.barred_fun(rs);
-        res *= -rs/2.;
+    	res = 0.5*rs*( H1m1.barred_fun(rs)*H2p1.barred_fun(rs) -
+	      H1.barred_fun(rs)*H2.barred_fun(rs) );
     }
 
     res *= rs*rs;
@@ -129,11 +129,10 @@ double atomic_integral(const Envelope_Bessel& J1, const Envelope_Bessel& J2)
     if(J1.kappa != J2.kappa){
         res = J1.barred_fun(rs)*J2m1.barred_fun(rs) -
               J1m1.barred_fun(rs)*J2.barred_fun(rs);
-        res *= 1./(-J1.kappa*J1.kappa - -J2.kappa*J2.kappa);
+        res *= 1./(-J1.kappa*J1.kappa + J2.kappa*J2.kappa);
     }else{
-        res = J1.barred_fun(rs)*J1.barred_fun(rs) -
-              J1m1.barred_fun(rs)*J1p1.barred_fun(rs);
-        res *= rs/2.;
+        res = 0.5*rs*( J1.barred_fun(rs)*J2.barred_fun(rs) -
+              J1m1.barred_fun(rs)*J2p1.barred_fun(rs) );
     }
 
     res *= rs*rs;
