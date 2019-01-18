@@ -45,8 +45,8 @@ numerov_debug.close();
 
 	double kappa = sqrt(0.015);
 	
-	GSL::Vector a = {0.0, 0.5, 0.5}, b = {0.5, 0.0, 0.5}, c = {0.5, 0.5, 0.0};
-//	GSL::Vector a = {1.0, 0.0, 0.0}, b = {0.0, 1.0, 0.0}, c = {0.0, 0.0, 1.0};
+//	GSL::Vector a = {0.0, 0.5, 0.5}, b = {0.5, 0.0, 0.5}, c = {0.5, 0.5, 0.0};
+	GSL::Vector a = {1.0, 0.0, 0.0}, b = {0.0, 1.0, 0.0}, c = {0.0, 0.0, 1.0};
 	std::cout << a << "\n";
 	std::cout << b << "\n";
 	std::cout << c << "\n";
@@ -94,23 +94,16 @@ numerov_debug.close();
 	C3.set_Z(6);
 	C4.set_Z(6);
 
-	cr.add_atoms(std::vector<Atom> {C1, C2});
+	cr.add_atoms(std::vector<Atom> {C1});
 
 	Simulation sim(cr, LDA, kappa);
 	sim.set_up_X_matrices();
 	K_mesh kmesh(cr.lat.r_lat);
-	kmesh.generate_mesh(5, 5, 5);
+	kmesh.generate_mesh(15, 15, 15);
 
-	Logarithmic_mesh test(10, 10000);
-	std::vector<double> f(10000, 0.0);
-	auto func = [](double x){ return x*x;};
-	for(size_t i = 0; i < test.r.size(); i++){
-		f[i] = func(test.r[i]);
-	}
-	std::cout << "Trapezoid = " << test.integrate(f) << " Simpson's = " << test.integrate_simpson(f) << "\n";
 
-//	for(GSL::Vector kp : kmesh.k_points){
-	for(GSL::Vector kp : { GSL::Vector {0., 0., 0.}, GSL::Vector { -1.777153, -3.554306, -1.777153 } }){
+	for(GSL::Vector kp : kmesh.k_points){
+//	for(GSL::Vector kp : { GSL::Vector {0., 0., 0.}, GSL::Vector { -1.777153, -3.554306, -1.777153 } }){
 
 		std::cout << "k-point " << kp << "\n******************************************************************************************************\n";
 
