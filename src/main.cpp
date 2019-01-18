@@ -101,14 +101,6 @@ numerov_debug.close();
 	K_mesh kmesh(cr.lat.r_lat);
 	kmesh.generate_mesh(5, 5, 5);
 
-	Logarithmic_mesh test(10, 10000);
-	std::vector<double> f(10000, 0.0);
-	auto func = [](double x){ return x*x;};
-	for(size_t i = 0; i < test.r.size(); i++){
-		f[i] = func(test.r[i]);
-	}
-	std::cout << "Trapezoid = " << test.integrate(f) << " Simpson's = " << test.integrate_simpson(f) << "\n";
-
 //	for(GSL::Vector kp : kmesh.k_points){
 	for(GSL::Vector kp : { GSL::Vector {0., 0., 0.}, GSL::Vector { -1.777153, -3.554306, -1.777153 } }){
 
