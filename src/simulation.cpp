@@ -50,7 +50,7 @@ Simulation::Simulation(const Crystal& crystal, const XC_FUN func, const double k
     pot.set_xc_fun(func);
     pot.initial_pot(nel, cryst.volume);
     // Divide electrons into core and valence states
-    for(Atom& at: cryst.atoms){
+    for(const Atom& at: cryst.atoms){
         add_states(at, kappa);
         if(at.get_Z() > 20){
             l_low = 3;
@@ -359,20 +359,22 @@ void Simulation::set_up_X_matrices()
                 XH1[at_i][l_i] = X_H1(w1.H, w2.H, w1.center);
                 XS1[at_i][l_i] = X_S1(w1.H, w2.H, w1.center);
             }
-            // Find off center expansion on site w1.center of wave w2
 
+            // Find off center expansion on site w1.center of wave w2
             for(Augmented_Bessel J2s : w2.J[at_i]){
                 if(J2s.l == w1.H.l){
                     XH2[at_i][l_i] = X_H2(w1.H, J2s, w1.center);
                     XS2[at_i][l_i] = X_S2(w1.H, J2s, w1.center);
                 }
             }
+
             // Find off center expansion on site s of waves w1 ans w2
             for(size_t n_s = 0; n_s < cryst.atoms.size(); n_s++){
                 for(Augmented_Bessel J1s : w1.J[n_s]){
                     for(Augmented_Bessel J2s : w2.J[n_s]){
                         if(J1s.l == J2s.l){
-                            size_t ipp = static_cast<size_t>(J1s.l.l*(J1s.l.l + 1) + J1s.l.m);
+                            size_t ipp = static_cast<size_t>(
+                                J1s.l.l*(J1s.l.l + 1) + J1s.l.m);
                             XH3[n_s][ipp]
                               =  X_H3(J1s, J2s, cryst.atoms[n_s]);
                             XS3[n_s][ipp]
@@ -381,6 +383,7 @@ void Simulation::set_up_X_matrices()
                     }
                 }
             }
+
         }
     }
     std::cout << "XS1 = " << XS1 << std::endl;
@@ -452,9 +455,9 @@ void Simulation::calc_eigen()
     eigvals_down = tmp.second;
     }catch (const std::runtime_error &e){
 	    std::cerr << e.what();
-	    std::cout << "Overlap matrix" << std::endl;
+	    std::cout << " Overlap matrix\n";
 	    for(size_t i = 0 ; i < N; i++){
-		    std::cout << "  " << S_up[i] << std::endl;
+		    std::cout << "  " << S_up[i] << "\n";
 	    }
 	    throw e;
     }

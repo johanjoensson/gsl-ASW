@@ -146,7 +146,7 @@ void Augmented_Hankel::update(std::vector<double>& v, const double en
     int nodes = n - l.l - 1;
     int sign = 1;
     if(nodes % 2 == 1){
-//	    sign = -1;
+	    sign = -1;
     }
     size_t last = mesh.r.size() - 1, lastbutone = mesh.r.size() - 2;
 
@@ -239,7 +239,7 @@ void Augmented_Bessel::update(std::vector<double>& v, const double en
     int nodes =  n - l.l - 1;
     int sign = 1;
     if(nodes % 2 == 1){
-//	    sign = -1;
+	    sign = -1;
     }
     size_t last = mesh.r.size() - 1, lastbutone = mesh.r.size() - 2;
     Bessel_function i(l);
@@ -252,9 +252,9 @@ void Augmented_Bessel::update(std::vector<double>& v, const double en
 
         std::vector<double> r_init = {
                 sign*GSL::pow_int(kappa, -l.l)*i(kappa*mesh.r[lastbutone])
-		  *mesh.r[lastbutone],
+		        *mesh.r[lastbutone],
 		sign*GSL::pow_int(kappa, -l.l)*i(kappa*mesh.r[last])
-		  *mesh.r[last]};
+		        *mesh.r[last]};
 
         val = sol.solve(mesh, v, l_init, r_init, EJ, nodes);
     }else{

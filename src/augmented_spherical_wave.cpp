@@ -24,16 +24,18 @@ Augmented_spherical_wave::Augmented_spherical_wave(double kappa_n, int n_n,
     Augmented_Bessel tmp;
     for(size_t i = 0; i < off_centers.size(); i++){
         Atom at = off_centers[i];
-        if(at.Z >= 20){
-            l_low = 3;
-        }else{
-            l_low = 2;
-        }
-        for(int l_s = 0; l_s <= std::min(l_low + 1, n - 1); l_s++){
-            for(int m_s = -l_s; m_s <= l_s; m_s++){
-                lm lp = {l_s, m_s};
-                tmp = Augmented_Bessel(n, lp, kappa, at.pos, at.mesh);
-                J[i].insert(tmp);
+        if(at != center){
+            if(at.Z >= 20){
+                l_low = 3;
+            }else{
+                l_low = 2;
+            }
+            for(int l_s = 0; l_s <= std::min(l_low + 1, n - 1); l_s++){
+                for(int m_s = -l_s; m_s <= l_s; m_s++){
+                    lm lp = {l_s, m_s};
+                    tmp = Augmented_Bessel(n, lp, kappa, at.pos, at.mesh);
+                    J[i].insert(tmp);
+                }
             }
         }
     }
