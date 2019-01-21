@@ -236,8 +236,11 @@ double X_S1(const Augmented_Hankel& Ht1, const Augmented_Hankel& Ht2, const Atom
     double res = 0;
     const Envelope_Hankel H1(at, Ht1.l, Ht1.kappa);
     const Envelope_Hankel H2(at, Ht2.l, Ht2.kappa);
+    // std::cout << "L = " << Ht1.l.l << " " << Ht1.l.m << std::endl;
     res += augmented_integral(Ht1, Ht2);
+    // std::cout << "Augmented integral <Ht|Ht> = " << augmented_integral(Ht1, Ht2) << std::endl;
     res += off_atomic_integral(H1, H2);
+    // std::cout << "Off-atomic integral <H|H>' = " << off_atomic_integral(H1, H2) << std::endl;
     return res;
 }
 
@@ -263,11 +266,11 @@ double X_S3(const Augmented_Bessel& Jt1, const Augmented_Bessel& Jt2, const Atom
     double res = 0;
     const Envelope_Bessel J1(at, Jt1.l, Jt1.kappa);
     const Envelope_Bessel J2(at, Jt2.l, Jt2.kappa);
-    // std::cout << "L = " << Jt1.l.l << " " << Jt1.l.m << std::endl;
+     //std::cout << "L = " << Jt1.l.l << " " << Jt1.l.m << std::endl;
     res += augmented_integral(Jt1, Jt2);
     // std::cout << "Augmented integral <Jt|Jt> = " << augmented_integral(Jt1, Jt2) << std::endl;
     res -= atomic_integral(J1, J2);
-    // std::cout << "Atomic integral <J|J> = " << atomic_integral(J1, J2) << std::endl;
+     //std::cout << "Atomic integral <J|J> = " << atomic_integral(J1, J2) << std::endl;
     return res;
 }
 
@@ -440,13 +443,21 @@ void Simulation::calc_eigen()
 //        std::cout << "  " << S_up[i] << std::endl;
 //    }
     std::cout << "Eigenvalues of S " << tmp.second << std::endl;
+    try{
     tmp = GSL::general_hermitian_eigen(H_up, S_up);
     eigvecs_up = tmp.first;
     eigvals_up = tmp.second;
     tmp  = GSL::general_hermitian_eigen(H_down, S_down);
     eigvecs_down = tmp.first;
     eigvals_down = tmp.second;
-
+    }catch (const std::runtime_error &e){
+	    std::cerr << e.what();
+	    std::cout << "Overlap matrix" << std::endl;
+	    for(size_t i = 0 ; i < N; i++){
+		    std::cout << "  " << S_up[i] << std::endl;
+	    }
+	    throw e;
+    }
     for(size_t i = 0; i < N; i++){
         std::cout << "  Eigenvalues (up, down): " << eigvals_up[i] << ", " <<
         eigvals_down[i] << " (Ry)\n";

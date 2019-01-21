@@ -44,13 +44,13 @@ numerov_debug.close();
 
 
 	double kappa = sqrt(0.015);
-	
-	GSL::Vector a = {0.0, 0.5, 0.5}, b = {0.5, 0.0, 0.5}, c = {0.5, 0.5, 0.0};
-//	GSL::Vector a = {1.0, 0.0, 0.0}, b = {0.0, 1.0, 0.0}, c = {0.0, 0.0, 1.0};
+
+//	GSL::Vector a = {0.0, 0.5, 0.5}, b = {0.5, 0.0, 0.5}, c = {0.5, 0.5, 0.0};
+	GSL::Vector a = {1.0, 0.0, 0.0}, b = {0.0, 1.0, 0.0}, c = {0.0, 0.0, 1.0};
 	std::cout << a << "\n";
 	std::cout << b << "\n";
 	std::cout << c << "\n";
-	Crystal cr(6.7463222980989*a, 6.7463222980989*b, 6.7463222980989*c);
+	Crystal cr(4*a, 4*b, 4*c);
 
 	std::cout << cr.lat.scale*cr.lat.lat << "\n";
 
@@ -101,11 +101,14 @@ numerov_debug.close();
 	K_mesh kmesh(cr.lat.r_lat);
 	kmesh.generate_mesh(5, 5, 5);
 
-//	for(GSL::Vector kp : kmesh.k_points){
-	for(GSL::Vector kp : { GSL::Vector {0., 0., 0.}, GSL::Vector { -1.777153, -3.554306, -1.777153 } }){
+	Bessel_function j(lm {1, 0});
+	std::cout << GSL::pow_int(kappa, -1)*3.3217036494*j(kappa*3.3217036494) << "\n";
 
-		std::cout << "k-point " << kp << "\n******************************************************************************************************\n";
+	for(GSL::Vector kp : kmesh.k_points){
+	// for(GSL::Vector kp : { GSL::Vector {0., 0., 0.}, GSL::Vector { -1.777153, -3.554306, -1.777153 } }){
 
+		std::cout << "k-point " << kp <<
+		"\n" << std::string(80, '*') << "\n";
 	 	sim.set_up_H(kp);
 		sim.set_up_S(kp);
 		sim.calc_eigen();

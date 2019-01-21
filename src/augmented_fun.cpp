@@ -161,7 +161,7 @@ void Augmented_Hankel::update(std::vector<double>& v, const double en
         r_init = {0., 0.};
     }else{
         r_init = {sign*GSL::pow_int(kappa, l.l + 1)*mesh.r[lastbutone]*H(kappa*mesh.r[lastbutone]),
-                  sign*GSL::pow_int(kappa, l.l+1)*mesh.r[last]*H(kappa*mesh.r[last])};
+                  sign*GSL::pow_int(kappa, l.l + 1)*mesh.r[last]*H(kappa*mesh.r[last])};
     }
     val = sol.solve(mesh, v, l_init, r_init, EH, nodes);
 }
@@ -242,7 +242,7 @@ void Augmented_Bessel::update(std::vector<double>& v, const double en
 //	    sign = -1;
     }
     size_t last = mesh.r.size() - 1, lastbutone = mesh.r.size() - 2;
-    Bessel_function j(l);
+    Bessel_function i(l);
 
     if(!core && nodes >= 0){
         std::vector<double> l_init = {
@@ -251,9 +251,9 @@ void Augmented_Bessel::update(std::vector<double>& v, const double en
             GSL::pow_int(mesh.r[2], l.l+1)};
 
         std::vector<double> r_init = {
-                sign*GSL::pow_int(kappa, -l.l)*j(kappa*mesh.r[lastbutone])
+                sign*GSL::pow_int(kappa, -l.l)*i(kappa*mesh.r[lastbutone])
 		  *mesh.r[lastbutone],
-		sign*GSL::pow_int(kappa, -l.l)*j(kappa*mesh.r[last])
+		sign*GSL::pow_int(kappa, -l.l)*i(kappa*mesh.r[last])
 		  *mesh.r[last]};
 
         val = sol.solve(mesh, v, l_init, r_init, EJ, nodes);
