@@ -53,3 +53,13 @@ void K_mesh::generate_mesh(const size_t N)
 
     this->generate_mesh(nx, ny, nz);
 }
+
+void K_mesh::generate_mesh(const std::vector<GSL::Vector>& path, const size_t N_steps)
+{
+	for(size_t i = 0; i < path.size() - 1; i++){
+		for(double n = 0; n <= 1.; n += 1./static_cast<double>(N_steps)){
+			k_points.push_back(path[i] - 
+					n*(path[i] - path[i + 1]));
+		}
+	}
+}

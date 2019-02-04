@@ -16,6 +16,7 @@ public:
     void generate_mesh(const size_t nx, const size_t ny, const size_t nz);
     void generate_mesh(const double r_max);
     void generate_mesh(const size_t N);
+    void generate_mesh(const std::vector<GSL::Vector>& path, const size_t N_steps);
 
 };
 #endif
