@@ -11,7 +11,7 @@ void Xc_func::set_xc(XC_FUN xcf)
     int xc_func = 0;
     int xc_spin = 0;
 
-    if(fun.get() == nullptr){
+    if(fun.get() == nullptr && xcf != NONE){
         fun = std::unique_ptr<xc_func_type>(new xc_func_type);
     }
 
@@ -24,6 +24,8 @@ void Xc_func::set_xc(XC_FUN xcf)
             xc_func = XC_LDA_X;
             xc_spin = XC_UNPOLARIZED;
             break;
+        case NONE:
+            return;
         default :
             break;
     }
@@ -36,7 +38,7 @@ Xc_func::Xc_func(XC_FUN xcf)
  : Xc_func()
 {
     if(xcf != UNDEFINED){
-        fun = std::unique_ptr<xc_func_type>(new xc_func_type);
+//        fun = std::unique_ptr<xc_func_type>(new xc_func_type);
         this->set_xc(xcf);
     }
 }
@@ -81,6 +83,11 @@ Xc_func::~Xc_func()
 std::vector<double> Xc_func::exc(std::vector<double> rho)
 {
     std::vector<double> res(rho.size(), 0.);
+
+    // Unitilialized xc functional, return 0 exc
+    if(fun == nullptr){
+        return res;
+    }
 
     switch(fun->info->family) {
         case XC_FAMILY_LDA:

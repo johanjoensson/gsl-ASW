@@ -29,7 +29,7 @@ public:
 
     void set_up(Potential &v);
 
-    double operator()(const GSL::Vector &r);
+    double operator()(const GSL::Vector &r) const;
 };
 
 #endif // AUGMENTED_SPHERICAL_WAVE_H

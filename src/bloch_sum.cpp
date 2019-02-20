@@ -19,12 +19,12 @@ GSL::Complex Bloch_sum::calc_d1(const GSL::Vector& tau, const GSL::Vector& kp)
     GSL::Result tmp;
     GSL::Complex c_fac(-1.0, 0.0);
 
-    double k = kp.norm(), dot = GSL::dot(kp, tau);
-    // Loop over all K-vectors, including (0, 0,0)
+    double k = kp.norm<double>(), dot = kp.dot(tau);
+    // Loop over all K-vectors
     for(auto Kn : c.Kn_vecs){
         kn = kp + Kn;
-        k = kn.norm();
-        dot = GSL::dot(kn, tau);
+        k = kn.norm<double>();
+        dot = kn.dot(tau);
         e = GSL::exp(GSL::Complex(0., dot));
         tmp = GSL::pow_int(k, l.l)*cubic_harmonic(l, kn)*
               GSL::exp((-kappa*kappa - k*k)/eta)/(-kappa*kappa - k*k);
@@ -47,12 +47,12 @@ GSL::Complex Bloch_sum::calc_d1_dot(const GSL::Vector& tau, const GSL::Vector& k
     GSL::Vector kn;
     GSL::Result tmp;
     GSL::Complex c_fac(1.0, 0.0);
-    double k = kp.norm(), dot = GSL::dot(kp, tau);
+    double k = kp.norm<double>(), dot = kp.dot(tau);
     // Loop over all K-vectors, including (0, 0,0)
     for(auto Kn : c.Kn_vecs){
         kn = kp + Kn;
-        k = kn.norm();
-        dot = GSL::dot(kn, tau);
+        k = kn.norm<double>();
+        dot = kn.dot(tau);
         e = GSL::exp(GSL::Complex(0., dot));
         tmp = GSL::pow_int(k, l.l)*cubic_harmonic(l, kn)*
               GSL::exp((-kappa*kappa - k*k)/eta)/
@@ -88,13 +88,13 @@ GSL::Complex Bloch_sum::calc_d2(const GSL::Vector& tau, const GSL::Vector& kp)
             continue;
         }
         tau_mu = tau - Rn;
-        t = tau_mu.norm();
-        dot = GSL::dot(kp, tau_mu);
+        t = tau_mu.norm<double>();
+        dot = kp.dot(tau_mu);
         tmp = GSL::pow_int(t, l.l)*cubic_harmonic(l, tau_mu)*I.ewald_int(l, t);
         e = GSL::exp(GSL::Complex(0., -dot));
         d2 += e*tmp.val;
     }
-    d2 *= GSL::pow_int(2, l.l)*GSL::exp(GSL::Complex(0., GSL::dot(kp,tau)));
+    d2 *= GSL::pow_int(2, l.l)*GSL::exp(GSL::Complex(0., kp.dot(tau)));
     return d2;
 }
 
@@ -115,15 +115,14 @@ GSL::Complex Bloch_sum::calc_d2_dot(const GSL::Vector& tau, const GSL::Vector& k
             continue;
         }
         tau_mu = tau - Rn;
-        t = tau_mu.norm();
-        dot = GSL::dot(kp, tau_mu);
+        t = tau_mu.norm<double>();
+        dot = kp.dot(tau_mu);
         tmp = GSL::pow_int(t, l.l)*cubic_harmonic(l, tau_mu)*
               I.ewald_int(lm {l.l - 1, 0}, t);
         e = GSL::exp(GSL::Complex(0., -dot));
         d2_dot += e*tmp.val;
     }
-    d2_dot *= 1./4*GSL::pow_int(2, l.l)*
-              GSL::exp(GSL::Complex(0., GSL::dot(kp,tau)));
+    d2_dot *= GSL::pow_int(2, l.l-2)*GSL::exp(GSL::Complex(0., kp.dot(tau)));
     return d2_dot;
 }
 
@@ -134,7 +133,7 @@ GSL::Complex Bloch_sum::calc_d3(const GSL::Vector& tau)
         return GSL::Complex(0., 0.);
     }
     GSL::Result d3 = -kappa/(4*M_SQRTPI)*(GSL::erfc(-kappa/std::sqrt(eta)) -
-		     GSL::erfc(kappa/std::sqrt(eta))) - 
+		     GSL::erfc(kappa/std::sqrt(eta))) -
 		     std::sqrt(eta)/(2*M_PI)*GSL::exp(-kappa*kappa/eta) +
 		     kappa/(2*M_SQRTPI);
 
@@ -147,8 +146,8 @@ GSL::Complex Bloch_sum::calc_d3_dot(const GSL::Vector& tau)
         return GSL::Complex(0., 0.);
     }
     // delta(tau) * delta(l, 0)
-    GSL::Result d3_dot = 1/(8*M_SQRTPI*kappa) * (GSL::erfc(-kappa/std::sqrt(eta)) - 
-        GSL::erfc(kappa/std::sqrt(eta))) - 
+    GSL::Result d3_dot = 1./(8*M_SQRTPI*kappa) * (GSL::erfc(-kappa/std::sqrt(eta)) -
+        GSL::erfc(kappa/std::sqrt(eta))) -
 	1./(4*M_SQRTPI*kappa);
     return GSL::Complex(d3_dot.val, 0);
 }

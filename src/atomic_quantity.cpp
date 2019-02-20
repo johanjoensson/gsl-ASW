@@ -19,15 +19,15 @@ double Atomic_quantity::operator()(const GSL::Vector& r)
     for(size_t i = 0; i < sites.size(); i++){
         at = sites[i];
         ri = r - at.get_pos();
-        if(ri.norm() <= at.get_AS()){
+        if(ri.norm<double>() <= at.get_AS()){
             t = 1;
 
             // Linear interpolation to find value at point ri
-            while(ri.norm() > at.mesh.r[t] && t < at.mesh.r.size()){
+            while(ri.norm<double>() > at.mesh.r[t] && t < at.mesh.r.size()){
                 t++;
             }
             if(t < at.mesh.r.size()){
-                res += lerp(ri.norm(), at.mesh.r[t-1], at.mesh.r[t], val[i][t-1], val[i][t]);
+                res += lerp(ri.norm<double>(), at.mesh.r[t-1], at.mesh.r[t], val[i][t-1], val[i][t]);
             }
         }
     }
@@ -35,8 +35,10 @@ double Atomic_quantity::operator()(const GSL::Vector& r)
     return res;
 }
 
-Potential::Potential(std::vector<Atom>& atoms)
- : Atomic_quantity(atoms), electrostatic(atoms.size()), exchange_correlation(atoms.size()), xc_fun(), MT_0(0)
+Potential::Potential(std::vector<Atom>& atoms,
+    std::function<double(const size_t, const double)> atomic_potential)
+ : Atomic_quantity(atoms), electrostatic(atoms.size()), exchange_correlation(atoms.size()),
+  at_pot(atomic_potential), xc_fun(), MT_0(0)
 {
     for(size_t i = 0; i < sites.size(); i++){
         electrostatic[i] = std::vector<double>(sites[i].mesh.r.size(), 0.);
@@ -56,12 +58,20 @@ double atomic_potential(const size_t Z, const double r)
     return -2.*static_cast<double>(Z)/r;
 }
 
+double mod_at_pot(const size_t Z, const double r)
+{
+    double alpha = 0.53625;
+    double x = r*std::cbrt(Z)/0.88534;
+    double phi = 1./((1 + alpha*x)*(1 + alpha*x));
+    return -(1 + static_cast<double>(Z - 1)*phi)/r;
+}
+
 double Xi0(size_t j, std::vector<Atom> sites, double r)
 {
     double res = 0, a = 0;
     for(size_t i = 0; i < sites.size(); i++){
         if(i != j){
-            a = (sites[j].pos - sites[i].pos).norm();
+            a = (sites[j].pos - sites[i].pos).norm<double>();
             res += (a + r)/a*atomic_potential(sites[i].get_Z(), a + r);
         }
     }
@@ -75,7 +85,9 @@ void Potential::initial_pot(size_t nel, double vol)
         rho = std::vector<double>(sites[i].mesh.r.size(), static_cast<double>(nel)/vol);
         exchange_correlation[i] = xc_fun.exc(rho);
         for(size_t j = 0; j < sites[i].mesh.r.size(); j++){
-            electrostatic[i][j] = atomic_potential(sites[i].get_Z(), sites[i].mesh.r[j]);
+            electrostatic[i][j] =
+            /*mod_at_pot(5*sites[i].get_Z(), sites[i].mesh.r[j]);*/
+            at_pot(sites[i].get_Z(), sites[i].mesh.r[j]);
         }
     }
     std::vector<double> alpha;
@@ -109,17 +121,17 @@ void Potential::initial_pot(size_t nel, double vol)
     }
 
 
+    // Calculate MT_0 as average potential over all atomic spheres
     double MT_0_s = 0, areas = 0;
     for(size_t i = 0; i < sites.size(); i++){
-        // Add v[rs]*4*Pi*rs^2, the value of the potential integrated over the
-        //entire atomic sphere, to V_MT
         MT_0_s += val[i].back()*GSL::pow_int(sites[i].get_AS(), 2);
         areas += GSL::pow_int(sites[i].get_AS(), 2);
     }
-    // Divide V_MT by the total atomic areas in the crystal, thus getting an
-    // average of the potential on all spheres
     this->MT_0 = MT_0_s/areas;
+
 	std::cout << "MT0 = " << this->MT_0 << std::endl;
+
+    // Make potential relative to MT_0
     for(size_t i = 0; i < sites.size(); i++){
         for(size_t j = 0; j < sites[i].mesh.r.size(); j++){
             val[i][j] -= this->MT_0;

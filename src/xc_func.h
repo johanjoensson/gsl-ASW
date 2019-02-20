@@ -9,6 +9,7 @@
 enum XC_FUN{
     LDA,
     LDA_NM,
+    NONE,
     UNDEFINED
 };
 

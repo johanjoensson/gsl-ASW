@@ -1,6 +1,7 @@
 #ifndef ATOMIC_QUANTITY_H
 #define ATOMIC_QUANTITY_H
 #include <vector>
+#include <functional>
 #include "GSLpp/vector.h"
 #include "atom.h"
 #include "xc_func.h"
@@ -27,6 +28,7 @@ public:
 
 class Potential : public Atomic_quantity{
     std::vector<std::vector<double>> electrostatic, exchange_correlation;
+    std::function<double(const size_t, const double)> at_pot;
 
 public:
     Xc_func xc_fun;
@@ -34,8 +36,15 @@ public:
 
     double MT_0 = 0;
 
-    Potential() : Atomic_quantity(), electrostatic(), exchange_correlation(), xc_fun(), MT_0(0){};
-    Potential(std::vector<Atom>& atoms);
+    Potential() : Atomic_quantity(), electrostatic(), exchange_correlation(),
+        at_pot([](const size_t Z, const double r){
+            return 0.*(static_cast<double>(Z) + r);}),
+        xc_fun(), MT_0(0){};
+    Potential(std::vector<Atom>& atoms,
+        std::function<double(const size_t Z, const double r)> atomic_potential =
+        [](const size_t Z, const double r){
+            return -2.*static_cast<double>(Z)/r;
+        });
     ~Potential(){};
 
     Potential(Potential&) = default;

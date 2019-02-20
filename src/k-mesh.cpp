@@ -36,30 +36,31 @@ void K_mesh::generate_mesh(const size_t nx, const size_t ny, const size_t nz)
 void K_mesh::generate_mesh(const double r_max)
 {
     const GSL::Vector Gx = r_lattice[0], Gy = r_lattice[1], Gz = r_lattice[2];
-    size_t nx = static_cast<size_t>(std::max(r_max/Gx.norm(), 1.));
-    size_t ny = static_cast<size_t>(std::max(r_max/Gy.norm(), 1.));
-    size_t nz = static_cast<size_t>(std::max(r_max/Gz.norm(), 1.));
+    size_t nx = static_cast<size_t>(std::max(r_max/Gx.norm<double>(), 1.));
+    size_t ny = static_cast<size_t>(std::max(r_max/Gy.norm<double>(), 1.));
+    size_t nz = static_cast<size_t>(std::max(r_max/Gz.norm<double>(), 1.));
     this->generate_mesh(nx, ny, nz);
 }
 
 void K_mesh::generate_mesh(const size_t N)
 {
     const GSL::Vector Gx = r_lattice[0], Gy = r_lattice[1], Gz = r_lattice[2];
-    double vol = GSL::dot(Gx, GSL::cross(Gy, Gz));
+    double vol = Gx.dot(Gy.cross(Gz));
     double Nd = static_cast<double>(N);
-    size_t nx = static_cast<size_t>(std::round(std::cbrt(Nd/vol)*Gx.norm()));
-    size_t ny = static_cast<size_t>(std::round(std::cbrt(Nd/vol)*Gy.norm()));
-    size_t nz = static_cast<size_t>(std::round(std::cbrt(Nd/vol)*Gz.norm()));
+    size_t nx = static_cast<size_t>(std::round(std::cbrt(Nd/vol)*Gx.norm<double>()));
+    size_t ny = static_cast<size_t>(std::round(std::cbrt(Nd/vol)*Gy.norm<double>()));
+    size_t nz = static_cast<size_t>(std::round(std::cbrt(Nd/vol)*Gz.norm<double>()));
 
     this->generate_mesh(nx, ny, nz);
 }
 
 void K_mesh::generate_mesh(const std::vector<GSL::Vector>& path, const size_t N_steps)
 {
+    double dn = 1./static_cast<double>(N_steps);
 	for(size_t i = 0; i < path.size() - 1; i++){
-		for(double n = 0; n <= 1.; n += 1./static_cast<double>(N_steps)){
+		for(unsigned int n = 0; n < N_steps; n++ ){
 			k_points.push_back(r_lattice.transpose()*(path[i] -
-					n*(path[i] - path[i + 1])));
+					n*dn*(path[i] - path[i + 1])));
 		}
 	}
 }

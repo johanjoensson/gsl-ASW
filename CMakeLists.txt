@@ -31,5 +31,6 @@ set(SOURCE_FILES    src/numerov_solver.cpp
 	    set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${CFLAGS}")
 
 add_executable(gsl-asw ${SOURCE_FILES})
-find_library(GSL_LIB GSLpp ../GSL-lib)
-target_link_libraries(gsl-asw m ${GSL_LIB} xc)
+target_include_directories(gsl-asw PRIVATE ../GSL-lib/include)
+find_library(GSL_LIB GSLpp ../GSL-lib/lib/GSLpp/)
+target_link_libraries(gsl-asw m ${GSL_LIB} xc gsl)

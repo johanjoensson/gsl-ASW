@@ -35,18 +35,18 @@ Augmented_function::Augmented_function(const int n_n, const lm l_n, const double
 Augmented_function::~Augmented_function()
 {}
 
-double Augmented_function::operator()(const GSL::Vector& r)
+double Augmented_function::operator()(const GSL::Vector& r) const
 {
     double res = 0;
     GSL::Vector ri = r - center;
     size_t t = 1;
-    if(ri.norm() <= radius){
-        while(mesh.r[t] < ri.norm() && t < mesh.r.size()){
+    if(ri.norm<double>() <= radius){
+        while(mesh.r[t] < ri.norm<double>() && t < mesh.r.size()){
             t++;
         }
         // r[t - 1] < |ri| and r[t] > |ri|
         if(t < mesh.r.size()){
-            res = lerp(ri.norm(), mesh.r[t - 1], mesh.r[t], val[t - 1]*mesh.drx[t-1], val[t]*mesh.drx[t]);
+            res = lerp(ri.norm<double>(), mesh.r[t - 1], mesh.r[t], val[t - 1]*mesh.drx[t-1], val[t]*mesh.drx[t]);
         }
     }
     return res;
@@ -251,9 +251,9 @@ void Augmented_Bessel::update(std::vector<double>& v, const double en
             GSL::pow_int(mesh.r[2], l.l+1)};
 
         std::vector<double> r_init = {
-                sign*GSL::pow_int(kappa, -l.l)*i(kappa*mesh.r[lastbutone])
+            sign*GSL::pow_int(kappa, -l.l)* i(kappa*mesh.r[lastbutone])
 		        *mesh.r[lastbutone],
-		sign*GSL::pow_int(kappa, -l.l)*i(kappa*mesh.r[last])
+		    sign*GSL::pow_int(kappa, -l.l)*i(kappa*mesh.r[last])
 		        *mesh.r[last]};
 
         val = sol.solve(mesh, v, l_init, r_init, EJ, nodes);

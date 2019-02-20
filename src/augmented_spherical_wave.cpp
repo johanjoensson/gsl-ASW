@@ -24,20 +24,20 @@ Augmented_spherical_wave::Augmented_spherical_wave(double kappa_n, int n_n,
     Augmented_Bessel tmp;
     for(size_t i = 0; i < off_centers.size(); i++){
         Atom at = off_centers[i];
-        if(at != center){
+//        if(at != center){
             if(at.Z >= 20){
                 l_low = 3;
             }else{
                 l_low = 2;
             }
-            for(int l_s = 0; l_s <= std::min(l_low + 1, n - 1); l_s++){
+           for(int l_s = 0; l_s <= std::min(l_low + 1, n - 1); l_s++){
                 for(int m_s = -l_s; m_s <= l_s; m_s++){
                     lm lp = {l_s, m_s};
                     tmp = Augmented_Bessel(n, lp, kappa, at.pos, at.mesh);
                     J[i].insert(tmp);
                 }
             }
-        }
+//        }
     }
 }
 
@@ -96,7 +96,7 @@ void Augmented_spherical_wave::set_up(Potential &v)
     }
 }
 
-double Augmented_spherical_wave::operator()(const GSL::Vector &r)
+double Augmented_spherical_wave::operator()(const GSL::Vector &r) const
 {
     double res = 0.;
     // Start with on-center value
@@ -115,8 +115,8 @@ double Augmented_spherical_wave::operator()(const GSL::Vector &r)
                 if(at.Z > 20){
                     l_low = 3;
                 }
-                B = Structure_constant( l_low, Jj.l, this->l, R);
-                res += Jj(r)*cubic_harmonic(Jj.l, r - Jj.center).val*B.val;
+                B = Structure_constant( l_low + 1, Jj.l, this->l);
+                res += Jj(r)*cubic_harmonic(Jj.l, r - Jj.center).val*B(R);
             }
         }
     }

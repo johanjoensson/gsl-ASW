@@ -1,6 +1,11 @@
 #include "utils.h"
 #include <iostream>
 
+std::ostream& operator<<(std::ostream& os, const lm& l)
+{
+    return os << "(" << l.l << ", " << l.m <<")";
+}
+
 bool operator==(const lm &a, const lm &b)
 {
     return (a.l == b.l) && (a.m == b.m);

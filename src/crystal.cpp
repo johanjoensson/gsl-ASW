@@ -11,8 +11,8 @@ namespace std {
 	struct hash<GSL::Vector>{
 		size_t operator()(const GSL::Vector &v) const
 		{
-			return std::hash<double>()((v*v).norm()) ^
-			std::hash<double>()(v.norm());
+			return std::hash<double>()((v*v).norm<double>()) ^
+			std::hash<double>()(v.norm<double>());
 		}
 	};
 	template<>
@@ -28,7 +28,7 @@ namespace std {
 
 bool comp_norm(GSL::Vector& a, GSL::Vector& b)
 {
-    return a.norm() < b.norm();
+    return a.norm<double>() < b.norm<double>();
 }
 
 double bisect_q(double tol, double kappa, double eta, lm l, double q_min,
@@ -51,6 +51,8 @@ double bisect_q(double tol, double kappa, double eta, lm l, double q_min,
 
 double Crystal::calc_eta() const
 {
+	std::cout << "volume of crystal = "<< this->volume <<"\n";
+
 	return GSL::exp(GSL::log(6.5) + 2./3*GSL::log(4*M_PI/3) -
 			2./3*GSL::log(this->volume)).val;
 }
@@ -63,9 +65,9 @@ size_t Crystal::calc_nk(double tol, double kappa, lm l)
 	while((-q*q + eta*(l.l*GSL::log(q) + GSL::log(1 + kappa*kappa) -
 	GSL::log(q*q + kappa*kappa) - GSL::log(tol)) + 1).val > 0)
 	{
-		q += sqrt(eta);
+		q += std::sqrt(eta);
 	}
-	q = bisect_q(tol, kappa, eta, l, q - sqrt(eta), q);
+	q = bisect_q(tol, kappa, eta, l, q - std::sqrt(eta), q);
 
 	return static_cast<size_t>(4*M_PI/3 * GSL::pow_int(q, 3)/
 	GSL::pow_int(2*M_PI, 3)*this->volume);
@@ -106,9 +108,9 @@ size_t Crystal::calc_nr(double tol, double kappa, lm l)
 	while((l.l*GSL::log(r) + GSL::log(I.ewald_int(l, r)) -
 	GSL::log(I.ewald_int(l, 1.)) - GSL::log(tol)).val > 0)
 	{
-		r += 2/sqrt(eta);
+		r += 2/std::sqrt(eta);
 	}
-	r = bisect_r(tol, kappa, eta, l, r - 2/sqrt(eta), r);
+	r = bisect_r(tol, kappa, eta, l, r - 2/std::sqrt(eta), r);
 
 	return static_cast<size_t>(4*M_PI/3 * GSL::pow_int(r, 3)/this->volume);
 
@@ -126,9 +128,9 @@ double Crystal::calc_Rmax(double tol, double kappa, lm l)
 	while((l.l*GSL::log(r) + GSL::log(I.ewald_int(l, r)) -
 	GSL::log(I.ewald_int(l, 1.)) - GSL::log(tol)).val > 0)
 	{
-		r += 2./sqrt(eta);
+		r += 2./std::sqrt(eta);
 	}
-	r = bisect_r(tol, kappa, eta, l, r - 2./sqrt(eta), r);
+	r = bisect_r(tol, kappa, eta, l, r - 2./std::sqrt(eta), r);
 
 	return r;
 
@@ -142,9 +144,9 @@ void Crystal::set_Rn(double Rmax)
     GSL::Vector b2(this->lat.r_lat[1]/this->lat.scale);
     GSL::Vector b3(this->lat.r_lat[2]/this->lat.scale);
 
-	int N1 = static_cast<int>(b1.norm()/(2*M_PI)*Rmax);
-	int N2 = static_cast<int>(b2.norm()/(2*M_PI)*Rmax);
-	int N3 = static_cast<int>(b3.norm()/(2*M_PI)*Rmax);
+	int N1 = static_cast<int>(b1.norm<double>()/(2*M_PI)*Rmax);
+	int N2 = static_cast<int>(b2.norm<double>()/(2*M_PI)*Rmax);
+	int N3 = static_cast<int>(b3.norm<double>()/(2*M_PI)*Rmax);
 
 	// std::unordered_set<GSL::Vector> tmp;
 	for(int n1 = -N1; n1 <= N1; n1++){
@@ -166,9 +168,9 @@ double Crystal::calc_Kmax(double tol, double kappa, lm l)
 	while((-q*q + eta*(l.l*GSL::log(q) + GSL::log(1 + kappa*kappa) -
 	GSL::log(q*q + kappa*kappa) - GSL::log(tol)) + 1).val > 0)
 	{
-		q += sqrt(eta);
+		q += std::sqrt(eta);
 	}
-	q = bisect_q(tol, kappa, eta, l, q - sqrt(eta), q);
+	q = bisect_q(tol, kappa, eta, l, q - std::sqrt(eta), q);
 
 	return q;
 }
@@ -182,9 +184,9 @@ void Crystal::set_Kn(double Kmax)
     GSL::Vector b2(this->lat.r_lat[1]/this->lat.scale);
     GSL::Vector b3(this->lat.r_lat[2]/this->lat.scale);
 
-	int N1 = static_cast<int>(a1.norm()/(2*M_PI)*Kmax);
-	int N2 = static_cast<int>(a2.norm()/(2*M_PI)*Kmax);
-	int N3 = static_cast<int>(a3.norm()/(2*M_PI)*Kmax);
+	int N1 = static_cast<int>(a1.norm<double>()/(2*M_PI)*Kmax);
+	int N2 = static_cast<int>(a2.norm<double>()/(2*M_PI)*Kmax);
+	int N3 = static_cast<int>(a3.norm<double>()/(2*M_PI)*Kmax);
 
 
 	for(int n1 = -N1; n1 <= N1; n1++){
@@ -197,25 +199,24 @@ void Crystal::set_Kn(double Kmax)
 	std::sort(Kn_vecs.begin(), Kn_vecs.end(), comp_norm);
 }
 
-double Crystal::calc_volume() 
+double Crystal::calc_volume()
 {
     GSL::Vector tmp, tmp1 = lat.lat[1], tmp2 = lat.lat[2];
-    tmp = GSL::cross(tmp1, tmp2);
-    return std::abs(GSL::dot(lat.lat[0], tmp)*GSL::pow_int(lat.scale, 3));
+    tmp = tmp1.cross(tmp2);
+    return std::abs(lat.lat[0].dot(tmp)*GSL::pow_int(lat.scale, 3));
 }
 
-double Crystal::calc_bz_volume() 
+double Crystal::calc_bz_volume()
 {
     GSL::Vector tmp;
-    tmp = GSL::cross(lat.r_lat[1], lat.r_lat[2]);
+    tmp = lat.r_lat[1].cross(lat.r_lat[2]);
 	std::cout << tmp << std::endl;
-    return std::abs(GSL::dot(lat.r_lat[0], tmp)/GSL::pow_int(lat.scale, 3));
+    return std::abs(lat.r_lat[0].dot(tmp)/GSL::pow_int(lat.scale, 3));
 }
 
 Crystal::Crystal()
  : Rn_vecs(), Kn_vecs(), lat(), atoms(), volume(), bz_volume()
-{
-}
+{}
 
 
 Crystal::Crystal(const double& a)
@@ -267,7 +268,7 @@ GSL::Vector& Crystal::get_Rn(const size_t& i)
 
 bool comp_norm_at(Atom& a, Atom& b)
 {
-    return a.pos.norm() < b.pos.norm();
+    return a.pos.norm<double>() < b.pos.norm<double>();
 }
 
 std::vector<std::vector<Atom>> Crystal::calc_nearest_neighbours()

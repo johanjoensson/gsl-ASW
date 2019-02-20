@@ -14,8 +14,8 @@
 #include "bloch_sum.h"
 #include "ewald_int.h"
 #include "gaunt.h"
-#include "GSLpp/matrix.h"
 #include "GSLpp/vector.h"
+#include "GSLpp/matrix.h"
 #include "GSLpp/complex.h"
 #include "GSLpp/special_functions.h"
 #include "GSLpp/error.h"
@@ -25,31 +25,38 @@
 #include "xc_func.h"
 #include "k-mesh.h"
 
+#include <gsl/gsl_sf_erf.h>
+
 int main()
 {
-#ifdef DEBUG
-std::ofstream numerov_debug;
-numerov_debug.open("numerov.debug", std::fstream::out|std::fstream::trunc);
-numerov_debug.close();
-numerov_debug.open("check_Hankel.dat", std::fstream::out|std::fstream::trunc);
-numerov_debug.close();
-numerov_debug.open("check_Bessel.dat", std::fstream::out|std::fstream::trunc);
-numerov_debug.close();
-#endif
 	std::cout.precision(12);
 
 	GSL::Error_handler e_handler;
 	e_handler.off();
 
 
+	Hankel_function h;
+	Integral_Hankel_function hi;
+
+	for(int l = 0; l < 3; l++){
+		for(int m = -l; m <= l; m++){
+			h.set_l(lm{l,m});
+			hi.set_l(lm{l,m});
+			for(double x = 0.001; x < 9; x += 0.1){
+				std::cout << x << " " << h(x) << " " << hi(x) << " " << 1 - hi(x)/h(x) <<"\n";
+			}
+			std::cout << "\n";
+		}
+		std::cout << "\n";
+	}
+	std::cout << "\n";
 	double kappa = std::sqrt(0.015);
 
-//	GSL::Vector a = {0.0, 0.5, 0.5}, b = {0.5, 0.0, 0.5}, c = {0.5, 0.5, 0.0};
 	GSL::Vector a = {1.0, 0.0, 0.0}, b = {0.0, 1.0, 0.0}, c = {0.0, 0.0, 1.0};
 	std::cout << a << "\n";
 	std::cout << b << "\n";
 	std::cout << c << "\n";
-	Crystal cr(6*a, 6*b, 6*c);
+	Crystal cr(4*a, 4*b, 4*c);
 
 	std::cout << cr.lat.scale*cr.lat.lat << "\n";
 
@@ -69,49 +76,33 @@ numerov_debug.close();
 	GSL::Vector tau(3);
 	Atom C1;
 	C1.set_pos(tau*cr.lat.scale*cr.lat.lat);
-
-	tau[0] = 0.25;
-	tau[1] = 0.25;
-	tau[2] = 0.25;
-	Atom C2;
-	C2.set_pos(tau*cr.lat.scale*cr.lat.lat);
-
-	tau[0] = 0.;
-	tau[1] = 0.5;
-	tau[2] = 0.5;
-	Atom C3;
-	C3.set_pos(tau*cr.lat.scale*cr.lat.lat);
-
-	tau[0] = 0.5;
-	tau[1] = 0.;
-	tau[2] = 0.5;
-	Atom C4;
-	C4.set_pos(tau*cr.lat.scale*cr.lat.lat);
-
 	C1.set_Z(6);
-	C2.set_Z(6);
-	C3.set_Z(6);
-	C4.set_Z(6);
+	cr.add_atoms(std::vector<Atom> {C1});
 
-	cr.add_atoms(std::vector<Atom> {C1, C2});
-
-	Simulation sim(cr, LDA, kappa);
+	Simulation sim(cr, NONE, kappa);
 	sim.set_up_X_matrices();
 	K_mesh kmesh(cr.lat.r_lat);
-	kmesh.generate_mesh(5, 5, 5);
 
-	Bessel_function j(lm {1, 0});
-	std::cout << GSL::pow_int(kappa, -1)*3.3217036494*j(kappa*3.3217036494) << "\n";
+	std::vector<GSL::Vector> k_path = {
+		{0.,0.,0.},			// Gamma
+		{0.5, 0.5, 0.5},	// R
+		{0.5, 0.5, 0.},		// M
+		{0., 0.5, 0.}, 		// X
+		{0., 0., 0.}		// Gamma
+	};
 
-	for(GSL::Vector kp : kmesh.k_points){
-	// for(GSL::Vector kp : { GSL::Vector {0., 0., 0.}, GSL::Vector { -1.777153, -3.554306, -1.777153 } }){
+	kmesh.generate_mesh(k_path, 50);
 
+	std::pair<GSL::Matrix_cx, GSL::Vector> eigen;
+	for(const GSL::Vector& kp : kmesh.k_points){
 		std::cout << "k-point " << kp <<
 		"\n" << std::string(80, '*') << "\n";
 	 	sim.set_up_H(kp);
 		sim.set_up_S(kp);
-		sim.calc_eigen();
+		eigen = sim.calc_eigen();
+		sim.add_eigvals(kp, eigen.second);
 	}
+	sim.print_eigvals(kmesh);
 
 	return 0;
 }

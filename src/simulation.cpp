@@ -1,6 +1,7 @@
 #include "simulation.h"
 #include <cmath>
 #include <iostream>
+#include <fstream>
 #include <stdexcept>
 #include <set>
 #include <algorithm>
@@ -13,12 +14,13 @@
 #include "GSLpp/linalg.h"
 
 Simulation::Simulation()
- : cryst(), pot(), n(), basis_valence(), basis_core(), H(), S(), XH1(), XS1(),
+ : cryst(), pot(), n(), basis_valence(), basis_core(), k_eigenvals(), H(), S(), XH1(), XS1(),
    XH2(), XS2(), XH3(), XS3()
 {}
 
-Simulation::Simulation(const Crystal& crystal, const XC_FUN func, const double kappa)
- : cryst(crystal), pot(), n(), basis_valence(), basis_core(), H(), S(), XH1(),
+Simulation::Simulation(const Crystal& crystal, const XC_FUN func, const double kappa,
+ std::function<double(const size_t, const double)> at_pot)
+ : cryst(crystal), pot(), n(), basis_valence(), basis_core(), k_eigenvals(), H(), S(), XH1(),
    XS1(), XH2(), XS2(), XH3(), XS3()
 {
     // Calculate MT radii
@@ -26,7 +28,7 @@ Simulation::Simulation(const Crystal& crystal, const XC_FUN func, const double k
     size_t l_low = 2;
     std::vector<std::vector<Atom>> nn = cryst.calc_nearest_neighbours();
     for(size_t i = 0; i < cryst.atoms.size(); i++){
-        cryst.atoms[i].set_MT(nn[i][0].get_pos().norm()/2);
+        cryst.atoms[i].set_MT(nn[i][0].get_pos().norm<double>()/2);
 		at_vol += GSL::pow_int(cryst.atoms[i].get_MT(), 3);
     }
 	at_vol *= 4*M_PI/3;
@@ -46,7 +48,7 @@ Simulation::Simulation(const Crystal& crystal, const XC_FUN func, const double k
         nel += cryst.atoms[i].get_Z();
     }
     // Set up initial potential
-    pot = Potential(cryst.atoms);
+    pot = Potential(cryst.atoms, at_pot);
     pot.set_xc_fun(func);
     pot.initial_pot(nel, cryst.volume);
     // Divide electrons into core and valence states
@@ -72,8 +74,8 @@ Simulation::Simulation(const Crystal& crystal, const XC_FUN func, const double k
         wave.set_up(pot);
     }
     size_t N = basis_valence.size();
-    H = GSL::Complex_Matrix(N, N);
-    S = GSL::Complex_Matrix(N, N);
+    H = GSL::Matrix_cx(N, N);
+    S = GSL::Matrix_cx(N, N);
 
     // Reserve space for each atom ad each 0 <= l <= l_low, -l <= m <= l
     XH1 = GSL::Matrix(cryst.atoms.size(),(l_low + 1)*(l_low + 1));
@@ -198,17 +200,17 @@ GSL::Complex Simulation::H_element(const size_t i1, const size_t i2, const GSL::
     }
 
     if(std::abs(w1.kappa*w1.kappa - w2.kappa*w2.kappa) < 1E-15){
-        B1 = Bloch_summed_structure_constant(l_low_1, w1.kappa, cryst, w1.l, w2.l);
-        res += -w2.kappa*w2.kappa*B1.dot_evaluate(tau_ij, kp);
+        B1 = Bloch_summed_structure_constant(l_low_1 + 1, w1.kappa, cryst, w1.l, w2.l);
+        res += -w2.kappa*w2.kappa*B1.dot(tau_ij, kp);
     }
 
-    B1 = Bloch_summed_structure_constant(l_low_2, w2.kappa, cryst, w1.l, w2.l);
-    res += XH2[at_i][l_i]*B1.evaluate(tau_ij, kp);
+    B1 = Bloch_summed_structure_constant(l_low_2 + 1, w2.kappa, cryst, w1.l, w2.l);
+    res += XH2[at_i][l_i]*B1(tau_ij, kp);
 
-    B1 = Bloch_summed_structure_constant(l_low_1, w1.kappa, cryst, w1.l, w2.l);
-    res += B1.evaluate(tau_ij, kp)*XH2[at_j][l_j];
+    B1 = Bloch_summed_structure_constant(l_low_1 + 1, w1.kappa, cryst, w1.l, w2.l);
+    res += B1(tau_ij, kp)*XH2[at_j][l_j];
     if(std::abs(w1.kappa*w1.kappa - w2.kappa*w2.kappa) < 1E15){
-        res += B1.evaluate(tau_ij, kp);
+        res += B1(tau_ij, kp);
     }
 
     for(size_t at_m = 0; at_m < cryst.atoms.size(); at_m++){
@@ -219,11 +221,11 @@ GSL::Complex Simulation::H_element(const size_t i1, const size_t i2, const GSL::
             for(Augmented_Bessel J2 : w2.J[at_m]){
                 if(J1.l == J2.l){
                     size_t ipp = static_cast<size_t>(J1.l.l*(J1.l.l + 1) + J1.l.m);
-                    B1 = Bloch_summed_structure_constant(l_low, w1.kappa, cryst, J1.l, w1.l);
-                    B2 = Bloch_summed_structure_constant(l_low, w2.kappa, cryst, J2.l, w2.l);
-                    res += B1.evaluate(J1.center - w1.center.pos, kp).conjugate()*
+                    B1 = Bloch_summed_structure_constant(l_low + 1, w1.kappa, cryst, J1.l, w1.l);
+                    B2 = Bloch_summed_structure_constant(l_low + 1, w2.kappa, cryst, J2.l, w2.l);
+                    res += B1(J1.center - w1.center.pos, kp).conjugate()*
                     XH3[at_m][ipp]*
-                    B2.evaluate(J2.center - w2.center.pos, kp);
+                    B2(J2.center - w2.center.pos, kp);
                 }
             }
         }
@@ -236,11 +238,11 @@ double X_S1(const Augmented_Hankel& Ht1, const Augmented_Hankel& Ht2, const Atom
     double res = 0;
     const Envelope_Hankel H1(at, Ht1.l, Ht1.kappa);
     const Envelope_Hankel H2(at, Ht2.l, Ht2.kappa);
-    // std::cout << "L = " << Ht1.l.l << " " << Ht1.l.m << std::endl;
+    std::cout << "L = " << Ht1.l.l << " " << Ht1.l.m << std::endl;
     res += augmented_integral(Ht1, Ht2);
-    // std::cout << "Augmented integral <Ht|Ht> = " << augmented_integral(Ht1, Ht2) << std::endl;
+    std::cout << "Augmented integral <Ht|Ht> = " << augmented_integral(Ht1, Ht2) << std::endl;
     res += off_atomic_integral(H1, H2);
-    // std::cout << "Off-atomic integral <H|H>' = " << off_atomic_integral(H1, H2) << std::endl;
+    std::cout << "Off-atomic integral <H|H>' = " << off_atomic_integral(H1, H2) << std::endl;
     return res;
 }
 
@@ -249,11 +251,11 @@ double X_S2(const Augmented_Hankel& Ht1, const Augmented_Bessel& Jt2, const Atom
     double res = 0;
     const Envelope_Hankel H1(at, Ht1.l, Ht1.kappa);
     const Envelope_Bessel J2(at, Jt2.l, Jt2.kappa);
-    // std::cout << "L = " << Ht1.l.l << " " << Ht1.l.m << std::endl;
+    std::cout << "L = " << Ht1.l.l << " " << Ht1.l.m << std::endl;
     res += augmented_integral(Ht1, Jt2);
-    // std::cout << "Augmented integral <Ht|Jt> = " << augmented_integral(Ht1, Jt2) << std::endl;
+    std::cout << "Augmented integral <Ht|Jt> = " << augmented_integral(Ht1, Jt2) << std::endl;
     res -= atomic_integral(H1, J2);
-    // std::cout << "Atomic integral <H|J> = " << atomic_integral(H1, J2) << std::endl;
+    std::cout << "Atomic integral <H|J> = " << atomic_integral(H1, J2) << std::endl;
     if(Ht1.kappa*Ht1.kappa != Jt2.kappa*Jt2.kappa){
         res += 1./(-Jt2.kappa*Jt2.kappa + Ht1.kappa*Ht1.kappa);
     }
@@ -266,11 +268,11 @@ double X_S3(const Augmented_Bessel& Jt1, const Augmented_Bessel& Jt2, const Atom
     double res = 0;
     const Envelope_Bessel J1(at, Jt1.l, Jt1.kappa);
     const Envelope_Bessel J2(at, Jt2.l, Jt2.kappa);
-     //std::cout << "L = " << Jt1.l.l << " " << Jt1.l.m << std::endl;
+    std::cout << "L = " << Jt1.l.l << " " << Jt1.l.m << std::endl;
     res += augmented_integral(Jt1, Jt2);
-    // std::cout << "Augmented integral <Jt|Jt> = " << augmented_integral(Jt1, Jt2) << std::endl;
+    std::cout << "Augmented integral <Jt|Jt> = " << augmented_integral(Jt1, Jt2) << std::endl;
     res -= atomic_integral(J1, J2);
-     //std::cout << "Atomic integral <J|J> = " << atomic_integral(J1, J2) << std::endl;
+    std::cout << "Atomic integral <J|J> = " << atomic_integral(J1, J2) << std::endl;
     return res;
 }
 
@@ -305,15 +307,15 @@ GSL::Complex Simulation::S_element(const size_t i1, const size_t i2, const GSL::
     }
 
     if(std::abs(w1.kappa*w1.kappa - w2.kappa*w2.kappa) < 1E-15){
-        B1 = Bloch_summed_structure_constant(l_low_1, w1.kappa, cryst, w1.l, w2.l);
-        res += B1.dot_evaluate(tau_ij, kp);
+        B1 = Bloch_summed_structure_constant(l_low_1 + 1, w1.kappa, cryst, w1.l, w2.l);
+        res += B1.dot(tau_ij, kp);
     }
 
-    B1 = Bloch_summed_structure_constant(l_low_1, w2.kappa, cryst, w1.l, w2.l);
-    res += XS2[at_i][l_i]*B1.evaluate(tau_ij, kp);
+    B1 = Bloch_summed_structure_constant(l_low_1 + 1, w2.kappa, cryst, w1.l, w2.l);
+    res += XS2[at_i][l_i]*B1(tau_ij, kp);
 
-    B1 = Bloch_summed_structure_constant(l_low_2, w1.kappa, cryst, w1.l, w2.l);
-    res += B1.evaluate(tau_ij, kp)*XS2[at_j][l_j];
+    B1 = Bloch_summed_structure_constant(l_low_2 + 1, w1.kappa, cryst, w1.l, w2.l);
+    res += B1(tau_ij, kp)*XS2[at_j][l_j];
 
     for(size_t at_m = 0; at_m < cryst.atoms.size(); at_m++){
         if(cryst.atoms[at_m].get_Z() > 20){
@@ -323,14 +325,17 @@ GSL::Complex Simulation::S_element(const size_t i1, const size_t i2, const GSL::
             for(Augmented_Bessel J2 : w2.J[at_m]){
                 if(J1.l == J2.l){
                     size_t ipp = static_cast<size_t>(J1.l.l*(J1.l.l + 1) + J1.l.m);
-                    B1 = Bloch_summed_structure_constant(l_low, w1.kappa, cryst, J1.l, w1.l);
-                    B2 = Bloch_summed_structure_constant(l_low, w2.kappa, cryst, J2.l, w2.l);
-                    res += B1.evaluate(J1.center - w1.center.pos, kp).conjugate()*
+                    B1 = Bloch_summed_structure_constant(l_low + 1, w1.kappa, cryst, J1.l, w1.l);
+                    B2 = Bloch_summed_structure_constant(l_low + 1, w2.kappa, cryst, J2.l, w2.l);
+                    res += B1(J1.center - w1.center.pos, kp).conjugate()*
 	                   XS3[at_m][ipp]*
-        	           B2.evaluate(J2.center - w2.center.pos, kp);
+        	           B2(J2.center - w2.center.pos, kp);
                 }
             }
         }
+    }
+    if(i1 == 2 && i2 == 0){
+        std::cout << i1 << " " << i2 << " : " << res << "\n";
     }
     return res;
 }
@@ -393,10 +398,9 @@ void Simulation::set_up_X_matrices()
 
 void Simulation::set_up_H(const GSL::Vector& kp)
 {
-    // std::cout << "Setting up Hamiltonian matrix." << std::endl;
     for(size_t i = 0; i < basis_valence.size(); i++){
         for(size_t j = 0; j < basis_valence.size(); j++){
-            this->H[i].set(j, H_element(i, j, kp));
+            this->H[i][j] = H_element(i, j, kp);
 //            this->H[j].set(i, this->H[i][j].conjugate());
         }
     }
@@ -404,47 +408,48 @@ void Simulation::set_up_H(const GSL::Vector& kp)
 
 void Simulation::set_up_S(const GSL::Vector& kp)
 {
-    // std::cout << "Setting up overlap matrix." << std::endl;
     for(size_t i = 0; i < basis_valence.size(); i++){
         for(size_t j = 0; j < basis_valence.size(); j++){
-            this->S[i].set(j, S_element(i, j, kp));
+            this->S[i][j] = S_element(i, j, kp);
 //            this->S[j].set(i, this->S[i][j].conjugate());
         }
     }
-//    std::cout << "Overlap matrix" << std::endl;
-//    for(size_t i = 0 ; i < basis_valence.size(); i++){
-//        std::cout << "  " << S[i] << std::endl;
-//    }
 }
 
-void Simulation::calc_eigen()
+void Simulation::add_eigvals(const GSL::Vector& kp, const GSL::Vector& eigvals)
+{
+    std::pair<GSL::Vector, GSL::Vector> tmp(kp, eigvals);
+    k_eigenvals.insert(tmp);
+}
+
+std::pair<GSL::Matrix_cx, GSL::Vector> Simulation::calc_eigen()
 {
     size_t N = basis_valence.size()/2;
-    GSL::Complex_Matrix eigvecs_up(N, N);
-    GSL::Complex_Matrix eigvecs_down(N, N);
+    GSL::Matrix_cx eigvecs_up(N, N);
+    GSL::Matrix_cx eigvecs_down(N, N);
     GSL::Vector eigvals_up(N);
     GSL::Vector eigvals_down(N);
 
-    GSL::Complex_Matrix H_up(N, N);
-    GSL::Complex_Matrix H_down(N, N);
-    GSL::Complex_Matrix S_up(N, N);
-    GSL::Complex_Matrix S_down(N, N);
+    GSL::Matrix_cx H_up(N, N);
+    GSL::Matrix_cx H_down(N, N);
+    GSL::Matrix_cx S_up(N, N);
+    GSL::Matrix_cx S_down(N, N);
+
+    for(auto row : S){
+        std::cout << row << "\n";
+    }
 
     for(size_t i = 0; i < N; i++){
         for(size_t j = 0; j < N; j++){
-            H_up[i].set(j, H[2*i][2*j]);
-            S_up[i].set(j, S[2*i][2*j]);
-            H_down[i].set(j, H[2*i+1][2*j+1]);
-            S_down[i].set(j, S[2*i+1][2*j+1]);
+            H_up[i][j] = H[2*i][2*j];
+            S_up[i][j] = S[2*i][2*j];
+            H_down[i][j] = H[2*i+1][2*j+1];
+            S_down[i][j] = S[2*i+1][2*j+1];
         }
     }
 
-    std::pair<GSL::Complex_Matrix, GSL::Vector> tmp;
+    std::pair<GSL::Matrix_cx, GSL::Vector> tmp;
     tmp = GSL::hermitian_eigen(S_up);
-//    std::cout << "Overlap matrix" << std::endl;
-//    for(size_t i = 0 ; i < N; i++){
-//        std::cout << "  " << S_up[i] << std::endl;
-//    }
     std::cout << "Eigenvalues of S " << tmp.second << std::endl;
     try{
     tmp = GSL::general_hermitian_eigen(H_up, S_up);
@@ -461,12 +466,32 @@ void Simulation::calc_eigen()
 	    }
 	    throw e;
     }
+/*
     for(size_t i = 0; i < N; i++){
         std::cout << "  Eigenvalues (up, down): " << eigvals_up[i] << ", " <<
         eigvals_down[i] << " (Ry)\n";
         std::cout << "  Eigenvectors (up, down) :\n";
         std::cout << "\t" << eigvecs_up.get_col(i) << "\n";
         std::cout << "\t" << eigvecs_down.get_col(i) << "\n";
+
     }
     std::cout << "\n\n";
+*/
+    return std::pair<GSL::Matrix_cx, GSL::Vector>(eigvecs_up, eigvals_up);
+}
+
+void Simulation::print_eigvals(K_mesh& k_mesh)
+{
+    std::ofstream of;
+    of.open("bands.dat", std::ios::trunc);
+    GSL::Vector eigvals;
+    for(GSL::Vector& kp :  k_mesh.k_points){
+        eigvals = k_eigenvals[kp];
+        of << kp[0] << " " << kp[1] << " " << kp[2] << " ";
+        for(size_t i = 0; i < eigvals.dim(); i++){
+            of << eigvals[i] << " ";
+        }
+        of << "\n";
+    }
+    of.close();
 }

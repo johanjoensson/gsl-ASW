@@ -47,7 +47,7 @@ double Envelope_Neumann::barred_fun(const double x) const
     return h.barred_fun(x) + sign*GSL::pow_int(kappa, 2*l.l + 1)*j.barred_fun(x);
 }
 
-double off_atomic_integral(const Envelope_Hankel& H1, const Envelope_Hankel& H2) 
+double off_atomic_integral(const Envelope_Hankel& H1, const Envelope_Hankel& H2)
 {
     if(H1.l.l != H2.l.l){
         return 0.;

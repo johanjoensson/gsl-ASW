@@ -1,6 +1,7 @@
 #include "ewald_int.h"
 #include "GSLpp/special_functions.h"
 #include "GSLpp/basic_math.h"
+#include "GSLpp/complex.h"
 #include <cmath>
 
 #include <iostream>
@@ -9,17 +10,17 @@ Ewald_integral::Ewald_integral()
  : ewald_param(1.), kappa(sqrt(0.015))
 {}
 
-void Ewald_integral::set_ewald_param(double eta)
+void Ewald_integral::set_ewald_param(const double eta)
 {
 	this->ewald_param = eta;
 }
 
-void Ewald_integral::set_kappa(double kappa_n)
+void Ewald_integral::set_kappa(const double kappa_n)
 {
 	this->kappa = kappa_n;
 }
 
-double Ewald_integral::bar_ew_int(lm l, double r)
+double Ewald_integral::bar_ew_int(lm l, double r) const
 {
 
     double res = 0;
@@ -33,6 +34,7 @@ double Ewald_integral::bar_ew_int(lm l, double r)
         t2 = ( GSL::exp( kappa*r)*GSL::erfc(0.5*sqrt(eta)*r + kappa/sqrt(eta)) ).val;
 
         res = M_SQRTPI/4*(t1 + t2 );
+        res = M_SQRTPI/2*(t1 - t2 - t3);
     }else if(l.l == -1){
          t1 = GSL::exp(-kappa*r).val*GSL::erfc(0.5*sqrt(eta)*r - kappa/sqrt(eta)).val;
          t2 = GSL::exp( kappa*r).val*GSL::erfc(0.5*sqrt(eta)*r + kappa/sqrt(eta)).val;
@@ -47,12 +49,12 @@ double Ewald_integral::bar_ew_int(lm l, double r)
     return res;
 }
 
-double Ewald_integral::ewald_int(lm l, double r)
+double Ewald_integral::ewald_int(lm l, double r) const
 {
     return bar_ew_int(l, r)/GSL::pow_int(r, 2*l.l + 1);
 }
 
-double Ewald_integral::bar_comp_ew_int(lm l, double r)
+double Ewald_integral::bar_comp_ew_int(lm l, double r) const
 {
     double res = 0.;
     double eta = this->ewald_param;
@@ -79,12 +81,12 @@ double Ewald_integral::bar_comp_ew_int(lm l, double r)
     return res;
 }
 
-double Ewald_integral::comp_ewald_int(lm l, double r)
+double Ewald_integral::comp_ewald_int(lm l, double r) const
 {
     return bar_comp_ew_int(l, r)/GSL::pow_int(r, 2*l.l+1);
 }
 
-std::vector<double> Ewald_integral::evaluate(lm l, Logarithmic_mesh &mesh)
+std::vector<double> Ewald_integral::evaluate(lm l, Logarithmic_mesh &mesh) const
 {
     double r = 0.;
 
@@ -96,7 +98,7 @@ std::vector<double> Ewald_integral::evaluate(lm l, Logarithmic_mesh &mesh)
     }
     return res;
 }
-std::vector<double> Ewald_integral::evaluate_comp(lm l, Logarithmic_mesh &mesh)
+std::vector<double> Ewald_integral::evaluate_comp(lm l, Logarithmic_mesh &mesh) const
 {
     double r = 0.;
 

@@ -14,7 +14,7 @@ public:
     Logarithmic_mesh mesh;
     std::vector<double> val;
 
-    double operator()(const GSL::Vector& r);
+    double operator()(const GSL::Vector& r) const;
 
     Augmented_function();
     Augmented_function(const Augmented_function&);

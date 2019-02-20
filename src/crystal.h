@@ -5,8 +5,8 @@
 #include "lattice.h"
 #include "atom.h"
 #include "utils.h"
-#include "GSLpp/matrix.h"
 #include "GSLpp/vector.h"
+#include "GSLpp/matrix.h"
 
 class Crystal {
 
