@@ -10,10 +10,10 @@
 ################################################################################
 
 # Compilers to use
-# CXX = clang++
-CXX ?= g++
-# CC  = clang
-CC  ?= gcc
+CXX = clang++
+#CXX ?= g++
+CC  = clang
+#CC  ?= gcc
 
 CXXCHECK = clang-tidy
 
@@ -27,8 +27,7 @@ BUILD_DIR = build
 TEST_DIR = test
 GSLLIBROOT=../GSL-lib
 #  -Werror 
-WFLAGS = -Wall -Wextra -pedantic -Wshadow -Wnon-virtual-dtor -Wold-style-cast -Wcast-align -Wunused -Woverloaded-virtual -Wpedantic -Wconversion -Wsign-conversion -Wnull-dereference -Wdouble-promotion -Wformat=2 -Weffc++
-# -Wmisleading-indentation -Wduplicated-cond -Wduplicated-branches -Wlogical-op  -Wuseless-cast
+WFLAGS = -Wall -Wextra -pedantic -Wshadow -Wnon-virtual-dtor -Wold-style-cast -Wcast-align -Wunused -Woverloaded-virtual -Wpedantic -Wconversion -Wsign-conversion -Wnull-dereference -Wdouble-promotion -Wformat=2 -Weffc++ -Wmisleading-indentation -Wduplicated-cond -Wduplicated-branches -Wlogical-op  -Wuseless-cast
 # Flags for the above defined compilers
 CXXFLAGS = -std=c++11 $(WFLAGS) -I $(SRC_DIR) -I $(GSLLIBROOT)/include -O0  -DDEBUG -g
 
@@ -37,7 +36,7 @@ CXXCHECKFLAGS = -checks=$(CXXCHECKS) -header-filter=.* -- -std=c++11
 
 # Libraries to link against
 GSLLIBDIR=$(GSLLIBROOT)/lib/GSLpp
-LDFLAGS = -pg -L$(GSLLIBDIR) -L. -Wl,-rpath=$(GSLLIBDIR) -lGSLpp -lxc -lm -lgsl -O3 -flto
+LDFLAGS = -pg -L$(GSLLIBDIR) -L. -Wl,-rpath=$(GSLLIBDIR) -lGSLpp -lxc -lm -lgsl # -O3 -flto
 
 # List of all executables in this project
 EXE = gsl-asw
@@ -121,6 +120,15 @@ tests: 	CXXFLAGS = -std=c++11 -I $(SRC_DIR) -I $(GSLLIBROOT)/include -I$(TEST_DI
 tests:  LDFLAGS = -lgcov -lgtest -L$(GSLLIBDIR) -L. -Wl,-rpath=$(GSLLIBDIR) -lGSLpp -lxc -lm 
 tests: 	clean $(TEST_OBJS)
 	$(CXX) $(TEST_OBJS) -o $@  $(LDFLAGS)
+
+test_mesh: $(BUILD_DIR)/test_mesh.o $(BUILD_DIR)/log_mesh.o
+	$(CXX) $^ -o $@ $(LDFLAGS)
+
+test_cubic: $(BUILD_DIR)/test_cubic.o $(BUILD_DIR)/spherical_fun.o $(BUILD_DIR)/ewald_int.o
+	$(CXX) $^ -o $@ $(LDFLAGS)
+
+test_numerov: $(BUILD_DIR)/test_new_numerov.o
+	$(CXX) $^ -o $@ $(LDFLAGS)
 
 build : 
 	mkdir -p build

@@ -45,7 +45,7 @@ double Neumann_function::operator()(const double x) const
 double Integral_Hankel_function::operator()(const double x) const
 {
 	return GSL::pow_int(2*x, l_m.l)*( I.ewald_int(l_m, x) +
-	  2./M_SQRTPI *I.comp_ewald_int(l_m, x));
+	  2./M_SQRTPI*I.comp_ewald_int(l_m, x));
 }
 
 void Integral_Hankel_function::set_ewald_param(const double eta)
@@ -55,14 +55,14 @@ void Integral_Hankel_function::set_ewald_param(const double eta)
 
 GSL::Result cubic_harmonic(lm l, const GSL::Vector& r)
 {
+    GSL::Result res(0., 0.);
 	int m_eff = std::abs(l.m);
     int sign = 1;
     if(m_eff % 2 == 1){
         sign = -1;
     }
 	double r_norm = r.norm<double>();
-	if(r_norm < 1e-14){
-		GSL::Result res(0., 0.);
+	if(r_norm < 1e-15){
 		return res;
 	}
 
@@ -72,7 +72,7 @@ GSL::Result cubic_harmonic(lm l, const GSL::Vector& r)
 	double x = tmp[0];
 	double y = tmp[1];
 	double z = tmp[2];
-	GSL::Result phi, cos_theta, res;
+	GSL::Result phi, cos_theta;
 
 
 	phi = GSL::Result(GSL::Complex(x, y).arg(), 0.);

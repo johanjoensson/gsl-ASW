@@ -56,7 +56,7 @@ double off_atomic_integral(const Envelope_Hankel& H1, const Envelope_Hankel& H2)
     }
 
     double res = 0.;
-    double rs = H1.center.mesh.r.back();
+    double rs = H1.center.mesh.r_back();
     Envelope_Hankel H1m1, H2m1, H1p1, H2p1;
     H1p1 = Envelope_Hankel(H1.center, lm {H1.l.l + 1, H1.l.m}, H1.kappa);
     H2p1 = Envelope_Hankel(H2.center, lm {H2.l.l + 1, H2.l.m}, H2.kappa);
@@ -80,7 +80,7 @@ double off_atomic_integral(const Envelope_Hankel& H1, const Envelope_Hankel& H2)
 double atomic_integral(const Envelope_Hankel& H1, const Envelope_Bessel& J2)
 {
     double res = 0.;
-    double rs = H1.center.mesh.r.back();
+    double rs = H1.center.mesh.r_back();
     Envelope_Hankel H1m1, H1p1;
     Envelope_Bessel J2m1, J2p1;
     H1p1 = Envelope_Hankel(H1.center, lm {H1.l.l + 1, H1.l.m}, H1.kappa);
@@ -115,7 +115,7 @@ double atomic_integral(const Envelope_Bessel& J1, const Envelope_Hankel& H2)
 double atomic_integral(const Envelope_Bessel& J1, const Envelope_Bessel& J2)
 {
     double res = 0;
-    double rs = J1.center.mesh.r.back();
+    double rs = J1.center.mesh.r_back();
     Envelope_Bessel J1m1, J2m1, J1p1, J2p1;
     J1p1 = Envelope_Bessel(J1.center, lm {J1.l.l + 1, J1.l.m}, J1.kappa);
     J1m1 = Envelope_Bessel(J1.center, lm {J1.l.l - 1, J1.l.m}, J1.kappa);

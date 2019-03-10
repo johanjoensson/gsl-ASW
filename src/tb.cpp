@@ -31,25 +31,10 @@ int main()
 {
 	std::cout.precision(12);
 
+
 	GSL::Error_handler e_handler;
 	e_handler.off();
 
-
-	Hankel_function h;
-	Integral_Hankel_function hi;
-
-	for(int l = 0; l < 3; l++){
-		for(int m = -l; m <= l; m++){
-			h.set_l(lm{l,m});
-			hi.set_l(lm{l,m});
-			for(double x = 0.001; x < 9; x += 0.1){
-				std::cout << x << " " << h(x) << " " << hi(x) << " " << 1 - hi(x)/h(x) <<"\n";
-			}
-			std::cout << "\n";
-		}
-		std::cout << "\n";
-	}
-	std::cout << "\n";
 	double kappa = std::sqrt(0.015);
 
 	GSL::Vector a = {1.0, 0.0, 0.0}, b = {0.0, 1.0, 0.0}, c = {0.0, 0.0, 1.0};
@@ -80,6 +65,7 @@ int main()
 	cr.add_atoms(std::vector<Atom> {C1});
 
 	Simulation sim(cr, NONE, kappa);
+
 	sim.set_up_X_matrices();
 	K_mesh kmesh(cr.lat.r_lat);
 

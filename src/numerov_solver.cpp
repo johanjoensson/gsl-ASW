@@ -9,26 +9,29 @@
 #include <string>
 #endif
 
-Numerov_solver::Numerov_solver()
-{}
+template<class T>
+int signum(T val)
+{
+	return (val > T(0)) - (val < T(0))
+}
 
 std::vector<double> Numerov_solver::solve_left(Logarithmic_mesh &mesh,
 	std::vector<double> &v, size_t i_lr, std::vector<double> &init_cond, double E)
 {
 	size_t l = init_cond.size();
-	std::vector<double> res(mesh.r.size(),0);
+	std::vector<double> res(mesh.size(),0);
 	double g, g1, g2;
 	double A = mesh.A();
 
 	size_t offset = res.size() - l;
 	for(size_t i = 0; i < l; i++){
-		res[offset + i] = init_cond[i]/std::sqrt(mesh.drx[i]);
+		res[offset + i] = init_cond[i]/std::sqrt(mesh.drx(i));
 	}
 
 	for(size_t i = offset - 1; i >= i_lr; i--){
-		g = mesh.drx[i]*mesh.drx[i]*(E - v[i]) - A*A/4.;
-		g1 = mesh.drx[i+1]*mesh.drx[i+1]*(E - v[i+1]) - A*A/4.;
-		g2 = mesh.drx[i+2]*mesh.drx[i+2]*(E - v[i+2]) - A*A/4.;
+		g = mesh.drx(i)*mesh.drx(i)*(E - v[i]) - A*A/4.;
+		g1 = mesh.drx(i+1)*mesh.drx(i+1)*(E - v[i+1]) - A*A/4.;
+		g2 = mesh.drx(i+2)*mesh.drx(i+2)*(E - v[i+2]) - A*A/4.;
 		res[i] = (2*res[i+1]*(1 - 5*g1/12) - res[i+2]*(1 + g2/12))/(1 + g/12);
 	}
 
@@ -39,41 +42,32 @@ std::vector<double> Numerov_solver::solve_right(Logarithmic_mesh &mesh,
 	std::vector<double> &v, size_t i_lr, std::vector<double> &init_cond, double E)
 {
 	size_t l = init_cond.size();
-	std::vector<double> res(mesh.r.size(),0);
+	std::vector<double> res(mesh.size(),0);
 	double g, g1, g2;
 
 	for(size_t i = 0; i < l; i++){
-		res[i] = init_cond[i]/std::sqrt(mesh.drx[i]);
+		res[i] = init_cond[i]/std::sqrt(mesh.drx(i));
 	}
 
 	double A = mesh.A();
 	for(size_t i = l; i <= i_lr; i++){
-		g = mesh.drx[i]*mesh.drx[i]*(E - v[i]) - A*A/4.;
-		g1 = mesh.drx[i-1]*mesh.drx[i-1]*(E - v[i-1]) - A*A/4.;
-		g2 = mesh.drx[i-2]*mesh.drx[i-2]*(E - v[i-2]) - A*A/4.;
+		g = mesh.drx(i)*mesh.drx(i)*(E - v[i]) - A*A/4.;
+		g1 = mesh.drx(i-1)*mesh.drx(i-1)*(E - v[i-1]) - A*A/4.;
+		g2 = mesh.drx(i-2)*mesh.drx(i-2)*(E - v[i-2]) - A*A/4.;
 		res[i] = (2*res[i-1]*(1 - 5*g1/12) - res[i-2]*(1 + g2/12))/(1 + g/12);
 	}
 
 	return res;
 }
 
-int sign(double f)
-{
-    int res = 1;
-    if(f < 0){
-	    res = -1;
-    }
-    return res;
-}
-
 size_t Numerov_solver::find_inversion_point(Logarithmic_mesh &mesh,
 	std::vector<double> &v, double e_trial)
 {
-	size_t inv = mesh.r.size() - 1;
+	size_t inv = mesh.size() - 1;
 	double pot;
 	bool done = false;
 	int s = sign(v[inv] - e_trial);
-	for(size_t i = mesh.r.size() - 1; i > 1   && !done; i--){
+	for(size_t i = mesh.size() - 1; i > 1   && !done; i--){
 		pot = v[i];
 		if(s != sign(pot - e_trial)){
 			inv = i;
@@ -103,16 +97,16 @@ double Numerov_solver::variational_energy_correction(Logarithmic_mesh &mesh,
 {
 	double f_inv, f_m1, f_p1, cusp_val, df;
 	double A = mesh.A();
-	f_inv = 1 + (mesh.drx[i_inv]*mesh.drx[i_inv]*(e_trial - v[i_inv]) -
+	f_inv = 1 + (mesh.drx(i_inv)*mesh.drx(i_inv)*(e_trial - v[i_inv]) -
 	A*A/4.)/12.;
-	f_m1 = 1 + (mesh.drx[i_inv-1]*mesh.drx[i_inv-1]*(e_trial - v[i_inv-1]) -
+	f_m1 = 1 + (mesh.drx(i_inv-1)*mesh.drx(i_inv-1)*(e_trial - v[i_inv-1]) -
 	A*A/4.)/12.;
-	f_p1 = 1 + (mesh.drx[i_inv+1]*mesh.drx[i_inv+1]*(e_trial - v[i_inv+1]) -
+	f_p1 = 1 + (mesh.drx(i_inv+1)*mesh.drx(i_inv+1)*(e_trial - v[i_inv+1]) -
 	A*A/4.)/12.;
 	cusp_val = (fun[i_inv - 1]*f_m1 + fun[i_inv + 1]*f_p1 +
 		10*fun[i_inv]*f_inv)/12.;
 	df = f_inv*(fun[i_inv]/cusp_val - 1.0);
-	return 12*df*cusp_val*cusp_val*mesh.drx[i_inv];
+	return 12*df*cusp_val*cusp_val*mesh.drx(i_inv);
 }
 
 std::vector<double> Numerov_solver::solve(Logarithmic_mesh &mesh,
@@ -125,9 +119,9 @@ std::vector<double> Numerov_solver::solve(Logarithmic_mesh &mesh,
 	// maximum energy for a bound state is the edge value of the potential
 	// double e_max = std::abs(v.back()), e_min = e_max;
 	// minimum energy for a bound state is the depth of the potential well
-	for(size_t i = 1; i < mesh.r.size(); i++){
-		if(e_min > v[i] + 0.25/mesh.r2[i]){
-			e_min = v[i] + 0.25/mesh.r2[i];
+	for(size_t i = 1; i < mesh.size(); i++){
+		if(e_min > v[i] + 0.25/mesh.r2(i)){
+			e_min = v[i] + 0.25/mesh.r2(i);
 		}
 	}
 	double e_trial = en;
@@ -141,7 +135,7 @@ std::vector<double> Numerov_solver::solve(Logarithmic_mesh &mesh,
 	out_file << e_min << " < " << en << " < " << e_max << "\n";
 #endif
 	bool done = false;
-	std::vector<double> res(mesh.r.size(),0), tmp(mesh.r.size(),0);
+	std::vector<double> res(mesh.size(),0), tmp(mesh.size(),0);
 
 	size_t i_inv = 0, it1 = 0, it2 = 0;
 	int n_tmp = -1;
@@ -225,25 +219,25 @@ std::vector<double> Numerov_solver::solve(Logarithmic_mesh &mesh,
 	}
 
 	// Make sure to scale solution to match boundary conditions
-	if(std::abs(r_init.back()) > 1E-15){
-		scale = r_init.back()/(res.back()*std::sqrt(mesh.drx.back()));
+	if(std::abs(r_init.back()) > 0){
+		scale = r_init.back()/(res.back()*std::sqrt(mesh.drx_back()));
 	}else{
 		// Core states, normalize to unity
 		std::vector<double> t(res.size(), 0.);
 		for(size_t i = 0; i < res.size(); i++){
-			t[i] = res[i]*res[i]*mesh.drx[i];
+			t[i] = res[i]*res[i]*mesh.drx(i);
 		}
 		scale = 1./std::sqrt(mesh.integrate(t));
 	}
 	// Scale or normalize solution
 	for(size_t i = 0; i < res.size(); i++){
-		res[i] *= std::sqrt(mesh.drx[i])*scale;
+		res[i] *= std::sqrt(mesh.drx(i))*scale;
 	}
 
 	en = e_trial;
 #ifdef DEBUG
-	out_file << "Inversion point = " << mesh.r[i_inv] << "\n";
-	out_file << "Right-most value: r = " << mesh.r.back() << " F = " << res.back() << "\n";
+	out_file << "Inversion point = " << mesh.r(i_inv) << "\n";
+	out_file << "Right-most value: r = " << mesh.r_back() << " F = " << res.back() << "\n";
 	out_file << "Initial condition: rightmost value = " << r_init.back() << "\n";
 	out_file.close();
 #endif

@@ -21,8 +21,11 @@ GSL::Complex Bloch_sum::calc_d1(const GSL::Vector& tau, const GSL::Vector& kp)
 
     double k = kp.norm<double>(), dot = kp.dot(tau);
     // Loop over all K-vectors
-    for(auto Kn : c.Kn_vecs){
+    for(auto& Kn : c.Kn_vecs){
         kn = kp + Kn;
+        if(kn == GSL::Vector(3)){
+            continue;
+        }
         k = kn.norm<double>();
         dot = kn.dot(tau);
         e = GSL::exp(GSL::Complex(0., dot));
@@ -48,9 +51,11 @@ GSL::Complex Bloch_sum::calc_d1_dot(const GSL::Vector& tau, const GSL::Vector& k
     GSL::Result tmp;
     GSL::Complex c_fac(1.0, 0.0);
     double k = kp.norm<double>(), dot = kp.dot(tau);
-    // Loop over all K-vectors, including (0, 0,0)
     for(auto Kn : c.Kn_vecs){
         kn = kp + Kn;
+        if(kn == GSL::Vector(3)){
+            continue;
+        }
         k = kn.norm<double>();
         dot = kn.dot(tau);
         e = GSL::exp(GSL::Complex(0., dot));
@@ -83,11 +88,10 @@ GSL::Complex Bloch_sum::calc_d2(const GSL::Vector& tau, const GSL::Vector& kp)
     GSL::Vector tau_mu;
     // Loop over all lattice vectors
     for(auto Rn : c.Rn_vecs){
-        // Do not add unit cell contribution at (0, 0, 0)
-        if(Rn == GSL::Vector(3) && tau == GSL::Vector(3)){
+        tau_mu = tau - Rn;
+        if(tau_mu == GSL::Vector(3)){
             continue;
         }
-        tau_mu = tau - Rn;
         t = tau_mu.norm<double>();
         dot = kp.dot(tau_mu);
         tmp = GSL::pow_int(t, l.l)*cubic_harmonic(l, tau_mu)*I.ewald_int(l, t);
@@ -111,10 +115,10 @@ GSL::Complex Bloch_sum::calc_d2_dot(const GSL::Vector& tau, const GSL::Vector& k
     // Loop over all lattice vectors
     for(auto Rn : c.Rn_vecs){
         // Do not add unit cell contribution at (0, 0, 0)
-        if(Rn == GSL::Vector(3) && tau == GSL::Vector(3)){
+        tau_mu = tau - Rn;
+        if(tau_mu == GSL::Vector(3)){
             continue;
         }
-        tau_mu = tau - Rn;
         t = tau_mu.norm<double>();
         dot = kp.dot(tau_mu);
         tmp = GSL::pow_int(t, l.l)*cubic_harmonic(l, tau_mu)*

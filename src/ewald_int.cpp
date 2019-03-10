@@ -90,10 +90,10 @@ std::vector<double> Ewald_integral::evaluate(lm l, Logarithmic_mesh &mesh) const
 {
     double r = 0.;
 
-    std::vector<double> res(mesh.r.size(), 0.);
+    std::vector<double> res(mesh.size(), 0.);
 
-    for(unsigned int i = 0; i < mesh.r.size(); i++){
-        r = mesh.r[i];
+    for(unsigned int i = 0; i < mesh.size(); i++){
+        r = mesh.r(i);
         res[i] = ewald_int(l,r);
     }
     return res;
@@ -102,10 +102,10 @@ std::vector<double> Ewald_integral::evaluate_comp(lm l, Logarithmic_mesh &mesh) 
 {
     double r = 0.;
 
-    std::vector<double> res(mesh.r.size(), 0.);
+    std::vector<double> res(mesh.size(), 0.);
 
-    for(unsigned int i = 0; i < mesh.r.size(); i++){
-        r = mesh.r[i];
+    for(unsigned int i = 0; i < mesh.size(); i++){
+        r = mesh.r(i);
         res[i] = comp_ewald_int(l,r);
     }
     return res;

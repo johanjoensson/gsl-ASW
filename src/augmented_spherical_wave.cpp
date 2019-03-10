@@ -46,7 +46,7 @@ std::vector<double> v_eff(const Logarithmic_mesh &mesh,
 {
     std::vector<double> res(v.size(), 0.);
     for(size_t i = 0; i < v.size(); i++){
-        res[i] = v[i] + l.l*(l.l + 1)/mesh.r2[i];
+        res[i] = v[i] + l.l*(l.l + 1)/mesh.r2(i);
     }
     return res;
 }
@@ -69,7 +69,7 @@ void Augmented_spherical_wave::set_up(Potential &v)
 	out_file.open("check_Hankel.dat", std::fstream::out|std::fstream::app);
 	out_file << "# r\tV(r)\trH(r)" << "\n";
 	for(size_t j = 0; j < H.val.size(); j++){
-		out_file << std::setprecision(8) << center.mesh.r[j] << " " << v_tot[j] << " " << H.val[j] << "\n";
+		out_file << std::setprecision(8) << center.mesh.r(j) << " " << v_tot[j] << " " << H.val[j] << "\n";
 	}
     out_file << "\n\n";
 	out_file.close();
@@ -86,7 +86,7 @@ void Augmented_spherical_wave::set_up(Potential &v)
             out_file.open("check_Bessel.dat", std::fstream::out|std::fstream::app);
             out_file << "# r\tV(r)\trJ(r)" << std::endl;
             for(size_t j = 0; j < Jil.val.size(); j++){
-                out_file << std::setprecision(8) << at.mesh.r[j] << " " << v_tot[j] << " " << Jil.val[j] << "\n";
+                out_file << std::setprecision(8) << at.mesh.r(j) << " " << v_tot[j] << " " << Jil.val[j] << "\n";
             }
             out_file << "\n\n";
             out_file.close();
