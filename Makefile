@@ -10,10 +10,10 @@
 ################################################################################
 
 # Compilers to use
-CXX = clang++
-#CXX ?= g++
-CC  = clang
-#CC  ?= gcc
+#CXX = clang++
+CXX ?= g++
+#CC  = clang
+CC  ?= gcc
 
 CXXCHECK = clang-tidy
 
@@ -128,6 +128,9 @@ test_cubic: $(BUILD_DIR)/test_cubic.o $(BUILD_DIR)/spherical_fun.o $(BUILD_DIR)/
 	$(CXX) $^ -o $@ $(LDFLAGS)
 
 test_numerov: $(BUILD_DIR)/test_new_numerov.o
+	$(CXX) $^ -o $@ $(LDFLAGS)
+
+test_schroedinger: $(BUILD_DIR)/test_schroedinger.o $(BUILD_DIR)/log_mesh.o
 	$(CXX) $^ -o $@ $(LDFLAGS)
 
 build : 

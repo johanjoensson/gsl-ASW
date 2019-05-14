@@ -2,24 +2,19 @@
 #include "GSLpp/special_functions.h"
 #include <stdexcept>
 
-Logarithmic_mesh::Logarithmic_mesh()
- : A_p(), B_p(), r_p(), r2_p(), drx_p()
-{}
-
 Logarithmic_mesh::Logarithmic_mesh(double radius, size_t num_points, double A_n)
-	: A_p(A_n), B_p(radius/(GSL::exp(A_n*(static_cast<double>(num_points) - 1)).val - 1.)),
-      r_p(num_points, 0), r2_p(num_points, 0), drx_p(num_points, 0)
+	: Mesh(num_points), A_p(A_n),
+    B_p(radius/(GSL::exp(A_n*(static_cast<double>(num_points) - 1)).val - 1.)),
+    drx_p(num_points, 0)
 {
 	double tmp;
 
 	for(unsigned int i = 0; i < num_points; i++){
 		tmp = this->B_p*(GSL::exp(this->A_p*i).val - 1);
-		this->r_p[i] = tmp;
-		this->r2_p[i] = tmp*tmp;
+		this->x_p[i] = tmp;
+		this->x2_p[i] = tmp*tmp;
 		this->drx_p[i] = this->A_p*(tmp + this->B_p);
-		// this->drx_p[i] = (tmp + this->B_p)*(GSL::exp(A_p).val - 1);
 	}
-    // this->drx_p[this->size() - 1] = this->A_p*(this->r_back() + this->B_p);
 }
 
 // Trapezoidal rule for integrals on a logarithmic mesh
@@ -31,7 +26,6 @@ double Logarithmic_mesh::integrate(std::vector<double>& f)
     double res = 0;
     for(size_t i = 1; i < this->size(); i++){
     	res += 0.5*(f[i - 1] + f[i])*drx_p[i-1];
-    	// res += 0.5*(f[i - 1] + f[i])*(r_p[i] - r_p[i - 1]);
     }
     return res;
 }

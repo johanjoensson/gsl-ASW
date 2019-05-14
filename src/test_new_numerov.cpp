@@ -1,4 +1,5 @@
 #include "numerov_solver.h"
+#include "schroedinger.h"
 #include <vector>
 #include <fstream>
 #include <GSLpp/special_functions.h>
@@ -11,7 +12,7 @@ int main()
 	GSL::Error_handler e_handler;
 	e_handler.off();
 	Numerov_solver sol;
-	size_t len = 1000;
+	size_t len = 10000;
 
 	// 1D particle in  box
 	int n = 3;
@@ -32,13 +33,12 @@ int main()
 	outfile << "\n\n";
 
 	// 1D harmonic oscillator
-	auto fac = [](int n){ double res = 1;
-		for(int i = 1; i < n; i++)
-			res *= i;
+	auto fac = [](int n){
+		double res = GSL::fact(static_cast<unsigned int>(n)).val;
 		return res;};
 
-	l = 10;
-	n = 1;
+	l = 6;
+	n = 0;
 	h_2 = GSL::pow_int(l/(len - 1), 2);
 	left = {
 		1./std::sqrt(GSL::pow_int(2, n)*fac(n))*1./std::sqrt(std::sqrt(M_PI))*
@@ -63,5 +63,7 @@ int main()
 	for(auto& val : res){
 		outfile << val << "\n";
 	}
+	outfile << "\n\n";
+
 	return 0;
 }

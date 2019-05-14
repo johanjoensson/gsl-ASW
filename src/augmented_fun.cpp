@@ -162,7 +162,7 @@ void Augmented_Hankel::update(std::vector<double>& v, const double en
         GSL::pow_int(mesh.r(2), l.l + 1)};
     std::vector<double> r_init;
     if(core){
-        r_init = {0., 0.};
+        r_init = {0.01, 0.};
     }else{
         r_init = {sign*GSL::pow_int(kappa, l.l + 1)*mesh.r(lastbutone)*H(kappa*mesh.r(lastbutone)),
                   sign*GSL::pow_int(kappa, l.l + 1)*mesh.r(last)*H(kappa*mesh.r(last))};
