@@ -1,10 +1,6 @@
 #include "xc_func.h"
 #include <iostream>
 
-Xc_func::Xc_func()
- : fun(nullptr)
-{}
-
 
 void Xc_func::set_xc(XC_FUN xcf)
 {
@@ -12,7 +8,8 @@ void Xc_func::set_xc(XC_FUN xcf)
     int xc_spin = 0;
 
     if(fun.get() == nullptr && xcf != NONE){
-        fun = std::unique_ptr<xc_func_type>(new xc_func_type);
+        fun = std::unique_ptr<xc_func_type, std::function<void(xc_func_type*)>>
+            (new xc_func_type, xc_func_end);
     }
 
     switch(xcf) {
@@ -43,6 +40,7 @@ Xc_func::Xc_func(XC_FUN xcf)
     }
 }
 
+/*
 Xc_func::Xc_func(Xc_func &xcf)
  : fun(new xc_func_type)
 {
@@ -72,13 +70,17 @@ Xc_func& Xc_func::operator=(Xc_func &&xcf)
 
     return *this;
 }
-
+*/
+/*
 Xc_func::~Xc_func()
 {
     if(fun.get() != nullptr){
+        std::cout << "Deallocating xc functional\n";
         xc_func_end(fun.get());
     }
 }
+*/
+
 
 std::vector<double> Xc_func::exc(std::vector<double> rho)
 {

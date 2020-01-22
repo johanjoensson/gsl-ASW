@@ -2,12 +2,6 @@
 #include <cmath>
 #include "GSLpp/basic_math.h"
 
-/*
-Lattice::Lattice()
- : lat(), r_lat(), scale(), volume(), bz_volume()
-{}
-*/
-
 Lattice::Lattice(const GSL::Vector& a, const GSL::Vector& b,
     const GSL::Vector& c)
  : lat(3,3), r_lat(3,3), scale(a.norm<double>()), volume(), bz_volume()

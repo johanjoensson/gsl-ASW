@@ -23,9 +23,15 @@ public:
     Augmented_Hankel H;
     std::vector<std::unordered_set<Augmented_Bessel>> J;
 
-    Augmented_spherical_wave();
+    // Augmented_spherical_wave(): center(), off_centers(), kappa(), n(), l(), s(), H(), J(){}
+    // Augmented_spherical_wave(const Augmented_spherical_wave&) = default;
+    // Augmented_spherical_wave(Augmented_spherical_wave&&) = default;
     Augmented_spherical_wave(double kappa, int n, lm l, spin s,
         const Atom& center, const std::vector<Atom>& off_centers);
+    // ~Augmented_spherical_wave() = default;
+
+    // Augmented_spherical_wave& operator=(const Augmented_spherical_wave&) = default;
+    // Augmented_spherical_wave& operator=(Augmented_spherical_wave&&) = default;
 
     void set_up(Potential &v);
 

@@ -8,10 +8,6 @@
 #include <fstream>
 
 
-Augmented_spherical_wave::Augmented_spherical_wave()
- : center(), off_centers(), kappa(),  n(), l(), s(), H(), J()
-{}
-
 Augmented_spherical_wave::Augmented_spherical_wave(double kappa_n, int n_n,
      lm l_n, spin s_n, const Atom& center_n, const std::vector<Atom>& off_centers_n)
  : center(center_n), off_centers(off_centers_n), kappa(kappa_n),
@@ -20,11 +16,9 @@ Augmented_spherical_wave::Augmented_spherical_wave(double kappa_n, int n_n,
 {
     // Set up off-center spheres
     int l_low = 2;
-    Numerov_solver sol;
     Augmented_Bessel tmp;
     for(size_t i = 0; i < off_centers.size(); i++){
         Atom at = off_centers[i];
-//        if(at != center){
             if(at.Z >= 20){
                 l_low = 3;
             }else{
@@ -37,39 +31,27 @@ Augmented_spherical_wave::Augmented_spherical_wave(double kappa_n, int n_n,
                     J[i].insert(tmp);
                 }
             }
-//        }
     }
-}
-
-std::vector<double> v_eff(const Logarithmic_mesh &mesh,
-    const std::vector<double>& v, const lm& l)
-{
-    std::vector<double> res(v.size(), 0.);
-    for(size_t i = 0; i < v.size(); i++){
-        res[i] = v[i] + l.l*(l.l + 1)/mesh.r2(i);
-    }
-    return res;
 }
 
 void Augmented_spherical_wave::set_up(Potential &v)
 {
-    double en = -1.*static_cast<double>(center.get_Z()*center.get_Z())/
-                    static_cast<double>(n*n) + v.MT_0;
+    double en = -GSL::pow_int(static_cast<double>(center.get_Z())/n, 2);
 
     // On-center expression
     std::vector<Atom>::iterator it = find(v.sites.begin(), v.sites.end(),
     center);
     size_t i = static_cast<size_t>(std::distance(v.sites.begin(), it));
-    std::vector<double> v_tot = v_eff(center.mesh, v.val[i], l);
 
-    H.update(v_tot, en, core_state);
+    std::cout << "Solving Hankel function\n";
+    H.update(v.val[i], en, core_state);
 
 #ifdef DEBUG
 	std::ofstream out_file;
 	out_file.open("check_Hankel.dat", std::fstream::out|std::fstream::app);
 	out_file << "# r\tV(r)\trH(r)" << "\n";
 	for(size_t j = 0; j < H.val.size(); j++){
-		out_file << std::setprecision(8) << center.mesh.r(j) << " " << v_tot[j] << " " << H.val[j] << "\n";
+		out_file << std::setprecision(8) << center.mesh.r(j) << " " << v.val[i][j]  + l.l*(l.l+1.)/center.mesh.r2(j)<< " " << H.val[j]*std::sqrt(center.mesh.drx(j)) << "\n";
 	}
     out_file << "\n\n";
 	out_file.close();
@@ -78,21 +60,22 @@ void Augmented_spherical_wave::set_up(Potential &v)
         std::unordered_set<Augmented_Bessel> Ji_tmp;
         it = find(v.sites.begin(), v.sites.end(), at);
         i = static_cast<size_t>(std::distance(v.sites.begin(), it));
-        for(Augmented_Bessel Jil : J[i]){
-            v_tot = v_eff(Jil.mesh, v.val[i], Jil.l);
-            Jil.update(v_tot, en, core_state);
-            Ji_tmp.insert(Jil);
+        for(auto Jil : J[i]){
+            // v_tot = v_eff(Jil.mesh, v.val[i], Jil.l);
+		std::cout << "Solving Bessel function\n";
+            	Jil.update(v.val[i], en, core_state);
+           	Ji_tmp.insert(Jil);
 #ifdef DEBUG
-            out_file.open("check_Bessel.dat", std::fstream::out|std::fstream::app);
-            out_file << "# r\tV(r)\trJ(r)" << std::endl;
-            for(size_t j = 0; j < Jil.val.size(); j++){
-                out_file << std::setprecision(8) << at.mesh.r(j) << " " << v_tot[j] << " " << Jil.val[j] << "\n";
-            }
-            out_file << "\n\n";
-            out_file.close();
+            	out_file.open("check_Bessel.dat", std::fstream::out|std::fstream::app);
+            	out_file << "# r\tV(r)\trJ(r)" << std::endl;
+            	for(size_t j = 0; j < Jil.val.size(); j++){
+                	out_file << std::setprecision(8) << at.mesh.r(j) << " " << v.val[i][j] + l.l*(l.l+1.)/at.mesh.r2(j) << " " << Jil.val[j]*std::sqrt(at.mesh.drx(j)) << "\n";
+            	}
+            	out_file << "\n\n";
+            	out_file.close();
 #endif
         }
-        J[i].swap(Ji_tmp);
+       J[i].swap(Ji_tmp);
     }
 }
 
@@ -104,18 +87,16 @@ double Augmented_spherical_wave::operator()(const GSL::Vector &r) const
 
     // Then do off-center contributions
     GSL::Vector R(3);
-    Structure_constant B;
-    Atom at;
     int l_low = 2;
     for(size_t j = 0; j < off_centers.size(); j++){
-        at = off_centers[j];
+        Atom at{off_centers[j]};
         if(at.pos != center.pos){
             for(Augmented_Bessel Jj : J[j]){
                 R = Jj.center - center.pos;
                 if(at.Z > 20){
                     l_low = 3;
                 }
-                B = Structure_constant( l_low + 1, Jj.l, this->l);
+                Structure_constant B = Structure_constant( l_low + 1, Jj.l, this->l);
                 res += Jj(r)*cubic_harmonic(Jj.l, r - Jj.center).val*B(R);
             }
         }

@@ -17,9 +17,9 @@ Structure_constant::Structure_constant(lm l1_n, lm l2_n)
 	: Structure_constant(3, std::sqrt(0.015), l1_n, l2_n)
 {}
 
-Structure_constant::Structure_constant()
- : l_int(), l1(), l2(), kappa()
-{}
+// Structure_constant::Structure_constant()
+//  : l_int(), l1(), l2(), kappa()
+// {}
 
 double Structure_constant::operator()(const GSL::Vector& r) const
 {
@@ -89,16 +89,16 @@ std::ostream& operator << ( std::ostream& os, const Structure_constant& B)
 }
 
 Bloch_summed_structure_constant::Bloch_summed_structure_constant(
-	int l_int_n, double kappa_n, const Crystal& c_n, lm l1_n, lm l2_n)
+	int l_int_n, double kappa_n, const Crystal_t<3, Atom>& c_n, lm l1_n, lm l2_n)
 	: l_int(l_int_n), kappa(kappa_n), c(c_n), l1(l1_n), l2(l2_n)
 {}
 
 Bloch_summed_structure_constant::Bloch_summed_structure_constant(
-	int l_int_n, const Crystal& c_n, lm l1_n, lm l2_n)
+	int l_int_n, const Crystal_t<3, Atom>& c_n, lm l1_n, lm l2_n)
 	: Bloch_summed_structure_constant(l_int_n, std::sqrt(0.015), c_n, l1_n, l2_n)
 {}
 
-Bloch_summed_structure_constant::Bloch_summed_structure_constant(const Crystal& c_n,
+Bloch_summed_structure_constant::Bloch_summed_structure_constant(const Crystal_t<3, Atom>& c_n,
 	lm l1_n, lm l2_n)
 	: Bloch_summed_structure_constant(3, std::sqrt(0.015), c_n, l1_n, l2_n)
 {}

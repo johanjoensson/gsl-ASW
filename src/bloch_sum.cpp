@@ -5,10 +5,10 @@
 #include <cmath>
 #include <string>
 
-Bloch_sum::Bloch_sum(const lm l_n, const double kappa_n, const Crystal& c_n)
+Bloch_sum::Bloch_sum(const lm l_n, const double kappa_n, const Crystal_t<3, Atom>& c_n)
  : l(l_n), kappa(kappa_n), c(c_n),
    eta(GSL::exp(GSL::log(6.5) + 2./3*GSL::log(4*M_PI/3.) -
-   2./3*GSL::log(c.volume)).val)
+   2./3*GSL::log(c.volume())).val)
 {}
 
 
@@ -21,7 +21,7 @@ GSL::Complex Bloch_sum::calc_d1(const GSL::Vector& tau, const GSL::Vector& kp)
 
     double k = kp.norm<double>(), dot = kp.dot(tau);
     // Loop over all K-vectors
-    for(auto& Kn : c.Kn_vecs){
+    for(auto& Kn : c.Kn_vecs()){
         kn = kp + Kn;
         if(kn == GSL::Vector(3)){
             continue;
@@ -40,7 +40,7 @@ GSL::Complex Bloch_sum::calc_d1(const GSL::Vector& tau, const GSL::Vector& kp)
     }else if(l.l%4 == 3){
         c_fac = GSL::Complex(0., -1.0);
     }
-    d1 *= 4*M_PI*c_fac/this->c.volume;
+    d1 *= 4*M_PI*c_fac/this->c.volume();
     return d1;
 }
 
@@ -51,7 +51,7 @@ GSL::Complex Bloch_sum::calc_d1_dot(const GSL::Vector& tau, const GSL::Vector& k
     GSL::Result tmp;
     GSL::Complex c_fac(1.0, 0.0);
     double k = kp.norm<double>(), dot = kp.dot(tau);
-    for(auto Kn : c.Kn_vecs){
+    for(auto Kn : c.Kn_vecs()){
         kn = kp + Kn;
         if(kn == GSL::Vector(3)){
             continue;
@@ -71,7 +71,7 @@ GSL::Complex Bloch_sum::calc_d1_dot(const GSL::Vector& tau, const GSL::Vector& k
     }else if(l.l%4 == 3){
         c_fac = GSL::Complex(0., 1.0);
     }
-    d1_dot *= 4*M_PI*c_fac/this->c.volume;
+    d1_dot *= 4*M_PI*c_fac/this->c.volume();
     d1_dot += 1./this->eta * calc_d1(tau, kp);
     return d1_dot;
 }
@@ -87,7 +87,7 @@ GSL::Complex Bloch_sum::calc_d2(const GSL::Vector& tau, const GSL::Vector& kp)
     GSL::Result tmp;
     GSL::Vector tau_mu;
     // Loop over all lattice vectors
-    for(auto Rn : c.Rn_vecs){
+    for(auto Rn : c.Rn_vecs()){
         tau_mu = tau - Rn;
         if(tau_mu == GSL::Vector(3)){
             continue;
@@ -113,7 +113,7 @@ GSL::Complex Bloch_sum::calc_d2_dot(const GSL::Vector& tau, const GSL::Vector& k
     GSL::Result tmp;
     GSL::Vector tau_mu = tau;
     // Loop over all lattice vectors
-    for(auto Rn : c.Rn_vecs){
+    for(auto Rn : c.Rn_vecs()){
         // Do not add unit cell contribution at (0, 0, 0)
         tau_mu = tau - Rn;
         if(tau_mu == GSL::Vector(3)){

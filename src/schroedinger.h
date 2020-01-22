@@ -28,7 +28,7 @@ protected:
 	Iter_v find_inversion_point(Iter_res res_start, Iter_res res_end,  Iter_v
 		v_start)
 	{
-		int init_sign = signum(*v_start);
+		int init_sign = signum(energy_m - *v_start);
 		Iter_res current = res_start;
 		Iter_v current_v = v_start;
 		while(current != res_end && signum(energy_m - (*current_v)) == init_sign){
@@ -38,15 +38,13 @@ protected:
 		return current;
 	}
 
-    virtual void normalize()
+    virtual double norm()
     {
-        double norm = 0;
+        double res = 0;
         for(auto it = psi_m.begin(); it != psi_m.end(); it++){
-            norm += GSL::pow_int(*it, 2)*h_m;
+            res += GSL::pow_int(*it, 2)*h_m;
         }
-        for(auto it = psi_m.begin(); it != psi_m.end(); it++){
-            *it /= norm;
-        }
+        return res;
     }
 
 private:
@@ -66,7 +64,13 @@ public:
           mesh.dx(), tol)
     {};
 
+    Schroedinger_Equation() = default;
+    Schroedinger_Equation(const Schroedinger_Equation &) = default;
+    Schroedinger_Equation(Schroedinger_Equation &&) = default;
     virtual ~Schroedinger_Equation() = default;
+
+    Schroedinger_Equation& operator=(const Schroedinger_Equation&) = default;
+    Schroedinger_Equation& operator=(Schroedinger_Equation&&) = default;
 
     virtual void solve()
     {
@@ -74,21 +78,30 @@ public:
         Numerov_solver sol;
         auto inv = psi_m.end();
         auto end_point = psi_m.rbegin();
-        for( auto tmp = r_init_m.begin() ; tmp != r_init_m.end(); tmp++, end_point++ ){}
+        for( auto tmp = r_init_m.begin() ; tmp != r_init_m.end(); tmp++,
+            end_point++ ){}
         int de;
 
         while(std::abs(e_max_m - e_min_m) > tol_m){
+
             energy_m = 0.5*(e_min_m + e_max_m);
-            inv = find_inversion_point(end_point, psi_m.rend(), v_m.rbegin()).base();
-            for(auto it = v_m.begin(), g_c = g.begin(); it != v_m.end(); it++, g_c++){
+            if(inv != find_inversion_point(end_point, psi_m.rend(),
+                v_m.rbegin()).base()){
+                    throw std::runtime_error("Unexpected change of matching point!");
+                }
+
+            for(auto it = v_m.begin(), g_c = g.begin(); it != v_m.end(); it++,
+                g_c++){
                 *g_c = (energy_m - *it)*GSL::pow_int(h_m, 2);
             }
             inv = sol.solve(psi_m.begin(), psi_m.end(), g.begin(), g.end(),
                   s.begin(), s.end(), l_init_m.begin(), l_init_m.end(),
                   r_init_m.begin(), r_init_m.end(), inv);
+
             if(inv != psi_m.end()){
                 de = sol.derivative_diff(psi_m.begin(), psi_m.end(), inv,
-                     g.begin(), s.begin(), GSL::pow_int(h_m, 3));
+                g.begin(), s.begin(), GSL::pow_int(h_m, 3));
+
             }else{
                 de = 0;
             }
@@ -104,30 +117,71 @@ public:
 
     }
 
-    void solve(size_t nodes)
+    virtual void solve(size_t nodes)
+    {
+        solve(nodes, 0.5*(e_min_m + e_max_m));
+    }
+
+    virtual void solve(size_t nodes, double e_guess)
     {
         std::vector<double> g(v_m.size(), 0), s(v_m.size(), 0);
         Numerov_solver sol;
         auto inv = psi_m.end();
-        for( auto tmp = r_init_m.begin() ; tmp != r_init_m.end(); tmp++, inv-- ){}
+        auto end_point = psi_m.rbegin();
+        for( auto tmp = r_init_m.begin() ; tmp != r_init_m.end(); tmp++, end_point++ ){}
         size_t n = nodes + 1;
-        while(n != nodes){
-            energy_m = 0.5*(e_min_m + e_max_m);
+        energy_m = e_guess;
+        int de;
 
-            for(auto it = v_m.begin(), g_c = g.begin(); it != v_m.end(); it++, g_c++){
+        while(n != nodes || std::abs(e_max_m - e_min_m) > tol_m){
+
+            for(auto it = v_m.begin(), g_c = g.begin(); it != v_m.end(); it++,
+                g_c++){
+
                 *g_c = (energy_m - *it)*GSL::pow_int(h_m, 2);
             }
-            inv = sol.solve(psi_m.begin(), psi_m.end(), g.begin(), g.end(),
+            inv = find_inversion_point(end_point, psi_m.rend(), v_m.rbegin()).base();
+            if(inv != sol.solve(psi_m.begin(), psi_m.end(), g.begin(), g.end(),
                   s.begin(), s.end(), l_init_m.begin(), l_init_m.end(),
-                  r_init_m.begin(), r_init_m.end(), inv);
+                  r_init_m.begin(), r_init_m.end(), inv)){
+                      throw std::runtime_error("Unexpected change of matching point!");
+                  }
             n = static_cast<size_t>(sol.count_nodes(psi_m.begin(),
                 psi_m.end()));
+
+
             if(n > nodes){
                 e_max_m = energy_m;
             }else if(n < nodes){
                 e_min_m = energy_m;
             }
-            solve();
+
+            if(inv != psi_m.end()){
+                de = sol.derivative_diff(psi_m.begin(), psi_m.end(), inv,
+                g.begin(), s.begin(), GSL::pow_int(h_m, 3));
+
+            }else{
+                de = 0;
+            }
+
+            if(n == nodes){
+                if(de > 0 ) {
+                    e_max_m = energy_m;
+                }else if(de < 0){
+                    e_min_m = energy_m;
+                }else{
+                    e_max_m = e_min_m;
+                }
+            }
+            energy_m = 0.5*(e_min_m + e_max_m);
+        }
+    }
+
+    virtual void normalize()
+    {
+        double n = norm();
+        for(auto it = psi_m.begin(); it != psi_m.end(); it++){
+            *it /= n;
         }
     }
 
@@ -152,27 +206,16 @@ class Radial_Schroedinger_Equation : public Schroedinger_Equation{
 protected:
     Logarithmic_mesh mesh_p;
 
-    double norm()
+    double norm() override
     {
-        double res = 0;
-        auto drx_i = mesh_p.drx_begin();
-        auto it = psi_m.begin();
-        for(; it != psi_m.end(); it++, drx_i++){
-            res += GSL::pow_int(*it*(*drx_i), 2);
+        std::vector<double> integrand(mesh_p.size());
+        for(size_t i = 0; i < mesh_p.size(); i++){
+            integrand[i] = GSL::pow_int(psi_m[i], 2)*mesh_p.drx(i);
         }
+        double res {mesh_p.integrate_simpson(integrand)};
         return res;
     }
-
-    void normalize()
-    {
-        double n = norm();
-        for(auto it = psi_m.begin(); it != psi_m.end(); it++){
-            *it /= std::sqrt(n);
-        }
-
-    }
 public:
-    virtual ~Radial_Schroedinger_Equation() = default;
     Radial_Schroedinger_Equation(double e_min, double e_max,
       std::vector<double>& v, size_t l, std::vector<double>& left_init,
       std::vector<double>& right_init, Logarithmic_mesh& mesh,
@@ -185,100 +228,78 @@ public:
         }
         auto r2 = mesh.r2_begin();
         auto v_c = v_m.begin();
-        for( ; v_c != v_m.end(); v_c++, r2++){
+        auto r = mesh.r_begin();
+        for( ; v_c != v_m.end(); v_c++, r2++, r++){
             *v_c += static_cast<double>(l*(l + 1))/(*r2);
         }
     }
 
     using Schroedinger_Equation::solve;
 
-    void solve(size_t nodes)
+    void solve(size_t nodes) override
     {
-        double e_max_old, e_min_old;
+        solve(nodes, 0.5*(e_min_m + e_max_m));
+    }
+
+    void solve(size_t nodes, double e_guess) override
+    {
         std::vector<double> g(v_m.size(), 0), s(v_m.size(), 0);
         Numerov_solver sol;
-        auto inv = psi_m.rend();
-        auto end_point = psi_m.rend();
-        for( auto tmp = r_init_m.begin() ; tmp != r_init_m.end(); tmp++, end_point++ ){}
         size_t n = nodes + 1;
-        while(n != nodes){
-            energy_m = 0.5*(e_max_m + e_min_m);
-            inv = find_inversion_point(psi_m.rbegin(), end_point, v_m.rbegin());
+        double de = 10*tol_m;
+        energy_m = e_guess;
+        auto inv = psi_m.rend();
+        auto end_point = psi_m.rbegin();
+        for( auto tmp = r_init_m.begin() ; tmp != r_init_m.end(); tmp++, end_point++ ){}
+        while(n != nodes || (std::abs(de) > tol_m && std::abs(e_max_m - e_min_m) > tol_m)){
+            inv = find_inversion_point(end_point, psi_m.rend(), v_m.rbegin());
 
             for(auto v_i = v_m.begin(), g_i = g.begin(), drx_i = mesh_p.drx_begin(); v_i != v_m.end(); v_i++, g_i++, drx_i++){
                 *g_i = (energy_m - *v_i)*GSL::pow_int(*drx_i, 2) -
                     GSL::pow_int(mesh_p.A(), 2)/4;
             }
 
-            inv = sol.solve(psi_m.rbegin(), psi_m.rend(), g.rbegin(), g.rend(),
+            sol.solve(psi_m.rbegin(), psi_m.rend(), g.rbegin(), g.rend(),
                   s.rbegin(), s.rend(), r_init_m.rbegin(), r_init_m.rend(),
                   l_init_m.begin(), l_init_m.end(), inv);
 
-            n = static_cast<size_t>(sol.count_nodes(++psi_m.begin(),
-                --psi_m.end()));
+            n = static_cast<size_t>(sol.count_nodes(++psi_m.rbegin(),--psi_m.rend()));
 
             if(n > nodes){
                 e_max_m = energy_m;
             }else if(n < nodes){
                 e_min_m = energy_m;
             }
-            e_max_old = e_max_m;
-            e_min_old = e_min_m;
-            std::cout << e_min_m << " < " << energy_m << " < " << e_max_m << "\n";
-            solve();
-            n = static_cast<size_t>(sol.count_nodes(++psi_m.begin(),
-                --psi_m.end()));
-            if(n > nodes){
-                e_min_m = e_min_old;
-                e_max_m = energy_m;
-            }else if(n < nodes){
-                e_max_m = e_max_old;
-                e_min_m = energy_m;
+
+            if(n == nodes){
+                if(inv != psi_m.rend()){
+                    de = variational_de(g.rbegin(), inv);
+                }else{
+                    de = 0;
+                }
+
+                if(de > 0){
+                    e_min_m = energy_m;
+                }else if(de < 0){
+                    e_max_m = energy_m;
+                }
+                energy_m += de;
+                energy_m = std::max(e_min_m, energy_m);
+                energy_m = std::min(e_max_m, energy_m);
+
+            }else{
+                energy_m = 0.5*(e_min_m + e_max_m);
             }
-            std::cout << "number of nodes = " << nodes << "\n";
         }
     }
 
-    void solve()
+    void normalize() override
     {
-        std::vector<double> g(v_m.size(), 0), s(v_m.size(), 0);
-        Numerov_solver sol;
-        auto inv = psi_m.rend();
-        auto end_point = psi_m.rend();
-        for( auto tmp = r_init_m.begin() ; tmp != r_init_m.end(); tmp++, end_point++ ){}
-        double de = 10*tol_m;
-
-        while(std::abs(de) > tol_m && std::abs(e_max_m - e_min_m) > tol_m){
-            inv = find_inversion_point(psi_m.rbegin(), end_point,
-                v_m.rbegin());
-
-            auto g_i = g.begin();
-            auto drx_i = mesh_p.drx_begin();
-            for(auto v_i = v_m.begin(); v_i != v_m.end(); v_i++, g_i++, drx_i++){
-                *g_i = (energy_m - *v_i)*GSL::pow_int(*drx_i, 2)
-                    - GSL::pow_int(mesh_p.A(), 2)/4;
-            }
-
-            inv = sol.solve(psi_m.rbegin(), psi_m.rend(), g.rbegin(), g.rend(),
-                  s.rbegin(), s.rend(), r_init_m.rbegin(), r_init_m.rend(),
-                  l_init_m.begin(), l_init_m.end(), inv);
-
-            if(inv != psi_m.rend()){
-                de = variational_de(g.rbegin(), inv);
-                std::cout << "Energy = " << energy_m << ", de = " << de << "\n";
-            }else{
-                de = 0;
-            }
-            if(de > 0){
-                e_min_m = energy_m;
-            }else if(de < 0){
-                e_max_m = energy_m;
-            }
-            energy_m += de;
-            energy_m = std::min(energy_m, e_max_m);
-            energy_m = std::max(energy_m, e_min_m);
+        double n = norm();
+        auto drx_i = mesh_p.drx_begin();
+        for(auto it = psi_m.begin(); it != psi_m.end(); it++, drx_i++){
+            *it /= std::sqrt(n);
         }
-        normalize();
     }
 
     template<class Iter, class T = double>
@@ -287,39 +308,36 @@ public:
         Iter g_i = g_start;
         auto F_i = psi_m.rbegin();
         auto drx_i = mesh_p.drx_rbegin();
-        for( ; F_i != inv; F_i++, g_i++, drx_i++){
-        }
-        T n = std::sqrt(norm());
-        T Fi = *F_i/n;
-        T Fm1 = *(F_i - 1)/n;
-        T Fp1 = *(F_i + 1)/n;
+        for( ; F_i != inv; F_i++, g_i++, drx_i++){}
+
+        T n = norm();
+        T Fi = *F_i;
+        T Fm1 = *(F_i - 1);
+        T Fp1 = *(F_i + 1);
+        T drx = *drx_i;
 
 
-        auto f = [](Iter g)->T{ return 1 + *g/12;};
+        auto f = [](T g)->T{ return 1 + g/12;};
 
-        // T Fcusp = (Fm1*f(g_i - 1) + Fp1*f(g_i + 1))/(12 - 10*f(g_i));
-        T Fcusp = (Fm1*f(g_i - 1) + Fp1*f(g_i + 1) + 10*Fi*f(g_i))/12;
-        T df = f(g_i)*(Fi/Fcusp - 1.);
-        return 12*Fcusp*Fcusp*df;
+
+        T Fcusp = (Fm1*f(*(g_i - 1)) + Fp1*f(*(g_i + 1)))/(12 - 10*f(*g_i));
+        // T Fcusp = (Fm1*f(*(g_i - 1)) + Fp1*f(*(g_i + 1)) + 10*Fi*f(*g_i))/12;
+        T df = f(*g_i)*(Fi/Fcusp - 1.);
+        return 12*Fcusp*Fcusp*df*drx/n;
     }
 
 };
 
 class Radial_Schroedinger_Equation_Central_Potential : public Radial_Schroedinger_Equation{
 public:
-    ~Radial_Schroedinger_Equation_Central_Potential() = default;
     Radial_Schroedinger_Equation_Central_Potential(std::vector<double>& v, size_t l, std::vector<double>& left_init,
       std::vector<double>& right_init, Logarithmic_mesh& mesh,
       double tol = 1e-10)
     : Radial_Schroedinger_Equation(0, 0, v, l, left_init,
         right_init, mesh, tol)
     {
-        if(l > 0){
-            e_min_m = *std::min_element(++v_m.begin(), v_m.end());
-        }else{
-            e_min_m = v_m.back() - 1;
-        }
-        e_max_m = *--(--v_m.end());
+        e_min_m = *std::min_element(v_m.begin()+1, v_m.end());
+        e_max_m = *(v_m.end());
         std::cout << "Energy inside range [" << e_min_m << ", " << e_max_m << "]\n";
     }
 };

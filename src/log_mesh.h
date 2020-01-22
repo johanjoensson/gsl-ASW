@@ -11,7 +11,14 @@ protected:
 		std::vector<double> x2_p;
 		double dx_p;
 	public:
-		virtual ~Mesh(){}
+		Mesh() : x_p(), x2_p(), dx_p() {}
+		Mesh(const Mesh&) = default;
+		Mesh(Mesh&&) = default;
+
+		virtual ~Mesh() = default;
+
+		Mesh& operator=(const Mesh&) = default;
+		Mesh& operator=(Mesh&&) = default;
 		Mesh(double x0, double x1, double dx)
 		 : x_p(), x2_p(), dx_p(dx)
 		{
@@ -23,6 +30,7 @@ protected:
 
 		Mesh(size_t n) : x_p(n, 0), x2_p(n, 0), dx_p(0){};
 		Mesh(double x0, double x1, size_t n) : Mesh(x0, x1, (x1 - x0)/static_cast<double>(n)) {}
+
 
 		double x(const size_t i) const {return x_p[i];}
 		std::vector<double>::iterator x_begin() {return x_p.begin();}
@@ -36,8 +44,8 @@ protected:
 
 		size_t size() const {return x_p.size();}
 
-		double integrate(std::vector<double>& f);
-		double integrate_simpson(std::vector<double>& f);
+		virtual double integrate(std::vector<double>& f) = 0;
+		virtual double integrate_simpson(std::vector<double>& f) = 0;
 };
 
 class Logarithmic_mesh : public Mesh {
@@ -45,11 +53,19 @@ class Logarithmic_mesh : public Mesh {
 		double B_p;
 		std::vector<double> drx_p;
 	public:
-		~Logarithmic_mesh() = default;
+		Logarithmic_mesh() : Mesh(), A_p(), B_p(), drx_p() {}
+		Logarithmic_mesh(const Logarithmic_mesh&) = default;
+		Logarithmic_mesh(Logarithmic_mesh&&) = default;
+
+		~Logarithmic_mesh() override = default;
+
 		Logarithmic_mesh(double radius, size_t num_points, double A = 0.01);
 
-		double integrate(std::vector<double>& f);
-		double integrate_simpson(std::vector<double>& f);
+		Logarithmic_mesh& operator=(const Logarithmic_mesh&) = default;
+		Logarithmic_mesh& operator=(Logarithmic_mesh&&) = default;
+
+		double integrate(std::vector<double>& f) override;
+		double integrate_simpson(std::vector<double>& f) override;
 
 		double A() const {return A_p;};
 		double B() const {return B_p;};
@@ -59,7 +75,7 @@ class Logarithmic_mesh : public Mesh {
 		double r_back() const {return x_back();};
 		double r2(const size_t i) const {return x2(i);};
 		std::vector<double>::iterator r2_begin() {return x2_begin();};
-		std::vector<double>::reverse_iterator r2_rbegin() {return r2_rbegin();};
+		std::vector<double>::reverse_iterator r2_rbegin() {return x2_rbegin();};
 		double r2_back() const {return x2_back();};
 		double drx(const size_t i) const {return drx_p[i];};
 		std::vector<double>::iterator drx_begin() {return drx_p.begin();};

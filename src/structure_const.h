@@ -27,7 +27,7 @@ class Structure_constant{
 		Structure_constant(int l_int_n, double kappa_n, lm l1_n, lm l2_n);
 		Structure_constant(int l_int_n, lm l1_n, lm l2_n);
 		Structure_constant(lm l1_n, lm l2_n);
-		Structure_constant();
+		// Structure_constant() = default;
 
 		double operator()(const GSL::Vector& r) const;
 		double dot(const GSL::Vector& r) const;
@@ -38,16 +38,15 @@ class Structure_constant{
 class Bloch_summed_structure_constant{
 		int l_int;
 		double kappa;
-		Crystal c;
+		Crystal_t<3, Atom> c;
 	    lm l1, l2;
 	public:
-		Bloch_summed_structure_constant():l_int(), kappa(), c(), l1(), l2()
-			{};
+		// Bloch_summed_structure_constant() = default;
 		Bloch_summed_structure_constant(int l_int, double kappa,
-			const Crystal& c, lm l1, lm l2);
-		Bloch_summed_structure_constant(int l_int, const Crystal& c, lm l1,
+			const Crystal_t<3, Atom>& c, lm l1, lm l2);
+		Bloch_summed_structure_constant(int l_int, const Crystal_t<3, Atom>& c, lm l1,
 			lm l2);
-		Bloch_summed_structure_constant(const Crystal& c, lm l1, lm l2);
+		Bloch_summed_structure_constant(const Crystal_t<3, Atom>& c, lm l1, lm l2);
 
 		GSL::Complex operator()(const GSL::Vector& tau, const GSL::Vector& kp)const;
 		GSL::Complex dot(const GSL::Vector& tau, const GSL::Vector& kp)const;

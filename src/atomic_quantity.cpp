@@ -2,11 +2,11 @@
 #include "utils.h"
 #include "GSLpp/basic_math.h"
 
-Atomic_quantity::Atomic_quantity(const std::vector<Atom>& atoms)
- : sites(atoms), val(atoms.size(), std::vector<double>(0,0))
+Atomic_quantity::Atomic_quantity(const Crystal_t<3, Atom>& cr)
+ : sites(cr.atoms()), val(cr.atoms().size(), std::vector<double>(0,0))
 {
-    for(size_t i = 0; i < sites.size(); i++){
-        val[i] = std::vector<double>(sites[i].mesh.size(), 0.);
+    for(auto site : cr.sites()){
+        val[site.index()] = std::vector<double>(cr.atom(site).mesh.size(), 0.);
     }
 }
 
@@ -14,10 +14,9 @@ double Atomic_quantity::operator()(const GSL::Vector& r)
 {
     double res = 0.;
     GSL::Vector ri(3);
-    Atom at;
     size_t t = 1;
     for(size_t i = 0; i < sites.size(); i++){
-        at = sites[i];
+        Atom at{sites[i]};
         ri = r - at.get_pos();
         if(ri.norm<double>() <= at.get_AS()){
             t = 1;
@@ -35,9 +34,9 @@ double Atomic_quantity::operator()(const GSL::Vector& r)
     return res;
 }
 
-Potential::Potential(std::vector<Atom>& atoms,
+Potential::Potential(const Crystal_t<3, Atom>& crystal,
     std::function<double(const size_t, const double)> atomic_potential)
- : Atomic_quantity(atoms), electrostatic(atoms.size()), exchange_correlation(atoms.size()),
+ : Atomic_quantity(crystal), electrostatic(crystal.atoms().size()), exchange_correlation(crystal.atoms().size()),
   at_pot(atomic_potential), xc_fun(), MT_0(0)
 {
     for(size_t i = 0; i < sites.size(); i++){
@@ -111,9 +110,10 @@ void Potential::initial_pot(size_t nel, double vol)
             alpha[rj] += 4./6 * drx1 * (Xi0(j, sites, r1) + Xi0(j, sites, -r1));
             alpha[rj] += 1./6 * drx * (Xi0(j, sites, r) + Xi0(j, sites, -r));
 
-           electrostatic[j][rj] += alpha[rj]/r;
+            electrostatic[j][rj] += alpha[rj]/r;
         }
     }
+
     for(size_t i = 0; i < sites.size(); i++){
         for(size_t j = 0; j < sites[i].mesh.size(); j++){
             val[i][j] = electrostatic[i][j] + exchange_correlation[i][j];
@@ -124,6 +124,7 @@ void Potential::initial_pot(size_t nel, double vol)
     // Calculate MT_0 as average potential over all atomic spheres
     double MT_0_s = 0, areas = 0;
     for(size_t i = 0; i < sites.size(); i++){
+        std::cout << "R-AS[" << i << "] = " << sites[i].get_AS() <<"\n";
         MT_0_s += val[i].back()*GSL::pow_int(sites[i].get_AS(), 2);
         areas += GSL::pow_int(sites[i].get_AS(), 2);
     }
@@ -139,6 +140,6 @@ void Potential::initial_pot(size_t nel, double vol)
     }
 }
 
-Density::Density(std::vector<Atom>& atoms)
- : Atomic_quantity(atoms), valence(atoms.size()), core(atoms.size())
+Density::Density(const Crystal_t<3, Atom>& cr)
+ : Atomic_quantity(cr), valence(cr.atoms().size()), core(cr.atoms().size())
 {}

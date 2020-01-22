@@ -43,11 +43,20 @@ class Atom {
 	//! Get atomic sphere radius
 	double get_AS() const;
 
-	Atom();
+
+/*
+	Atom() = default;
+	Atom(const Atom&) = default;
+	Atom(Atom&&) = default;
+	~Atom() = default;
+*/
 	Atom(const Logarithmic_mesh &mesh, const GSL::Vector &r);
 	Atom(const double mt, const double as, const size_t z,
 		const Logarithmic_mesh &mesh, const GSL::Vector &r);
 
+
+	// Atom& operator=(const Atom&) = default;
+	// Atom& operator=(Atom&&) = default;
 	friend bool operator==(const Atom &a, const Atom &b);
 	friend bool operator!=(const Atom &a, const Atom &b);
 

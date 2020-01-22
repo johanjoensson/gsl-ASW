@@ -45,9 +45,11 @@ double Atom::get_AS() const
 	return this->AS;
 }
 
+/*
 Atom::Atom()
  : Z(), MT(), AS(), pos(3), mesh()
 {}
+*/
 
 Atom::Atom(const double mt, const double as, const size_t z,
 	const Logarithmic_mesh &mesh_n, const GSL::Vector &r)

@@ -3,6 +3,7 @@
 #include <fstream>
 #include <cmath>
 #include <algorithm>
+#include <thread>
 #include "simulation.h"
 #include "spherical_fun.h"
 #include "utils.h"
@@ -24,6 +25,11 @@
 #include "envelope_fun.h"
 #include "xc_func.h"
 #include "k-mesh.h"
+
+void k_iteration(const GSL::Vector& kp, const Simulation& sim)
+{
+	sim.calc_eigen(kp);
+}
 
 int main()
 {
@@ -49,14 +55,14 @@ numerov_debug.close();
 	std::cout << a << "\n";
 	std::cout << b << "\n";
 	std::cout << c << "\n";
-	Crystal cr(6*a, 6*b, 6*c);
+	Crystal_t<3, Atom> cr(Lattice_t<3>({40*a, 40*b, 40*c}));
 
-	std::cout << cr.lat.scale*cr.lat.lat << "\n";
+	std::cout << "Crystal volume = " << cr.volume() << " (a.u.)^3\n";
 
 	std::cout << "Calculating Rmax" << "\n";
-	double Rmax = cr.calc_Rmax(5e-14, kappa, lm {5, 0});
+	double Rmax = calc_Rmax(cr.volume(), kappa, lm {5, 0}, 5e-14);
 	std::cout << "Calculating Kmax" << "\n";
-	double Kmax = cr.calc_Kmax(5e-14, kappa, lm {5, 0});
+	double Kmax = calc_Kmax(cr.volume(), kappa, lm {5, 0}, 5e-14);
 	std::cout << "Rmax = " << Rmax << ", Kmax = " << Kmax << "\n";
 
 
@@ -67,51 +73,70 @@ numerov_debug.close();
 
 	std::cout << "Setting up atoms" << "\n";
 	GSL::Vector tau(3);
-	Atom C1;
-	C1.set_pos(tau*cr.lat.scale*cr.lat.lat);
+	Atom C1{Logarithmic_mesh(), tau*cr.lat().lat()};
 
 	tau[0] = 0.25;
 	tau[1] = 0.25;
 	tau[2] = 0.25;
-	Atom C2;
-	C2.set_pos(tau*cr.lat.scale*cr.lat.lat);
+	Atom C2{Logarithmic_mesh(), tau*cr.lat().lat()};
 
 	tau[0] = 0.;
 	tau[1] = 0.5;
 	tau[2] = 0.5;
-	Atom C3;
-	C3.set_pos(tau*cr.lat.scale*cr.lat.lat);
+	Atom C3{Logarithmic_mesh(), tau*cr.lat().lat()};
 
 	tau[0] = 0.5;
 	tau[1] = 0.;
 	tau[2] = 0.5;
-	Atom C4;
-	C4.set_pos(tau*cr.lat.scale*cr.lat.lat);
+	Atom C4{Logarithmic_mesh(), tau*cr.lat().lat()};
 
-	C1.set_Z(6);
+	C1.set_Z(1);
 	C2.set_Z(6);
 	C3.set_Z(6);
 	C4.set_Z(6);
 
-	cr.add_atoms(std::vector<Atom> {C1, C2});
+	cr.set_size({1, 1, 1});
+	cr.add_sites({{0, 0, 0}});
+	cr.add_basis({C1});
+
+	std::cout << "Crystal contains " << cr.sites().size() << " sites\n";
+	std::cout << "Crystal contains " << cr.atoms().size() << " inequivalent atoms\n";
 
 	Simulation sim(cr, LDA, kappa);
+
+	std::cout << "Setting up X matrices\n" << std::flush;
 	sim.set_up_X_matrices();
-	K_mesh kmesh(cr.lat.r_lat);
-	kmesh.generate_mesh(5, 5, 5);
+	K_mesh kmesh(cr.lat().recip_lat());
+	kmesh.generate_mesh(2, 2, 2);
 
-	Bessel_function j(lm {1, 0});
-	std::cout << GSL::pow_int(kappa, -1)*3.3217036494*j(kappa*3.3217036494) << "\n";
 
-	for(GSL::Vector kp : kmesh.k_points){
-	// for(GSL::Vector kp : { GSL::Vector {0., 0., 0.}, GSL::Vector { -1.777153, -3.554306, -1.777153 } }){
+	size_t n_threads = 1;
+	std::vector<std::thread> thread_pool(n_threads);
 
-		std::cout << "k-point " << kp <<
-		"\n" << std::string(80, '*') << "\n";
-	 	sim.set_up_H(kp);
-		sim.set_up_S(kp);
-		sim.calc_eigen();
+	for(const auto& kp : kmesh.k_points){
+		size_t t_id = 0;
+		while(true){
+			if(!thread_pool[t_id].joinable()){
+				thread_pool[t_id] = std::thread(
+					[&sim] (const GSL::Vector& k)
+					{
+						sim.calc_eigen(k);
+					}, kp);
+					break;
+			}else{
+				thread_pool[t_id].join();
+			}
+			t_id = (t_id + 1) % n_threads;
+		}
 	}
+
+	for(auto&& thread : thread_pool){
+		if(thread.joinable()){
+			thread.join();
+		}
+	}
+
+	std::cout << "All threads joined succesfully!\n" << std::endl;
 
 	return 0;
 }

@@ -62,12 +62,17 @@ class Numerov_solver{
 			current_s++;
 		}
 
+		auto f = [](Iter_g g){return 1 + *g/12.;};
 		// Solve equation
 		while(current != res_end){
-			*current = 	2*(*previous)*(1 - 5./12*(*previous_g)) -
-						(*pprevious)*(1 + 1./12*(*pprevious_g)) +
+			*current = 	(*previous)*(12 - 10*f(previous_g)) -
+						(*pprevious)*f(pprevious_g) +
 						1./12*((*current_s) + 10*(*previous_s) +(*pprevious_s));
-			*current /= 1 + 1./12*(*current_g);
+			// *current = 	2*(*previous)*(1 - 5./12*(*previous_g)) -
+			// 			(*pprevious)*(1 + 1./12*(*pprevious_g)) +
+			// 			1./12*((*current_s) + 10*(*previous_s) +(*pprevious_s));
+			*current /= f(current_g);
+			// *current /= 1 + 1./12*(*current_g);
 
 			pprevious = previous;
 			pprevious_g = previous_g;
@@ -128,15 +133,15 @@ class Numerov_solver{
 		if(tmp != res_end){
 			// tmp now points to the element after the matching point
 			// Extract value at matching point
-			T scale = *(--tmp);
+			T scale = 1/(*--tmp);
 			// Solve . <- |
 			auto rinv = solve_direction(std::reverse_iterator<Iter_res>(res_end),
-				std::reverse_iterator<Iter_res>(tmp), right_start, right_end,
+				std::reverse_iterator<Iter_res>(inv), right_start, right_end,
 				std::reverse_iterator<Iter_g>(g_end),
 				std::reverse_iterator<Iter_s>(s_end));
 			// Match values at matching point
-			scale /= *(--rinv);
-			for(auto iter = inv; iter != res_end; iter++){
+			scale *= *(--rinv);
+			for(auto iter = res_start; iter != inv; iter++){
 				*iter *= scale;
 			}
 		}
@@ -169,7 +174,7 @@ class Numerov_solver{
 	* \t__g_start__ - iterator to the start of the g container\n
 	* \t__s_start__ - iterator to the start of the s container\n
 	Returns:\n
-	\t Approximation ofsign(y'_R(x_inv) - y'_L(x_inv)), sign of the difference in derivatives.\n
+	\t Approximation of sign(y'_R(x_inv) - y'_L(x_inv)), sign of the difference in derivatives.\n
 	NOTE : The elements of g must be multiplied with the step size squared (h^2).
 	***************************************************************************/
 	template<class Iter_res, class Iter_g, class Iter_s, class T = double>

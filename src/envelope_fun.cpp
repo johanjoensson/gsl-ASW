@@ -1,10 +1,6 @@
 #include "envelope_fun.h"
 #include "spherical_fun.h"
 
-Envelope_function::Envelope_function()
- : center(), l(), kappa()
-{}
-
 Envelope_function::Envelope_function(const Atom& center_n, lm l_n, double kappa_n)
  : center(center_n), l(l_n), kappa(kappa_n)
 {}
@@ -57,11 +53,10 @@ double off_atomic_integral(const Envelope_Hankel& H1, const Envelope_Hankel& H2)
 
     double res = 0.;
     double rs = H1.center.mesh.r_back();
-    Envelope_Hankel H1m1, H2m1, H1p1, H2p1;
-    H1p1 = Envelope_Hankel(H1.center, lm {H1.l.l + 1, H1.l.m}, H1.kappa);
-    H2p1 = Envelope_Hankel(H2.center, lm {H2.l.l + 1, H2.l.m}, H2.kappa);
-    H1m1 = Envelope_Hankel(H1.center, lm {H1.l.l - 1, H1.l.m}, H1.kappa);
-    H2m1 = Envelope_Hankel(H2.center, lm {H2.l.l - 1, H2.l.m}, H2.kappa);
+    Envelope_Hankel H1p1 {H1.center, lm {H1.l.l + 1, H1.l.m}, H1.kappa};
+    Envelope_Hankel H2p1 {H2.center, lm {H2.l.l + 1, H2.l.m}, H2.kappa};
+    Envelope_Hankel H1m1 {H1.center, lm {H1.l.l - 1, H1.l.m}, H1.kappa};
+    Envelope_Hankel H2m1 {H2.center, lm {H2.l.l - 1, H2.l.m}, H2.kappa};
 
 
     if(H1.kappa != H2.kappa){
@@ -81,12 +76,10 @@ double atomic_integral(const Envelope_Hankel& H1, const Envelope_Bessel& J2)
 {
     double res = 0.;
     double rs = H1.center.mesh.r_back();
-    Envelope_Hankel H1m1, H1p1;
-    Envelope_Bessel J2m1, J2p1;
-    H1p1 = Envelope_Hankel(H1.center, lm {H1.l.l + 1, H1.l.m}, H1.kappa);
-    J2p1 = Envelope_Bessel(J2.center, lm {J2.l.l + 1, J2.l.m}, J2.kappa);
-    H1m1 = Envelope_Hankel(H1.center, lm {H1.l.l - 1, H1.l.m}, H1.kappa);
-    J2m1 = Envelope_Bessel(J2.center, lm {J2.l.l - 1, J2.l.m}, J2.kappa);
+    Envelope_Hankel H1p1 {H1.center, lm {H1.l.l + 1, H1.l.m}, H1.kappa};
+    Envelope_Bessel J2p1 {J2.center, lm {J2.l.l + 1, J2.l.m}, J2.kappa};
+    Envelope_Hankel H1m1 {H1.center, lm {H1.l.l - 1, H1.l.m}, H1.kappa};
+    Envelope_Bessel J2m1 {J2.center, lm {J2.l.l - 1, J2.l.m}, J2.kappa};
 
     if(H1.center != J2.center){
         return 0.;
@@ -116,11 +109,10 @@ double atomic_integral(const Envelope_Bessel& J1, const Envelope_Bessel& J2)
 {
     double res = 0;
     double rs = J1.center.mesh.r_back();
-    Envelope_Bessel J1m1, J2m1, J1p1, J2p1;
-    J1p1 = Envelope_Bessel(J1.center, lm {J1.l.l + 1, J1.l.m}, J1.kappa);
-    J1m1 = Envelope_Bessel(J1.center, lm {J1.l.l - 1, J1.l.m}, J1.kappa);
-    J2p1 = Envelope_Bessel(J2.center, lm {J2.l.l + 1, J2.l.m}, J2.kappa);
-    J2m1 = Envelope_Bessel(J2.center, lm {J2.l.l - 1, J2.l.m}, J2.kappa);
+    Envelope_Bessel J1p1 {J1.center, lm {J1.l.l + 1, J1.l.m}, J1.kappa};
+    Envelope_Bessel J1m1 {J1.center, lm {J1.l.l - 1, J1.l.m}, J1.kappa};
+    Envelope_Bessel J2p1 {J2.center, lm {J2.l.l + 1, J2.l.m}, J2.kappa};
+    Envelope_Bessel J2m1 {J2.center, lm {J2.l.l - 1, J2.l.m}, J2.kappa};
 
     if(J1.center != J2.center){
         return 0.;

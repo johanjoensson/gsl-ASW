@@ -29,14 +29,14 @@ GSLLIBROOT=../GSL-lib
 #  -Werror 
 WFLAGS = -Wall -Wextra -pedantic -Wshadow -Wnon-virtual-dtor -Wold-style-cast -Wcast-align -Wunused -Woverloaded-virtual -Wpedantic -Wconversion -Wsign-conversion -Wnull-dereference -Wdouble-promotion -Wformat=2 -Weffc++ -Wmisleading-indentation -Wduplicated-cond -Wduplicated-branches -Wlogical-op  -Wuseless-cast
 # Flags for the above defined compilers
-CXXFLAGS = -std=c++11 $(WFLAGS) -I $(SRC_DIR) -I $(GSLLIBROOT)/include -O0  -DDEBUG -g
+CXXFLAGS = -std=c++14 $(WFLAGS) -I $(SRC_DIR) -I $(GSLLIBROOT)/include -O0  -DDEBUG -g
 
 CXXCHECKS =clang-analyzer-*,-clang-analyzer-cplusplus*,cppcoreguidelines-*,bugprone-* 
-CXXCHECKFLAGS = -checks=$(CXXCHECKS) -header-filter=.* -- -std=c++11
+CXXCHECKFLAGS = -checks=$(CXXCHECKS) -header-filter=.* -- -std=c++11 -I$(GSLLIBROOT)/include
 
 # Libraries to link against
 GSLLIBDIR=$(GSLLIBROOT)/lib/GSLpp
-LDFLAGS = -pg -L$(GSLLIBDIR) -L. -Wl,-rpath=$(GSLLIBDIR) -lGSLpp -lxc -lm -lgsl # -O3 -flto
+LDFLAGS = -pg -L$(GSLLIBDIR) -L. -Wl,-rpath=$(GSLLIBDIR) -lGSLpp -lxc -lm -lgsl -lpthread # -O3 -flto
 
 # List of all executables in this project
 EXE = gsl-asw
@@ -49,7 +49,6 @@ ASW_OBJ =     main.o\
 	      augmented_spherical_wave.o\
 	      atomic_quantity.o\
 	      atom.o\
-	      crystal.o\
 	      lattice.o\
 	      ewald_int.o\
 	      utils.o\
@@ -59,7 +58,10 @@ ASW_OBJ =     main.o\
 	      k-mesh.o\
 	      log_mesh.o\
 	      spherical_fun.o\
-              numerov_solver.o\
+
+ASW_HEADERS = numerov_solver.h\
+	      schroedinger.h\
+
 
 TB_OBJS =     tb.o\
 	      bloch_sum.o\
@@ -79,7 +81,9 @@ TB_OBJS =     tb.o\
 	      k-mesh.o\
 	      log_mesh.o\
 	      spherical_fun.o\
-              numerov_solver.o\
+
+TB_HEADERS =  numerov_solver.h\
+	      schroedinger.h\
 
 TEST_OBJ =	
 
@@ -102,10 +106,10 @@ $(BUILD_DIR)/%.o: $(SRC_DIR)/%.c $(SRC_DIR)/%.h
 	$(CC) $(CFLAGS) -c $? -o $@
 
 # Link numerov_test
-gsl-asw: $(OBJS)
+gsl-asw: $(OBJS) 
 	$(CXX) $^ -o $@ $(LDFLAGS)
 
-TB: $(addprefix $(BUILD_DIR)/, $(TB_OBJS))
+TB: $(addprefix $(BUILD_DIR)/, $(TB_OBJS)) 
 	$(CXX) $^ -o $@ $(LDFLAGS)
 
 checkall: $(addprefix $(SRC_DIR)/, $(ASW_OBJ:o=cpp))
