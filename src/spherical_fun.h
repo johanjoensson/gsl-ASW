@@ -11,7 +11,7 @@ class Spherical_function{
 protected:
     lm l_m;
 public:
-    Spherical_function(): l_m() {};
+    Spherical_function() : l_m() {};
     Spherical_function(const lm l_n):l_m(l_n){};
     Spherical_function(const Spherical_function& f) = default;
     Spherical_function(Spherical_function&& f) = default;
@@ -36,7 +36,7 @@ class Hankel_function : public Spherical_function
 public:
     Hankel_function() : Spherical_function(){};
     Hankel_function(const lm l_n) : Spherical_function(l_n){};
-    double operator()(const double x) const;
+    double operator()(const double x) const override;
 };
 
 class Bessel_function : public Spherical_function
@@ -44,7 +44,7 @@ class Bessel_function : public Spherical_function
 public:
     Bessel_function() : Spherical_function(){};
     Bessel_function(const lm l_n) : Spherical_function(l_n){};
-    double operator()(const double x) const;
+    double operator()(const double x) const override;
 };
 
 class Neumann_function : public Spherical_function
@@ -52,7 +52,7 @@ class Neumann_function : public Spherical_function
 public:
     Neumann_function() : Spherical_function(){};
     Neumann_function(const lm l_n) : Spherical_function(l_n){};
-    double operator()(const double x) const;
+    double operator()(const double x) const override;
 };
 
 class Integral_Hankel_function : public Hankel_function
@@ -62,7 +62,7 @@ private:
 public:
     Integral_Hankel_function() : Hankel_function(), I(){ I.set_kappa(1.0);};
     Integral_Hankel_function(const lm l_n) : Hankel_function(l_n), I(){ I.set_kappa(1.0);};
-    double operator()(const double x) const;
+    double operator()(const double x) const override;
     void set_ewald_param(const double eta);
 };
 
