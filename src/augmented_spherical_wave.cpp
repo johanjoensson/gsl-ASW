@@ -36,14 +36,13 @@ Augmented_spherical_wave::Augmented_spherical_wave(double kappa_n, int n_n,
 
 void Augmented_spherical_wave::set_up(Potential &v)
 {
-    double en = -GSL::pow_int(static_cast<double>(center.get_Z())/n, 2);
+    double en = -GSL::pow_int(static_cast<double>(center.get_Z())/n, 2) + v.MT0();
 
     // On-center expression
     std::vector<Atom>::iterator it = find(v.sites.begin(), v.sites.end(),
     center);
     size_t i = static_cast<size_t>(std::distance(v.sites.begin(), it));
 
-    std::cout << "Solving Hankel function\n";
     H.update(v.val[i], en, core_state);
 
 #ifdef DEBUG
@@ -62,7 +61,6 @@ void Augmented_spherical_wave::set_up(Potential &v)
         i = static_cast<size_t>(std::distance(v.sites.begin(), it));
         for(auto Jil : J[i]){
             // v_tot = v_eff(Jil.mesh, v.val[i], Jil.l);
-		std::cout << "Solving Bessel function\n";
             	Jil.update(v.val[i], en, core_state);
            	Ji_tmp.insert(Jil);
 #ifdef DEBUG

@@ -55,7 +55,7 @@ numerov_debug.close();
 	std::cout << a << "\n";
 	std::cout << b << "\n";
 	std::cout << c << "\n";
-	Crystal_t<3, Atom> cr(Lattice_t<3>({40*a, 40*b, 40*c}));
+	Crystal_t<3, Atom> cr(Lattice_t<3>({36*a, 36*b, 36*c}));
 
 	std::cout << "Crystal volume = " << cr.volume() << " (a.u.)^3\n";
 

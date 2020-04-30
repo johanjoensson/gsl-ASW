@@ -133,11 +133,11 @@ void Potential::initial_pot(size_t nel, double vol)
 	std::cout << "MT0 = " << this->MT_0 << std::endl;
 
     // Make potential relative to MT_0
-    for(size_t i = 0; i < sites.size(); i++){
-        for(size_t j = 0; j < sites[i].mesh.size(); j++){
-            val[i][j] -= this->MT_0;
-        }
-    }
+    // for(size_t i = 0; i < sites.size(); i++){
+    //     for(size_t j = 0; j < sites[i].mesh.size(); j++){
+    //         val[i][j] -= this->MT_0;
+    //     }
+    // }
 }
 
 Density::Density(const Crystal_t<3, Atom>& cr)

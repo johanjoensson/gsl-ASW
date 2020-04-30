@@ -338,7 +338,6 @@ public:
     {
         e_min_m = *std::min_element(v_m.begin()+1, v_m.end());
         e_max_m = *(v_m.end());
-        std::cout << "Energy inside range [" << e_min_m << ", " << e_max_m << "]\n";
     }
 };
 #endif // SCHOEDINGER_H

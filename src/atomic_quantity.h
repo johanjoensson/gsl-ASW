@@ -24,12 +24,13 @@ public:
 class Potential : public Atomic_quantity{
     std::vector<std::vector<double>> electrostatic, exchange_correlation;
     std::function<double(const size_t, const double)> at_pot;
+    double MT_0;
 
 public:
     Xc_func xc_fun;
     void initial_pot(size_t nel, double vol);
 
-    double MT_0;
+    double MT0(){return MT_0;};
 
     Potential() : Atomic_quantity(), electrostatic(), exchange_correlation(),
         at_pot([](const size_t Z, const double r){

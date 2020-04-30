@@ -22,7 +22,7 @@ double Augmented_function::operator()(const GSL::Vector& r) const
         }
         // r[t - 1] < |ri| and r[t] > |ri|
         if(t < mesh.size()){
-            res = lerp(ri.norm<double>(), mesh.r(t - 1), mesh.r(t), val[t - 1]*mesh.drx(t-1), val[t]*mesh.drx(t));
+            res = lerp(ri.norm<double>(), mesh.r(t - 1), mesh.r(t), val[t - 1]*std::sqrt(mesh.drx(t-1))*mesh.drx(t-1), val[t]*std::sqrt(mesh.drx(t))*mesh.drx(t));
         }
     }
     return res;
@@ -41,7 +41,8 @@ double augmented_integral(const Augmented_function &a, const Augmented_function 
     for(size_t i = 0; i < integrand.size(); i++){
     	integrand[i] = a.val[i]*b.val[i]*mesh.drx(i);
     }
-    return mesh.integrate(integrand);
+//    return mesh.integrate(integrand);
+    return mesh.integrate_simpson(integrand);
 }
 
 bool operator==(const Augmented_function &a, const Augmented_function &b)

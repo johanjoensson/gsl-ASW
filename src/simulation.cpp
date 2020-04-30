@@ -144,13 +144,14 @@ double X_H2(const Augmented_Hankel& Ht1, const Augmented_Bessel& Jt2, const Atom
     double res = 0;
     const Envelope_Hankel H1(at, Ht1.l, Ht1.kappa);
     const Envelope_Bessel J2(at, Jt2.l, Jt2.kappa);
-    res += Jt2.EJ*augmented_integral(Ht1, Jt2);
+    //res += Jt2.EJ*augmented_integral(Ht1, Jt2);
+    res += Jt2.EJ/(Ht1.EH - Jt2.EJ);
     res -= -Jt2.kappa*Jt2.kappa*atomic_integral(H1, J2);
     if(Ht1.kappa*Ht1.kappa != Jt2.kappa*Jt2.kappa){
         res += -Jt2.kappa*Jt2.kappa/(-Jt2.kappa*Jt2.kappa - -Ht1.kappa*Ht1.kappa);
     }
+
     return res;
-    // return 0;
 }
 
 double X_H3(const Augmented_Bessel& Jt1, const Augmented_Bessel& Jt2, const Atom& at)
@@ -243,7 +244,8 @@ double X_S2(const Augmented_Hankel& Ht1, const Augmented_Bessel& Jt2, const Atom
     double res = 0;
     const Envelope_Hankel H1(at, Ht1.l, Ht1.kappa);
     const Envelope_Bessel J2(at, Jt2.l, Jt2.kappa);
-    res += augmented_integral(Ht1, Jt2);
+//    res += augmented_integral(Ht1, Jt2);
+    res += 1./(Ht1.EH - Jt2.EJ);
     res -= atomic_integral(H1, J2);
     if(Ht1.kappa*Ht1.kappa != Jt2.kappa*Jt2.kappa){
         res += 1./(-Jt2.kappa*Jt2.kappa + Ht1.kappa*Ht1.kappa);
@@ -394,9 +396,9 @@ const GSL::Matrix_cx Simulation::set_S(const GSL::Vector& kp) const
     size_t N = basis_valence.size();
     GSL::Matrix_cx S(N, N);
     for(size_t i = 0; i < basis_valence.size(); i++){
-        for(size_t j = 0; j < basis_valence.size(); j++){
+        for(size_t j = i; j < basis_valence.size(); j++){
             S[i][j] = S_element(i, j, kp);
-//            S[j][i] = GSL::Complex(S[i][j]).conjugate();
+            // S[j][i] = GSL::Complex(S[i][j]).conjugate();
         }
     }
     return S;
