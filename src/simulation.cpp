@@ -72,8 +72,10 @@ Simulation::Simulation(const Crystal_t<3, Atom>& crystal, const XC_FUN func, con
     }
 
     // Reserve space for each atom ad each 0 <= l <= l_low, -l <= m <= l
-    XH1 = GSL::Matrix(cryst.atoms().size(),(l_low + 1)*(l_low + 1));
-    XS1 = GSL::Matrix(cryst.atoms().size(),(l_low + 1)*(l_low + 1));
+    // XH1 = GSL::Matrix(cryst.atoms().size(),(l_low + 1)*(l_low + 1));
+    XH1 = GSL::Matrix(cryst.atoms().size(),(l_low + 1)*(2*l_low + 1));
+    // XS1 = GSL::Matrix(cryst.atoms().size(),(l_low + 1)*(l_low + 1));
+    XS1 = GSL::Matrix(cryst.atoms().size(),(l_low + 1)*(2*l_low + 1));
     XH2 = GSL::Matrix(cryst.atoms().size(),(l_low + 1)*(l_low + 1));
     XS2 = GSL::Matrix(cryst.atoms().size(),(l_low + 1)*(l_low + 1));
 
@@ -134,7 +136,7 @@ double X_H1(const Augmented_Hankel& Ht1, const Augmented_Hankel& Ht2, const Atom
     double res = 0;
     const Envelope_Hankel H1(at, Ht1.l, Ht1.kappa);
     const Envelope_Hankel H2(at, Ht2.l, Ht2.kappa);
-    res += Ht2.EH*augmented_integral(Ht1, Ht2);
+    res += Ht2.EH()*augmented_integral(Ht1, Ht2);
     res += -Ht2.kappa*Ht2.kappa*off_atomic_integral(H1, H2);
     return res;
 }
@@ -145,10 +147,10 @@ double X_H2(const Augmented_Hankel& Ht1, const Augmented_Bessel& Jt2, const Atom
     const Envelope_Hankel H1(at, Ht1.l, Ht1.kappa);
     const Envelope_Bessel J2(at, Jt2.l, Jt2.kappa);
     //res += Jt2.EJ*augmented_integral(Ht1, Jt2);
-    res += Jt2.EJ/(Ht1.EH - Jt2.EJ);
+    res += Jt2.EJ()/(Ht1.EH() - Jt2.EJ());
     res -= -Jt2.kappa*Jt2.kappa*atomic_integral(H1, J2);
     if(Ht1.kappa*Ht1.kappa != Jt2.kappa*Jt2.kappa){
-        res += -Jt2.kappa*Jt2.kappa/(-Jt2.kappa*Jt2.kappa - -Ht1.kappa*Ht1.kappa);
+        res += -Jt2.kappa*Jt2.kappa/(-Jt2.kappa*Jt2.kappa + Ht1.kappa*Ht1.kappa);
     }
 
     return res;
@@ -159,7 +161,7 @@ double X_H3(const Augmented_Bessel& Jt1, const Augmented_Bessel& Jt2, const Atom
     double res = 0;
     const Envelope_Bessel J1(at, Jt1.l, Jt1.kappa);
     const Envelope_Bessel J2(at, Jt2.l, Jt2.kappa);
-    res += Jt2.EJ*augmented_integral(Jt1, Jt2);
+    res += Jt2.EJ()*augmented_integral(Jt1, Jt2);
     res -= -Jt2.kappa*Jt2.kappa*atomic_integral(J1, J2);
     return res;
     // return 0;
@@ -169,7 +171,6 @@ GSL::Complex Simulation::H_element(const size_t i1, const size_t i2, const GSL::
 {
     const Augmented_spherical_wave w1 = basis_valence[i1];
     const Augmented_spherical_wave w2 = basis_valence[i2];
-
     int l_low_1 = 2, l_low_2 = 2, l_low  = 2;
     if(w1.center.Z > 20){
         l_low_1 = 3;
@@ -188,10 +189,11 @@ GSL::Complex Simulation::H_element(const size_t i1, const size_t i2, const GSL::
             at_j = i;
         }
     }
-    size_t l_i = static_cast<size_t>(w1.l.l*(w1.l.l + 1) + w1.l.m);
-    size_t l_j = static_cast<size_t>(w2.l.l*(w2.l.l + 1) + w2.l.m);
+    size_t l_i = static_cast<size_t>(w1.l.l*(l_low_1 + 1) + w1.l.m);
+    size_t l_j = static_cast<size_t>(w2.l.l*(l_low_2 + 1) + w2.l.m);
 
     if(at_i == at_j && l_i == l_j){
+        std::cout << "Hola!\t";
         res += XH1[at_i][l_i];
     }
 
@@ -211,19 +213,19 @@ GSL::Complex Simulation::H_element(const size_t i1, const size_t i2, const GSL::
 
     for(size_t at_m = 0; at_m < cryst.atoms().size(); at_m++){
         if(cryst.atoms()[at_m].get_Z() > 20){
+            l_low = 3;
         }
-        l_low = 3;
         for(Augmented_Bessel J1 : w1.J[at_m]){
-            for(Augmented_Bessel J2 : w2.J[at_m]){
-                if(J1.l == J2.l){
+            // for(Augmented_Bessel J2 : w2.J[at_m]){
+                // if(J1.l == J2.l){
                     size_t ipp = static_cast<size_t>(J1.l.l*(J1.l.l + 1) + J1.l.m);
                     B1 = Bloch_summed_structure_constant(l_low + 1, w1.kappa, cryst, J1.l, w1.l);
-                    Bloch_summed_structure_constant B2 = Bloch_summed_structure_constant(l_low + 1, w2.kappa, cryst, J2.l, w2.l);
+                    Bloch_summed_structure_constant B2 = Bloch_summed_structure_constant(l_low + 1, w2.kappa, cryst, J1.l, w2.l);
                     res += B1(J1.center - w1.center.pos, kp).conjugate()*
                     XH3[at_m][ipp]*
-                    B2(J2.center - w2.center.pos, kp);
-                }
-            }
+                    B2(J1.center - w2.center.pos, kp);
+                // }
+            // }
         }
     }
     return res;
@@ -245,7 +247,7 @@ double X_S2(const Augmented_Hankel& Ht1, const Augmented_Bessel& Jt2, const Atom
     const Envelope_Hankel H1(at, Ht1.l, Ht1.kappa);
     const Envelope_Bessel J2(at, Jt2.l, Jt2.kappa);
 //    res += augmented_integral(Ht1, Jt2);
-    res += 1./(Ht1.EH - Jt2.EJ);
+    res += 1./(Ht1.EH() - Jt2.EJ());
     res -= atomic_integral(H1, J2);
     if(Ht1.kappa*Ht1.kappa != Jt2.kappa*Jt2.kappa){
         res += 1./(-Jt2.kappa*Jt2.kappa + Ht1.kappa*Ht1.kappa);
@@ -285,8 +287,8 @@ GSL::Complex Simulation::S_element(const size_t i1, const size_t i2, const GSL::
             at_j = i;
         }
     }
-    size_t l_i = static_cast<size_t>(w1.l.l*(w1.l.l + 1) + w1.l.m);
-    size_t l_j = static_cast<size_t>(w2.l.l*(w2.l.l + 1) + w2.l.m);
+    size_t l_i = static_cast<size_t>(w1.l.l*(l_low_1 + 1) + w1.l.m);
+    size_t l_j = static_cast<size_t>(w2.l.l*(l_low_2 + 1) + w2.l.m);
 
     if(at_i == at_j && l_i == l_j){
         res += XS1[at_i][l_i];
@@ -311,7 +313,7 @@ GSL::Complex Simulation::S_element(const size_t i1, const size_t i2, const GSL::
         for(Augmented_Bessel J1 : w1.J[at_m]){
             for(Augmented_Bessel J2 : w2.J[at_m]){
                 if(J1.l == J2.l){
-                    size_t ipp = static_cast<size_t>(J1.l.l*(J1.l.l + 1) + J1.l.m);
+                    size_t ipp = static_cast<size_t>(J1.l.l*(l_low + 1) + J1.l.m);
                     B1 = Bloch_summed_structure_constant(l_low + 1, w1.kappa, cryst, J1.l, w1.l);
                     Bloch_summed_structure_constant B2 = Bloch_summed_structure_constant(l_low + 1, w2.kappa, cryst, J2.l, w2.l);
                     res += B1(J1.center - w1.center.pos, kp).conjugate()*
@@ -335,7 +337,14 @@ void Simulation::set_up_X_matrices()
 
             Augmented_spherical_wave w1 = basis_valence[i];
             Augmented_spherical_wave w2 = basis_valence[j];
-            size_t l_i = static_cast<size_t>(w1.l.l*(w1.l.l + 1) + w1.l.m);
+            int l_low_1 = 2, l_low_2 = 2, l_low  = 2;
+            if(w1.center.Z > 20){
+                l_low_1 = 3;
+            }
+            if(w2.center.Z > 20){
+                l_low_2 = 3;
+            }
+            size_t l_i = static_cast<size_t>(w1.l.l*(l_low_1 + 1) + w1.l.m);
 
             for(size_t n_s = 0; n_s < cryst.atoms().size(); n_s++){
                 if(cryst.atoms()[n_s] == w1.center){
@@ -358,11 +367,14 @@ void Simulation::set_up_X_matrices()
 
             // Find off center expansion on site s of waves w1 ans w2
             for(size_t n_s = 0; n_s < cryst.atoms().size(); n_s++){
+                if(cryst.atoms()[n_s].get_Z() > 20){
+                    l_low = 3;
+                }
                 for(Augmented_Bessel J1s : w1.J[n_s]){
                     for(Augmented_Bessel J2s : w2.J[n_s]){
                         if(J1s.l == J2s.l){
                             size_t ipp = static_cast<size_t>(
-                                J1s.l.l*(J1s.l.l + 1) + J1s.l.m);
+                                J1s.l.l*(l_low + 1) + J1s.l.m);
                             XH3[n_s][ipp]
                               =  X_H3(J1s, J2s, cryst.atoms()[n_s]);
                             XS3[n_s][ipp]
@@ -383,8 +395,10 @@ const GSL::Matrix_cx Simulation::set_H(const GSL::Vector& kp) const
 {
     size_t N = basis_valence.size();
     GSL::Matrix_cx H(N, N);
-    for(size_t i = 0; i < basis_valence.size(); i++){
-        for(size_t j = 0; j < basis_valence.size(); j++){
+    for(size_t i = 0; i < N; i++){
+        for(size_t j = 0; j < N; j++){
+            // auto tmp = H_element(i, j, kp);
+            // std::cout << "H[" << i << "][" << j << "] = " << tmp << "\n";
             H[i][j] = H_element(i, j, kp);
         }
     }
@@ -396,9 +410,10 @@ const GSL::Matrix_cx Simulation::set_S(const GSL::Vector& kp) const
     size_t N = basis_valence.size();
     GSL::Matrix_cx S(N, N);
     for(size_t i = 0; i < basis_valence.size(); i++){
-        for(size_t j = i; j < basis_valence.size(); j++){
+        for(size_t j = 0; j < basis_valence.size(); j++){
+            auto tmp = S_element(i, j, kp);
+            std::cout << "S[" << i << "][" << j << "] = " << tmp << "\n";
             S[i][j] = S_element(i, j, kp);
-            // S[j][i] = GSL::Complex(S[i][j]).conjugate();
         }
     }
     return S;

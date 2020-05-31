@@ -34,8 +34,8 @@ public:
 
     Potential() : Atomic_quantity(), electrostatic(), exchange_correlation(),
         at_pot([](const size_t Z, const double r){
-            return 0.*(static_cast<double>(Z) + r);}),
-        xc_fun(), MT_0(0){}
+            return 0.*(static_cast<double>(Z) + r);}), MT_0(),
+        xc_fun(){}
     Potential(const Crystal_t<3, Atom>& cryst,
         std::function<double(const size_t Z, const double r)> atomic_potential =
         [](const size_t Z, const double r){

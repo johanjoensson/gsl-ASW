@@ -34,11 +34,15 @@ protected:
 
 		double x(const size_t i) const {return x_p[i];}
 		std::vector<double>::iterator x_begin() {return x_p.begin();}
+		std::vector<double>::iterator x_end() {return x_p.end();}
 		std::vector<double>::reverse_iterator x_rbegin() {return x_p.rbegin();};
+		std::vector<double>::reverse_iterator x_rend() {return x_p.rend();};
 		double x_back() const {return x_p.back();}
 		double x2(const size_t i) const {return x2_p[i];}
 		std::vector<double>::iterator x2_begin() {return x2_p.begin();}
+		std::vector<double>::iterator x2_end() {return x2_p.end();}
 		std::vector<double>::reverse_iterator x2_rbegin() {return x2_p.rbegin();};
+		std::vector<double>::reverse_iterator x2_rend() {return x2_p.rend();};
 		double x2_back() const {return x2_p.back();}
 		double dx() const {return dx_p;}
 
@@ -71,15 +75,20 @@ class Logarithmic_mesh : public Mesh {
 		double B() const {return B_p;};
 		double r(const size_t i) const {return x(i);};
 		std::vector<double>::iterator r_begin() {return x_begin();};
+		std::vector<double>::iterator r_end() {return x_end();};
 		std::vector<double>::reverse_iterator r_rbegin() {return x_rbegin();};
 		double r_back() const {return x_back();};
 		double r2(const size_t i) const {return x2(i);};
 		std::vector<double>::iterator r2_begin() {return x2_begin();};
+		std::vector<double>::iterator r2_end() {return x2_end();};
 		std::vector<double>::reverse_iterator r2_rbegin() {return x2_rbegin();};
+		std::vector<double>::reverse_iterator r2_rend() {return x2_rend();};
 		double r2_back() const {return x2_back();};
 		double drx(const size_t i) const {return drx_p[i];};
 		std::vector<double>::iterator drx_begin() {return drx_p.begin();};
+		std::vector<double>::iterator drx_end() {return drx_p.end();};
 		std::vector<double>::reverse_iterator drx_rbegin() {return drx_p.rbegin();};
+		std::vector<double>::reverse_iterator drx_rend() {return drx_p.rend();};
 		double drx_back() const {return drx_p.back();};
 };
 #endif //LOG_MESH_H

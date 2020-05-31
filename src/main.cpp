@@ -55,7 +55,7 @@ numerov_debug.close();
 	std::cout << a << "\n";
 	std::cout << b << "\n";
 	std::cout << c << "\n";
-	Crystal_t<3, Atom> cr(Lattice_t<3>({36*a, 36*b, 36*c}));
+	Crystal_t<3, Atom> cr(Lattice_t<3>({16*a, 16*b, 16*c}));
 
 	std::cout << "Crystal volume = " << cr.volume() << " (a.u.)^3\n";
 
@@ -91,7 +91,7 @@ numerov_debug.close();
 	Atom C4{Logarithmic_mesh(), tau*cr.lat().lat()};
 
 	C1.set_Z(1);
-	C2.set_Z(6);
+	C2.set_Z(1);
 	C3.set_Z(6);
 	C4.set_Z(6);
 

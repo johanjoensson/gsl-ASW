@@ -7,7 +7,7 @@
 
 Augmented_function::Augmented_function(const int n_n, const lm l_n, const double kappa_n,
     const GSL::Vector& center_n, const Logarithmic_mesh& mesh_n)
- : n(n_n), l(l_n), kappa(kappa_n), radius(mesh_n.r_back()), center(center_n), mesh(mesh_n),
+ : En(0), n(n_n), l(l_n), kappa(kappa_n), radius(mesh_n.r_back()), center(center_n), mesh(mesh_n),
  val(mesh_n.size())
 {}
 
@@ -57,13 +57,13 @@ bool operator!=(const Augmented_function &a, const Augmented_function &b)
 
 Augmented_Hankel::Augmented_Hankel(const int n_n, const lm l_n, const double kappa_n,
     const GSL::Vector& center_n, const Logarithmic_mesh& mesh_n)
- : Augmented_function(n_n, l_n, kappa_n, center_n, mesh_n), EH()
+ : Augmented_function(n_n, l_n, kappa_n, center_n, mesh_n)
 {}
 
 void Augmented_Hankel::update(std::vector<double>& v, const double en
     , const bool core)
 {
-    EH = en;
+    EH() = en;
     size_t nodes = static_cast<size_t>(n - l.l - 1);
     size_t last = mesh.size() - 1, lastbutone = mesh.size() - 2;
 
@@ -81,7 +81,7 @@ void Augmented_Hankel::update(std::vector<double>& v, const double en
                   GSL::pow_int(kappa, l.l + 1)*mesh.r(last)*H(kappa*mesh.r(last))/std::sqrt(mesh.drx(last))};
     }
     Radial_Schroedinger_Equation_Central_Potential se(v, static_cast<size_t>(l.l), l_init, r_init, mesh, 1e-10);
-    se.solve(nodes, EH);
+    se.solve(nodes, EH());
     if(core){
         se.normalize();
     }else{
@@ -94,18 +94,18 @@ void Augmented_Hankel::update(std::vector<double>& v, const double en
         }
     }
     val = se.psi();
-    EH = se.e();
+    EH() = se.e();
 }
 
 Augmented_Bessel::Augmented_Bessel(const int n_n, const lm l_n, const double kappa_n,
     const GSL::Vector& center_n, const Logarithmic_mesh& mesh_n)
- : Augmented_function(n_n, l_n, kappa_n, center_n, mesh_n), EJ()
+ : Augmented_function(n_n, l_n, kappa_n, center_n, mesh_n)
 {}
 
 void Augmented_Bessel::update(std::vector<double>& v, const double en
     , const bool core)
 {
-    EJ = en;
+    EJ() = en;
     size_t nodes =  static_cast<size_t>(n - l.l - 1);
     int sign = 1;
     if(nodes % 2 == 1){
@@ -127,15 +127,15 @@ void Augmented_Bessel::update(std::vector<double>& v, const double en
 		        *mesh.r(last)/std::sqrt(mesh.drx(last))};
 
         Radial_Schroedinger_Equation_Central_Potential se(v, static_cast<size_t>(l.l), l_init, r_init, mesh, 1e-10);
-        se.solve(nodes, EJ);
+        se.solve(nodes, EJ());
         double scale = r_init.back()/se.psi().back();
         for(size_t i = 0; i < mesh.size(); i++){
             se.psi()[i] *= scale;
         }
         val = se.psi();
-        EJ = se.e();
+        EJ() = se.e();
     }else{
-        EJ = 0.;
+        EJ() = 0.;
         val = std::vector<double>(val.size(), 0.);
     }
 }

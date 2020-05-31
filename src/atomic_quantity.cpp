@@ -37,7 +37,7 @@ double Atomic_quantity::operator()(const GSL::Vector& r)
 Potential::Potential(const Crystal_t<3, Atom>& crystal,
     std::function<double(const size_t, const double)> atomic_potential)
  : Atomic_quantity(crystal), electrostatic(crystal.atoms().size()), exchange_correlation(crystal.atoms().size()),
-  at_pot(atomic_potential), xc_fun(), MT_0(0)
+  at_pot(atomic_potential), MT_0(), xc_fun()
 {
     for(size_t i = 0; i < sites.size(); i++){
         electrostatic[i] = std::vector<double>(sites[i].mesh.size(), 0.);
@@ -110,13 +110,13 @@ void Potential::initial_pot(size_t nel, double vol)
             alpha[rj] += 4./6 * drx1 * (Xi0(j, sites, r1) + Xi0(j, sites, -r1));
             alpha[rj] += 1./6 * drx * (Xi0(j, sites, r) + Xi0(j, sites, -r));
 
-            electrostatic[j][rj] += alpha[rj]/r;
+            // electrostatic[j][rj] += alpha[rj]/r;
         }
     }
 
     for(size_t i = 0; i < sites.size(); i++){
         for(size_t j = 0; j < sites[i].mesh.size(); j++){
-            val[i][j] = electrostatic[i][j] + exchange_correlation[i][j];
+            val[i][j] = electrostatic[i][j]  + exchange_correlation[i][j] ;
         }
     }
 

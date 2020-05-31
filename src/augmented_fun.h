@@ -6,6 +6,8 @@
 #include "GSLpp/vector.h"
 
 class Augmented_function{
+protected:
+    double En;
 public:
     int n;
     lm l;
@@ -16,7 +18,7 @@ public:
 
     double operator()(const GSL::Vector& r) const;
 
-    Augmented_function(): n(), l(), kappa(), radius(), center(), mesh(), val(){}
+    Augmented_function(): En(), n(), l(), kappa(), radius(), center(), mesh(), val(){}
     Augmented_function(const Augmented_function&) = default;
     Augmented_function(Augmented_function&&) = default;
     virtual ~Augmented_function() = default;
@@ -44,8 +46,9 @@ bool operator!=(const Augmented_function &a, const Augmented_function &b);
 
 class Augmented_Hankel: public Augmented_function{
 public:
-    double EH;
-    Augmented_Hankel():Augmented_function(), EH(){}
+    double& EH(){return En;}
+    double EH() const {return En;}
+    Augmented_Hankel() = default;
     Augmented_Hankel(const Augmented_Hankel& a) = default;
     Augmented_Hankel(Augmented_Hankel&& a) = default;
     ~Augmented_Hankel() = default;
@@ -62,8 +65,9 @@ public:
 
 class Augmented_Bessel: public Augmented_function{
 public:
-    double EJ;
-    Augmented_Bessel(): Augmented_function(), EJ(){}
+    double& EJ(){return En;}
+    double EJ() const {return En;}
+    Augmented_Bessel() = default;
     Augmented_Bessel(const Augmented_Bessel& a) = default;
     Augmented_Bessel(Augmented_Bessel&& a) = default;
     ~Augmented_Bessel() = default;

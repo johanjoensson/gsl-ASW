@@ -17,7 +17,7 @@ Augmented_spherical_wave::Augmented_spherical_wave(double kappa_n, int n_n,
     // Set up off-center spheres
     int l_low = 2;
     Augmented_Bessel tmp;
-    for(size_t i = 0; i < off_centers.size(); i++){
+    for(size_t i = 0; i < off_centers.size() /* && off_centers[i] != center */; i++){
         Atom at = off_centers[i];
             if(at.Z >= 20){
                 l_low = 3;
@@ -44,6 +44,7 @@ void Augmented_spherical_wave::set_up(Potential &v)
     size_t i = static_cast<size_t>(std::distance(v.sites.begin(), it));
 
     H.update(v.val[i], en, core_state);
+    H.EH() -= v.MT0();
 
 #ifdef DEBUG
 	std::ofstream out_file;
@@ -61,7 +62,8 @@ void Augmented_spherical_wave::set_up(Potential &v)
         i = static_cast<size_t>(std::distance(v.sites.begin(), it));
         for(auto Jil : J[i]){
             // v_tot = v_eff(Jil.mesh, v.val[i], Jil.l);
-            	Jil.update(v.val[i], en, core_state);
+            Jil.update(v.val[i], en, core_state);
+            Jil.EJ() -= v.MT0();
            	Ji_tmp.insert(Jil);
 #ifdef DEBUG
             	out_file.open("check_Bessel.dat", std::fstream::out|std::fstream::app);
