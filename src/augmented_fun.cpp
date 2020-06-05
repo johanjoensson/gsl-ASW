@@ -39,9 +39,9 @@ double augmented_integral(const Augmented_function &a, const Augmented_function 
     std::vector<double> integrand(a.val.size(), 0);
 
     for(size_t i = 0; i < integrand.size(); i++){
-    	integrand[i] = a.val[i]*b.val[i]*mesh.drx(i);
+    	integrand[i] = a.val[i]*b.val[i];
     }
-//    return mesh.integrate(integrand);
+    // return mesh.integrate(integrand);
     return mesh.integrate_simpson(integrand);
 }
 
@@ -71,14 +71,14 @@ void Augmented_Hankel::update(std::vector<double>& v, const double en
 
     std::vector<double> l_init = {
         0,
-        GSL::pow_int(mesh.r(1), l.l + 1)/std::sqrt(mesh.drx(1)),
-        GSL::pow_int(mesh.r(2), l.l + 1)/std::sqrt(mesh.drx(2))};
+        GSL::pow_int(mesh.r(1), l.l + 1),
+        GSL::pow_int(mesh.r(2), l.l + 1)};
     std::vector<double> r_init;
     if(core){
         r_init = {1e-8, 0.};
     }else{
-        r_init = {GSL::pow_int(kappa, l.l + 1)*mesh.r(lastbutone)*H(kappa*mesh.r(lastbutone))/std::sqrt(mesh.drx(lastbutone)),
-                  GSL::pow_int(kappa, l.l + 1)*mesh.r(last)*H(kappa*mesh.r(last))/std::sqrt(mesh.drx(last))};
+        r_init = {GSL::pow_int(kappa, l.l + 1)*mesh.r(lastbutone)*H(kappa*mesh.r(lastbutone)),
+                  GSL::pow_int(kappa, l.l + 1)*mesh.r(last)*H(kappa*mesh.r(last))};
     }
     Radial_Schroedinger_Equation_Central_Potential se(v, static_cast<size_t>(l.l), l_init, r_init, mesh, 1e-10);
     se.solve(nodes, EH());
@@ -117,14 +117,14 @@ void Augmented_Bessel::update(std::vector<double>& v, const double en
     if(!core){
         std::vector<double> l_init = {
             0,
-            GSL::pow_int(mesh.r(1), l.l+1)/std::sqrt(mesh.drx(1)),
-            GSL::pow_int(mesh.r(2), l.l+1)/std::sqrt(mesh.drx(2))};
+            GSL::pow_int(mesh.r(1), l.l+1),
+            GSL::pow_int(mesh.r(2), l.l+1)};
 
         std::vector<double> r_init = {
             sign*GSL::pow_int(kappa, -l.l)* I(kappa*mesh.r(lastbutone))
-		        *mesh.r(lastbutone)/std::sqrt(mesh.drx(lastbutone)),
+		        *mesh.r(lastbutone),
 		    sign*GSL::pow_int(kappa, -l.l)*I(kappa*mesh.r(last))
-		        *mesh.r(last)/std::sqrt(mesh.drx(last))};
+		        *mesh.r(last)};
 
         Radial_Schroedinger_Equation_Central_Potential se(v, static_cast<size_t>(l.l), l_init, r_init, mesh, 1e-10);
         se.solve(nodes, EJ());

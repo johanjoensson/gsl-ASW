@@ -55,7 +55,7 @@ numerov_debug.close();
 	std::cout << a << "\n";
 	std::cout << b << "\n";
 	std::cout << c << "\n";
-	Crystal_t<3, Atom> cr(Lattice_t<3>({16*a, 16*b, 16*c}));
+	Crystal_t<3, Atom> cr(Lattice_t<3>({5*a, 5*b, 5*c}));
 
 	std::cout << "Crystal volume = " << cr.volume() << " (a.u.)^3\n";
 
@@ -90,14 +90,14 @@ numerov_debug.close();
 	tau[2] = 0.5;
 	Atom C4{Logarithmic_mesh(), tau*cr.lat().lat()};
 
-	C1.set_Z(1);
-	C2.set_Z(1);
+	C1.set_Z(6);
+	C2.set_Z(6);
 	C3.set_Z(6);
 	C4.set_Z(6);
 
 	cr.set_size({1, 1, 1});
-	cr.add_sites({{0, 0, 0}});
-	cr.add_basis({C1});
+	cr.add_sites({{0, 0, 0}, {0.25, 0.25, 0.25}});
+	cr.add_basis({C1, C2});
 
 	std::cout << "Crystal contains " << cr.sites().size() << " sites\n";
 	std::cout << "Crystal contains " << cr.atoms().size() << " inequivalent atoms\n";
@@ -108,6 +108,7 @@ numerov_debug.close();
 	sim.set_up_X_matrices();
 	K_mesh kmesh(cr.lat().recip_lat());
 	kmesh.generate_mesh(2, 2, 2);
+	// kmesh.generate_mesh({{0,0,0}, {1,1,1}}, 1);
 
 
 	size_t n_threads = 1;

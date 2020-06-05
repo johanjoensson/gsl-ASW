@@ -14,17 +14,22 @@ class Bloch_sum{
     Crystal_t<3, Atom> c;
     double eta;
 
-    GSL::Complex calc_d1(const GSL::Vector& tau, const GSL::Vector& kp);
-    GSL::Complex calc_d2(const GSL::Vector& tau, const GSL::Vector& kp);
-    GSL::Complex calc_d3(const GSL::Vector& tau);
-    GSL::Complex calc_d1_dot(const GSL::Vector& tau, const GSL::Vector& kp);
-    GSL::Complex calc_d2_dot(const GSL::Vector& tau, const GSL::Vector& kp);
-    GSL::Complex calc_d3_dot(const GSL::Vector& tau);
+    GSL::Complex calc_d1(const GSL::Vector& tau, const GSL::Vector& kp) const;
+    GSL::Complex calc_d2(const GSL::Vector& tau, const GSL::Vector& kp) const;
+    GSL::Complex calc_d3(const GSL::Vector& tau) const;
+    GSL::Complex calc_d1_dot(const GSL::Vector& tau, const GSL::Vector& kp) const;
+    GSL::Complex calc_d2_dot(const GSL::Vector& tau, const GSL::Vector& kp) const;
+    GSL::Complex calc_d3_dot(const GSL::Vector& tau) const;
 public:
     Bloch_sum(const lm l, const double kappa, const Crystal_t<3, Atom>& c);
 
-    GSL::Complex hankel_envelope(const GSL::Vector& tau, const GSL::Vector& kp);
-    GSL::Complex hankel_envelope_dot(const GSL::Vector& tau, const GSL::Vector& kp);
+    GSL::Complex hankel_envelope(const GSL::Vector& tau, const GSL::Vector& kp) const;
+    GSL::Complex hankel_envelope_dot(const GSL::Vector& tau, const GSL::Vector& kp) const;
+
+    GSL::Complex operator()(const GSL::Vector& tau, const GSL::Vector& kp) const
+    {
+        return hankel_envelope(tau, kp);
+    }
 };
 
 

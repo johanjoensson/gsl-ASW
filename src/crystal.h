@@ -50,7 +50,9 @@ public:
 	Atom atom(const Site_t<dim>& s) const;
 
 	std::vector<GSL::Vector>& Rn_vecs(){return R_m;}
+	std::vector<GSL::Vector> Rn_vecs() const {return R_m;}
 	std::vector<GSL::Vector>& Kn_vecs(){return K_m;}
+	std::vector<GSL::Vector> Kn_vecs() const {return K_m;}
 
 	double volume() const {return lat().lat().det();}
 };

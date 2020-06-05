@@ -8,16 +8,16 @@
 #include <fstream>
 
 
-Augmented_spherical_wave::Augmented_spherical_wave(double kappa_n, int n_n,
+Augmented_spherical_wave::Augmented_spherical_wave(double kappa_n, size_t index_n, int n_n,
      lm l_n, spin s_n, const Atom& center_n, const std::vector<Atom>& off_centers_n)
- : center(center_n), off_centers(off_centers_n), kappa(kappa_n),
+ : center(center_n), off_centers(off_centers_n), kappa(kappa_n), index(index_n),
    n(n_n), l(l_n), s(s_n), H(n_n, l_n, kappa_n, center_n.pos, center_n.mesh),
    J(off_centers_n.size())
 {
     // Set up off-center spheres
     int l_low = 2;
     Augmented_Bessel tmp;
-    for(size_t i = 0; i < off_centers.size() /* && off_centers[i] != center */; i++){
+    for(size_t i = 0; i < off_centers.size() /*&& off_centers[i] != center*/; i++){
         Atom at = off_centers[i];
             if(at.Z >= 20){
                 l_low = 3;

@@ -7,11 +7,11 @@
 int main()
 {
     std::fstream out_file("mesh_test.dat", std::ios::out);
-    Logarithmic_mesh mesh(2*M_PI, 100);
-    auto sin = [](double x){return GSL::sinc(5*x).val;};
+    Logarithmic_mesh mesh(2*M_PI, 500);
+    auto sinc = [](double x){return GSL::sinc(100*x).val;};
     std::vector<double> f(mesh.size());
     for(size_t i = 0; i < mesh.size(); i++){
-        f[i] = sin(mesh.r(i));
+        f[i] = sinc(mesh.r(i));
         out_file << mesh.r(i) << " " << mesh.r(i+1) - mesh.r(i) << " " << mesh.drx(i) << " " << f[i] << "\n";
     }
     out_file.close();

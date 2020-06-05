@@ -41,8 +41,7 @@ LDFLAGS = -pg -L$(GSLLIBDIR) -L. -Wl,-rpath=$(GSLLIBDIR) -lGSLpp -lxc -lm -lgsl 
 # List of all executables in this project
 EXE = gsl-asw
 
-ASW_OBJ =     main.o\
-	      bloch_sum.o\
+ASW_OBJ =     bloch_sum.o\
 	      gaunt.o\
 	      structure_const.o\
 	      augmented_fun.o\
@@ -85,11 +84,14 @@ TB_OBJS =     tb.o\
 TB_HEADERS =  numerov_solver.h\
 	      schroedinger.h\
 
-TEST_OBJ =	
+TEST_OBJ = $(ASW_OBJ)\
+	   bloch_summed_structure_constants.o\
+	   bloch_sum_test.o\
+	   spherical_functions_test.o
 
 
-OBJS = $(addprefix $(BUILD_DIR)/, $(ASW_OBJ))
-TEST_OBJS = $(addprefix $(TEST_DIR)/, $(TEST_OBJ))
+OBJS = $(addprefix $(BUILD_DIR)/, $(ASW_OBJ)) $(BUILD_DIR)/main.o
+TEST_OBJS = $(addprefix $(BUILD_DIR)/, $(TEST_OBJ)) $(BUILD_DIR)/main_test.o
 
 # Targets to always execute, even if new files with the same names exists
 .PHONY: build all clean cleanall 
@@ -100,6 +102,9 @@ all: build $(EXE)
 # Create object files from c++ sources
 $(BUILD_DIR)/%.o: $(SRC_DIR)/%.cpp $(SRC_DIR)/%.h
 	$(CXX) $(CXXFLAGS) -c $< -o $@
+
+$(BUILD_DIR)/%.o: $(TEST_DIR)/%.cpp
+	$(CXX) $(CXXFLAGS) -c $? -o $@
 
 # Create object files from c sources
 $(BUILD_DIR)/%.o: $(SRC_DIR)/%.c $(SRC_DIR)/%.h
@@ -121,7 +126,7 @@ travis: CXXFLAGS = -std=c++11 -I $(SRC_DIR) -I $(GSLLIBROOT)/include -O0
 travis: all
 
 tests: 	CXXFLAGS = -std=c++11 -I $(SRC_DIR) -I $(GSLLIBROOT)/include -I$(TEST_DIR) -O0 -fprofile-arcs -ftest-coverage
-tests:  LDFLAGS = -lgcov -lgtest -L$(GSLLIBDIR) -L. -Wl,-rpath=$(GSLLIBDIR) -lGSLpp -lxc -lm 
+tests:  LDFLAGS = -lgcov -lgtest -L$(GSLLIBDIR) -L. -Wl,-rpath=$(GSLLIBDIR) -lGSLpp -lgsl -lxc -lm 
 tests: 	clean $(TEST_OBJS)
 	$(CXX) $(TEST_OBJS) -o $@  $(LDFLAGS)
 
@@ -142,7 +147,7 @@ build :
 
 # Remove object files
 clean:
-	rm -f $(BUILD_DIR)/*.o
+	rm -f $(BUILD_DIR)/*.o $(BUILD_DIR)/*.gcno $(BUILD_DIR)/*.gcda
 
 # Remove executables and object files
 cleanall:

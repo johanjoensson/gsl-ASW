@@ -39,7 +39,7 @@ double Structure_constant::operator()(const GSL::Vector& r) const
 		for (int mpp = -lpp; mpp <= lpp; mpp++){
 			a = gaunt(l2, l1, lm {lpp, mpp});
 			if (std::abs(a.val) > 1E-15){
-			    m_sum += a*cubic_harmonic(lm {lpp, mpp}, r);
+			    m_sum += a*cubic_harmonic(lm {lpp, mpp}, r/r.norm<double>());
 			}
 		}
 
@@ -69,7 +69,7 @@ double Structure_constant::dot(const GSL::Vector& r) const
 		for (int mpp = -lpp; mpp <= lpp; mpp++){
 			a = gaunt(l2, l1, lm {lpp, mpp});
 			if (std::abs(a.val) > 1E-15){
-			    m_sum += a*cubic_harmonic(lm {lpp, mpp}, r);
+			    m_sum += a*cubic_harmonic(lm {lpp, mpp}, r/r);
 			}
 		}
 

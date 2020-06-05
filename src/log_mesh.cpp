@@ -42,5 +42,10 @@ double Logarithmic_mesh::integrate_simpson(std::vector<double>& f)
                4*f[2*i - 1]*this->drx_p[2*i - 1] +
 			   f[2*i]*this->drx_p[2*i];
     }
+	if(this->size() % 2 != 0){
+		size_t i = this->size();
+		res += f[i - 3]*this->drx_p[i - 3] + 4*f[i - 2]*this->drx_p[i - 2] +
+		       f[i - 1]*this->drx_p[i - 1];
+	}
     return 1./3 * res;
 }

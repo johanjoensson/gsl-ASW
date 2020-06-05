@@ -152,7 +152,8 @@ class Numerov_solver{
 	/***********************************************************************//**
 	* Solve in one direction only.
 	* Overloaded version of solve.
-	**************************************************************************/	template<class Iter_res, class Iter_g, class Iter_s, class Iter_left_init , class Iter_right_init, class T = double>
+	**************************************************************************/
+	template<class Iter_res, class Iter_g, class Iter_s, class Iter_left_init , class Iter_right_init, class T = double>
 	Iter_res solve(Iter_res res_start, Iter_res res_end,
 			Iter_g g_start, Iter_g g_end, Iter_s s_start, Iter_s s_end,
 			Iter_left_init left_start, Iter_left_init left_end)

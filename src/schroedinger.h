@@ -38,15 +38,6 @@ protected:
 		return current;
 	}
 
-    virtual double norm()
-    {
-        double res = 0;
-        for(auto it = psi_m.begin(); it != psi_m.end(); it++){
-            res += GSL::pow_int(*it, 2)*h_m;
-        }
-        return res;
-    }
-
 private:
     double h_m;
 
@@ -71,6 +62,15 @@ public:
 
     Schroedinger_Equation& operator=(const Schroedinger_Equation&) = default;
     Schroedinger_Equation& operator=(Schroedinger_Equation&&) = default;
+
+    virtual double norm()
+    {
+        double res = 0;
+        for(auto it = psi_m.begin(); it != psi_m.end(); it++){
+            res += GSL::pow_int(*it, 2)*h_m;
+        }
+        return res;
+    }
 
     virtual void solve()
     {
@@ -206,15 +206,39 @@ class Radial_Schroedinger_Equation : public Schroedinger_Equation{
 protected:
     Logarithmic_mesh mesh_p;
 
-    double norm() override
+    double F_norm()
     {
         std::vector<double> integrand(mesh_p.size());
         for(size_t i = 0; i < mesh_p.size(); i++){
             integrand[i] = GSL::pow_int(psi_m[i], 2)*mesh_p.drx(i);
         }
-        double res {mesh_p.integrate_simpson(integrand)};
-        return res;
+        return mesh_p.integrate_simpson(integrand);
     }
+
+    template<class Iter, class T = double>
+    double variational_de(Iter g_start, Iter inv)
+    {
+        Iter g_i = g_start;
+        auto F_i = psi_m.rbegin();
+        auto drx_i = mesh_p.drx_rbegin();
+        for( ; F_i != inv; F_i++, g_i++, drx_i++){}
+
+        T n = F_norm();
+        T Fi = *F_i;
+        T Fm1 = *(F_i - 1);
+        T Fp1 = *(F_i + 1);
+        T drx = *drx_i;
+
+
+        auto f = [](T g)->T{ return 1 + g/12;};
+
+
+        T Fcusp = (Fm1*f(*(g_i - 1)) + Fp1*f(*(g_i + 1)))/(12 - 10*f(*g_i));
+        // T Fcusp = (Fm1*f(*(g_i - 1)) + Fp1*f(*(g_i + 1)) + 10*Fi*f(*g_i))/12;
+        T df = f(*g_i)*(Fi/Fcusp - 1.);
+        return 12*Fcusp*Fcusp*df*drx/n;
+    }
+
 public:
     Radial_Schroedinger_Equation(double e_min, double e_max,
       std::vector<double>& v, size_t l, std::vector<double>& left_init,
@@ -232,6 +256,14 @@ public:
         for( ; v_c != v_m.end(); v_c++, r2++, r++){
             *v_c += static_cast<double>(l*(l + 1))/(*r2);
         }
+
+        for(auto l_i = left_init.begin(), drx_i = mesh.drx_begin(); l_i != left_init.end(); l_i++, drx_i++){
+            *l_i /= *drx_i;
+        }
+        for(auto r_i = right_init.rbegin(), drx_i = mesh.drx_rbegin(); r_i != right_init.rend(); r_i++, drx_i++){
+            *r_i /= *drx_i;
+        }
+
     }
 
     using Schroedinger_Equation::solve;
@@ -291,39 +323,27 @@ public:
                 energy_m = 0.5*(e_min_m + e_max_m);
             }
         }
+        for(auto it = psi_m.begin(), drx_i = mesh_p.drx_begin(); it != psi_m.end(); it++, drx_i++){
+            *it *= std::sqrt(*drx_i);
+        }
+    }
+
+    double norm() override
+    {
+        std::vector<double> integrand(mesh_p.size());
+        for(size_t i = 0; i < mesh_p.size(); i++){
+            integrand[i] = GSL::pow_int(psi_m[i], 2);
+        }
+        return mesh_p.integrate_simpson(integrand);
     }
 
     void normalize() override
     {
-        double n = norm();
+        double n = this->norm();
         auto drx_i = mesh_p.drx_begin();
         for(auto it = psi_m.begin(); it != psi_m.end(); it++, drx_i++){
             *it /= std::sqrt(n);
         }
-    }
-
-    template<class Iter, class T = double>
-    double variational_de(Iter g_start, Iter inv)
-    {
-        Iter g_i = g_start;
-        auto F_i = psi_m.rbegin();
-        auto drx_i = mesh_p.drx_rbegin();
-        for( ; F_i != inv; F_i++, g_i++, drx_i++){}
-
-        T n = norm();
-        T Fi = *F_i;
-        T Fm1 = *(F_i - 1);
-        T Fp1 = *(F_i + 1);
-        T drx = *drx_i;
-
-
-        auto f = [](T g)->T{ return 1 + g/12;};
-
-
-        T Fcusp = (Fm1*f(*(g_i - 1)) + Fp1*f(*(g_i + 1)))/(12 - 10*f(*g_i));
-        // T Fcusp = (Fm1*f(*(g_i - 1)) + Fp1*f(*(g_i + 1)) + 10*Fi*f(*g_i))/12;
-        T df = f(*g_i)*(Fi/Fcusp - 1.);
-        return 12*Fcusp*Fcusp*df*drx/n;
     }
 
 };

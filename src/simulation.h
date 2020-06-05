@@ -24,7 +24,8 @@ class Simulation{
     std::vector<Augmented_spherical_wave> basis_valence;
     std::vector<Augmented_spherical_wave> basis_core;
     std::map<GSL::Vector, GSL::Vector, GSLVecCompare> k_eigenvals;
-    GSL::Matrix XH1, XS1, XH2, XS2, XH3, XS3;
+    GSL::Vector XH1, XS1, XH2, XS2;
+    GSL::Matrix XH3, XS3;
 
     void add_states(const Atom& at, const double kappa);
     GSL::Complex H_element(const size_t i1, const size_t i2, const GSL::Vector& kp) const;

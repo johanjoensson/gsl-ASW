@@ -50,9 +50,9 @@ void harmonic_oscillator()
 void coulomb_potential()
 {
     unsigned int len = 1000;
-	double r0 = 8;
-    unsigned int z = 16;
-    unsigned int n = 2;
+	double r0 = 16;
+    unsigned int z = 1;
+    unsigned int n = 1;
     unsigned int l = 0;
 	std::vector<double> v(len, r0);
     Logarithmic_mesh mesh(r0, len);
@@ -61,7 +61,7 @@ void coulomb_potential()
 	for(auto it = v.begin(); it != v.end(); it++, r_c++){
 		*it = pot(*r_c);
 	}
-	std::vector<double> left = { 0., GSL::pow_int(-1, static_cast<int>(n - l) - 1)*GSL::pow_int(mesh.r(1), static_cast<int>(l)+1)/std::sqrt(mesh.drx(1)), GSL::pow_int(-1, static_cast<int>(n - l) - 1)*GSL::pow_int(mesh.r(2), static_cast<int>(l)+1)/std::sqrt(mesh.drx(2))};
+	std::vector<double> left = { 0., GSL::pow_int(-1, static_cast<int>(n - l) - 1)*GSL::pow_int(mesh.r(1), static_cast<int>(l)+1), GSL::pow_int(-1, static_cast<int>(n - l) - 1)*GSL::pow_int(mesh.r(2), static_cast<int>(l)+1)};
 	std::vector<double> right = {0.001, 0};
 
 	Radial_Schroedinger_Equation_Central_Potential se(v, l, left, right, mesh, 1e-14);
@@ -74,7 +74,7 @@ void coulomb_potential()
     auto r_i = mesh.r_begin();
     auto drx_i = mesh.drx_begin();
 	while(psi_i != se.psi().end()){
-		outfile << *r_i << " " << *psi_i << " " << *v_i << "\n";
+		outfile << *r_i << " " << (*psi_i) << " " << *v_i << "\n";
         psi_i++;
         v_i++;
         r_i++;

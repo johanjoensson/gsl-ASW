@@ -32,3 +32,5 @@
 *.app
 gsl-asw
 numerov-test
+tests
+test_*
