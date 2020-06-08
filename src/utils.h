@@ -10,7 +10,8 @@ enum spin{
 };
 
 struct lm {
-    lm(int l_n, int m_n):n(0), l(l_n), m(m_n){}
+    lm(const int& l_n, const int& m_n):n(0), l(l_n), m(m_n){}
+    lm(const int& n_n, const int& l_n, const int& m_n):n(n_n), l(l_n), m(m_n){}
     lm():n(0), l(0), m(0){}
     int n;
     int l;
@@ -32,17 +33,6 @@ inline std::ostream& operator<<(std::ostream& os, const lm& l)
     return os << "(" << l.n << ", " << l.l << ", " << l.m <<")";
 }
 
-struct lm_hash{
-    size_t operator()(const lm& l)
-    {
-        size_t res = 0;
-        res ^= std::hash<int>()(l.n) + 0x9e3779b9 + (res<< 6) + (res>> 2);
-        res ^= std::hash<int>()(l.l) + 0x9e3779b9 + (res<< 6) + (res>> 2);
-        res ^= std::hash<int>()(l.m) + 0x9e3779b9 + (res<< 6) + (res>> 2);
-        return res;
-    }
-};
-
 template<class X = double, class Y = double>
 double lerp(X x, X x0, X x1, Y y0, Y y1)
 {
@@ -55,4 +45,17 @@ double calc_Rmax(const double vol, const double kappa, const lm &l, const double
 double calc_Kmax(const double vol, const double kappa, const lm &l, const double tol);
 
 
+namespace std {
+	template<>
+    struct hash<lm>{
+        size_t operator()(const lm& l)
+        {
+            size_t res = 0;
+            res ^= std::hash<int>()(l.n) + 0x9e3779b9 + (res<< 6) + (res>> 2);
+            res ^= std::hash<int>()(l.l) + 0x9e3779b9 + (res<< 6) + (res>> 2);
+            res ^= std::hash<int>()(l.m) + 0x9e3779b9 + (res<< 6) + (res>> 2);
+            return res;
+        }
+    };
+}
 #endif // UTILS_H

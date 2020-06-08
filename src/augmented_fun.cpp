@@ -5,9 +5,9 @@
 #include <numeric>
 #include <fstream>
 
-Augmented_function::Augmented_function(const int n_n, const lm l_n, const double kappa_n,
+Augmented_function::Augmented_function( const lm l_n, const double kappa_n,
     const GSL::Vector& center_n, const Logarithmic_mesh& mesh_n)
- : En(0), n(n_n), l(l_n), kappa(kappa_n), radius(mesh_n.r_back()), center(center_n), mesh(mesh_n),
+ : En(0), l(l_n), kappa(kappa_n), radius(mesh_n.r_back()), center(center_n), mesh(mesh_n),
  val(mesh_n.size())
 {}
 
@@ -47,7 +47,7 @@ double augmented_integral(const Augmented_function &a, const Augmented_function 
 
 bool operator==(const Augmented_function &a, const Augmented_function &b)
 {
-    return a.n == b.n && a.l == b.l && a.center == b.center;
+    return a.l == b.l && a.center == b.center;
 }
 
 bool operator!=(const Augmented_function &a, const Augmented_function &b)
@@ -55,16 +55,16 @@ bool operator!=(const Augmented_function &a, const Augmented_function &b)
     return !(a == b);
 }
 
-Augmented_Hankel::Augmented_Hankel(const int n_n, const lm l_n, const double kappa_n,
+Augmented_Hankel::Augmented_Hankel(const lm l_n, const double kappa_n,
     const GSL::Vector& center_n, const Logarithmic_mesh& mesh_n)
- : Augmented_function(n_n, l_n, kappa_n, center_n, mesh_n)
+ : Augmented_function(l_n, kappa_n, center_n, mesh_n)
 {}
 
 void Augmented_Hankel::update(std::vector<double>& v, const double en
     , const bool core)
 {
     EH() = en;
-    size_t nodes = static_cast<size_t>(n - l.l - 1);
+    size_t nodes = static_cast<size_t>(l.n - l.l - 1);
     size_t last = mesh.size() - 1, lastbutone = mesh.size() - 2;
 
     Hankel_function H(l);
@@ -97,16 +97,16 @@ void Augmented_Hankel::update(std::vector<double>& v, const double en
     EH() = se.e();
 }
 
-Augmented_Bessel::Augmented_Bessel(const int n_n, const lm l_n, const double kappa_n,
+Augmented_Bessel::Augmented_Bessel(const lm l_n, const double kappa_n,
     const GSL::Vector& center_n, const Logarithmic_mesh& mesh_n)
- : Augmented_function(n_n, l_n, kappa_n, center_n, mesh_n)
+ : Augmented_function(l_n, kappa_n, center_n, mesh_n)
 {}
 
 void Augmented_Bessel::update(std::vector<double>& v, const double en
     , const bool core)
 {
     EJ() = en;
-    size_t nodes =  static_cast<size_t>(n - l.l - 1);
+    size_t nodes =  static_cast<size_t>(l.n - l.l - 1);
     int sign = 1;
     if(nodes % 2 == 1){
 	    sign = -1;

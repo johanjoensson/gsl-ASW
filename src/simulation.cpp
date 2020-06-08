@@ -116,15 +116,15 @@ void Simulation::add_states(const Atom& at, const double kappa)
         if(nel + static_cast<size_t>(2*n_s*n_s) >= Z){
             std::cout << "valence : ( " << n_s << " " << ln << " )" << std::endl;
             for(int m = -ln; m <= ln; m++){
-                basis_valence.push_back(Augmented_spherical_wave(kappa, index, n_s, lm {ln, m}, UP, at, cryst.atoms()));
+                basis_valence.push_back(Augmented_spherical_wave(kappa, index, lm {n_s, ln, m}, UP, at, cryst.atoms()));
                 index++;
-//                basis_valence.push_back(Augmented_spherical_wave(kappa, n_s, lm {ln, m}, DOWN, at, cryst.atoms));
+//                basis_valence.push_back(Augmented_spherical_wave(kappa, lm {n_s, ln, m}, DOWN, at, cryst.atoms));
             }
         }else{
             std::cout << "core : ( " << n_s << " " << ln << " )" << std::endl;
             for(int m = -ln; m <= ln; m++){
-                basis_core.push_back(Augmented_spherical_wave(kappa, 0, n_s, lm {ln, m}, UP, at, cryst.atoms()));
-//                basis_core.push_back(Augmented_spherical_wave(kappa, n_s, lm {ln, m}, DOWN, at, cryst.atoms));
+                basis_core.push_back(Augmented_spherical_wave(kappa, 0, lm {n_s, ln, m}, UP, at, cryst.atoms()));
+//                basis_core.push_back(Augmented_spherical_wave(kappa, lm {n_s, ln, m}, DOWN, at, cryst.atoms));
             }
         }
         nel += static_cast<size_t>(2*(2*ln + 1));
@@ -219,7 +219,7 @@ GSL::Complex Simulation::H_element(const size_t i1, const size_t i2, const GSL::
         }
         for(Augmented_Bessel J1 : w1.J[at_m]){
             for(Augmented_Bessel J2 : w2.J[at_m]){
-                if(J1.n == J2.n && J1.l == J2.l){
+                if(J1.l == J2.l){
                     size_t ipp = static_cast<size_t>(J1.l.l*(J1.l.l + 1) + J1.l.m);
                     B1 = Bloch_summed_structure_constant(l_low + 1, w1.kappa, cryst, J1.l, w1.l);
                     Bloch_summed_structure_constant B2 = Bloch_summed_structure_constant(l_low + 1, w2.kappa, cryst, J2.l, w2.l);

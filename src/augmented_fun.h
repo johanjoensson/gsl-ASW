@@ -9,7 +9,6 @@ class Augmented_function{
 protected:
     double En;
 public:
-    int n;
     lm l;
     double kappa, radius;
     GSL::Vector center;
@@ -18,12 +17,12 @@ public:
 
     double operator()(const GSL::Vector& r) const;
 
-    Augmented_function(): En(), n(), l(), kappa(), radius(), center(), mesh(), val(){}
+    Augmented_function(): En(), l(), kappa(), radius(), center(), mesh(), val(){}
     Augmented_function(const Augmented_function&) = default;
     Augmented_function(Augmented_function&&) = default;
     virtual ~Augmented_function() = default;
 
-    Augmented_function(const int n, const lm l, const double kappa,
+    Augmented_function(const lm l, const double kappa,
         const GSL::Vector& center, const Logarithmic_mesh& mesh);
 
     Augmented_function& operator=(const Augmented_function&) = default;
@@ -53,7 +52,7 @@ public:
     Augmented_Hankel(Augmented_Hankel&& a) = default;
     ~Augmented_Hankel() = default;
 
-    Augmented_Hankel(const int n, const lm l, const double kappa,
+    Augmented_Hankel(const lm l, const double kappa,
         const GSL::Vector& center, const Logarithmic_mesh& mesh);
 
 
@@ -72,7 +71,7 @@ public:
     Augmented_Bessel(Augmented_Bessel&& a) = default;
     ~Augmented_Bessel() = default;
 
-    Augmented_Bessel(const int n, const lm l, const double kappa, const GSL::Vector& center, const Logarithmic_mesh& mesh);
+    Augmented_Bessel(const lm l, const double kappa, const GSL::Vector& center, const Logarithmic_mesh& mesh);
 
 
     Augmented_Bessel& operator=(const Augmented_Bessel& a) = default;
@@ -83,13 +82,89 @@ public:
 
 namespace std {
 	template<>
+	struct hash<Augmented_Hankel>{
+		size_t operator()(const Augmented_Hankel &f) const
+		{
+            size_t res = 0;
+            std::hash<lm> hlm;
+            std::hash<double> hkappa;
+
+			res ^= hlm(f.l) + 0x9e3779b9 + (res<< 6) + (res>> 2);
+			res ^= hkappa(f.kappa) + 0x9e3779b9 + (res<< 6) + (res>> 2);
+
+            return res;
+		}
+	};
+	template<>
 	struct hash<Augmented_Bessel>{
 		size_t operator()(const Augmented_Bessel &f) const
 		{
-			return (std::hash<int>()((f.l.l >> 1) + f.l.m)^
-			std::hash<int>()(f.n >> (f.l.l + f.l.m)));
+            size_t res = 0;
+            std::hash<lm> hlm;
+            std::hash<double> hkappa;
+
+			res ^= hlm(f.l) + 0x9e3779b9 + (res<< 6) + (res>> 2);
+			res ^= hkappa(f.kappa) + 0x9e3779b9 + (res<< 6) + (res>> 2);
+
+            return res;
 		}
 	};
 }
+
+class Hankel_container
+{
+private:
+    std::unordered_set<Augmented_Hankel> functions;
+private:
+    void add_function(const Augmented_Hankel&);
+    Augmented_Hankel& get_function(const lm& l, const double& kappa,
+        const spin& s);
+
+    std::unordered_set<Augmented_Hankel>::iterator begin()
+    {
+        return functions.begin();
+    }
+    std::unordered_set<Augmented_Hankel>::iterator end()
+    {
+        return functions.end();
+    }
+
+    std::unordered_set<Augmented_Hankel>::const_iterator cbegin()
+    {
+        return functions.cbegin();
+    }
+    std::unordered_set<Augmented_Hankel>::const_iterator cend()
+    {
+        return functions.cend();
+    }
+};
+
+class Bessel_container
+{
+private:
+    std::unordered_set<Augmented_Bessel> functions;
+private:
+    void add_function(const Augmented_Bessel&);
+    Augmented_Hankel& get_function(const lm& l, const double& kappa,
+        const spin& s);
+
+    std::unordered_set<Augmented_Bessel>::iterator begin()
+    {
+        return functions.begin();
+    }
+    std::unordered_set<Augmented_Bessel>::iterator end()
+    {
+        return functions.end();
+    }
+
+    std::unordered_set<Augmented_Bessel>::const_iterator cbegin()
+    {
+        return functions.cbegin();
+    }
+    std::unordered_set<Augmented_Bessel>::const_iterator cend()
+    {
+        return functions.cend();
+    }
+};
 
 #endif // AUGMENTED_FUN_H

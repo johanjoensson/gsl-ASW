@@ -8,10 +8,10 @@
 #include <fstream>
 
 
-Augmented_spherical_wave::Augmented_spherical_wave(double kappa_n, size_t index_n, int n_n,
+Augmented_spherical_wave::Augmented_spherical_wave(double kappa_n, size_t index_n,
      lm l_n, spin s_n, const Atom& center_n, const std::vector<Atom>& off_centers_n)
  : center(center_n), off_centers(off_centers_n), kappa(kappa_n), index(index_n),
-   n(n_n), l(l_n), s(s_n), H(n_n, l_n, kappa_n, center_n.pos, center_n.mesh),
+   l(l_n), s(s_n), H(l_n, kappa_n, center_n.pos, center_n.mesh),
    J(off_centers_n.size())
 {
     // Set up off-center spheres
@@ -24,10 +24,10 @@ Augmented_spherical_wave::Augmented_spherical_wave(double kappa_n, size_t index_
             }else{
                 l_low = 2;
             }
-           for(int l_s = 0; l_s <= std::min(l_low + 1, n - 1); l_s++){
+           for(int l_s = 0; l_s <= std::min(l_low + 1, l.n - 1); l_s++){
                 for(int m_s = -l_s; m_s <= l_s; m_s++){
-                    lm lp = {l_s, m_s};
-                    tmp = Augmented_Bessel(n, lp, kappa, at.pos, at.mesh);
+                    lm lp = {l.n, l_s, m_s};
+                    tmp = Augmented_Bessel(lp, kappa, at.pos, at.mesh);
                     J[i].insert(tmp);
                 }
             }
@@ -36,7 +36,7 @@ Augmented_spherical_wave::Augmented_spherical_wave(double kappa_n, size_t index_
 
 void Augmented_spherical_wave::set_up(Potential &v)
 {
-    double en = -GSL::pow_int(static_cast<double>(center.get_Z())/n, 2) + v.MT0();
+    double en = -GSL::pow_int(static_cast<double>(center.get_Z())/l.n, 2) + v.MT0();
 
     // On-center expression
     std::vector<Atom>::iterator it = find(v.sites.begin(), v.sites.end(),
