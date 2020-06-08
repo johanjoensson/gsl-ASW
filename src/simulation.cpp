@@ -282,6 +282,7 @@ GSL::Complex Simulation::S_element(const size_t i1, const size_t i2, const GSL::
     if(w2.center.Z > 20){
         l_low_2 = 3;
     }
+
     GSL::Complex res = 0.;
     const GSL::Vector tau_ij(w1.center.pos - w2.center.pos);
     size_t at_i = 0, at_j = 0;
@@ -343,13 +344,6 @@ void Simulation::set_up_X_matrices()
 
             Augmented_spherical_wave w1 = basis_valence[i];
             Augmented_spherical_wave w2 = basis_valence[j];
-            int l_low_1 = 2, l_low_2 = 2, l_low  = 2;
-            if(w1.center.Z > 20){
-                l_low_1 = 3;
-            }
-            if(w2.center.Z > 20){
-                l_low_2 = 3;
-            }
             size_t l_i = w1.index;
 
             for(size_t n_s = 0; n_s < cryst.atoms().size(); n_s++){
@@ -373,9 +367,6 @@ void Simulation::set_up_X_matrices()
 
             // Find off center expansion on site s of waves w1 ans w2
             for(size_t n_s = 0; n_s < cryst.atoms().size(); n_s++){
-                if(cryst.atoms()[n_s].get_Z() > 20){
-                    l_low = 3;
-                }
                 for(Augmented_Bessel J1s : w1.J[n_s]){
                     for(Augmented_Bessel J2s : w2.J[n_s]){
                         if(J1s.l == J2s.l){

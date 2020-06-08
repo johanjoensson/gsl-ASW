@@ -28,8 +28,9 @@ GSL::Complex Bloch_sum::calc_d1(const GSL::Vector& tau, const GSL::Vector& kp) c
         }
         k = kn.norm<double>();
         dot = kn.dot(tau);
+        kn.normalize();
         e = GSL::exp(GSL::Complex(0., dot));
-        tmp = GSL::pow_int(k, l.l)*cubic_harmonic(l, kn/kn.norm<double>())*
+        tmp = GSL::pow_int(k, l.l)*cubic_harmonic(l, kn)*
               GSL::exp((-kappa*kappa - k*k)/eta)/(-kappa*kappa - k*k);
         d1 += e*tmp.val;
     }
@@ -94,7 +95,8 @@ GSL::Complex Bloch_sum::calc_d2(const GSL::Vector& tau, const GSL::Vector& kp) c
         }
         t = tau_mu.norm<double>();
         dot = kp.dot(tau_mu);
-        tmp = GSL::pow_int(t, l.l)*cubic_harmonic(l, tau_mu/tau_mu.norm<double>())*I.ewald_int(l, t);
+        tau_mu.normalize();
+        tmp = GSL::pow_int(t, l.l)*cubic_harmonic(l, tau_mu)*I.ewald_int(l, t);
         e = GSL::exp(GSL::Complex(0., -dot));
         d2 += e*tmp.val;
     }
