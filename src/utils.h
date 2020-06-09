@@ -9,6 +9,9 @@ enum spin{
     NON_COLLINEAR
 };
 
+/*******************************************************************************
+ Composite quantum numbers, (n, l, m)
+*******************************************************************************/
 struct lm {
     lm(const int& l_n, const int& m_n):n(0), l(l_n), m(m_n){}
     lm(const int& n_n, const int& l_n, const int& m_n):n(n_n), l(l_n), m(m_n){}
@@ -25,6 +28,143 @@ struct lm {
     bool operator!=(const lm &a) const
     {
         return !(*this == a);
+    }
+
+    /***************************************************************************
+    Ordering according to the Aufbauprinzip i.e., first according to n + l,
+    if n + l equal, order according to n. If n are equal order according to
+    m (ordering according to m is not part of the Aufbauprinzip).
+    E.g. [1s, 2s, 2p, 3s, 3p, 4s, 3d, 4p, ...]
+       /
+    1s
+       /   /
+    2s  2p
+       /   /   /
+    3s  3p  3d
+       /   /
+    4s  4p  4d  4f
+    .
+    .
+    .
+    ***************************************************************************/
+    bool operator<(const lm& a) const
+    {
+        if(this->n + this->l == a.n + a.l){
+            if(this->n == a.n){
+                return (this->m < a.m);
+            }else{
+                return (this->n < a.n);
+            }
+        }else{
+            return (this->n + this->l < a.n + a.l);
+        }
+        return false;
+    }
+
+    bool operator>(const lm& a) const
+    {
+        if(this->n + this->l == a.n + a.l){
+            if(this->n == a.n){
+                return (this->m > a.m);
+            }else{
+                return (this->n > a.n);
+            }
+        }else{
+            return (this->n + this->l > a.n + a.l);
+        }
+        return false;
+    }
+
+    bool operator>=(const lm& a) const
+    {
+        return !(*this < a);
+    }
+
+    bool operator<=(const lm& a) const
+    {
+        return !(*this > a);
+    }
+
+    lm& operator++()
+    {
+        if(++this->m > this->l){
+            if(++this->l >= this->n){
+                ++this->n;
+                this->l = 0;
+            }
+            this->m = -this->l;
+        }
+        return *this;
+    }
+
+    lm& operator--()
+    {
+        if(--this->m < -this->l){
+            if(--this->l < 0){
+                --this->n;
+                this->l = this->n - 1;
+            }
+            this->m = this->l;
+        }
+        return *this;
+    }
+
+    lm operator++(int)
+    {
+        lm res = *this;
+        ++*this;
+        return res;
+    }
+
+    lm operator--(int)
+    {
+        lm res = *this;
+        --*this;
+        return res;
+    }
+
+    lm& operator+=(int a)
+    {
+        int tmp = a;
+        while(tmp > this->l - this->m){
+            tmp -= this->l - this->m + 1;
+            this->l += 1;
+            if(this->l >= this->n){
+                this->l = 0;
+                this->n++;
+            }
+            this->m = -this->l;
+        }
+        this->m += tmp;
+        return *this;
+    }
+
+    lm& operator-=(int a)
+    {
+        int tmp = a;
+        while(tmp > this->m + this->l){
+            tmp -= this->l + this->m + 1;
+            this->l -= 1;
+            if(this->l < 0){
+                this->n--;
+                this->l = this->n - 1;
+            }
+            this->m = this->l;
+        }
+        this->m -= tmp;
+        return *this;
+    }
+
+    lm operator+(int a)
+    {
+        lm res = *this;
+        return (res += a);
+    }
+
+    lm operator-(int a)
+    {
+        lm res = *this;
+        return (res -= a);
     }
 };
 

@@ -10,19 +10,20 @@ protected:
     double En;
 public:
     lm l;
-    double kappa, radius;
+    double kappa;
+    spin s;
     GSL::Vector center;
     Logarithmic_mesh mesh;
     std::vector<double> val;
 
     double operator()(const GSL::Vector& r) const;
 
-    Augmented_function(): En(), l(), kappa(), radius(), center(), mesh(), val(){}
+    Augmented_function(): En(), l(), kappa(), s(), center(), mesh(), val(){}
     Augmented_function(const Augmented_function&) = default;
     Augmented_function(Augmented_function&&) = default;
     virtual ~Augmented_function() = default;
 
-    Augmented_function(const lm l, const double kappa,
+    Augmented_function(const lm l, const double kappa, const spin s,
         const GSL::Vector& center, const Logarithmic_mesh& mesh);
 
     Augmented_function& operator=(const Augmented_function&) = default;
@@ -52,7 +53,7 @@ public:
     Augmented_Hankel(Augmented_Hankel&& a) = default;
     ~Augmented_Hankel() = default;
 
-    Augmented_Hankel(const lm l, const double kappa,
+    Augmented_Hankel(const lm l, const double kappa, const spin s,
         const GSL::Vector& center, const Logarithmic_mesh& mesh);
 
 
@@ -71,7 +72,7 @@ public:
     Augmented_Bessel(Augmented_Bessel&& a) = default;
     ~Augmented_Bessel() = default;
 
-    Augmented_Bessel(const lm l, const double kappa, const GSL::Vector& center, const Logarithmic_mesh& mesh);
+    Augmented_Bessel(const lm l, const double kappa, const spin s, const GSL::Vector& center, const Logarithmic_mesh& mesh);
 
 
     Augmented_Bessel& operator=(const Augmented_Bessel& a) = default;
@@ -114,57 +115,109 @@ namespace std {
 class Hankel_container
 {
 private:
-    std::unordered_set<Augmented_Hankel> functions;
-private:
+    std::vector<Augmented_Hankel> functions;
+public:
+    Hankel_container():functions(){};
     void add_function(const Augmented_Hankel&);
     Augmented_Hankel& get_function(const lm& l, const double& kappa,
         const spin& s);
+    size_t get_index(const lm& l, const double& kappa,
+        const spin& s) const;
+        Augmented_Hankel& operator()(const lm& l, const double& kappa, const spin& s)
+        {return this->get_function(l, kappa, s);}
 
-    std::unordered_set<Augmented_Hankel>::iterator begin()
+    std::vector<Augmented_Hankel>::iterator begin()
     {
         return functions.begin();
     }
-    std::unordered_set<Augmented_Hankel>::iterator end()
+    std::vector<Augmented_Hankel>::iterator end()
     {
         return functions.end();
     }
 
-    std::unordered_set<Augmented_Hankel>::const_iterator cbegin()
+    std::vector<Augmented_Hankel>::const_iterator cbegin()
     {
         return functions.cbegin();
     }
-    std::unordered_set<Augmented_Hankel>::const_iterator cend()
+    std::vector<Augmented_Hankel>::const_iterator cend()
     {
         return functions.cend();
     }
+    Augmented_Hankel& front()
+    {
+        return functions.front();
+    }
+    Augmented_Hankel& back()
+    {
+        return functions.back();
+    }
+    const Augmented_Hankel& front() const
+    {
+        return functions.front();
+    }
+    const Augmented_Hankel& back() const
+    {
+        return functions.back();
+    }
+
+    size_t size() const
+    {return functions.size();}
 };
 
 class Bessel_container
 {
 private:
-    std::unordered_set<Augmented_Bessel> functions;
-private:
+    std::vector<Augmented_Bessel> functions;
+public:
+    Bessel_container():functions(){};
     void add_function(const Augmented_Bessel&);
-    Augmented_Hankel& get_function(const lm& l, const double& kappa,
+    Augmented_Bessel& get_function(const lm& l, const double& kappa,
         const spin& s);
+    size_t get_index(const lm& l, const double& kappa,
+        const spin& s) const;
 
-    std::unordered_set<Augmented_Bessel>::iterator begin()
+    std::vector<Augmented_Bessel>::iterator begin()
     {
         return functions.begin();
     }
-    std::unordered_set<Augmented_Bessel>::iterator end()
+    std::vector<Augmented_Bessel>::iterator end()
     {
         return functions.end();
     }
-
-    std::unordered_set<Augmented_Bessel>::const_iterator cbegin()
+    std::vector<Augmented_Bessel>::const_iterator begin() const
+    {
+        return functions.begin();
+    }
+    std::vector<Augmented_Bessel>::const_iterator end() const
+    {
+        return functions.end();
+    }
+    std::vector<Augmented_Bessel>::const_iterator cbegin()
     {
         return functions.cbegin();
     }
-    std::unordered_set<Augmented_Bessel>::const_iterator cend()
+    std::vector<Augmented_Bessel>::const_iterator cend()
     {
         return functions.cend();
     }
+    Augmented_Bessel& front()
+    {
+        return functions.front();
+    }
+    Augmented_Bessel& back()
+    {
+        return functions.back();
+    }
+    const Augmented_Bessel& front() const
+    {
+        return functions.front();
+    }
+    const Augmented_Bessel& back() const
+    {
+        return functions.back();
+    }
+    size_t size() const
+    {return functions.size();}
 };
 
 #endif // AUGMENTED_FUN_H
