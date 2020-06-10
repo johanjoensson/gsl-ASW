@@ -397,6 +397,7 @@ const GSL::Matrix_cx Simulation::set_H(const GSL::Vector& kp) const
             H[i][j] = H_element(i, j, kp);
         }
     }
+    std::cout << "H = " << H <<"\n";
     return H;
 }
 
@@ -411,6 +412,7 @@ const GSL::Matrix_cx Simulation::set_S(const GSL::Vector& kp) const
             S[i][j] = S_element(i, j, kp);
         }
     }
+    std::cout << "S = " << S <<"\n";
     return S;
 }
 

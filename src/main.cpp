@@ -96,8 +96,8 @@ numerov_debug.close();
 	C4.set_Z(6);
 
 	cr.set_size({1, 1, 1});
-	cr.add_sites({{0, 0, 0}, {0.25, 0.25, 0.25}});
-	cr.add_basis({C1, C2});
+	cr.add_sites({{0, 0, 0}});//, {0.25, 0.25, 0.25}});
+	cr.add_basis({C1});//, C2});
 
 	std::cout << "Crystal contains " << cr.sites().size() << " sites\n";
 	std::cout << "Crystal contains " << cr.atoms().size() << " inequivalent atoms\n";
