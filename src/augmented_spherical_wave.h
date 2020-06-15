@@ -10,31 +10,17 @@
 
 class Augmented_spherical_wave{
 private:
+    std::vector<Hankel_container>& Hs_m;
+    std::vector<Bessel_container>& Bs_m;
 
 public:
-    Atom center;
-    std::vector<Atom> off_centers;
+    Site_t<3> center;
     double kappa;
-    size_t index;
-    int n;
     lm l;
     spin s;
     bool core_state = false;
 
-    Augmented_Hankel H;
-    std::vector<std::unordered_set<Augmented_Bessel>> J;
-
-    // Augmented_spherical_wave(): center(), off_centers(), kappa(), n(), l(), s(), H(), J(){}
-    // Augmented_spherical_wave(const Augmented_spherical_wave&) = default;
-    // Augmented_spherical_wave(Augmented_spherical_wave&&) = default;
-    Augmented_spherical_wave(double kappa, size_t index, int n, lm l, spin s,
-        const Atom& center, const std::vector<Atom>& off_centers);
-    // ~Augmented_spherical_wave() = default;
-
-    // Augmented_spherical_wave& operator=(const Augmented_spherical_wave&) = default;
-    // Augmented_spherical_wave& operator=(Augmented_spherical_wave&&) = default;
-
-    void set_up(Potential &v);
+    Augmented_spherical_wave(std::vector<Hankel_container>& Hs_n, std::vector<Bessel_container>& Bs_n, Site_t<3> center, double kappa, lm l, spin s);
 
     double operator()(const GSL::Vector &r) const;
 };

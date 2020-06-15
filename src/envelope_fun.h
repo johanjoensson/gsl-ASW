@@ -8,12 +8,12 @@
 // Class/Functor for representing envelope funcitons
 class Envelope_function{
 public:
-    Atom center;
+    size_t center;
     lm l;
     double kappa;
 
     // Envelope_function() : center(), l(), kappa() {};
-    Envelope_function(const Atom& center, lm l, double kappa);
+    Envelope_function(const size_t& center, lm l, double kappa);
     Envelope_function(const Envelope_function&) = default;
     Envelope_function(Envelope_function&&) = default;
 
@@ -31,7 +31,7 @@ public:
     // Envelope_Hankel()
     //  :Envelope_function()
     //  {};
-    Envelope_Hankel(const Atom& center_n, lm l_n, double kappa_n)
+    Envelope_Hankel(const size_t& center_n, lm l_n, double kappa_n)
      : Envelope_function(center_n, l_n, kappa_n)
      {};
 
@@ -43,7 +43,7 @@ public:
     // Envelope_Bessel()
     //  :Envelope_function()
     //  {};
-    Envelope_Bessel(const Atom& center_n, lm l_n, double kappa_n)
+    Envelope_Bessel(const size_t& center_n, lm l_n, double kappa_n)
      : Envelope_function(center_n, l_n, kappa_n)
      {};
 
@@ -55,7 +55,7 @@ public:
     // Envelope_Neumann()
      // :Envelope_function()
      // {};
-    Envelope_Neumann(const Atom& center_n, lm l_n, double kappa_n)
+    Envelope_Neumann(const size_t& center_n, lm l_n, double kappa_n)
      : Envelope_function(center_n, l_n, kappa_n)
      {};
 
@@ -66,21 +66,21 @@ public:
 * Hankel functions                                                             *
 *******************************************************************************/
 // One center integral
-double off_atomic_integral(const Envelope_Hankel& H1, const Envelope_Hankel& H2);
+double off_atomic_integral(const Envelope_Hankel& H1, const Envelope_Hankel& H2, const double rs);
 // Two center integrals
-double atomic_integral(const Envelope_Hankel& H1, const Envelope_Bessel& J2);
-double atomic_integral(const Envelope_Bessel& J1, const Envelope_Hankel& H2);
+double atomic_integral(const Envelope_Hankel& H1, const Envelope_Bessel& J2, const double rs);
+double atomic_integral(const Envelope_Bessel& J1, const Envelope_Hankel& H2, const double rs);
 
 /*******************************************************************************
 * Neumann functions                                                            *
 *******************************************************************************/
 // One center integral
-double atomic_integral(const Envelope_Neumann& N1, const Envelope_Neumann& N2);
+double atomic_integral(const Envelope_Neumann& N1, const Envelope_Neumann& N2, const double rs);
 // Two center integrals
-double atomic_integral(const Envelope_Neumann& N1, const Envelope_Bessel& J2);
-double atomic_integral(const Envelope_Bessel& J1, const Envelope_Neumann& N2);
+double atomic_integral(const Envelope_Neumann& N1, const Envelope_Bessel& J2, const double rs);
+double atomic_integral(const Envelope_Bessel& J1, const Envelope_Neumann& N2, const double rs);
 
 // Three center integral
-double atomic_integral(const Envelope_Bessel& J1, const Envelope_Bessel& J2);
+double atomic_integral(const Envelope_Bessel& J1, const Envelope_Bessel& J2, const double rs);
 
 #endif // ENVELOPE_FUN_H

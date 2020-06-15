@@ -1,8 +1,9 @@
 #include "envelope_fun.h"
 #include "spherical_fun.h"
 
-Envelope_function::Envelope_function(const Atom& center_n, lm l_n, double kappa_n)
+Envelope_function::Envelope_function(const size_t& center_n, lm l_n, double kappa_n)
  : center(center_n), l(l_n), kappa(kappa_n)
+
 {}
 
 double Envelope_Hankel::barred_fun(const double x) const
@@ -43,16 +44,15 @@ double Envelope_Neumann::barred_fun(const double x) const
     return h.barred_fun(x) + sign*GSL::pow_int(kappa, 2*l.l + 1)*j.barred_fun(x);
 }
 
-double off_atomic_integral(const Envelope_Hankel& H1, const Envelope_Hankel& H2)
+double off_atomic_integral(const Envelope_Hankel& H1, const Envelope_Hankel& H2, const double rs)
 {
-    if(H1.l.l != H2.l.l){
+    if(H1.l != H2.l){
         return 0.;
     }else if(H1.center != H2.center){
         return 0.;
     }
 
     double res = 0.;
-    double rs = H1.center.mesh.r_back();
     Envelope_Hankel H1p1 {H1.center, lm {H1.l.l + 1, H1.l.m}, H1.kappa};
     Envelope_Hankel H2p1 {H2.center, lm {H2.l.l + 1, H2.l.m}, H2.kappa};
     Envelope_Hankel H1m1 {H1.center, lm {H1.l.l - 1, H1.l.m}, H1.kappa};
@@ -72,10 +72,9 @@ double off_atomic_integral(const Envelope_Hankel& H1, const Envelope_Hankel& H2)
     return res;
 }
 
-double atomic_integral(const Envelope_Hankel& H1, const Envelope_Bessel& J2)
+double atomic_integral(const Envelope_Hankel& H1, const Envelope_Bessel& J2, const double rs)
 {
     double res = 0.;
-    double rs = H1.center.mesh.r_back();
     Envelope_Hankel H1p1 {H1.center, lm {H1.l.l + 1, H1.l.m}, H1.kappa};
     Envelope_Bessel J2p1 {J2.center, lm {J2.l.l + 1, J2.l.m}, J2.kappa};
     Envelope_Hankel H1m1 {H1.center, lm {H1.l.l - 1, H1.l.m}, H1.kappa};
@@ -100,15 +99,14 @@ double atomic_integral(const Envelope_Hankel& H1, const Envelope_Bessel& J2)
     return res;
 }
 
-double atomic_integral(const Envelope_Bessel& J1, const Envelope_Hankel& H2)
+double atomic_integral(const Envelope_Bessel& J1, const Envelope_Hankel& H2, const double rs)
 {
-    return atomic_integral(H2, J1);
+    return atomic_integral(H2, J1, rs);
 }
 
-double atomic_integral(const Envelope_Bessel& J1, const Envelope_Bessel& J2)
+double atomic_integral(const Envelope_Bessel& J1, const Envelope_Bessel& J2, const double rs)
 {
     double res = 0;
-    double rs = J1.center.mesh.r_back();
     Envelope_Bessel J1p1 {J1.center, lm {J1.l.l + 1, J1.l.m}, J1.kappa};
     Envelope_Bessel J1m1 {J1.center, lm {J1.l.l - 1, J1.l.m}, J1.kappa};
     Envelope_Bessel J2p1 {J2.center, lm {J2.l.l + 1, J2.l.m}, J2.kappa};

@@ -67,6 +67,8 @@ public:
 };
 
 unsigned long int factorial(int n);
-GSL::Result cubic_harmonic(lm l, const GSL::Vector& r);
+
+GSL::Result cubic_harmonic(const lm& l, const GSL::Vector& r);
+GSL::Result cubic_harmonic(const int l, const int m, const double cos_theta, const double phi);
 
 #endif //SPHERICAL_FUN_H

@@ -106,7 +106,6 @@ Bloch_summed_structure_constant::Bloch_summed_structure_constant(const Crystal_t
 GSL::Complex Bloch_summed_structure_constant::operator()(const GSL::Vector& tau,
 	const GSL::Vector& kp) const
 {
-	Bloch_sum bloch_sum(lm {0, 0}, kappa, this->c);
 	double k_fac = GSL::pow_int(kappa, l1.l + l2.l);
 
 	int sign = 1;
@@ -117,12 +116,11 @@ GSL::Complex Bloch_summed_structure_constant::operator()(const GSL::Vector& tau,
 		for (int mpp = -lpp; mpp <= lpp; mpp++){
 			a = gaunt(l2, l1, lm {lpp, mpp});
 			if (std::abs(a.val) > 1E-14){
-				bloch_sum = Bloch_sum(lm {lpp, mpp}, kappa, this->c);
+				Bloch_sum bloch_sum(lm {lpp, mpp}, kappa, this->c);
 			    m_sum += a.val*bloch_sum.hankel_envelope(tau, kp);
 			}
 		}
-		sum += sign/(GSL::pow_int(kappa, lpp))*m_sum;
-		sign = -sign;
+		sum += GSL::pow_int(-1/kappa, lpp)*m_sum;
 	}
 
 	if (l2.l % 2 == 0){
@@ -167,6 +165,6 @@ GSL::Complex Bloch_summed_structure_constant::dot(
 std::ostream& operator << ( std::ostream& os,
 	const Bloch_summed_structure_constant& B)
 {
-	os << "B[(" << B.l1.l << ", " << B.l1.m << "), (" << B.l2.l << ", " << B.l2.m << ")]";
+	os << "B[(" << B.l1.l << ", " << B.l1.m << "), (" << B.l2.l << ", " << B.l2.m << "), " << B.kappa << "]";
 	return os;
 }

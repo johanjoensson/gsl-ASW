@@ -10,24 +10,26 @@ K_mesh::K_mesh(const GSL::Matrix& r_lat)
  : r_lattice(r_lat), k_points()
 {}
 
+/*******************************************************************************
+* Monkhorst-Pack scheme for generatign K-mesh                                  *
+*******************************************************************************/
 void K_mesh::generate_mesh(const size_t nx, const size_t ny, const size_t nz)
 {
-    const GSL::Vector Gx = r_lattice[0], Gy = r_lattice[1], Gz = r_lattice[2];
-    GSL::Vector tmp(3);
+    const GSL::Vector Gx(r_lattice[0]), Gy(r_lattice[1]), Gz(r_lattice[2]);
+    GSL::Vector kp, tmp;
     double nxd = static_cast<double>(nx);
     double nyd = static_cast<double>(ny);
     double nzd = static_cast<double>(nz);
-    double twonxd = static_cast<double>(2*nx);
-    double twonyd = static_cast<double>(2*ny);
-    double twonzd = static_cast<double>(2*nz);
 
+    std::cout << "reciprocal lattice = " << r_lattice << "\n";
     for(size_t n1 = 0; n1 < nx; n1++){
         for(size_t n2 = 0; n2 < ny; n2++){
             for(size_t n3 = 0; n3 < nz; n3++){
-                tmp = (static_cast<double>(2*n1) - nxd - 1)/twonxd*Gx;
-                tmp += (static_cast<double>(2*n2) - nyd - 1)/twonyd*Gy;
-                tmp += (static_cast<double>(2*n3) - nzd - 1)/twonzd*Gz;
-                k_points.push_back({tmp[0], tmp[1], tmp[2]});
+                k_points.push_back(
+                    r_lattice[0]*(static_cast<double>(2*n1) - nxd - 1)/(static_cast<double>(2*nx))
+                +   r_lattice[1]*(static_cast<double>(2*n2) - nyd - 1)/(static_cast<double>(2*ny))
+                +   r_lattice[2]*(static_cast<double>(2*n3) - nzd - 1)/(static_cast<double>(2*nz))
+                );
             }
         }
     }
