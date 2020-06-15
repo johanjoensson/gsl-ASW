@@ -108,8 +108,6 @@ void Crystal_t<dim, Atom>::set_Rn(const double Rmax)
 	zero.fill(0);
 	GSL::Matrix a(lat_m.lat()), b(lat_m.recip_lat());
 	GSL::Vector tmp(dim);
-	std::set<GSL::Vector, Vector_comp_norm> res;
-
 	// Calculate limits
 	for(size_t i = 0; i < dim; i++){
 		N[i] = static_cast<int>(std::ceil(b[i].norm<double>()/(2*M_PI)*Rmax));
@@ -118,17 +116,9 @@ void Crystal_t<dim, Atom>::set_Rn(const double Rmax)
 
 	// temporary vector for storing linear combinations of new and old vector
 	// std::unordered_set<GSL::Vector, GSL::Vector_hasher_t<double, gsl_vector, std::allocator<double>>> r_tmp;
-	std::set<GSL::Vector, Vector_comp_norm>r_tmp;
-
 	while(n != N){
-/*
-		if(n == zero){
-			n.back()++;
-			continue;
-		}
-*/
 		tmp.assign(n.begin(), n.end());
-		r_tmp.insert(tmp*a);
+		R_m.push_back(tmp*a);
 		n.back()++;
 		for(size_t i = dim - 1; i > 0; i--){
 			if(n[i] > N[i]){
@@ -138,10 +128,7 @@ void Crystal_t<dim, Atom>::set_Rn(const double Rmax)
 		}
 	}
 	tmp.assign(n.begin(), n.end());
-	r_tmp.insert(tmp*a);
-
-	R_m.assign(r_tmp.begin(), r_tmp.end());
-	// std::sort(R_m.begin(), R_m.end(), comp_norm);
+	R_m.push_back(tmp*a);
 }
 
 template<size_t dim, class Atom>
@@ -152,25 +139,15 @@ void Crystal_t<dim, Atom>::set_Kn(const double Kmax)
 	zero.fill(0);
 	GSL::Vector tmp(dim);
 	GSL::Matrix a(lat_m.lat()), b(lat_m.recip_lat());
-	std::set<GSL::Vector, Vector_comp_norm> res;
-
 	// Calculate limits
 	for(size_t i = 0; i < dim; i++){
 		N[i] = static_cast<int>(std::ceil(a[i].norm<double>()/(2*M_PI)*Kmax));
 		n[i] = -N[i];
 	}
-
 	// temporary vector for storing linear combinations of new and old vector
-	std::set<GSL::Vector, Vector_comp_norm> k_tmp;
 	while(n != N){
-/*
-		if(n == zero){
-			n.back()++;
-			continue;
-		}
-*/
 		tmp.assign(n.begin(), n.end());
-		k_tmp.insert(tmp*a);
+		K_m.push_back(tmp*a);
 		n.back()++;
 		for(size_t i = dim - 1; i > 0; i--){
 			if(n[i] > N[i]){
@@ -179,11 +156,7 @@ void Crystal_t<dim, Atom>::set_Kn(const double Kmax)
 			}
 		}
 	}
-	tmp.assign(n.begin(), n.end());
-	k_tmp.insert(tmp*a);
-
-	K_m.assign(k_tmp.begin(), k_tmp.end());
-	// std::sort(K_m.begin(), K_m.end(), comp_norm);
+	K_m.push_back(tmp*a);
 }
 
 template<size_t dim, class Atom>

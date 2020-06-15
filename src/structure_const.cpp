@@ -120,8 +120,7 @@ GSL::Complex Bloch_summed_structure_constant::operator()(const GSL::Vector& tau,
 			    m_sum += a.val*bloch_sum.hankel_envelope(tau, kp);
 			}
 		}
-		sum += sign/(GSL::pow_int(kappa, lpp))*m_sum;
-		sign = -sign;
+		sum += GSL::pow_int(-1/kappa, lpp)*m_sum;
 	}
 
 	if (l2.l % 2 == 0){

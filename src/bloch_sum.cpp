@@ -20,7 +20,7 @@ GSL::Complex Bloch_sum::calc_d1(const GSL::Vector& tau, const GSL::Vector& kp) c
 
     double k, dot;
     // Loop over all K-vectors
-    for(auto Kn : c.Kn_vecs()){
+    for(const auto& Kn : c.Kn_vecs()){
         // GSL::Vector kn(Kn + kp);
         if(Kn + kp == GSL::Vector(3)){
             continue;
@@ -51,7 +51,7 @@ GSL::Complex Bloch_sum::calc_d1_dot(const GSL::Vector& tau, const GSL::Vector& k
     GSL::Result tmp;
     GSL::Complex c_fac(1.0, 0.0);
     double k = kp.norm<double>(), dot = kp.dot(tau);
-    for(auto Kn : c.Kn_vecs()){
+    for(const auto& Kn : c.Kn_vecs()){
         // GSL::Vector kn(Kn + kp);
         if(Kn + kp == GSL::Vector(3)){
             continue;
@@ -87,7 +87,7 @@ GSL::Complex Bloch_sum::calc_d2(const GSL::Vector& tau, const GSL::Vector& kp) c
     double t = 0, dot = 0;
     GSL::Result tmp;
     // Loop over all lattice vectors
-    for(auto Rn : c.Rn_vecs()){
+    for(const auto& Rn : c.Rn_vecs()){
         if((tau == GSL::Vector(3) && Rn == GSL::Vector(3))){
             continue;
         }
@@ -114,7 +114,7 @@ GSL::Complex Bloch_sum::calc_d2_dot(const GSL::Vector& tau, const GSL::Vector& k
     double t = 0, dot = 0;
     GSL::Result tmp;
     // Loop over all lattice vectors
-    for(auto Rn : c.Rn_vecs()){
+    for(const auto& Rn : c.Rn_vecs()){
         // Do not add unit cell contribution at (0, 0, 0)
         if(tau == GSL::Vector(3) && Rn == GSL::Vector(3)){
             continue;
