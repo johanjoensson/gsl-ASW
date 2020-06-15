@@ -9,7 +9,7 @@ TEST(CubicHarmonic, Y00)
     for(int i = 0; i < 10; i++){
         for(int j = 0; j < 10; j++){
             for(int k = 0; k < 10; k++){
-                vecs[100*i + 10*j + k] = GSL::Vector({i - 5, j - 5, k - 5});
+                vecs[100*i + 10*j + k] = GSL::Vector({static_cast<double>(i - 5), static_cast<double>(j - 5), static_cast<double>(k - 5)});
             }
         }
     }
@@ -26,7 +26,7 @@ TEST(CubicHarmonic, Y1m1)
     for(int i = 0; i < 10; i++){
         for(int j = 0; j < 10; j++){
             for(int k = 0; k < 10; k++){
-                vecs[100*i + 10*j + k] = GSL::Vector({i - 5 , j - 5 , k - 5 });
+                vecs[100*i + 10*j + k] = GSL::Vector({static_cast<double>(i - 5) , static_cast<double>(j - 5) , static_cast<double>(k - 5) });
             }
         }
     }
@@ -42,7 +42,7 @@ TEST(CubicHarmonic, Y10)
     for(int i = 0; i < 10; i++){
         for(int j = 0; j < 10; j++){
             for(int k = 0; k < 10; k++){
-                vecs[100*i + 10*j + k] = GSL::Vector({i - 5 , j - 5 , k - 5 });
+                vecs[100*i + 10*j + k] = GSL::Vector({static_cast<double>(i - 5) , static_cast<double>(j - 5) , static_cast<double>(k - 5) });
             }
         }
     }
@@ -58,7 +58,7 @@ TEST(CubicHarmonic, Y11)
     for(int i = 0; i < 10; i++){
         for(int j = 0; j < 10; j++){
             for(int k = 0; k < 10; k++){
-                vecs[100*i + 10*j + k] = GSL::Vector({i - 5 , j - 5 , k - 5 });
+                vecs[100*i + 10*j + k] = GSL::Vector({static_cast<double>(i - 5) , static_cast<double>(j - 5) , static_cast<double>(k - 5) });
             }
         }
     }
@@ -74,7 +74,7 @@ TEST(CubicHarmonic, Y2m2)
     for(int i = 0; i < 10; i++){
         for(int j = 0; j < 10; j++){
             for(int k = 0; k < 10; k++){
-                vecs[100*i + 10*j + k] = GSL::Vector({i - 5 , j - 5 , k - 5 });
+                vecs[100*i + 10*j + k] = GSL::Vector({static_cast<double>(i - 5) , static_cast<double>(j - 5) , static_cast<double>(k - 5) });
             }
         }
     }
@@ -90,7 +90,7 @@ TEST(CubicHarmonic, Y2m1)
     for(int i = 0; i < 10; i++){
         for(int j = 0; j < 10; j++){
             for(int k = 0; k < 10; k++){
-                vecs[100*i + 10*j + k] = GSL::Vector({i - 5 , j - 5 , k - 5 });
+                vecs[100*i + 10*j + k] = GSL::Vector({static_cast<double>(i - 5) , static_cast<double>(j - 5) , static_cast<double>(k - 5) });
             }
         }
     }
@@ -106,7 +106,7 @@ TEST(CubicHarmonic, Y20)
     for(int i = 0; i < 10; i++){
         for(int j = 0; j < 10; j++){
             for(int k = 0; k < 10; k++){
-                vecs[100*i + 10*j + k] = GSL::Vector({i - 5 , j - 5 , k - 5 });
+                vecs[100*i + 10*j + k] = GSL::Vector({static_cast<double>(i - 5) , static_cast<double>(j - 5) , static_cast<double>(k - 5) });
             }
         }
     }
@@ -122,7 +122,7 @@ TEST(CubicHarmonic, Y21)
     for(int i = 0; i < 10; i++){
         for(int j = 0; j < 10; j++){
             for(int k = 0; k < 10; k++){
-                vecs[100*i + 10*j + k] = GSL::Vector({i - 5 , j - 5 , k - 5 });
+                vecs[100*i + 10*j + k] = GSL::Vector({static_cast<double>(i - 5) , static_cast<double>(j - 5) , static_cast<double>(k - 5) });
             }
         }
     }
@@ -138,7 +138,7 @@ TEST(CubicHarmonic, Y22)
     for(int i = 0; i < 10; i++){
         for(int j = 0; j < 10; j++){
             for(int k = 0; k < 10; k++){
-                vecs[100*i + 10*j + k] = GSL::Vector({i - 5 , j - 5 , k - 5 });
+                vecs[100*i + 10*j + k] = GSL::Vector({static_cast<double>(i - 5) , static_cast<double>(j - 5) , static_cast<double>(k - 5) });
             }
         }
     }
