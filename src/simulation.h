@@ -38,7 +38,7 @@ class Simulation{
     void init_augmented_functions();
 
 
-    void add_states(const Atom& center, const double kappa);
+    void add_states(const Site_t<3>& center, const double kappa);
 
     double X_H1(const Augmented_Hankel& Ht1, const Augmented_Hankel& Ht2, const size_t& at);
     double X_H2(const Augmented_Hankel& Ht1, const Augmented_Bessel& Jt2, const size_t& at);

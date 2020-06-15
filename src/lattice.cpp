@@ -1,7 +1,7 @@
 #include "lattice.h"
 #include <cmath>
 #include "GSLpp/basic_math.h"
-
+/*
 Lattice::Lattice(const GSL::Vector& a, const GSL::Vector& b,
     const GSL::Vector& c)
  : lat(3,3), r_lat(3,3), scale(a.norm<double>()), volume(), bz_volume()
@@ -18,3 +18,4 @@ Lattice::Lattice(const GSL::Vector& a, const GSL::Vector& b,
 
     bz_volume = std::abs(r_lat[0].dot(r_lat[1].cross(r_lat[2])));
 }
+*/

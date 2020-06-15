@@ -14,13 +14,13 @@ private:
     std::vector<Bessel_container>& Bs_m;
 
 public:
-    size_t center;
+    Site_t<3> center;
     double kappa;
     lm l;
     spin s;
     bool core_state = false;
 
-    Augmented_spherical_wave(std::vector<Hankel_container>& Hs_n, std::vector<Bessel_container>& Bs_n, size_t center, double kappa, lm l, spin s);
+    Augmented_spherical_wave(std::vector<Hankel_container>& Hs_n, std::vector<Bessel_container>& Bs_n, Site_t<3> center, double kappa, lm l, spin s);
 
     double operator()(const GSL::Vector &r) const;
 };

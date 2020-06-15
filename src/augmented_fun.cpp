@@ -41,6 +41,7 @@ double augmented_integral(const Augmented_function &a, const Augmented_function 
     std::vector<double> integrand(a.val.size(), 0);
 
     for(size_t i = 0; i < integrand.size(); i++){
+        // std::cout << a.val[i] << "\t" << b.val[i] << "\n";
     	integrand[i] = a.val[i]*b.val[i];
     }
     // return mesh.integrate(integrand);
@@ -160,14 +161,14 @@ void Hankel_container::add_function(const Augmented_Hankel& H)
 {
     auto cmp = [](const Augmented_Hankel& H1, const Augmented_Hankel& H2)
     {
-        if(H1.l == H2.l){
+        if(H1.s == H2.s){
             if(H1.kappa == H2.kappa){
-                return H1.s < H2.s;
+                return H1.l < H2.l;
             }else{
                 return H1.kappa < H2.kappa;
             }
         }else{
-            return H1.l < H2.l;
+            return H1.s < H2.s;
         }
         return false;
     };
@@ -179,21 +180,21 @@ Augmented_Hankel& Hankel_container::get_function(const lm& l, const double& kapp
 {
     auto cmp = [](const Augmented_Hankel& H1, const Augmented_Hankel& H2)
     {
-        if(H1.l == H2.l){
+        if(H1.s == H2.s){
             if(H1.kappa == H2.kappa){
-                return H1.s < H2.s;
+                return H1.l < H2.l;
             }else{
                 return H1.kappa < H2.kappa;
             }
         }else{
-            return H1.l < H2.l;
+            return H1.s < H2.s;
         }
         return false;
     };
     auto H = Augmented_Hankel({l.n, l.l, -l.l}, kappa, s, GSL::Vector(3), Logarithmic_mesh());
     auto it = std::lower_bound(functions.begin(), functions.end(), H, cmp);
     if(it == functions.end()){
-        throw std::runtime_error("Hankel function not found!\n");
+        throw std::runtime_error("Hankel function, " + l.to_string() + ", not found!\n");
     }
     return *it;
 }
@@ -202,21 +203,21 @@ size_t Hankel_container::get_index(const lm& l, const double& kappa, const spin&
 {
     auto cmp = [](const Augmented_Hankel& H1, const Augmented_Hankel& H2)
     {
-        if(H1.l == H2.l){
+        if(H1.s == H2.s){
             if(H1.kappa == H2.kappa){
-                return H1.s < H2.s;
+                return H1.l < H2.l;
             }else{
                 return H1.kappa < H2.kappa;
             }
         }else{
-            return H1.l < H2.l;
+            return H1.s < H2.s;
         }
         return false;
     };
     auto H = Augmented_Hankel({l.n, l.l, -l.l}, kappa, s, GSL::Vector(3), Logarithmic_mesh());
     auto it = std::lower_bound(functions.begin(), functions.end(), H, cmp);
     if(it == functions.end()){
-        throw std::runtime_error("Hankel function not found!\n");
+        throw std::runtime_error("Hankel function, " + l.to_string() + ", not found!\n");
     }
     return static_cast<size_t>(std::distance(functions.begin(), it));
 }
@@ -225,14 +226,14 @@ void Bessel_container::add_function(const Augmented_Bessel& J)
 {
     auto cmp = [](const Augmented_Bessel& J1, const Augmented_Bessel& J2)
     {
-        if(J1.l == J2.l){
+        if(J1.s == J2.s){
             if(J1.kappa == J2.kappa){
-                return J1.s < J2.s;
+                return J1.l < J2.l;
             }else{
                 return J1.kappa < J2.kappa;
             }
         }else{
-            return J1.l < J2.l;
+            return J1.s < J2.s;
         }
         return false;
     };
@@ -244,21 +245,21 @@ Augmented_Bessel& Bessel_container::get_function(const lm& l, const double& kapp
 {
     auto cmp = [](const Augmented_Bessel& J1, const Augmented_Bessel& J2)
     {
-        if(J1.l == J2.l){
+        if(J1.s == J2.s){
             if(J1.kappa == J2.kappa){
-                return J1.s < J2.s;
+                return J1.l < J2.l;
             }else{
                 return J1.kappa < J2.kappa;
             }
         }else{
-            return J1.l < J2.l;
+            return J1.s < J2.s;
         }
         return false;
     };
     auto J = Augmented_Bessel({l.n, l.l, -l.l}, kappa, s, GSL::Vector(3), Logarithmic_mesh());
     auto it = std::lower_bound(functions.begin(), functions.end(), J, cmp);
     if(it == functions.end()){
-        throw std::runtime_error("Bessel function not found!\n");
+        throw std::runtime_error("Bessel function, " + l.to_string() + ", not found!\n");
     }
     return *it;
 }
@@ -267,21 +268,21 @@ size_t Bessel_container::get_index(const lm& l, const double& kappa, const spin&
 {
     auto cmp = [](const Augmented_Bessel& J1, const Augmented_Bessel& J2)
     {
-        if(J1.l == J2.l){
+        if(J1.s == J2.s){
             if(J1.kappa == J2.kappa){
-                return J1.s < J2.s;
+                return J1.l < J2.l;
             }else{
                 return J1.kappa < J2.kappa;
             }
         }else{
-            return J1.l < J2.l;
+            return J1.s < J2.s;
         }
         return false;
     };
     auto J = Augmented_Bessel({l.n, l.l, -l.l}, kappa, s, GSL::Vector(3), Logarithmic_mesh());
     auto it = std::lower_bound(functions.begin(), functions.end(), J, cmp);
     if(it == functions.end()){
-        throw std::runtime_error("Bessel function not found!\n");
+        throw std::runtime_error("Bessel function, " + l.to_string() + ", not found!\n");
     }
     return static_cast<size_t>(std::distance(functions.begin(), it));
 }

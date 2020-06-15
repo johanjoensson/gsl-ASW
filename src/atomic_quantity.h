@@ -32,7 +32,7 @@ class Potential : public Atomic_quantity{
 
 public:
     Xc_func xc_fun;
-    void initial_pot(size_t nel, double vol);
+    void initial_pot(double vol);
 
     double MT0(){return MT_0;};
 

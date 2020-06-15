@@ -166,11 +166,19 @@ struct lm {
         lm res = *this;
         return (res -= a);
     }
+    std::string to_string() const
+    {
+        std::string res = "";
+        res += "(" + std::to_string(this->n);
+        res += ", " + std::to_string(this->l);
+        res += ", " + std::to_string(this->m) + ")";
+        return res;
+    }
 };
 
 inline std::ostream& operator<<(std::ostream& os, const lm& l)
 {
-    return os << "(" << l.n << ", " << l.l << ", " << l.m <<")";
+    return os << l.to_string();
 }
 
 template<class X = double, class Y = double>

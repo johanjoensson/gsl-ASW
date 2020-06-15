@@ -25,7 +25,7 @@ class Atom {
 
 	// Atomic position, cartesian coordinates
 	GSL::Vector pos;
-	Logarithmic_mesh mesh;
+//	Logarithmic_mesh mesh;
 	void set_Z(const size_t Z_n);
 	//! Get nuclear charge
 	size_t get_Z() const;
@@ -50,9 +50,9 @@ class Atom {
 	Atom(Atom&&) = default;
 	~Atom() = default;
 */
-	Atom(const Logarithmic_mesh &mesh, const GSL::Vector &r);
+	Atom(/*const Logarithmic_mesh &mesh,*/ const GSL::Vector &r);
 	Atom(const double mt, const double as, const size_t z,
-		const Logarithmic_mesh &mesh, const GSL::Vector &r);
+		/*const Logarithmic_mesh &mesh,*/ const GSL::Vector &r);
 
 
 	// Atom& operator=(const Atom&) = default;

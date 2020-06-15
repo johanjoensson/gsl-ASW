@@ -22,11 +22,11 @@ double Atomic_quantity::operator()(const GSL::Vector& r)
             t = 1;
 
             // Linear interpolation to find value at point ri
-            while(ri.norm<double>() > at.mesh.r(t) && t < at.mesh.size()){
+            while(ri.norm<double>() > at_meshes[i].r(t) && t < at_meshes[i].size()){
                 t++;
             }
-            if(t < at.mesh.size()){
-                res += lerp(ri.norm<double>(), at.mesh.r(t-1), at.mesh.r(t), val[i][t-1], val[i][t]);
+            if(t < at_meshes[i].size()){
+                res += lerp(ri.norm<double>(), at_meshes[i].r(t-1), at_meshes[i].r(t), val[i][t-1], val[i][t]);
             }
         }
     }
@@ -65,7 +65,7 @@ double mod_at_pot(const size_t Z, const double r)
     return -(1 + static_cast<double>(Z - 1)*phi)/r;
 }
 
-double Xi0(size_t j, std::vector<Atom> sites, double r)
+double Xi0(size_t j, const std::vector<Atom>& sites, double r)
 {
     double res = 0, a = 0;
     for(size_t i = 0; i < sites.size(); i++){
@@ -77,8 +77,12 @@ double Xi0(size_t j, std::vector<Atom> sites, double r)
     return res;
 }
 
-void Potential::initial_pot(size_t nel, double vol)
+void Potential::initial_pot(double vol)
 {
+    size_t nel = 0;
+    for(const auto& at : atoms){
+        nel += at.get_Z();
+    }
     std::vector<double> rho;
     for(size_t i = 0; i < atoms.size(); i++){
         rho = std::vector<double>(at_meshes[i].size(), static_cast<double>(nel)/vol);

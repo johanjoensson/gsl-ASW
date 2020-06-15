@@ -53,41 +53,47 @@ void Integral_Hankel_function::set_ewald_param(const double eta)
 	I.set_ewald_param(eta);
 }
 
-GSL::Result cubic_harmonic(lm l, const GSL::Vector& r)
+GSL::Result cubic_harmonic(const lm& l, GSL::Vector&& r)
 {
-    if(l == lm{0,0}){
+    if(l.l == 0 && l.m == 0){
+        return GSL::Result(1./std::sqrt(4*M_PI), 0);
+    }
+    if(std::abs(r.norm()) < 1e-15){
+        return GSL::Result(0, 0);
+    }
+
+    return GSL::pow_int(r.norm(), l.l)*cubic_harmonic(l.l, l.m,
+                            r[2]/r.norm(), GSL::Complex(r[0], r[1]).arg());
+}
+
+GSL::Result cubic_harmonic(const lm& l, const GSL::Vector& r)
+{
+    if(l.l == 0 && l.m == 0){
         return GSL::Result(1./std::sqrt(4*M_PI), 0);
     }
 
-	double r_norm = r.norm<double>();
-	if(r_norm < 1e-15){
-		return GSL::Result(0,0);
-	}
+    if(std::abs(r.norm()) < 1e-15){
+        return GSL::Result(0, 0);
+    }
+	return GSL::pow_int(r.norm(), l.l)*cubic_harmonic(l.l, l.m,
+                            r[2]/r.norm(), GSL::Complex(r[0], r[1]).arg());
+}
 
-    GSL::Result res(0., 0.);
-	int m_eff = std::abs(l.m);
+GSL::Result cubic_harmonic(const int l, const int m, const double cos_theta, const double phi)
+{
+	int m_eff = std::abs(m);
     int sign = 1;
     if(m_eff % 2 == 1){
         sign = -1;
     }
-
-	double x = r[0];
-	double y = r[1];
-	double z = r[2];
-	GSL::Result phi, cos_theta;
-
-
-	phi = GSL::Result(GSL::Complex(x, y).arg(), 0.);
-	cos_theta = GSL::Result(z/r_norm, 0);
-
-
-	if(l.m >= 0){
-		res = GSL::cos(m_eff*phi);
-	}else if (l.m < 0){
-		res = GSL::sin(m_eff*phi);
+    double fac = 1;
+	if(m > 0){
+		fac = GSL::cos(m_eff*phi).val;
+	}else if (m < 0){
+		fac = GSL::sin(m_eff*phi).val;
 	}
-    if(l.m != 0){
-        res *= std::sqrt(2.);
+    if(m != 0){
+        fac *= std::sqrt(2.);
     }
-	return GSL::pow_int(r_norm, l.l)*sign*GSL::legendre_sphPlm(l.l, m_eff, cos_theta.val)*res;
+	return sign*GSL::legendre_sphPlm(l, m_eff, cos_theta)*fac;
 }
