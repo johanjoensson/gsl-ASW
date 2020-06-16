@@ -35,7 +35,7 @@ Crystal_t<3, Atom> set_up_crystal()
 TEST(BlochSum, Negate0)
 {
     Crystal_t<3, Atom> cr{set_up_crystal()};
-    Bloch_sum D({0,0}, std::sqrt(0.015), cr);
+    Bloch_sum D;
 
     for(auto tau : R_vecs){
         for(auto k : K_vecs){
@@ -43,8 +43,8 @@ TEST(BlochSum, Negate0)
             // EXPECT_DOUBLE_EQ(D(-tau*cr.lat().lat(), k*cr.lat().recip_lat()).im(), D(tau*cr.lat().lat(), -k*cr.lat().recip_lat()).im());
             // ASSERT_DOUBLE_EQ(D(-tau*cr.lat().lat(), k*cr.lat().recip_lat()).re(), D(tau*cr.lat().lat(), -k*cr.lat().recip_lat()).re());
             // ASSERT_DOUBLE_EQ(D(-tau*cr.lat().lat(), k*cr.lat().recip_lat()).im(), D(tau*cr.lat().lat(), -k*cr.lat().recip_lat()).im());
-            ASSERT_NEAR(D(-tau*cr.lat().lat(), k*cr.lat().recip_lat()).re(), D(tau*cr.lat().lat(), -k*cr.lat().recip_lat()).re(), 5e-16);
-            ASSERT_NEAR(D(-tau*cr.lat().lat(), k*cr.lat().recip_lat()).im(), D(tau*cr.lat().lat(), -k*cr.lat().recip_lat()).im(), 5e-16);
+            ASSERT_NEAR(D({0, 0}, std::sqrt(0.015), cr, -tau*cr.lat().lat(), k*cr.lat().recip_lat()).re(), D({0, 0}, std::sqrt(0.015), cr, tau*cr.lat().lat(), -k*cr.lat().recip_lat()).re(), 5e-12);
+            ASSERT_NEAR(D({0, 0}, std::sqrt(0.015), cr, -tau*cr.lat().lat(), k*cr.lat().recip_lat()).im(), D({0, 0}, std::sqrt(0.015), cr, tau*cr.lat().lat(), -k*cr.lat().recip_lat()).im(), 5e-12);
         }
     }
 }
@@ -52,14 +52,14 @@ TEST(BlochSum, Negate0)
 TEST(BlochSum, Negate1)
 {
     Crystal_t<3, Atom> cr = set_up_crystal();
-    Bloch_sum D({1,0}, std::sqrt(0.015), cr);
+    Bloch_sum D;
 
     for(GSL::Vector tau : R_vecs){
         for(GSL::Vector k : K_vecs){
             // ASSERT_DOUBLE_EQ(D(-tau*cr.lat().lat(), k*cr.lat().recip_lat()).re(), -D(tau*cr.lat().lat(), -k*cr.lat().recip_lat()).re());
             // ASSERT_DOUBLE_EQ(D(-tau*cr.lat().lat(), k*cr.lat().recip_lat()).im(), -D(tau*cr.lat().lat(), -k*cr.lat().recip_lat()).im());
-            ASSERT_NEAR(D(-tau*cr.lat().lat(), k*cr.lat().recip_lat()).re(), -D(tau*cr.lat().lat(), -k*cr.lat().recip_lat()).re(), 5e-14);
-            ASSERT_NEAR(D(-tau*cr.lat().lat(), k*cr.lat().recip_lat()).im(), -D(tau*cr.lat().lat(), -k*cr.lat().recip_lat()).im(), 5e-14);
+            ASSERT_NEAR(D({1,0}, std::sqrt(0.015), cr, -tau*cr.lat().lat(), k*cr.lat().recip_lat()).re(), -D({1,0}, std::sqrt(0.015), cr, tau*cr.lat().lat(), -k*cr.lat().recip_lat()).re(), 5e-12);
+            ASSERT_NEAR(D({1,0}, std::sqrt(0.015), cr, -tau*cr.lat().lat(), k*cr.lat().recip_lat()).im(), -D({1,0}, std::sqrt(0.015), cr, tau*cr.lat().lat(), -k*cr.lat().recip_lat()).im(), 5e-12);
         }
     }
 }
@@ -67,14 +67,14 @@ TEST(BlochSum, Negate1)
 TEST(BlochSum, Negate2)
 {
     Crystal_t<3, Atom> cr = set_up_crystal();
-    Bloch_sum D({1,1}, std::sqrt(0.015), cr);
+    Bloch_sum D;
 
     for(GSL::Vector tau : R_vecs){
         for(GSL::Vector k : K_vecs){
            // ASSERT_DOUBLE_EQ(D(-tau*cr.lat().lat(), k*cr.lat().recip_lat()).re(), -D(tau*cr.lat().lat(), -k*cr.lat().recip_lat()).re());
            // ASSERT_DOUBLE_EQ(D(-tau*cr.lat().lat(), k*cr.lat().recip_lat()).im(), -D(tau*cr.lat().lat(), -k*cr.lat().recip_lat()).im());
-            ASSERT_NEAR(D(-tau*cr.lat().lat(), k*cr.lat().recip_lat()).re(), -D(tau*cr.lat().lat(), -k*cr.lat().recip_lat()).re(), 5e-14);
-            ASSERT_NEAR(D(-tau*cr.lat().lat(), k*cr.lat().recip_lat()).im(), -D(tau*cr.lat().lat(), -k*cr.lat().recip_lat()).im(), 5e-14);
+            ASSERT_NEAR(D({1,1}, std::sqrt(0.015), cr, -tau*cr.lat().lat(), k*cr.lat().recip_lat()).re(), -D({1,1}, std::sqrt(0.015), cr, tau*cr.lat().lat(), -k*cr.lat().recip_lat()).re(), 5e-12);
+            ASSERT_NEAR(D({1,1}, std::sqrt(0.015), cr, -tau*cr.lat().lat(), k*cr.lat().recip_lat()).im(), -D({1,1}, std::sqrt(0.015), cr, tau*cr.lat().lat(), -k*cr.lat().recip_lat()).im(), 5e-12);
         }
     }
 }
@@ -82,14 +82,14 @@ TEST(BlochSum, Negate2)
 TEST(BlochSum, Negate3)
 {
     Crystal_t<3, Atom> cr = set_up_crystal();
-    Bloch_sum D({2,0}, std::sqrt(0.015), cr);
+    Bloch_sum D;
 
     for(GSL::Vector tau : R_vecs){
         for(GSL::Vector k : K_vecs){
            // ASSERT_DOUBLE_EQ(D(-tau*cr.lat().lat(), k*cr.lat().recip_lat()).re(), D(tau*cr.lat().lat(), -k*cr.lat().recip_lat()).re());
            // ASSERT_DOUBLE_EQ(D(-tau*cr.lat().lat(), k*cr.lat().recip_lat()).im(), D(tau*cr.lat().lat(), -k*cr.lat().recip_lat()).im());
-            ASSERT_NEAR(D(-tau*cr.lat().lat(), k*cr.lat().recip_lat()).re(), D(tau*cr.lat().lat(), -k*cr.lat().recip_lat()).re(), 5e-14);
-            ASSERT_NEAR(D(-tau*cr.lat().lat(), k*cr.lat().recip_lat()).im(), D(tau*cr.lat().lat(), -k*cr.lat().recip_lat()).im(), 5e-14);
+            ASSERT_NEAR(D({2,0}, std::sqrt(0.015), cr, -tau*cr.lat().lat(), k*cr.lat().recip_lat()).re(), D({2,0}, std::sqrt(0.015), cr, tau*cr.lat().lat(), -k*cr.lat().recip_lat()).re(), 5e-12);
+            ASSERT_NEAR(D({2,0}, std::sqrt(0.015), cr, -tau*cr.lat().lat(), k*cr.lat().recip_lat()).im(), D({2,0}, std::sqrt(0.015), cr, tau*cr.lat().lat(), -k*cr.lat().recip_lat()).im(), 5e-12);
         }
     }
 }
@@ -97,14 +97,14 @@ TEST(BlochSum, Negate3)
 TEST(BlochSum, Conjugate0)
 {
     Crystal_t<3, Atom> cr = set_up_crystal();
-    Bloch_sum D({0,0}, std::sqrt(0.015), cr);
+    Bloch_sum D;
 
     for(GSL::Vector tau : R_vecs){
         for(GSL::Vector k : K_vecs){
            // ASSERT_DOUBLE_EQ(D(tau*cr.lat().lat(), k*cr.lat().recip_lat()).re(), D(tau*cr.lat().lat(), -k*cr.lat().recip_lat()).re());
            // ASSERT_DOUBLE_EQ(D(tau*cr.lat().lat(), k*cr.lat().recip_lat()).im(), -D(tau*cr.lat().lat(), -k*cr.lat().recip_lat()).im());
-            ASSERT_NEAR(D(tau*cr.lat().lat(), k*cr.lat().recip_lat()).re(), D(tau*cr.lat().lat(), -k*cr.lat().recip_lat()).re(), 5e-14);
-            ASSERT_NEAR(D(tau*cr.lat().lat(), k*cr.lat().recip_lat()).im(), -D(tau*cr.lat().lat(), -k*cr.lat().recip_lat()).im(), 5e-14);
+            ASSERT_NEAR(D({0,0}, std::sqrt(0.015), cr, tau*cr.lat().lat(), k*cr.lat().recip_lat()).re(), D({0,0}, std::sqrt(0.015), cr, tau*cr.lat().lat(), -k*cr.lat().recip_lat()).re(), 5e-12);
+            ASSERT_NEAR(D({0,0}, std::sqrt(0.015), cr, tau*cr.lat().lat(), k*cr.lat().recip_lat()).im(), -D({0,0}, std::sqrt(0.015), cr, tau*cr.lat().lat(), -k*cr.lat().recip_lat()).im(), 5e-12);
         }
     }
 }
@@ -112,14 +112,14 @@ TEST(BlochSum, Conjugate0)
 TEST(BlochSum, Conjugate1)
 {
     Crystal_t<3, Atom> cr = set_up_crystal();
-    Bloch_sum D({1,0}, std::sqrt(0.015), cr);
+    Bloch_sum D;
 
     for(GSL::Vector tau : R_vecs){
         for(GSL::Vector k : K_vecs){
            // ASSERT_DOUBLE_EQ(D(tau*cr.lat().lat(), k*cr.lat().recip_lat()).re(), D(tau*cr.lat().lat(), -k*cr.lat().recip_lat()).re());
            // ASSERT_DOUBLE_EQ(D(tau*cr.lat().lat(), k*cr.lat().recip_lat()).im(), -D(tau*cr.lat().lat(), -k*cr.lat().recip_lat()).im());
-            ASSERT_NEAR(D(tau*cr.lat().lat(), k*cr.lat().recip_lat()).re(), D(tau*cr.lat().lat(), -k*cr.lat().recip_lat()).re(), 5e-14);
-            ASSERT_NEAR(D(tau*cr.lat().lat(), k*cr.lat().recip_lat()).im(), -D(tau*cr.lat().lat(), -k*cr.lat().recip_lat()).im(), 5e-14);
+            ASSERT_NEAR(D({1,0}, std::sqrt(0.015), cr, tau*cr.lat().lat(), k*cr.lat().recip_lat()).re(), D({1,0}, std::sqrt(0.015), cr, tau*cr.lat().lat(), -k*cr.lat().recip_lat()).re(), 5e-12);
+            ASSERT_NEAR(D({1,0}, std::sqrt(0.015), cr, tau*cr.lat().lat(), k*cr.lat().recip_lat()).im(), -D({1,0}, std::sqrt(0.015), cr, tau*cr.lat().lat(), -k*cr.lat().recip_lat()).im(), 5e-12);
         }
     }
 }
@@ -127,14 +127,14 @@ TEST(BlochSum, Conjugate1)
 TEST(BlochSum, Conjugate2)
 {
     Crystal_t<3, Atom> cr = set_up_crystal();
-    Bloch_sum D({1,1}, std::sqrt(0.015), cr);
+    Bloch_sum D;
 
     for(GSL::Vector tau : R_vecs){
         for(GSL::Vector k : K_vecs){
            // ASSERT_DOUBLE_EQ(D(tau*cr.lat().lat(), k*cr.lat().recip_lat()).re(), D(tau*cr.lat().lat(), -k*cr.lat().recip_lat()).re());
            // ASSERT_DOUBLE_EQ(D(tau*cr.lat().lat(), k*cr.lat().recip_lat()).im(), -D(tau*cr.lat().lat(), -k*cr.lat().recip_lat()).im());
-            ASSERT_NEAR(D(tau*cr.lat().lat(), k*cr.lat().recip_lat()).re(), D(tau*cr.lat().lat(), -k*cr.lat().recip_lat()).re(), 5e-14);
-            ASSERT_NEAR(D(tau*cr.lat().lat(), k*cr.lat().recip_lat()).im(), -D(tau*cr.lat().lat(), -k*cr.lat().recip_lat()).im(), 5e-14);
+            ASSERT_NEAR(D({1,1}, std::sqrt(0.015), cr, tau*cr.lat().lat(), k*cr.lat().recip_lat()).re(), D({1,1}, std::sqrt(0.015), cr, tau*cr.lat().lat(), -k*cr.lat().recip_lat()).re(), 5e-12);
+            ASSERT_NEAR(D({1,1}, std::sqrt(0.015), cr, tau*cr.lat().lat(), k*cr.lat().recip_lat()).im(), -D({1,1}, std::sqrt(0.015), cr, tau*cr.lat().lat(), -k*cr.lat().recip_lat()).im(), 5e-12);
         }
     }
 }
@@ -142,14 +142,14 @@ TEST(BlochSum, Conjugate2)
 TEST(BlochSum, Conjugate3)
 {
     Crystal_t<3, Atom> cr = set_up_crystal();
-    Bloch_sum D({2,0}, std::sqrt(0.015), cr);
+    Bloch_sum D;
 
     for(GSL::Vector tau : R_vecs){
         for(GSL::Vector k : K_vecs){
            // ASSERT_DOUBLE_EQ(D(tau*cr.lat().lat(), k*cr.lat().recip_lat()).re(), D(tau*cr.lat().lat(), -k*cr.lat().recip_lat()).re());
            // ASSERT_DOUBLE_EQ(D(tau*cr.lat().lat(), k*cr.lat().recip_lat()).im(), -D(tau*cr.lat().lat(), -k*cr.lat().recip_lat()).im());
-            ASSERT_NEAR(D(tau*cr.lat().lat(), k*cr.lat().recip_lat()).re(), D(tau*cr.lat().lat(), -k*cr.lat().recip_lat()).re(), 5e-14);
-            ASSERT_NEAR(D(tau*cr.lat().lat(), k*cr.lat().recip_lat()).im(), -D(tau*cr.lat().lat(), -k*cr.lat().recip_lat()).im(), 5e-14);
+            ASSERT_NEAR(D({2,0}, std::sqrt(0.015), cr, tau*cr.lat().lat(), k*cr.lat().recip_lat()).re(), D({2,0}, std::sqrt(0.015), cr, tau*cr.lat().lat(), -k*cr.lat().recip_lat()).re(), 5e-12);
+            ASSERT_NEAR(D({2,0}, std::sqrt(0.015), cr, tau*cr.lat().lat(), k*cr.lat().recip_lat()).im(), -D({2,0}, std::sqrt(0.015), cr, tau*cr.lat().lat(), -k*cr.lat().recip_lat()).im(), 5e-12);
         }
     }
 }
