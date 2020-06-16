@@ -5,6 +5,10 @@
 #include <cmath>
 #include <string>
 
+std::unordered_map<Bloch_sum::Key, GSL::Complex> Bloch_sum::values_m{};
+std::unordered_map<Bloch_sum::Key, GSL::Complex> Bloch_sum::dot_values_m{};
+
+
 Bloch_sum::Bloch_sum(const lm l_n, const double kappa_n, const Crystal_t<3, Atom>& c_n)
  : l(l_n), kappa(kappa_n), c(c_n),
    eta(GSL::exp(GSL::log(6.5) + 2./3*GSL::log(4*M_PI/3.) -
@@ -162,10 +166,22 @@ GSL::Complex Bloch_sum::calc_d3_dot(const GSL::Vector& tau) const
 
 GSL::Complex Bloch_sum::hankel_envelope(const GSL::Vector& tau, const GSL::Vector& kp) const
 {
-    return calc_d1(tau, kp) + calc_d2(tau, kp) + calc_d3(tau);
+    auto it = values_m.find({l, kappa, tau, kp});
+    if(it != values_m.end()){
+        return it->second;
+    }else{
+        values_m.insert({{l, kappa, tau, kp}, calc_d1(tau, kp) + calc_d2(tau, kp) + calc_d3(tau)});
+        return calc_d1(tau, kp) + calc_d2(tau, kp) + calc_d3(tau);
+    }
 }
 
 GSL::Complex Bloch_sum::hankel_envelope_dot(const GSL::Vector& tau, const GSL::Vector& kp) const
 {
-    return calc_d1_dot(tau, kp) + calc_d2_dot(tau, kp) + calc_d3_dot(tau);
+    auto it = dot_values_m.find({l, kappa, tau, kp});
+    if(it != dot_values_m.end()){
+        return it->second;
+    }else{
+        dot_values_m.insert({{l, kappa, tau, kp}, calc_d1_dot(tau, kp) + calc_d2_dot(tau, kp) + calc_d3_dot(tau)});
+        return calc_d1_dot(tau, kp) + calc_d2_dot(tau, kp) + calc_d3_dot(tau);
+    }
 }

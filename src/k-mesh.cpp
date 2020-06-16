@@ -21,7 +21,6 @@ void K_mesh::generate_mesh(const size_t nx, const size_t ny, const size_t nz)
     double nyd = static_cast<double>(ny);
     double nzd = static_cast<double>(nz);
 
-    std::cout << "reciprocal lattice = " << r_lattice << "\n";
     for(size_t n1 = 0; n1 < nx; n1++){
         for(size_t n2 = 0; n2 < ny; n2++){
             for(size_t n3 = 0; n3 < nz; n3++){

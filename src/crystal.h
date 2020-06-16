@@ -69,6 +69,11 @@ void Crystal_t<dim, Atom>::add_sites(const std::vector<GSL::Vector>& positions)
 {
 	for(size_t i = 0; i < positions.size(); i++){
 		sites_m.push_back(Site_t<dim>(i, positions[i]*lat_m.lat(), size_m));
+		if(i >= atoms_m.size()){
+			atom_index_m.push_back(atoms_m.size() - 1);
+		}else{
+			atom_index_m.push_back(i);
+		}
 	}
 }
 
@@ -77,7 +82,6 @@ void Crystal_t<dim, Atom>::add_basis(const std::vector<Atom>& basis)
 {
 	for(const auto unit : basis){
 		atoms_m.push_back(unit);
-		atom_index_m.push_back(atoms_m.size() - 1);
 	}
 }
 

@@ -55,7 +55,7 @@ numerov_debug.close();
 	std::cout << a << "\n";
 	std::cout << b << "\n";
 	std::cout << c << "\n";
-	Crystal_t<3, Atom> cr(Lattice_t<3>({5*a, 5*b, 5*c}));
+	Crystal_t<3, Atom> cr(Lattice_t<3>({6*a, 6*b, 6*c}));
 
 	std::cout << "Crystal volume = " << cr.volume() << " (a.u.)^3\n";
 
@@ -98,8 +98,8 @@ numerov_debug.close();
 	C4.set_Z(6);
 
 	cr.set_size({1, 1, 1});
-	cr.add_sites({{0, 0, 0}, {0.5, 0.5, 0.5}});
 	cr.add_basis({C1, C2});
+	cr.add_sites({{0, 0, 0}, {0.5, 0.5, 0.5}});
 
 	std::cout << "Crystal contains " << cr.sites().size() << " sites\n";
 	std::cout << "Crystal contains " << cr.atoms().size() << " inequivalent atoms\n";
