@@ -31,26 +31,25 @@ class Bloch_sum{
     static std::unordered_map<Key, GSL::Complex> values_m;
     static std::unordered_map<Key, GSL::Complex> dot_values_m;
 
-    lm l;
-    double kappa;
-    const Crystal_t<3, Atom>& c;
-    double eta;
-
-    GSL::Complex calc_d1(const GSL::Vector& tau, const GSL::Vector& kp) const;
-    GSL::Complex calc_d2(const GSL::Vector& tau, const GSL::Vector& kp) const;
-    GSL::Complex calc_d3(const GSL::Vector& tau) const;
-    GSL::Complex calc_d1_dot(const GSL::Vector& tau, const GSL::Vector& kp) const;
-    GSL::Complex calc_d2_dot(const GSL::Vector& tau, const GSL::Vector& kp) const;
-    GSL::Complex calc_d3_dot(const GSL::Vector& tau) const;
+    GSL::Complex calc_d1(const lm l, const double kappa, const Crystal_t<3, Atom>& c, const GSL::Vector& tau, const GSL::Vector& kp) const;
+    GSL::Complex calc_d2(const lm l, const double kappa, const Crystal_t<3, Atom>& c, const GSL::Vector& tau, const GSL::Vector& kp) const;
+    GSL::Complex calc_d3(const lm l, const double kappa, const Crystal_t<3, Atom>& c, const GSL::Vector& tau) const;
+    GSL::Complex calc_d1_dot(const lm l, const double kappa, const Crystal_t<3, Atom>& c, const GSL::Vector& tau, const GSL::Vector& kp) const;
+    GSL::Complex calc_d2_dot(const lm l, const double kappa, const Crystal_t<3, Atom>& c, const GSL::Vector& tau, const GSL::Vector& kp) const;
+    GSL::Complex calc_d3_dot(const lm l, const double kappa, const Crystal_t<3, Atom>& c, const GSL::Vector& tau) const;
 public:
-    Bloch_sum(const lm l, const double kappa, const Crystal_t<3, Atom>& c);
+    Bloch_sum(){}
 
-    GSL::Complex hankel_envelope(const GSL::Vector& tau, const GSL::Vector& kp) const;
-    GSL::Complex hankel_envelope_dot(const GSL::Vector& tau, const GSL::Vector& kp) const;
+    GSL::Complex hankel_envelope(const lm l, const double kappa, const Crystal_t<3, Atom>& c, const GSL::Vector& tau, const GSL::Vector& kp) const;
+    GSL::Complex hankel_envelope_dot(const lm l, const double kappa, const Crystal_t<3, Atom>& c, const GSL::Vector& tau, const GSL::Vector& kp) const;
 
-    GSL::Complex operator()(const GSL::Vector& tau, const GSL::Vector& kp) const
+    GSL::Complex operator()(const lm l, const double kappa, const Crystal_t<3, Atom>& c, const GSL::Vector& tau, const GSL::Vector& kp) const
     {
-        return hankel_envelope(tau, kp);
+        return hankel_envelope(l, kappa, c, tau, kp);
+    }
+    GSL::Complex dot(const lm l, const double kappa, const Crystal_t<3, Atom>& c, const GSL::Vector& tau, const GSL::Vector& kp) const
+    {
+        return hankel_envelope_dot(l, kappa, c, tau, kp);
     }
 };
 

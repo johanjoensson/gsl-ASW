@@ -105,13 +105,13 @@ GSL::Complex Bloch_summed_structure_constant::operator()(
 		int sign = 1;
 		GSL::Result a;
 		GSL::Complex m_sum(0., 0.), sum(0., 0.);
+		Bloch_sum D;
 		for (int lpp = 0; lpp <= lint.l; lpp++){
 			m_sum = GSL::Complex(0., 0.);
 			for (int mpp = -lpp; mpp <= lpp; mpp++){
 				a = gaunt(lp, l, lm {lpp, mpp});
 				if (std::abs(a.val) > 1E-14){
-					Bloch_sum bloch_sum(lm {lpp, mpp}, kappa, c);
-				    m_sum += a.val*bloch_sum.hankel_envelope(tau, kp);
+				    m_sum += a.val*D(lm {lpp, mpp}, kappa, c, tau, kp);
 				}
 			}
 			sum += GSL::pow_int(-1/kappa, lpp)*m_sum;
@@ -140,16 +140,16 @@ GSL::Complex Bloch_summed_structure_constant::dot(
 		int sign = 1;
 		GSL::Result a;
 		GSL::Complex m_sum(0., 0.), sum(0., 0.);
+		Bloch_sum D;
 		for (int lpp = 0; lpp <= lint.l; lpp++){
 			m_sum = GSL::Complex(0., 0.);
 			for (int mpp = -lpp; mpp <= lpp; mpp++){
 				a = gaunt(lp, l, lm {lpp, mpp});
 				if (std::abs(a.val) > 1E-15){
-					Bloch_sum bloch_sum(lm {lpp, mpp}, kappa, c);
 				    m_sum += a.val*
-					(2*bloch_sum.hankel_envelope_dot(tau, kp) -
+					(2*D.dot(lm {lpp, mpp}, kappa, c, tau, kp) -
 					(l.l + lp.l - lpp)/
-					GSL::pow_int(kappa, 2)*bloch_sum.hankel_envelope(tau, kp));
+					GSL::pow_int(kappa, 2)*D(lm {lpp, mpp}, kappa, c, tau, kp));
 				}
 			}
 			sum += sign/(GSL::pow_int(kappa, lpp))*m_sum;

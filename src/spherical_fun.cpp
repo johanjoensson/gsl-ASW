@@ -42,15 +42,10 @@ double Neumann_function::operator()(const double x) const
     return n.val*x;
 }
 
-double Integral_Hankel_function::operator()(const double x) const
+double Integral_Hankel_function::operator()(const double kappa, const double eta, const double x) const
 {
-	return GSL::pow_int(2*x, l_m.l)*( I.ewald_int(l_m, x) +
-	  2./M_SQRTPI*I.comp_ewald_int(l_m, x));
-}
-
-void Integral_Hankel_function::set_ewald_param(const double eta)
-{
-	I.set_ewald_param(eta);
+	return GSL::pow_int(2*x, l_m.l)*( I.ewald_int(kappa, eta, l_m, x) +
+	  2./M_SQRTPI*I.comp_ewald_int(kappa, eta, l_m, x));
 }
 
 GSL::Result cubic_harmonic(const lm& l, GSL::Vector&& r)

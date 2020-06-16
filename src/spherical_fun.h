@@ -12,14 +12,14 @@ protected:
     lm l_m;
 public:
     Spherical_function() : l_m() {};
-    Spherical_function(const lm l_n):l_m(l_n){};
+    Spherical_function(const lm l_n):l_m(l_n){}
     Spherical_function(const Spherical_function& f) = default;
     Spherical_function(Spherical_function&& f) = default;
 
     Spherical_function& operator=(const Spherical_function& f) = default;
     Spherical_function& operator=(Spherical_function&& f) = default;
 
-    virtual ~Spherical_function(){};
+    virtual ~Spherical_function(){}
     virtual double operator()(const double x) const
         {return 0.*x;}
 
@@ -34,8 +34,8 @@ double wronskian(Spherical_function& a, Spherical_function& b, double r);
 class Hankel_function : public Spherical_function
 {
 public:
-    Hankel_function() : Spherical_function(){};
-    Hankel_function(const lm l_n) : Spherical_function(l_n){};
+    Hankel_function() : Spherical_function(){}
+    Hankel_function(const lm l_n) : Spherical_function(l_n){}
     double operator()(const double x) const override;
 };
 
@@ -60,10 +60,9 @@ class Integral_Hankel_function : public Hankel_function
 private:
     Ewald_integral I;
 public:
-    Integral_Hankel_function() : Hankel_function(), I(){ I.set_kappa(1.0);};
-    Integral_Hankel_function(const lm l_n) : Hankel_function(l_n), I(){ I.set_kappa(1.0);};
-    double operator()(const double x) const override;
-    void set_ewald_param(const double eta);
+    Integral_Hankel_function() : Hankel_function(), I(){};
+    using Hankel_function::operator();
+    double operator()(const double kappa, const double eta, const double x) const;
 };
 
 unsigned long int factorial(int n);

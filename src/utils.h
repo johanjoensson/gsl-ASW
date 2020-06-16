@@ -187,7 +187,7 @@ double lerp(X x, X x0, X x1, Y y0, Y y1)
     return 1/(x1 - x0) * ((x1 - x)*y0 + (x - x0)*y1);
 }
 
-double calc_eta();
+double calc_eta(const double volume);
 
 double calc_Rmax(const double vol, const double kappa, const lm &l, const double tol);
 double calc_Kmax(const double vol, const double kappa, const lm &l, const double tol);

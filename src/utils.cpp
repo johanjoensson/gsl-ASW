@@ -30,15 +30,13 @@ double calc_Rmax(const double vol, const double kappa, const lm &l, const double
     double eta = calc_eta(vol);
 
 	Ewald_integral I;
-	I.set_kappa(kappa);
-	I.set_ewald_param(eta);
 	double r = 1;
 
-    auto f = [l, I, tol](const double x)
+    auto f = [=](const double x)
     {
         double res;
-        res = (l.l*GSL::log(x) + GSL::log(I.ewald_int(l, x)) -
-        GSL::log(I.ewald_int(l, 1.)) - GSL::log(tol)).val;
+        res = (l.l*GSL::log(x) + GSL::log(I.ewald_int(kappa, eta, l, x)) -
+        GSL::log(I.ewald_int(kappa, eta, l, 1.)) - GSL::log(tol)).val;
         return res;
     };
 
@@ -55,12 +53,9 @@ double calc_Kmax(const double vol, const double kappa, const lm &l, const double
 {
     double eta = calc_eta(vol);
 
-	Ewald_integral I;
-	I.set_kappa(kappa);
-	I.set_ewald_param(eta);
 	double k = 1;
 
-    auto f = [l, I, kappa, eta, tol](const double x)
+    auto f = [=](const double x)
     {
         double res;
         res = -x*x + eta*(l.l*GSL::log(x) + GSL::log(1 + kappa*kappa) -
