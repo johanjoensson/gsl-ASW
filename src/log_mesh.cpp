@@ -18,7 +18,7 @@ Logarithmic_mesh::Logarithmic_mesh(double radius, size_t num_points, double A_n)
 }
 
 // Trapezoidal rule for integrals on a logarithmic mesh
-double Logarithmic_mesh::integrate(std::vector<double>& f)
+double Logarithmic_mesh::integrate(const std::vector<double>& f) const
 {
     if(this->size() != f.size()){
     	throw std::runtime_error("Mesh size does not match function size!\n");
@@ -31,7 +31,7 @@ double Logarithmic_mesh::integrate(std::vector<double>& f)
 }
 
 // Composite Simpson's rule for integrals on a logarithmic mesh
-double Logarithmic_mesh::integrate_simpson(std::vector<double>& f)
+double Logarithmic_mesh::integrate_simpson(const std::vector<double>& f) const
 {
     if(this->size() != f.size()){
     	throw std::runtime_error("Mesh size does not match function size!\n");

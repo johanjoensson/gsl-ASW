@@ -22,9 +22,9 @@ double Augmented_spherical_wave::operator()(const GSL::Vector &r) const
     GSL::Vector R(3);
     for(auto Js : Bs_m){
         for(Augmented_Bessel Jj : Js){
-            R = Jj.center - center.pos();
+            R =  - center.pos();
             Structure_constant B = Structure_constant(Js.back().l.n - 1, Jj.l, this->l);
-            res += Jj(r)*cubic_harmonic(Jj.l, r - Jj.center).val*B(R);
+            res += Jj(r)*cubic_harmonic(Jj.l, r).val*B(R);
         }
     }
 

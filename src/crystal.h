@@ -49,9 +49,13 @@ public:
 	std::vector<Atom>& atoms() {return atoms_m;}
 	std::vector<Atom> atoms() const {return atoms_m;}
 	std::array<size_t, dim>& size(){return size_m;}
+	Atom& atoms(const size_t i) {return atoms_m[i];}
+	Atom atoms(const size_t i) const{return atoms_m[i];}
+
 
 	Atom& atom(const Site_t<dim>& s) {return atoms_m[atom_index_m[s.index()]];}
 	Atom atom(const Site_t<dim>& s) const{return atoms_m[atom_index_m[s.index()]];}
+
 
 	size_t& atom_index(const Site_t<dim>& s) {return atom_index_m[s.index()];}
 	size_t atom_index(const Site_t<dim>& s) const {return atom_index_m[s.index()];}
@@ -75,6 +79,11 @@ void Crystal_t<dim, Atom>::add_sites(const std::vector<GSL::Vector>& positions)
 			atom_index_m.push_back(i);
 		}
 	}
+	std::cout << "[";
+	for(auto index : atom_index_m){
+		std::cout << index << ", ";
+	}
+	std::cout << "]";
 }
 
 template<size_t dim, class Atom>
@@ -169,9 +178,12 @@ std::vector<Neighbours<dim>> Crystal_t<dim, Atom>::calc_nearest_neighbours() con
 	std::vector<Neighbours<dim>> res(sites_m.size());
 	GSL::Vector ri, rj/*, zero_v(dim)*/;
 	for(size_t i = 0; i < sites_m.size(); i++){
-		for(size_t j = i + 1; j < sites_m.size(); j++){
+		for(size_t j = i; j < sites_m.size(); j++){
 			// Add all lattice vectors
 			for(const auto& R : R_m){
+				if(i == j && R == GSL::Vector(3)){
+					continue;
+				}
 				// Insert all atoms in the system
 				res[i].push_back(Site_t<dim>(j, sites_m[i].pos() - sites_m[j].pos() + R, size_m));
 				res[j].push_back(Site_t<dim>(i, sites_m[j].pos() - sites_m[i].pos() - R, size_m));
@@ -179,6 +191,7 @@ std::vector<Neighbours<dim>> Crystal_t<dim, Atom>::calc_nearest_neighbours() con
 			}
 		}
 		std::sort(res[i].begin(), res[i].end(), comp_norm_site<dim>);
+		std::cout << "Nearest neighbor for atom " << i << " is at relative position " << res[i].front().pos() << "\n";
 	}
 	return res;
 }

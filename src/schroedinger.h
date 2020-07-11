@@ -39,23 +39,23 @@ protected:
 	}
 
 private:
-    double h_m;
+    const double h_m;
 
 public:
 
-    Schroedinger_Equation(double e_min, double e_max, std::vector<double>& v, std::vector<double>& left_init, std::vector<double>& right_init, double h = 1e-3, double tol = 1e-10)
+    Schroedinger_Equation(const double e_min, const double e_max, const std::vector<double>& v, const std::vector<double>& left_init, const std::vector<double>& right_init, const double h = 1e-3, const double tol = 1e-10)
      : energy_m(0), e_min_m(e_min), e_max_m(e_max), v_m(v), psi_m(v.size(), 0),
        l_init_m(left_init), r_init_m(right_init), tol_m(tol), h_m(h)
     {}
 
-    Schroedinger_Equation(double e_min, double e_max, std::vector<double>& v,
-    std::vector<double>& left_init, std::vector<double>& right_init, Mesh&
-    mesh, double tol = 1e-10)
+    Schroedinger_Equation(const double e_min, const double e_max, const std::vector<double>& v,
+    const std::vector<double>& left_init, const std::vector<double>& right_init, const Mesh&
+    mesh, const double tol = 1e-10)
         : Schroedinger_Equation(e_min, e_max, v, left_init, right_init,
           mesh.dx(), tol)
     {};
 
-    Schroedinger_Equation() = default;
+    // Schroedinger_Equation() = default;
     Schroedinger_Equation(const Schroedinger_Equation &) = default;
     Schroedinger_Equation(Schroedinger_Equation &&) = default;
     virtual ~Schroedinger_Equation() = default;
@@ -63,7 +63,7 @@ public:
     Schroedinger_Equation& operator=(const Schroedinger_Equation&) = default;
     Schroedinger_Equation& operator=(Schroedinger_Equation&&) = default;
 
-    virtual double norm()
+    virtual double norm() const
     {
         double res = 0;
         for(auto it = psi_m.begin(); it != psi_m.end(); it++){
@@ -122,7 +122,7 @@ public:
         solve(nodes, 0.5*(e_min_m + e_max_m));
     }
 
-    virtual void solve(size_t nodes, double e_guess)
+    virtual void solve(const size_t nodes, const double e_guess)
     {
         std::vector<double> g(v_m.size(), 0), s(v_m.size(), 0);
         Numerov_solver sol;
@@ -204,9 +204,9 @@ public:
 
 class Radial_Schroedinger_Equation : public Schroedinger_Equation{
 protected:
-    Logarithmic_mesh mesh_p;
+    const Logarithmic_mesh& mesh_p;
 
-    double F_norm()
+    double F_norm() const
     {
         std::vector<double> integrand(mesh_p.size());
         for(size_t i = 0; i < mesh_p.size(); i++){
@@ -240,11 +240,11 @@ protected:
     }
 
 public:
-    Radial_Schroedinger_Equation(double e_min, double e_max,
-      std::vector<double>& v, size_t l, std::vector<double>& left_init,
-      std::vector<double>& right_init, Logarithmic_mesh& mesh,
-      double tol = 1e-10)
-      : Schroedinger_Equation(e_min, e_max, v, left_init, right_init, 1., tol),
+    Radial_Schroedinger_Equation(const double e_min, const double e_max,
+      const std::vector<double>& v, const size_t l, const std::vector<double>& left_init_n,
+      const std::vector<double>& right_init_n, const Logarithmic_mesh& mesh,
+      const double tol = 1e-10)
+      : Schroedinger_Equation(e_min, e_max, v, left_init_n, right_init_n, 1., tol),
         mesh_p(mesh)
     {
         if(mesh.size() != v.size()){
@@ -257,10 +257,12 @@ public:
             *v_c += static_cast<double>(l*(l + 1))/(*r2);
         }
 
-        for(auto l_i = left_init.begin(), drx_i = mesh.drx_begin(); l_i != left_init.end(); l_i++, drx_i++){
+        auto l_i = l_init_m.begin();
+        for(auto  drx_i = mesh.drx_begin(); l_i != l_init_m.end(); l_i++, drx_i++){
             *l_i /= *drx_i;
         }
-        for(auto r_i = right_init.rbegin(), drx_i = mesh.drx_rbegin(); r_i != right_init.rend(); r_i++, drx_i++){
+        auto r_i = r_init_m.rbegin();
+        for(auto drx_i = mesh.drx_rbegin(); r_i != r_init_m.rend(); r_i++, drx_i++){
             *r_i /= *drx_i;
         }
 
@@ -268,12 +270,12 @@ public:
 
     using Schroedinger_Equation::solve;
 
-    void solve(size_t nodes) override
+    void solve(const  size_t nodes) override
     {
         solve(nodes, 0.5*(e_min_m + e_max_m));
     }
 
-    void solve(size_t nodes, double e_guess) override
+    void solve(const  size_t nodes, const  double e_guess) override
     {
         std::vector<double> g(v_m.size(), 0), s(v_m.size(), 0);
         Numerov_solver sol;
@@ -286,7 +288,10 @@ public:
         while(n != nodes || (std::abs(de) > tol_m && std::abs(e_max_m - e_min_m) > tol_m)){
             inv = find_inversion_point(end_point, psi_m.rend(), v_m.rbegin());
 
-            for(auto v_i = v_m.begin(), g_i = g.begin(), drx_i = mesh_p.drx_begin(); v_i != v_m.end(); v_i++, g_i++, drx_i++){
+            auto v_i = v_m.begin();
+            auto g_i = g.begin();
+            auto drx_i = mesh_p.drx_begin();
+            for(; v_i != v_m.end(); v_i++, g_i++, drx_i++){
                 *g_i = (energy_m - *v_i)*GSL::pow_int(*drx_i, 2) -
                     GSL::pow_int(mesh_p.A(), 2)/4;
             }
@@ -323,12 +328,14 @@ public:
                 energy_m = 0.5*(e_min_m + e_max_m);
             }
         }
-        for(auto it = psi_m.begin(), drx_i = mesh_p.drx_begin(); it != psi_m.end(); it++, drx_i++){
+        auto it = psi_m.begin();
+        auto drx_i = mesh_p.drx_begin();
+        for(; it != psi_m.end(); it++, drx_i++){
             *it *= std::sqrt(*drx_i);
         }
     }
 
-    double norm() override
+    double norm() const override
     {
         std::vector<double> integrand(mesh_p.size());
         for(size_t i = 0; i < mesh_p.size(); i++){
@@ -350,9 +357,9 @@ public:
 
 class Radial_Schroedinger_Equation_Central_Potential : public Radial_Schroedinger_Equation{
 public:
-    Radial_Schroedinger_Equation_Central_Potential(std::vector<double>& v, size_t l, std::vector<double>& left_init,
-      std::vector<double>& right_init, Logarithmic_mesh& mesh,
-      double tol = 1e-10)
+    Radial_Schroedinger_Equation_Central_Potential(const std::vector<double>& v, const size_t l, const std::vector<double>& left_init,
+      const std::vector<double>& right_init, const Logarithmic_mesh& mesh,
+      const double tol = 1e-10)
     : Radial_Schroedinger_Equation(0, 0, v, l, left_init,
         right_init, mesh, tol)
     {

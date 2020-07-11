@@ -4,16 +4,17 @@
 #include "GSLpp/special_functions.h"
 #include "utils.h"
 #include "atom.h"
+#include "site.h"
 
 // Class/Functor for representing envelope funcitons
 class Envelope_function{
 public:
-    size_t center;
+    Site_t<3> center;
     lm l;
     double kappa;
 
     // Envelope_function() : center(), l(), kappa() {};
-    Envelope_function(const size_t& center, lm l, double kappa);
+    Envelope_function(const Site_t<3>& center, lm l, double kappa);
     Envelope_function(const Envelope_function&) = default;
     Envelope_function(Envelope_function&&) = default;
 
@@ -31,7 +32,7 @@ public:
     // Envelope_Hankel()
     //  :Envelope_function()
     //  {};
-    Envelope_Hankel(const size_t& center_n, lm l_n, double kappa_n)
+    Envelope_Hankel(const Site_t<3>& center_n, lm l_n, double kappa_n)
      : Envelope_function(center_n, l_n, kappa_n)
      {};
 
@@ -43,7 +44,7 @@ public:
     // Envelope_Bessel()
     //  :Envelope_function()
     //  {};
-    Envelope_Bessel(const size_t& center_n, lm l_n, double kappa_n)
+    Envelope_Bessel(const Site_t<3>& center_n, lm l_n, double kappa_n)
      : Envelope_function(center_n, l_n, kappa_n)
      {};
 
@@ -55,7 +56,7 @@ public:
     // Envelope_Neumann()
      // :Envelope_function()
      // {};
-    Envelope_Neumann(const size_t& center_n, lm l_n, double kappa_n)
+    Envelope_Neumann(const Site_t<3>& center_n, lm l_n, double kappa_n)
      : Envelope_function(center_n, l_n, kappa_n)
      {};
 

@@ -1,7 +1,7 @@
 #include "envelope_fun.h"
 #include "spherical_fun.h"
 
-Envelope_function::Envelope_function(const size_t& center_n, lm l_n, double kappa_n)
+Envelope_function::Envelope_function(const Site_t<3>& center_n, lm l_n, double kappa_n)
  : center(center_n), l(l_n), kappa(kappa_n)
 
 {}

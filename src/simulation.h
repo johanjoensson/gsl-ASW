@@ -23,9 +23,9 @@ class Simulation{
     std::vector<Hankel_container> Hs_m;
     std::vector<Bessel_container> Bs_m;
     Crystal_t<3, Atom> cryst;
+    std::vector<Logarithmic_mesh> at_meshes;
     Potential pot;
     Density n;
-    std::vector<Logarithmic_mesh> at_meshes;
     std::vector<Augmented_spherical_wave> basis_valence;
     std::vector<Augmented_spherical_wave> basis_core;
     std::map<GSL::Vector, GSL::Vector, GSLVecCompare> k_eigenvals;
@@ -34,18 +34,18 @@ class Simulation{
     void set_up_crystal();
     void set_up_basis();
     void set_up_augmented_functions();
-    void set_up_potential(std::function<double(const size_t, const double)> at_pot, const XC_FUN func);
+    void set_up_potential(const XC_FUN func);
     void init_augmented_functions();
 
 
     void add_states(const Site_t<3>& center, const double kappa);
 
-    double X_H1(const Augmented_Hankel& Ht1, const Augmented_Hankel& Ht2, const size_t& at);
-    double X_H2(const Augmented_Hankel& Ht1, const Augmented_Bessel& Jt2, const size_t& at);
-    double X_H3(const Augmented_Bessel& Jt1, const Augmented_Bessel& Jt2, const size_t& at);
-    double X_S1(const Augmented_Hankel& Ht1, const Augmented_Hankel& Ht2, const size_t& at);
-    double X_S2(const Augmented_Hankel& Ht1, const Augmented_Bessel& Jt2, const size_t& at);
-    double X_S3(const Augmented_Bessel& Jt1, const Augmented_Bessel& Jt2, const size_t& at);
+    double X_H1(const Augmented_Hankel& Ht1, const Augmented_Hankel& Ht2, const Site_t<3>& at);
+    double X_H2(const Augmented_Hankel& Ht1, const Augmented_Bessel& Jt2, const Site_t<3>& at);
+    double X_H3(const Augmented_Bessel& Jt1, const Augmented_Bessel& Jt2, const Site_t<3>& at);
+    double X_S1(const Augmented_Hankel& Ht1, const Augmented_Hankel& Ht2, const Site_t<3>& at);
+    double X_S2(const Augmented_Hankel& Ht1, const Augmented_Bessel& Jt2, const Site_t<3>& at);
+    double X_S3(const Augmented_Bessel& Jt1, const Augmented_Bessel& Jt2, const Site_t<3>& at);
 
 
     GSL::Complex H_element(const size_t i1, const size_t i2, const GSL::Vector& kp) const;

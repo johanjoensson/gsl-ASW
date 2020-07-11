@@ -180,6 +180,7 @@ GSL::Complex Bloch_sum::hankel_envelope_dot(const lm l, const double kappa, cons
             calc_d1_dot(l, kappa, c, tau, kp) +
             calc_d2_dot(l, kappa, c, tau, kp) +
             calc_d3_dot(l, kappa, c, tau)});
+
         return  calc_d1_dot(l, kappa, c, tau, kp) +
                 calc_d2_dot(l, kappa, c, tau, kp) +
                 calc_d3_dot(l, kappa, c, tau);

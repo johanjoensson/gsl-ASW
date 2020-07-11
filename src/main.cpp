@@ -55,6 +55,7 @@ numerov_debug.close();
 	std::cout << a << "\n";
 	std::cout << b << "\n";
 	std::cout << c << "\n";
+	// Crystal_t<3, Atom> cr(Lattice_t<3>({12*a, 12*b, 12*c}));
 	Crystal_t<3, Atom> cr(Lattice_t<3>({6*a, 6*b, 6*c}));
 
 	std::cout << "Crystal volume = " << cr.volume() << " (a.u.)^3\n";
@@ -91,15 +92,25 @@ numerov_debug.close();
 	tau[1] = 0.;
 	tau[2] = 0.5;
 	Atom C4(/*Logarithmic_mesh(),*/ tau*cr.lat().lat());
+	Atom C5(/*Logarithmic_mesh(),*/ tau*cr.lat().lat());
+	Atom C6(/*Logarithmic_mesh(),*/ tau*cr.lat().lat());
+	Atom C7(/*Logarithmic_mesh(),*/ tau*cr.lat().lat());
+	Atom C8(/*Logarithmic_mesh(),*/ tau*cr.lat().lat());
 
 	C1.set_Z(6);
 	C2.set_Z(6);
 	C3.set_Z(6);
 	C4.set_Z(6);
+	C5.set_Z(6);
+	C6.set_Z(6);
+	C7.set_Z(6);
+	C8.set_Z(6);
 
 	cr.set_size({1, 1, 1});
-	cr.add_basis({C1, C2});
-	cr.add_sites({{0, 0, 0}, {0.5, 0.5, 0.5}});
+	// cr.add_basis({C1});
+	cr.add_basis({C1, C2, C3, C4, C5, C6, C7, C8});
+	cr.add_sites({{0, 0, 0}, {0.5, 0, 0}, {0, 0.5, 0}, {0, 0, 0.5}, {0.5, 0.5, 0}, {0.5, 0, 0.5}, {0, 0.5, 0.5}, {0.5, 0.5, 0.5}});
+	// cr.add_sites({{0, 0, 0}});
 
 	std::cout << "Crystal contains " << cr.sites().size() << " sites\n";
 	std::cout << "Crystal contains " << cr.atoms().size() << " inequivalent atoms\n";

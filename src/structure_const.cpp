@@ -114,7 +114,7 @@ GSL::Complex Bloch_summed_structure_constant::operator()(
 				    m_sum += a.val*D(lm {lpp, mpp}, kappa, c, tau, kp);
 				}
 			}
-			sum += GSL::pow_int(-1/kappa, lpp)*m_sum;
+			sum += GSL::pow_int(-1./kappa, lpp)*m_sum;
 		}
 
 		if (lp.l % 2 == 0){

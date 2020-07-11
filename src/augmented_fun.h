@@ -12,19 +12,18 @@ public:
     lm l;
     double kappa;
     spin s;
-    GSL::Vector center;
     Logarithmic_mesh mesh;
     std::vector<double> val;
 
     double operator()(const GSL::Vector& r) const;
 
-    Augmented_function(): En(), l(), kappa(), s(), center(), mesh(), val(){}
+    Augmented_function() = default;
     Augmented_function(const Augmented_function&) = default;
     Augmented_function(Augmented_function&&) = default;
-    virtual ~Augmented_function() = default;
+    virtual ~Augmented_function(){}
 
     Augmented_function(const lm l, const double kappa, const spin s,
-        const GSL::Vector& center, const Logarithmic_mesh& mesh);
+        const Logarithmic_mesh& mesh);
 
     Augmented_function& operator=(const Augmented_function&) = default;
     Augmented_function& operator=(Augmented_function&&) = default;
@@ -49,13 +48,12 @@ public:
     double& EH(){return En;}
     double EH() const {return En;}
     Augmented_Hankel() = default;
-    Augmented_Hankel(const Augmented_Hankel& a) = default;
-    Augmented_Hankel(Augmented_Hankel&& a) = default;
-    ~Augmented_Hankel() = default;
+    Augmented_Hankel(const Augmented_Hankel&) = default;
+    Augmented_Hankel(Augmented_Hankel&&) = default;
+    ~Augmented_Hankel(){}
 
     Augmented_Hankel(const lm l, const double kappa, const spin s,
-        const GSL::Vector& center, const Logarithmic_mesh& mesh);
-
+        const Logarithmic_mesh& mesh);
 
     Augmented_Hankel& operator=(const Augmented_Hankel& a) = default;
     Augmented_Hankel& operator=(Augmented_Hankel&& a) = default;
@@ -68,15 +66,16 @@ public:
     double& EJ(){return En;}
     double EJ() const {return En;}
     Augmented_Bessel() = default;
-    Augmented_Bessel(const Augmented_Bessel& a) = default;
-    Augmented_Bessel(Augmented_Bessel&& a) = default;
-    ~Augmented_Bessel() = default;
+    Augmented_Bessel(const Augmented_Bessel&) = default;
+    Augmented_Bessel(Augmented_Bessel&&) = default;
+    ~Augmented_Bessel(){}
 
-    Augmented_Bessel(const lm l, const double kappa, const spin s, const GSL::Vector& center, const Logarithmic_mesh& mesh);
+    Augmented_Bessel(const lm l, const double kappa, const spin s,
+        const Logarithmic_mesh& mesh);
 
 
     Augmented_Bessel& operator=(const Augmented_Bessel& a) = default;
-    Augmented_Bessel& operator=(Augmented_Bessel&& a) = default;
+    Augmented_Bessel& operator=( Augmented_Bessel&& a) = default;
 
     void update(std::vector<double>& v, const double en, const bool core) override;
 };

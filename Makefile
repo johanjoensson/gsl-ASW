@@ -29,14 +29,14 @@ GSLLIBROOT=../GSL-lib
 OLEVEL = -Og -O1
 WFLAGS = -Wall -Wextra -pedantic -Wshadow -Wnon-virtual-dtor -Wold-style-cast -Wcast-align -Wunused -Woverloaded-virtual -Wpedantic -Wconversion -Wsign-conversion -Wnull-dereference -Wdouble-promotion -Wformat=2 -Weffc++ -Wmisleading-indentation -Wduplicated-cond -Wduplicated-branches -Wlogical-op  -Wuseless-cast -Werror
 # Flags for the above defined compilers
-CXXFLAGS = -std=c++14 $(WFLAGS) -I $(SRC_DIR) -I $(GSLLIBROOT)/include $(OLEVEL)  -DNoDEBUG -g -pg
+CXXFLAGS = -std=c++14 $(WFLAGS) -I $(SRC_DIR) -I $(GSLLIBROOT)/include $(OLEVEL)  -DDEBUG -g -pg
 
 CXXCHECKS =clang-analyzer-*,-clang-analyzer-cplusplus*,cppcoreguidelines-*,bugprone-* 
 CXXCHECKFLAGS = -checks=$(CXXCHECKS) -header-filter=.* -- -std=c++11 -I$(GSLLIBROOT)/include
 
 # Libraries to link against
 GSLLIBDIR=$(GSLLIBROOT)/lib/GSLpp
-LDFLAGS = -pg -L$(GSLLIBDIR) -L. -Wl,-rpath=$(GSLLIBDIR) -lGSLpp -lxc -lm -lgsl -lpthread $(OLEVEL) -flto
+LDFLAGS = -pg -L$(GSLLIBDIR) -L. -Wl,-rpath=$(GSLLIBDIR) -lGSLpp -lxc -lm -lpthread $(OLEVEL) -flto
 
 # List of all executables in this project
 EXE = gsl-asw
