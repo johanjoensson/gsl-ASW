@@ -23,19 +23,6 @@ class Numerov_solver{
 	* \t__res_end__ - Iterator pointing to the element one past the last element of the result container.\n
 	*\t__g_start__ - Iterator pointing to the first element of  the g container
 	***************************************************************************/
-	// template<class Iter_res, class Iter_g>
-	// Iter_g find_inversion_point(Iter_res res_start, Iter_res res_end,  Iter_g
-	// 	g_start)
-	// {
-	// 	int init_sign = signum(*g_start);
-	// 	Iter_res current = res_start;
-	// 	Iter_g current_g = g_start;
-	// 	while(current != res_end && signum(*current_g) == init_sign){
-	// 		current++;
-	// 		current_g++;
-	// 	}
-	// 	return current;
-	// }
 
 	template<class Iter_res, class Iter_g, class Iter_s, class Iter_init>
 	Iter_res solve_direction(Iter_res res_start, Iter_res res_end, Iter_init
@@ -62,17 +49,13 @@ class Numerov_solver{
 			current_s++;
 		}
 
-		auto f = [](Iter_g g){return 1 + *g/12.;};
+		auto f = [](Iter_g g){return 1 + *g/12;};
 		// Solve equation
 		while(current != res_end){
 			*current = 	(*previous)*(12 - 10*f(previous_g)) -
 						(*pprevious)*f(pprevious_g) +
 						1./12*((*current_s) + 10*(*previous_s) +(*pprevious_s));
-			// *current = 	2*(*previous)*(1 - 5./12*(*previous_g)) -
-			// 			(*pprevious)*(1 + 1./12*(*pprevious_g)) +
-			// 			1./12*((*current_s) + 10*(*previous_s) +(*pprevious_s));
 			*current /= f(current_g);
-			// *current /= 1 + 1./12*(*current_g);
 
 			pprevious = previous;
 			pprevious_g = previous_g;

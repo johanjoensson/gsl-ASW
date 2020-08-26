@@ -50,22 +50,23 @@ void harmonic_oscillator()
 void coulomb_potential()
 {
     unsigned int len = 1000;
-	double r0 = 16;
-    unsigned int z = 1;
-    unsigned int n = 1;
-    unsigned int l = 0;
-	std::vector<double> v(len, r0);
+    double r0 = 56;
+    int z = 1;
+    int n = 2;
+    int l = 4;
+    std::vector<double> v(len, r0);
     Logarithmic_mesh mesh(r0, len);
     auto pot = [z](double r){return -2.*z/r;};
     auto r_c = mesh.r_begin();
-	for(auto it = v.begin(); it != v.end(); it++, r_c++){
-		*it = pot(*r_c);
-	}
-	std::vector<double> left = { 0., GSL::pow_int(-1, static_cast<int>(n - l) - 1)*GSL::pow_int(mesh.r(1), static_cast<int>(l)+1), GSL::pow_int(-1, static_cast<int>(n - l) - 1)*GSL::pow_int(mesh.r(2), static_cast<int>(l)+1)};
-	std::vector<double> right = {0.001, 0};
+    for(auto it = v.begin(); it != v.end(); it++, r_c++){
+	    *it = pot(*r_c);
+    }
+    std::vector<double> left = { 0., GSL::pow_int(-1, (n - l - 1))*GSL::pow_int(mesh.r(1), l + 1), GSL::pow_int(-1, (n - l - 1))*GSL::pow_int(mesh.r(2), l + 1)};
+    std::vector<double> right = {0.001, 0};
 
-	Radial_Schroedinger_Equation_Central_Potential se(v, l, left, right, mesh, 1e-14);
-	se.solve(n - l - 1, -GSL::pow_int(static_cast<double>(z)/n, 2));
+    unsigned int nodes = static_cast<unsigned int>(std::max(n - l - 1, 0));
+    Radial_Schroedinger_Equation_Central_Potential se(v, static_cast<unsigned int>(l), left, right, mesh, 1e-14);
+    se.solve(nodes, -GSL::pow_int(z/n, 2));
     se.normalize();
 
     std::cout << "Found energy : " << se.e() << "\n";
@@ -73,13 +74,13 @@ void coulomb_potential()
     auto v_i = se.v().begin();
     auto r_i = mesh.r_begin();
     auto drx_i = mesh.drx_begin();
-	while(psi_i != se.psi().end()){
-		outfile << *r_i << " " << (*psi_i) << " " << *v_i << "\n";
-        psi_i++;
-        v_i++;
-        r_i++;
-        drx_i++;
-	}
+    while(psi_i != se.psi().end()){
+	    outfile << *r_i << " " << (*psi_i) << " " << *v_i << "\n";
+	    psi_i++;
+	    v_i++;
+	    r_i++;
+	    drx_i++;
+    }
     outfile << "\n\n";
 }
 

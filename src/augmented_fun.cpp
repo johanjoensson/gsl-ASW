@@ -37,10 +37,8 @@ double augmented_integral(const Augmented_function &a, const Augmented_function 
     std::vector<double> integrand(a.val.size(), 0);
 
     for(size_t i = 0; i < integrand.size(); i++){
-        // std::cout << a.val[i] << "\t" << b.val[i] << "\n";
     	integrand[i] = a.val[i]*b.val[i];
     }
-    // return mesh.integrate(integrand);
     return mesh.integrate_simpson(integrand);
 }
 
@@ -63,7 +61,7 @@ void Augmented_Hankel::update(std::vector<double>& v, const double en
     , const bool core)
 {
     EH() = en;
-    size_t nodes = static_cast<size_t>(l.n - l.l - 1);
+    size_t nodes = static_cast<size_t>(std::max(0, l.n - l.l - 1));
     size_t last = mesh.size() - 1, lastbutone = mesh.size() - 2;
 
     Hankel_function H(l);
@@ -112,7 +110,7 @@ void Augmented_Bessel::update(std::vector<double>& v, const double en
     , const bool core)
 {
     EJ() = en;
-    size_t nodes =  static_cast<size_t>(l.n - l.l - 1);
+    size_t nodes = static_cast<size_t>(std::max(0, l.n - l.l - 1));
     int sign = 1;
     if(nodes % 2 == 1){
 	    sign = -1;
@@ -187,8 +185,8 @@ Augmented_Hankel& Hankel_container::get_function(const lm& l, const double& kapp
         }
         return false;
     };
-    Augmented_Hankel H({l.n, l.l, -l.l}, kappa, s, Logarithmic_mesh());
-    auto it = std::lower_bound(functions.begin(), functions.end(), H, cmp);
+    auto it = std::lower_bound(functions.begin(), functions.end(),
+        Augmented_Hankel ({l.n, l.l, -l.l}, kappa, s, Logarithmic_mesh()), cmp);
     if(it == functions.end()){
         throw std::runtime_error("Hankel function, " + l.to_string() + ", not found!\n");
     }
@@ -210,8 +208,8 @@ size_t Hankel_container::get_index(const lm& l, const double& kappa, const spin&
         }
         return false;
     };
-    Augmented_Hankel H({l.n, l.l, -l.l}, kappa, s, Logarithmic_mesh());
-    auto it = std::lower_bound(functions.begin(), functions.end(), H, cmp);
+    auto it = std::lower_bound(functions.begin(), functions.end(),
+            Augmented_Hankel ({l.n, l.l, -l.l}, kappa, s, Logarithmic_mesh()), cmp);
     if(it == functions.end()){
         throw std::runtime_error("Hankel function, " + l.to_string() + ", not found!\n");
     }
@@ -252,8 +250,8 @@ Augmented_Bessel& Bessel_container::get_function(const lm& l, const double& kapp
         }
         return false;
     };
-    Augmented_Bessel J({l.n, l.l, -l.l}, kappa, s, Logarithmic_mesh());
-    auto it = std::lower_bound(functions.begin(), functions.end(), J, cmp);
+    auto it = std::lower_bound(functions.begin(), functions.end(),
+        Augmented_Bessel ({l.n, l.l, -l.l}, kappa, s, Logarithmic_mesh()), cmp);
     if(it == functions.end()){
         throw std::runtime_error("Bessel function, " + l.to_string() + ", not found!\n");
     }
@@ -276,9 +274,39 @@ size_t Bessel_container::get_index(const lm& l, const double& kappa, const spin&
         return false;
     };
     Augmented_Bessel J({l.n, l.l, -l.l}, kappa, s, Logarithmic_mesh());
-    auto it = std::lower_bound(functions.begin(), functions.end(), J, cmp);
+    auto it = std::lower_bound(functions.begin(), functions.end(),
+            Augmented_Bessel ({l.n, l.l, -l.l}, kappa, s, Logarithmic_mesh()), cmp);
     if(it == functions.end()){
         throw std::runtime_error("Bessel function, " + l.to_string() + ", not found!\n");
     }
     return static_cast<size_t>(std::distance(functions.begin(), it));
+}
+
+lm Bessel_container::min_lm() const
+{
+    auto cmp = [](const Augmented_Bessel& J1, const Augmented_Bessel& J2)
+        {
+            return J1.l < J2.l;
+        };
+    auto it = std::min_element(functions.begin(), functions.end(), cmp);
+    if(it == functions.end()){
+        throw std::runtime_error("Minimum element not found!\n");
+    }
+    return it->l;
+
+}
+
+
+lm Bessel_container::max_lm() const
+{
+    auto cmp = [](const Augmented_Bessel& J1, const Augmented_Bessel& J2)
+        {
+            return J1.l < J2.l;
+        };
+    auto it = std::max_element(functions.begin(), functions.end(), cmp);
+    if(it == functions.end()){
+        throw std::runtime_error("Maximum element not found!\n");
+    }
+    return it->l;
+
 }

@@ -172,8 +172,12 @@ public:
     void add_function(const Augmented_Bessel&);
     Augmented_Bessel& get_function(const lm& l, const double& kappa,
         const spin& s);
+    Augmented_Bessel& get_function(size_t index){ return functions[index];}
     size_t get_index(const lm& l, const double& kappa,
         const spin& s) const;
+
+    lm max_lm() const;
+    lm min_lm() const;
 
     std::vector<Augmented_Bessel>::iterator begin()
     {

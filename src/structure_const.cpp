@@ -89,78 +89,148 @@ std::ostream& operator << ( std::ostream& os, const Structure_constant& B)
 	return os;
 }
 
-std::unordered_map<Bloch_summed_structure_constant::Key, GSL::Complex> Bloch_summed_structure_constant::values_m{};
-std::unordered_map<Bloch_summed_structure_constant::Key, GSL::Complex> Bloch_summed_structure_constant::dot_values_m{};
-
-GSL::Complex Bloch_summed_structure_constant::operator()(
-	const Crystal_t<3, Atom>& c, const lm lint, const lm& l, const lm& lp, const double kappa,
-	const GSL::Vector& tau,	const GSL::Vector& kp) const
+void Bloch_summed_structure_constant::Container::add(const Crystal_t<3, Atom>& c, const lm& lint, const lm& lp, const lm& l, const double kappa, const GSL::Vector& tau,	const GSL::Vector& kp)
 {
-	auto it = values_m.find({l, lp, kappa, tau, kp});
-	if(it != values_m.end()){
-		return it->second;
-	}else{
-		double k_fac = GSL::pow_int(kappa, l.l + lp.l);
-
-		int sign = 1;
-		GSL::Result a;
-		GSL::Complex m_sum(0., 0.), sum(0., 0.);
-		Bloch_sum D;
-		for (int lpp = 0; lpp <= lint.l; lpp++){
-			m_sum = GSL::Complex(0., 0.);
-			for (int mpp = -lpp; mpp <= lpp; mpp++){
-				a = gaunt(lp, l, lm {lpp, mpp});
-				if (std::abs(a.val) > 1E-14){
-				    m_sum += a.val*D(lm {lpp, mpp}, kappa, c, tau, kp);
-				}
-			}
-			sum += GSL::pow_int(-1./kappa, lpp)*m_sum;
-		}
-
-		if (lp.l % 2 == 0){
-			sign = 1;
-		}else{
-			sign = -1;
-		}
-		values_m.insert({{l, lp, kappa, tau, kp},{4*M_PI*sign*k_fac*sum}});
-		return 4*M_PI*sign*k_fac*sum;
-	}
+	Bloch_summed_structure_constant B;
+	values_m.insert({{l, lp, kappa, tau, kp},B.calc(c, lint, lp, l, kappa, tau, kp, D_m)});
+	dot_values_m.insert({{l, lp, kappa, tau, kp},B.dot(c, lint, lp, l, kappa, tau, kp, D_m)});
 }
 
-GSL::Complex Bloch_summed_structure_constant::dot(
-	const Crystal_t<3, Atom>& c, const lm lint, const lm& l, const lm& lp, const double kappa,
-	const GSL::Vector& tau, const GSL::Vector& kp) const
+GSL::Complex Bloch_summed_structure_constant::Container::get(const Crystal_t<3, Atom>& c, const lm& lint, const lm& lp, const lm& l, const double kappa, const GSL::Vector& tau,	const GSL::Vector& kp)
 {
-	auto it = dot_values_m.find({l, lp, kappa, tau, kp});
+	// Check if value has already been calculated
+	auto it = values_m.find({lp, l, kappa, tau, kp});
+	if(it != values_m.end()){
+		return it->second;
+	}
+	it = values_m.find({l, lp, kappa, tau, kp});
+	if(it != values_m.end()){
+		return (l.l - lp.l) % 2 == 0 ? it->second : -it->second;
+	}
+	it = values_m.find({lp, l, kappa, -tau, -kp});
+	if(it != values_m.end()){
+		return (l.l - lp.l) % 2 == 0 ? it->second : -it->second;
+	}
+	it = values_m.find({lp, l, kappa, tau, -kp});
+	if(it != values_m.end()){
+		return it->second.conjugate();
+	}
+	// Value not already calculated, calculate!
+	this->add(c, lint, lp, l, kappa, tau, kp);
+	const Bloch_summed_structure_constant B;
+	return B.calc(c, lint, lp, l, kappa, tau, kp, D_m);
+}
+
+GSL::Complex Bloch_summed_structure_constant::Container::get_dot(const Crystal_t<3, Atom>& c, const lm& lint, const lm& lp, const lm& l, const double kappa,
+	const GSL::Vector& tau,	const GSL::Vector& kp)
+{
+	// Check if value has already been calculated
+	auto it = dot_values_m.find({lp, l, kappa, tau, kp});
 	if(it != dot_values_m.end()){
 		return it->second;
-	}else{
-		double k_fac = GSL::pow_int(kappa, l.l + lp.l);
-
-		int sign = 1;
-		GSL::Result a;
-		GSL::Complex m_sum(0., 0.), sum(0., 0.);
-		Bloch_sum D;
-		for (int lpp = 0; lpp <= lint.l; lpp++){
-			m_sum = GSL::Complex(0., 0.);
-			for (int mpp = -lpp; mpp <= lpp; mpp++){
-				a = gaunt(lp, l, lm {lpp, mpp});
-				if (std::abs(a.val) > 1E-15){
-				    m_sum += a.val*
-					(2*D.dot(lm {lpp, mpp}, kappa, c, tau, kp) -
-					(l.l + lp.l - lpp)/
-					GSL::pow_int(kappa, 2)*D(lm {lpp, mpp}, kappa, c, tau, kp));
-				}
-			}
-			sum += sign/(GSL::pow_int(kappa, lpp))*m_sum;
-			sign = -sign;
-		}
-		if (lp.l % 2 == 0){
-			sign = 1;
-		}else{
-			sign  = -1;
-		}
-		dot_values_m.insert({{l, lp, kappa, tau, kp},{2*M_PI*sign*k_fac*sum}});
-		return 2*M_PI*sign*k_fac*sum;
 	}
+	it = dot_values_m.find({l, lp, kappa, tau, kp});
+	if(it != dot_values_m.end()){
+		return (l.l - lp.l) % 2 == 0 ? it->second : -it->second;
+	}
+	it = dot_values_m.find({lp, l, kappa, -tau, -kp});
+	if(it != dot_values_m.end()){
+		return (l.l - lp.l) % 2 == 0 ? it->second : -it->second;
+	}
+	it = dot_values_m.find({lp, l, kappa, tau, -kp});
+	if(it != dot_values_m.end()){
+		return it->second.conjugate();
+	}
+	// Value not already calculated, calculate!
+	this->add(c, lint, lp, l, kappa, tau, kp);
+	const Bloch_summed_structure_constant B;
+	return B.calc_dot(c, lint, lp, l, kappa, tau, kp, D_m);
+}
+
+void Bloch_summed_structure_constant::Container::recalculate_all(const Crystal_t<3, Atom>& c, const lm& lint)
+{
+    auto old_values = values_m;
+    auto old_dot_values = dot_values_m;
+
+    values_m.clear();
+    dot_values_m.clear();
+
+	D_m.recalculate_all(c);
+    for(const auto& it : old_values){
+        auto lp = std::get<0>(it.first);
+		auto l = std::get<1>(it.first);
+        auto kappa = std::get<2>(it.first);
+        auto tau = std::get<3>(it.first);
+        auto kp = std::get<4>(it.first);
+        this->add(c, lint, lp, l, kappa, tau, kp);
+    }
+
+	for(const auto& it : old_dot_values){
+        auto lp = std::get<0>(it.first);
+		auto l = std::get<1>(it.first);
+        auto kappa = std::get<2>(it.first);
+        auto tau = std::get<3>(it.first);
+        auto kp = std::get<4>(it.first);
+        this->dot(c, lint, lp, l, kappa, tau, kp);
+    }
+}
+
+GSL::Complex Bloch_summed_structure_constant::calc(
+	const Crystal_t<3, Atom>& c, const lm& lint, const lm& lp, const lm& l, const double kappa,
+	const GSL::Vector& tau,	const GSL::Vector& kp) const
+{
+	Bloch_sum::Container Ds;
+	return this->calc(c, lint, lp, l, kappa, tau, kp, Ds);
+}
+
+GSL::Complex Bloch_summed_structure_constant::calc(
+	const Crystal_t<3, Atom>& c, const lm& lint, const lm& lp, const lm& l, const double kappa,
+	const GSL::Vector& tau,	const GSL::Vector& kp, Bloch_sum::Container& Ds) const
+{
+	GSL::Complex sum(0., 0.);
+	for (int lpp = 0; lpp <= lint.l; lpp++){
+		for (int mpp = -lpp; mpp <= lpp; mpp++){
+			GSL::Result a = gaunt(l, lp, lm {lpp, mpp});
+			if (std::abs(a.val) > 1E-15){
+			    sum += GSL::pow_int(-1, lpp)*GSL::pow_int(1./kappa, lpp)*
+				a.val*Ds(lm {lpp, mpp}, kappa, c, tau, kp);
+			}
+		}
+	}
+
+	double k_fac = GSL::pow_int(kappa, l.l + lp.l);
+	int sign = l.l % 2 == 0 ? 1 : -1;
+
+	return 4*M_PI*sign*k_fac*sum;
+}
+
+GSL::Complex Bloch_summed_structure_constant::calc_dot(
+	const Crystal_t<3, Atom>& c, const lm& lint, const lm& lp, const lm& l, const double kappa,
+	const GSL::Vector& tau, const GSL::Vector& kp) const
+{
+	Bloch_sum::Container Ds;
+	return this->calc_dot(c, lint, lp, l, kappa, tau, kp, Ds);
+}
+GSL::Complex Bloch_summed_structure_constant::calc_dot(
+	const Crystal_t<3, Atom>& c, const lm& lint, const lm& lp, const lm& l, const double kappa,
+	const GSL::Vector& tau, const GSL::Vector& kp, Bloch_sum::Container& Ds) const
+{
+	GSL::Result a;
+	GSL::Complex sum(0., 0.);
+	for (int lpp = 0; lpp <= lint.l; lpp++){
+		for (int mpp = -lpp; mpp <= lpp; mpp++){
+			a = gaunt(l, lp, lm {lpp, mpp});
+			if (std::abs(a.val) > 1E-15){
+				sum += a.val*
+				(2*Ds.dot(lm {lpp,	 mpp}, kappa, c, tau, kp) -
+				(l.l + lp.l - lpp)/GSL::pow_int(kappa, 2)*
+				Ds(lm {lpp, mpp}, kappa, c, tau, kp))*
+				GSL::pow_int(-1, lpp)*GSL::pow_int(1./kappa, lpp);
+			}
+		}
+	}
+	double k_fac = GSL::pow_int(kappa, l.l + lp.l);
+	int sign = l.l % 2 == 0 ? 1 : -1;
+
+	return 2*M_PI*sign*k_fac*sum;
 }

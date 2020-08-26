@@ -5,8 +5,82 @@
 #include <cmath>
 #include <string>
 
-std::unordered_map<Bloch_sum::Key, GSL::Complex> Bloch_sum::values_m{};
-std::unordered_map<Bloch_sum::Key, GSL::Complex> Bloch_sum::dot_values_m{};
+void Bloch_sum::Container::add(const lm l, const double kappa, const Crystal_t<3, Atom>& c, const GSL::Vector& tau, const GSL::Vector& kp)
+{
+    Bloch_sum D;
+    values_m.insert({{l, kappa, tau, kp}, D(l, kappa, c, tau, kp)});
+    dot_values_m.insert({{l, kappa, tau, kp}, D.dot(l, kappa, c, tau, kp)});
+}
+
+GSL::Complex Bloch_sum::Container::get(const lm l, const double kappa, const Crystal_t<3, Atom>& c, const GSL::Vector& tau, const GSL::Vector& kp)
+{
+    auto it = values_m.find({l, kappa, tau, kp});
+    if(it != values_m.end()){
+        return it->second;
+    }
+    it = values_m.find({l, kappa, -tau, -kp});
+    if(it != values_m.end()){
+        return (l.l % 2) == 0 ? it->second : -it->second;
+    }
+    it = values_m.find({l, kappa, tau, -kp});
+    if(it != values_m.end()){
+        return it->second.conjugate();
+    }
+    it = values_m.find({l, kappa, -tau, kp});
+    if(it != values_m.end()){
+        return (l.l % 2) == 0 ? it->second.conjugate() : -it->second.conjugate();
+    }
+    Bloch_sum D;
+    this->add(l, kappa, c, tau, kp);
+    return D(l, kappa, c, tau, kp);
+}
+
+GSL::Complex Bloch_sum::Container::get_dot(const lm l, const double kappa, const Crystal_t<3, Atom>& c, const GSL::Vector& tau, const GSL::Vector& kp)
+{
+    auto it = dot_values_m.find({l, kappa, tau, kp});
+    if(it != dot_values_m.end()){
+        return it->second;
+    }
+    it = dot_values_m.find({l, kappa, -tau, -kp});
+    if(it != dot_values_m.end()){
+        return (l.l % 2) == 0 ? it->second : -it->second;
+    }
+    it = dot_values_m.find({l, kappa, tau, -kp});
+    if(it != dot_values_m.end()){
+        return it->second.conjugate();
+    }
+    it = dot_values_m.find({l, kappa, -tau, kp});
+    if(it != dot_values_m.end()){
+        return (l.l % 2) == 0 ? it->second.conjugate() : -it->second.conjugate();
+    }
+    Bloch_sum D;
+    this->add(l, kappa, c, tau, kp);
+    return D.dot(l, kappa, c, tau, kp);
+}
+
+void Bloch_sum::Container::recalculate_all(const Crystal_t<3, Atom>& c)
+{
+    auto old_values = values_m;
+    auto old_dot_values = dot_values_m;
+
+    values_m.clear();
+    dot_values_m.clear();
+
+    for(const auto& it : old_values){
+        auto l = std::get<0>(it.first);
+        auto kappa = std::get<1>(it.first);
+        auto tau = std::get<2>(it.first);
+        auto kp = std::get<3>(it.first);
+        this->add(l, kappa, c, tau, kp);
+    }
+    for(const auto& it : old_dot_values){
+        auto l = std::get<0>(it.first);
+        auto kappa = std::get<1>(it.first);
+        auto tau = std::get<2>(it.first);
+        auto kp = std::get<3>(it.first);
+        this->add(l, kappa, c, tau, kp);
+    }
+}
 
 GSL::Complex Bloch_sum::calc_d1(const lm l, const double kappa, const Crystal_t<3, Atom>& c, const GSL::Vector& tau, const GSL::Vector& kp) const
 {
@@ -18,14 +92,11 @@ GSL::Complex Bloch_sum::calc_d1(const lm l, const double kappa, const Crystal_t<
     double k, dot;
     // Loop over all K-vectors
     for(const auto& Kn : c.Kn_vecs()){
-        // GSL::Vector kn(Kn + kp);
-        if(Kn + kp == GSL::Vector(3)){
+        if((Kn + kp).norm2() < 1e-16){
             continue;
         }
-        // k = kn.norm<double>();
         dot = tau.dot(Kn + kp);
         k = (Kn + kp).norm();
-        // kn.normalize();
         e = GSL::exp(GSL::Complex(0., dot));
         tmp = GSL::pow_int(k, l.l)*cubic_harmonic(l, (Kn + kp)/k)*
               GSL::exp((-kappa*kappa - k*k)/eta)/(-kappa*kappa - k*k);
@@ -51,7 +122,7 @@ GSL::Complex Bloch_sum::calc_d1_dot(const lm l, const double kappa, const Crysta
     const double eta = calc_eta(c.volume());
     for(const auto& Kn : c.Kn_vecs()){
         // GSL::Vector kn(Kn + kp);
-        if(Kn + kp == GSL::Vector(3)){
+        if((Kn + kp).norm2() < 1e-16){
             continue;
         }
         // k = kn.norm<double>();
@@ -82,20 +153,17 @@ GSL::Complex Bloch_sum::calc_d2(const lm l, const double kappa, const Crystal_t<
     double t = 0, dot = 0;
     GSL::Result tmp;
     // Loop over all lattice vectors
-    for(const auto& Rn : c.Rn_vecs()){
-        if((tau == GSL::Vector(3) && Rn == GSL::Vector(3))){
+    for(const auto Rn : c.Rn_vecs()){
+        if((tau - Rn).norm2() < 1e-16){
             continue;
         }
-        // GSL::Vector tau_mu(tau - Rn);
-        // t = tau_mu.norm<double>();
         t = (tau - Rn).norm();
         dot = kp.dot(tau - Rn);
-        // tau_mu.normalize();
         tmp = GSL::pow_int(t, l.l)*cubic_harmonic(l, (tau - Rn)/t)*I.ewald_int(kappa, calc_eta(c.volume()), l, t);
         e = GSL::exp(GSL::Complex(0., -dot));
         d2 += e*tmp.val;
     }
-    d2 *= GSL::pow_int(2, l.l)*GSL::exp(GSL::Complex(0., kp.dot(tau)));
+    d2 *= GSL::pow_int(2, l.l)*GSL::exp(GSL::Complex(0, kp.dot(tau)));
     return d2;
 }
 
@@ -106,17 +174,13 @@ GSL::Complex Bloch_sum::calc_d2_dot(const lm l, const double kappa, const Crysta
     double t = 0, dot = 0;
     GSL::Result tmp;
     // Loop over all lattice vectors
-    for(const auto& Rn : c.Rn_vecs()){
+    for(const auto Rn : c.Rn_vecs()){
         // Do not add unit cell contribution at (0, 0, 0)
-        if(tau == GSL::Vector(3) && Rn == GSL::Vector(3)){
+        if((tau - Rn).norm2() < 1e-16){
             continue;
         }
-        // GSL::Vector tau_mu(tau - Rn);
-        // t = tau_mu.norm<double>();
         t = (tau - Rn).norm<double>();
-        // dot = kp.dot(tau_mu);
         dot = kp.dot(tau - Rn);
-        // tau_mu.normalize();
         tmp = GSL::pow_int(t, l.l)*cubic_harmonic(l, (tau - Rn)/t)*
               I.ewald_int(kappa, calc_eta(c.volume()), lm {l.l - 1, 0}, t);
         e = GSL::exp(GSL::Complex(0., -dot));
@@ -150,39 +214,21 @@ GSL::Complex Bloch_sum::calc_d3_dot(const lm l, const double kappa, const Crysta
     // delta(tau) * delta(l, 0)
     GSL::Result d3_dot = 1./(8*M_SQRTPI*kappa) * (GSL::erfc(-kappa/std::sqrt(eta)) -
         GSL::erfc(kappa/std::sqrt(eta))) -
-	1./(4*M_SQRTPI*kappa);
+	       1./(4*M_SQRTPI*kappa);
+
     return GSL::Complex(d3_dot.val, 0);
 }
 
 GSL::Complex Bloch_sum::hankel_envelope(const lm l, const double kappa, const Crystal_t<3, Atom>& c, const GSL::Vector& tau, const GSL::Vector& kp) const
 {
-    auto it = values_m.find({l, kappa, tau, kp});
-    if(it != values_m.end()){
-        return it->second;
-    }else{
-        values_m.insert({{l, kappa, tau, kp},
-            calc_d1(l, kappa, c, tau, kp) +
+    return  calc_d1(l, kappa, c, tau, kp) +
             calc_d2(l, kappa, c, tau, kp) +
-            calc_d3(l, kappa, c, tau)});
-        return  calc_d1(l, kappa, c, tau, kp) +
-                calc_d2(l, kappa, c, tau, kp) +
-                calc_d3(l, kappa, c, tau);
-    }
+            calc_d3(l, kappa, c, tau);
 }
 
 GSL::Complex Bloch_sum::hankel_envelope_dot(const lm l, const double kappa, const Crystal_t<3, Atom>& c, const GSL::Vector& tau, const GSL::Vector& kp) const
 {
-    auto it = dot_values_m.find({l, kappa, tau, kp});
-    if(it != dot_values_m.end()){
-        return it->second;
-    }else{
-        dot_values_m.insert({{l, kappa, tau, kp},
-            calc_d1_dot(l, kappa, c, tau, kp) +
+    return  calc_d1_dot(l, kappa, c, tau, kp) +
             calc_d2_dot(l, kappa, c, tau, kp) +
-            calc_d3_dot(l, kappa, c, tau)});
-
-        return  calc_d1_dot(l, kappa, c, tau, kp) +
-                calc_d2_dot(l, kappa, c, tau, kp) +
-                calc_d3_dot(l, kappa, c, tau);
-    }
+            calc_d3_dot(l, kappa, c, tau);
 }

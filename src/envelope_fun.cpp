@@ -121,7 +121,7 @@ double atomic_integral(const Envelope_Bessel& J1, const Envelope_Bessel& J2, con
               J1m1.barred_fun(rs)*J2.barred_fun(rs);
         res *= 1./(-J1.kappa*J1.kappa + J2.kappa*J2.kappa);
     }else{
-        res = 0.5*rs*( J1.barred_fun(rs)*J2.barred_fun(rs) -
+        res = 0.5*rs*(J1.barred_fun(rs)*J2.barred_fun(rs) -
               J1m1.barred_fun(rs)*J2p1.barred_fun(rs) );
     }
 

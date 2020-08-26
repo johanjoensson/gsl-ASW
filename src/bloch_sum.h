@@ -28,9 +28,6 @@ namespace std{
 class Bloch_sum{
 
     using Key = std::tuple<lm, double, GSL::Vector, GSL::Vector>;
-    static std::unordered_map<Key, GSL::Complex> values_m;
-    static std::unordered_map<Key, GSL::Complex> dot_values_m;
-
     GSL::Complex calc_d1(const lm l, const double kappa, const Crystal_t<3, Atom>& c, const GSL::Vector& tau, const GSL::Vector& kp) const;
     GSL::Complex calc_d2(const lm l, const double kappa, const Crystal_t<3, Atom>& c, const GSL::Vector& tau, const GSL::Vector& kp) const;
     GSL::Complex calc_d3(const lm l, const double kappa, const Crystal_t<3, Atom>& c, const GSL::Vector& tau) const;
@@ -51,6 +48,28 @@ public:
     {
         return hankel_envelope_dot(l, kappa, c, tau, kp);
     }
+
+	class Container{
+	private:
+		std::unordered_map<Bloch_sum::Key, GSL::Complex> values_m;
+    	std::unordered_map<Bloch_sum::Key, GSL::Complex> dot_values_m;
+		void add(const lm l, const double kappa, const Crystal_t<3, Atom>& c, const GSL::Vector& tau, const GSL::Vector& kp);
+	public:
+		Container() : values_m(), dot_values_m() {}
+	    GSL::Complex get(const lm l, const double kappa, const Crystal_t<3, Atom>& c, const GSL::Vector& tau, const GSL::Vector& kp);
+	    GSL::Complex operator()(const lm l, const double kappa, const Crystal_t<3, Atom>& c, const GSL::Vector& tau, const GSL::Vector& kp)
+	    {
+	        return get(l, kappa, c, tau, kp);
+	    }
+
+	    GSL::Complex get_dot(const lm l, const double kappa, const Crystal_t<3, Atom>& c, const GSL::Vector& tau, const GSL::Vector& kp);
+	    GSL::Complex dot(const lm l, const double kappa, const Crystal_t<3, Atom>& c, const GSL::Vector& tau, const GSL::Vector& kp)
+	    {
+	        return get_dot(l, kappa, c, tau, kp);
+	    }
+
+		void recalculate_all( const Crystal_t<3, Atom>& c);
+	};
 };
 
 

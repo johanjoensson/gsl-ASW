@@ -88,7 +88,7 @@ struct lm {
     lm& operator++()
     {
         if(++this->m > this->l){
-            if(++this->l >= this->n){
+            if(++this->l > this->n - 1){
                 ++this->n;
                 this->l = 0;
             }
@@ -155,13 +155,13 @@ struct lm {
         return *this;
     }
 
-    lm operator+(int a)
+    lm operator+(int a) const
     {
         lm res = *this;
         return (res += a);
     }
 
-    lm operator-(int a)
+    lm operator-(int a) const
     {
         lm res = *this;
         return (res -= a);

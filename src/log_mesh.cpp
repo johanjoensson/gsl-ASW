@@ -4,13 +4,13 @@
 
 Logarithmic_mesh::Logarithmic_mesh(double radius, size_t num_points, double A_n)
 	: Mesh(num_points), A_p(A_n),
-    B_p(radius/(GSL::exp(A_n*(static_cast<double>(num_points) - 1)).val - 1.)),
+    B_p(radius/GSL::expm1(A_n*(static_cast<double>(num_points) - 1))),
     drx_p(num_points, 0)
 {
 	double r;
 
 	for(unsigned int i = 0; i < num_points; i++){
-		r = this->B_p*(GSL::exp(this->A_p*i).val - 1);
+		r = this->B_p*GSL::expm1(this->A_p*i);
 		this->x_p[i] = r;
 		this->x2_p[i] = GSL::pow_int(r, 2);
 		this->drx_p[i] = this->A_p*(r + this->B_p);

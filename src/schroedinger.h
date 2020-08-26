@@ -219,8 +219,8 @@ protected:
     double variational_de(Iter g_start, Iter inv)
     {
         Iter g_i = g_start;
-        auto F_i = psi_m.rbegin();
-        auto drx_i = mesh_p.drx_rbegin();
+        auto F_i = psi_m.begin();
+        auto drx_i = mesh_p.drx_begin();
         for( ; F_i != inv; F_i++, g_i++, drx_i++){}
 
         T n = F_norm();
@@ -282,12 +282,21 @@ public:
         size_t n = nodes + 1;
         double de = 10*tol_m;
         energy_m = e_guess;
-        auto inv = psi_m.rend();
-        auto end_point = psi_m.rbegin();
-        for( auto tmp = r_init_m.begin() ; tmp != r_init_m.end(); tmp++, end_point++ ){}
-        while(n != nodes || (std::abs(de) > tol_m && std::abs(e_max_m - e_min_m) > tol_m)){
-            inv = find_inversion_point(end_point, psi_m.rend(), v_m.rbegin());
 
+        auto inv = psi_m.begin();
+
+        auto end_point = psi_m.end(), v_end = v_m.end();
+        for( auto tmp = r_init_m.begin(); tmp != r_init_m.end(); tmp++, end_point--, v_end-- ){}
+
+        auto v_start = v_m.begin();
+        for(auto tmp = l_init_m.begin(); tmp != l_init_m.end(); tmp++, v_start++){}
+        v_start = std::min_element(v_start, v_end);
+
+        auto start_point = psi_m.begin();
+        for(auto tmp = v_m.begin() ; tmp != v_start; tmp++, start_point++){}
+
+        while(n != nodes || (std::abs(de) > tol_m && std::abs(e_max_m - e_min_m) > tol_m)){
+            inv = find_inversion_point(start_point, end_point, v_start);
             auto v_i = v_m.begin();
             auto g_i = g.begin();
             auto drx_i = mesh_p.drx_begin();
@@ -296,11 +305,11 @@ public:
                     GSL::pow_int(mesh_p.A(), 2)/4;
             }
 
-            sol.solve(psi_m.rbegin(), psi_m.rend(), g.rbegin(), g.rend(),
-                  s.rbegin(), s.rend(), r_init_m.rbegin(), r_init_m.rend(),
-                  l_init_m.begin(), l_init_m.end(), inv);
+            sol.solve(psi_m.begin(), psi_m.end(), g.begin(), g.end(),
+                  s.begin(), s.end(), l_init_m.begin(), l_init_m.end(),
+                  r_init_m.rbegin(), r_init_m.rend(), inv);
 
-            n = static_cast<size_t>(sol.count_nodes(++psi_m.rbegin(),--psi_m.rend()));
+            n = static_cast<size_t>(sol.count_nodes(++psi_m.begin(),--psi_m.end()));
 
             if(n > nodes){
                 e_max_m = energy_m;
@@ -309,8 +318,8 @@ public:
             }
 
             if(n == nodes){
-                if(inv != psi_m.rend()){
-                    de = variational_de(g.rbegin(), inv);
+                if(inv != psi_m.end()){
+                    de = variational_de(g.begin(), inv);
                 }else{
                     de = 0;
                 }

@@ -7,8 +7,7 @@ set(WFLAGS " -Werror -Wall -Wextra -pedantic -Wshadow -Wnon-virtual-dtor -Wold-s
 set(CXXFLAGS  "-g -std=c++11 ${WFLAGS} -DDEBUG")
 set(CFLAGS  "-g -std=c11 ${WFLAGS} -DDEBUG")
 
-set(SOURCE_FILES    src/numerov_solver.cpp
-		    src/spherical_fun.cpp
+set(SOURCE_FILES    src/spherical_fun.cpp
 		    src/log_mesh.cpp
 		    src/bloch_sum.cpp
 		    src/gaunt.cpp
@@ -17,7 +16,6 @@ set(SOURCE_FILES    src/numerov_solver.cpp
 		    src/augmented_spherical_wave.cpp
 		    src/atomic_quantity.cpp
 		    src/atom.cpp
-		    src/crystal.cpp
 		    src/lattice.cpp
 		    src/ewald_int.cpp
 		    src/utils.cpp

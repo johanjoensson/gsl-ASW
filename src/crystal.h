@@ -71,26 +71,22 @@ public:
 template<size_t dim, class Atom>
 void Crystal_t<dim, Atom>::add_sites(const std::vector<GSL::Vector>& positions)
 {
+	size_t offset = sites_m.size();
 	for(size_t i = 0; i < positions.size(); i++){
-		sites_m.push_back(Site_t<dim>(i, positions[i]*lat_m.lat(), size_m));
-		if(i >= atoms_m.size()){
+		sites_m.push_back(Site_t<dim>(offset + i, positions[i]*lat_m.lat(), size_m));
+		if(offset + i >= atoms_m.size()){
 			atom_index_m.push_back(atoms_m.size() - 1);
 		}else{
 			atom_index_m.push_back(i);
 		}
 	}
-	std::cout << "[";
-	for(auto index : atom_index_m){
-		std::cout << index << ", ";
-	}
-	std::cout << "]";
 }
 
 template<size_t dim, class Atom>
 void Crystal_t<dim, Atom>::add_basis(const std::vector<Atom>& basis)
 {
-	for(const auto unit : basis){
-		atoms_m.push_back(unit);
+	for(const auto atom : basis){
+		atoms_m.push_back(atom);
 	}
 }
 

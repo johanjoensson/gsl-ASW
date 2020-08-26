@@ -35,28 +35,46 @@ void Simulation::set_up_crystal()
 void Simulation::add_states(const Site_t<3>& center, const double kappa)
 {
     std::set<lm> p;
-    lm l{1, 0, 0};
+    lm l = {1, 0, 0};
     size_t nel = 0;
     size_t Z = cryst.atom(center).get_Z();
-    while(nel < Z || l.m > -l.l){
+    for(; nel < Z || /*l.l > 0*/ l.m > -l.l; l++, nel += 2){
         p.insert(l);
-        l++;
-        nel += 2;
     }
+    l = lm {l.n - 1, l.n -2, l.n - 2};
+/*    while(l.l <= 3) {
+        p.insert(l);
+        if(l.m >= l.l){
+            l.l++;
+            l.m = -l.l;
+        }else{
+            l.m++;
+        }
+    }
+*/
     nel = 0;
-    // auto center_index = cryst.atom_index(center);
     for(lm tmp : p){
-        if(nel + static_cast<size_t>(2*tmp.l + 1) >= Z){
+        if(nel + static_cast<size_t>(/*2*tmp.n*tmp.n*/ 2*(2*tmp.l + 1)) >= Z){
             std::cout << "valence : " << tmp << std::endl;
-            basis_valence.push_back(Augmented_spherical_wave(Hs_m, Bs_m, center, kappa, tmp, UP));
-            basis_valence.push_back(Augmented_spherical_wave(Hs_m, Bs_m, center, kappa, tmp, DOWN));
+            // basis_valence.push_back(Augmented_spherical_wave(Hs_m, Bs_m, center, kappa, tmp, UP));
+            // basis_valence.push_back(Augmented_spherical_wave(Hs_m, Bs_m, center, kappa, tmp, DOWN));
+            basis_valence.push_back(Augmented_spherical_wave(center, kappa, tmp, UP, false));
+            basis_valence.push_back(Augmented_spherical_wave(center, kappa, tmp, DOWN, false));
         }else{
             std::cout << "core : " << tmp << std::endl;
-            basis_core.push_back(Augmented_spherical_wave(Hs_m, Bs_m, center, kappa, tmp, UP));
-            basis_core.push_back(Augmented_spherical_wave(Hs_m, Bs_m, center, kappa, tmp, DOWN));
+            basis_core.push_back(Augmented_spherical_wave(center, kappa, tmp, UP, true));
+            basis_core.push_back(Augmented_spherical_wave(center, kappa, tmp, DOWN, true));
         }
         nel += 2;
     }
+    std::stable_sort(basis_valence.begin(), basis_valence.end(),
+        [](const Augmented_spherical_wave& w1, const Augmented_spherical_wave& w2){
+            return w1.s() < w2.s();
+        });
+    std::stable_sort(basis_core.begin(), basis_core.end(),
+        [](const Augmented_spherical_wave& w1, const Augmented_spherical_wave& w2){
+            return w1.s() < w2.s();
+        });
 }
 
 void Simulation::set_up_basis()
@@ -72,22 +90,12 @@ void Simulation::set_up_basis()
     set_up_augmented_functions();
     // Divide electrons into core and valence states
     for(const auto& site: cryst.sites()){
+        std::cout << "\n\nSite!\n\n";
         for(auto kappa : kappas){
             add_states(site, kappa);
         }
     }
     std::cout << "# valence states " << basis_valence.size() << std::endl;
-
-    std::cout << "Setting up core states." << std::endl;
-    for(Augmented_spherical_wave& wave : basis_core){
-        wave.core_state = true;
-        // wave.set_up(pot);
-    }
-    std::cout << "Setting up valence states." << std::endl;
-    for(Augmented_spherical_wave& wave: basis_valence){
-        wave.core_state = false;
-        // wave.set_up(pot);
-    }
 }
 
 void Simulation::set_up_augmented_functions()
@@ -96,26 +104,42 @@ void Simulation::set_up_augmented_functions()
     lm lH{1, 0, 0};
     size_t nel = 0;
     for(size_t i = 0; i < cryst.atoms().size(); i++){;
+        size_t z = cryst.atoms(i).get_Z();
         Hs_m.push_back(Hankel_container());
         Bs_m.push_back(Bessel_container());
-        while(nel < cryst.atoms(i).get_Z()){
+        while(nel < z){
+            int l_max = 3;
+            if(nel + static_cast<size_t>(2*lH.n*lH.n) < z){
+                l_max = lH.n - 1;
+            }
+
+            for(int n = lH.n, l = lH.l; l <= l_max; l++){
             for(auto kappa : kappas){
                 for(auto s : {spin{UP}, spin{DOWN}}){
-                    Hs_m.back().add_function(Augmented_Hankel(lH, kappa, s,
+                    Hs_m.back().add_function(Augmented_Hankel({n, l, -l}, kappa, s,
                         at_meshes[i]));
                 }
             }
-            nel += 2*static_cast<size_t>(2*lH.l + 1);
-            lH += 2*lH.l + 1;
+            }
+            nel += 2*static_cast<size_t>(lH.n*lH.n);
+            lH += lH.n*lH.n;
         }
-        //for(lm lB = {1, 0, 0}; lB.n <= lH.n; lB += 2*lB.l + 1){
-        for(lm lB = {1, 0, 0}; lB != lH; lB += 2*lB.l + 1){
-            for(auto kappa : kappas){
-                for(auto s : {spin{UP}, spin{DOWN}}){
-                    Bs_m.back().add_function(Augmented_Bessel(lB, kappa, s,
-                        at_meshes[i]));
+        lm lB{1, 0, 0};
+        nel = 0;
+        while(nel < z){
+            if(nel + static_cast<size_t>(2*lB.n*lB.n) > z){
+            for(int n = lB.n, l = lB.l; l <= 4; l++){
+                for(auto kappa : kappas){
+                    for(auto s : {spin{UP}, spin{DOWN}}){
+                        Bs_m.back().add_function(Augmented_Bessel({n, l, -l}, kappa, s,
+                            at_meshes[i]));
+                    }
                 }
             }
+            }
+
+            nel += static_cast<size_t>(2*lB.n*lB.n);
+            lB += lB.n*lB.n;
         }
         nel = 0;
         lH = {1, 0, 0};
@@ -135,17 +159,19 @@ void Simulation::set_up_potential(const XC_FUN func)
 void Simulation::init_augmented_functions()
 {
     std::cout << "Initialising augmented Hankel functions" << std::endl;
+    size_t N = basis_valence.size();
     for(size_t i = 0; i < cryst.atoms().size(); i++){
         for(auto& H : Hs_m[i]){
+            std::cout << "H " << H.l << std::flush;
             bool core = false;
             if(H.s == UP){
-                core = H.l < basis_valence[0].l;
+                core = H.l < basis_valence[0].l();
             }else{
-                core = H.l < basis_valence[1].l;
+                core = H.l < basis_valence[N/2].l();
             }
             H.update(pot.sphere(i), -GSL::pow_int(static_cast<double>(cryst.atoms(i).get_Z())/H.l.n, 2) + pot.MT0(), core);
             H.EH() -= pot.MT0();
-            std::cout << "H " << H.l << ", EH = " << H.EH() << "\n";
+            std::cout << ", EH = " << H.EH() << "\n";
         }
     }
 
@@ -165,8 +191,8 @@ void Simulation::init_augmented_functions()
 
 Simulation::Simulation(const Crystal_t<3, Atom>& crystal, const XC_FUN func, const std::vector<double> kappas_n,
  std::function<double(const size_t, const double)> at_pot)
- : kappas(kappas_n), Hs_m(), Bs_m(), cryst(crystal), at_meshes(cryst.atoms().size()), pot(cryst, at_meshes, at_pot), n(cryst, at_meshes), basis_valence(), basis_core(), k_eigenvals(), XH1(),
-   XS1(), XH2(), XS2(), XH3(), XS3()
+ : kappas(kappas_n), Hs_m(), Bs_m(), cryst(crystal), at_meshes(cryst.atoms().size()), pot(cryst, at_meshes, at_pot), n_m(cryst, at_meshes), basis_valence(), basis_core(), k_eigenvals(), XH1(),
+   XS1(), XH2(), XS2(), XH3(), XS3(), B_m()
 {
 
     set_up_crystal();
@@ -212,8 +238,7 @@ double Simulation::X_H2(const Augmented_Hankel& Ht1, const Augmented_Bessel& Jt2
     double res = 0;
     const Envelope_Hankel H1(site, Ht1.l, Ht1.kappa);
     const Envelope_Bessel J2(site, Jt2.l, Jt2.kappa);
-    //res += Jt2.EJ*augmented_integral(Ht1, Jt2);
-    if(std::abs(Ht1.EH() - Jt2.EJ()) < 1e-7){
+    if(std::abs(Ht1.EH() - Jt2.EJ()) < 1e-16){
         res += Jt2.EJ()*augmented_integral(Ht1, Ht1);
     }else{
         res += Jt2.EJ()/(Ht1.EH() - Jt2.EJ());
@@ -236,52 +261,45 @@ double Simulation::X_H3(const Augmented_Bessel& Jt1, const Augmented_Bessel& Jt2
     return res;
 }
 
-GSL::Complex Simulation::H_element(const size_t i1, const size_t i2, const GSL::Vector& kp) const
+GSL::Complex Simulation::H_element(const size_t i1, const size_t i2, const GSL::Vector& kp)
 {
     const Augmented_spherical_wave w1 = basis_valence[i1];
     const Augmented_spherical_wave w2 = basis_valence[i2];
-    Site_t<3> at_i = w1.center, at_j = w2.center;
+    Site_t<3> at_i = w1.center(), at_j = w2.center();
 
     GSL::Complex res = 0.;
-    GSL::Vector tau_ij(w1.center.pos() - w2.center.pos());
-    size_t l_i = Hs_m[cryst.atom_index(at_i)].get_index(w1.l, w1.kappa, w1.s);
-    size_t l_j = Hs_m[cryst.atom_index(at_j)].get_index(w2.l, w2.kappa, w2.s);
+    GSL::Vector tau_ij(at_i.pos() - at_j.pos());
+    size_t l_i = Hs_m[cryst.atom_index(at_i)].get_index(w1.l(), w1.kappa(), w1.s());
+    size_t l_j = Hs_m[cryst.atom_index(at_j)].get_index(w2.l(), w2.kappa(), w2.s());
 
-    if((w1.center == w2.center && l_i == l_j) && (w1.s == w2.s)){
+    if(at_i == at_j && w1.l().l == w2.l().l && w1.l().m == w2.l().m){
         res += XH1[at_i.index()][l_i][l_j];
     }
 
-    Bloch_summed_structure_constant B;
-
-    if(std::abs(w1.kappa*w1.kappa - w2.kappa*w2.kappa) < 1E-15){
-        res += -GSL::pow_int(w2.kappa, 2)*
-        B.dot(cryst, {w1.l.n, w1.l.n - 1, w1.l.n - 1}, w1.l, w2.l, w1.kappa, tau_ij, kp);
+    if(std::abs(w1.kappa()*w1.kappa() - w2.kappa()*w2.kappa()) < 1E-15){
+        res += -GSL::pow_int(w2.kappa(), 2)*
+        B_m.dot(cryst, {4, 0}, w1.l(), w2.l(), w1.kappa(), tau_ij, kp);
     }
 
-    res += XH2[at_i.index()][l_i][Bs_m[cryst.atom_index(at_i)].get_index(w1.l, w2.kappa, w1.s)]*
-    B(cryst, {w2.l.n, w2.l.n - 1, w2.l.n - 1}, w1.l, w2.l, w1.kappa, tau_ij, kp);
+    res += XH2[at_i.index()][l_i][Bs_m[cryst.atom_index(at_i)].get_index(w1.l(), w2.kappa(), w1.s())]*
+    B_m(cryst, {4, 0}, w1.l(), w2.l(), w2.kappa(), tau_ij, kp);
 
-    res += B(cryst, {w1.l.n, w1.l.n - 1, w1.l.n - 1}, w1.l, w2.l, w1.kappa, tau_ij, kp)*
-        XH2[at_j.index()][l_j][Bs_m[cryst.atom_index(at_j)].get_index(w2.l, w1.kappa, w1.s)];
-    if(std::abs(w1.kappa*w1.kappa - w2.kappa*w2.kappa) < 1E-15){
-        res += B(cryst, {w1.l.n, w1.l.n - 1, w1.l.n - 1}, w1.l, w2.l, w1.kappa, tau_ij, kp);
+    res += B_m(cryst, {4, 0}, w1.l(), w2.l(), w1.kappa(), tau_ij, kp)*
+        XH2[at_j.index()][l_j][Bs_m[cryst.atom_index(at_j)].get_index(w2.l(), w1.kappa(), w1.s())];
+    if(std::abs(w1.kappa()*w1.kappa() - w2.kappa()*w2.kappa()) < 1E-15){
+        res += B_m(cryst, {4, 0}, w1.l(), w2.l(), w1.kappa(), tau_ij, kp);
     }
 
     for(auto& site : cryst.sites()){
-        for(Augmented_Bessel J1 : Bs_m[cryst.atom_index(site)]){
-            if(J1.s != w1.s){
-                continue;
-            }
-            size_t lpp1 = Bs_m[cryst.atom_index(site)].get_index(J1.l, w1.kappa, w1.s);
-            size_t lpp2 = Bs_m[cryst.atom_index(site)].get_index(J1.l, w2.kappa, w1.s);
-            if(std::abs(XH3[site.index()][lpp1][lpp2]) > 1e-16){
-                GSL::Vector ti = w1.center.pos() - site.pos();
-                GSL::Vector tj = w2.center.pos() - site.pos();
-                for(int dl = 0; dl < 2*J1.l.l + 1; dl++){
-                    res += B(cryst, {w1.l.n, w1.l.n - 1, w1.l.n - 1}, J1.l + dl, w1.l, w1.kappa, ti, kp).conjugate()*
+        for(int lpp = 0; lpp <=  4 ; lpp++){
+            for(int mpp = - lpp; mpp <= lpp; mpp++){
+                size_t lpp1 = Bs_m[cryst.atom_index(site)].get_index({w1.l().n, lpp, -lpp}, w1.kappa(), w1.s());
+                size_t lpp2 = Bs_m[cryst.atom_index(site)].get_index({w2.l().n, lpp, -lpp}, w2.kappa(), w2.s());
+                GSL::Vector ti = site.pos() - at_i.pos();
+                GSL::Vector tj = site.pos() - at_j.pos();
+                res += B_m(cryst, {4, 4}, {w1.l().n, lpp, mpp}, w1.l(), w1.kappa(), ti, kp).conjugate()*
                     XH3[site.index()][lpp1][lpp2]*
-                    B(cryst, {w2.l.n, w2.l.n - 1, w2.l.n - 1}, J1.l + dl, w2.l, w2.kappa, tj, kp);
-                }
+                    B_m(cryst, {4, 4}, {w2.l().n, lpp, mpp}, w2.l(), w2.kappa(), tj, kp);
             }
         }
     }
@@ -290,12 +308,9 @@ GSL::Complex Simulation::H_element(const size_t i1, const size_t i2, const GSL::
 
 double Simulation::X_S1(const Augmented_Hankel& Ht1, const Augmented_Hankel& Ht2, const Site_t<3>& site)
 {
-    double res = 0;
     const Envelope_Hankel H1(site, Ht1.l, Ht1.kappa);
     const Envelope_Hankel H2(site, Ht2.l, Ht2.kappa);
-    res += augmented_integral(Ht1, Ht2);
-        res += off_atomic_integral(H1, H2, at_meshes[cryst.atom_index(site)].r_back());
-    return res;
+    return augmented_integral(Ht1, Ht2) + off_atomic_integral(H1, H2, at_meshes[cryst.atom_index(site)].r_back());
 }
 
 double Simulation::X_S2(const Augmented_Hankel& Ht1, const Augmented_Bessel& Jt2, const Site_t<3>& site)
@@ -303,8 +318,7 @@ double Simulation::X_S2(const Augmented_Hankel& Ht1, const Augmented_Bessel& Jt2
     double res = 0;
     const Envelope_Hankel H1(site, Ht1.l, Ht1.kappa);
     const Envelope_Bessel J2(site, Jt2.l, Jt2.kappa);
-//    res += augmented_integral(Ht1, Jt2);
-    if(std::abs(Ht1.EH() - Jt2.EJ()) < 1e-7){
+    if(std::abs(Ht1.EH() - Jt2.EJ()) < 1e-16){
         res += augmented_integral(Ht1, Ht1);
     }else{
         res += 1./(Ht1.EH() - Jt2.EJ());
@@ -318,56 +332,46 @@ double Simulation::X_S2(const Augmented_Hankel& Ht1, const Augmented_Bessel& Jt2
 
 double Simulation::X_S3(const Augmented_Bessel& Jt1, const Augmented_Bessel& Jt2, const Site_t<3>& site)
 {
-    double res = 0;
     const Envelope_Bessel J1(site, Jt1.l, Jt1.kappa);
     const Envelope_Bessel J2(site, Jt2.l, Jt2.kappa);
-    res += augmented_integral(Jt1, Jt2);
-    res -= atomic_integral(J1, J2, at_meshes[cryst.atom_index(site)].r_back());
-    return res;
+    return augmented_integral(Jt1, Jt2) - atomic_integral(J1, J2, at_meshes[cryst.atom_index(site)].r_back());
 }
 
-GSL::Complex Simulation::S_element(const size_t i1, const size_t i2, const GSL::Vector& kp) const
+GSL::Complex Simulation::S_element(const size_t i1, const size_t i2, const GSL::Vector& kp)
 {
     const Augmented_spherical_wave w1 = basis_valence[i1];
     const Augmented_spherical_wave w2 = basis_valence[i2];
-    Site_t<3> at_i = w1.center, at_j = w2.center;
+    const Site_t<3> at_i = w1.center(), at_j = w2.center();
 
     GSL::Complex res = 0.;
-    GSL::Vector tau_ij(w1.center.pos() - w2.center.pos());
-    size_t l_i = Hs_m[cryst.atom_index(at_i)].get_index(w1.l, w1.kappa, w1.s);
-    size_t l_j = Hs_m[cryst.atom_index(at_j)].get_index(w2.l, w2.kappa, w2.s);
+    const GSL::Vector tau_ij(at_i.pos() - at_j.pos());
+    const size_t l_i = Hs_m[cryst.atom_index(at_i)].get_index(w1.l(), w1.kappa(), w1.s());
+    const size_t l_j = Hs_m[cryst.atom_index(at_j)].get_index(w2.l(), w2.kappa(), w2.s());
 
-    Bloch_summed_structure_constant B;
-
-    if((w1.center == w2.center && l_i == l_j) && (w1.s == w2.s)){
+    if(at_i == at_j && lm {w1.l().l, w1.l().m} == lm {w2.l().l, w2.l().m}){
         res += XS1[at_i.index()][l_i][l_j];
     }
 
-    if(std::abs(w1.kappa*w1.kappa - w2.kappa*w2.kappa) < 1E-15){
-        res += B.dot(cryst, {w1.l.n, 0}, w1.l, w2.l, w1.kappa, tau_ij, kp);
+    if(std::abs(w1.kappa()*w1.kappa() - w2.kappa()*w2.kappa()) < 1E-15){
+        res += B_m.dot(cryst, {4, 4}, w1.l(), w2.l(), w1.kappa(), tau_ij, kp);
     }
 
-    res += XS2[at_i.index()][l_i][Bs_m[cryst.atom_index(at_i)].get_index(w1.l, w2.kappa, w1.s)]*
-    B(cryst, { w2.l.n, 0}, w1.l, w2.l, w2.kappa, tau_ij, kp);
+    res += XS2[at_i.index()][l_i][Bs_m[cryst.atom_index(at_i)].get_index(w1.l(), w2.kappa(), w2.s())]*
+        B_m(cryst, {4, 4}, w1.l(), w2.l(), w2.kappa(), tau_ij, kp);
 
-    res += B(cryst, {w1.l.n, 0}, w1.l, w2.l, w1.kappa, tau_ij, kp)*
-    XS2[at_j.index()][l_j][Bs_m[cryst.atom_index(at_j)].get_index(w2.l, w1.kappa, w1.s)];
+    res += B_m(cryst, {4, 4}, w1.l(), w2.l(), w1.kappa(), tau_ij, kp)*
+        XS2[at_j.index()][l_j][Bs_m[cryst.atom_index(at_j)].get_index(w2.l(), w1.kappa(), w1.s())];
 
-    for(auto& site : cryst.sites()){
-        for(Augmented_Bessel J1 : Bs_m[cryst.atom_index(site)]){
-            if(J1.s != w1.s || J1.l.n < w1.l.n){
-                continue;
-            }
-            size_t lpp1 = Bs_m[cryst.atom_index(site)].get_index(J1.l, w1.kappa, w1.s);
-            size_t lpp2 = Bs_m[cryst.atom_index(site)].get_index(J1.l, w2.kappa, w1.s);
-            if(std::abs(XS3[site.index()][lpp1][lpp2]) > 1e-16){
-                GSL::Vector ti = w1.center.pos() - site.pos();
-                GSL::Vector tj = w2.center.pos() - site.pos();
-                for(int dl = 0; dl < 2*J1.l.l + 1; dl++){
-                    res += B(cryst, {w1.l.n, 0}, J1.l + dl, w1.l, w1.kappa, ti, kp).conjugate()*
-                    XS3[site.index()][lpp1][lpp2]*
-                    B(cryst, {w2.l.n, 0}, J1.l + dl, w2.l, w2.kappa, tj, kp);
-                }
+    for(const auto& site : cryst.sites()){
+        for(int lpp = 0; lpp <=  4 ; lpp++){
+            for(int mpp = - lpp; mpp <= lpp; mpp++){
+                size_t lpp1 = Bs_m[cryst.atom_index(site)].get_index({w1.l().n, lpp, -lpp}, w1.kappa(), w1.s());
+                size_t lpp2 = Bs_m[cryst.atom_index(site)].get_index({w2.l().n, lpp, -lpp}, w2.kappa(), w2.s());
+                    GSL::Vector ti = site.pos() - at_i.pos();
+                    GSL::Vector tj = site.pos() - at_j.pos();
+                    res += B_m(cryst, {4, 4}, {w1.l().n, lpp, mpp}, w1.l(), w1.kappa(), ti, kp).conjugate()*
+                        XS3[site.index()][lpp1][lpp2]*
+                        B_m(cryst, {4, 4}, {w2.l().n, lpp, mpp}, w2.l(), w2.kappa(), tj, kp);
             }
         }
     }
@@ -378,170 +382,183 @@ GSL::Complex Simulation::S_element(const size_t i1, const size_t i2, const GSL::
 void Simulation::set_up_X_matrices()
 {
     for(size_t i = 0; i < basis_valence.size(); i++){
+        Augmented_spherical_wave w1 = basis_valence[i];
+        Site_t<3> at_i = w1.center();
+        size_t i1 = Hs_m[cryst.atom_index(at_i)].get_index(w1.l(), w1.kappa(), w1.s());
         for(size_t j = 0; j < basis_valence.size(); j++){
-
-            Augmented_spherical_wave w1 = basis_valence[i];
             Augmented_spherical_wave w2 = basis_valence[j];
-            // if(w1.s != w2.s){
-                // continue;
-            // }
-            Site_t<3> at_i = w1.center, at_j = w2.center;
-            size_t i1 = Hs_m[cryst.atom_index(at_i)].get_index(w1.l, w1.kappa, w1.s);
-            size_t i2 = Hs_m[cryst.atom_index(at_j)].get_index(w2.l, w2.kappa, w2.s);
-            size_t ipp1 = 0;
-            size_t ipp2 = 0;
+            Site_t<3> at_j = w2.center();
+            size_t i2 = Hs_m[cryst.atom_index(at_j)].get_index(w2.l(), w2.kappa(), w2.s());
 
-            // if(w1.center == w2.center && w1.l == w2.l){
-            XH1[at_i.index()][i1][i2] = X_H1(Hs_m[cryst.atom_index(at_i)].get_function(w1.l, w1.kappa, w1.s), Hs_m[cryst.atom_index(at_j)].get_function(w2.l, w2.kappa, w2.s), at_i);
-            XS1[at_i.index()][i1][i2] = X_S1(Hs_m[cryst.atom_index(at_i)].get_function(w1.l, w1.kappa, w1.s), Hs_m[cryst.atom_index(at_j)].get_function(w2.l, w2.kappa, w2.s), at_i);
-            // }
+            XH1[at_i.index()][i1][i2] = X_H1(Hs_m[cryst.atom_index(at_i)].get_function(w1.l(), w1.kappa(), w1.s()), Hs_m[cryst.atom_index(at_j)].get_function(w2.l(), w2.kappa(), w2.s()), at_i);
+            XS1[at_i.index()][i1][i2] = X_S1(Hs_m[cryst.atom_index(at_i)].get_function(w1.l(), w1.kappa(), w1.s()), Hs_m[cryst.atom_index(at_j)].get_function(w2.l(), w2.kappa(), w2.s()), at_i);
+        }
 
-            // Find off center expansion on site w1.center of wave w2
-            for(Augmented_Bessel J2s : Bs_m[cryst.atom_index(at_i)]){
-                // if(J2s.l == w1.l && J2s.s == w1.s ){
-                    ipp2 = Bs_m[cryst.atom_index(at_i)].get_index(J2s.l, J2s.kappa, J2s.s);
-                    XH2[at_i.index()][i1][ipp2] = X_H2(Hs_m[cryst.atom_index(at_i)].get_function(w1.l, w1.kappa, w1.s), J2s, at_i);
-                    XS2[at_i.index()][i1][ipp2] = X_S2(Hs_m[cryst.atom_index(at_i)].get_function(w1.l, w1.kappa, w1.s), J2s, at_i);
-                // }
+        for(Augmented_Bessel J2s : Bs_m[cryst.atom_index(at_i)]){
+            if(w1.l().l != J2s.l.l){
+                continue;
             }
+                size_t ipp2 = Bs_m[cryst.atom_index(at_i)].get_index(J2s.l, J2s.kappa, J2s.s);
+                XH2[at_i.index()][i1][ipp2] = X_H2(Hs_m[cryst.atom_index(at_i)].get_function(w1.l(), w1.kappa(), w1.s()), J2s, at_i);
+                XS2[at_i.index()][i1][ipp2] = X_S2(Hs_m[cryst.atom_index(at_i)].get_function(w1.l(), w1.kappa(), w1.s()), J2s, at_i);
+        }
 
-            // Find off center expansion on site s of waves w1 and w2
-            for(auto& site : cryst.sites()){
-                size_t n_s = cryst.atom_index(site);
-                for(Augmented_Bessel J1s : Bs_m[n_s]){
-                    for(Augmented_Bessel J2s : Bs_m[n_s]){
-                        // if(J1s.l == J2s.l && J1s.s == J2s.s){
-                            ipp1 = Bs_m[n_s].get_index(J1s.l, J1s.kappa, J1s.s);
-                            ipp2 = Bs_m[n_s].get_index(J2s.l, J2s.kappa, J2s.s);
-                            XH3[site.index()][ipp1][ipp2] =  X_H3(J1s, J2s, site);
-                            XS3[site.index()][ipp1][ipp2] =  X_S3(J1s, J2s, site);
-                        // }
+    }
+    for(auto& site : cryst.sites()){
+        size_t n_s = cryst.atom_index(site);
+        for(const Augmented_Bessel& J1s : Bs_m[n_s]){
+            for(const Augmented_Bessel& J2s : Bs_m[n_s]){
+        // for(size_t ipp1 = 0; ipp1 < Bs_m[n_s].size(); ipp1++){
+            // for(size_t ipp2 = 0; ipp2 < Bs_m[n_s].size(); ipp2++){
+                    // auto J1s = Bs_m[n_s].get_function(ipp1);
+                    // auto J2s = Bs_m[n_s].get_function(ipp2);
+                    if(J1s.l.l != J2s.l.l){
+                        continue;
                     }
-                }
+                    size_t ipp1 = Bs_m[n_s].get_index(J1s.l, J1s.kappa, J1s.s);
+                    size_t ipp2 = Bs_m[n_s].get_index(J2s.l, J2s.kappa, J2s.s);
+                    XH3[site.index()][ipp1][ipp2] = X_H3(J1s, J2s, site);
+                    XS3[site.index()][ipp1][ipp2] = X_S3(J1s, J2s, site);
             }
         }
     }
+
     std::cout << "XS1 =\n";
     for(auto XS1_i : XS1){
         for(auto row : XS1_i){
             std::cout << row << "\n";
         }
+        std::cout << "\n";
     }
     std::cout << "XS2 =\n";
     for(auto XS2_i : XS2){
         for(auto row : XS2_i){
             std::cout << row << "\n";
         }
+        std::cout << "\n";
     }
     std::cout << "XS3 =\n";
     for(auto XS3_i : XS3){
         for(auto row :  XS3_i){
             std::cout << row << "\n";
         }
+        std::cout << "\n";
     }
+    // throw std::runtime_error("Check!\n");
 }
 
-const GSL::Matrix_cx Simulation::set_H(const GSL::Vector& kp) const
+const GSL::Matrix_cx Simulation::set_H(const GSL::Vector& kp)
 {
     size_t N = basis_valence.size();
     GSL::Matrix_cx H(N, N);
     for(size_t i = 0; i < N; i++){
+        // for(size_t j = 0; j <= i; j++){
         for(size_t j = 0; j < N; j++){
             H[i][j] = H_element(i, j, kp);
+            // H[j][i] = H_element(i, j, kp).conjugate();
         }
     }
     return H;
 }
 
-const GSL::Matrix_cx Simulation::set_S(const GSL::Vector& kp) const
+const GSL::Matrix_cx Simulation::set_S(const GSL::Vector& kp)
 {
     size_t N = basis_valence.size();
     GSL::Matrix_cx S(N, N);
-    for(size_t i = 0; i < basis_valence.size(); i++){
-        for(size_t j = 0; j < basis_valence.size(); j++){
+    for(size_t i = 0; i < N; i++){
+        // for(size_t j = 0; j <= i; j++){
+        for(size_t j = 0; j < N; j++){
+
             S[i][j] = S_element(i, j, kp);
+            // S[j][i] = S_element(i, j, kp).conjugate();
         }
     }
     return S;
 }
 
+/*
 void Simulation::add_eigvals(const GSL::Vector& kp, const GSL::Vector& eigvals)
 {
     std::pair<GSL::Vector, GSL::Vector> tmp(kp, eigvals);
     k_eigenvals.insert(tmp);
 }
+*/
 
-// const std::pair<GSL::Matrix_cx, GSL::Vector> Simulation::calc_eigen(const GSL::Vector& kp) const
-void Simulation::calc_eigen(const GSL::Vector& kp) const
+void Simulation::calc_eigen(const GSL::Vector& kp)
 {
     const GSL::Matrix_cx H {set_H(kp)};
     const GSL::Matrix_cx S {set_S(kp)};
-//    size_t N = basis_valence.size();
     size_t N = basis_valence.size()/2;
     GSL::Matrix_cx eigvecs_up(N, N);
-    // GSL::Matrix_cx eigvecs_down(N, N);
     GSL::Vector eigvals_up(N);
-    // GSL::Vector eigvals_down(N);
 
-    GSL::Matrix_cx H_up(N, N);
-    // GSL::Matrix_cx H_down(N, N);
-    GSL::Matrix_cx S_up(N, N);
-    // GSL::Matrix_cx S_down(N, N);
+    GSL::Matrix_cx::View H_up = H.view(0,0, N, N);
+    GSL::Matrix_cx::View S_up = S.view(0, 0, N, N);;
 
     for(size_t i = 0; i < N; i++){
         for(size_t j = 0; j < N; j++){
-            if(!(basis_valence[2*i].s == UP && basis_valence[2*j].s == UP)){
-                std::cerr << "FATAL ERROR!\n";
+            if(!(basis_valence[i].s() == UP && basis_valence[j].s() == UP)){
+                std::string msg("Valence function ");
+                if(basis_valence[i].s() != UP){
+                    msg += std::to_string(i);
+                }else{
+                    msg += std::to_string(j);
+                }
+                msg += " is not spin UP.\n";
+                throw std::runtime_error(msg + "FATAL ERROR!\n");
             }
-        //    H_up[i][j] = H[i][j];
-        //    S_up[i][j] = S[i][j];
-            H_up[i][j] = H[2*i][2*j];
-            S_up[i][j] = S[2*i][2*j];
-//            H_down[i][j] = H[2*i+1][2*j+1];
-//            S_down[i][j] = S[2*i+1][2*j+1];
+            // H_up[i][j] = H[2*i][2*j];
+            // S_up[i][j] = S[2*i][2*j];
         }
     }
 
     std::pair<GSL::Matrix_cx, GSL::Vector> tmp, overlap;
     overlap = GSL::hermitian_eigen(S_up);
+    std::cout << "k-point " << kp << "\n";
     try{
-//        std::cout << "Solving Hermitian eigenvalue problem" << std::endl;
         tmp = GSL::general_hermitian_eigen(H_up, S_up);
         eigvecs_up = tmp.first;
         eigvals_up = tmp.second;
+        std::cout << "\tEigenvalues (up):\n\t" << eigvals_up << " (Ry)\n";
+        std::cout << "\tEigenvectors (up) :\n";
+        for(auto row : eigvecs_up.T()){
+            std::cout << "\t\t" << row << "\n";
+        }
+        std::cout << "\n";
+        // k_eigenvals[kp] = GSL::sort_general_hermitian_eigen(eigvals_up, eigvecs_up);
+        k_eigenvals[kp] = {eigvecs_up, eigvals_up};
+
     }catch (const std::runtime_error &e){
-	    std::cerr << e.what();
-	    std::cerr << " Hamiltonian matrix\n";
-	    for(size_t i = 0 ; i < N; i++){
-		    std::cerr << "  " << H_up[i] << "\n";
-	    }
-	    std::cerr << " Overlap matrix\n";
-	    for(size_t i = 0 ; i < N; i++){
-		    std::cerr << "  " << S_up[i] << "\n";
-	    }
+		std::cerr << e.what();
+		std::cerr << " Hamiltonian matrix\n";
+		for(size_t i = 0 ; i < N; i++){
+			std::cerr << "  " << H_up[i] << "\n";
+		}
+		std::cerr << " Overlap matrix\n";
+		for(size_t i = 0 ; i < N; i++){
+			std::cerr << "  " << S_up[i] << "\n";
+		}
         std::cerr << "Eigenvalues of Overlap matrix\n" << overlap.second << "\n";
     }
-    // for(size_t i = 0; i < N; i++){
-    std::cout << "k-point " << kp << "\n";
-    std::cout << "\tEigenvalues (up):\n\t" << eigvals_up << " (Ry)\n";
-    std::cout << "\tEigenvectors (up) :\n";
-    for(auto row : eigvecs_up.T()){
-        std::cout << "\t\t" << row << "\n";
-    }
-    std::cout << "\n";
 }
 
-void Simulation::print_eigvals(K_mesh& k_mesh)
+void Simulation::print_eigvals(const K_mesh& k_mesh)
 {
     std::ofstream of;
     of.open("bands.dat", std::ios::trunc);
     for(const auto& kp :  k_mesh.k_points){
-        const GSL::Vector eigvals {k_eigenvals[kp]};
-        of << kp[0] << " " << kp[1] << " " << kp[2] << " ";
-        for(size_t i = 0; i < eigvals.dim(); i++){
-            of << eigvals[i] << " ";
-        }
-        of << "\n";
+    //for(auto it : k_eigenvals){
+        //auto kp = it.first;
+        //auto eigvals = it.second.second;
+        auto it = k_eigenvals.find(kp);
+		if(it != k_eigenvals.end()){
+				auto eigvals = it->second.second;
+				of << kp[0] << " " << kp[1] << " " << kp[2] << " ";
+				for(size_t i = 0; i < eigvals.dim(); i++){
+						of << eigvals[i] << " ";
+				}
+				of << "\n";
+		}
     }
     of.close();
 }

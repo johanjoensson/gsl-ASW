@@ -10,6 +10,7 @@
 #include "xc_func.h"
 #include "k-mesh.h"
 #include "log_mesh.h"
+#include "structure_const.h"
 
 struct GSLVecCompare{
     bool operator()(const GSL::Vector& lhs, const GSL::Vector& rhs) const
@@ -25,11 +26,12 @@ class Simulation{
     Crystal_t<3, Atom> cryst;
     std::vector<Logarithmic_mesh> at_meshes;
     Potential pot;
-    Density n;
+    Density n_m;
     std::vector<Augmented_spherical_wave> basis_valence;
     std::vector<Augmented_spherical_wave> basis_core;
-    std::map<GSL::Vector, GSL::Vector, GSLVecCompare> k_eigenvals;
+    std::map<GSL::Vector, std::pair<GSL::Matrix_cx, GSL::Vector>, GSLVecCompare> k_eigenvals;
     std::vector<GSL::Matrix> XH1, XS1, XH2, XS2, XH3, XS3;
+    Bloch_summed_structure_constant::Container B_m;
 
     void set_up_crystal();
     void set_up_basis();
@@ -48,8 +50,8 @@ class Simulation{
     double X_S3(const Augmented_Bessel& Jt1, const Augmented_Bessel& Jt2, const Site_t<3>& at);
 
 
-    GSL::Complex H_element(const size_t i1, const size_t i2, const GSL::Vector& kp) const;
-    GSL::Complex S_element(const size_t i1, const size_t i2, const GSL::Vector& kp) const;
+    GSL::Complex H_element(const size_t i1, const size_t i2, const GSL::Vector& kp);
+    GSL::Complex S_element(const size_t i1, const size_t i2, const GSL::Vector& kp);
 public:
     Simulation(const Crystal_t<3, Atom>& crystal, const XC_FUN func, const std::vector<double> kappas_n,
     std::function<double(const size_t, const double)> at_pot =
@@ -59,12 +61,12 @@ public:
         });
 
     void set_up_X_matrices();
-    const GSL::Matrix_cx set_H(const GSL::Vector& kp) const;
-    const GSL::Matrix_cx set_S(const GSL::Vector& kp) const;
+    const GSL::Matrix_cx set_H(const GSL::Vector& kp);
+    const GSL::Matrix_cx set_S(const GSL::Vector& kp);
     // const std::pair<GSL::Matrix_cx, GSL::Vector> calc_eigen(const GSL::Vector&) const;
-    void calc_eigen(const GSL::Vector&) const;
+    void calc_eigen(const GSL::Vector&);
 
     void add_eigvals(const GSL::Vector& kp, const GSL::Vector& eigvals);
-    void print_eigvals(K_mesh& k_mesh);
+    void print_eigvals(const K_mesh& k_mesh);
 };
 #endif // SIMULATION_H

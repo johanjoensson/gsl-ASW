@@ -60,8 +60,8 @@ void K_mesh::generate_mesh(const std::vector<GSL::Vector>& path, const size_t N_
     double dn = 1./static_cast<double>(N_steps);
 	for(size_t i = 0; i < path.size() - 1; i++){
 		for(unsigned int n = 0; n < N_steps; n++ ){
-			k_points.push_back(r_lattice.transpose()*(path[i] -
-					n*dn*(path[i] - path[i + 1])));
+			k_points.push_back((path[i] -
+					n*dn*(path[i] - path[i + 1]))*r_lattice);
 		}
 	}
 }

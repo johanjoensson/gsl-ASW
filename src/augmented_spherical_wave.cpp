@@ -7,11 +7,12 @@
 #include <iomanip>
 #include <fstream>
 
-
+/*
 Augmented_spherical_wave::Augmented_spherical_wave(std::vector<Hankel_container>& Hs_n, std::vector<Bessel_container>& Bs_n, Site_t<3> center_n, double kappa_n, lm l_n, spin s_n)
  : Hs_m(Hs_n), Bs_m(Bs_n), center(center_n), kappa(kappa_n), l(l_n), s(s_n)
 {}
-
+*/
+/*
 double Augmented_spherical_wave::operator()(const GSL::Vector &r) const
 {
     double res = 0.;
@@ -30,3 +31,4 @@ double Augmented_spherical_wave::operator()(const GSL::Vector &r) const
 
     return res;
 }
+*/

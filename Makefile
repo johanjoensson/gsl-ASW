@@ -26,10 +26,10 @@ BUILD_DIR = build
 # Test directory
 TEST_DIR = test
 GSLLIBROOT=../GSL-lib
-OLEVEL = -Og -O1
+OLEVEL = -Ofast
 WFLAGS = -Wall -Wextra -pedantic -Wshadow -Wnon-virtual-dtor -Wold-style-cast -Wcast-align -Wunused -Woverloaded-virtual -Wpedantic -Wconversion -Wsign-conversion -Wnull-dereference -Wdouble-promotion -Wformat=2 -Weffc++ -Wmisleading-indentation -Wduplicated-cond -Wduplicated-branches -Wlogical-op  -Wuseless-cast -Werror
 # Flags for the above defined compilers
-CXXFLAGS = -std=c++14 $(WFLAGS) -I $(SRC_DIR) -I $(GSLLIBROOT)/include $(OLEVEL)  -DDEBUG -g -pg
+CXXFLAGS = -std=c++14 $(WFLAGS) -I $(SRC_DIR) -I $(GSLLIBROOT)/include $(OLEVEL) -flto -DDEBUG #-g -pg 
 
 CXXCHECKS =clang-analyzer-*,-clang-analyzer-cplusplus*,cppcoreguidelines-*,bugprone-* 
 CXXCHECKFLAGS = -checks=$(CXXCHECKS) -header-filter=.* -- -std=c++11 -I$(GSLLIBROOT)/include
@@ -125,7 +125,7 @@ travis: GSLLIBDIR = $(GSLLIBROOT)/lib/GSLpp
 travis: CXXFLAGS = -std=c++11 -I $(SRC_DIR) -I $(GSLLIBROOT)/include -O0
 travis: all
 
-tests: 	CXXFLAGS = -std=c++11 -I $(SRC_DIR) -I $(GSLLIBROOT)/include -I$(TEST_DIR) -O0 -fprofile-arcs -ftest-coverage
+tests: 	CXXFLAGS = -std=c++11 -I $(SRC_DIR) -I $(GSLLIBROOT)/include -I$(TEST_DIR) -O1 -fprofile-arcs -ftest-coverage
 tests:  LDFLAGS = -lgcov -lgtest -L$(GSLLIBDIR) -L. -Wl,-rpath=$(GSLLIBDIR) -lGSLpp -lgsl -lxc -lm 
 tests: 	clean $(TEST_OBJS)
 	$(CXX) $(TEST_OBJS) -o $@  $(LDFLAGS)
