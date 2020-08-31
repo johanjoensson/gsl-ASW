@@ -32,6 +32,7 @@ GSL::Complex Bloch_sum::Container::get(const lm l, const double kappa, const Cry
     }
     Bloch_sum D;
     this->add(l, kappa, c, tau, kp);
+  
     return D(l, kappa, c, tau, kp);
 }
 
@@ -92,11 +93,11 @@ GSL::Complex Bloch_sum::calc_d1(const lm l, const double kappa, const Crystal_t<
     double k, dot;
     // Loop over all K-vectors
     for(const auto& Kn : c.Kn_vecs()){
-        if((Kn + kp).norm2() < 1e-6){
+        k = (Kn + kp).norm();
+        if(k < 1e-16){
             continue;
         }
         dot = tau.dot(Kn + kp);
-        k = (Kn + kp).norm();
         e = GSL::exp(GSL::Complex(0., dot));
         tmp = GSL::pow_int(k, l.l)*cubic_harmonic(l, (Kn + kp)/k);
         if (std::abs(kappa*kappa + k*k) > 1e-16 ){
@@ -126,11 +127,11 @@ GSL::Complex Bloch_sum::calc_d1_dot(const lm l, const double kappa, const Crysta
     const double eta = calc_eta(c.volume());
     for(const auto& Kn : c.Kn_vecs()){
         // GSL::Vector kn(Kn + kp);
-        if((Kn + kp).norm2() < 1e-6){
+        k = (Kn + kp).norm();
+        if(k < 1e-16){
             continue;
         }
         // k = kn.norm<double>();
-        k = (Kn + kp).norm();
         dot = tau.dot(Kn + kp);
         e = GSL::exp(GSL::Complex(0., dot));
         tmp = GSL::pow_int(k, l.l)*cubic_harmonic(l, (Kn + kp)/k);
@@ -163,10 +164,10 @@ GSL::Complex Bloch_sum::calc_d2(const lm l, const double kappa, const Crystal_t<
     double eta = calc_eta(c.volume());
     // Loop over all lattice vectors
     for(const auto Rn : c.Rn_vecs()){
-        if((tau - Rn).norm2() < 1e-16){
+        t = (tau - Rn).norm();
+        if(t < 1e-16){
             continue;
         }
-        t = (tau - Rn).norm();
         dot = kp.dot(tau - Rn);
         tmp = GSL::pow_int(t, l.l)*cubic_harmonic(l, (tau - Rn)/t)*I.ewald_int(kappa, eta, l, t);
         e = GSL::exp(GSL::Complex(0., -dot));
@@ -185,11 +186,11 @@ GSL::Complex Bloch_sum::calc_d2_dot(const lm l, const double kappa, const Crysta
     double eta = calc_eta(c.volume());
     // Loop over all lattice vectors
     for(const auto Rn : c.Rn_vecs()){
+        t = (tau - Rn).norm<double>();
         // Do not add unit cell contribution at (0, 0, 0)
-        if((tau - Rn).norm2() < 1e-16){
+        if(t < 1e-16){
             continue;
         }
-        t = (tau - Rn).norm<double>();
         dot = kp.dot(tau - Rn);
         tmp = GSL::pow_int(t, l.l)*cubic_harmonic(l, (tau - Rn)/t)*
               I.ewald_int(kappa, eta, lm {l.l - 1, 0}, t);

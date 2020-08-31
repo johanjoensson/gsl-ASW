@@ -58,6 +58,10 @@ numerov_debug.close();
 	std::cout << c << "\n";
 	// Crystal_t<3, Atom> cr(Lattice_t<3>({16*a, 16*b, 16*c}));
 	Crystal_t<3, Atom> cr(Lattice_t<3>({7*a, 7*b, 7*c}));
+	for(auto row : cr.lat().recip_lat()){
+		std::cout << row <<"\n";
+	}
+	std::cout << "\n";
 
 	std::cout << "Crystal volume = " << cr.volume() << " (a.u.)^3\n";
 
@@ -158,7 +162,7 @@ numerov_debug.close();
 	}
 	of.close();
 
-	return 0;
+//	return 0;
 
 	std::cout << "Loop ove k-points\n" << std::endl;
 	for(const auto& kp : kmesh.k_points){
