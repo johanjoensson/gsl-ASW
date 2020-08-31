@@ -92,14 +92,18 @@ GSL::Complex Bloch_sum::calc_d1(const lm l, const double kappa, const Crystal_t<
     double k, dot;
     // Loop over all K-vectors
     for(const auto& Kn : c.Kn_vecs()){
-        if((Kn + kp).norm2() < 1e-16){
+        if((Kn + kp).norm2() < 1e-6){
             continue;
         }
         dot = tau.dot(Kn + kp);
         k = (Kn + kp).norm();
         e = GSL::exp(GSL::Complex(0., dot));
-        tmp = GSL::pow_int(k, l.l)*cubic_harmonic(l, (Kn + kp)/k)*
-              GSL::exp((-kappa*kappa - k*k)/eta)/(-kappa*kappa - k*k);
+        tmp = GSL::pow_int(k, l.l)*cubic_harmonic(l, (Kn + kp)/k);
+        if (std::abs(kappa*kappa + k*k) > 1e-16 ){
+              tmp *= GSL::exp((-kappa*kappa - k*k)/eta)/(-kappa*kappa - k*k);
+          }else{
+              tmp /= eta;
+          }
         d1 += e*tmp.val;
     }
     if(l.l % 4 == 1){
@@ -122,16 +126,20 @@ GSL::Complex Bloch_sum::calc_d1_dot(const lm l, const double kappa, const Crysta
     const double eta = calc_eta(c.volume());
     for(const auto& Kn : c.Kn_vecs()){
         // GSL::Vector kn(Kn + kp);
-        if((Kn + kp).norm2() < 1e-16){
+        if((Kn + kp).norm2() < 1e-6){
             continue;
         }
         // k = kn.norm<double>();
         k = (Kn + kp).norm();
         dot = tau.dot(Kn + kp);
         e = GSL::exp(GSL::Complex(0., dot));
-        tmp = GSL::pow_int(k, l.l)*cubic_harmonic(l, (Kn + kp)/k)*
-              GSL::exp((-kappa*kappa - k*k)/eta)/
+        tmp = GSL::pow_int(k, l.l)*cubic_harmonic(l, (Kn + kp)/k);
+        if(std::abs(kappa*kappa + k*k) > 1e-16){
+            tmp *=   GSL::exp((-kappa*kappa - k*k)/eta)/
               GSL::pow_int(-kappa*kappa - k*k, 2);
+          }else{
+              tmp /= eta*eta;
+          }
         d1_dot += e*tmp.val;
     }
     if(l.l % 4 == 1){
@@ -152,6 +160,7 @@ GSL::Complex Bloch_sum::calc_d2(const lm l, const double kappa, const Crystal_t<
     GSL::Complex d2 = GSL::Complex(0., 0.), e = GSL::Complex(0,0);
     double t = 0, dot = 0;
     GSL::Result tmp;
+    double eta = calc_eta(c.volume());
     // Loop over all lattice vectors
     for(const auto Rn : c.Rn_vecs()){
         if((tau - Rn).norm2() < 1e-16){
@@ -159,7 +168,7 @@ GSL::Complex Bloch_sum::calc_d2(const lm l, const double kappa, const Crystal_t<
         }
         t = (tau - Rn).norm();
         dot = kp.dot(tau - Rn);
-        tmp = GSL::pow_int(t, l.l)*cubic_harmonic(l, (tau - Rn)/t)*I.ewald_int(kappa, calc_eta(c.volume()), l, t);
+        tmp = GSL::pow_int(t, l.l)*cubic_harmonic(l, (tau - Rn)/t)*I.ewald_int(kappa, eta, l, t);
         e = GSL::exp(GSL::Complex(0., -dot));
         d2 += e*tmp.val;
     }
@@ -173,6 +182,7 @@ GSL::Complex Bloch_sum::calc_d2_dot(const lm l, const double kappa, const Crysta
     GSL::Complex d2_dot = GSL::Complex(0., 0.), e = GSL::Complex(0,0);
     double t = 0, dot = 0;
     GSL::Result tmp;
+    double eta = calc_eta(c.volume());
     // Loop over all lattice vectors
     for(const auto Rn : c.Rn_vecs()){
         // Do not add unit cell contribution at (0, 0, 0)
@@ -182,7 +192,7 @@ GSL::Complex Bloch_sum::calc_d2_dot(const lm l, const double kappa, const Crysta
         t = (tau - Rn).norm<double>();
         dot = kp.dot(tau - Rn);
         tmp = GSL::pow_int(t, l.l)*cubic_harmonic(l, (tau - Rn)/t)*
-              I.ewald_int(kappa, calc_eta(c.volume()), lm {l.l - 1, 0}, t);
+              I.ewald_int(kappa, eta, lm {l.l - 1, 0}, t);
         e = GSL::exp(GSL::Complex(0., -dot));
         d2_dot += e*tmp.val;
     }

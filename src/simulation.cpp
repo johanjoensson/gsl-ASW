@@ -124,23 +124,24 @@ void Simulation::set_up_augmented_functions()
             nel += 2*static_cast<size_t>(lH.n*lH.n);
             lH += lH.n*lH.n;
         }
-        lm lB{1, 0, 0};
+        // lm lB{1, 0, 0};
         nel = 0;
-        while(nel < z){
-            if(nel + static_cast<size_t>(2*lB.n*lB.n) > z){
-            for(int n = lB.n, l = lB.l; l <= 4; l++){
+        // while(nel < z){
+            // if(nel + static_cast<size_t>(2*lB.n*lB.n) > z){
+            // for(int n = lB.n, l = lB.l; l < lB.n; l++){
+            for(lm l = {lH.n, 0,  0}; l.n == lH.n; l += 2*l.l + 1){
                 for(auto kappa : kappas){
                     for(auto s : {spin{UP}, spin{DOWN}}){
-                        Bs_m.back().add_function(Augmented_Bessel({n, l, -l}, kappa, s,
+                        Bs_m.back().add_function(Augmented_Bessel(l, kappa, s,
                             at_meshes[i]));
                     }
                 }
-            }
+            // }
             }
 
-            nel += static_cast<size_t>(2*lB.n*lB.n);
-            lB += lB.n*lB.n;
-        }
+            // nel += static_cast<size_t>(2*lB.n*lB.n);
+            // lB += lB.n*lB.n;
+        // }
         nel = 0;
         lH = {1, 0, 0};
         std::cout << "Hs_m contains " << Hs_m.back().size() << " elements\n";
@@ -291,7 +292,7 @@ GSL::Complex Simulation::H_element(const size_t i1, const size_t i2, const GSL::
     }
 
     for(auto& site : cryst.sites()){
-        for(int lpp = 0; lpp <=  4 ; lpp++){
+        for(int lpp = 0; lpp <= Bs_m[cryst.atom_index(site)].max_lm().n - 1; lpp++){
             for(int mpp = - lpp; mpp <= lpp; mpp++){
                 size_t lpp1 = Bs_m[cryst.atom_index(site)].get_index({w1.l().n, lpp, -lpp}, w1.kappa(), w1.s());
                 size_t lpp2 = Bs_m[cryst.atom_index(site)].get_index({w2.l().n, lpp, -lpp}, w2.kappa(), w2.s());
@@ -354,7 +355,7 @@ GSL::Complex Simulation::S_element(const size_t i1, const size_t i2, const GSL::
     }
 
     if(std::abs(w1.kappa()*w1.kappa() - w2.kappa()*w2.kappa()) < 1E-15){
-        res += B_m.dot(cryst, {4, 4}, w1.l(), w2.l(), w1.kappa(), tau_ij, kp);
+        res += B_m.dot(cryst, {4, 4}, w1.l(), w2.l(), w1.kappa(), tau_ij, kp)*0;
     }
 
     res += XS2[at_i.index()][l_i][Bs_m[cryst.atom_index(at_i)].get_index(w1.l(), w2.kappa(), w2.s())]*
@@ -364,7 +365,7 @@ GSL::Complex Simulation::S_element(const size_t i1, const size_t i2, const GSL::
         XS2[at_j.index()][l_j][Bs_m[cryst.atom_index(at_j)].get_index(w2.l(), w1.kappa(), w1.s())];
 
     for(const auto& site : cryst.sites()){
-        for(int lpp = 0; lpp <=  4 ; lpp++){
+        for(int lpp = 0; lpp <= Bs_m[cryst.atom_index(site)].max_lm().n - 1; lpp++){
             for(int mpp = - lpp; mpp <= lpp; mpp++){
                 size_t lpp1 = Bs_m[cryst.atom_index(site)].get_index({w1.l().n, lpp, -lpp}, w1.kappa(), w1.s());
                 size_t lpp2 = Bs_m[cryst.atom_index(site)].get_index({w2.l().n, lpp, -lpp}, w2.kappa(), w2.s());
@@ -409,10 +410,6 @@ void Simulation::set_up_X_matrices()
         size_t n_s = cryst.atom_index(site);
         for(const Augmented_Bessel& J1s : Bs_m[n_s]){
             for(const Augmented_Bessel& J2s : Bs_m[n_s]){
-        // for(size_t ipp1 = 0; ipp1 < Bs_m[n_s].size(); ipp1++){
-            // for(size_t ipp2 = 0; ipp2 < Bs_m[n_s].size(); ipp2++){
-                    // auto J1s = Bs_m[n_s].get_function(ipp1);
-                    // auto J2s = Bs_m[n_s].get_function(ipp2);
                     if(J1s.l.l != J2s.l.l){
                         continue;
                     }
@@ -445,7 +442,6 @@ void Simulation::set_up_X_matrices()
         }
         std::cout << "\n";
     }
-    // throw std::runtime_error("Check!\n");
 }
 
 const GSL::Matrix_cx Simulation::set_H(const GSL::Vector& kp)
@@ -477,14 +473,6 @@ const GSL::Matrix_cx Simulation::set_S(const GSL::Vector& kp)
     return S;
 }
 
-/*
-void Simulation::add_eigvals(const GSL::Vector& kp, const GSL::Vector& eigvals)
-{
-    std::pair<GSL::Vector, GSL::Vector> tmp(kp, eigvals);
-    k_eigenvals.insert(tmp);
-}
-*/
-
 void Simulation::calc_eigen(const GSL::Vector& kp)
 {
     const GSL::Matrix_cx H {set_H(kp)};
@@ -508,14 +496,17 @@ void Simulation::calc_eigen(const GSL::Vector& kp)
                 msg += " is not spin UP.\n";
                 throw std::runtime_error(msg + "FATAL ERROR!\n");
             }
-            // H_up[i][j] = H[2*i][2*j];
-            // S_up[i][j] = S[2*i][2*j];
         }
     }
 
     std::pair<GSL::Matrix_cx, GSL::Vector> tmp, overlap;
     overlap = GSL::hermitian_eigen(S_up);
     std::cout << "k-point " << kp << "\n";
+    std::cerr << " Overlap matrix\n";
+    for(size_t i = 0 ; i < N; i++){
+        std::cerr << "  " << S_up[i] << "\n";
+    }
+    std::cerr << "Eigenvalues of Overlap matrix\n" << overlap.second << "\n";
     try{
         tmp = GSL::general_hermitian_eigen(H_up, S_up);
         eigvecs_up = tmp.first;
@@ -531,16 +522,16 @@ void Simulation::calc_eigen(const GSL::Vector& kp)
 
     }catch (const std::runtime_error &e){
 		std::cerr << e.what();
-		std::cerr << " Hamiltonian matrix\n";
-		for(size_t i = 0 ; i < N; i++){
-			std::cerr << "  " << H_up[i] << "\n";
-		}
-		std::cerr << " Overlap matrix\n";
-		for(size_t i = 0 ; i < N; i++){
-			std::cerr << "  " << S_up[i] << "\n";
-		}
-        std::cerr << "Eigenvalues of Overlap matrix\n" << overlap.second << "\n";
+		// std::cerr << " Hamiltonian matrix\n";
+		// for(size_t i = 0 ; i < N; i++){
+		// 	std::cerr << "  " << H_up[i] << "\n";
+		// }
+        std::cerr << "Setting eigenvalues to "<< nan("") <<"\n";
+        for(auto& eigval : eigvals_up){
+            eigval = nan("");
+        }
     }
+    k_eigenvals[kp] = {eigvecs_up, eigvals_up};
 }
 
 void Simulation::print_eigvals(const K_mesh& k_mesh)
@@ -548,9 +539,6 @@ void Simulation::print_eigvals(const K_mesh& k_mesh)
     std::ofstream of;
     of.open("bands.dat", std::ios::trunc);
     for(const auto& kp :  k_mesh.k_points){
-    //for(auto it : k_eigenvals){
-        //auto kp = it.first;
-        //auto eigvals = it.second.second;
         auto it = k_eigenvals.find(kp);
 		if(it != k_eigenvals.end()){
 				auto eigvals = it->second.second;
@@ -562,4 +550,20 @@ void Simulation::print_eigvals(const K_mesh& k_mesh)
 		}
     }
     of.close();
+}
+
+double Simulation::canonical_band(const lm l, const double kappa, const spin s, const GSL::Vector& kp)
+{
+    auto h = Hs_m[0].get_function(l, kappa, s);
+    auto j = Bs_m[0].get_function(l, kappa, s);
+    const double eh = h.EH(), ej = j.EJ();
+
+    const double shh = augmented_integral(h, h), sjh = augmented_integral(j, h);
+
+    GSL::Complex B = B_m(this->cryst, lm {4, 4}, l, l, kappa, GSL::Vector(3), kp);
+    if(std::abs(B.im()) > 1e-10 ){
+        std::cerr << "Imaginary part of Bloch summed structure constant is too large!\n";
+    }
+    double tmp = shh/sjh*B.re();
+    return (eh + ej*tmp)/(1 + tmp);
 }

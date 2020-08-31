@@ -68,5 +68,8 @@ public:
 
     void add_eigvals(const GSL::Vector& kp, const GSL::Vector& eigvals);
     void print_eigvals(const K_mesh& k_mesh);
+
+    double canonical_band(const lm l, const double kappa, const spin s, const GSL::Vector& kp);
+
 };
 #endif // SIMULATION_H
