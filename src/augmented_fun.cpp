@@ -111,10 +111,6 @@ void Augmented_Bessel::update(std::vector<double>& v, const double en
 {
     EJ() = en;
     size_t nodes = static_cast<size_t>(std::max(0, l.n - l.l - 1));
-    int sign = 1;
-    if(nodes % 2 == 1){
-	    sign = -1;
-    }
     size_t last = mesh.size() - 1, lastbutone = mesh.size() - 2;
     Bessel_function I(l);
 
@@ -125,9 +121,9 @@ void Augmented_Bessel::update(std::vector<double>& v, const double en
             GSL::pow_int(mesh.r(2), l.l+1)};
 
         std::vector<double> r_init = {
-            sign*GSL::pow_int(kappa, -l.l)* I(kappa*mesh.r(lastbutone))
+            GSL::pow_int(kappa, -l.l)* I(kappa*mesh.r(lastbutone))
 		        *mesh.r(lastbutone),
-		    sign*GSL::pow_int(kappa, -l.l)*I(kappa*mesh.r(last))
+		    GSL::pow_int(kappa, -l.l)*I(kappa*mesh.r(last))
 		        *mesh.r(last)};
 
         Radial_Schroedinger_Equation_Central_Potential se(v, static_cast<size_t>(l.l), l_init, r_init, mesh, 1e-10);

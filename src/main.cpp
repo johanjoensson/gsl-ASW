@@ -102,7 +102,7 @@ numerov_debug.close();
 	Atom C7(/*Logarithmic_mesh(),*/ tau*cr.lat().lat());
 	Atom C8(/*Logarithmic_mesh(),*/ tau*cr.lat().lat());
 
-	C1.set_Z(21);
+	C1.set_Z(6);
 	C2.set_Z(6);
 	C3.set_Z(6);
 	C4.set_Z(6);
@@ -112,9 +112,9 @@ numerov_debug.close();
 	C8.set_Z(6);
 
 	cr.set_size({1, 1, 1});
-	cr.add_basis({C1});//), C4, C5, C6, C7, C8});
+	cr.add_basis({C1});//, C2});//, C3, C4, C5, C6, C7, C8});
 	// cr.add_sites({{0, 0, 0}, {0.5, 0, 0}, {0, 0.5, 0}, {0, 0, 0.5}, {0.5, 0.5, 0}, {0.5, 0, 0.5}, {0, 0.5, 0.5}, {0.5, 0.5, 0.5}});
-	cr.add_sites({{0, 0, 0}});//, {0.25, 0.25, 0.25}});
+	cr.add_sites({{0, 0, 0}, {0.25, 0.25, 0.25}});
 
 	std::cout << "Crystal contains " << cr.sites().size() << " sites\n";
 	std::cout << "Crystal contains " << cr.atoms().size() << " inequivalent atoms\n";

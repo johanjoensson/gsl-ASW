@@ -220,13 +220,13 @@ GSL::Complex Bloch_summed_structure_constant::calc_dot(
 	for (int lpp = 0; lpp <= lint.l; lpp++){
 		for (int mpp = -lpp; mpp <= lpp; mpp++){
 			a = gaunt(l, lp, lm {lpp, mpp});
-			if (std::abs(a.val) > 1E-16){
+//			if (std::abs(a.val) > 1E-16){
 				sum += a.val*
 				(2*Ds.dot(lm {lpp,	 mpp}, kappa, c, tau, kp) -
 				(l.l + lp.l - lpp)/GSL::pow_int(kappa, 2)*
 				Ds(lm {lpp, mpp}, kappa, c, tau, kp))*
 				GSL::pow_int(-1, lpp)*GSL::pow_int(1./kappa, lpp);
-			}
+//			}
 		}
 	}
 	double k_fac = GSL::pow_int(kappa, l.l + lp.l);

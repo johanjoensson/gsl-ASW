@@ -90,7 +90,6 @@ void Simulation::set_up_basis()
     set_up_augmented_functions();
     // Divide electrons into core and valence states
     for(const auto& site: cryst.sites()){
-        std::cout << "\n\nSite!\n\n";
         for(auto kappa : kappas){
             add_states(site, kappa);
         }
@@ -239,7 +238,7 @@ double Simulation::X_H2(const Augmented_Hankel& Ht1, const Augmented_Bessel& Jt2
     double res = 0;
     const Envelope_Hankel H1(site, Ht1.l, Ht1.kappa);
     const Envelope_Bessel J2(site, Jt2.l, Jt2.kappa);
-    if(std::abs(Ht1.EH() - Jt2.EJ()) < 1e-5){
+    if(std::abs(Ht1.EH() - Jt2.EJ()) < 5e-4){
         res += Jt2.EJ()*augmented_integral(Ht1, Ht1);
     }else{
         res += Jt2.EJ()/(Ht1.EH() - Jt2.EJ());
@@ -320,7 +319,7 @@ double Simulation::X_S2(const Augmented_Hankel& Ht1, const Augmented_Bessel& Jt2
     double res = 0;
     const Envelope_Hankel H1(site, Ht1.l, Ht1.kappa);
     const Envelope_Bessel J2(site, Jt2.l, Jt2.kappa);
-    if(std::abs(Ht1.EH() - Jt2.EJ()) < 1e-5){
+    if(std::abs(Ht1.EH() - Jt2.EJ()) < 5e-4){
         res += augmented_integral(Ht1, Ht1);
     }else{
         res += 1./(Ht1.EH() - Jt2.EJ());
@@ -558,17 +557,17 @@ double Simulation::canonical_band(const lm l, const double kappa, const spin s, 
 {
     auto h = Hs_m[0].get_function(l, kappa, s);
     auto j = Bs_m[0].get_function(l, kappa, s);
-//    const double eh = h.EH(), ej = j.EJ();
+    const double eh = h.EH(), ej = j.EJ();
 
-//    const double shh = augmented_integral(h, h), sjh = augmented_integral(j, h);
+    const double shh = augmented_integral(h, h), sjh = std::abs(eh - ej) < 5e-4 ? augmented_integral(h, h) : 1./(eh - ej);
 
     lm lint = {4, 0};
     GSL::Complex B = B_m(this->cryst, lint, l, l, kappa, GSL::Vector(3), kp);
     if(std::abs(B.im()) > 1e-10 ){
         std::cerr << "Imaginary part of Bloch summed structure constant is too large!\n";
     }
-    //double tmp = shh/sjh*B.re();
-//    return (eh + ej*tmp)/(1 + tmp);
-    return B.re();
+    double tmp = shh/sjh*B.re();
+    return (eh + ej*tmp)/(1 + tmp);
+//    return B.re();
     
 }

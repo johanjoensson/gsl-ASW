@@ -94,12 +94,12 @@ GSL::Complex Bloch_sum::calc_d1(const lm l, const double kappa, const Crystal_t<
     // Loop over all K-vectors
     for(const auto& Kn : c.Kn_vecs()){
         k = (Kn + kp).norm();
-        if(k < 1e-16){
+        if((k < 1e-16 && l.l > 0) || (kappa*kappa + k*k)/eta > 37){
             continue;
-        }
-        dot = tau.dot(Kn + kp);
+        }        
+	dot = tau.dot(Kn + kp);
         e = GSL::exp(GSL::Complex(0., dot));
-        tmp = GSL::pow_int(k, l.l)*cubic_harmonic(l, (Kn + kp)/k);
+        tmp = l.l == 0 ? cubic_harmonic(l, (Kn + kp)) : GSL::pow_int(k, l.l)*cubic_harmonic(l, (Kn + kp)/k);
         if (std::abs(kappa*kappa + k*k) > 1e-16 ){
               tmp *= GSL::exp((-kappa*kappa - k*k)/eta)/(-kappa*kappa - k*k);
           }else{
@@ -128,13 +128,12 @@ GSL::Complex Bloch_sum::calc_d1_dot(const lm l, const double kappa, const Crysta
     for(const auto& Kn : c.Kn_vecs()){
         // GSL::Vector kn(Kn + kp);
         k = (Kn + kp).norm();
-        if(k < 1e-16){
+        if((k < 1e-16 && l.l > 0) || (kappa*kappa + k*k)/eta > 37){
             continue;
         }
-        // k = kn.norm<double>();
         dot = tau.dot(Kn + kp);
         e = GSL::exp(GSL::Complex(0., dot));
-        tmp = GSL::pow_int(k, l.l)*cubic_harmonic(l, (Kn + kp)/k);
+        tmp = l.l == 0 ? cubic_harmonic(l, (Kn + kp)) : GSL::pow_int(k, l.l)*cubic_harmonic(l, (Kn + kp)/k);
         if(std::abs(kappa*kappa + k*k) > 1e-16){
             tmp *=   GSL::exp((-kappa*kappa - k*k)/eta)/
               GSL::pow_int(-kappa*kappa - k*k, 2);

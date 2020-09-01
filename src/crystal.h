@@ -156,11 +156,6 @@ void Crystal_t<dim, Atom>::set_Kn(const double Kmax)
 	}
 	// temporary vector for storing linear combinations of new and old vector
 	while(n != N){
-		std::cout << "\t[";
-		for(auto val : n){
-			std::cout << val << " ";
-		}
-		std::cout << "]\n";
 
 		tmp.assign(n.begin(), n.end());
 		K_m.push_back(tmp*b);
@@ -174,9 +169,6 @@ void Crystal_t<dim, Atom>::set_Kn(const double Kmax)
 	}
 	tmp.assign(n.begin(), n.end());
 	K_m.push_back(tmp*b);
-	for(auto k : K_m){
-		std::cout << "\t" << k << "\n";
-	}
 }
 
 template<size_t dim, class Atom>
