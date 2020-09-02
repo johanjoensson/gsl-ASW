@@ -57,7 +57,7 @@ numerov_debug.close();
 	std::cout << b << "\n";
 	std::cout << c << "\n";
 	// Crystal_t<3, Atom> cr(Lattice_t<3>({16*a, 16*b, 16*c}));
-	Crystal_t<3, Atom> cr(Lattice_t<3>({7*a, 7*b, 7*c}));
+	Crystal_t<3, Atom> cr(Lattice_t<3>({3*a, 3*b, 3*c}));
 	for(auto row : cr.lat().recip_lat()){
 		std::cout << row <<"\n";
 	}
@@ -102,8 +102,8 @@ numerov_debug.close();
 	Atom C7(/*Logarithmic_mesh(),*/ tau*cr.lat().lat());
 	Atom C8(/*Logarithmic_mesh(),*/ tau*cr.lat().lat());
 
-	C1.set_Z(6);
-	C2.set_Z(6);
+	C1.set_Z(21);
+	C2.set_Z(21);
 	C3.set_Z(6);
 	C4.set_Z(6);
 	C5.set_Z(6);

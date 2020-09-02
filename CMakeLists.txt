@@ -1,34 +1,41 @@
-cmake_minimum_required(VERSION 3.0)
+cmake_minimum_required(VERSION 3.14)
 
-project(gsl-asw)
+project(
+	GSL-ASW
+	VERSION 0.1
+	DESCRIPTION "Augmented Spherical Wave method Density Functional Theory code using the GNU Scientific Library"
+	LANGUAGES CXX
+)
 
-set(WFLAGS " -Werror -Wall -Wextra -pedantic -Wshadow -Wnon-virtual-dtor -Wold-style-cast -Wcast-align -Wunused -Woverloaded-virtual -Wpedantic -Wconversion -Wsign-conversion -Wmisleading-indentation -Wduplicated-cond -Wduplicated-branches -Wlogical-op -Wnull-dereference -Wuseless-cast -Wdouble-promotion -Wformat=2 -Weffc++")
+# Only do these if this is the main project, and not if it is included through add_subdirectory
+if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
 
-set(CXXFLAGS  "-g -std=c++11 ${WFLAGS} -DDEBUG")
-set(CFLAGS  "-g -std=c11 ${WFLAGS} -DDEBUG")
+	set(CMAKE_CXX_EXTENSIONS OFF)
+	set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 
-set(SOURCE_FILES    src/spherical_fun.cpp
-		    src/log_mesh.cpp
-		    src/bloch_sum.cpp
-		    src/gaunt.cpp
-		    src/structure_const.cpp
-		    src/augmented_fun.cpp
-		    src/augmented_spherical_wave.cpp
-		    src/atomic_quantity.cpp
-		    src/atom.cpp
-		    src/lattice.cpp
-		    src/ewald_int.cpp
-		    src/utils.cpp
-		    src/xc_func.cpp
-		    src/envelope_fun.cpp
-		    src/simulation.cpp
-		    src/k-mesh.cpp
-		    src/main.cpp)		
+	find_package(Doxygen)   
+	if(Doxygen_FOUND)    
+		add_subdirectory(docs)   
+	else()     
+		message(STATUS "Doxygen not found, not building docs")   
+	endif()
 
-	    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${CXXFLAGS}")
-	    set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${CFLAGS}")
+	set(WFLAGS " -Werror -Wall -Wextra -pedantic -Wshadow -Wnon-virtual-dtor -Wold-style-cast -Wcast-align -Wunused -Woverloaded-virtual -Wpedantic -Wconversion -Wsign-conversion -Wmisleading-indentation -Wduplicated-cond -Wduplicated-branches -Wlogical-op -Wnull-dereference -Wuseless-cast -Wdouble-promotion -Wformat=2 -Weffc++")
+	set(CXXFLAGS  "${WFLAGS}")
+	set(CFLAGS  "${WFLAGS}")
+	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${CXXFLAGS}")
+	set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${CFLAGS}")
 
-add_executable(gsl-asw ${SOURCE_FILES})
-target_include_directories(gsl-asw PRIVATE ../GSL-lib/include)
-find_library(GSL_LIB GSLpp ../GSL-lib/lib/GSLpp/)
-target_link_libraries(gsl-asw m ${GSL_LIB} xc gsl)
+endif() # Main project only part ends here
+
+
+set(GSLpp_ROOT /home/johan/Programming/GSL-lib)
+
+add_subdirectory(src)
+add_subdirectory(bin)
+
+
+if((CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME OR MODERN_CMAKE_BUILD_TESTING)    
+    AND BUILD_TESTING)   
+	add_subdirectory(tests) 
+endif()

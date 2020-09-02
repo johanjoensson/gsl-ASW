@@ -568,6 +568,4 @@ double Simulation::canonical_band(const lm l, const double kappa, const spin s, 
     }
     double tmp = shh/sjh*B.re();
     return (eh + ej*tmp)/(1 + tmp);
-//    return B.re();
-    
 }
