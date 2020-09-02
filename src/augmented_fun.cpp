@@ -33,7 +33,6 @@ double Augmented_function::operator()(const GSL::Vector& r) const
 double augmented_integral(const Augmented_function &a, const Augmented_function &b)
 {
     Logarithmic_mesh mesh = a.mesh;
-    // Make sure both funcions are centered on the same site
     std::vector<double> integrand(a.val.size(), 0);
 
     for(size_t i = 0; i < integrand.size(); i++){

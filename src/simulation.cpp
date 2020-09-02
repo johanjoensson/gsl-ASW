@@ -113,7 +113,7 @@ void Simulation::set_up_augmented_functions()
                 l_max = lH.n - 1;
             }
 
-            for(int n = lH.n, l = lH.l; l <= l_max; l++){
+            for(int n = lH.n, l = lH.l; l <= std::min(l_max, lH.n - 1); l++){
             for(auto kappa : kappas){
                 for(auto s : {spin{UP}, spin{DOWN}}){
                     Hs_m.back().add_function(Augmented_Hankel({n, l, -l}, kappa, s,
@@ -129,7 +129,7 @@ void Simulation::set_up_augmented_functions()
         // while(nel < z){
             // if(nel + static_cast<size_t>(2*lB.n*lB.n) > z){
             // for(int n = lB.n, l = lB.l; l < lB.n; l++){
-            for(lm l = {lH.n, 0,  0}; l.n == lH.n; l += 2*l.l + 1){
+            for(lm l = {lH.n - 1, 0,  0}; l.n == lH.n - 1; l += 2*l.l + 1){
                 for(auto kappa : kappas){
                     for(auto s : {spin{UP}, spin{DOWN}}){
                         Bs_m.back().add_function(Augmented_Bessel(l, kappa, s,
@@ -242,7 +242,10 @@ double Simulation::X_H2(const Augmented_Hankel& Ht1, const Augmented_Bessel& Jt2
     if(std::abs(Ht1.EH() - Jt2.EJ()) < 1e-16){
         res += Jt2.EJ()*augmented_integral(Ht1, Ht1);
     }else{
-        res += Jt2.EJ()/(Ht1.EH() - Jt2.EJ());
+        std::cout << "Error in interal = " << ( 1./(Ht1.EH() - Jt2.EJ()) - augmented_integral(Ht1, Jt2) ) * ( Ht1.EH() - Jt2.EJ() ) << "\n";
+        // res += Jt2.EJ()/(Ht1.EH() - Jt2.EJ());
+        res += Jt2.EJ()*augmented_integral(Ht1, Jt2);
+
     }
     res -= -Jt2.kappa*Jt2.kappa*atomic_integral(H1, J2, at_meshes[cryst.atom_index(site)].r_back());
     if(Ht1.kappa*Ht1.kappa != Jt2.kappa*Jt2.kappa){
@@ -448,10 +451,10 @@ const GSL::Matrix_cx Simulation::set_H(const GSL::Vector& kp)
     size_t N = basis_valence.size();
     GSL::Matrix_cx H(N, N);
     for(size_t i = 0; i < N; i++){
-        // for(size_t j = 0; j <= i; j++){
-        for(size_t j = 0; j < N; j++){
+        for(size_t j = 0; j <= i; j++){
+        // for(size_t j = 0; j < N; j++){
             H[i][j] = H_element(i, j, kp);
-            // H[j][i] = H_element(i, j, kp).conjugate();
+            H[j][i] = H_element(i, j, kp).conjugate();
         }
     }
     return H;
@@ -462,11 +465,11 @@ const GSL::Matrix_cx Simulation::set_S(const GSL::Vector& kp)
     size_t N = basis_valence.size();
     GSL::Matrix_cx S(N, N);
     for(size_t i = 0; i < N; i++){
-        // for(size_t j = 0; j <= i; j++){
-        for(size_t j = 0; j < N; j++){
+        for(size_t j = 0; j <= i; j++){
+        // for(size_t j = 0; j < N; j++){
 
             S[i][j] = S_element(i, j, kp);
-            // S[j][i] = S_element(i, j, kp).conjugate();
+            S[j][i] = S_element(i, j, kp).conjugate();
         }
     }
     return S;
@@ -563,6 +566,6 @@ double Simulation::canonical_band(const lm l, const double kappa, const spin s, 
     if(std::abs(B.im()) > 1e-10 ){
         std::cerr << "Imaginary part of Bloch summed structure constant is too large!\n";
     }
-    double tmp = shh/sjh*B.re();
-    return (eh + ej*tmp)/(1 + tmp);
+    double tmp = sjh/shh*B.re();
+    return (eh - ej*tmp)/(1 - tmp);
 }

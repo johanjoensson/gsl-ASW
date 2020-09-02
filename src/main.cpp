@@ -158,7 +158,7 @@ numerov_debug.close();
 	}
 	of.close();
 
-	return 0;
+	// return 0;
 
 	std::cout << "Loop ove k-points\n" << std::endl;
 	for(const auto& kp : kmesh.k_points){
