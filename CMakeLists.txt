@@ -20,12 +20,10 @@ if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
 		message(STATUS "Doxygen not found, not building docs")   
 	endif()
 
-	set(WFLAGS " -Werror -Wall -Wextra -pedantic -Wshadow -Wnon-virtual-dtor -Wold-style-cast -Wcast-align -Wunused -Woverloaded-virtual -Wpedantic -Wconversion -Wsign-conversion -Wmisleading-indentation -Wduplicated-cond -Wduplicated-branches -Wlogical-op -Wnull-dereference -Wuseless-cast -Wdouble-promotion -Wformat=2 -Weffc++")
-	set(CXXFLAGS  "${WFLAGS}")
-	set(CFLAGS  "${WFLAGS}")
-	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${CXXFLAGS}")
-	set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${CFLAGS}")
-
+	set(WFLAGS -Werror -Wall -Wextra -pedantic -Wshadow -Wnon-virtual-dtor -Wold-style-cast -Wcast-align -Wunused -Woverloaded-virtual -Wpedantic -Wconversion -Wsign-conversion -Wmisleading-indentation -Wnull-dereference -Wdouble-promotion -Wformat=2 -Weffc++)
+	if(CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
+		set(WFLAGS ${WFLAGS} -Wduplicated-cond -Wduplicated-branches -Wlogical-op -Wuseless-cast)
+	endif()
 endif() # Main project only part ends here
 
 

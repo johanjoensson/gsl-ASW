@@ -98,6 +98,7 @@ void Bloch_summed_structure_constant::Container::add(const Crystal_t<3, Atom>& c
 
 GSL::Complex Bloch_summed_structure_constant::Container::get(const Crystal_t<3, Atom>& c, const lm& lint, const lm& lp, const lm& l, const double kappa, const GSL::Vector& tau,	const GSL::Vector& kp)
 {
+/*
 	// Check if value has already been calculated
 	auto it = values_m.find({lp, l, kappa, tau, kp});
 	if(it != values_m.end()){
@@ -117,6 +118,7 @@ GSL::Complex Bloch_summed_structure_constant::Container::get(const Crystal_t<3, 
 	}
 	// Value not already calculated, calculate!
 	this->add(c, lint, lp, l, kappa, tau, kp);
+*/
 	const Bloch_summed_structure_constant B;
 	return B.calc(c, lint, lp, l, kappa, tau, kp, D_m);
 }
@@ -124,6 +126,7 @@ GSL::Complex Bloch_summed_structure_constant::Container::get(const Crystal_t<3, 
 GSL::Complex Bloch_summed_structure_constant::Container::get_dot(const Crystal_t<3, Atom>& c, const lm& lint, const lm& lp, const lm& l, const double kappa,
 	const GSL::Vector& tau,	const GSL::Vector& kp)
 {
+	/*
 	// Check if value has already been calculated
 	auto it = dot_values_m.find({lp, l, kappa, tau, kp});
 	if(it != dot_values_m.end()){
@@ -142,7 +145,9 @@ GSL::Complex Bloch_summed_structure_constant::Container::get_dot(const Crystal_t
 		return it->second.conjugate();
 	}
 	// Value not already calculated, calculate!
+
 	this->add(c, lint, lp, l, kappa, tau, kp);
+*/
 	const Bloch_summed_structure_constant B;
 	return B.calc_dot(c, lint, lp, l, kappa, tau, kp, D_m);
 }
@@ -220,13 +225,13 @@ GSL::Complex Bloch_summed_structure_constant::calc_dot(
 	for (int lpp = 0; lpp <= lint.l; lpp++){
 		for (int mpp = -lpp; mpp <= lpp; mpp++){
 			a = gaunt(l, lp, lm {lpp, mpp});
-//			if (std::abs(a.val) > 1E-16){
+			if (std::abs(a.val) > 1E-16){
 				sum += a.val*
 				(2*Ds.dot(lm {lpp,	 mpp}, kappa, c, tau, kp) -
 				(l.l + lp.l - lpp)/GSL::pow_int(kappa, 2)*
 				Ds(lm {lpp, mpp}, kappa, c, tau, kp))*
 				GSL::pow_int(-1, lpp)*GSL::pow_int(1./kappa, lpp);
-//			}
+			}
 		}
 	}
 	double k_fac = GSL::pow_int(kappa, l.l + lp.l);

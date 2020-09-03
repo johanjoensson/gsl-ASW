@@ -14,6 +14,7 @@ void Bloch_sum::Container::add(const lm l, const double kappa, const Crystal_t<3
 
 GSL::Complex Bloch_sum::Container::get(const lm l, const double kappa, const Crystal_t<3, Atom>& c, const GSL::Vector& tau, const GSL::Vector& kp)
 {
+	/*
     auto it = values_m.find({l, kappa, tau, kp});
     if(it != values_m.end()){
         return it->second;
@@ -30,14 +31,16 @@ GSL::Complex Bloch_sum::Container::get(const lm l, const double kappa, const Cry
     if(it != values_m.end()){
         return (l.l % 2) == 0 ? it->second.conjugate() : -it->second.conjugate();
     }
-    Bloch_sum D;
     this->add(l, kappa, c, tau, kp);
+    */
+    Bloch_sum D;
   
     return D(l, kappa, c, tau, kp);
 }
 
 GSL::Complex Bloch_sum::Container::get_dot(const lm l, const double kappa, const Crystal_t<3, Atom>& c, const GSL::Vector& tau, const GSL::Vector& kp)
 {
+	/*
     auto it = dot_values_m.find({l, kappa, tau, kp});
     if(it != dot_values_m.end()){
         return it->second;
@@ -54,8 +57,9 @@ GSL::Complex Bloch_sum::Container::get_dot(const lm l, const double kappa, const
     if(it != dot_values_m.end()){
         return (l.l % 2) == 0 ? it->second.conjugate() : -it->second.conjugate();
     }
-    Bloch_sum D;
     this->add(l, kappa, c, tau, kp);
+    */
+    Bloch_sum D;
     return D.dot(l, kappa, c, tau, kp);
 }
 

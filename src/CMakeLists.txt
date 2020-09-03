@@ -1,4 +1,3 @@
-
 set(SOURCE_FILES    spherical_fun.cpp
 		    log_mesh.cpp
 		    bloch_sum.cpp
@@ -26,6 +25,13 @@ find_library(GSL_LIB GSLpp ${GSLpp_ROOT}/lib/GSLpp/ REQUIRED)
 target_link_libraries(gsl-asw-lib PUBLIC m ${GSL_LIB} xc ) 
 # All users of this library will need at least C++11 
 target_compile_features(gsl-asw-lib PUBLIC cxx_std_11) 
+
+target_compile_options(gsl-asw-lib PRIVATE $<$<CONFIG:DEBUG>:${WFLAGS} -g -O1 -DDEBUG>)
+target_compile_options(gsl-asw-lib PRIVATE $<$<CONFIG:RELEASE>:${WFLAGS} -O2>)
+if(CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
+	target_compile_options(gsl-asw-lib PRIVATE $<$<CONFIG:DEBUG>:-Og -pg>)
+	target_compile_options(gsl-asw-lib PRIVATE $<$<CONFIG:RELEASE>:-Ofast>)
+endif()
 
 # IDEs should put the headers in a nice place 
 source_group(   
