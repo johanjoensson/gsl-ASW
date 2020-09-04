@@ -102,8 +102,8 @@ numerov_debug.close();
 	Atom C7(/*Logarithmic_mesh(),*/ tau*cr.lat().lat());
 	Atom C8(/*Logarithmic_mesh(),*/ tau*cr.lat().lat());
 
-	C1.set_Z(21);
-	C2.set_Z(21);
+	C1.set_Z(6);
+	C2.set_Z(6);
 	C3.set_Z(6);
 	C4.set_Z(6);
 	C5.set_Z(6);
@@ -155,7 +155,7 @@ numerov_debug.close();
 	of.open("canonical_bands.dat", std::ios::trunc);
     for(const auto& kp :  kmesh.k_points){
 		of << kp[0] << " " << kp[1] << " " << kp[2] << " ";
-		for(lm l = {3, 2, -2}; l != lm {4, 0, 0}; l++){
+		for(lm l = {3, 1, -1}; l != lm {3, 2, -2}; l++){
 			of << sim.canonical_band(l, kappa, UP, kp) << " ";
 		}
 		of << "\n";
