@@ -29,6 +29,8 @@ endif() # Main project only part ends here
 
 set(GSLpp_ROOT /home/johan/Programming/GSL-lib)
 
+find_library(GSL_LIB GSLpp ${GSLpp_ROOT}/lib/GSLpp/ REQUIRED)
+
 add_subdirectory(src)
 add_subdirectory(bin)
 
