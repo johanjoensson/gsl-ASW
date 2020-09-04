@@ -30,7 +30,10 @@
 *.exe
 *.out
 *.app
-gsl-asw
+gsl-asw-*
 numerov-test
 test_*
 test
+
+# Build directory
+build

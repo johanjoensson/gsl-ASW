@@ -327,7 +327,6 @@ double Simulation::X_S2(const Augmented_Hankel& Ht1, const Augmented_Bessel& Jt2
     }else{
         res += 1./(Ht1.EH() - Jt2.EJ());
     }
-    std::cout << "l = " << Jt2.l << ", <Ht|Jt> = " << augmented_integral(Ht1, Jt2) << ", (eH - eJ)^-1 = " << 1/(Ht1.EH() - Jt2.EJ())<< "\n"; 
     res -= atomic_integral(H1, J2, at_meshes[cryst.atom_index(site)].r_back());
     if(Ht1.kappa*Ht1.kappa != Jt2.kappa*Jt2.kappa){
         res += 1./(-Jt2.kappa*Jt2.kappa + Ht1.kappa*Ht1.kappa);

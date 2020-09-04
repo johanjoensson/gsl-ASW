@@ -19,18 +19,15 @@ add_library(gsl-asw-lib ${SOURCE_FILES})
 
 target_include_directories(gsl-asw-lib PUBLIC ../include/)
 target_include_directories(gsl-asw-lib PUBLIC ${GSLpp_ROOT}/include/)
-find_library(GSL_LIB GSLpp ${GSLpp_ROOT}/lib/GSLpp/ REQUIRED)
 
-# This depends on (header only) boost 
-target_link_libraries(gsl-asw-lib PUBLIC m ${GSL_LIB} xc ) 
 # All users of this library will need at least C++11 
 target_compile_features(gsl-asw-lib PUBLIC cxx_std_11) 
 
-target_compile_options(gsl-asw-lib PRIVATE $<$<CONFIG:DEBUG>:${WFLAGS} -g -O1 -DDEBUG>)
-target_compile_options(gsl-asw-lib PRIVATE $<$<CONFIG:RELEASE>:${WFLAGS} -O2>)
+target_compile_options(gsl-asw-lib PUBLIC $<$<CONFIG:DEBUG>:${WFLAGS} -g -O1 -DDEBUG>)
+target_compile_options(gsl-asw-lib PUBLIC $<$<CONFIG:RELEASE>:${WFLAGS} -O2>)
 if(CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
-	target_compile_options(gsl-asw-lib PRIVATE $<$<CONFIG:DEBUG>:-Og -pg>)
-	target_compile_options(gsl-asw-lib PRIVATE $<$<CONFIG:RELEASE>:-Ofast>)
+	target_compile_options(gsl-asw-lib PUBLIC $<$<CONFIG:DEBUG>:-Og -pg>)
+	target_compile_options(gsl-asw-lib PUBLIC $<$<CONFIG:RELEASE>:-Ofast>)
 endif()
 
 # IDEs should put the headers in a nice place 

@@ -4,27 +4,27 @@
 #include <cmath>
 #include <algorithm>
 #include <thread>
-#include "simulation.h"
-#include "spherical_fun.h"
-#include "utils.h"
-#include "numerov_solver.h"
-#include "structure_const.h"
-#include "numerov_solver.h"
-#include "atom.h"
-#include "crystal.h"
-#include "bloch_sum.h"
-#include "ewald_int.h"
-#include "gaunt.h"
-#include "GSLpp/matrix.h"
-#include "GSLpp/vector.h"
-#include "GSLpp/complex.h"
-#include "GSLpp/special_functions.h"
-#include "GSLpp/error.h"
-#include "augmented_spherical_wave.h"
-#include "atomic_quantity.h"
-#include "envelope_fun.h"
-#include "xc_func.h"
-#include "k-mesh.h"
+#include <gsl-asw/simulation.h>
+#include <gsl-asw/spherical_fun.h>
+#include <gsl-asw/utils.h>
+#include <gsl-asw/numerov_solver.h>
+#include <gsl-asw/structure_const.h>
+#include <gsl-asw/numerov_solver.h>
+#include <gsl-asw/atom.h>
+#include <gsl-asw/crystal.h>
+#include <gsl-asw/bloch_sum.h>
+#include <gsl-asw/ewald_int.h>
+#include <gsl-asw/gaunt.h>
+#include <GSLpp/matrix.h>
+#include <GSLpp/vector.h>
+#include <GSLpp/complex.h>
+#include <GSLpp/special_functions.h>
+#include <GSLpp/error.h>
+#include <gsl-asw/augmented_spherical_wave.h>
+#include <gsl-asw/atomic_quantity.h>
+#include <gsl-asw/envelope_fun.h>
+#include <gsl-asw/xc_func.h>
+#include <gsl-asw/k-mesh.h>
 
 void k_iteration(const GSL::Vector& kp, Simulation& sim)
 {
@@ -102,8 +102,8 @@ numerov_debug.close();
 	Atom C7(/*Logarithmic_mesh(),*/ tau*cr.lat().lat());
 	Atom C8(/*Logarithmic_mesh(),*/ tau*cr.lat().lat());
 
-	C1.set_Z(21);
-	C2.set_Z(21);
+	C1.set_Z(6);
+	C2.set_Z(6);
 	C3.set_Z(6);
 	C4.set_Z(6);
 	C5.set_Z(6);
@@ -155,7 +155,7 @@ numerov_debug.close();
 	of.open("canonical_bands.dat", std::ios::trunc);
     for(const auto& kp :  kmesh.k_points){
 		of << kp[0] << " " << kp[1] << " " << kp[2] << " ";
-		for(lm l = {3, 2, -2}; l != lm {4, 0, 0}; l++){
+		for(lm l = {3, 1, -1}; l != lm {3, 2, -2}; l++){
 			of << sim.canonical_band(l, kappa, UP, kp) << " ";
 		}
 		of << "\n";
