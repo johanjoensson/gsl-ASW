@@ -27,7 +27,7 @@ if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
 endif() # Main project only part ends here
 
 
-set(GSLpp_ROOT /home/johan/Programming/GSL-lib)
+set(GSLpp_ROOT /home/jjonsson/Programming/GSL-lib)
 
 add_subdirectory(src)
 add_subdirectory(bin)
