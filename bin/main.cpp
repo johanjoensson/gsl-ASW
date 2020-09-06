@@ -57,7 +57,7 @@ numerov_debug.close();
 	std::cout << b << "\n";
 	std::cout << c << "\n";
 	// Crystal_t<3, Atom> cr(Lattice_t<3>({16*a, 16*b, 16*c}));
-	Crystal_t<3, Atom> cr(Lattice_t<3>({3*a, 3*b, 3*c}));
+	Crystal_t<3, Atom> cr(Lattice_t<3>({7*a, 7*b, 7*c}));
 	for(auto row : cr.lat().recip_lat()){
 		std::cout << row <<"\n";
 	}

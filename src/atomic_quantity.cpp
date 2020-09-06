@@ -118,7 +118,7 @@ void Potential::initial_pot(double vol)
             alpha[ri] += 4./6 * drx1 * (Xi0(site, r1) + Xi0(site, -r1));
             alpha[ri] += 1./6 * drx * (Xi0(site, r) + Xi0(site, -r));
 
-            // electrostatic[at_i][ri] += alpha[ri]/r;
+            electrostatic[at_i][ri] += alpha[ri]/r;
         }
         done[at_i] = true;
         std::cout << "Done setting up electrostatic potential of atom " << at_i << "\n";

@@ -37,9 +37,7 @@ double Bessel_function::operator()(const double x) const
 
 double Neumann_function::operator()(const double x) const
 {
-    GSL::Result n(0,0);
-
-    return n.val*x;
+    return GSL::bessel_yn(l_m.l, x).val;
 }
 
 double Integral_Hankel_function::operator()(const double kappa, const double eta, const double x) const
@@ -63,7 +61,7 @@ GSL::Result cubic_harmonic(const lm& l, GSL::Vector&& r)
 
 GSL::Result cubic_harmonic(const lm& l, const GSL::Vector& r)
 {
-    if(l.l == 0 && l.m == 0){
+    if(l.l == 0){
         return GSL::Result(1./std::sqrt(4*M_PI), 0);
     }
 

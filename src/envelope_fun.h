@@ -8,13 +8,15 @@
 
 // Class/Functor for representing envelope funcitons
 class Envelope_function{
-public:
-    Site_t<3> center;
-    lm l;
-    double kappa;
+protected:
+    Site_t<3> center_m;
+    lm l_m;
+    double kappa_m;
 
-    // Envelope_function() : center(), l(), kappa() {};
-    Envelope_function(const Site_t<3>& center, lm l, double kappa);
+public:
+    Envelope_function(const Site_t<3>& center_n, lm l_n, double kappa_n)
+     : center_m(center_n), l_m(l_n), kappa_m(kappa_n)
+    {}
     Envelope_function(const Envelope_function&) = default;
     Envelope_function(Envelope_function&&) = default;
 
@@ -25,30 +27,36 @@ public:
     double operator()(const GSL::Vector r);
     virtual double barred_fun(const double x) const
         {return 0.*x;}
+
+    friend double atomic_integral(const Envelope_function&, const Envelope_function&, const double rs);
 };
+
+class Envelope_Hankel;
+class Envelope_Bessel;
+class Envelope_Neumann;
 
 class Envelope_Hankel : public Envelope_function{
 public:
-    // Envelope_Hankel()
-    //  :Envelope_function()
-    //  {};
     Envelope_Hankel(const Site_t<3>& center_n, lm l_n, double kappa_n)
      : Envelope_function(center_n, l_n, kappa_n)
-     {};
+    {};
 
     double barred_fun(const double x) const override;
+
+    friend double off_atomic_integral(const Envelope_Hankel& H1, const Envelope_Hankel& H2, const double rs);
+    friend double atomic_integral(const Envelope_Hankel& H1, const Envelope_Bessel& J2, const double rs);
+
 };
 
 class Envelope_Bessel : public Envelope_function{
 public:
-    // Envelope_Bessel()
-    //  :Envelope_function()
-    //  {};
     Envelope_Bessel(const Site_t<3>& center_n, lm l_n, double kappa_n)
      : Envelope_function(center_n, l_n, kappa_n)
-     {};
+    {};
 
     double barred_fun(const double x) const override;
+    friend double atomic_integral(const Envelope_Hankel& H1, const Envelope_Bessel& J2, const double rs);
+    friend double atomic_integral(const Envelope_Bessel& J1, const Envelope_Bessel& J2, const double rs);
 };
 
 class Envelope_Neumann : public Envelope_function{
@@ -58,9 +66,10 @@ public:
      // {};
     Envelope_Neumann(const Site_t<3>& center_n, lm l_n, double kappa_n)
      : Envelope_function(center_n, l_n, kappa_n)
-     {};
+    {};
 
     double barred_fun(const double x) const override;
+
 };
 
 /*******************************************************************************

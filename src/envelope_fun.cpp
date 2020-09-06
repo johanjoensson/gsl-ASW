@@ -1,68 +1,70 @@
 #include "envelope_fun.h"
 #include "spherical_fun.h"
 
-Envelope_function::Envelope_function(const Site_t<3>& center_n, lm l_n, double kappa_n)
- : center(center_n), l(l_n), kappa(kappa_n)
-
-{}
-
 double Envelope_Hankel::barred_fun(const double x) const
 {
-    lm l_eff = l;
-    double kappa_fac = 1.;
-    if(l.l < 0){
-        l_eff = lm{ -l.l - 1, l.m};
-        kappa_fac = GSL::pow_int(kappa, 2*l.l + 1);
+    if(l_m.l < 0){
+        Envelope_Hankel h(center_m, lm {-l_m.l - 1, l_m.m}, kappa_m);
+        return GSL::pow_int(kappa_m, 2*l_m.l + 1)*h.barred_fun(x);
     }
-    Hankel_function h(l_eff);
-    return GSL::pow_int(kappa, l_eff.l+1)*kappa_fac*h(kappa*x);
+    if(std::abs(kappa_m) < 1e-16){
+        if(l_m.l == 0){
+            return 1./x;
+        }
+        return (GSL::doublefact(static_cast<unsigned int>(2*l_m.l - 1)).val/GSL::pow_int(x, l_m.l + 1));
+    }
+    Hankel_function h(l_m);
+    return GSL::pow_int(kappa_m, l_m.l + 1)*h(kappa_m*x);
 }
 
 double Envelope_Bessel::barred_fun(const double x) const
 {
-    if(l.l >= 0){
-        Bessel_function j(l);
-        return GSL::pow_int(kappa, -l.l)*j(kappa*x);
-    }else{
-        Envelope_Neumann n(center, lm {-l.l - 1, l.m}, kappa);
-        int sign = 1;
-        if(-l.l % 2 == 0){
-            sign = -1;
-        }
-        return sign*n.barred_fun(x);
+    if(l_m.l < 0){
+        Envelope_Bessel jp1(center_m, lm {l_m.l  + 1, l_m.m}, kappa_m), jp2(center_m, lm {l_m.l + 2, l_m.m}, kappa_m);
+        return (2*l_m.l + 3)*jp1.barred_fun(x)/x + kappa_m*kappa_m*jp2.barred_fun(x);
     }
+    if(std::abs(kappa_m) < 1e-16){
+        return GSL::pow_int(x, l_m.l)/GSL::doublefact(static_cast<unsigned int>(2*l_m.l + 1)).val;
+    }
+    Bessel_function j(l_m);
+    return GSL::pow_int(kappa_m, -l_m.l)*j(kappa_m*x);
 }
 
 double Envelope_Neumann::barred_fun(const double x) const
 {
-    Envelope_Bessel j(center, l, kappa);
-    Envelope_Hankel h(center, l, kappa);
-    int sign = 1;
-    if(l.l % 2 == 1){
-        sign = -1;
+    if(l_m.l < 0){
+        Envelope_Neumann np1(center_m, lm {l_m.l + 1, l_m.m}, kappa_m), np2(center_m, lm {l_m.l + 2, l_m.m}, kappa_m);
+        return ((2*l_m.l + 3)/x*np1.barred_fun(x) + np2.barred_fun(x))/(kappa_m*kappa_m);
     }
-    return h.barred_fun(x) + sign*GSL::pow_int(kappa, 2*l.l + 1)*j.barred_fun(x);
+    if(std::abs(kappa_m) < 1e-16){
+        if(l_m.l == 0){
+            return 1./x;
+        }
+        return (GSL::doublefact(static_cast<unsigned int>(2*l_m.l - 1)).val/GSL::pow_int(x, l_m.l + 1));
+    }
+    Neumann_function n(l_m);
+    return -GSL::pow_int(kappa_m, l_m.l+1)*n(kappa_m*x);
 }
 
 double off_atomic_integral(const Envelope_Hankel& H1, const Envelope_Hankel& H2, const double rs)
 {
-    if(H1.l != H2.l){
+    if(H1.l_m != H2.l_m){
         return 0.;
-    }else if(H1.center != H2.center){
+    }else if(H1.center_m != H2.center_m){
         return 0.;
     }
 
     double res = 0.;
-    Envelope_Hankel H1p1 {H1.center, lm {H1.l.l + 1, H1.l.m}, H1.kappa};
-    Envelope_Hankel H2p1 {H2.center, lm {H2.l.l + 1, H2.l.m}, H2.kappa};
-    Envelope_Hankel H1m1 {H1.center, lm {H1.l.l - 1, H1.l.m}, H1.kappa};
-    Envelope_Hankel H2m1 {H2.center, lm {H2.l.l - 1, H2.l.m}, H2.kappa};
+    Envelope_Hankel H1p1 {H1.center_m, lm {H1.l_m.l + 1, H1.l_m.m}, H1.kappa_m};
+    Envelope_Hankel H2p1 {H2.center_m, lm {H2.l_m.l + 1, H2.l_m.m}, H2.kappa_m};
+    Envelope_Hankel H1m1 {H1.center_m, lm {H1.l_m.l - 1, H1.l_m.m}, H1.kappa_m};
+    Envelope_Hankel H2m1 {H2.center_m, lm {H2.l_m.l - 1, H2.l_m.m}, H2.kappa_m};
 
 
-    if(H1.kappa != H2.kappa){
+    if(H1.kappa_m != H2.kappa_m){
         res = H1.barred_fun(rs)*H2p1.barred_fun(rs) -
               H1p1.barred_fun(rs)*H2.barred_fun(rs);
-        res *= 1./(-H1.kappa*H1.kappa + H2.kappa*H2.kappa);
+        res *= 1./(-H1.kappa_m*H1.kappa_m + H2.kappa_m*H2.kappa_m);
     }else{
     	res = 0.5*rs*( H1m1.barred_fun(rs)*H2p1.barred_fun(rs) -
 	      H1.barred_fun(rs)*H2.barred_fun(rs) );
@@ -75,24 +77,24 @@ double off_atomic_integral(const Envelope_Hankel& H1, const Envelope_Hankel& H2,
 double atomic_integral(const Envelope_Hankel& H1, const Envelope_Bessel& J2, const double rs)
 {
     double res = 0.;
-    Envelope_Hankel H1p1 {H1.center, lm {H1.l.l + 1, H1.l.m}, H1.kappa};
-    Envelope_Bessel J2p1 {J2.center, lm {J2.l.l + 1, J2.l.m}, J2.kappa};
-    Envelope_Hankel H1m1 {H1.center, lm {H1.l.l - 1, H1.l.m}, H1.kappa};
-    Envelope_Bessel J2m1 {J2.center, lm {J2.l.l - 1, J2.l.m}, J2.kappa};
+    Envelope_Hankel H1p1 {H1.center_m, lm {H1.l_m.l + 1, H1.l_m.m}, H1.kappa_m};
+    Envelope_Bessel J2p1 {J2.center_m, lm {J2.l_m.l + 1, J2.l_m.m}, J2.kappa_m};
+    Envelope_Hankel H1m1 {H1.center_m, lm {H1.l_m.l - 1, H1.l_m.m}, H1.kappa_m};
+    Envelope_Bessel J2m1 {J2.center_m, lm {J2.l_m.l - 1, J2.l_m.m}, J2.kappa_m};
 
-    if(H1.center != J2.center){
+    if(H1.center_m != J2.center_m){
         return 0.;
     }
 
-    if(H1.kappa != J2.kappa){
+    if(H1.kappa_m != J2.kappa_m){
         res = rs*rs*(H1.barred_fun(rs)*J2m1.barred_fun(rs) +
-               H1.kappa*H1.kappa*H1m1.barred_fun(rs)*J2.barred_fun(rs)) - 1;
-        res *= 1./(-H1.kappa*H1.kappa + J2.kappa*J2.kappa);
+               H1.kappa_m*H1.kappa_m*H1m1.barred_fun(rs)*J2.barred_fun(rs)) - 1;
+        res *= 1./(-H1.kappa_m*H1.kappa_m + J2.kappa_m*J2.kappa_m);
     }else{
         res = rs*rs*rs*(2*H1.barred_fun(rs)*J2.barred_fun(rs)  +
-              H1.kappa*H1.kappa*H1m1.barred_fun(rs)*J2p1.barred_fun(rs) +
-              1./(H1.kappa*H1.kappa)*H1p1.barred_fun(rs)*J2m1.barred_fun(rs)) -
-              (2*H1.l.l + 1)/(H1.kappa*H1.kappa);
+              H1.kappa_m*H1.kappa_m*H1m1.barred_fun(rs)*J2p1.barred_fun(rs) +
+              1./(H1.kappa_m*H1.kappa_m)*H1p1.barred_fun(rs)*J2m1.barred_fun(rs)) -
+              (2*H1.l_m.l + 1)/(H1.kappa_m*H1.kappa_m);
         res *= 1./4;
     }
 
@@ -107,19 +109,19 @@ double atomic_integral(const Envelope_Bessel& J1, const Envelope_Hankel& H2, con
 double atomic_integral(const Envelope_Bessel& J1, const Envelope_Bessel& J2, const double rs)
 {
     double res = 0;
-    Envelope_Bessel J1p1 {J1.center, lm {J1.l.l + 1, J1.l.m}, J1.kappa};
-    Envelope_Bessel J1m1 {J1.center, lm {J1.l.l - 1, J1.l.m}, J1.kappa};
-    Envelope_Bessel J2p1 {J2.center, lm {J2.l.l + 1, J2.l.m}, J2.kappa};
-    Envelope_Bessel J2m1 {J2.center, lm {J2.l.l - 1, J2.l.m}, J2.kappa};
+    Envelope_Bessel J1p1 {J1.center_m, lm {J1.l_m.l + 1, J1.l_m.m}, J1.kappa_m};
+    Envelope_Bessel J1m1 {J1.center_m, lm {J1.l_m.l - 1, J1.l_m.m}, J1.kappa_m};
+    Envelope_Bessel J2p1 {J2.center_m, lm {J2.l_m.l + 1, J2.l_m.m}, J2.kappa_m};
+    Envelope_Bessel J2m1 {J2.center_m, lm {J2.l_m.l - 1, J2.l_m.m}, J2.kappa_m};
 
-    if(J1.center != J2.center){
+    if(J1.center_m != J2.center_m){
         return 0.;
     }
 
-    if(J1.kappa != J2.kappa){
+    if(J1.kappa_m != J2.kappa_m){
         res = J1.barred_fun(rs)*J2m1.barred_fun(rs) -
               J1m1.barred_fun(rs)*J2.barred_fun(rs);
-        res *= 1./(-J1.kappa*J1.kappa + J2.kappa*J2.kappa);
+        res *= 1./(-J1.kappa_m*J1.kappa_m + J2.kappa_m*J2.kappa_m);
     }else{
         res = 0.5*rs*(J1.barred_fun(rs)*J2.barred_fun(rs) -
               J1m1.barred_fun(rs)*J2p1.barred_fun(rs) );
