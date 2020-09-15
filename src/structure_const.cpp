@@ -126,7 +126,7 @@ GSL::Complex Bloch_summed_structure_constant::Container::get(const Crystal_t<3, 
 GSL::Complex Bloch_summed_structure_constant::Container::get_dot(const Crystal_t<3, Atom>& c, const lm& lint, const lm& lp, const lm& l, const double kappa,
 	const GSL::Vector& tau,	const GSL::Vector& kp)
 {
-/*	
+/*
 	// Check if value has already been calculated
 	auto it = dot_values_m.find({lp, l, kappa, tau, kp});
 	if(it != dot_values_m.end()){
@@ -193,17 +193,29 @@ GSL::Complex Bloch_summed_structure_constant::calc(
 	const GSL::Vector& tau,	const GSL::Vector& kp, Bloch_sum::Container& Ds) const
 {
 	GSL::Complex sum(0., 0.);
-	for (int lpp = 0; lpp <= lint.l; lpp++){
+	double k_fac = 1;
+	if(std::abs(kappa) > 1e-10){
+		k_fac = GSL::pow_int(kappa, l.l + lp.l);
+		for (int lpp = 0; lpp <= lint.l; lpp++){
+			for (int mpp = -lpp; mpp <= lpp; mpp++){
+				GSL::Result a = gaunt(l, lp, lm {lpp, mpp});
+				if (std::abs(a.val) > 1E-16){
+				    sum += GSL::pow_int(-1, lpp)*GSL::pow_int(1./kappa, lpp)*
+					a.val*Ds(lm {lpp, mpp}, kappa, c, tau, kp);
+				}
+			}
+		}
+	}else{
+		int lpp = l.l + lp.l;
 		for (int mpp = -lpp; mpp <= lpp; mpp++){
 			GSL::Result a = gaunt(l, lp, lm {lpp, mpp});
 			if (std::abs(a.val) > 1E-16){
-			    sum += GSL::pow_int(-1, lpp)*GSL::pow_int(1./kappa, lpp)*
+			    sum += GSL::pow_int(-1, lpp)*
 				a.val*Ds(lm {lpp, mpp}, kappa, c, tau, kp);
 			}
 		}
 	}
 
-	double k_fac = GSL::pow_int(kappa, l.l + lp.l);
 	int sign = l.l % 2 == 0 ? 1 : -1;
 
 	return 4*M_PI*sign*k_fac*sum;
@@ -222,19 +234,30 @@ GSL::Complex Bloch_summed_structure_constant::calc_dot(
 {
 	GSL::Result a;
 	GSL::Complex sum(0., 0.);
-	for (int lpp = 0; lpp <= lint.l; lpp++){
+	double k_fac = 1;
+	if(std::abs(kappa) > 1e-10){
+		k_fac = GSL::pow_int(kappa, l.l + lp.l);
+		for (int lpp = 0; lpp <= lint.l; lpp++){
+			for (int mpp = -lpp; mpp <= lpp; mpp++){
+				a = gaunt(l, lp, lm {lpp, mpp});
+				if (std::abs(a.val) > 1E-16){
+					sum += a.val*
+						(2*Ds.dot(lm {lpp,	 mpp}, kappa, c, tau, kp) -
+						 (l.l + lp.l - lpp)/GSL::pow_int(kappa, 2)*
+						 Ds(lm {lpp, mpp}, kappa, c, tau, kp))*
+						GSL::pow_int(-1, lpp)*GSL::pow_int(1./kappa, lpp);
+				}
+			}
+		}
+	}else{
+		int lpp = l.l + lp.l;
 		for (int mpp = -lpp; mpp <= lpp; mpp++){
 			a = gaunt(l, lp, lm {lpp, mpp});
 			if (std::abs(a.val) > 1E-16){
-				sum += a.val*
-				(2*Ds.dot(lm {lpp,	 mpp}, kappa, c, tau, kp) -
-				(l.l + lp.l - lpp)/GSL::pow_int(kappa, 2)*
-				Ds(lm {lpp, mpp}, kappa, c, tau, kp))*
-				GSL::pow_int(-1, lpp)*GSL::pow_int(1./kappa, lpp);
+				sum += a.val*(2*Ds.dot(lm {lpp,	 mpp}, kappa, c, tau, kp));
 			}
 		}
 	}
-	double k_fac = GSL::pow_int(kappa, l.l + lp.l);
 	int sign = l.l % 2 == 0 ? 1 : -1;
 
 	return 2*M_PI*sign*k_fac*sum;

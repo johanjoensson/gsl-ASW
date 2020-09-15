@@ -15,8 +15,12 @@ double Ewald_integral::bar_ew_int(const double kappa, const double eta, const lm
         return  M_SQRTPI/4*( GSL::exp(-kappa*r)*GSL::erfc(a - kappa/sqrt(eta)) ).val +
                 M_SQRTPI/4*( GSL::exp( kappa*r)*GSL::erfc(a + kappa/sqrt(eta)) ).val;
     }else if(l.l == -1){
-         return  M_SQRTPI/(2*kappa*r)*(GSL::exp(-kappa*r)*GSL::erfc(a - kappa/sqrt(eta))).val +
-                -M_SQRTPI/(2*kappa*r)*(GSL::exp( kappa*r)*GSL::erfc(a + kappa/sqrt(eta))).val;
+	if(std::abs(kappa) > 1e-10){
+		return  M_SQRTPI/(2*kappa*r)*(GSL::exp(-kappa*r)*GSL::erfc(a - kappa/sqrt(eta))).val +
+			-M_SQRTPI/(2*kappa*r)*(GSL::exp( kappa*r)*GSL::erfc(a + kappa/sqrt(eta))).val;
+	}else{
+		return (1./a*GSL::exp(-a2) - M_SQRTPI*GSL::erfc(a)).val;
+	}
     }
     return   (2.*l.l - 1)/2 * bar_ew_int(kappa, eta, lm {l.l - 1, l.m}, r) +
             -b*bar_ew_int(kappa, eta, lm {l.l - 2, l.m}, r) +
@@ -35,11 +39,11 @@ double Ewald_integral::bar_comp_ew_int(const double kappa, const double eta, con
     double b = -kappa*kappa*r*r/4;
 
     if(l.l == 0){
-        return   M_SQRTPI/4.*(GSL::exp(-kappa*r)*GSL::erfc(-0.5*sqrt(eta)*r + kappa/sqrt(eta))).val +
-                -M_SQRTPI/4.*(GSL::exp(kappa*r)*GSL::erfc(0.5*sqrt(eta)*r + kappa/sqrt(eta))).val;
+	    return   M_SQRTPI/4.*(GSL::exp(-kappa*r)*GSL::erfc(-0.5*sqrt(eta)*r + kappa/sqrt(eta))).val +
+		    -M_SQRTPI/4.*(GSL::exp(kappa*r)*GSL::erfc(0.5*sqrt(eta)*r + kappa/sqrt(eta))).val;
     }else if(l.l == -1){
-        return  M_SQRTPI/(2*kappa*r)*(GSL::exp(-kappa*r)*GSL::erfc(-0.5*sqrt(eta)*r + kappa/sqrt(eta))).val +
-                M_SQRTPI/(2*kappa*r)*(GSL::exp(kappa*r)*GSL::erfc(0.5*sqrt(eta)*r + kappa/sqrt(eta))).val;
+		return  M_SQRTPI/(2*kappa*r)*(GSL::exp(-kappa*r)*GSL::erfc(-0.5*sqrt(eta)*r + kappa/sqrt(eta))).val +
+			M_SQRTPI/(2*kappa*r)*(GSL::exp(kappa*r)*GSL::erfc(0.5*sqrt(eta)*r + kappa/sqrt(eta))).val;
     }
     return   (2*l.l - 1)/2. * bar_comp_ew_int(kappa, eta, lm {l.l - 1, l.m}, r) +
             -b*bar_comp_ew_int(kappa, eta, lm {l.l - 2, l.m}, r) +

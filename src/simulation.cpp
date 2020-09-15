@@ -226,8 +226,8 @@ Simulation::Simulation(const Crystal_t<3, Atom>& crystal, const XC_FUN func, con
 double Simulation::X_H1(const Augmented_Hankel& Ht1, const Augmented_Hankel& Ht2, const Site_t<3>& site)
 {
     double res = 0;
-    const Envelope_Hankel H1(site, Ht1.l, Ht1.kappa);
-    const Envelope_Hankel H2(site, Ht2.l, Ht2.kappa);
+    const Envelope_Hankel H1(Ht1.l, Ht1.kappa);
+    const Envelope_Hankel H2(Ht2.l, Ht2.kappa);
     res += Ht2.EH()*augmented_integral(Ht1, Ht2);
     res += -Ht2.kappa*Ht2.kappa*off_atomic_integral(H1, H2, at_meshes[cryst.atom_index(site)].r_back());
     return res;
@@ -236,12 +236,12 @@ double Simulation::X_H1(const Augmented_Hankel& Ht1, const Augmented_Hankel& Ht2
 double Simulation::X_H2(const Augmented_Hankel& Ht1, const Augmented_Bessel& Jt2, const Site_t<3>& site)
 {
     double res = 0;
-    const Envelope_Hankel H1(site, Ht1.l, Ht1.kappa);
-    const Envelope_Bessel J2(site, Jt2.l, Jt2.kappa);
+    const Envelope_Hankel H1(Ht1.l, Ht1.kappa);
+    const Envelope_Bessel J2(Jt2.l, Jt2.kappa);
     if(std::abs(Ht1.EH() - Jt2.EJ()) < 5e-4){
         res += Jt2.EJ()*augmented_integral(Ht1, Ht1);
     }else{
-        std::cout << "Error in interal = " << ( 1./(Ht1.EH() - Jt2.EJ()) - augmented_integral(Ht1, Jt2) ) * ( Ht1.EH() - Jt2.EJ() ) << "\n";
+//        std::cout << "Error in interal = " << ( 1./(Ht1.EH() - Jt2.EJ()) - augmented_integral(Ht1, Jt2) ) * ( Ht1.EH() - Jt2.EJ() ) << "\n";
         // res += Jt2.EJ()/(Ht1.EH() - Jt2.EJ());
         res += Jt2.EJ()*augmented_integral(Ht1, Jt2);
 
@@ -257,8 +257,8 @@ double Simulation::X_H2(const Augmented_Hankel& Ht1, const Augmented_Bessel& Jt2
 double Simulation::X_H3(const Augmented_Bessel& Jt1, const Augmented_Bessel& Jt2, const Site_t<3>& site)
 {
     double res = 0;
-    const Envelope_Bessel J1(site, Jt1.l, Jt1.kappa);
-    const Envelope_Bessel J2(site, Jt2.l, Jt2.kappa);
+    const Envelope_Bessel J1(Jt1.l, Jt1.kappa);
+    const Envelope_Bessel J2(Jt2.l, Jt2.kappa);
     res += Jt2.EJ()*augmented_integral(Jt1, Jt2);
     res -= -Jt2.kappa*Jt2.kappa*atomic_integral(J1, J2, at_meshes[cryst.atom_index(site)].r_back());
     return res;
@@ -312,17 +312,17 @@ GSL::Complex Simulation::H_element(const size_t i1, const size_t i2, const GSL::
 
 double Simulation::X_S1(const Augmented_Hankel& Ht1, const Augmented_Hankel& Ht2, const Site_t<3>& site)
 {
-    const Envelope_Hankel H1(site, Ht1.l, Ht1.kappa);
-    const Envelope_Hankel H2(site, Ht2.l, Ht2.kappa);
+    const Envelope_Hankel H1(Ht1.l, Ht1.kappa);
+    const Envelope_Hankel H2(Ht2.l, Ht2.kappa);
     return augmented_integral(Ht1, Ht2) + off_atomic_integral(H1, H2, at_meshes[cryst.atom_index(site)].r_back());
 }
 
 double Simulation::X_S2(const Augmented_Hankel& Ht1, const Augmented_Bessel& Jt2, const Site_t<3>& site)
 {
     double res = 0;
-    const Envelope_Hankel H1(site, Ht1.l, Ht1.kappa);
-    const Envelope_Bessel J2(site, Jt2.l, Jt2.kappa);
-    if(std::abs(Ht1.EH() - Jt2.EJ()) < 5e-4){
+    const Envelope_Hankel H1(Ht1.l, Ht1.kappa);
+    const Envelope_Bessel J2(Jt2.l, Jt2.kappa);
+    if(std::abs(Ht1.EH() - Jt2.EJ()) < 1e-10){
         res += augmented_integral(Ht1, Ht1);
     }else{
         res += 1./(Ht1.EH() - Jt2.EJ());
@@ -336,8 +336,8 @@ double Simulation::X_S2(const Augmented_Hankel& Ht1, const Augmented_Bessel& Jt2
 
 double Simulation::X_S3(const Augmented_Bessel& Jt1, const Augmented_Bessel& Jt2, const Site_t<3>& site)
 {
-    const Envelope_Bessel J1(site, Jt1.l, Jt1.kappa);
-    const Envelope_Bessel J2(site, Jt2.l, Jt2.kappa);
+    const Envelope_Bessel J1(Jt1.l, Jt1.kappa);
+    const Envelope_Bessel J2(Jt2.l, Jt2.kappa);
     return augmented_integral(Jt1, Jt2) - atomic_integral(J1, J2, at_meshes[cryst.atom_index(site)].r_back());
 }
 

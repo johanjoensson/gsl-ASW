@@ -1,6 +1,7 @@
 #include "augmented_fun.h"
 #include "spherical_fun.h"
 #include "schroedinger.h"
+#include "envelope_fun.h"
 
 #include <numeric>
 #include <fstream>
@@ -63,7 +64,7 @@ void Augmented_Hankel::update(std::vector<double>& v, const double en
     size_t nodes = static_cast<size_t>(std::max(0, l.n - l.l - 1));
     size_t last = mesh.size() - 1, lastbutone = mesh.size() - 2;
 
-    Hankel_function H(l);
+    Envelope_Hankel H(l, kappa);
 
     std::vector<double> l_init = {
         0,
@@ -73,8 +74,8 @@ void Augmented_Hankel::update(std::vector<double>& v, const double en
     if(core){
         r_init = {1e-8, 0.};
     }else{
-        r_init = {GSL::pow_int(kappa, l.l + 1)*mesh.r(lastbutone)*H(kappa*mesh.r(lastbutone)),
-                  GSL::pow_int(kappa, l.l + 1)*mesh.r(last)*H(kappa*mesh.r(last))};
+        r_init = {mesh.r(lastbutone)*H.barred_fun(mesh.r(lastbutone)),
+                  mesh.r(last)*H.barred_fun(mesh.r(last))};
     }
     Radial_Schroedinger_Equation_Central_Potential se(v, static_cast<size_t>(l.l), l_init, r_init, mesh, 1e-10);
     se.solve(nodes, EH());
@@ -111,7 +112,7 @@ void Augmented_Bessel::update(std::vector<double>& v, const double en
     EJ() = en;
     size_t nodes = static_cast<size_t>(std::max(0, l.n - l.l - 1));
     size_t last = mesh.size() - 1, lastbutone = mesh.size() - 2;
-    Bessel_function I(l);
+    Envelope_Bessel I(l, kappa);
 
     if(!core){
         std::vector<double> l_init = {
@@ -120,9 +121,9 @@ void Augmented_Bessel::update(std::vector<double>& v, const double en
             GSL::pow_int(mesh.r(2), l.l+1)};
 
         std::vector<double> r_init = {
-            GSL::pow_int(kappa, -l.l)* I(kappa*mesh.r(lastbutone))
+            I.barred_fun(mesh.r(lastbutone))
 		        *mesh.r(lastbutone),
-		    GSL::pow_int(kappa, -l.l)*I(kappa*mesh.r(last))
+		    I.barred_fun(mesh.r(last))
 		        *mesh.r(last)};
 
         Radial_Schroedinger_Equation_Central_Potential se(v, static_cast<size_t>(l.l), l_init, r_init, mesh, 1e-10);
