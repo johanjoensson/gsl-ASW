@@ -27,7 +27,7 @@ if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
 endif() # Main project only part ends here
 
 
-set(GSLpp_ROOT /home/jjonsson/Programming/GSL-lib)
+set(GSLpp_ROOT /home/johan/Programming/GSL-lib)
 
 find_library(GSL_LIB GSLpp ${GSLpp_ROOT}/lib/GSLpp/ REQUIRED)
 

@@ -119,7 +119,7 @@ numerov_debug.close();
 	std::cout << "Crystal contains " << cr.sites().size() << " sites\n";
 	std::cout << "Crystal contains " << cr.atoms().size() << " inequivalent atoms\n";
 
-	Simulation sim(cr, LDA, {0});
+	Simulation sim(cr, LDA, {kappa, std::sqrt(1.5)});
 
 	std::cout << "Setting up X matrices\n" << std::flush;
 	sim.set_up_X_matrices();

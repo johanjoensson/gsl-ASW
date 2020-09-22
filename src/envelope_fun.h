@@ -27,6 +27,12 @@ public:
     virtual double barred_fun(const double x) const
         {return 0.*x;}
 
+    double kappa() const {return kappa_m;}
+    double& kappa() {return kappa_m;}
+
+    lm l() const {return l_m;}
+    lm& l() {return l_m;}
+
     friend double atomic_integral(const Envelope_function&, const Envelope_function&, const double rs);
 };
 
@@ -92,4 +98,7 @@ double atomic_integral(const Envelope_Bessel& J1, const Envelope_Neumann& N2, co
 // Three center integral
 double atomic_integral(const Envelope_Bessel& J1, const Envelope_Bessel& J2, const double rs);
 
+
+// Wronskian
+double wronskian(const Envelope_Hankel& f, const Envelope_Hankel& g, const double rs);
 #endif // ENVELOPE_FUN_H
