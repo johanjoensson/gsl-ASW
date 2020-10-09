@@ -7,13 +7,13 @@
 
 class Augmented_function{
 protected:
-    double En;
+    double En_m;
 public:
-    lm l;
-    double kappa;
-    spin s;
-    Logarithmic_mesh mesh;
-    std::vector<double> val;
+    lm l_m;
+    double kappa_m;
+    spin s_m;
+    Logarithmic_mesh mesh_m;
+    std::vector<double> val_m;
 
     double operator()(const GSL::Vector& r) const;
 
@@ -33,6 +33,24 @@ public:
 
     virtual void update(std::vector<double>& v, const double en, const bool core)
      = 0;
+
+    lm l() const {return l_m;}
+    lm& l() {return l_m;}
+
+    double kappa() const {return kappa_m;}
+    double& kappa() {return kappa_m;}
+
+    spin s() const {return s_m;}
+    spin& s() {return s_m;}
+
+    Logarithmic_mesh mesh() const {return mesh_m;}
+    Logarithmic_mesh& mesh() {return mesh_m;}
+
+    std::vector<double> val() const {return val_m;}
+    std::vector<double>& val() {return val_m;}
+
+    double En() const { return En_m;}
+    double& En() { return En_m;}
 };
 
 // Use Simpsons rule to calculate integrals over atomic spheres of augmented functions
@@ -45,8 +63,8 @@ bool operator!=(const Augmented_function &a, const Augmented_function &b);
 
 class Augmented_Hankel: public Augmented_function{
 public:
-    double& EH(){return En;}
-    double EH() const {return En;}
+    double& EH(){return En_m;}
+    double EH() const {return En_m;}
     Augmented_Hankel() = default;
     Augmented_Hankel(const Augmented_Hankel&) = default;
     Augmented_Hankel(Augmented_Hankel&&) = default;
@@ -63,8 +81,8 @@ public:
 
 class Augmented_Bessel: public Augmented_function{
 public:
-    double& EJ(){return En;}
-    double EJ() const {return En;}
+    double& EJ(){return En_m;}
+    double EJ() const {return En_m;}
     Augmented_Bessel() = default;
     Augmented_Bessel(const Augmented_Bessel&) = default;
     Augmented_Bessel(Augmented_Bessel&&) = default;
@@ -89,8 +107,8 @@ namespace std {
             std::hash<lm> hlm;
             std::hash<double> hkappa;
 
-			res ^= hlm(f.l) + 0x9e3779b9 + (res<< 6) + (res>> 2);
-			res ^= hkappa(f.kappa) + 0x9e3779b9 + (res<< 6) + (res>> 2);
+			res ^= hlm(f.l()) + 0x9e3779b9 + (res<< 6) + (res>> 2);
+			res ^= hkappa(f.kappa()) + 0x9e3779b9 + (res<< 6) + (res>> 2);
 
             return res;
 		}
@@ -103,8 +121,8 @@ namespace std {
             std::hash<lm> hlm;
             std::hash<double> hkappa;
 
-			res ^= hlm(f.l) + 0x9e3779b9 + (res<< 6) + (res>> 2);
-			res ^= hkappa(f.kappa) + 0x9e3779b9 + (res<< 6) + (res>> 2);
+			res ^= hlm(f.l()) + 0x9e3779b9 + (res<< 6) + (res>> 2);
+			res ^= hkappa(f.kappa()) + 0x9e3779b9 + (res<< 6) + (res>> 2);
 
             return res;
 		}

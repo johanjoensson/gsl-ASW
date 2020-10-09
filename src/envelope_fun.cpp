@@ -147,4 +147,13 @@ double atomic_integral(const Envelope_Bessel& J1, const Envelope_Bessel& J2, con
     return res;
 }
 
-double wronskian(Envelope_function a, Envelope_function b, double r);
+//Wronskian
+double wronskian(const Envelope_Hankel& f, const Envelope_Hankel& g, const double rs)
+{
+	if(std::abs(f.kappa() - g.kappa()) < 1e-10 && f.l().l == g.l().l){
+		return 0;
+	}
+	const Envelope_Hankel fp1(lm{f.l().l + 1, f.l().m}, f.kappa());
+	const Envelope_Hankel gp1(lm{g.l().l + 1, g.l().m}, g.kappa());
+	return rs*rs*(fp1.barred_fun(rs)*g.barred_fun(rs) - gp1.barred_fun(rs)*f.barred_fun(rs));
+}
