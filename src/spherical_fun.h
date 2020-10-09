@@ -29,7 +29,7 @@ public:
         {return l_m;};
 };
 
-double wronskian(Spherical_function& a, Spherical_function& b, double r);
+double wronskian(Spherical_function a, Spherical_function b, double r);
 
 class Hankel_function : public Spherical_function
 {

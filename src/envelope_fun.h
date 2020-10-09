@@ -44,6 +44,7 @@ public:
 
     friend double off_atomic_integral(const Envelope_Hankel& H1, const Envelope_Hankel& H2, const double rs);
     friend double atomic_integral(const Envelope_Hankel& H1, const Envelope_Bessel& J2, const double rs);
+    friend double off_atomic_integral(const Envelope_Hankel& H1, const Envelope_Bessel& J2, const double rs);
 
 };
 
@@ -56,6 +57,7 @@ public:
     double barred_fun(const double x) const override;
     friend double atomic_integral(const Envelope_Hankel& H1, const Envelope_Bessel& J2, const double rs);
     friend double atomic_integral(const Envelope_Bessel& J1, const Envelope_Bessel& J2, const double rs);
+    friend double off_atomic_integral(const Envelope_Hankel& H1, const Envelope_Bessel& J2, const double rs);
 };
 
 class Envelope_Neumann : public Envelope_function{
@@ -76,6 +78,7 @@ public:
 *******************************************************************************/
 // One center integral
 double off_atomic_integral(const Envelope_Hankel& H1, const Envelope_Hankel& H2, const double rs);
+double off_atomic_integral(const Envelope_Hankel& H1, const Envelope_Bessel& J2, const double rs);
 // Two center integrals
 double atomic_integral(const Envelope_Hankel& H1, const Envelope_Bessel& J2, const double rs);
 double atomic_integral(const Envelope_Bessel& J1, const Envelope_Hankel& H2, const double rs);
@@ -91,5 +94,10 @@ double atomic_integral(const Envelope_Bessel& J1, const Envelope_Neumann& N2, co
 
 // Three center integral
 double atomic_integral(const Envelope_Bessel& J1, const Envelope_Bessel& J2, const double rs);
+
+/*******************************************************************************
+* Wronskkians of envelope functions (barred spherical functions)               *
+*******************************************************************************/
+double wronskian(Envelope_function a, Envelope_function b, double r);
 
 #endif // ENVELOPE_FUN_H

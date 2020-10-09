@@ -71,6 +71,31 @@ double off_atomic_integral(const Envelope_Hankel& H1, const Envelope_Hankel& H2,
     return res;
 }
 
+double off_atomic_integral(const Envelope_Hankel& H1, const Envelope_Bessel& J2, const double rs)
+{
+    if(H1.l_m != J2.l_m){
+        return 0.;
+    }
+    double res = 0.;
+    Envelope_Hankel H1p1 {lm {H1.l_m.l + 1, H1.l_m.m}, H1.kappa_m};
+    Envelope_Hankel J2p1 {lm {J2.l_m.l + 1, J2.l_m.m}, J2.kappa_m};
+    Envelope_Hankel H1m1 {lm {H1.l_m.l - 1, H1.l_m.m}, H1.kappa_m};
+    Envelope_Hankel J2m1 {lm {J2.l_m.l - 1, J2.l_m.m}, J2.kappa_m};
+
+
+    if(H1.kappa_m != J2.kappa_m){
+        res =-J2.kappa_m*J2.kappa_m*H1.barred_fun(rs)*J2p1.barred_fun(rs) -
+              H1p1.barred_fun(rs)*J2.barred_fun(rs);
+        res *= 1./(-H1.kappa_m*H1.kappa_m + J2.kappa_m*J2.kappa_m);
+    }else{
+    	res = 0.5*rs*( H1m1.barred_fun(rs)*J2p1.barred_fun(rs) -
+	      H1.barred_fun(rs)*J2.barred_fun(rs) );
+    }
+
+    res *= rs*rs;
+    return res;
+}
+
 double atomic_integral(const Envelope_Hankel& H1, const Envelope_Bessel& J2, const double rs)
 {
     double res = 0.;
@@ -87,7 +112,7 @@ double atomic_integral(const Envelope_Hankel& H1, const Envelope_Bessel& J2, con
         res = rs*rs*rs*(2*H1.barred_fun(rs)*J2.barred_fun(rs)  +
               H1.kappa_m*H1.kappa_m*H1m1.barred_fun(rs)*J2p1.barred_fun(rs));
 	if(std::abs(H1.kappa_m) > 1e-10){
-              res += rs*rs*rs/4 * 1./(H1.kappa_m*H1.kappa_m)*H1p1.barred_fun(rs)*J2m1.barred_fun(rs)
+              res += rs*rs*rs * 1./(H1.kappa_m*H1.kappa_m)*H1p1.barred_fun(rs)*J2m1.barred_fun(rs)
                       -(2*H1.l_m.l + 1)/(H1.kappa_m*H1.kappa_m);
 	}
         res *= 1./4;
@@ -121,3 +146,5 @@ double atomic_integral(const Envelope_Bessel& J1, const Envelope_Bessel& J2, con
     res *= rs*rs;
     return res;
 }
+
+double wronskian(Envelope_function a, Envelope_function b, double r);

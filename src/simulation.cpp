@@ -170,7 +170,7 @@ void Simulation::init_augmented_functions()
                 core = H.l < basis_valence[N/2].l();
             }
             H.update(pot.sphere(i), -GSL::pow_int(static_cast<double>(cryst.atoms(i).get_Z())/H.l.n, 2) + pot.MT0(), core);
-            H.EH() -= pot.MT0();
+            H.EH() += pot.MT0();
             std::cout << ", EH = " << H.EH() << "\n";
         }
     }
@@ -183,7 +183,7 @@ void Simulation::init_augmented_functions()
                 continue;
             }
             J.update(pot.sphere(i), -GSL::pow_int(static_cast<double>(cryst.atoms(i).get_Z())/J.l.n, 2) + pot.MT0(), false);
-            J.EJ() -= pot.MT0();
+            J.EJ() += pot.MT0();
             std::cout << "J " << J.l << ", JH = " << J.EJ() << "\n";
         }
     }
