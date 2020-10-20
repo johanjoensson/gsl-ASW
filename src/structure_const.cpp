@@ -92,11 +92,11 @@ std::ostream& operator << ( std::ostream& os, const Structure_constant& B)
 void Bloch_summed_structure_constant::Container::add(const Crystal_t<3, Atom>& c, const lm& lint, const lm& lp, const lm& l, const double kappa, const GSL::Vector& tau,	const GSL::Vector& kp)
 {
 	Bloch_summed_structure_constant B;
-	values_m.insert({{l, lp, kappa, tau, kp},B.calc(c, lint, lp, l, kappa, tau, kp, D_m)});
-	dot_values_m.insert({{l, lp, kappa, tau, kp},B.dot(c, lint, lp, l, kappa, tau, kp, D_m)});
+	values_m.insert({{l, lp, kappa, tau, kp},B.calc(c, lint, l, lp, kappa, tau, kp, D_m)});
+	dot_values_m.insert({{l, lp, kappa, tau, kp},B.dot(c, lint, l, lp, kappa, tau, kp, D_m)});
 }
 
-GSL::Complex Bloch_summed_structure_constant::Container::get(const Crystal_t<3, Atom>& c, const lm& lint, const lm& lp, const lm& l, const double kappa, const GSL::Vector& tau,	const GSL::Vector& kp)
+GSL::Complex Bloch_summed_structure_constant::Container::get(const Crystal_t<3, Atom>& c, const lm& lint, const lm& l, const lm& lp, const double kappa, const GSL::Vector& tau,	const GSL::Vector& kp)
 {
 /*
 	// Check if value has already been calculated
@@ -120,10 +120,10 @@ GSL::Complex Bloch_summed_structure_constant::Container::get(const Crystal_t<3, 
 	this->add(c, lint, lp, l, kappa, tau, kp);
 */
 	const Bloch_summed_structure_constant B;
-	return B.calc(c, lint, lp, l, kappa, tau, kp, D_m);
+	return B.calc(c, lint, l, lp, kappa, tau, kp, D_m);
 }
 
-GSL::Complex Bloch_summed_structure_constant::Container::get_dot(const Crystal_t<3, Atom>& c, const lm& lint, const lm& lp, const lm& l, const double kappa,
+GSL::Complex Bloch_summed_structure_constant::Container::get_dot(const Crystal_t<3, Atom>& c, const lm& lint, const lm& l, const lm& lp, const double kappa,
 	const GSL::Vector& tau,	const GSL::Vector& kp)
 {
 /*
@@ -149,7 +149,7 @@ GSL::Complex Bloch_summed_structure_constant::Container::get_dot(const Crystal_t
 	this->add(c, lint, lp, l, kappa, tau, kp);
 */
 	const Bloch_summed_structure_constant B;
-	return B.calc_dot(c, lint, lp, l, kappa, tau, kp, D_m);
+	return B.calc_dot(c, lint, l, lp, kappa, tau, kp, D_m);
 }
 
 void Bloch_summed_structure_constant::Container::recalculate_all(const Crystal_t<3, Atom>& c, const lm& lint)
@@ -167,7 +167,7 @@ void Bloch_summed_structure_constant::Container::recalculate_all(const Crystal_t
         auto kappa = std::get<2>(it.first);
         auto tau = std::get<3>(it.first);
         auto kp = std::get<4>(it.first);
-        this->add(c, lint, lp, l, kappa, tau, kp);
+        this->add(c, lint, l, lp, kappa, tau, kp);
     }
 
 	for(const auto& it : old_dot_values){
@@ -176,20 +176,20 @@ void Bloch_summed_structure_constant::Container::recalculate_all(const Crystal_t
         auto kappa = std::get<2>(it.first);
         auto tau = std::get<3>(it.first);
         auto kp = std::get<4>(it.first);
-        this->dot(c, lint, lp, l, kappa, tau, kp);
+        this->dot(c, lint, l, lp, kappa, tau, kp);
     }
 }
 
 GSL::Complex Bloch_summed_structure_constant::calc(
-	const Crystal_t<3, Atom>& c, const lm& lint, const lm& lp, const lm& l, const double kappa,
+	const Crystal_t<3, Atom>& c, const lm& lint, const lm& l, const lm& lp, const double kappa,
 	const GSL::Vector& tau,	const GSL::Vector& kp) const
 {
 	Bloch_sum::Container Ds;
-	return this->calc(c, lint, lp, l, kappa, tau, kp, Ds);
+	return this->calc(c, lint, l, lp, kappa, tau, kp, Ds);
 }
 
 GSL::Complex Bloch_summed_structure_constant::calc(
-	const Crystal_t<3, Atom>& c, const lm& lint, const lm& lp, const lm& l, const double kappa,
+	const Crystal_t<3, Atom>& c, const lm& lint, const lm& l, const lm& lp, const double kappa,
 	const GSL::Vector& tau,	const GSL::Vector& kp, Bloch_sum::Container& Ds) const
 {
 	GSL::Complex sum(0., 0.);
@@ -222,14 +222,14 @@ GSL::Complex Bloch_summed_structure_constant::calc(
 }
 
 GSL::Complex Bloch_summed_structure_constant::calc_dot(
-	const Crystal_t<3, Atom>& c, const lm& lint, const lm& lp, const lm& l, const double kappa,
+	const Crystal_t<3, Atom>& c, const lm& lint, const lm& l, const lm& lp, const double kappa,
 	const GSL::Vector& tau, const GSL::Vector& kp) const
 {
 	Bloch_sum::Container Ds;
-	return this->calc_dot(c, lint, lp, l, kappa, tau, kp, Ds);
+	return this->calc_dot(c, lint, l, lp, kappa, tau, kp, Ds);
 }
 GSL::Complex Bloch_summed_structure_constant::calc_dot(
-	const Crystal_t<3, Atom>& c, const lm& lint, const lm& lp, const lm& l, const double kappa,
+	const Crystal_t<3, Atom>& c, const lm& lint, const lm& l, const lm& lp, const double kappa,
 	const GSL::Vector& tau, const GSL::Vector& kp, Bloch_sum::Container& Ds) const
 {
 	GSL::Result a;
