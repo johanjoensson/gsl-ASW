@@ -572,9 +572,9 @@ double Simulation::canonical_band(const lm l, const double kappa, const spin s, 
     auto j = Bs_m[0].get_function(l, kappa, s);
     const double eh = h.EH(), ej = j.EJ();
 
-    const double shh = augmented_integral(h, h), sjh = std::abs(eh - ej) < 5e-4 ? augmented_integral(h, h) : 1./(eh - ej);
+    const double shh = augmented_integral(h, h), sjh = std::abs(eh - ej) < 1e-10 ? augmented_integral(h, h) : 1./(eh - ej);
 
-    lm lint = {4, 0};
+    lm lint = {5, 0};
     GSL::Complex B = B_m(this->cryst, lint, l, l, kappa, GSL::Vector(3), kp);
     if(std::abs(B.im()) > 1e-12 ){
         std::cerr << "Imaginary part of Bloch summed structure constant is too large!\n";
