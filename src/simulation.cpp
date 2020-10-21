@@ -169,7 +169,7 @@ void Simulation::init_augmented_functions()
             }else{
                 core = H.l() < basis_valence[N/2].l();
             }
-            H.update(pot.sphere(i), -GSL::pow_int(static_cast<double>(cryst.atoms(i).get_Z())/H.l().n, 2) + pot.MT0(), core);
+            H.update(pot.sphere(i), -GSL::pow_int(static_cast<double>(cryst.atoms(i).get_Z())/H.l().n, 2), core);
             H.EH() -= pot.MT0();
             std::cout << ", EH = " << H.EH() << "\n";
         }
@@ -182,7 +182,7 @@ void Simulation::init_augmented_functions()
                 std::cout << "Unexpected\n";
                 continue;
             }
-            J.update(pot.sphere(i), -GSL::pow_int(static_cast<double>(cryst.atoms(i).get_Z())/J.l().n, 2) + pot.MT0(), false);
+            J.update(pot.sphere(i), -GSL::pow_int(static_cast<double>(cryst.atoms(i).get_Z())/J.l().n, 2), false);
             J.EJ() -= pot.MT0();
             std::cout << "J " << J.l() << ", JH = " << J.EJ() << "\n";
         }
@@ -576,7 +576,7 @@ double Simulation::canonical_band(const lm l, const double kappa, const spin s, 
 
     lm lint = {4, 0};
     GSL::Complex B = B_m(this->cryst, lint, l, l, kappa, GSL::Vector(3), kp);
-    if(std::abs(B.im()) > 1e-10 ){
+    if(std::abs(B.im()) > 1e-12 ){
         std::cerr << "Imaginary part of Bloch summed structure constant is too large!\n";
     }
     double tmp = sjh/shh*B.re();
