@@ -1,7 +1,7 @@
-#include "augmented_fun.h"
-#include "spherical_fun.h"
-#include "schroedinger.h"
-#include "envelope_fun.h"
+#include <augmented_fun.h>
+#include <spherical_fun.h>
+#include <schroedinger.h>
+#include <envelope_fun.h>
 
 #include <numeric>
 #include <fstream>
@@ -41,6 +41,8 @@ double augmented_integral(const Augmented_function &a, const Augmented_function 
 		    integrand[i] = a.val()[i]*b.val()[i];
 	    }
 	    return mesh.integrate_simpson(integrand);
+	    // return mesh.integrate(integrand);
+
     }else{
 	    Envelope_Hankel h1(a.l(), a.kappa()), h2(b.l(), b.kappa());
 	    return 1./(a.En() - b.En()) * wronskian(h1, h2, a.mesh().r_back());

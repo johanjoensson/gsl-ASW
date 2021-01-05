@@ -1,62 +1,80 @@
 #include <iostream>
 #include <algorithm>
+#include <tuple>
 #include <cmath>
-#include "gaunt.h"
-#include "spherical_fun.h"
-#include "GSLpp/special_functions.h"
-
+#include <gaunt.h>
+#include <spherical_fun.h>
+#include <GSLpp/special_functions.h>
+#include <GSLpp/complex.h>
 
 #include <chrono>
 
-bool triangle(lm l1, lm l2, lm l3)
+/*******************************************************************************
+* Check triangle identity for l-quantum numbers l1.l, l2.l and l3.l            *
+* | l1.l - l2.l | < l3.l < | l1.l + l2.l |
+*******************************************************************************/
+constexpr inline bool triangle(lm l1, lm l2, lm l3)
 {
-	if(l3.l >= std::abs(l1.l - l2.l) && l3.l <= l1.l + l2.l){
-		return true;
-	}
-	return false;
+	return (l3.l >= std::abs(l1.l - l2.l) && l3.l <= std::abs(l1.l + l2.l));
 }
-GSL::Result gaunt(lm l1, lm l2, lm l3)
+
+/*******************************************************************************
+* Get coefficients and lm pair for complex spherical harmonics that make up    *
+* the real cubic harmonic with lm pair l.                                      *
+*******************************************************************************/
+std::vector<std::pair<GSL::Complex, lm>> get_complex_sph (const lm& l)
 {
+	std::vector<std::pair<GSL::Complex, lm>> res;
+	int l1 = l.l, l2 = l.l;
+	int m1 = l.m, m2 = l.m;
+	GSL::Complex c1 = 0, c2 = 0;
 
-	if((l1.l + l2.l + l3.l) % 2 != 0){
-		return GSL::Result(0, 0);
-	}else if(!triangle(l1, l2, l3)){
-		return GSL::Result(0, 0);
-	}else if(l3.m + l2.m  != l1.m){
-		return GSL::Result(0, 0);
+	if(m1 < 0){
+		m2 = -m2;
+		c1 = GSL::Complex(0, 1)/sqrt(2);
+		c2 = GSL::pow_int(-1, m2 + 1)*c1;
+		res.push_back({c1, {l1, m1}});
+		res.push_back({c2, {l2, m2}});
+	}else if (m1 > 0){
+		m1 = -m1;
+		c1 = 1/sqrt(2);
+		c2 = GSL::pow_int(-1, m2)*c1;
+		res.push_back({c1, {l1, m1}});
+		res.push_back({c2, {l2, m2}});
+	}else{
+		c1 = 1;
+		c2 = 0;
+		res.push_back({c1, {l1, m1}});
 	}
+	return res;
+}
 
+
+inline GSL::Result gaunt(lm l1, lm l2, lm l3)
+{
 	double C = std::sqrt((2.*l1.l + 1)*(2.*l2.l + 1)*(2.*l3.l + 1)/(4*M_PI));
-	C = std::abs(l1.m) % 2 == 0 ? C : -C;
-
 	return  C*GSL::wigner_3j(l1.l, l2.l, l3.l,  0,    0,    0  )*
-	  			GSL::wigner_3j(l1.l, l2.l, l3.l, -l1.m, l2.m, l3.m);
+	  			GSL::wigner_3j(l1.l, l2.l, l3.l, l1.m, l2.m, l3.m);
 }
 
-/* Not sure if this is needed anymore...
- * Or indeed if it ever was needed... */
+/*******************************************************************************
+* NAIVE IMPLEMENTATION, BUT IT SEEMS TO WORK                                   *
+*******************************************************************************/
 GSL::Result real_gaunt(lm l1, lm l2, lm l3)
 {
-	int m_max = std::max(l1.m, std::max(l2.m, l3.m));
-	int c = 1;
-	GSL::Result res;
-
-	if (m_max == l1.m){
-		if (l1.m % 2 != 0){
-			c = -1;
+	GSL::Complex res(0, 0);
+	double err = 0;
+	for(auto c1 : get_complex_sph(l1)){
+		for(auto c2 : get_complex_sph(l2)){
+			for(auto c3 : get_complex_sph(l3)){
+				GSL::Result g = gaunt(c1.second, c2.second, c3.second);
+				res += c1.first*c2.first*c3.first*g.val;
+				err += g.err;
+			}
 		}
-		res = c*0.5*std::sqrt(2)*gaunt(lm {l1.l, -l1.m}, l2, l3);
-	}else if(m_max == l2.m){
-		if (l2.m % 2 != 0){
-			c = -1;
-		}
-		res = c*0.5*std::sqrt(2)*gaunt(l1, lm {l2.l, -l2.m}, l3);
-	}else if(m_max == l3.m){
-		if (l3.m % 2 != 0){
-			c = -1;
-		}
-		res = c*0.5*std::sqrt(2)*gaunt(l1, l2, lm {l3.l, -l3.m});
 	}
-
-	return res;
+	if(abs(res.im()) > 1e-6){
+		std::cerr << "Real Gaunt coefficient is " << res << ", with a rather large imaginary part!\n";
+	}
+	return GSL::Result(res.re(), err);
 }

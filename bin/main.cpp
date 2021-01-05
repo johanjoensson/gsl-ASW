@@ -4,27 +4,28 @@
 #include <cmath>
 #include <algorithm>
 #include <thread>
-#include <gsl-asw/simulation.h>
-#include <gsl-asw/spherical_fun.h>
-#include <gsl-asw/utils.h>
-#include <gsl-asw/numerov_solver.h>
-#include <gsl-asw/structure_const.h>
-#include <gsl-asw/numerov_solver.h>
-#include <gsl-asw/atom.h>
-#include <gsl-asw/crystal.h>
-#include <gsl-asw/bloch_sum.h>
-#include <gsl-asw/ewald_int.h>
-#include <gsl-asw/gaunt.h>
+#include <simulation.h>
+#include <spherical_fun.h>
+#include <utils.h>
+#include <numerov_solver.h>
+#include <structure_const.h>
+#include <numerov_solver.h>
+#include <atom.h>
+#include <crystal.h>
+#include <bloch_sum.h>
+#include <ewald_int.h>
+#include <gaunt.h>
 #include <GSLpp/matrix.h>
 #include <GSLpp/vector.h>
 #include <GSLpp/complex.h>
 #include <GSLpp/special_functions.h>
 #include <GSLpp/error.h>
-#include <gsl-asw/augmented_spherical_wave.h>
-#include <gsl-asw/atomic_quantity.h>
-#include <gsl-asw/envelope_fun.h>
-#include <gsl-asw/xc_func.h>
-#include <gsl-asw/k-mesh.h>
+#include <augmented_spherical_wave.h>
+#include <atomic_quantity.h>
+#include <envelope_fun.h>
+#include <xc_func.h>
+#include <k-mesh.h>
+#include <brillouin_zone_integration.h>
 
 void k_iteration(const GSL::Vector& kp, Simulation& sim)
 {
@@ -45,7 +46,7 @@ numerov_debug.close();
 	std::cout.precision(12);
 
 	GSL::Error_handler e_handler;
-	e_handler.off();
+	// e_handler.off();
 
 
 	double kappa = std::sqrt(0.015);
@@ -74,8 +75,10 @@ numerov_debug.close();
 
 	std::cout << "Setting R-vectors" << std::endl;
 	cr.set_Rn(Rmax);
+	// cr.set_Rn(0);
 	std::cout << "Setting K-vectors" << std::endl;
 	cr.set_Kn(Kmax);
+	// cr.set_Kn(0);
 	std::cout << "Number of R-vectors " << cr.Rn_vecs().size() << "\n";
 	std::cout << "Number of K-vectors " << cr.Kn_vecs().size() << "\n";
 
@@ -112,14 +115,14 @@ numerov_debug.close();
 	C8.set_Z(6);
 
 	cr.set_size({1, 1, 1});
-	cr.add_basis({C1});//, C2});//, C3, C4, C5, C6, C7, C8});
+	cr.add_basis({C1, C2});//, C3, C4, C5, C6, C7, C8});
 	// cr.add_sites({{0, 0, 0}, {0.5, 0, 0}, {0, 0.5, 0}, {0, 0, 0.5}, {0.5, 0.5, 0}, {0.5, 0, 0.5}, {0, 0.5, 0.5}, {0.5, 0.5, 0.5}});
-	cr.add_sites({{0, 0, 0}, {0.25, 0.25, 0.25}});
+	cr.add_sites({{0, 0, 0}, {0.5, 0.5, 0.5}});
 
 	std::cout << "Crystal contains " << cr.sites().size() << " sites\n";
 	std::cout << "Crystal contains " << cr.atoms().size() << " inequivalent atoms\n";
 
-	Simulation sim(cr, LDA, {kappa, 0});
+	Simulation sim(cr, LDA, {kappa});
 
 	std::cout << "Setting up X matrices\n" << std::flush;
 	sim.set_up_X_matrices();
@@ -155,8 +158,8 @@ numerov_debug.close();
 	of.open("canonical_bands.dat", std::ios::trunc);
     for(const auto& kp :  kmesh.k_points){
 		of << kp[0] << " " << kp[1] << " " << kp[2] << " ";
-		for(lm l = {3, 1, -1}; l != lm {3, 2, -2}; l++){
-			of << sim.canonical_band(l, kappa, UP, kp) << " ";
+		for(lm l = {2, 1, -1}; l != lm {3, 0, 0}; l++){
+			of << std::setprecision(10)  << sim.canonical_band(l, kappa, UP, kp) << " ";
 		}
 		of << "\n";
 	}

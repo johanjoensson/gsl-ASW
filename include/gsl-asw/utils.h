@@ -15,7 +15,14 @@ enum spin{
 struct lm {
     lm(const int& l_n, const int& m_n):n(0), l(l_n), m(m_n){}
     lm(const int& n_n, const int& l_n, const int& m_n):n(n_n), l(l_n), m(m_n){}
-    lm():n(0), l(0), m(0){}
+    lm() = default;
+    lm(const lm&) = default;
+    lm(lm&&) = default;
+    ~lm() = default;
+
+    lm& operator=(const lm&) = default;
+    lm& operator=(lm&&) = default;
+
     int n;
     int l;
 	int m;
@@ -34,7 +41,8 @@ struct lm {
     Ordering according to the Aufbauprinzip i.e., first according to n + l,
     if n + l equal, order according to n. If n are equal order according to
     m (ordering according to m is not part of the Aufbauprinzip).
-    E.g. [1s, 2s, 2p, 3s, 3p, 4s, 3d, 4p, ...]
+    E.g. [1s, 2s, 2p, 3s, 3p, 4s, 3d, 4p, ...]\n
+    \verbatim
        /
     1s
        /   /
@@ -46,6 +54,7 @@ struct lm {
     .
     .
     .
+    \endverbatim
     ***************************************************************************/
     bool operator<(const lm& a) const
     {

@@ -8,7 +8,7 @@
 #include <iostream>
 
 #define TOL 1e-10
-#define KAPPA 0
+#define KAPPA std::sqrt(0.015)
 
 namespace {
 const std::array<GSL::Vector, 7> R_vecs = {GSL::Vector{0.001, 0, 0}, {0, 0.001, 0},

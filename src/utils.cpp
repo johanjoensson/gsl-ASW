@@ -1,6 +1,6 @@
-#include "utils.h"
-#include "GSLpp/special_functions.h"
-#include "ewald_int.h"
+#include <utils.h>
+#include <GSLpp/special_functions.h>
+#include <ewald_int.h>
 #include <iostream>
 
 double calc_eta(const double vol)

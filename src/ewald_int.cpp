@@ -1,7 +1,7 @@
-#include "ewald_int.h"
-#include "GSLpp/special_functions.h"
-#include "GSLpp/basic_math.h"
-#include "GSLpp/complex.h"
+#include <ewald_int.h>
+#include <GSLpp/special_functions.h>
+#include <GSLpp/basic_math.h>
+#include <GSLpp/complex.h>
 #include <cmath>
 
 #include <iostream>

@@ -1,4 +1,4 @@
-#include "atom.h"
+#include <gsl-asw/atom.h>
 
 size_t Atom::get_Z() const
 {

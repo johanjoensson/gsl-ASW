@@ -1,4 +1,4 @@
-#include "schroedinger.h"
+#include <schroedinger.h>
 #include <vector>
 #include <fstream>
 #include <GSLpp/special_functions.h>

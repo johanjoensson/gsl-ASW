@@ -6,8 +6,8 @@
 #include <gtest/gtest.h>
 #include <array>
 
-#define TOL 1e-10
-#define KAPPA 0
+#define TOL 1e-12
+#define KAPPA std::sqrt(0.015)
 namespace {
 std::array<GSL::Vector, 5> R_vecs = {GSL::Vector{0, 0, 0}, {0.5, 0, 0}, {0, 0.5, 0},
                                      {0, 0, 0.5}, {0.5, 0.5, 0.5}};

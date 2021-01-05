@@ -1,6 +1,6 @@
 #include <cmath>
 #include <algorithm>
-#include "numerov_solver.h"
+#include <numerov_solver.h>
 
 #ifdef DEBUG
 #include <iostream>

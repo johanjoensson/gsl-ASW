@@ -1,7 +1,7 @@
 #include <cmath>
 #include <string>
-#include "spherical_fun.h"
-#include "GSLpp/complex.h"
+#include <spherical_fun.h>
+#include <GSLpp/complex.h>
 
 #include <iostream>
 

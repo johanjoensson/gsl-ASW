@@ -1,6 +1,6 @@
-#include "lattice.h"
+#include <lattice.h>
 #include <cmath>
-#include "GSLpp/basic_math.h"
+#include <GSLpp/basic_math.h>
 /*
 Lattice::Lattice(const GSL::Vector& a, const GSL::Vector& b,
     const GSL::Vector& c)

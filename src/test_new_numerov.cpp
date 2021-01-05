@@ -1,5 +1,5 @@
-#include "numerov_solver.h"
-#include "schroedinger.h"
+#include <numerov_solver.h>
+#include <schroedinger.h>
 #include <vector>
 #include <fstream>
 #include <GSLpp/special_functions.h>

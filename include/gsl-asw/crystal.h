@@ -113,18 +113,14 @@ template<size_t dim, class Atom>
 void Crystal_t<dim, Atom>::set_Rn(const double Rmax)
 {
 	std::array<int, dim> N, n;//, zero;
-//	N.fill(0);
-//	zero.fill(0);
 	GSL::Matrix a(lat_m.lat()), b(lat_m.recip_lat());
 	GSL::Vector tmp(dim);
 	// Calculate limits
 	for(size_t i = 0; i < dim; i++){
-		//N[i] = static_cast<int>(std::ceil(b[i].norm<double>()/(2*M_PI)*Rmax));
 		N[i] = static_cast<int>(Rmax/a[i].norm());
 		n[i] = -N[i];
 	}
 
-	// temporary vector for storing linear combinations of new and old vector
 	while(n != N){
 		tmp.assign(n.begin(), n.end());
 		R_m.push_back(tmp*a);
@@ -144,17 +140,13 @@ template<size_t dim, class Atom>
 void Crystal_t<dim, Atom>::set_Kn(const double Kmax)
 {
 	std::array<int, dim> N, n;//, zero;
-//	N.fill(0);
-//	zero.fill(0);
 	GSL::Vector tmp(dim);
 	GSL::Matrix a(lat_m.lat()), b(lat_m.recip_lat());
 	// Calculate limits
 	for(size_t i = 0; i < dim; i++){
-		//N[i] = static_cast<int>(std::ceil(a[i].norm<double>()/(2*M_PI)*Kmax));
 		N[i] = static_cast<int>(std::ceil(Kmax/b[i].norm()));
 		n[i] = -N[i];
 	}
-	// temporary vector for storing linear combinations of new and old vector
 	while(n != N){
 
 		tmp.assign(n.begin(), n.end());

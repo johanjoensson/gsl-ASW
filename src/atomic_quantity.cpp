@@ -1,6 +1,6 @@
-#include "atomic_quantity.h"
-#include "utils.h"
-#include "GSLpp/basic_math.h"
+#include <atomic_quantity.h>
+#include <utils.h>
+#include <GSLpp/basic_math.h>
 #include <iomanip>
 
 Atomic_quantity::Atomic_quantity(const Crystal_t<3, Atom>& cr_n, const std::vector<Logarithmic_mesh>& at_meshes_n)
@@ -102,8 +102,8 @@ void Potential::initial_pot(double vol)
         }
         std::vector<double> alpha(at_meshes[at_i].size());
         alpha[0] = 0.;
-        alpha[1] = 1./6 * (4*Xi0(site, at_meshes[at_i].r(0))*at_meshes[at_i].drx(0)
-    + (Xi0(site, at_meshes[at_i].r(1)) + Xi0(site, -at_meshes[at_i].r(1)))*at_meshes[at_i].drx(1));
+        alpha[1] = 1./6 * (4*Xi0(site, at_meshes[at_i].r(0))*at_meshes[at_i].drx(static_cast<size_t>(0))
+    + (Xi0(site, at_meshes[at_i].r(1)) + Xi0(site, -at_meshes[at_i].r(1)))*at_meshes[at_i].drx(static_cast<size_t>(1)));
         electrostatic[at_i][0] += Xi0(site, 0);
         electrostatic[at_i][1] += alpha[1] * 1/at_meshes[at_i].r(1);
         for(size_t ri = 2; ri < at_meshes[at_i].size(); ri++){
@@ -130,7 +130,6 @@ void Potential::initial_pot(double vol)
         }
     }
 
-
     // Calculate MT_0 as average potential over all atomic spheres
     double MT_0_s = 0, areas = 0;
     for(size_t i = 0; i < cr.atoms().size(); i++){
@@ -142,14 +141,14 @@ void Potential::initial_pot(double vol)
 
 	std::cout << "MT0 = " << this->MT_0 << std::endl;
 
-/*
+
     // Make potential relative to MT_0
     for(size_t i = 0; i < cr.atoms().size(); i++){
         for(size_t j = 0; j < at_meshes[i].size(); j++){
             val[i][j] -= this->MT_0;
         }
     }
-*/
+
 }
 
 Density::Density(const Crystal_t<3, Atom>& cr_n, std::vector<Logarithmic_mesh>& at_meshes_n)

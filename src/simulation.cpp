@@ -1,25 +1,27 @@
-#include "simulation.h"
+#include <simulation.h>
 #include <cmath>
 #include <iostream>
 #include <fstream>
 #include <stdexcept>
 #include <set>
 #include <algorithm>
-#include "atom.h"
-#include "utils.h"
-#include "envelope_fun.h"
-#include "structure_const.h"
-#include "GSLpp/special_functions.h"
-#include "GSLpp/eigen.h"
-#include "GSLpp/linalg.h"
+#include <atom.h>
+#include <utils.h>
+#include <envelope_fun.h>
+#include <structure_const.h>
+#include <GSLpp/special_functions.h>
+#include <GSLpp/eigen.h>
+#include <GSLpp/linalg.h>
 
 void Simulation::set_up_crystal()
 {
+
+
     double at_vol = 0;
     std::vector<std::vector<Site_t<3>>> nn = cryst.calc_nearest_neighbours();
     // Calculate MT radii
     for(const auto& site : cryst.sites()){
-        std::cout << "Nearest neighbor " << nn[site.index()][0].pos() << "\n";
+        std::cout << "Nearest neighbor " << nn[site.index()][0].pos() << std::endl;
         cryst.atom(site).set_MT(nn[site.index()][0].pos().norm<double>()/2);
         at_vol += GSL::pow_int(cryst.atom(site).get_MT(), 3);
         std::cout << "RMT = " << cryst.atom(site).get_MT() << "\n";
@@ -30,6 +32,15 @@ void Simulation::set_up_crystal()
         cryst.atom(site).set_AS( std::cbrt(cryst.volume()/at_vol) *
         cryst.atom(site).get_MT());
     }
+
+
+/*
+    for(const auto& site : cryst.sites()){
+        cryst.atom(site).set_AS( 1.2407 );
+        cryst.atom(site).set_MT( 1.2407 );
+
+    }
+*/
 }
 
 void Simulation::add_states(const Site_t<3>& center, const double kappa)
@@ -84,8 +95,11 @@ void Simulation::set_up_basis()
     for(size_t i = 0; i < cryst.atoms().size(); i++){
         // auto index = std::distance(cryst.atoms().begin(), std::find(cryst.atoms().begin(), cryst.atoms().end(), at));
         // at_meshes[static_cast<size_t>(index)] = Logarithmic_mesh(at.get_AS(),
-        at_meshes[i] = Logarithmic_mesh(cryst.atoms(i).get_AS(),
-            static_cast<size_t>(1000*(0.5 + static_cast<double>(cryst.atoms(i).get_Z())/118)));
+        size_t np = static_cast<size_t>(1000*(0.5 + static_cast<double>(cryst.atoms(i).get_Z())/118));
+        if (np % 2 == 0) {
+            np++;
+        }
+        at_meshes[i] = Logarithmic_mesh(cryst.atoms(i).get_AS(), np);
     }
     set_up_augmented_functions();
     // Divide electrons into core and valence states
@@ -463,10 +477,10 @@ const GSL::Matrix_cx Simulation::set_H(const GSL::Vector& kp)
     size_t N = basis_valence.size();
     GSL::Matrix_cx H(N, N);
     for(size_t i = 0; i < N; i++){
-        for(size_t j = 0; j <= i; j++){
-        // for(size_t j = 0; j < N; j++){
+        // for(size_t j = 0; j <= i; j++){
+        for(size_t j = 0; j < N; j++){
             H[i][j] = H_element(i, j, kp);
-            H[j][i] = H_element(i, j, kp).conjugate();
+            // H[j][i] = H_element(i, j, kp).conjugate();
         }
     }
     return H;
@@ -477,11 +491,11 @@ const GSL::Matrix_cx Simulation::set_S(const GSL::Vector& kp)
     size_t N = basis_valence.size();
     GSL::Matrix_cx S(N, N);
     for(size_t i = 0; i < N; i++){
-        for(size_t j = 0; j <= i; j++){
-        // for(size_t j = 0; j < N; j++){
+        // for(size_t j = 0; j <= i; j++){
+        for(size_t j = 0; j < N; j++){
 
             S[i][j] = S_element(i, j, kp);
-            S[j][i] = S_element(i, j, kp).conjugate();
+            // S[j][i] = S_element(i, j, kp).conjugate();
         }
     }
     return S;
@@ -495,7 +509,7 @@ void Simulation::calc_eigen(const GSL::Vector& kp)
     GSL::Matrix_cx eigvecs_up(N, N);
     GSL::Vector eigvals_up(N);
 
-    GSL::Matrix_cx::View H_up = H.view(0,0, N, N);
+    GSL::Matrix_cx::View H_up = H.view(0, 0, N, N);
     GSL::Matrix_cx::View S_up = S.view(0, 0, N, N);;
 
     for(size_t i = 0; i < N; i++){
@@ -516,11 +530,6 @@ void Simulation::calc_eigen(const GSL::Vector& kp)
     std::pair<GSL::Matrix_cx, GSL::Vector> tmp, overlap;
     overlap = GSL::hermitian_eigen(S_up);
     std::cout << "k-point " << kp << "\n";
-    std::cout << " Overlap matrix\n";
-    for(size_t i = 0 ; i < N; i++){
-        std::cout << "  " << S_up[i] << "\n";
-    }
-    std::cout << "Eigenvalues of Overlap matrix\n" << overlap.second << "\n";
     try{
         tmp = GSL::general_hermitian_eigen(H_up, S_up);
         eigvecs_up = tmp.first;
@@ -535,15 +544,20 @@ void Simulation::calc_eigen(const GSL::Vector& kp)
         k_eigenvals[kp] = {eigvecs_up, eigvals_up};
 
     }catch (const std::runtime_error &e){
-		std::cerr << e.what();
-		// std::cerr << " Hamiltonian matrix\n";
-		// for(size_t i = 0 ; i < N; i++){
-		// 	std::cerr << "  " << H_up[i] << "\n";
-		// }
-        std::cerr << "Setting eigenvalues to "<< nan("") <<"\n";
-        for(auto& eigval : eigvals_up){
-            eigval = nan("");
-        }
+	    std::cerr << e.what();
+	    std::cerr << " Overlap matrix\n";
+	    for(size_t i = 0 ; i < N; i++){
+		    std::cerr << "  " << S_up[i] << "\n";
+	    }
+	    std::cerr << "Eigenvalues of Overlap matrix\n" << overlap.second << "\n";
+	    std::cerr << " Hamiltonian matrix\n";
+	    for(size_t i = 0 ; i < N; i++){
+		    std::cerr << "  " << H_up[i] << "\n";
+	    }
+	    std::cerr << "Setting eigenvalues to "<< nan("") <<"\n";
+	    for(auto& eigval : eigvals_up){
+		    eigval = nan("");
+	    }
     }
     k_eigenvals[kp] = {eigvecs_up, eigvals_up};
 }

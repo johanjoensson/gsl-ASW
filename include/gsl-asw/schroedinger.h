@@ -295,6 +295,7 @@ public:
         auto start_point = psi_m.begin();
         for(auto tmp = v_m.begin() ; tmp != v_start; tmp++, start_point++){}
 
+        size_t variational_steps = 0;
         while(n != nodes || (std::abs(de) > tol_m && std::abs(e_max_m - e_min_m) > tol_m)){
             inv = find_inversion_point(start_point, end_point, v_start);
             auto v_i = v_m.begin();
@@ -330,9 +331,10 @@ public:
                     e_max_m = energy_m;
                 }
                 energy_m += de;
-                energy_m = std::max(e_min_m, energy_m);
-                energy_m = std::min(e_max_m, energy_m);
-
+                if(energy_m > e_max_m || energy_m < e_min_m){
+                    energy_m = 0.5*(e_min_m + e_max_m);
+                }
+                variational_steps++;
             }else{
                 energy_m = 0.5*(e_min_m + e_max_m);
             }
@@ -373,7 +375,7 @@ public:
         right_init, mesh, tol)
     {
         e_min_m = *std::min_element(v_m.begin()+1, v_m.end());
-        e_max_m = *(v_m.end());
+        e_max_m = v_m.back();
     }
 };
 #endif // SCHOEDINGER_H

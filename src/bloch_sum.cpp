@@ -1,6 +1,6 @@
-#include "bloch_sum.h"
-#include "ewald_int.h"
-#include "envelope_fun.h"
+#include <bloch_sum.h>
+#include <ewald_int.h>
+#include <envelope_fun.h>
 
 #include <cmath>
 #include <string>
@@ -14,7 +14,7 @@ void Bloch_sum::Container::add(const lm l, const double kappa, const Crystal_t<3
 
 GSL::Complex Bloch_sum::Container::get(const lm l, const double kappa, const Crystal_t<3, Atom>& c, const GSL::Vector& tau, const GSL::Vector& kp)
 {
-	
+
     auto it = values_m.find({l, kappa, tau, kp});
     if(it != values_m.end()){
         return it->second;
@@ -32,15 +32,15 @@ GSL::Complex Bloch_sum::Container::get(const lm l, const double kappa, const Cry
         return (l.l % 2) == 0 ? it->second.conjugate() : -it->second.conjugate();
     }
     this->add(l, kappa, c, tau, kp);
-    
+
     Bloch_sum D;
-  
+
     return D(l, kappa, c, tau, kp);
 }
 
 GSL::Complex Bloch_sum::Container::get_dot(const lm l, const double kappa, const Crystal_t<3, Atom>& c, const GSL::Vector& tau, const GSL::Vector& kp)
 {
-	
+
     auto it = dot_values_m.find({l, kappa, tau, kp});
     if(it != dot_values_m.end()){
         return it->second;
@@ -58,7 +58,7 @@ GSL::Complex Bloch_sum::Container::get_dot(const lm l, const double kappa, const
         return (l.l % 2) == 0 ? it->second.conjugate() : -it->second.conjugate();
     }
     this->add(l, kappa, c, tau, kp);
-    
+
     Bloch_sum D;
     return D.dot(l, kappa, c, tau, kp);
 }
@@ -100,8 +100,8 @@ GSL::Complex Bloch_sum::calc_d1(const lm l, const double kappa, const Crystal_t<
         k = (Kn + kp).norm();
         if((k < 1e-16 && l.l > 0) || (kappa*kappa + k*k)/eta > 37){
             continue;
-        }        
-	dot = tau.dot(Kn + kp);
+        }
+	    dot = tau.dot(Kn + kp);
         e = GSL::exp(GSL::Complex(0., dot));
         tmp = l.l == 0 ? cubic_harmonic(l, GSL::Vector{1.0, 0, 0}) : GSL::pow_int(k, l.l)*cubic_harmonic(l, (Kn + kp)/k);
         if (std::abs(kappa*kappa + k*k) > 1e-16 ){
@@ -142,7 +142,7 @@ GSL::Complex Bloch_sum::calc_d1_dot(const lm l, const double kappa, const Crysta
             tmp *=   GSL::exp((-kappa*kappa - k*k)/eta)/
               GSL::pow_int(-kappa*kappa - k*k, 2);
           }else{
-              tmp /= eta*eta;
+              tmp /= 2*eta*eta;
           }
         d1_dot += e*tmp.val;
     }
@@ -211,24 +211,38 @@ GSL::Complex Bloch_sum::calc_d3(const lm l, const double kappa, const Crystal_t<
         return GSL::Complex(0., 0.);
     }
     const double eta = calc_eta(c.volume());
+/*
     GSL::Result d3 = -kappa/(4*M_SQRTPI)*(GSL::erfc(-kappa/std::sqrt(eta)) -
 		     GSL::erfc(kappa/std::sqrt(eta))) -
 		     std::sqrt(eta)/(2*M_PI)*GSL::exp(-kappa*kappa/eta) +
 		     kappa/(2*M_SQRTPI);
+*/
+    GSL::Result d3 = kappa/(2*M_SQRTPI)*(GSL::erf(-kappa/std::sqrt(eta))) -
+        std::sqrt(eta)/(2*M_PI)*GSL::exp(-kappa*kappa/eta) +
+        kappa/(2*M_SQRTPI);
 
     return GSL::Complex(d3.val, 0);
 }
 
 GSL::Complex Bloch_sum::calc_d3_dot(const lm l, const double kappa, const Crystal_t<3, Atom>& c, const GSL::Vector& tau) const
 {
+    // delta(tau) * delta(l, 0)
     if(tau != GSL::Vector(3) || l.l != 0){
         return GSL::Complex(0., 0.);
     }
     const double eta = calc_eta(c.volume());
-    // delta(tau) * delta(l, 0)
+
+    if(std::abs(kappa*kappa) < 1e-16){
+        return 1./(2*M_PI*std::sqrt(eta));
+    }
+
+/*
     GSL::Result d3_dot = 1./(8*M_SQRTPI*kappa) * (GSL::erfc(-kappa/std::sqrt(eta)) -
         GSL::erfc(kappa/std::sqrt(eta))) -
 	       1./(4*M_SQRTPI*kappa);
+*/
+   GSL::Result d3_dot = -1./(4*M_SQRTPI*kappa) * GSL::erf(-kappa/std::sqrt(eta)) -
+       1./(4*M_SQRTPI*kappa);
 
     return GSL::Complex(d3_dot.val, 0);
 }

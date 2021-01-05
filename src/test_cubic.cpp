@@ -1,4 +1,4 @@
-#include "spherical_fun.h"
+#include <spherical_fun.h>
 #include <GSLpp/vector.h>
 #include <cmath>
 #include <iostream>

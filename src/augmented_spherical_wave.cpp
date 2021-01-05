@@ -1,7 +1,7 @@
-#include "augmented_spherical_wave.h"
-#include "spherical_fun.h"
-#include "numerov_solver.h"
-#include "structure_const.h"
+#include <augmented_spherical_wave.h>
+#include <spherical_fun.h>
+#include <numerov_solver.h>
+#include <structure_const.h>
 #include <algorithm>
 #include <iostream>
 #include <iomanip>
