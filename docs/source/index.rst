@@ -1,5 +1,5 @@
-.. gsl-ASW documentation master file, created by
-   sphinx-quickstart on Wed Mar  7 23:12:58 2018.
+.. GSL-ASW documentation master file, created by
+   sphinx-quickstart on Tue Jan  5 15:39:36 2021.
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
@@ -8,16 +8,17 @@ Welcome to gsl-ASW's documentation!
 ===================================
 
 .. toctree::
-   :maxdepth: 2
-   :caption: Contents:
+    :maxdepth: 2
+    :caption: Contents:
 
-   Introduction
-   Requirements
-   Building
-   Greetings
-   License
+    Greetings
+    Introduction
+    Requirements
+    Building
+    License
 
 
+==================
 Indices and tables
 ==================
 

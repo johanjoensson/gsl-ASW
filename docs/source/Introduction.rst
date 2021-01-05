@@ -1,6 +1,7 @@
 ============
 Introduction
 ============
+
 The goal of this project is to make my own DFT code, using the Augmented
 Spherical Wave basis functions. My implementation is based on what is described
 in the book “The augmented spherical wave method: A comprehensive treatment” by
