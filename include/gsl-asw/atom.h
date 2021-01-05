@@ -2,19 +2,17 @@
 #define ATOM_H
 
 #include <gsl/gsl_math.h>
-#include "GSLpp/vector.h"
-#include "log_mesh.h"
+#include <GSLpp/vector.h>
+#include <log_mesh.h>
 
-/***************************************************************************//**
+/*******************************************************************************
 * A class for representing atoms in the cell.\n
-* Contains:\n
-* __Z__ - Nuclear charge\n
-* __AS__ - Atomic sphere radius\n
-* __MT__ - Muffin tin radius\n
-* __pos__ - position, in cartesian coordinates\n
-* __mesh__ - logarithmic mesh to use in intraatomic calculations\n
+* @param Z Nuclear charge\n
+* @param AS Atomic sphere radius\n
+* @param MT Muffin tin radius\n
+* @param pos Position, in cartesian coordinates\n
+* @param mesh Logarithmic mesh to use in intraatomic calculations\n
 *******************************************************************************/
-
 class Atom {
 	public:
 	// Nuclear charge
