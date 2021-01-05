@@ -1,0 +1,369 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.20" xml:lang="en-US">
+  <compounddef id="classAtom" kind="class" language="C++" prot="public">
+    <compoundname>Atom</compoundname>
+    <includes refid="atom_8h" local="no">atom.h</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="classAtom_1a16d12add5804971aa9c6138af3f1b5fb" prot="public" static="no" mutable="no">
+        <type>size_t</type>
+        <definition>size_t Atom::Z</definition>
+        <argsstring></argsstring>
+        <name>Z</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/atom.h" line="19" column="8" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/atom.h" bodystart="19" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAtom_1a7940182ab4aa43283df6020a0f0dd67d" prot="public" static="no" mutable="no">
+        <type>double</type>
+        <definition>double Atom::MT</definition>
+        <argsstring></argsstring>
+        <name>MT</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/atom.h" line="22" column="8" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/atom.h" bodystart="22" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAtom_1aea60fa7809c63ccc399467fe8f737e46" prot="public" static="no" mutable="no">
+        <type>double</type>
+        <definition>double Atom::AS</definition>
+        <argsstring></argsstring>
+        <name>AS</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/atom.h" line="22" column="11" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/atom.h" bodystart="22" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAtom_1ac1c5c0961f23ba8bd1d06f21223b7c87" prot="public" static="no" mutable="no">
+        <type>GSL::Vector</type>
+        <definition>GSL::Vector Atom::pos</definition>
+        <argsstring></argsstring>
+        <name>pos</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/atom.h" line="25" column="13" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/atom.h" bodystart="25" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classAtom_1a1cfd38d42eb03bf1df0f50bc868f17e9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Atom::set_Z</definition>
+        <argsstring>(const size_t Z_n)</argsstring>
+        <name>set_Z</name>
+        <param>
+          <type>const size_t</type>
+          <declname>Z_n</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/atom.h" line="27" column="6"/>
+      </memberdef>
+      <memberdef kind="function" id="classAtom_1aa92066a3b1c4db78cd25b0963acd6923" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>size_t</type>
+        <definition>size_t Atom::get_Z</definition>
+        <argsstring>() const</argsstring>
+        <name>get_Z</name>
+        <briefdescription>
+<para>Get nuclear charge. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/atom.h" line="29" column="8"/>
+      </memberdef>
+      <memberdef kind="function" id="classAtom_1a4882a9c424bd88153205c2692a81d0dd" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Atom::set_pos</definition>
+        <argsstring>(const GSL::Vector &amp;r)</argsstring>
+        <name>set_pos</name>
+        <param>
+          <type>const GSL::Vector &amp;</type>
+          <declname>r</declname>
+        </param>
+        <briefdescription>
+<para>Set atom position (cartersian) </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/atom.h" line="31" column="6"/>
+      </memberdef>
+      <memberdef kind="function" id="classAtom_1a3295af53c32e694d912f23c3c88e73e3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Atom::set_MT</definition>
+        <argsstring>(double mt)</argsstring>
+        <name>set_MT</name>
+        <param>
+          <type>double</type>
+          <declname>mt</declname>
+        </param>
+        <briefdescription>
+<para>Set muffin tin radius. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/atom.h" line="33" column="6"/>
+      </memberdef>
+      <memberdef kind="function" id="classAtom_1a32ee3cf43681e3bc4f4aefe9f515e169" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Atom::set_AS</definition>
+        <argsstring>(double as)</argsstring>
+        <name>set_AS</name>
+        <param>
+          <type>double</type>
+          <declname>as</declname>
+        </param>
+        <briefdescription>
+<para>Set atomic sphere radius. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/atom.h" line="35" column="6"/>
+      </memberdef>
+      <memberdef kind="function" id="classAtom_1a50ceb084c159ee821c3a97ff65b61c4e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Atom::set_mesh</definition>
+        <argsstring>(const Logarithmic_mesh &amp;mesh)</argsstring>
+        <name>set_mesh</name>
+        <param>
+          <type>const <ref refid="classLogarithmic__mesh" kindref="compound">Logarithmic_mesh</ref> &amp;</type>
+          <declname>mesh</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/atom.h" line="36" column="6"/>
+      </memberdef>
+      <memberdef kind="function" id="classAtom_1a4ea8fc90efe0550f0252969f9c1d72f0" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>GSL::Vector</type>
+        <definition>GSL::Vector Atom::get_pos</definition>
+        <argsstring>() const</argsstring>
+        <name>get_pos</name>
+        <briefdescription>
+<para>Get atomic position (cartesian) </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/atom.h" line="38" column="13"/>
+      </memberdef>
+      <memberdef kind="function" id="classAtom_1aff41b65a6211ed46e882e9fa6ed4d29a" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>double</type>
+        <definition>double Atom::get_MT</definition>
+        <argsstring>() const</argsstring>
+        <name>get_MT</name>
+        <briefdescription>
+<para>Get muffin tin radius. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/atom.h" line="40" column="8"/>
+      </memberdef>
+      <memberdef kind="function" id="classAtom_1a41ae3ca27b51b8ff7da19081ec58153b" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>double</type>
+        <definition>double Atom::get_AS</definition>
+        <argsstring>() const</argsstring>
+        <name>get_AS</name>
+        <briefdescription>
+<para>Get atomic sphere radius. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/atom.h" line="42" column="8"/>
+      </memberdef>
+      <memberdef kind="function" id="classAtom_1add9b57f197ae0ace67d9d52fb263b4c7" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Atom::Atom</definition>
+        <argsstring>(const GSL::Vector &amp;r)</argsstring>
+        <name>Atom</name>
+        <param>
+          <type>const GSL::Vector &amp;</type>
+          <declname>r</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/atom.h" line="51" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="classAtom_1ae203700dc05a90a863b282144fc7d041" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Atom::Atom</definition>
+        <argsstring>(const double mt, const double as, const size_t z, const GSL::Vector &amp;r)</argsstring>
+        <name>Atom</name>
+        <param>
+          <type>const double</type>
+          <declname>mt</declname>
+        </param>
+        <param>
+          <type>const double</type>
+          <declname>as</declname>
+        </param>
+        <param>
+          <type>const size_t</type>
+          <declname>z</declname>
+        </param>
+        <param>
+          <type>const GSL::Vector &amp;</type>
+          <declname>r</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/atom.h" line="52" column="1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="friend">
+      <memberdef kind="friend" id="classAtom_1a5e07c0c118320fdc1f667405d874d4d4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>friend bool</type>
+        <definition>bool operator==</definition>
+        <argsstring>(const Atom &amp;a, const Atom &amp;b)</argsstring>
+        <name>operator==</name>
+        <param>
+          <type>const <ref refid="classAtom" kindref="compound">Atom</ref> &amp;</type>
+          <declname>a</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classAtom" kindref="compound">Atom</ref> &amp;</type>
+          <declname>b</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/atom.h" line="58" column="13"/>
+      </memberdef>
+      <memberdef kind="friend" id="classAtom_1a5c6fb2b0ae8e500e98c63ca22091c4a0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>friend bool</type>
+        <definition>bool operator!=</definition>
+        <argsstring>(const Atom &amp;a, const Atom &amp;b)</argsstring>
+        <name>operator!=</name>
+        <param>
+          <type>const <ref refid="classAtom" kindref="compound">Atom</ref> &amp;</type>
+          <declname>a</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classAtom" kindref="compound">Atom</ref> &amp;</type>
+          <declname>b</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/atom.h" line="59" column="13"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para>A class for representing atoms in the cell.<linebreak/>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>Z</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Nuclear charge<linebreak/>
+</para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>AS</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Atomic sphere radius<linebreak/>
+</para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>MT</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Muffin tin radius<linebreak/>
+</para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>pos</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Position, in cartesian coordinates<linebreak/>
+</para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>mesh</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Logarithmic mesh to use in intraatomic calculations<linebreak/>
+</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+    </detaileddescription>
+    <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/atom.h" line="16" column="1" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/atom.h" bodystart="16" bodyend="61"/>
+    <listofallmembers>
+      <member refid="classAtom_1aea60fa7809c63ccc399467fe8f737e46" prot="public" virt="non-virtual"><scope>Atom</scope><name>AS</name></member>
+      <member refid="classAtom_1add9b57f197ae0ace67d9d52fb263b4c7" prot="public" virt="non-virtual"><scope>Atom</scope><name>Atom</name></member>
+      <member refid="classAtom_1ae203700dc05a90a863b282144fc7d041" prot="public" virt="non-virtual"><scope>Atom</scope><name>Atom</name></member>
+      <member refid="classAtom_1a41ae3ca27b51b8ff7da19081ec58153b" prot="public" virt="non-virtual"><scope>Atom</scope><name>get_AS</name></member>
+      <member refid="classAtom_1aff41b65a6211ed46e882e9fa6ed4d29a" prot="public" virt="non-virtual"><scope>Atom</scope><name>get_MT</name></member>
+      <member refid="classAtom_1a4ea8fc90efe0550f0252969f9c1d72f0" prot="public" virt="non-virtual"><scope>Atom</scope><name>get_pos</name></member>
+      <member refid="classAtom_1aa92066a3b1c4db78cd25b0963acd6923" prot="public" virt="non-virtual"><scope>Atom</scope><name>get_Z</name></member>
+      <member refid="classAtom_1a7940182ab4aa43283df6020a0f0dd67d" prot="public" virt="non-virtual"><scope>Atom</scope><name>MT</name></member>
+      <member refid="classAtom_1a5c6fb2b0ae8e500e98c63ca22091c4a0" prot="public" virt="non-virtual"><scope>Atom</scope><name>operator!=</name></member>
+      <member refid="classAtom_1a5e07c0c118320fdc1f667405d874d4d4" prot="public" virt="non-virtual"><scope>Atom</scope><name>operator==</name></member>
+      <member refid="classAtom_1ac1c5c0961f23ba8bd1d06f21223b7c87" prot="public" virt="non-virtual"><scope>Atom</scope><name>pos</name></member>
+      <member refid="classAtom_1a32ee3cf43681e3bc4f4aefe9f515e169" prot="public" virt="non-virtual"><scope>Atom</scope><name>set_AS</name></member>
+      <member refid="classAtom_1a50ceb084c159ee821c3a97ff65b61c4e" prot="public" virt="non-virtual"><scope>Atom</scope><name>set_mesh</name></member>
+      <member refid="classAtom_1a3295af53c32e694d912f23c3c88e73e3" prot="public" virt="non-virtual"><scope>Atom</scope><name>set_MT</name></member>
+      <member refid="classAtom_1a4882a9c424bd88153205c2692a81d0dd" prot="public" virt="non-virtual"><scope>Atom</scope><name>set_pos</name></member>
+      <member refid="classAtom_1a1cfd38d42eb03bf1df0f50bc868f17e9" prot="public" virt="non-virtual"><scope>Atom</scope><name>set_Z</name></member>
+      <member refid="classAtom_1a16d12add5804971aa9c6138af3f1b5fb" prot="public" virt="non-virtual"><scope>Atom</scope><name>Z</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

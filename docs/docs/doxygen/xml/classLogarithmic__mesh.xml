@@ -1,0 +1,1191 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.20" xml:lang="en-US">
+  <compounddef id="classLogarithmic__mesh" kind="class" language="C++" prot="public">
+    <compoundname>Logarithmic_mesh</compoundname>
+    <basecompoundref refid="classMesh" prot="public" virt="non-virtual">Mesh</basecompoundref>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classLogarithmic__mesh_1ab6f3d6f57523e463d4c7d5ad8f18d45b" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double Logarithmic_mesh::A_p</definition>
+        <argsstring></argsstring>
+        <name>A_p</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/log_mesh.h" line="64" column="8" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/log_mesh.h" bodystart="64" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classLogarithmic__mesh_1a4072c1b77e6677d301b763e2e1cd4b39" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double Logarithmic_mesh::B_p</definition>
+        <argsstring></argsstring>
+        <name>B_p</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/log_mesh.h" line="65" column="8" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/log_mesh.h" bodystart="65" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classLogarithmic__mesh_1a0ef05af6c4725753fe2edc24730adc32" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; double &gt;</type>
+        <definition>std::vector&lt;double&gt; Logarithmic_mesh::drx_p</definition>
+        <argsstring></argsstring>
+        <name>drx_p</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/log_mesh.h" line="66" column="13" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/log_mesh.h" bodystart="66" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classLogarithmic__mesh_1a9f7191a27876aac22e587ba63ae8bfe0" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; double &gt;</type>
+        <definition>std::vector&lt;double&gt; Logarithmic_mesh::d2rx_p</definition>
+        <argsstring></argsstring>
+        <name>d2rx_p</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/log_mesh.h" line="67" column="13" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/log_mesh.h" bodystart="67" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classLogarithmic__mesh_1a71b95d9f26d43566ad2411a66a032d2c" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>Logarithmic_mesh::Logarithmic_mesh</definition>
+        <argsstring>()</argsstring>
+        <name>Logarithmic_mesh</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/log_mesh.h" line="69" column="1" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/log_mesh.h" bodystart="69" bodyend="69"/>
+      </memberdef>
+      <memberdef kind="function" id="classLogarithmic__mesh_1ad7a04fec84f43113d6baa0805e91160e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Logarithmic_mesh::Logarithmic_mesh</definition>
+        <argsstring>(const Logarithmic_mesh &amp;)=default</argsstring>
+        <name>Logarithmic_mesh</name>
+        <param>
+          <type>const <ref refid="classLogarithmic__mesh" kindref="compound">Logarithmic_mesh</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/log_mesh.h" line="70" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="classLogarithmic__mesh_1a534fb490dd099ab814dbdbc63baa932e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Logarithmic_mesh::Logarithmic_mesh</definition>
+        <argsstring>(Logarithmic_mesh &amp;&amp;)=default</argsstring>
+        <name>Logarithmic_mesh</name>
+        <param>
+          <type><ref refid="classLogarithmic__mesh" kindref="compound">Logarithmic_mesh</ref> &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/log_mesh.h" line="71" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="classLogarithmic__mesh_1acf14e111994a586eabcc6d5ebd1d253e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Logarithmic_mesh::~Logarithmic_mesh</definition>
+        <argsstring>() override=default</argsstring>
+        <name>~Logarithmic_mesh</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/log_mesh.h" line="73" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="classLogarithmic__mesh_1a58fa08356267fb71b343f2682dae90ff" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Logarithmic_mesh::Logarithmic_mesh</definition>
+        <argsstring>(double radius, size_t num_points, double A=0.01)</argsstring>
+        <name>Logarithmic_mesh</name>
+        <param>
+          <type>double</type>
+          <declname>radius</declname>
+        </param>
+        <param>
+          <type>size_t</type>
+          <declname>num_points</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>A</declname>
+          <defval>0.01</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/log_mesh.h" line="75" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="classLogarithmic__mesh_1a27f03ff539a7532a6bc299e3d241cadc" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classLogarithmic__mesh" kindref="compound">Logarithmic_mesh</ref> &amp;</type>
+        <definition>Logarithmic_mesh&amp; Logarithmic_mesh::operator=</definition>
+        <argsstring>(const Logarithmic_mesh &amp;)=default</argsstring>
+        <name>operator=</name>
+        <param>
+          <type>const <ref refid="classLogarithmic__mesh" kindref="compound">Logarithmic_mesh</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/log_mesh.h" line="77" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classLogarithmic__mesh_1aafc21aac43269fbddbd0309eb0ab59b5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classLogarithmic__mesh" kindref="compound">Logarithmic_mesh</ref> &amp;</type>
+        <definition>Logarithmic_mesh&amp; Logarithmic_mesh::operator=</definition>
+        <argsstring>(Logarithmic_mesh &amp;&amp;)=default</argsstring>
+        <name>operator=</name>
+        <param>
+          <type><ref refid="classLogarithmic__mesh" kindref="compound">Logarithmic_mesh</ref> &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/log_mesh.h" line="78" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classLogarithmic__mesh_1ac5bcc83573645af1376e40f8519c146e" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>double</type>
+        <definition>double Logarithmic_mesh::integrate</definition>
+        <argsstring>(const std::vector&lt; double &gt; &amp;f) const override</argsstring>
+        <name>integrate</name>
+        <reimplements refid="classMesh_1a5905f4657c786188b6b737c87c27ca06">integrate</reimplements>
+        <param>
+          <type>const std::vector&lt; double &gt; &amp;</type>
+          <declname>f</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/log_mesh.h" line="80" column="8"/>
+      </memberdef>
+      <memberdef kind="function" id="classLogarithmic__mesh_1aee51394ad007e44c9b8eb8bde21c3e63" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>double</type>
+        <definition>double Logarithmic_mesh::integrate_simpson</definition>
+        <argsstring>(const std::vector&lt; double &gt; &amp;f) const override</argsstring>
+        <name>integrate_simpson</name>
+        <reimplements refid="classMesh_1ad508abca406bb55f8914a74c2e05e8ef">integrate_simpson</reimplements>
+        <param>
+          <type>const std::vector&lt; double &gt; &amp;</type>
+          <declname>f</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/log_mesh.h" line="81" column="8"/>
+      </memberdef>
+      <memberdef kind="function" id="classLogarithmic__mesh_1add5bde638650c11bcc500f1bb7114817" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>double</type>
+        <definition>double Logarithmic_mesh::A</definition>
+        <argsstring>() const</argsstring>
+        <name>A</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/log_mesh.h" line="83" column="8" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/log_mesh.h" bodystart="83" bodyend="83"/>
+      </memberdef>
+      <memberdef kind="function" id="classLogarithmic__mesh_1acbfc0fd9de3b2490c713a50647210cc6" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>double</type>
+        <definition>double Logarithmic_mesh::B</definition>
+        <argsstring>() const</argsstring>
+        <name>B</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/log_mesh.h" line="84" column="8" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/log_mesh.h" bodystart="84" bodyend="84"/>
+      </memberdef>
+      <memberdef kind="function" id="classLogarithmic__mesh_1aa56edcfcd4a9290b142fed5dd92b35a7" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>double</type>
+        <definition>double Logarithmic_mesh::r</definition>
+        <argsstring>(const size_t i) const</argsstring>
+        <name>r</name>
+        <param>
+          <type>const size_t</type>
+          <declname>i</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/log_mesh.h" line="85" column="8" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/log_mesh.h" bodystart="85" bodyend="85"/>
+      </memberdef>
+      <memberdef kind="function" id="classLogarithmic__mesh_1a422984abc64c453b4ae303287f41f4dd" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::vector&lt; double &gt;::iterator</type>
+        <definition>std::vector&lt;double&gt;::iterator Logarithmic_mesh::r_begin</definition>
+        <argsstring>()</argsstring>
+        <name>r_begin</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/log_mesh.h" line="86" column="24" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/log_mesh.h" bodystart="86" bodyend="86"/>
+      </memberdef>
+      <memberdef kind="function" id="classLogarithmic__mesh_1a69bf855df5647d75335d4fa4771cc254" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::vector&lt; double &gt;::const_iterator</type>
+        <definition>std::vector&lt;double&gt;::const_iterator Logarithmic_mesh::r_begin</definition>
+        <argsstring>() const</argsstring>
+        <name>r_begin</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/log_mesh.h" line="87" column="30" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/log_mesh.h" bodystart="87" bodyend="87"/>
+      </memberdef>
+      <memberdef kind="function" id="classLogarithmic__mesh_1a310cb208ec4d9962b792c31c36aac67b" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::vector&lt; double &gt;::iterator</type>
+        <definition>std::vector&lt;double&gt;::iterator Logarithmic_mesh::r_end</definition>
+        <argsstring>()</argsstring>
+        <name>r_end</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/log_mesh.h" line="88" column="24" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/log_mesh.h" bodystart="88" bodyend="88"/>
+      </memberdef>
+      <memberdef kind="function" id="classLogarithmic__mesh_1a56a6cc6a717c880a8db3ebb163eb6e7d" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::vector&lt; double &gt;::const_iterator</type>
+        <definition>std::vector&lt;double&gt;::const_iterator Logarithmic_mesh::r_end</definition>
+        <argsstring>() const</argsstring>
+        <name>r_end</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/log_mesh.h" line="89" column="30" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/log_mesh.h" bodystart="89" bodyend="89"/>
+      </memberdef>
+      <memberdef kind="function" id="classLogarithmic__mesh_1af7eccb256d1fefb834571b72c2a63847" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::vector&lt; double &gt;::reverse_iterator</type>
+        <definition>std::vector&lt;double&gt;::reverse_iterator Logarithmic_mesh::r_rbegin</definition>
+        <argsstring>()</argsstring>
+        <name>r_rbegin</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/log_mesh.h" line="90" column="32" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/log_mesh.h" bodystart="90" bodyend="90"/>
+      </memberdef>
+      <memberdef kind="function" id="classLogarithmic__mesh_1ad3eaf8d98a84f6f577f0d9e939ec48e0" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::vector&lt; double &gt;::const_reverse_iterator</type>
+        <definition>std::vector&lt;double&gt;::const_reverse_iterator Logarithmic_mesh::r_rbegin</definition>
+        <argsstring>() const</argsstring>
+        <name>r_rbegin</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/log_mesh.h" line="91" column="38" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/log_mesh.h" bodystart="91" bodyend="91"/>
+      </memberdef>
+      <memberdef kind="function" id="classLogarithmic__mesh_1a1b6461d4e67b2ff71c393cb2a9bec32e" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>double</type>
+        <definition>double Logarithmic_mesh::r_back</definition>
+        <argsstring>() const</argsstring>
+        <name>r_back</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/log_mesh.h" line="92" column="8" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/log_mesh.h" bodystart="92" bodyend="92"/>
+      </memberdef>
+      <memberdef kind="function" id="classLogarithmic__mesh_1a90e0361a49bae6f1d9f0b40326322d2b" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>double</type>
+        <definition>double Logarithmic_mesh::r2</definition>
+        <argsstring>(const size_t i) const</argsstring>
+        <name>r2</name>
+        <param>
+          <type>const size_t</type>
+          <declname>i</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/log_mesh.h" line="93" column="8" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/log_mesh.h" bodystart="93" bodyend="93"/>
+      </memberdef>
+      <memberdef kind="function" id="classLogarithmic__mesh_1a4ef273ae1778bcc9dc9bbe2ac87e750f" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::vector&lt; double &gt;::iterator</type>
+        <definition>std::vector&lt;double&gt;::iterator Logarithmic_mesh::r2_begin</definition>
+        <argsstring>()</argsstring>
+        <name>r2_begin</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/log_mesh.h" line="94" column="24" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/log_mesh.h" bodystart="94" bodyend="94"/>
+      </memberdef>
+      <memberdef kind="function" id="classLogarithmic__mesh_1a20be5de0c0e2f193477e69289ea99c36" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::vector&lt; double &gt;::const_iterator</type>
+        <definition>std::vector&lt;double&gt;::const_iterator Logarithmic_mesh::r2_begin</definition>
+        <argsstring>() const</argsstring>
+        <name>r2_begin</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/log_mesh.h" line="95" column="30" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/log_mesh.h" bodystart="95" bodyend="95"/>
+      </memberdef>
+      <memberdef kind="function" id="classLogarithmic__mesh_1a2bf6a309544379aa84a76c1ca10e9b0b" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::vector&lt; double &gt;::iterator</type>
+        <definition>std::vector&lt;double&gt;::iterator Logarithmic_mesh::r2_end</definition>
+        <argsstring>()</argsstring>
+        <name>r2_end</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/log_mesh.h" line="96" column="24" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/log_mesh.h" bodystart="96" bodyend="96"/>
+      </memberdef>
+      <memberdef kind="function" id="classLogarithmic__mesh_1a2a519d9b48b9e35388981d7f0108a955" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::vector&lt; double &gt;::const_iterator</type>
+        <definition>std::vector&lt;double&gt;::const_iterator Logarithmic_mesh::r2_end</definition>
+        <argsstring>() const</argsstring>
+        <name>r2_end</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/log_mesh.h" line="97" column="30" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/log_mesh.h" bodystart="97" bodyend="97"/>
+      </memberdef>
+      <memberdef kind="function" id="classLogarithmic__mesh_1a054b66b1f8776c35e2d34b651ffd526f" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>double</type>
+        <definition>double Logarithmic_mesh::r2_back</definition>
+        <argsstring>() const</argsstring>
+        <name>r2_back</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/log_mesh.h" line="98" column="8" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/log_mesh.h" bodystart="98" bodyend="98"/>
+      </memberdef>
+      <memberdef kind="function" id="classLogarithmic__mesh_1ad834c8d800c01f55ac09a48b22fb3b90" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>double</type>
+        <definition>double Logarithmic_mesh::drx</definition>
+        <argsstring>(const size_t i) const</argsstring>
+        <name>drx</name>
+        <param>
+          <type>const size_t</type>
+          <declname>i</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/log_mesh.h" line="100" column="8" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/log_mesh.h" bodystart="100" bodyend="100"/>
+      </memberdef>
+      <memberdef kind="function" id="classLogarithmic__mesh_1a5156ee23eb1227a7b8b29f4712d72d98" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>double</type>
+        <definition>double Logarithmic_mesh::drx</definition>
+        <argsstring>(const double x) const</argsstring>
+        <name>drx</name>
+        <param>
+          <type>const double</type>
+          <declname>x</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/log_mesh.h" line="101" column="8" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/log_mesh.h" bodystart="101" bodyend="101"/>
+      </memberdef>
+      <memberdef kind="function" id="classLogarithmic__mesh_1a9c83fa18d7a0c6788a82de3ddf787029" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::vector&lt; double &gt;::iterator</type>
+        <definition>std::vector&lt;double&gt;::iterator Logarithmic_mesh::drx_begin</definition>
+        <argsstring>()</argsstring>
+        <name>drx_begin</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/log_mesh.h" line="102" column="24" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/log_mesh.h" bodystart="102" bodyend="102"/>
+      </memberdef>
+      <memberdef kind="function" id="classLogarithmic__mesh_1a14c43e17df3021445e07d8bc46ee16ce" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::vector&lt; double &gt;::const_iterator</type>
+        <definition>std::vector&lt;double&gt;::const_iterator Logarithmic_mesh::drx_begin</definition>
+        <argsstring>() const</argsstring>
+        <name>drx_begin</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/log_mesh.h" line="103" column="30" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/log_mesh.h" bodystart="103" bodyend="103"/>
+      </memberdef>
+      <memberdef kind="function" id="classLogarithmic__mesh_1a59650fd627d66110e10b765bafd1a783" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::vector&lt; double &gt;::iterator</type>
+        <definition>std::vector&lt;double&gt;::iterator Logarithmic_mesh::drx_end</definition>
+        <argsstring>()</argsstring>
+        <name>drx_end</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/log_mesh.h" line="104" column="24" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/log_mesh.h" bodystart="104" bodyend="104"/>
+      </memberdef>
+      <memberdef kind="function" id="classLogarithmic__mesh_1aefda9d8ccbb160a03b7f2b279989c52d" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::vector&lt; double &gt;::const_iterator</type>
+        <definition>std::vector&lt;double&gt;::const_iterator Logarithmic_mesh::drx_end</definition>
+        <argsstring>() const</argsstring>
+        <name>drx_end</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/log_mesh.h" line="105" column="30" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/log_mesh.h" bodystart="105" bodyend="105"/>
+      </memberdef>
+      <memberdef kind="function" id="classLogarithmic__mesh_1a27bab2e9d3844cb0a034cd15fa8569dd" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::vector&lt; double &gt;::reverse_iterator</type>
+        <definition>std::vector&lt;double&gt;::reverse_iterator Logarithmic_mesh::drx_rbegin</definition>
+        <argsstring>()</argsstring>
+        <name>drx_rbegin</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/log_mesh.h" line="106" column="32" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/log_mesh.h" bodystart="106" bodyend="106"/>
+      </memberdef>
+      <memberdef kind="function" id="classLogarithmic__mesh_1ab0808302408a51daa9b6c730838a6147" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::vector&lt; double &gt;::const_reverse_iterator</type>
+        <definition>std::vector&lt;double&gt;::const_reverse_iterator Logarithmic_mesh::drx_rbegin</definition>
+        <argsstring>() const</argsstring>
+        <name>drx_rbegin</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/log_mesh.h" line="107" column="38" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/log_mesh.h" bodystart="107" bodyend="107"/>
+      </memberdef>
+      <memberdef kind="function" id="classLogarithmic__mesh_1a512db0f06749fe7b30920f4fee993884" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::vector&lt; double &gt;::reverse_iterator</type>
+        <definition>std::vector&lt;double&gt;::reverse_iterator Logarithmic_mesh::drx_rend</definition>
+        <argsstring>()</argsstring>
+        <name>drx_rend</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/log_mesh.h" line="108" column="32" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/log_mesh.h" bodystart="108" bodyend="108"/>
+      </memberdef>
+      <memberdef kind="function" id="classLogarithmic__mesh_1a90a93f0cf6426ee1090e82c5a8f7ca94" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::vector&lt; double &gt;::const_reverse_iterator</type>
+        <definition>std::vector&lt;double&gt;::const_reverse_iterator Logarithmic_mesh::drx_rend</definition>
+        <argsstring>() const</argsstring>
+        <name>drx_rend</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/log_mesh.h" line="109" column="38" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/log_mesh.h" bodystart="109" bodyend="109"/>
+      </memberdef>
+      <memberdef kind="function" id="classLogarithmic__mesh_1a27cd2ce09412c90a42cbb106b19ae9e0" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>double</type>
+        <definition>double Logarithmic_mesh::drx_back</definition>
+        <argsstring>() const</argsstring>
+        <name>drx_back</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/log_mesh.h" line="110" column="8" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/log_mesh.h" bodystart="110" bodyend="110"/>
+      </memberdef>
+      <memberdef kind="function" id="classLogarithmic__mesh_1ad0306e60876e355481b2804f61c67508" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>double</type>
+        <definition>double Logarithmic_mesh::d2rx</definition>
+        <argsstring>(const size_t i) const</argsstring>
+        <name>d2rx</name>
+        <param>
+          <type>const size_t</type>
+          <declname>i</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/log_mesh.h" line="112" column="8" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/log_mesh.h" bodystart="112" bodyend="112"/>
+      </memberdef>
+      <memberdef kind="function" id="classLogarithmic__mesh_1a3c826046da6a41e033601beb8e168b25" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>double</type>
+        <definition>double Logarithmic_mesh::d2rx</definition>
+        <argsstring>(const double x) const</argsstring>
+        <name>d2rx</name>
+        <param>
+          <type>const double</type>
+          <declname>x</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/log_mesh.h" line="113" column="8" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/log_mesh.h" bodystart="113" bodyend="113"/>
+      </memberdef>
+      <memberdef kind="function" id="classLogarithmic__mesh_1a8f3f91f0518d5b73ce2e671c0034d332" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::vector&lt; double &gt;::iterator</type>
+        <definition>std::vector&lt;double&gt;::iterator Logarithmic_mesh::d2rx_begin</definition>
+        <argsstring>()</argsstring>
+        <name>d2rx_begin</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/log_mesh.h" line="114" column="24" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/log_mesh.h" bodystart="114" bodyend="114"/>
+      </memberdef>
+      <memberdef kind="function" id="classLogarithmic__mesh_1a6b705faaa15bc095d7067e60a4711e78" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::vector&lt; double &gt;::const_iterator</type>
+        <definition>std::vector&lt;double&gt;::const_iterator Logarithmic_mesh::d2rx_begin</definition>
+        <argsstring>() const</argsstring>
+        <name>d2rx_begin</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/log_mesh.h" line="115" column="30" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/log_mesh.h" bodystart="115" bodyend="115"/>
+      </memberdef>
+      <memberdef kind="function" id="classLogarithmic__mesh_1a69b0100df72ccf4fde5ed24af2b74a0a" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::vector&lt; double &gt;::iterator</type>
+        <definition>std::vector&lt;double&gt;::iterator Logarithmic_mesh::d2rx_end</definition>
+        <argsstring>()</argsstring>
+        <name>d2rx_end</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/log_mesh.h" line="116" column="24" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/log_mesh.h" bodystart="116" bodyend="116"/>
+      </memberdef>
+      <memberdef kind="function" id="classLogarithmic__mesh_1a5bcaca583fe32e0e1b709185782a1dd6" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::vector&lt; double &gt;::const_iterator</type>
+        <definition>std::vector&lt;double&gt;::const_iterator Logarithmic_mesh::d2rx_end</definition>
+        <argsstring>() const</argsstring>
+        <name>d2rx_end</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/log_mesh.h" line="117" column="30" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/log_mesh.h" bodystart="117" bodyend="117"/>
+      </memberdef>
+      <memberdef kind="function" id="classLogarithmic__mesh_1ad2df2e0b175582588cb23809fcc997f8" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::vector&lt; double &gt;::reverse_iterator</type>
+        <definition>std::vector&lt;double&gt;::reverse_iterator Logarithmic_mesh::d2rx_rbegin</definition>
+        <argsstring>()</argsstring>
+        <name>d2rx_rbegin</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/log_mesh.h" line="118" column="32" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/log_mesh.h" bodystart="118" bodyend="118"/>
+      </memberdef>
+      <memberdef kind="function" id="classLogarithmic__mesh_1a91482f8e59cdfa77da3a3b0588ea92eb" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::vector&lt; double &gt;::const_reverse_iterator</type>
+        <definition>std::vector&lt;double&gt;::const_reverse_iterator Logarithmic_mesh::d2rx_rbegin</definition>
+        <argsstring>() const</argsstring>
+        <name>d2rx_rbegin</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/log_mesh.h" line="119" column="38" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/log_mesh.h" bodystart="119" bodyend="119"/>
+      </memberdef>
+      <memberdef kind="function" id="classLogarithmic__mesh_1abc62a8a66ad8f506022d3e06a3e8dae3" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::vector&lt; double &gt;::reverse_iterator</type>
+        <definition>std::vector&lt;double&gt;::reverse_iterator Logarithmic_mesh::d2rx_rend</definition>
+        <argsstring>()</argsstring>
+        <name>d2rx_rend</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/log_mesh.h" line="120" column="32" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/log_mesh.h" bodystart="120" bodyend="120"/>
+      </memberdef>
+      <memberdef kind="function" id="classLogarithmic__mesh_1ad65e147c207fbefafe113f7794a66369" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::vector&lt; double &gt;::const_reverse_iterator</type>
+        <definition>std::vector&lt;double&gt;::const_reverse_iterator Logarithmic_mesh::d2rx_rend</definition>
+        <argsstring>() const</argsstring>
+        <name>d2rx_rend</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/log_mesh.h" line="121" column="38" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/log_mesh.h" bodystart="121" bodyend="121"/>
+      </memberdef>
+      <memberdef kind="function" id="classLogarithmic__mesh_1a64d9c9c747ec8ca4c10acee1578e6941" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>double</type>
+        <definition>double Logarithmic_mesh::d2rx_back</definition>
+        <argsstring>() const</argsstring>
+        <name>d2rx_back</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/log_mesh.h" line="122" column="8" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/log_mesh.h" bodystart="122" bodyend="122"/>
+      </memberdef>
+      <memberdef kind="function" id="classMesh_1ada10825606a4e6491754dd748b89b208" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>double</type>
+        <definition>double Mesh::x</definition>
+        <argsstring>(const size_t i) const</argsstring>
+        <name>x</name>
+        <param>
+          <type>const size_t</type>
+          <declname>i</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/log_mesh.h" line="35" column="8" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/log_mesh.h" bodystart="35" bodyend="35"/>
+      </memberdef>
+      <memberdef kind="function" id="classMesh_1a2b09978ea07e2553e1fdb48e686993b1" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::vector&lt; double &gt;::iterator</type>
+        <definition>std::vector&lt;double&gt;::iterator Mesh::x_begin</definition>
+        <argsstring>()</argsstring>
+        <name>x_begin</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/log_mesh.h" line="36" column="24" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/log_mesh.h" bodystart="36" bodyend="36"/>
+      </memberdef>
+      <memberdef kind="function" id="classMesh_1aaad6ca89f9642e0f253ee1f1c0ed72a5" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::vector&lt; double &gt;::const_iterator</type>
+        <definition>std::vector&lt;double&gt;::const_iterator Mesh::x_begin</definition>
+        <argsstring>() const</argsstring>
+        <name>x_begin</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/log_mesh.h" line="37" column="30" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/log_mesh.h" bodystart="37" bodyend="37"/>
+      </memberdef>
+      <memberdef kind="function" id="classMesh_1a88667b687cbf95f5edef74e7bb4196a4" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::vector&lt; double &gt;::iterator</type>
+        <definition>std::vector&lt;double&gt;::iterator Mesh::x_end</definition>
+        <argsstring>()</argsstring>
+        <name>x_end</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/log_mesh.h" line="38" column="24" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/log_mesh.h" bodystart="38" bodyend="38"/>
+      </memberdef>
+      <memberdef kind="function" id="classMesh_1aeea40873cdde75ba0f3875d08cfb8ff3" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::vector&lt; double &gt;::const_iterator</type>
+        <definition>std::vector&lt;double&gt;::const_iterator Mesh::x_end</definition>
+        <argsstring>() const</argsstring>
+        <name>x_end</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/log_mesh.h" line="39" column="30" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/log_mesh.h" bodystart="39" bodyend="39"/>
+      </memberdef>
+      <memberdef kind="function" id="classMesh_1a06b8a46d4ecea97224775e53f39a2ce1" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::vector&lt; double &gt;::reverse_iterator</type>
+        <definition>std::vector&lt;double&gt;::reverse_iterator Mesh::x_rbegin</definition>
+        <argsstring>()</argsstring>
+        <name>x_rbegin</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/log_mesh.h" line="40" column="32" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/log_mesh.h" bodystart="40" bodyend="40"/>
+      </memberdef>
+      <memberdef kind="function" id="classMesh_1aff4a2f0c46b09ae3c7bd53ef449e1b31" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::vector&lt; double &gt;::const_reverse_iterator</type>
+        <definition>std::vector&lt;double&gt;::const_reverse_iterator Mesh::x_rbegin</definition>
+        <argsstring>() const</argsstring>
+        <name>x_rbegin</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/log_mesh.h" line="41" column="38" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/log_mesh.h" bodystart="41" bodyend="41"/>
+      </memberdef>
+      <memberdef kind="function" id="classMesh_1adaa5c8c204c77b144ed4549be280fe4d" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::vector&lt; double &gt;::reverse_iterator</type>
+        <definition>std::vector&lt;double&gt;::reverse_iterator Mesh::x_rend</definition>
+        <argsstring>()</argsstring>
+        <name>x_rend</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/log_mesh.h" line="42" column="32" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/log_mesh.h" bodystart="42" bodyend="42"/>
+      </memberdef>
+      <memberdef kind="function" id="classMesh_1a99b27d9fa2db350882110ef4cbec8cde" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::vector&lt; double &gt;::const_reverse_iterator</type>
+        <definition>std::vector&lt;double&gt;::const_reverse_iterator Mesh::x_rend</definition>
+        <argsstring>() const</argsstring>
+        <name>x_rend</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/log_mesh.h" line="43" column="38" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/log_mesh.h" bodystart="43" bodyend="43"/>
+      </memberdef>
+      <memberdef kind="function" id="classMesh_1a1b19461734f11611f1a2fbec26f29618" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>double</type>
+        <definition>double Mesh::x_back</definition>
+        <argsstring>() const</argsstring>
+        <name>x_back</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/log_mesh.h" line="44" column="8" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/log_mesh.h" bodystart="44" bodyend="44"/>
+      </memberdef>
+      <memberdef kind="function" id="classMesh_1adde1322a4f7b1e555cac0ee49f114f02" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>double</type>
+        <definition>double Mesh::x2</definition>
+        <argsstring>(const size_t i) const</argsstring>
+        <name>x2</name>
+        <param>
+          <type>const size_t</type>
+          <declname>i</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/log_mesh.h" line="45" column="8" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/log_mesh.h" bodystart="45" bodyend="45"/>
+      </memberdef>
+      <memberdef kind="function" id="classMesh_1ab3351992e91f2507b4bfc7215d765edd" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::vector&lt; double &gt;::iterator</type>
+        <definition>std::vector&lt;double&gt;::iterator Mesh::x2_begin</definition>
+        <argsstring>()</argsstring>
+        <name>x2_begin</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/log_mesh.h" line="46" column="24" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/log_mesh.h" bodystart="46" bodyend="46"/>
+      </memberdef>
+      <memberdef kind="function" id="classMesh_1a79f11b4417c29635ed48d5bdeed633e8" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::vector&lt; double &gt;::const_iterator</type>
+        <definition>std::vector&lt;double&gt;::const_iterator Mesh::x2_begin</definition>
+        <argsstring>() const</argsstring>
+        <name>x2_begin</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/log_mesh.h" line="47" column="30" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/log_mesh.h" bodystart="47" bodyend="47"/>
+      </memberdef>
+      <memberdef kind="function" id="classMesh_1a8ba9b8c4f48005c9ed04aeaf38117fd1" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::vector&lt; double &gt;::iterator</type>
+        <definition>std::vector&lt;double&gt;::iterator Mesh::x2_end</definition>
+        <argsstring>()</argsstring>
+        <name>x2_end</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/log_mesh.h" line="48" column="24" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/log_mesh.h" bodystart="48" bodyend="48"/>
+      </memberdef>
+      <memberdef kind="function" id="classMesh_1a8d3e89e9df4ed82cd4ac8aada66693f4" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::vector&lt; double &gt;::const_iterator</type>
+        <definition>std::vector&lt;double&gt;::const_iterator Mesh::x2_end</definition>
+        <argsstring>() const</argsstring>
+        <name>x2_end</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/log_mesh.h" line="49" column="30" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/log_mesh.h" bodystart="49" bodyend="49"/>
+      </memberdef>
+      <memberdef kind="function" id="classMesh_1a054ad7ea2cacfceb5b9993f014d7e3fd" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::vector&lt; double &gt;::reverse_iterator</type>
+        <definition>std::vector&lt;double&gt;::reverse_iterator Mesh::x2_rbegin</definition>
+        <argsstring>()</argsstring>
+        <name>x2_rbegin</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/log_mesh.h" line="50" column="32" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/log_mesh.h" bodystart="50" bodyend="50"/>
+      </memberdef>
+      <memberdef kind="function" id="classMesh_1a4e12406f9337939435c08c0b96af02fd" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::vector&lt; double &gt;::const_reverse_iterator</type>
+        <definition>std::vector&lt;double&gt;::const_reverse_iterator Mesh::x2_rbegin</definition>
+        <argsstring>() const</argsstring>
+        <name>x2_rbegin</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/log_mesh.h" line="51" column="38" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/log_mesh.h" bodystart="51" bodyend="51"/>
+      </memberdef>
+      <memberdef kind="function" id="classMesh_1a8b6df8cadda182164e4d9ad64aa58270" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::vector&lt; double &gt;::reverse_iterator</type>
+        <definition>std::vector&lt;double&gt;::reverse_iterator Mesh::x2_rend</definition>
+        <argsstring>()</argsstring>
+        <name>x2_rend</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/log_mesh.h" line="52" column="32" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/log_mesh.h" bodystart="52" bodyend="52"/>
+      </memberdef>
+      <memberdef kind="function" id="classMesh_1a7eaa0d51400f36187b6e04420562bf27" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::vector&lt; double &gt;::const_reverse_iterator</type>
+        <definition>std::vector&lt;double&gt;::const_reverse_iterator Mesh::x2_rend</definition>
+        <argsstring>() const</argsstring>
+        <name>x2_rend</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/log_mesh.h" line="53" column="38" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/log_mesh.h" bodystart="53" bodyend="53"/>
+      </memberdef>
+      <memberdef kind="function" id="classMesh_1a57f0dfaca412445578fd97dbd9474a1c" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>double</type>
+        <definition>double Mesh::x2_back</definition>
+        <argsstring>() const</argsstring>
+        <name>x2_back</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/log_mesh.h" line="54" column="8" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/log_mesh.h" bodystart="54" bodyend="54"/>
+      </memberdef>
+      <memberdef kind="function" id="classMesh_1a8c1ea2e3a966ae8f9f23d68951f47310" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>double</type>
+        <definition>double Mesh::dx</definition>
+        <argsstring>() const</argsstring>
+        <name>dx</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/log_mesh.h" line="55" column="8" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/log_mesh.h" bodystart="55" bodyend="55"/>
+      </memberdef>
+      <memberdef kind="function" id="classMesh_1a28e75ba3042956e93ed2fba045b32b39" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>size_t</type>
+        <definition>size_t Mesh::size</definition>
+        <argsstring>() const</argsstring>
+        <name>size</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/log_mesh.h" line="57" column="8" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/log_mesh.h" bodystart="57" bodyend="57"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="protected-attrib">
+      <memberdef kind="variable" id="classMesh_1a515b65efe4fbef9b058b9fb7c40ebc50" prot="protected" static="no" mutable="no">
+        <type>std::vector&lt; double &gt;</type>
+        <definition>std::vector&lt;double&gt; Mesh::x_p</definition>
+        <argsstring></argsstring>
+        <name>x_p</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/log_mesh.h" line="10" column="13" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/log_mesh.h" bodystart="10" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classMesh_1a759618c365642825fd788845e2c46084" prot="protected" static="no" mutable="no">
+        <type>std::vector&lt; double &gt;</type>
+        <definition>std::vector&lt;double&gt; Mesh::x2_p</definition>
+        <argsstring></argsstring>
+        <name>x2_p</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/log_mesh.h" line="11" column="13" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/log_mesh.h" bodystart="11" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classMesh_1a4d10f1dc561d1b84a3846e0a8ed84591" prot="protected" static="no" mutable="no">
+        <type>double</type>
+        <definition>double Mesh::dx_p</definition>
+        <argsstring></argsstring>
+        <name>dx_p</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/log_mesh.h" line="12" column="8" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/log_mesh.h" bodystart="12" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>Logarithmic_mesh</label>
+        <link refid="classLogarithmic__mesh"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>Mesh</label>
+        <link refid="classMesh"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>Logarithmic_mesh</label>
+        <link refid="classLogarithmic__mesh"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>Mesh</label>
+        <link refid="classMesh"/>
+        <childnode refid="3" relation="usage">
+          <edgelabel>x2_p</edgelabel>
+          <edgelabel>x_p</edgelabel>
+        </childnode>
+      </node>
+      <node id="3">
+        <label>std::vector&lt; double &gt;</label>
+      </node>
+    </collaborationgraph>
+    <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/log_mesh.h" line="63" column="1" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/log_mesh.h" bodystart="63" bodyend="124"/>
+    <listofallmembers>
+      <member refid="classLogarithmic__mesh_1add5bde638650c11bcc500f1bb7114817" prot="public" virt="non-virtual"><scope>Logarithmic_mesh</scope><name>A</name></member>
+      <member refid="classLogarithmic__mesh_1ab6f3d6f57523e463d4c7d5ad8f18d45b" prot="private" virt="non-virtual"><scope>Logarithmic_mesh</scope><name>A_p</name></member>
+      <member refid="classLogarithmic__mesh_1acbfc0fd9de3b2490c713a50647210cc6" prot="public" virt="non-virtual"><scope>Logarithmic_mesh</scope><name>B</name></member>
+      <member refid="classLogarithmic__mesh_1a4072c1b77e6677d301b763e2e1cd4b39" prot="private" virt="non-virtual"><scope>Logarithmic_mesh</scope><name>B_p</name></member>
+      <member refid="classLogarithmic__mesh_1ad0306e60876e355481b2804f61c67508" prot="public" virt="non-virtual"><scope>Logarithmic_mesh</scope><name>d2rx</name></member>
+      <member refid="classLogarithmic__mesh_1a3c826046da6a41e033601beb8e168b25" prot="public" virt="non-virtual"><scope>Logarithmic_mesh</scope><name>d2rx</name></member>
+      <member refid="classLogarithmic__mesh_1a64d9c9c747ec8ca4c10acee1578e6941" prot="public" virt="non-virtual"><scope>Logarithmic_mesh</scope><name>d2rx_back</name></member>
+      <member refid="classLogarithmic__mesh_1a8f3f91f0518d5b73ce2e671c0034d332" prot="public" virt="non-virtual"><scope>Logarithmic_mesh</scope><name>d2rx_begin</name></member>
+      <member refid="classLogarithmic__mesh_1a6b705faaa15bc095d7067e60a4711e78" prot="public" virt="non-virtual"><scope>Logarithmic_mesh</scope><name>d2rx_begin</name></member>
+      <member refid="classLogarithmic__mesh_1a69b0100df72ccf4fde5ed24af2b74a0a" prot="public" virt="non-virtual"><scope>Logarithmic_mesh</scope><name>d2rx_end</name></member>
+      <member refid="classLogarithmic__mesh_1a5bcaca583fe32e0e1b709185782a1dd6" prot="public" virt="non-virtual"><scope>Logarithmic_mesh</scope><name>d2rx_end</name></member>
+      <member refid="classLogarithmic__mesh_1a9f7191a27876aac22e587ba63ae8bfe0" prot="private" virt="non-virtual"><scope>Logarithmic_mesh</scope><name>d2rx_p</name></member>
+      <member refid="classLogarithmic__mesh_1ad2df2e0b175582588cb23809fcc997f8" prot="public" virt="non-virtual"><scope>Logarithmic_mesh</scope><name>d2rx_rbegin</name></member>
+      <member refid="classLogarithmic__mesh_1a91482f8e59cdfa77da3a3b0588ea92eb" prot="public" virt="non-virtual"><scope>Logarithmic_mesh</scope><name>d2rx_rbegin</name></member>
+      <member refid="classLogarithmic__mesh_1abc62a8a66ad8f506022d3e06a3e8dae3" prot="public" virt="non-virtual"><scope>Logarithmic_mesh</scope><name>d2rx_rend</name></member>
+      <member refid="classLogarithmic__mesh_1ad65e147c207fbefafe113f7794a66369" prot="public" virt="non-virtual"><scope>Logarithmic_mesh</scope><name>d2rx_rend</name></member>
+      <member refid="classLogarithmic__mesh_1ad834c8d800c01f55ac09a48b22fb3b90" prot="public" virt="non-virtual"><scope>Logarithmic_mesh</scope><name>drx</name></member>
+      <member refid="classLogarithmic__mesh_1a5156ee23eb1227a7b8b29f4712d72d98" prot="public" virt="non-virtual"><scope>Logarithmic_mesh</scope><name>drx</name></member>
+      <member refid="classLogarithmic__mesh_1a27cd2ce09412c90a42cbb106b19ae9e0" prot="public" virt="non-virtual"><scope>Logarithmic_mesh</scope><name>drx_back</name></member>
+      <member refid="classLogarithmic__mesh_1a9c83fa18d7a0c6788a82de3ddf787029" prot="public" virt="non-virtual"><scope>Logarithmic_mesh</scope><name>drx_begin</name></member>
+      <member refid="classLogarithmic__mesh_1a14c43e17df3021445e07d8bc46ee16ce" prot="public" virt="non-virtual"><scope>Logarithmic_mesh</scope><name>drx_begin</name></member>
+      <member refid="classLogarithmic__mesh_1a59650fd627d66110e10b765bafd1a783" prot="public" virt="non-virtual"><scope>Logarithmic_mesh</scope><name>drx_end</name></member>
+      <member refid="classLogarithmic__mesh_1aefda9d8ccbb160a03b7f2b279989c52d" prot="public" virt="non-virtual"><scope>Logarithmic_mesh</scope><name>drx_end</name></member>
+      <member refid="classLogarithmic__mesh_1a0ef05af6c4725753fe2edc24730adc32" prot="private" virt="non-virtual"><scope>Logarithmic_mesh</scope><name>drx_p</name></member>
+      <member refid="classLogarithmic__mesh_1a27bab2e9d3844cb0a034cd15fa8569dd" prot="public" virt="non-virtual"><scope>Logarithmic_mesh</scope><name>drx_rbegin</name></member>
+      <member refid="classLogarithmic__mesh_1ab0808302408a51daa9b6c730838a6147" prot="public" virt="non-virtual"><scope>Logarithmic_mesh</scope><name>drx_rbegin</name></member>
+      <member refid="classLogarithmic__mesh_1a512db0f06749fe7b30920f4fee993884" prot="public" virt="non-virtual"><scope>Logarithmic_mesh</scope><name>drx_rend</name></member>
+      <member refid="classLogarithmic__mesh_1a90a93f0cf6426ee1090e82c5a8f7ca94" prot="public" virt="non-virtual"><scope>Logarithmic_mesh</scope><name>drx_rend</name></member>
+      <member refid="classMesh_1a8c1ea2e3a966ae8f9f23d68951f47310" prot="public" virt="non-virtual"><scope>Logarithmic_mesh</scope><name>dx</name></member>
+      <member refid="classMesh_1a4d10f1dc561d1b84a3846e0a8ed84591" prot="protected" virt="non-virtual"><scope>Logarithmic_mesh</scope><name>dx_p</name></member>
+      <member refid="classLogarithmic__mesh_1ac5bcc83573645af1376e40f8519c146e" prot="public" virt="virtual"><scope>Logarithmic_mesh</scope><name>integrate</name></member>
+      <member refid="classLogarithmic__mesh_1aee51394ad007e44c9b8eb8bde21c3e63" prot="public" virt="virtual"><scope>Logarithmic_mesh</scope><name>integrate_simpson</name></member>
+      <member refid="classLogarithmic__mesh_1a71b95d9f26d43566ad2411a66a032d2c" prot="public" virt="non-virtual"><scope>Logarithmic_mesh</scope><name>Logarithmic_mesh</name></member>
+      <member refid="classLogarithmic__mesh_1ad7a04fec84f43113d6baa0805e91160e" prot="public" virt="non-virtual"><scope>Logarithmic_mesh</scope><name>Logarithmic_mesh</name></member>
+      <member refid="classLogarithmic__mesh_1a534fb490dd099ab814dbdbc63baa932e" prot="public" virt="non-virtual"><scope>Logarithmic_mesh</scope><name>Logarithmic_mesh</name></member>
+      <member refid="classLogarithmic__mesh_1a58fa08356267fb71b343f2682dae90ff" prot="public" virt="non-virtual"><scope>Logarithmic_mesh</scope><name>Logarithmic_mesh</name></member>
+      <member refid="classMesh_1a2af137f1571af89172b9c102302c416b" prot="public" virt="non-virtual"><scope>Logarithmic_mesh</scope><name>Mesh</name></member>
+      <member refid="classMesh_1a182bab27228d1b69ad4352d896b36225" prot="public" virt="non-virtual"><scope>Logarithmic_mesh</scope><name>Mesh</name></member>
+      <member refid="classMesh_1a9320a207f0acff24ba80b6af1cc3d5aa" prot="public" virt="non-virtual"><scope>Logarithmic_mesh</scope><name>Mesh</name></member>
+      <member refid="classMesh_1ab5b9b800768354b0489f2cdc83c0c991" prot="public" virt="non-virtual"><scope>Logarithmic_mesh</scope><name>Mesh</name></member>
+      <member refid="classMesh_1a0b900c5d80b72b8aeedd9c3049336110" prot="public" virt="non-virtual"><scope>Logarithmic_mesh</scope><name>Mesh</name></member>
+      <member refid="classMesh_1a60ce7ae6427f3d28a13871b18f087a18" prot="public" virt="non-virtual"><scope>Logarithmic_mesh</scope><name>Mesh</name></member>
+      <member refid="classLogarithmic__mesh_1a27f03ff539a7532a6bc299e3d241cadc" prot="public" virt="non-virtual"><scope>Logarithmic_mesh</scope><name>operator=</name></member>
+      <member refid="classLogarithmic__mesh_1aafc21aac43269fbddbd0309eb0ab59b5" prot="public" virt="non-virtual"><scope>Logarithmic_mesh</scope><name>operator=</name></member>
+      <member refid="classMesh_1af06ecafd1b7cf16c687666dbfce53657" prot="public" virt="non-virtual" ambiguityscope="Mesh::"><scope>Logarithmic_mesh</scope><name>operator=</name></member>
+      <member refid="classMesh_1ad79a428470d24816a0a3bfff72d5231d" prot="public" virt="non-virtual" ambiguityscope="Mesh::"><scope>Logarithmic_mesh</scope><name>operator=</name></member>
+      <member refid="classLogarithmic__mesh_1aa56edcfcd4a9290b142fed5dd92b35a7" prot="public" virt="non-virtual"><scope>Logarithmic_mesh</scope><name>r</name></member>
+      <member refid="classLogarithmic__mesh_1a90e0361a49bae6f1d9f0b40326322d2b" prot="public" virt="non-virtual"><scope>Logarithmic_mesh</scope><name>r2</name></member>
+      <member refid="classLogarithmic__mesh_1a054b66b1f8776c35e2d34b651ffd526f" prot="public" virt="non-virtual"><scope>Logarithmic_mesh</scope><name>r2_back</name></member>
+      <member refid="classLogarithmic__mesh_1a4ef273ae1778bcc9dc9bbe2ac87e750f" prot="public" virt="non-virtual"><scope>Logarithmic_mesh</scope><name>r2_begin</name></member>
+      <member refid="classLogarithmic__mesh_1a20be5de0c0e2f193477e69289ea99c36" prot="public" virt="non-virtual"><scope>Logarithmic_mesh</scope><name>r2_begin</name></member>
+      <member refid="classLogarithmic__mesh_1a2bf6a309544379aa84a76c1ca10e9b0b" prot="public" virt="non-virtual"><scope>Logarithmic_mesh</scope><name>r2_end</name></member>
+      <member refid="classLogarithmic__mesh_1a2a519d9b48b9e35388981d7f0108a955" prot="public" virt="non-virtual"><scope>Logarithmic_mesh</scope><name>r2_end</name></member>
+      <member refid="classLogarithmic__mesh_1a1b6461d4e67b2ff71c393cb2a9bec32e" prot="public" virt="non-virtual"><scope>Logarithmic_mesh</scope><name>r_back</name></member>
+      <member refid="classLogarithmic__mesh_1a422984abc64c453b4ae303287f41f4dd" prot="public" virt="non-virtual"><scope>Logarithmic_mesh</scope><name>r_begin</name></member>
+      <member refid="classLogarithmic__mesh_1a69bf855df5647d75335d4fa4771cc254" prot="public" virt="non-virtual"><scope>Logarithmic_mesh</scope><name>r_begin</name></member>
+      <member refid="classLogarithmic__mesh_1a310cb208ec4d9962b792c31c36aac67b" prot="public" virt="non-virtual"><scope>Logarithmic_mesh</scope><name>r_end</name></member>
+      <member refid="classLogarithmic__mesh_1a56a6cc6a717c880a8db3ebb163eb6e7d" prot="public" virt="non-virtual"><scope>Logarithmic_mesh</scope><name>r_end</name></member>
+      <member refid="classLogarithmic__mesh_1af7eccb256d1fefb834571b72c2a63847" prot="public" virt="non-virtual"><scope>Logarithmic_mesh</scope><name>r_rbegin</name></member>
+      <member refid="classLogarithmic__mesh_1ad3eaf8d98a84f6f577f0d9e939ec48e0" prot="public" virt="non-virtual"><scope>Logarithmic_mesh</scope><name>r_rbegin</name></member>
+      <member refid="classMesh_1a28e75ba3042956e93ed2fba045b32b39" prot="public" virt="non-virtual"><scope>Logarithmic_mesh</scope><name>size</name></member>
+      <member refid="classMesh_1ada10825606a4e6491754dd748b89b208" prot="public" virt="non-virtual"><scope>Logarithmic_mesh</scope><name>x</name></member>
+      <member refid="classMesh_1adde1322a4f7b1e555cac0ee49f114f02" prot="public" virt="non-virtual"><scope>Logarithmic_mesh</scope><name>x2</name></member>
+      <member refid="classMesh_1a57f0dfaca412445578fd97dbd9474a1c" prot="public" virt="non-virtual"><scope>Logarithmic_mesh</scope><name>x2_back</name></member>
+      <member refid="classMesh_1ab3351992e91f2507b4bfc7215d765edd" prot="public" virt="non-virtual"><scope>Logarithmic_mesh</scope><name>x2_begin</name></member>
+      <member refid="classMesh_1a79f11b4417c29635ed48d5bdeed633e8" prot="public" virt="non-virtual"><scope>Logarithmic_mesh</scope><name>x2_begin</name></member>
+      <member refid="classMesh_1a8ba9b8c4f48005c9ed04aeaf38117fd1" prot="public" virt="non-virtual"><scope>Logarithmic_mesh</scope><name>x2_end</name></member>
+      <member refid="classMesh_1a8d3e89e9df4ed82cd4ac8aada66693f4" prot="public" virt="non-virtual"><scope>Logarithmic_mesh</scope><name>x2_end</name></member>
+      <member refid="classMesh_1a759618c365642825fd788845e2c46084" prot="protected" virt="non-virtual"><scope>Logarithmic_mesh</scope><name>x2_p</name></member>
+      <member refid="classMesh_1a054ad7ea2cacfceb5b9993f014d7e3fd" prot="public" virt="non-virtual"><scope>Logarithmic_mesh</scope><name>x2_rbegin</name></member>
+      <member refid="classMesh_1a4e12406f9337939435c08c0b96af02fd" prot="public" virt="non-virtual"><scope>Logarithmic_mesh</scope><name>x2_rbegin</name></member>
+      <member refid="classMesh_1a8b6df8cadda182164e4d9ad64aa58270" prot="public" virt="non-virtual"><scope>Logarithmic_mesh</scope><name>x2_rend</name></member>
+      <member refid="classMesh_1a7eaa0d51400f36187b6e04420562bf27" prot="public" virt="non-virtual"><scope>Logarithmic_mesh</scope><name>x2_rend</name></member>
+      <member refid="classMesh_1a1b19461734f11611f1a2fbec26f29618" prot="public" virt="non-virtual"><scope>Logarithmic_mesh</scope><name>x_back</name></member>
+      <member refid="classMesh_1a2b09978ea07e2553e1fdb48e686993b1" prot="public" virt="non-virtual"><scope>Logarithmic_mesh</scope><name>x_begin</name></member>
+      <member refid="classMesh_1aaad6ca89f9642e0f253ee1f1c0ed72a5" prot="public" virt="non-virtual"><scope>Logarithmic_mesh</scope><name>x_begin</name></member>
+      <member refid="classMesh_1a88667b687cbf95f5edef74e7bb4196a4" prot="public" virt="non-virtual"><scope>Logarithmic_mesh</scope><name>x_end</name></member>
+      <member refid="classMesh_1aeea40873cdde75ba0f3875d08cfb8ff3" prot="public" virt="non-virtual"><scope>Logarithmic_mesh</scope><name>x_end</name></member>
+      <member refid="classMesh_1a515b65efe4fbef9b058b9fb7c40ebc50" prot="protected" virt="non-virtual"><scope>Logarithmic_mesh</scope><name>x_p</name></member>
+      <member refid="classMesh_1a06b8a46d4ecea97224775e53f39a2ce1" prot="public" virt="non-virtual"><scope>Logarithmic_mesh</scope><name>x_rbegin</name></member>
+      <member refid="classMesh_1aff4a2f0c46b09ae3c7bd53ef449e1b31" prot="public" virt="non-virtual"><scope>Logarithmic_mesh</scope><name>x_rbegin</name></member>
+      <member refid="classMesh_1adaa5c8c204c77b144ed4549be280fe4d" prot="public" virt="non-virtual"><scope>Logarithmic_mesh</scope><name>x_rend</name></member>
+      <member refid="classMesh_1a99b27d9fa2db350882110ef4cbec8cde" prot="public" virt="non-virtual"><scope>Logarithmic_mesh</scope><name>x_rend</name></member>
+      <member refid="classLogarithmic__mesh_1acf14e111994a586eabcc6d5ebd1d253e" prot="public" virt="non-virtual"><scope>Logarithmic_mesh</scope><name>~Logarithmic_mesh</name></member>
+      <member refid="classMesh_1a651347a4a847da7d491641c66c7904c5" prot="public" virt="virtual"><scope>Logarithmic_mesh</scope><name>~Mesh</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,181 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.20" xml:lang="en-US">
+  <compounddef id="classBrillouin__zone__integrator" kind="class" language="C++" prot="public">
+    <compoundname>Brillouin_zone_integrator</compoundname>
+    <derivedcompoundref refid="classBrillouin__sampler" prot="public" virt="non-virtual">Brillouin_sampler</derivedcompoundref>
+      <sectiondef kind="protected-func">
+      <memberdef kind="function" id="classBrillouin__zone__integrator_1a7f770e53b9e1699f0065203ae20e7319" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Brillouin_zone_integrator::Brillouin_zone_integrator</definition>
+        <argsstring>()=default</argsstring>
+        <name>Brillouin_zone_integrator</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/brillouin_zone_integration.h" line="15" column="5"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classBrillouin__zone__integrator_1adf83dfa7950b7b71be2a13f981060386" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Brillouin_zone_integrator::Brillouin_zone_integrator</definition>
+        <argsstring>(const Brillouin_zone_integrator &amp;)=default</argsstring>
+        <name>Brillouin_zone_integrator</name>
+        <param>
+          <type>const <ref refid="classBrillouin__zone__integrator" kindref="compound">Brillouin_zone_integrator</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/brillouin_zone_integration.h" line="17" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classBrillouin__zone__integrator_1aff93d40c825381047fc9efe0ad04ad48" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Brillouin_zone_integrator::Brillouin_zone_integrator</definition>
+        <argsstring>(Brillouin_zone_integrator &amp;&amp;)=default</argsstring>
+        <name>Brillouin_zone_integrator</name>
+        <param>
+          <type><ref refid="classBrillouin__zone__integrator" kindref="compound">Brillouin_zone_integrator</ref> &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/brillouin_zone_integration.h" line="18" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classBrillouin__zone__integrator_1a1684ee4d784984a8d8f9750e4530d029" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type></type>
+        <definition>virtual Brillouin_zone_integrator::~Brillouin_zone_integrator</definition>
+        <argsstring>()=default</argsstring>
+        <name>~Brillouin_zone_integrator</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/brillouin_zone_integration.h" line="20" column="13"/>
+      </memberdef>
+      <memberdef kind="function" id="classBrillouin__zone__integrator_1a3e972edd2a152675ec74fd9d5856b8aa" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classBrillouin__zone__integrator" kindref="compound">Brillouin_zone_integrator</ref> &amp;</type>
+        <definition>Brillouin_zone_integrator&amp; Brillouin_zone_integrator::operator=</definition>
+        <argsstring>(const Brillouin_zone_integrator &amp;)=default</argsstring>
+        <name>operator=</name>
+        <param>
+          <type>const <ref refid="classBrillouin__zone__integrator" kindref="compound">Brillouin_zone_integrator</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/brillouin_zone_integration.h" line="22" column="31"/>
+      </memberdef>
+      <memberdef kind="function" id="classBrillouin__zone__integrator_1adac55b04ec1c552efb60c1ad6a1e2152" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classBrillouin__zone__integrator" kindref="compound">Brillouin_zone_integrator</ref> &amp;</type>
+        <definition>Brillouin_zone_integrator&amp; Brillouin_zone_integrator::operator=</definition>
+        <argsstring>(Brillouin_zone_integrator &amp;&amp;)=default</argsstring>
+        <name>operator=</name>
+        <param>
+          <type><ref refid="classBrillouin__zone__integrator" kindref="compound">Brillouin_zone_integrator</ref> &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/brillouin_zone_integration.h" line="23" column="31"/>
+      </memberdef>
+      <memberdef kind="function" id="classBrillouin__zone__integrator_1ac7ef8c2242c25e0e9e982919fac2020c" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
+        <type>double</type>
+        <definition>virtual double Brillouin_zone_integrator::dos</definition>
+        <argsstring>(const double E) const</argsstring>
+        <name>dos</name>
+        <reimplementedby refid="classBrillouin__sampler_1ac583b178a091dd13ff816f3ee3a4ba41">dos</reimplementedby>
+        <param>
+          <type>const double</type>
+          <declname>E</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/brillouin_zone_integration.h" line="25" column="20" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/brillouin_zone_integration.h" bodystart="25" bodyend="25"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="6">
+        <label>Lorentzian_sampler</label>
+        <link refid="classLorentzian__sampler"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>Brillouin_zone_integrator</label>
+        <link refid="classBrillouin__zone__integrator"/>
+      </node>
+      <node id="3">
+        <label>ColdSmearing_sampler</label>
+        <link refid="classColdSmearing__sampler"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="7">
+        <label>MethfesselPaxton_sampler</label>
+        <link refid="classMethfesselPaxton__sampler"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>Brillouin_sampler</label>
+        <link refid="classBrillouin__sampler"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="8">
+        <label>Simple_sampler</label>
+        <link refid="classSimple__sampler"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>Fermi_sampler</label>
+        <link refid="classFermi__sampler"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>Gaussian_sampler</label>
+        <link refid="classGaussian__sampler"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/brillouin_zone_integration.h" line="12" column="1" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/brillouin_zone_integration.h" bodystart="13" bodyend="26"/>
+    <listofallmembers>
+      <member refid="classBrillouin__zone__integrator_1a7f770e53b9e1699f0065203ae20e7319" prot="protected" virt="non-virtual"><scope>Brillouin_zone_integrator</scope><name>Brillouin_zone_integrator</name></member>
+      <member refid="classBrillouin__zone__integrator_1adf83dfa7950b7b71be2a13f981060386" prot="public" virt="non-virtual"><scope>Brillouin_zone_integrator</scope><name>Brillouin_zone_integrator</name></member>
+      <member refid="classBrillouin__zone__integrator_1aff93d40c825381047fc9efe0ad04ad48" prot="public" virt="non-virtual"><scope>Brillouin_zone_integrator</scope><name>Brillouin_zone_integrator</name></member>
+      <member refid="classBrillouin__zone__integrator_1ac7ef8c2242c25e0e9e982919fac2020c" prot="public" virt="virtual"><scope>Brillouin_zone_integrator</scope><name>dos</name></member>
+      <member refid="classBrillouin__zone__integrator_1a3e972edd2a152675ec74fd9d5856b8aa" prot="public" virt="non-virtual"><scope>Brillouin_zone_integrator</scope><name>operator=</name></member>
+      <member refid="classBrillouin__zone__integrator_1adac55b04ec1c552efb60c1ad6a1e2152" prot="public" virt="non-virtual"><scope>Brillouin_zone_integrator</scope><name>operator=</name></member>
+      <member refid="classBrillouin__zone__integrator_1a1684ee4d784984a8d8f9750e4530d029" prot="public" virt="virtual"><scope>Brillouin_zone_integrator</scope><name>~Brillouin_zone_integrator</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

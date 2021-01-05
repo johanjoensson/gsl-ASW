@@ -1,0 +1,349 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.20" xml:lang="en-US">
+  <compounddef id="classNumerov__solver" kind="class" language="C++" prot="public">
+    <compoundname>Numerov_solver</compoundname>
+    <includes refid="numerov__solver_8h" local="no">numerov_solver.h</includes>
+      <sectiondef kind="private-func">
+      <memberdef kind="function" id="classNumerov__solver_1ae9435d8e69bfecaebd807f284520b507" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class Iter_res</type>
+          </param>
+          <param>
+            <type>class Iter_g</type>
+          </param>
+          <param>
+            <type>class Iter_s</type>
+          </param>
+          <param>
+            <type>class Iter_init</type>
+          </param>
+        </templateparamlist>
+        <type>Iter_res</type>
+        <definition>Iter_res Numerov_solver::solve_direction</definition>
+        <argsstring>(Iter_res res_start, Iter_res res_end, Iter_init init_start, Iter_init init_end, Iter_g g_start, Iter_s s_start)</argsstring>
+        <name>solve_direction</name>
+        <param>
+          <type>Iter_res</type>
+          <declname>res_start</declname>
+        </param>
+        <param>
+          <type>Iter_res</type>
+          <declname>res_end</declname>
+        </param>
+        <param>
+          <type>Iter_init</type>
+          <declname>init_start</declname>
+        </param>
+        <param>
+          <type>Iter_init</type>
+          <declname>init_end</declname>
+        </param>
+        <param>
+          <type>Iter_g</type>
+          <declname>g_start</declname>
+        </param>
+        <param>
+          <type>Iter_s</type>
+          <declname>s_start</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Find the point where g(x_i) = 0 (classical inversion point).<linebreak/>
+ \t__Iter_res__ - iterator to result container (e.g. std::vector)<linebreak/>
+ \t__Iter_g__ - iterator to g container (e.g. std::vector)<linebreak/>
+ Input:<linebreak/>
+ \t__res_start__ - Iterator pointing to the first element of the result container.<linebreak/>
+ \t__res_end__ - Iterator pointing to the element one past the last element of the result container.<linebreak/>
+\t__g_start__ - Iterator pointing to the first element of the g container </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/numerov_solver.h" line="28" column="10" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/numerov_solver.h" bodystart="28" bodyend="71"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classNumerov__solver_1a6bef66a191dde203ac8fe9469a908712" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Numerov_solver::Numerov_solver</definition>
+        <argsstring>()=default</argsstring>
+        <name>Numerov_solver</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/numerov_solver.h" line="73" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="classNumerov__solver_1a65b9b13d9163fe41de27069f420d8ee3" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class Iter_res</type>
+          </param>
+          <param>
+            <type>class Iter_g</type>
+          </param>
+          <param>
+            <type>class Iter_s</type>
+          </param>
+          <param>
+            <type>class Iter_left_init</type>
+          </param>
+          <param>
+            <type>class Iter_right_init</type>
+          </param>
+          <param>
+            <type>class T</type>
+            <defval>double</defval>
+          </param>
+        </templateparamlist>
+        <type>Iter_res</type>
+        <definition>Iter_res Numerov_solver::solve</definition>
+        <argsstring>(Iter_res res_start, Iter_res res_end, Iter_g g_start, Iter_g g_end, Iter_s s_start, Iter_s s_end, Iter_left_init left_start, Iter_left_init left_end, Iter_right_init right_start, Iter_right_init right_end, Iter_res inv)</argsstring>
+        <name>solve</name>
+        <param>
+          <type>Iter_res</type>
+          <declname>res_start</declname>
+        </param>
+        <param>
+          <type>Iter_res</type>
+          <declname>res_end</declname>
+        </param>
+        <param>
+          <type>Iter_g</type>
+          <declname>g_start</declname>
+        </param>
+        <param>
+          <type>Iter_g</type>
+          <declname>g_end</declname>
+        </param>
+        <param>
+          <type>Iter_s</type>
+          <declname>s_start</declname>
+        </param>
+        <param>
+          <type>Iter_s</type>
+          <declname>s_end</declname>
+        </param>
+        <param>
+          <type>Iter_left_init</type>
+          <declname>left_start</declname>
+        </param>
+        <param>
+          <type>Iter_left_init</type>
+          <declname>left_end</declname>
+        </param>
+        <param>
+          <type>Iter_right_init</type>
+          <declname>right_start</declname>
+        </param>
+        <param>
+          <type>Iter_right_init</type>
+          <declname>right_end</declname>
+        </param>
+        <param>
+          <type>Iter_res</type>
+          <declname>inv</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Use Numerov&apos;s algorithm to solve the differential equation. \t__Iter_res__ - iterator to result container (e.g. std::vector)<linebreak/>
+ \t__Iter_g__ - iterator to g container (e.g. std::vector)<linebreak/>
+ Input:<linebreak/>
+ \t__res_start__ - iterator to the first element in the result container<linebreak/>
+ \t__res_end__ - iterator one step part the last element in the result container<linebreak/>
+ \t__g_start__ - iterator to the start of the g container<linebreak/>
+ \t__g_end__ - iterator to one step past the last element of the g container<linebreak/>
+ \t__s_start__ - iterator to the start of the s container<linebreak/>
+ \t__s_end__ - iterator to one step past the last element of the s container<linebreak/>
+ \t__left_start__ - iterator to the start of the container containing the left hand initial conditions<linebreak/>
+ \t__left_end__ - iterator to one step past the last element of the left boundary conditions container<linebreak/>
+ \t__right_start__ - iterator to the start of the container containing the right hand initial conditions<linebreak/>
+ \t__right_end__ - iterator to one step past the last element of the right boundary conditions container<linebreak/>
+Returns:<linebreak/>
+\t Iterator to the matching point.<linebreak/>
+NOTE : The elements of g must be multiplied with the step size squared (h^2). </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/numerov_solver.h" line="95" column="10" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/numerov_solver.h" bodystart="95" bodyend="132"/>
+      </memberdef>
+      <memberdef kind="function" id="classNumerov__solver_1ad36887819ca68c3ea9033a065c627c6d" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class Iter_res</type>
+          </param>
+          <param>
+            <type>class Iter_g</type>
+          </param>
+          <param>
+            <type>class Iter_s</type>
+          </param>
+          <param>
+            <type>class Iter_left_init</type>
+          </param>
+          <param>
+            <type>class Iter_right_init</type>
+          </param>
+          <param>
+            <type>class T</type>
+            <defval>double</defval>
+          </param>
+        </templateparamlist>
+        <type>Iter_res</type>
+        <definition>Iter_res Numerov_solver::solve</definition>
+        <argsstring>(Iter_res res_start, Iter_res res_end, Iter_g g_start, Iter_g g_end, Iter_s s_start, Iter_s s_end, Iter_left_init left_start, Iter_left_init left_end)</argsstring>
+        <name>solve</name>
+        <param>
+          <type>Iter_res</type>
+          <declname>res_start</declname>
+        </param>
+        <param>
+          <type>Iter_res</type>
+          <declname>res_end</declname>
+        </param>
+        <param>
+          <type>Iter_g</type>
+          <declname>g_start</declname>
+        </param>
+        <param>
+          <type>Iter_g</type>
+          <declname>g_end</declname>
+        </param>
+        <param>
+          <type>Iter_s</type>
+          <declname>s_start</declname>
+        </param>
+        <param>
+          <type>Iter_s</type>
+          <declname>s_end</declname>
+        </param>
+        <param>
+          <type>Iter_left_init</type>
+          <declname>left_start</declname>
+        </param>
+        <param>
+          <type>Iter_left_init</type>
+          <declname>left_end</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Solve in one direction only. Overloaded version of solve. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/numerov_solver.h" line="140" column="10" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/numerov_solver.h" bodystart="140" bodyend="146"/>
+      </memberdef>
+      <memberdef kind="function" id="classNumerov__solver_1aa1937256e243d0a408cb71928d857713" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class Iter_res</type>
+          </param>
+          <param>
+            <type>class Iter_g</type>
+          </param>
+          <param>
+            <type>class Iter_s</type>
+          </param>
+          <param>
+            <type>class T</type>
+            <defval>double</defval>
+          </param>
+        </templateparamlist>
+        <type>int</type>
+        <definition>int Numerov_solver::derivative_diff</definition>
+        <argsstring>(Iter_res res_start, Iter_g res_end, Iter_res inv, Iter_g g_start, Iter_s s_start, double tol=1e-6)</argsstring>
+        <name>derivative_diff</name>
+        <param>
+          <type>Iter_res</type>
+          <declname>res_start</declname>
+        </param>
+        <param>
+          <type>Iter_g</type>
+          <declname>res_end</declname>
+        </param>
+        <param>
+          <type>Iter_res</type>
+          <declname>inv</declname>
+        </param>
+        <param>
+          <type>Iter_g</type>
+          <declname>g_start</declname>
+        </param>
+        <param>
+          <type>Iter_s</type>
+          <declname>s_start</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>tol</declname>
+          <defval>1e-6</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Use Numerov&apos;s algorithm to estimate the difference in derivatives at the matching point. \t__Iter_res__ - iterator to result container (e.g. std::vector)<linebreak/>
+ \t__Iter_g__ - iterator to g container (e.g. std::vector)<linebreak/>
+ \t__Iter_s__ - iterator to s container (e.g. std::vector)<linebreak/>
+ \t__T__ - Class representing numerical values (e.g. double)<linebreak/>
+ Input:<linebreak/>
+ \t__res_start__ - iterator to the first element in the result container<linebreak/>
+ \t__res_end__ - iterator one step part the last element in the result container<linebreak/>
+ \t__inv__ - iterator to result at inversion point<linebreak/>
+ \t__g_start__ - iterator to the start of the g container<linebreak/>
+ \t__s_start__ - iterator to the start of the s container<linebreak/>
+Returns:<linebreak/>
+\t Approximation of sign(y&apos;_R(x_inv) - y&apos;_L(x_inv)), sign of the difference in derivatives.<linebreak/>
+NOTE : The elements of g must be multiplied with the step size squared (h^2). </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/numerov_solver.h" line="165" column="5" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/numerov_solver.h" bodystart="165" bodyend="184"/>
+      </memberdef>
+      <memberdef kind="function" id="classNumerov__solver_1aeae9b9ffa364c9e7eb86f5444f839a33" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class Iter_res</type>
+          </param>
+        </templateparamlist>
+        <type>int</type>
+        <definition>int Numerov_solver::count_nodes</definition>
+        <argsstring>(Iter_res start, Iter_res end)</argsstring>
+        <name>count_nodes</name>
+        <param>
+          <type>Iter_res</type>
+          <declname>start</declname>
+        </param>
+        <param>
+          <type>Iter_res</type>
+          <declname>end</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/numerov_solver.h" line="187" column="5" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/numerov_solver.h" bodystart="187" bodyend="202"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para>A class for solving differential equations using the Numerov method </para>
+    </detaileddescription>
+    <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/numerov_solver.h" line="16" column="1" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/numerov_solver.h" bodystart="16" bodyend="204"/>
+    <listofallmembers>
+      <member refid="classNumerov__solver_1aeae9b9ffa364c9e7eb86f5444f839a33" prot="public" virt="non-virtual"><scope>Numerov_solver</scope><name>count_nodes</name></member>
+      <member refid="classNumerov__solver_1aa1937256e243d0a408cb71928d857713" prot="public" virt="non-virtual"><scope>Numerov_solver</scope><name>derivative_diff</name></member>
+      <member refid="classNumerov__solver_1a6bef66a191dde203ac8fe9469a908712" prot="public" virt="non-virtual"><scope>Numerov_solver</scope><name>Numerov_solver</name></member>
+      <member refid="classNumerov__solver_1a65b9b13d9163fe41de27069f420d8ee3" prot="public" virt="non-virtual"><scope>Numerov_solver</scope><name>solve</name></member>
+      <member refid="classNumerov__solver_1ad36887819ca68c3ea9033a065c627c6d" prot="public" virt="non-virtual"><scope>Numerov_solver</scope><name>solve</name></member>
+      <member refid="classNumerov__solver_1ae9435d8e69bfecaebd807f284520b507" prot="private" virt="non-virtual"><scope>Numerov_solver</scope><name>solve_direction</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,515 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.20" xml:lang="en-US">
+  <compounddef id="classDirac__Equation" kind="class" language="C++" prot="public">
+    <compoundname>Dirac_Equation</compoundname>
+    <derivedcompoundref refid="classRadial__Dirac__Equation" prot="public" virt="non-virtual">Radial_Dirac_Equation</derivedcompoundref>
+      <sectiondef kind="protected-attrib">
+      <memberdef kind="variable" id="classDirac__Equation_1af41f7a8ba5e7a3f9f6471f3420743630" prot="protected" static="no" mutable="no">
+        <type>double</type>
+        <definition>double Dirac_Equation::energy_m</definition>
+        <argsstring></argsstring>
+        <name>energy_m</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/dirac.h" line="17" column="12" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/dirac.h" bodystart="17" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classDirac__Equation_1aeff140cf472e5123f5d29df703b170d0" prot="protected" static="no" mutable="no">
+        <type>double</type>
+        <definition>double Dirac_Equation::e_min_m</definition>
+        <argsstring></argsstring>
+        <name>e_min_m</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/dirac.h" line="17" column="21" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/dirac.h" bodystart="17" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classDirac__Equation_1af2041b9ced54043c8af640165a320ad1" prot="protected" static="no" mutable="no">
+        <type>double</type>
+        <definition>double Dirac_Equation::e_max_m</definition>
+        <argsstring></argsstring>
+        <name>e_max_m</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/dirac.h" line="17" column="29" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/dirac.h" bodystart="17" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classDirac__Equation_1a5286bf65ce7e21164e50011ec5f3f3fc" prot="protected" static="no" mutable="no">
+        <type>std::vector&lt; double &gt;</type>
+        <definition>std::vector&lt;double&gt; Dirac_Equation::v_m</definition>
+        <argsstring></argsstring>
+        <name>v_m</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/dirac.h" line="18" column="17" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/dirac.h" bodystart="18" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classDirac__Equation_1a0ed3134996cb0d3dd9efc3f2071cc12b" prot="protected" static="no" mutable="no">
+        <type>std::array&lt; std::vector&lt; double &gt;, 4 &gt; psi_m std::array&lt; std::vector&lt; double &gt;, 4 &gt;</type>
+        <definition>std::array&lt;std::vector&lt;double&gt;, 4&gt; psi_m std::array&lt;std::vector&lt;double&gt;, 4&gt; Dirac_Equation::l_init_m</definition>
+        <argsstring></argsstring>
+        <name>l_init_m</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/dirac.h" line="20" column="15" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/dirac.h" bodystart="20" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classDirac__Equation_1ae66a369069f64a55fcf643201b95b80a" prot="protected" static="no" mutable="no">
+        <type>std::array&lt; std::vector&lt; double &gt;, 4 &gt; psi_m std::array&lt; std::vector&lt; double &gt;, 4 &gt;</type>
+        <definition>std::array&lt;std::vector&lt;double&gt;, 4&gt; psi_m std::array&lt;std::vector&lt;double&gt;, 4&gt; Dirac_Equation::r_init_m</definition>
+        <argsstring></argsstring>
+        <name>r_init_m</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/dirac.h" line="20" column="24" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/dirac.h" bodystart="20" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classDirac__Equation_1adeec323c701d465f6dd7bcc3cadff8d3" prot="protected" static="no" mutable="no">
+        <type>double</type>
+        <definition>double Dirac_Equation::tol_m</definition>
+        <argsstring></argsstring>
+        <name>tol_m</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/dirac.h" line="21" column="12" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/dirac.h" bodystart="21" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classDirac__Equation_1a966f96c7f22ea703859466c102d6de56" prot="private" static="no" mutable="no">
+        <type>const double</type>
+        <definition>const double Dirac_Equation::h_m</definition>
+        <argsstring></argsstring>
+        <name>h_m</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/dirac.h" line="47" column="18" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/dirac.h" bodystart="47" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="protected-func">
+      <memberdef kind="function" id="classDirac__Equation_1a41c7592a265abd9ab19f300db641d614" prot="protected" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class Iter_res</type>
+          </param>
+          <param>
+            <type>class Iter_v</type>
+          </param>
+        </templateparamlist>
+        <type>std::array&lt; Iter_res, 4 &gt;</type>
+        <definition>std::array&lt;Iter_res, 4&gt; Dirac_Equation::find_inversion_point</definition>
+        <argsstring>(std::array&lt; Iter_res, 4 &gt; res_start, std::array&lt; Iter_res, 4 &gt; res_end, Iter_v v_start)</argsstring>
+        <name>find_inversion_point</name>
+        <param>
+          <type>std::array&lt; Iter_res, 4 &gt;</type>
+          <declname>res_start</declname>
+        </param>
+        <param>
+          <type>std::array&lt; Iter_res, 4 &gt;</type>
+          <declname>res_end</declname>
+        </param>
+        <param>
+          <type>Iter_v</type>
+          <declname>v_start</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Find the point where E - v(X_i) = 0 (classical inversion point).<linebreak/>
+ \t__Iter_res__ - iterator to result container (e.g. std::vector)<linebreak/>
+ \t__Iter_v__ - iterator to v container (e.g. std::vector)<linebreak/>
+ Input:<linebreak/>
+ \t__res_start__ - Iterator pointing to the first element of the result container.<linebreak/>
+ \t__res_end__ - Iterator pointing to the element one past the last element of the result container.<linebreak/>
+\t__v_start__ - Iterator pointing to the first element of the g container </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/dirac.h" line="33" column="12" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/dirac.h" bodystart="33" bodyend="44"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classDirac__Equation_1a6f3f47cf48bc70fbc779e05b06823363" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>Dirac_Equation::Dirac_Equation</definition>
+        <argsstring>(const double e_min, const double e_max, const std::vector&lt; double &gt; &amp;v, const std::array&lt; std::vector&lt; double &gt;, 4 &gt; &amp;left_init, const std::array&lt; std::vector&lt; double &gt;, 4 &gt; &amp;right_init, const double h=1e-3, const double tol=1e-10)</argsstring>
+        <name>Dirac_Equation</name>
+        <param>
+          <type>const double</type>
+          <declname>e_min</declname>
+        </param>
+        <param>
+          <type>const double</type>
+          <declname>e_max</declname>
+        </param>
+        <param>
+          <type>const std::vector&lt; double &gt; &amp;</type>
+          <declname>v</declname>
+        </param>
+        <param>
+          <type>const std::array&lt; std::vector&lt; double &gt;, 4 &gt; &amp;</type>
+          <declname>left_init</declname>
+        </param>
+        <param>
+          <type>const std::array&lt; std::vector&lt; double &gt;, 4 &gt; &amp;</type>
+          <declname>right_init</declname>
+        </param>
+        <param>
+          <type>const double</type>
+          <declname>h</declname>
+          <defval>1e-3</defval>
+        </param>
+        <param>
+          <type>const double</type>
+          <declname>tol</declname>
+          <defval>1e-10</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/dirac.h" line="51" column="5" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/dirac.h" bodystart="51" bodyend="54"/>
+      </memberdef>
+      <memberdef kind="function" id="classDirac__Equation_1a9fb287690d3e71a7eff0ece3b74dffc6" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>Dirac_Equation::Dirac_Equation</definition>
+        <argsstring>(const double e_min, const double e_max, const std::vector&lt; double &gt; &amp;v, const std::array&lt; std::vector&lt; double &gt;, 4 &gt; &amp;left_init, const std::array&lt; std::vector&lt; double &gt;, 4 &gt; &amp;right_init, const Mesh &amp;mesh, const double tol=1e-10)</argsstring>
+        <name>Dirac_Equation</name>
+        <param>
+          <type>const double</type>
+          <declname>e_min</declname>
+        </param>
+        <param>
+          <type>const double</type>
+          <declname>e_max</declname>
+        </param>
+        <param>
+          <type>const std::vector&lt; double &gt; &amp;</type>
+          <declname>v</declname>
+        </param>
+        <param>
+          <type>const std::array&lt; std::vector&lt; double &gt;, 4 &gt; &amp;</type>
+          <declname>left_init</declname>
+        </param>
+        <param>
+          <type>const std::array&lt; std::vector&lt; double &gt;, 4 &gt; &amp;</type>
+          <declname>right_init</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classMesh" kindref="compound">Mesh</ref> &amp;</type>
+          <declname>mesh</declname>
+        </param>
+        <param>
+          <type>const double</type>
+          <declname>tol</declname>
+          <defval>1e-10</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/dirac.h" line="56" column="5" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/dirac.h" bodystart="56" bodyend="61"/>
+      </memberdef>
+      <memberdef kind="function" id="classDirac__Equation_1a26a597dded6d127a6263f01c1f97dbb2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Dirac_Equation::Dirac_Equation</definition>
+        <argsstring>(const Dirac_Equation &amp;)=default</argsstring>
+        <name>Dirac_Equation</name>
+        <param>
+          <type>const <ref refid="classDirac__Equation" kindref="compound">Dirac_Equation</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/dirac.h" line="64" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classDirac__Equation_1ab70a1032d64852858c8b9b21293e215c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Dirac_Equation::Dirac_Equation</definition>
+        <argsstring>(Dirac_Equation &amp;&amp;)=default</argsstring>
+        <name>Dirac_Equation</name>
+        <param>
+          <type><ref refid="classDirac__Equation" kindref="compound">Dirac_Equation</ref> &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/dirac.h" line="65" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classDirac__Equation_1ac8f6871f7bb3924a56b7fa07df476945" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type></type>
+        <definition>virtual Dirac_Equation::~Dirac_Equation</definition>
+        <argsstring>()=default</argsstring>
+        <name>~Dirac_Equation</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/dirac.h" line="66" column="13"/>
+      </memberdef>
+      <memberdef kind="function" id="classDirac__Equation_1ae16fec47f9f97a97185886ab0669782e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classDirac__Equation" kindref="compound">Dirac_Equation</ref> &amp;</type>
+        <definition>Dirac_Equation&amp; Dirac_Equation::operator=</definition>
+        <argsstring>(const Dirac_Equation &amp;)=default</argsstring>
+        <name>operator=</name>
+        <param>
+          <type>const <ref refid="classDirac__Equation" kindref="compound">Dirac_Equation</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/dirac.h" line="68" column="20"/>
+      </memberdef>
+      <memberdef kind="function" id="classDirac__Equation_1a049029888cfae1a947ecfad0c28d9c23" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classDirac__Equation" kindref="compound">Dirac_Equation</ref> &amp;</type>
+        <definition>Dirac_Equation&amp; Dirac_Equation::operator=</definition>
+        <argsstring>(Dirac_Equation &amp;&amp;)=default</argsstring>
+        <name>operator=</name>
+        <param>
+          <type><ref refid="classDirac__Equation" kindref="compound">Dirac_Equation</ref> &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/dirac.h" line="69" column="20"/>
+      </memberdef>
+      <memberdef kind="function" id="classDirac__Equation_1a0d445282df5bcaa9b2f3b4c7b09a16f3" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
+        <type>double</type>
+        <definition>virtual double Dirac_Equation::norm</definition>
+        <argsstring>() const</argsstring>
+        <name>norm</name>
+        <reimplementedby refid="classRadial__Dirac__Equation_1a8bae0b1044363a7e024b46e631b78aed">norm</reimplementedby>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/dirac.h" line="71" column="20" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/dirac.h" bodystart="71" bodyend="81"/>
+      </memberdef>
+      <memberdef kind="function" id="classDirac__Equation_1ac996a933695a76d758a878396de414c4" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type>void</type>
+        <definition>virtual void Dirac_Equation::solve</definition>
+        <argsstring>()</argsstring>
+        <name>solve</name>
+        <reimplementedby refid="classRadial__Dirac__Equation_1ac996a933695a76d758a878396de414c4">solve</reimplementedby>
+        <reimplementedby refid="classRadial__Dirac__Equation_1a09cde000674ef4eae0de5900c3a67507">solve</reimplementedby>
+        <reimplementedby refid="classRadial__Dirac__Equation_1abedfa82d40aff78e6811fec453ff36d1">solve</reimplementedby>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/dirac.h" line="83" column="18" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/dirac.h" bodystart="83" bodyend="127"/>
+      </memberdef>
+      <memberdef kind="function" id="classDirac__Equation_1abedfa82d40aff78e6811fec453ff36d1" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type>void</type>
+        <definition>virtual void Dirac_Equation::solve</definition>
+        <argsstring>(size_t nodes)</argsstring>
+        <name>solve</name>
+        <reimplementedby refid="classRadial__Dirac__Equation_1a59529222ca2d58fc2b585f481714b998">solve</reimplementedby>
+        <param>
+          <type>size_t</type>
+          <declname>nodes</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/dirac.h" line="129" column="18" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/dirac.h" bodystart="129" bodyend="132"/>
+      </memberdef>
+      <memberdef kind="function" id="classDirac__Equation_1a09cde000674ef4eae0de5900c3a67507" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type>void</type>
+        <definition>virtual void Dirac_Equation::solve</definition>
+        <argsstring>(const size_t nodes, const double e_guess)</argsstring>
+        <name>solve</name>
+        <reimplementedby refid="classRadial__Dirac__Equation_1ad4957c84196fc39295174c9c129ffb91">solve</reimplementedby>
+        <param>
+          <type>const size_t</type>
+          <declname>nodes</declname>
+        </param>
+        <param>
+          <type>const double</type>
+          <declname>e_guess</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/dirac.h" line="134" column="18" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/dirac.h" bodystart="134" bodyend="189"/>
+      </memberdef>
+      <memberdef kind="function" id="classDirac__Equation_1a4689391a36a3610b092ecbd9ccafb332" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type>void</type>
+        <definition>virtual void Dirac_Equation::normalize</definition>
+        <argsstring>()</argsstring>
+        <name>normalize</name>
+        <reimplementedby refid="classRadial__Dirac__Equation_1a8fd901a23c4a8ec0574e7ab6efa34a8e">normalize</reimplementedby>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/dirac.h" line="191" column="18" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/dirac.h" bodystart="191" bodyend="200"/>
+      </memberdef>
+      <memberdef kind="function" id="classDirac__Equation_1ad7298431a64f736b770c750e99de77f8" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::array&lt; std::vector&lt; double &gt;, 4 &gt; &amp;</type>
+        <definition>std::array&lt;std::vector&lt;double&gt;, 4&gt;&amp; Dirac_Equation::psi</definition>
+        <argsstring>()</argsstring>
+        <name>psi</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/dirac.h" line="202" column="16" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/dirac.h" bodystart="202" bodyend="205"/>
+      </memberdef>
+      <memberdef kind="function" id="classDirac__Equation_1aefaf0c54ed20c7423b3781759d1f3970" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::vector&lt; double &gt; &amp;</type>
+        <definition>std::vector&lt;double&gt;&amp; Dirac_Equation::v</definition>
+        <argsstring>()</argsstring>
+        <name>v</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/dirac.h" line="207" column="17" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/dirac.h" bodystart="207" bodyend="210"/>
+      </memberdef>
+      <memberdef kind="function" id="classDirac__Equation_1a6a147e357cf7e9c49ba7224456c8f4b9" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>double</type>
+        <definition>double Dirac_Equation::e</definition>
+        <argsstring>()</argsstring>
+        <name>e</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/dirac.h" line="212" column="12" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/dirac.h" bodystart="212" bodyend="215"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="3">
+        <label>Radial_Dirac_Equation_Central_Potential</label>
+        <link refid="classRadial__Dirac__Equation__Central__Potential"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>Radial_Dirac_Equation</label>
+        <link refid="classRadial__Dirac__Equation"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>Dirac_Equation</label>
+        <link refid="classDirac__Equation"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>std::array&lt; std::vector&lt; double &gt;, 4 &gt;</label>
+        <childnode refid="3" relation="usage">
+          <edgelabel>elements</edgelabel>
+        </childnode>
+      </node>
+      <node id="3">
+        <label>std::vector&lt; double &gt;</label>
+      </node>
+      <node id="1">
+        <label>Dirac_Equation</label>
+        <link refid="classDirac__Equation"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>l_init_m</edgelabel>
+          <edgelabel>r_init_m</edgelabel>
+        </childnode>
+        <childnode refid="3" relation="usage">
+          <edgelabel>v_m</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/dirac.h" line="15" column="1" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/dirac.h" bodystart="15" bodyend="217"/>
+    <listofallmembers>
+      <member refid="classDirac__Equation_1a6f3f47cf48bc70fbc779e05b06823363" prot="public" virt="non-virtual"><scope>Dirac_Equation</scope><name>Dirac_Equation</name></member>
+      <member refid="classDirac__Equation_1a9fb287690d3e71a7eff0ece3b74dffc6" prot="public" virt="non-virtual"><scope>Dirac_Equation</scope><name>Dirac_Equation</name></member>
+      <member refid="classDirac__Equation_1a26a597dded6d127a6263f01c1f97dbb2" prot="public" virt="non-virtual"><scope>Dirac_Equation</scope><name>Dirac_Equation</name></member>
+      <member refid="classDirac__Equation_1ab70a1032d64852858c8b9b21293e215c" prot="public" virt="non-virtual"><scope>Dirac_Equation</scope><name>Dirac_Equation</name></member>
+      <member refid="classDirac__Equation_1a6a147e357cf7e9c49ba7224456c8f4b9" prot="public" virt="non-virtual"><scope>Dirac_Equation</scope><name>e</name></member>
+      <member refid="classDirac__Equation_1af2041b9ced54043c8af640165a320ad1" prot="protected" virt="non-virtual"><scope>Dirac_Equation</scope><name>e_max_m</name></member>
+      <member refid="classDirac__Equation_1aeff140cf472e5123f5d29df703b170d0" prot="protected" virt="non-virtual"><scope>Dirac_Equation</scope><name>e_min_m</name></member>
+      <member refid="classDirac__Equation_1af41f7a8ba5e7a3f9f6471f3420743630" prot="protected" virt="non-virtual"><scope>Dirac_Equation</scope><name>energy_m</name></member>
+      <member refid="classDirac__Equation_1a41c7592a265abd9ab19f300db641d614" prot="protected" virt="non-virtual"><scope>Dirac_Equation</scope><name>find_inversion_point</name></member>
+      <member refid="classDirac__Equation_1a966f96c7f22ea703859466c102d6de56" prot="private" virt="non-virtual"><scope>Dirac_Equation</scope><name>h_m</name></member>
+      <member refid="classDirac__Equation_1a0ed3134996cb0d3dd9efc3f2071cc12b" prot="protected" virt="non-virtual"><scope>Dirac_Equation</scope><name>l_init_m</name></member>
+      <member refid="classDirac__Equation_1a0d445282df5bcaa9b2f3b4c7b09a16f3" prot="public" virt="virtual"><scope>Dirac_Equation</scope><name>norm</name></member>
+      <member refid="classDirac__Equation_1a4689391a36a3610b092ecbd9ccafb332" prot="public" virt="virtual"><scope>Dirac_Equation</scope><name>normalize</name></member>
+      <member refid="classDirac__Equation_1ae16fec47f9f97a97185886ab0669782e" prot="public" virt="non-virtual"><scope>Dirac_Equation</scope><name>operator=</name></member>
+      <member refid="classDirac__Equation_1a049029888cfae1a947ecfad0c28d9c23" prot="public" virt="non-virtual"><scope>Dirac_Equation</scope><name>operator=</name></member>
+      <member refid="classDirac__Equation_1ad7298431a64f736b770c750e99de77f8" prot="public" virt="non-virtual"><scope>Dirac_Equation</scope><name>psi</name></member>
+      <member refid="classDirac__Equation_1ae66a369069f64a55fcf643201b95b80a" prot="protected" virt="non-virtual"><scope>Dirac_Equation</scope><name>r_init_m</name></member>
+      <member refid="classDirac__Equation_1ac996a933695a76d758a878396de414c4" prot="public" virt="virtual"><scope>Dirac_Equation</scope><name>solve</name></member>
+      <member refid="classDirac__Equation_1abedfa82d40aff78e6811fec453ff36d1" prot="public" virt="virtual"><scope>Dirac_Equation</scope><name>solve</name></member>
+      <member refid="classDirac__Equation_1a09cde000674ef4eae0de5900c3a67507" prot="public" virt="virtual"><scope>Dirac_Equation</scope><name>solve</name></member>
+      <member refid="classDirac__Equation_1adeec323c701d465f6dd7bcc3cadff8d3" prot="protected" virt="non-virtual"><scope>Dirac_Equation</scope><name>tol_m</name></member>
+      <member refid="classDirac__Equation_1aefaf0c54ed20c7423b3781759d1f3970" prot="public" virt="non-virtual"><scope>Dirac_Equation</scope><name>v</name></member>
+      <member refid="classDirac__Equation_1a5286bf65ce7e21164e50011ec5f3f3fc" prot="protected" virt="non-virtual"><scope>Dirac_Equation</scope><name>v_m</name></member>
+      <member refid="classDirac__Equation_1ac8f6871f7bb3924a56b7fa07df476945" prot="public" virt="virtual"><scope>Dirac_Equation</scope><name>~Dirac_Equation</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,106 @@
+\hypertarget{classSchroedinger__Equation}{}\doxysection{Schroedinger\+\_\+\+Equation Class Reference}
+\label{classSchroedinger__Equation}\index{Schroedinger\_Equation@{Schroedinger\_Equation}}
+Inheritance diagram for Schroedinger\+\_\+\+Equation\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{classSchroedinger__Equation}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classSchroedinger__Equation_a5b6701dbba3522dcf40a16fd7560a446}\label{classSchroedinger__Equation_a5b6701dbba3522dcf40a16fd7560a446}} 
+{\bfseries Schroedinger\+\_\+\+Equation} (const double e\+\_\+min, const double e\+\_\+max, const std\+::vector$<$ double $>$ \&v, const std\+::vector$<$ double $>$ \&left\+\_\+init, const std\+::vector$<$ double $>$ \&right\+\_\+init, const double h=1e-\/3, const double tol=1e-\/10)
+\item 
+\mbox{\Hypertarget{classSchroedinger__Equation_a6c127a0a82044fdc6d80e53cc1c912eb}\label{classSchroedinger__Equation_a6c127a0a82044fdc6d80e53cc1c912eb}} 
+{\bfseries Schroedinger\+\_\+\+Equation} (const double e\+\_\+min, const double e\+\_\+max, const std\+::vector$<$ double $>$ \&v, const std\+::vector$<$ double $>$ \&left\+\_\+init, const std\+::vector$<$ double $>$ \&right\+\_\+init, const \mbox{\hyperlink{classMesh}{Mesh}} \&mesh, const double tol=1e-\/10)
+\item 
+\mbox{\Hypertarget{classSchroedinger__Equation_ae5553ac0e314aafcfad23c2030c0c2af}\label{classSchroedinger__Equation_ae5553ac0e314aafcfad23c2030c0c2af}} 
+{\bfseries Schroedinger\+\_\+\+Equation} (const \mbox{\hyperlink{classSchroedinger__Equation}{Schroedinger\+\_\+\+Equation}} \&)=default
+\item 
+\mbox{\Hypertarget{classSchroedinger__Equation_af5d191ca9f98c8cc0841bfb833aee94e}\label{classSchroedinger__Equation_af5d191ca9f98c8cc0841bfb833aee94e}} 
+{\bfseries Schroedinger\+\_\+\+Equation} (\mbox{\hyperlink{classSchroedinger__Equation}{Schroedinger\+\_\+\+Equation}} \&\&)=default
+\item 
+\mbox{\Hypertarget{classSchroedinger__Equation_ac5bb4bdb2fcdd7401d4735651c39ec4d}\label{classSchroedinger__Equation_ac5bb4bdb2fcdd7401d4735651c39ec4d}} 
+\mbox{\hyperlink{classSchroedinger__Equation}{Schroedinger\+\_\+\+Equation}} \& {\bfseries operator=} (const \mbox{\hyperlink{classSchroedinger__Equation}{Schroedinger\+\_\+\+Equation}} \&)=default
+\item 
+\mbox{\Hypertarget{classSchroedinger__Equation_a9b6ea0cd4f1d3e25935928f1c238b17a}\label{classSchroedinger__Equation_a9b6ea0cd4f1d3e25935928f1c238b17a}} 
+\mbox{\hyperlink{classSchroedinger__Equation}{Schroedinger\+\_\+\+Equation}} \& {\bfseries operator=} (\mbox{\hyperlink{classSchroedinger__Equation}{Schroedinger\+\_\+\+Equation}} \&\&)=default
+\item 
+\mbox{\Hypertarget{classSchroedinger__Equation_a15abeb8a3ca6b5559ad75df3d55d53d7}\label{classSchroedinger__Equation_a15abeb8a3ca6b5559ad75df3d55d53d7}} 
+virtual double {\bfseries norm} () const
+\item 
+\mbox{\Hypertarget{classSchroedinger__Equation_a04280196f993f0b428ef00330ec67589}\label{classSchroedinger__Equation_a04280196f993f0b428ef00330ec67589}} 
+virtual void {\bfseries solve} ()
+\item 
+\mbox{\Hypertarget{classSchroedinger__Equation_a636061d408a8fb3173405e2607542209}\label{classSchroedinger__Equation_a636061d408a8fb3173405e2607542209}} 
+virtual void {\bfseries solve} (size\+\_\+t nodes)
+\item 
+\mbox{\Hypertarget{classSchroedinger__Equation_a6d82e465f31cdc2217e590b37d964940}\label{classSchroedinger__Equation_a6d82e465f31cdc2217e590b37d964940}} 
+virtual void {\bfseries solve} (const size\+\_\+t nodes, const double e\+\_\+guess)
+\item 
+\mbox{\Hypertarget{classSchroedinger__Equation_a4177cba062332b6fd121589eeec5af67}\label{classSchroedinger__Equation_a4177cba062332b6fd121589eeec5af67}} 
+virtual void {\bfseries normalize} ()
+\item 
+\mbox{\Hypertarget{classSchroedinger__Equation_ac00fea2e607c1cc9b8b0a22521462d84}\label{classSchroedinger__Equation_ac00fea2e607c1cc9b8b0a22521462d84}} 
+std\+::vector$<$ double $>$ \& {\bfseries psi} ()
+\item 
+\mbox{\Hypertarget{classSchroedinger__Equation_a54d7ca479ce22229bd78a2f0dd39aa04}\label{classSchroedinger__Equation_a54d7ca479ce22229bd78a2f0dd39aa04}} 
+std\+::vector$<$ double $>$ \& {\bfseries v} ()
+\item 
+\mbox{\Hypertarget{classSchroedinger__Equation_a309ed38cfd4cf412f133afd89c7eea1e}\label{classSchroedinger__Equation_a309ed38cfd4cf412f133afd89c7eea1e}} 
+double {\bfseries e} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$class Iter\+\_\+res , class Iter\+\_\+v $>$ }\\Iter\+\_\+v \mbox{\hyperlink{classSchroedinger__Equation_a332d6da5c633fd7cb18f59211e93c366}{find\+\_\+inversion\+\_\+point}} (Iter\+\_\+res res\+\_\+start, Iter\+\_\+res res\+\_\+end, Iter\+\_\+v v\+\_\+start)
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classSchroedinger__Equation_a5fc395082349ce5df3b9407568b7cd4d}\label{classSchroedinger__Equation_a5fc395082349ce5df3b9407568b7cd4d}} 
+double {\bfseries energy\+\_\+m}
+\item 
+\mbox{\Hypertarget{classSchroedinger__Equation_a3a2404ae5bff5c53ede30d46b0cdd16e}\label{classSchroedinger__Equation_a3a2404ae5bff5c53ede30d46b0cdd16e}} 
+double {\bfseries e\+\_\+min\+\_\+m}
+\item 
+\mbox{\Hypertarget{classSchroedinger__Equation_a0a0c2bc722316378a67e326c7e9b11a0}\label{classSchroedinger__Equation_a0a0c2bc722316378a67e326c7e9b11a0}} 
+double {\bfseries e\+\_\+max\+\_\+m}
+\item 
+\mbox{\Hypertarget{classSchroedinger__Equation_a0686e3b199849104f2a11f3bc9bab0c4}\label{classSchroedinger__Equation_a0686e3b199849104f2a11f3bc9bab0c4}} 
+std\+::vector$<$ double $>$ {\bfseries v\+\_\+m}
+\item 
+\mbox{\Hypertarget{classSchroedinger__Equation_a7678b45da97c75227b3809f200d81b40}\label{classSchroedinger__Equation_a7678b45da97c75227b3809f200d81b40}} 
+std\+::vector$<$ double $>$ {\bfseries psi\+\_\+m}
+\item 
+\mbox{\Hypertarget{classSchroedinger__Equation_a10e376c4831b22f5337a08fb2cb01724}\label{classSchroedinger__Equation_a10e376c4831b22f5337a08fb2cb01724}} 
+std\+::vector$<$ double $>$ {\bfseries l\+\_\+init\+\_\+m}
+\item 
+\mbox{\Hypertarget{classSchroedinger__Equation_acd6be0fc2e16b0e4e6290dc1fece5e33}\label{classSchroedinger__Equation_acd6be0fc2e16b0e4e6290dc1fece5e33}} 
+std\+::vector$<$ double $>$ {\bfseries r\+\_\+init\+\_\+m}
+\item 
+\mbox{\Hypertarget{classSchroedinger__Equation_ad49fd836c59bca15ad6c7bfe1b26ece7}\label{classSchroedinger__Equation_ad49fd836c59bca15ad6c7bfe1b26ece7}} 
+double {\bfseries tol\+\_\+m}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classSchroedinger__Equation_a332d6da5c633fd7cb18f59211e93c366}\label{classSchroedinger__Equation_a332d6da5c633fd7cb18f59211e93c366}} 
+\index{Schroedinger\_Equation@{Schroedinger\_Equation}!find\_inversion\_point@{find\_inversion\_point}}
+\index{find\_inversion\_point@{find\_inversion\_point}!Schroedinger\_Equation@{Schroedinger\_Equation}}
+\doxysubsubsection{\texorpdfstring{find\_inversion\_point()}{find\_inversion\_point()}}
+{\footnotesize\ttfamily template$<$class Iter\+\_\+res , class Iter\+\_\+v $>$ \\
+Iter\+\_\+v Schroedinger\+\_\+\+Equation\+::find\+\_\+inversion\+\_\+point (\begin{DoxyParamCaption}\item[{Iter\+\_\+res}]{res\+\_\+start,  }\item[{Iter\+\_\+res}]{res\+\_\+end,  }\item[{Iter\+\_\+v}]{v\+\_\+start }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
+
+Find the point where E -\/ v(\+X\+\_\+i) = 0 (classical inversion point).~\newline
+ \textbackslash{}t\+\_\+\+\_\+\+Iter\+\_\+res\+\_\+\+\_\+ -\/ iterator to result container (e.\+g. std\+::vector)~\newline
+ \textbackslash{}t\+\_\+\+\_\+\+Iter\+\_\+v\+\_\+\+\_\+ -\/ iterator to v container (e.\+g. std\+::vector)~\newline
+ Input\+:~\newline
+ \textbackslash{}t\+\_\+\+\_\+res\+\_\+start\+\_\+\+\_\+ -\/ Iterator pointing to the first element of the result container.~\newline
+ \textbackslash{}t\+\_\+\+\_\+res\+\_\+end\+\_\+\+\_\+ -\/ Iterator pointing to the element one past the last element of the result container.~\newline
+\textbackslash{}t\+\_\+\+\_\+v\+\_\+start\+\_\+\+\_\+ -\/ Iterator pointing to the first element of the g container 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+schroedinger.\+h\end{DoxyCompactItemize}

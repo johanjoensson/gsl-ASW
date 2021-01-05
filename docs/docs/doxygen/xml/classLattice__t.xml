@@ -1,0 +1,126 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.20" xml:lang="en-US">
+  <compounddef id="classLattice__t" kind="class" language="C++" prot="public">
+    <compoundname>Lattice_t</compoundname>
+    <templateparamlist>
+      <param>
+        <type>size_t</type>
+        <declname>dim</declname>
+        <defname>dim</defname>
+      </param>
+    </templateparamlist>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classLattice__t_1a502bf447c9587ba89f7fdafae2a1d789" prot="private" static="no" mutable="no">
+        <type>GSL::Matrix</type>
+        <definition>GSL::Matrix Lattice_t&lt; dim &gt;::lat_m</definition>
+        <argsstring></argsstring>
+        <name>lat_m</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/lattice.h" line="23" column="17" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/lattice.h" bodystart="23" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classLattice__t_1aac19f330f37234ba013d9fb44079f39e" prot="private" static="no" mutable="no">
+        <type>GSL::Matrix</type>
+        <definition>GSL::Matrix Lattice_t&lt; dim &gt;::recip_lat_m</definition>
+        <argsstring></argsstring>
+        <name>recip_lat_m</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/lattice.h" line="23" column="23" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/lattice.h" bodystart="23" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classLattice__t_1a7ccafaf29b9fb8d0b563944221171633" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double Lattice_t&lt; dim &gt;::scale_m</definition>
+        <argsstring></argsstring>
+        <name>scale_m</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/lattice.h" line="24" column="12" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/lattice.h" bodystart="24" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classLattice__t_1a02b2f55b4b26ca78d1e2e4514185b8b3" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>Lattice_t&lt; dim &gt;::Lattice_t</definition>
+        <argsstring>(const std::initializer_list&lt; GSL::Vector &gt; &amp;l)</argsstring>
+        <name>Lattice_t</name>
+        <param>
+          <type>const std::initializer_list&lt; GSL::Vector &gt; &amp;</type>
+          <declname>l</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/lattice.h" line="27" column="5" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/lattice.h" bodystart="27" bodyend="32"/>
+      </memberdef>
+      <memberdef kind="function" id="classLattice__t_1ab9a6ed3d649e880e4be31890d24ad07a" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>double</type>
+        <definition>double Lattice_t&lt; dim &gt;::scale</definition>
+        <argsstring>() const</argsstring>
+        <name>scale</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/lattice.h" line="34" column="12" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/lattice.h" bodystart="34" bodyend="34"/>
+      </memberdef>
+      <memberdef kind="function" id="classLattice__t_1a1d1b65ca65df7de2ee8c69486b43280e" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>GSL::Matrix</type>
+        <definition>GSL::Matrix Lattice_t&lt; dim &gt;::lat</definition>
+        <argsstring>() const</argsstring>
+        <name>lat</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/lattice.h" line="35" column="17" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/lattice.h" bodystart="35" bodyend="35"/>
+      </memberdef>
+      <memberdef kind="function" id="classLattice__t_1ab968e186ccf201a283ed05babea055ca" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>GSL::Matrix</type>
+        <definition>GSL::Matrix Lattice_t&lt; dim &gt;::recip_lat</definition>
+        <argsstring>() const</argsstring>
+        <name>recip_lat</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/lattice.h" line="36" column="17" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/lattice.h" bodystart="36" bodyend="36"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/lattice.h" line="20" column="1" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/lattice.h" bodystart="21" bodyend="37"/>
+    <listofallmembers>
+      <member refid="classLattice__t_1a1d1b65ca65df7de2ee8c69486b43280e" prot="public" virt="non-virtual"><scope>Lattice_t</scope><name>lat</name></member>
+      <member refid="classLattice__t_1a502bf447c9587ba89f7fdafae2a1d789" prot="private" virt="non-virtual"><scope>Lattice_t</scope><name>lat_m</name></member>
+      <member refid="classLattice__t_1a02b2f55b4b26ca78d1e2e4514185b8b3" prot="public" virt="non-virtual"><scope>Lattice_t</scope><name>Lattice_t</name></member>
+      <member refid="classLattice__t_1ab968e186ccf201a283ed05babea055ca" prot="public" virt="non-virtual"><scope>Lattice_t</scope><name>recip_lat</name></member>
+      <member refid="classLattice__t_1aac19f330f37234ba013d9fb44079f39e" prot="private" virt="non-virtual"><scope>Lattice_t</scope><name>recip_lat_m</name></member>
+      <member refid="classLattice__t_1ab9a6ed3d649e880e4be31890d24ad07a" prot="public" virt="non-virtual"><scope>Lattice_t</scope><name>scale</name></member>
+      <member refid="classLattice__t_1a7ccafaf29b9fb8d0b563944221171633" prot="private" virt="non-virtual"><scope>Lattice_t</scope><name>scale_m</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

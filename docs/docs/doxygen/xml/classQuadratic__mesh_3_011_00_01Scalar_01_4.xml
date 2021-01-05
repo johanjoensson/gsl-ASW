@@ -1,0 +1,426 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.20" xml:lang="en-US">
+  <compounddef id="classQuadratic__mesh_3_011_00_01Scalar_01_4" kind="class" language="C++" prot="public">
+    <compoundname>Quadratic_mesh&lt; 1, Scalar &gt;</compoundname>
+    <basecompoundref refid="classMesh__base_3_011_00_01Scalar_01_4" prot="public" virt="non-virtual">Mesh_base&lt; 1, Scalar &gt;</basecompoundref>
+    <templateparamlist>
+      <param>
+        <type>class Scalar</type>
+      </param>
+    </templateparamlist>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classQuadratic__mesh_3_011_00_01Scalar_01_4_1ac8eb3a781e807de341ff6b001b890229" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Quadratic_mesh&lt; 1, Scalar &gt;::Quadratic_mesh</definition>
+        <argsstring>()=delete</argsstring>
+        <name>Quadratic_mesh</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/numerical-mesh.h" line="450" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classQuadratic__mesh_3_011_00_01Scalar_01_4_1a56d03d4e6b5d5514c6ca7033e873f547" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>Quadratic_mesh&lt; 1, Scalar &gt;::Quadratic_mesh</definition>
+        <argsstring>(const Scalar R_min, const Scalar R_max, const size_t N)</argsstring>
+        <name>Quadratic_mesh</name>
+        <param>
+          <type>const Scalar</type>
+          <declname>R_min</declname>
+        </param>
+        <param>
+          <type>const Scalar</type>
+          <declname>R_max</declname>
+        </param>
+        <param>
+          <type>const size_t</type>
+          <declname>N</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/numerical-mesh.h" line="451" column="5" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/numerical-mesh.h" bodystart="451" bodyend="453"/>
+      </memberdef>
+      <memberdef kind="function" id="classQuadratic__mesh_3_011_00_01Scalar_01_4_1ab3ca01b800d0a69bbb8d94f1f32ff1ed" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Quadratic_mesh&lt; 1, Scalar &gt;::~Quadratic_mesh</definition>
+        <argsstring>()=default</argsstring>
+        <name>~Quadratic_mesh</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/numerical-mesh.h" line="455" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classQuadratic__mesh_3_011_00_01Scalar_01_4_1a3add3861c4d54ee5a5a4ca8a14620357" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Quadratic_mesh&lt; 1, Scalar &gt;::Quadratic_mesh</definition>
+        <argsstring>(const Quadratic_mesh &amp;)=default</argsstring>
+        <name>Quadratic_mesh</name>
+        <param>
+          <type>const <ref refid="classQuadratic__mesh" kindref="compound">Quadratic_mesh</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/numerical-mesh.h" line="457" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classQuadratic__mesh_3_011_00_01Scalar_01_4_1a4fd5a8d554bee2518c0c8d5f8fc58b2e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Quadratic_mesh&lt; 1, Scalar &gt;::Quadratic_mesh</definition>
+        <argsstring>(Quadratic_mesh &amp;&amp;)=default</argsstring>
+        <name>Quadratic_mesh</name>
+        <param>
+          <type><ref refid="classQuadratic__mesh" kindref="compound">Quadratic_mesh</ref> &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/numerical-mesh.h" line="458" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classQuadratic__mesh_3_011_00_01Scalar_01_4_1a32a0d908cf7c434ce7c14a0ff6fa3d8d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classQuadratic__mesh" kindref="compound">Quadratic_mesh</ref> &amp;</type>
+        <definition>Quadratic_mesh&amp; Quadratic_mesh&lt; 1, Scalar &gt;::operator=</definition>
+        <argsstring>(const Quadratic_mesh &amp;)=default</argsstring>
+        <name>operator=</name>
+        <param>
+          <type>const <ref refid="classQuadratic__mesh" kindref="compound">Quadratic_mesh</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/numerical-mesh.h" line="460" column="20"/>
+      </memberdef>
+      <memberdef kind="function" id="classQuadratic__mesh_3_011_00_01Scalar_01_4_1ab5f0541e5638a1643d60b192f0325aff" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classQuadratic__mesh" kindref="compound">Quadratic_mesh</ref> &amp;</type>
+        <definition>Quadratic_mesh&amp; Quadratic_mesh&lt; 1, Scalar &gt;::operator=</definition>
+        <argsstring>(Quadratic_mesh &amp;&amp;)=default</argsstring>
+        <name>operator=</name>
+        <param>
+          <type><ref refid="classQuadratic__mesh" kindref="compound">Quadratic_mesh</ref> &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/numerical-mesh.h" line="461" column="20"/>
+      </memberdef>
+      <memberdef kind="function" id="classQuadratic__mesh_3_011_00_01Scalar_01_4_1a58ee04d9f4d74bd6052cb1bae3a8b397" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
+        <type>Scalar</type>
+        <definition>Scalar Quadratic_mesh&lt; 1, Scalar &gt;::r</definition>
+        <argsstring>(const Scalar &amp;x) const override</argsstring>
+        <name>r</name>
+        <reimplements refid="classMesh__base_3_011_00_01Scalar_01_4_1a5544719321cf874549b8172477560dc4">r</reimplements>
+        <param>
+          <type>const Scalar &amp;</type>
+          <declname>x</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/numerical-mesh.h" line="463" column="12" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/numerical-mesh.h" bodystart="463" bodyend="466"/>
+      </memberdef>
+      <memberdef kind="function" id="classQuadratic__mesh_3_011_00_01Scalar_01_4_1a2ea84d9640c7effafab4a8f45324cdad" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
+        <type>Scalar</type>
+        <definition>Scalar Quadratic_mesh&lt; 1, Scalar &gt;::r2</definition>
+        <argsstring>(const Scalar &amp;x) const override</argsstring>
+        <name>r2</name>
+        <reimplements refid="classMesh__base_3_011_00_01Scalar_01_4_1adfa57ed7cf2880ad2bcadbbb7843c5de">r2</reimplements>
+        <param>
+          <type>const Scalar &amp;</type>
+          <declname>x</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/numerical-mesh.h" line="468" column="12" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/numerical-mesh.h" bodystart="468" bodyend="471"/>
+      </memberdef>
+      <memberdef kind="function" id="classQuadratic__mesh_3_011_00_01Scalar_01_4_1a781df4dde28ce4a47eef1d88053598c4" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
+        <type>Scalar</type>
+        <definition>Scalar Quadratic_mesh&lt; 1, Scalar &gt;::dr</definition>
+        <argsstring>(const Scalar &amp;x) const override</argsstring>
+        <name>dr</name>
+        <reimplements refid="classMesh__base_3_011_00_01Scalar_01_4_1a2c061ad771f1e0242de6e80fabd9fdbb">dr</reimplements>
+        <param>
+          <type>const Scalar &amp;</type>
+          <declname>x</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/numerical-mesh.h" line="473" column="12" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/numerical-mesh.h" bodystart="473" bodyend="476"/>
+      </memberdef>
+      <memberdef kind="function" id="classMesh__base_3_011_00_01Scalar_01_4_1ac513eb350f3638a5e4d88299fda9e3cf" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
+        <type>std::vector&lt; Scalar &gt;</type>
+        <definition>virtual std::vector&lt;Scalar&gt; Mesh_base&lt; 1, Scalar &gt;::r</definition>
+        <argsstring>() const</argsstring>
+        <name>r</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/numerical-mesh.h" line="187" column="25" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/numerical-mesh.h" bodystart="187" bodyend="194"/>
+      </memberdef>
+      <memberdef kind="function" id="classMesh__base_3_011_00_01Scalar_01_4_1a607b07f006226169b08cf0a1b2f707a7" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
+        <type>std::vector&lt; Scalar &gt;</type>
+        <definition>virtual std::vector&lt;Scalar&gt; Mesh_base&lt; 1, Scalar &gt;::r2</definition>
+        <argsstring>() const</argsstring>
+        <name>r2</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/numerical-mesh.h" line="196" column="25" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/numerical-mesh.h" bodystart="196" bodyend="203"/>
+      </memberdef>
+      <memberdef kind="function" id="classMesh__base_3_011_00_01Scalar_01_4_1a3632f85fe9e1fb93e1f77396ccb2376f" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
+        <type>std::vector&lt; Scalar &gt;</type>
+        <definition>virtual std::vector&lt;Scalar&gt; Mesh_base&lt; 1, Scalar &gt;::dr</definition>
+        <argsstring>() const</argsstring>
+        <name>dr</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/numerical-mesh.h" line="205" column="25" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/numerical-mesh.h" bodystart="205" bodyend="212"/>
+      </memberdef>
+      <memberdef kind="function" id="classMesh__base_3_011_00_01Scalar_01_4_1a4d5a0335fd88ee521c5d97663673c8b8" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>Scalar</type>
+        <definition>Scalar Mesh_base&lt; 1, Scalar &gt;::operator()</definition>
+        <argsstring>(const Scalar &amp;x) const</argsstring>
+        <name>operator()</name>
+        <param>
+          <type>const Scalar &amp;</type>
+          <declname>x</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/numerical-mesh.h" line="185" column="12" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/numerical-mesh.h" bodystart="185" bodyend="185"/>
+      </memberdef>
+      <memberdef kind="function" id="classMesh__base_3_011_00_01Scalar_01_4_1a855155611eee132eac1443688fafbbb8" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class Func</type>
+          </param>
+        </templateparamlist>
+        <type>std::vector&lt; Scalar &gt;</type>
+        <definition>std::vector&lt;Scalar&gt; Mesh_base&lt; 1, Scalar &gt;::evaluate</definition>
+        <argsstring>(Func f, size_t h=1)</argsstring>
+        <name>evaluate</name>
+        <param>
+          <type>Func</type>
+          <declname>f</declname>
+        </param>
+        <param>
+          <type>size_t</type>
+          <declname>h</declname>
+          <defval>1</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/numerical-mesh.h" line="215" column="17" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/numerical-mesh.h" bodystart="215" bodyend="222"/>
+      </memberdef>
+      <memberdef kind="function" id="classMesh__base_3_011_00_01Scalar_01_4_1a85455dfa05bffdecf73612662978dfb1" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class Func</type>
+          </param>
+        </templateparamlist>
+        <type>std::vector&lt; Scalar &gt;</type>
+        <definition>std::vector&lt;Scalar&gt; Mesh_base&lt; 1, Scalar &gt;::evaluate</definition>
+        <argsstring>(Func f, Scalar x0, Scalar x1, Scalar h)</argsstring>
+        <name>evaluate</name>
+        <param>
+          <type>Func</type>
+          <declname>f</declname>
+        </param>
+        <param>
+          <type>Scalar</type>
+          <declname>x0</declname>
+        </param>
+        <param>
+          <type>Scalar</type>
+          <declname>x1</declname>
+        </param>
+        <param>
+          <type>Scalar</type>
+          <declname>h</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/numerical-mesh.h" line="225" column="17" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/numerical-mesh.h" bodystart="225" bodyend="232"/>
+      </memberdef>
+      <memberdef kind="function" id="classMesh__base_3_011_00_01Scalar_01_4_1ac7bd5dadab1c50e41a2afb9fd6710f49" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>size_t</type>
+        <definition>size_t Mesh_base&lt; 1, Scalar &gt;::dim</definition>
+        <argsstring>() const</argsstring>
+        <name>dim</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/numerical-mesh.h" line="234" column="12" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/numerical-mesh.h" bodystart="234" bodyend="234"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="protected-attrib">
+      <memberdef kind="variable" id="classMesh__base_3_011_00_01Scalar_01_4_1ad569061c2555235d59c839ec544c90ab" prot="protected" static="no" mutable="no">
+        <type>Scalar</type>
+        <definition>Scalar Mesh_base&lt; 1, Scalar &gt;::alpha_m</definition>
+        <argsstring></argsstring>
+        <name>alpha_m</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/numerical-mesh.h" line="166" column="12" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/numerical-mesh.h" bodystart="166" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classMesh__base_3_011_00_01Scalar_01_4_1af212e5a4ce35f6fabd517ab3c7d389b1" prot="protected" static="no" mutable="no">
+        <type>Scalar</type>
+        <definition>Scalar Mesh_base&lt; 1, Scalar &gt;::beta_m</definition>
+        <argsstring></argsstring>
+        <name>beta_m</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/numerical-mesh.h" line="166" column="20" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/numerical-mesh.h" bodystart="166" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classMesh__base_3_011_00_01Scalar_01_4_1a56df16c984709647136c6741670b5cfe" prot="protected" static="no" mutable="no">
+        <type>Scalar</type>
+        <definition>Scalar Mesh_base&lt; 1, Scalar &gt;::gamma_m</definition>
+        <argsstring></argsstring>
+        <name>gamma_m</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/numerical-mesh.h" line="166" column="27" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/numerical-mesh.h" bodystart="166" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classMesh__base_3_011_00_01Scalar_01_4_1a9227637ef9758ec1cccf1e5e2b8c1589" prot="protected" static="no" mutable="no">
+        <type>size_t</type>
+        <definition>size_t Mesh_base&lt; 1, Scalar &gt;::N_m</definition>
+        <argsstring></argsstring>
+        <name>N_m</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/numerical-mesh.h" line="167" column="12" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/numerical-mesh.h" bodystart="167" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>Quadratic_mesh&lt; 1, Scalar &gt;</label>
+        <link refid="classQuadratic__mesh_3_011_00_01Scalar_01_4"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>Mesh_base&lt; 1, Scalar &gt;</label>
+        <link refid="classMesh__base_3_011_00_01Scalar_01_4"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>Quadratic_mesh&lt; 1, Scalar &gt;</label>
+        <link refid="classQuadratic__mesh_3_011_00_01Scalar_01_4"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>Mesh_base&lt; 1, Scalar &gt;</label>
+        <link refid="classMesh__base_3_011_00_01Scalar_01_4"/>
+      </node>
+    </collaborationgraph>
+    <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/numerical-mesh.h" line="448" column="1" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/numerical-mesh.h" bodystart="448" bodyend="477"/>
+    <listofallmembers>
+      <member refid="classMesh__base_3_011_00_01Scalar_01_4_1ad569061c2555235d59c839ec544c90ab" prot="protected" virt="non-virtual"><scope>Quadratic_mesh&lt; 1, Scalar &gt;</scope><name>alpha_m</name></member>
+      <member refid="classMesh__base_3_011_00_01Scalar_01_4_1af212e5a4ce35f6fabd517ab3c7d389b1" prot="protected" virt="non-virtual"><scope>Quadratic_mesh&lt; 1, Scalar &gt;</scope><name>beta_m</name></member>
+      <member refid="classMesh__base_3_011_00_01Scalar_01_4_1ac7bd5dadab1c50e41a2afb9fd6710f49" prot="public" virt="non-virtual"><scope>Quadratic_mesh&lt; 1, Scalar &gt;</scope><name>dim</name></member>
+      <member refid="classQuadratic__mesh_3_011_00_01Scalar_01_4_1a781df4dde28ce4a47eef1d88053598c4" prot="public" virt="virtual"><scope>Quadratic_mesh&lt; 1, Scalar &gt;</scope><name>dr</name></member>
+      <member refid="classMesh__base_3_011_00_01Scalar_01_4_1a3632f85fe9e1fb93e1f77396ccb2376f" prot="public" virt="virtual" ambiguityscope="Mesh_base&lt; 1, Scalar &gt;::"><scope>Quadratic_mesh&lt; 1, Scalar &gt;</scope><name>dr</name></member>
+      <member refid="classMesh__base_3_011_00_01Scalar_01_4_1a855155611eee132eac1443688fafbbb8" prot="public" virt="non-virtual"><scope>Quadratic_mesh&lt; 1, Scalar &gt;</scope><name>evaluate</name></member>
+      <member refid="classMesh__base_3_011_00_01Scalar_01_4_1a85455dfa05bffdecf73612662978dfb1" prot="public" virt="non-virtual"><scope>Quadratic_mesh&lt; 1, Scalar &gt;</scope><name>evaluate</name></member>
+      <member refid="classMesh__base_3_011_00_01Scalar_01_4_1a56df16c984709647136c6741670b5cfe" prot="protected" virt="non-virtual"><scope>Quadratic_mesh&lt; 1, Scalar &gt;</scope><name>gamma_m</name></member>
+      <member refid="classMesh__base_3_011_00_01Scalar_01_4_1a1de4ff128718c3c0bb5655ec1f091867" prot="protected" virt="non-virtual"><scope>Quadratic_mesh&lt; 1, Scalar &gt;</scope><name>Mesh_base</name></member>
+      <member refid="classMesh__base_3_011_00_01Scalar_01_4_1afb07d75a05829b7c0c386f9f8f99e6f9" prot="public" virt="non-virtual"><scope>Quadratic_mesh&lt; 1, Scalar &gt;</scope><name>Mesh_base</name></member>
+      <member refid="classMesh__base_3_011_00_01Scalar_01_4_1a703bfe89ed388e55be6c0fe6727b704d" prot="public" virt="non-virtual"><scope>Quadratic_mesh&lt; 1, Scalar &gt;</scope><name>Mesh_base</name></member>
+      <member refid="classMesh__base_3_011_00_01Scalar_01_4_1a3620539d65ebabf6864e4f5258ee2af3" prot="public" virt="non-virtual"><scope>Quadratic_mesh&lt; 1, Scalar &gt;</scope><name>Mesh_base</name></member>
+      <member refid="classMesh__base_3_011_00_01Scalar_01_4_1a9227637ef9758ec1cccf1e5e2b8c1589" prot="protected" virt="non-virtual"><scope>Quadratic_mesh&lt; 1, Scalar &gt;</scope><name>N_m</name></member>
+      <member refid="classMesh__base_3_011_00_01Scalar_01_4_1a4d5a0335fd88ee521c5d97663673c8b8" prot="public" virt="non-virtual"><scope>Quadratic_mesh&lt; 1, Scalar &gt;</scope><name>operator()</name></member>
+      <member refid="classQuadratic__mesh_3_011_00_01Scalar_01_4_1a32a0d908cf7c434ce7c14a0ff6fa3d8d" prot="public" virt="non-virtual"><scope>Quadratic_mesh&lt; 1, Scalar &gt;</scope><name>operator=</name></member>
+      <member refid="classQuadratic__mesh_3_011_00_01Scalar_01_4_1ab5f0541e5638a1643d60b192f0325aff" prot="public" virt="non-virtual"><scope>Quadratic_mesh&lt; 1, Scalar &gt;</scope><name>operator=</name></member>
+      <member refid="classMesh__base_3_011_00_01Scalar_01_4_1ad99fc65d728b66a0bd3bbbb3300631d3" prot="public" virt="non-virtual" ambiguityscope="Mesh_base&lt; 1, Scalar &gt;::"><scope>Quadratic_mesh&lt; 1, Scalar &gt;</scope><name>operator=</name></member>
+      <member refid="classMesh__base_3_011_00_01Scalar_01_4_1a5f5b0a02a9bc6279a575183458e75a45" prot="public" virt="non-virtual" ambiguityscope="Mesh_base&lt; 1, Scalar &gt;::"><scope>Quadratic_mesh&lt; 1, Scalar &gt;</scope><name>operator=</name></member>
+      <member refid="classQuadratic__mesh_3_011_00_01Scalar_01_4_1ac8eb3a781e807de341ff6b001b890229" prot="public" virt="non-virtual"><scope>Quadratic_mesh&lt; 1, Scalar &gt;</scope><name>Quadratic_mesh</name></member>
+      <member refid="classQuadratic__mesh_3_011_00_01Scalar_01_4_1a56d03d4e6b5d5514c6ca7033e873f547" prot="public" virt="non-virtual"><scope>Quadratic_mesh&lt; 1, Scalar &gt;</scope><name>Quadratic_mesh</name></member>
+      <member refid="classQuadratic__mesh_3_011_00_01Scalar_01_4_1a3add3861c4d54ee5a5a4ca8a14620357" prot="public" virt="non-virtual"><scope>Quadratic_mesh&lt; 1, Scalar &gt;</scope><name>Quadratic_mesh</name></member>
+      <member refid="classQuadratic__mesh_3_011_00_01Scalar_01_4_1a4fd5a8d554bee2518c0c8d5f8fc58b2e" prot="public" virt="non-virtual"><scope>Quadratic_mesh&lt; 1, Scalar &gt;</scope><name>Quadratic_mesh</name></member>
+      <member refid="classQuadratic__mesh_3_011_00_01Scalar_01_4_1a58ee04d9f4d74bd6052cb1bae3a8b397" prot="public" virt="virtual"><scope>Quadratic_mesh&lt; 1, Scalar &gt;</scope><name>r</name></member>
+      <member refid="classMesh__base_3_011_00_01Scalar_01_4_1ac513eb350f3638a5e4d88299fda9e3cf" prot="public" virt="virtual" ambiguityscope="Mesh_base&lt; 1, Scalar &gt;::"><scope>Quadratic_mesh&lt; 1, Scalar &gt;</scope><name>r</name></member>
+      <member refid="classQuadratic__mesh_3_011_00_01Scalar_01_4_1a2ea84d9640c7effafab4a8f45324cdad" prot="public" virt="virtual"><scope>Quadratic_mesh&lt; 1, Scalar &gt;</scope><name>r2</name></member>
+      <member refid="classMesh__base_3_011_00_01Scalar_01_4_1a607b07f006226169b08cf0a1b2f707a7" prot="public" virt="virtual" ambiguityscope="Mesh_base&lt; 1, Scalar &gt;::"><scope>Quadratic_mesh&lt; 1, Scalar &gt;</scope><name>r2</name></member>
+      <member refid="classMesh__base_3_011_00_01Scalar_01_4_1abbe0b687ffd10e27b580237b304f4c85" prot="public" virt="virtual"><scope>Quadratic_mesh&lt; 1, Scalar &gt;</scope><name>~Mesh_base</name></member>
+      <member refid="classQuadratic__mesh_3_011_00_01Scalar_01_4_1ab3ca01b800d0a69bbb8d94f1f32ff1ed" prot="public" virt="non-virtual"><scope>Quadratic_mesh&lt; 1, Scalar &gt;</scope><name>~Quadratic_mesh</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

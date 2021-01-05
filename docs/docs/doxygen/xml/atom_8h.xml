@@ -1,0 +1,209 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.20" xml:lang="en-US">
+  <compounddef id="atom_8h" kind="file" language="C++">
+    <compoundname>atom.h</compoundname>
+    <includes local="no">gsl/gsl_math.h</includes>
+    <includes local="no">GSLpp/vector.h</includes>
+    <includes refid="log__mesh_8h" local="no">log_mesh.h</includes>
+    <includedby refid="atomic__quantity_8h" local="yes">atomic_quantity.h</includedby>
+    <includedby refid="augmented__spherical__wave_8h" local="yes">augmented_spherical_wave.h</includedby>
+    <includedby refid="bloch__sum_8h" local="yes">bloch_sum.h</includedby>
+    <includedby refid="envelope__fun_8h" local="yes">envelope_fun.h</includedby>
+    <incdepgraph>
+      <node id="5">
+        <label>GSLpp/special_functions.h</label>
+      </node>
+      <node id="3">
+        <label>GSLpp/vector.h</label>
+      </node>
+      <node id="4">
+        <label>log_mesh.h</label>
+        <link refid="log__mesh_8h_source"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>atom.h</label>
+        <link refid="atom_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="7">
+        <label>vector</label>
+      </node>
+      <node id="6">
+        <label>cstddef</label>
+      </node>
+      <node id="2">
+        <label>gsl/gsl_math.h</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="3">
+        <label>augmented_fun.h</label>
+        <link refid="augmented__fun_8h_source"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>bloch_sum.h</label>
+        <link refid="bloch__sum_8h_source"/>
+        <childnode refid="7" relation="include">
+        </childnode>
+      </node>
+      <node id="8">
+        <label>envelope_fun.h</label>
+        <link refid="envelope__fun_8h_source"/>
+      </node>
+      <node id="1">
+        <label>atom.h</label>
+        <link refid="atom_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>atomic_quantity.h</label>
+        <link refid="atomic__quantity_8h_source"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>simulation.h</label>
+        <link refid="simulation_8h_source"/>
+      </node>
+      <node id="4">
+        <label>augmented_spherical_wave.h</label>
+        <link refid="augmented__spherical__wave_8h_source"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+      </node>
+      <node id="7">
+        <label>structure_const.h</label>
+        <link refid="structure__const_8h_source"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="classAtom" prot="public">Atom</innerclass>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="atom_8h_1a5e07c0c118320fdc1f667405d874d4d4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool operator==</definition>
+        <argsstring>(const Atom &amp;a, const Atom &amp;b)</argsstring>
+        <name>operator==</name>
+        <param>
+          <type>const <ref refid="classAtom" kindref="compound">Atom</ref> &amp;</type>
+          <declname>a</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classAtom" kindref="compound">Atom</ref> &amp;</type>
+          <declname>b</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/atom.h" line="63" column="6" declfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/atom.h" declline="63" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="atom_8h_1a5c6fb2b0ae8e500e98c63ca22091c4a0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool operator!=</definition>
+        <argsstring>(const Atom &amp;a, const Atom &amp;b)</argsstring>
+        <name>operator!=</name>
+        <param>
+          <type>const <ref refid="classAtom" kindref="compound">Atom</ref> &amp;</type>
+          <declname>a</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classAtom" kindref="compound">Atom</ref> &amp;</type>
+          <declname>b</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/atom.h" line="64" column="6" declfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/atom.h" declline="64" declcolumn="6"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#ifndef<sp/>ATOM_H</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>ATOM_H</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;gsl/gsl_math.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;GSLpp/vector.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;log_mesh.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight></codeline>
+<codeline lineno="16" refid="classAtom" refkind="compound"><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classAtom" kindref="compound">Atom</ref><sp/>{</highlight></codeline>
+<codeline lineno="17"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="18"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Nuclear<sp/>charge</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="19"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>Z;</highlight></codeline>
+<codeline lineno="20"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Muffin<sp/>tin<sp/>radius<sp/>(MT)<sp/>&amp;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="21"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Atomic<sp/>sphere<sp/>radius<sp/>(AS)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="22"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>MT,<sp/>AS;</highlight></codeline>
+<codeline lineno="23"><highlight class="normal"></highlight></codeline>
+<codeline lineno="24"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Atomic<sp/>position,<sp/>cartesian<sp/>coordinates</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="25"><highlight class="normal"><sp/><sp/><sp/><sp/>GSL::Vector<sp/>pos;</highlight></codeline>
+<codeline lineno="26"><highlight class="normal"></highlight><highlight class="comment">//<sp/><sp/>Logarithmic_mesh<sp/>mesh;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="27"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>set_Z(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>Z_n);</highlight></codeline>
+<codeline lineno="29" refid="classAtom_1aa92066a3b1c4db78cd25b0963acd6923" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/><ref refid="classAtom_1aa92066a3b1c4db78cd25b0963acd6923" kindref="member">get_Z</ref>()<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="31" refid="classAtom_1a4882a9c424bd88153205c2692a81d0dd" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classAtom_1a4882a9c424bd88153205c2692a81d0dd" kindref="member">set_pos</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>GSL::Vector<sp/>&amp;r);</highlight></codeline>
+<codeline lineno="33" refid="classAtom_1a3295af53c32e694d912f23c3c88e73e3" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classAtom_1a3295af53c32e694d912f23c3c88e73e3" kindref="member">set_MT</ref>(</highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>mt);</highlight></codeline>
+<codeline lineno="35" refid="classAtom_1a32ee3cf43681e3bc4f4aefe9f515e169" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classAtom_1a32ee3cf43681e3bc4f4aefe9f515e169" kindref="member">set_AS</ref>(</highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>as);</highlight></codeline>
+<codeline lineno="36"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>set_mesh(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classLogarithmic__mesh" kindref="compound">Logarithmic_mesh</ref>&amp;<sp/>mesh);</highlight></codeline>
+<codeline lineno="38" refid="classAtom_1a4ea8fc90efe0550f0252969f9c1d72f0" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>GSL::Vector<sp/><ref refid="classAtom_1a4ea8fc90efe0550f0252969f9c1d72f0" kindref="member">get_pos</ref>()<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="40" refid="classAtom_1aff41b65a6211ed46e882e9fa6ed4d29a" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/><ref refid="classAtom_1aff41b65a6211ed46e882e9fa6ed4d29a" kindref="member">get_MT</ref>()<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="42" refid="classAtom_1a41ae3ca27b51b8ff7da19081ec58153b" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/><ref refid="classAtom_1a41ae3ca27b51b8ff7da19081ec58153b" kindref="member">get_AS</ref>()<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="43"><highlight class="normal"></highlight></codeline>
+<codeline lineno="44"><highlight class="normal"></highlight></codeline>
+<codeline lineno="45"><highlight class="normal"></highlight><highlight class="comment">/*</highlight></codeline>
+<codeline lineno="46"><highlight class="comment"><sp/><sp/><sp/><sp/>Atom()<sp/>=<sp/>default;</highlight></codeline>
+<codeline lineno="47"><highlight class="comment"><sp/><sp/><sp/><sp/>Atom(const<sp/>Atom&amp;)<sp/>=<sp/>default;</highlight></codeline>
+<codeline lineno="48"><highlight class="comment"><sp/><sp/><sp/><sp/>Atom(Atom&amp;&amp;)<sp/>=<sp/>default;</highlight></codeline>
+<codeline lineno="49"><highlight class="comment"><sp/><sp/><sp/><sp/>~Atom()<sp/>=<sp/>default;</highlight></codeline>
+<codeline lineno="50"><highlight class="comment">*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="51"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classAtom" kindref="compound">Atom</ref>(</highlight><highlight class="comment">/*const<sp/>Logarithmic_mesh<sp/>&amp;mesh,*/</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>GSL::Vector<sp/>&amp;r);</highlight></codeline>
+<codeline lineno="52"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classAtom" kindref="compound">Atom</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>mt,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>as,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>z,</highlight></codeline>
+<codeline lineno="53"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*const<sp/>Logarithmic_mesh<sp/>&amp;mesh,*/</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>GSL::Vector<sp/>&amp;r);</highlight></codeline>
+<codeline lineno="54"><highlight class="normal"></highlight></codeline>
+<codeline lineno="55"><highlight class="normal"></highlight></codeline>
+<codeline lineno="56"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Atom&amp;<sp/>operator=(const<sp/>Atom&amp;)<sp/>=<sp/>default;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="57"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Atom&amp;<sp/>operator=(Atom&amp;&amp;)<sp/>=<sp/>default;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="58"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">friend</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>operator==(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classAtom" kindref="compound">Atom</ref><sp/>&amp;a,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classAtom" kindref="compound">Atom</ref><sp/>&amp;b);</highlight></codeline>
+<codeline lineno="59"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">friend</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>operator!=(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classAtom" kindref="compound">Atom</ref><sp/>&amp;a,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classAtom" kindref="compound">Atom</ref><sp/>&amp;b);</highlight></codeline>
+<codeline lineno="60"><highlight class="normal"></highlight></codeline>
+<codeline lineno="61"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="62"><highlight class="normal"></highlight></codeline>
+<codeline lineno="63"><highlight class="normal"></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>operator==(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classAtom" kindref="compound">Atom</ref><sp/>&amp;a,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classAtom" kindref="compound">Atom</ref><sp/>&amp;b);</highlight></codeline>
+<codeline lineno="64"><highlight class="normal"></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>operator!=(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classAtom" kindref="compound">Atom</ref><sp/>&amp;a,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classAtom" kindref="compound">Atom</ref><sp/>&amp;b);</highlight></codeline>
+<codeline lineno="65"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/>//ATOM_H</highlight></codeline>
+    </programlisting>
+    <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/atom.h"/>
+  </compounddef>
+</doxygen>

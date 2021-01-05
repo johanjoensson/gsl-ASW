@@ -1,0 +1,194 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.20" xml:lang="en-US">
+  <compounddef id="classSimple__sampler" kind="class" language="C++" prot="public">
+    <compoundname>Simple_sampler</compoundname>
+    <basecompoundref refid="classBrillouin__sampler" prot="public" virt="non-virtual">Brillouin_sampler</basecompoundref>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classSimple__sampler_1a73bce47724d0fe7a1530bc02dcd45b2c" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double Simple_sampler::tol_m</definition>
+        <argsstring></argsstring>
+        <name>tol_m</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/brillouin_zone_integration.h" line="63" column="12" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/brillouin_zone_integration.h" bodystart="63" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSimple__sampler_1a940c42501f40b05edcc02b6753543648" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double Simple_sampler::h_m</definition>
+        <argsstring></argsstring>
+        <name>h_m</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/brillouin_zone_integration.h" line="63" column="18" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/brillouin_zone_integration.h" bodystart="63" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-func">
+      <memberdef kind="function" id="classSimple__sampler_1a29cca95be5b1a61676f7a03c61bcedbe" prot="private" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
+        <type>double</type>
+        <definition>double Simple_sampler::delta</definition>
+        <argsstring>(const double x) const</argsstring>
+        <name>delta</name>
+        <reimplements refid="classBrillouin__sampler_1a401abedcb55d86450f1cf95eaa361677">delta</reimplements>
+        <param>
+          <type>const double</type>
+          <declname>x</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/brillouin_zone_integration.h" line="64" column="19" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/brillouin_zone_integration.h" bodystart="64" bodyend="67"/>
+      </memberdef>
+      <memberdef kind="function" id="classSimple__sampler_1ae428ba03870125dc8ab66b6671a889e9" prot="private" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
+        <type>double</type>
+        <definition>double Simple_sampler::theta</definition>
+        <argsstring>(const double x) const</argsstring>
+        <name>theta</name>
+        <reimplements refid="classBrillouin__sampler_1ad5ca21d092ba351cadf335ae500042a9">theta</reimplements>
+        <param>
+          <type>const double</type>
+          <declname>x</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/brillouin_zone_integration.h" line="68" column="19" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/brillouin_zone_integration.h" bodystart="68" bodyend="71"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classSimple__sampler_1af24584b10ee5ec3516807db02e9d163e" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>Simple_sampler::Simple_sampler</definition>
+        <argsstring>(const GSL::Matrix &amp;energies, const double tol=1e-12, const double h=1)</argsstring>
+        <name>Simple_sampler</name>
+        <param>
+          <type>const GSL::Matrix &amp;</type>
+          <declname>energies</declname>
+        </param>
+        <param>
+          <type>const double</type>
+          <declname>tol</declname>
+          <defval>1e-12</defval>
+        </param>
+        <param>
+          <type>const double</type>
+          <declname>h</declname>
+          <defval>1</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/brillouin_zone_integration.h" line="74" column="5" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/brillouin_zone_integration.h" bodystart="74" bodyend="76"/>
+      </memberdef>
+      <memberdef kind="function" id="classSimple__sampler_1aee09103e677da7036afc09f504e1e525" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Simple_sampler::~Simple_sampler</definition>
+        <argsstring>()=default</argsstring>
+        <name>~Simple_sampler</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/brillouin_zone_integration.h" line="77" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classBrillouin__sampler_1ac583b178a091dd13ff816f3ee3a4ba41" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
+        <type>double</type>
+        <definition>double Brillouin_sampler::dos</definition>
+        <argsstring>(const double E) const override</argsstring>
+        <name>dos</name>
+        <reimplements refid="classBrillouin__zone__integrator_1ac7ef8c2242c25e0e9e982919fac2020c">dos</reimplements>
+        <param>
+          <type>const double</type>
+          <declname>E</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/brillouin_zone_integration.h" line="45" column="12" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/brillouin_zone_integration.h" bodystart="45" bodyend="57"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="3">
+        <label>Brillouin_zone_integrator</label>
+        <link refid="classBrillouin__zone__integrator"/>
+      </node>
+      <node id="2">
+        <label>Brillouin_sampler</label>
+        <link refid="classBrillouin__sampler"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>Simple_sampler</label>
+        <link refid="classSimple__sampler"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="3">
+        <label>Brillouin_zone_integrator</label>
+        <link refid="classBrillouin__zone__integrator"/>
+      </node>
+      <node id="2">
+        <label>Brillouin_sampler</label>
+        <link refid="classBrillouin__sampler"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>Simple_sampler</label>
+        <link refid="classSimple__sampler"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/brillouin_zone_integration.h" line="60" column="1" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/brillouin_zone_integration.h" bodystart="61" bodyend="78"/>
+    <listofallmembers>
+      <member refid="classBrillouin__sampler_1a7307bce71980da14baeeac7ff827cd63" prot="public" virt="non-virtual"><scope>Simple_sampler</scope><name>Brillouin_sampler</name></member>
+      <member refid="classBrillouin__sampler_1a3c9ea1575d92880743709e90881a8a52" prot="public" virt="non-virtual"><scope>Simple_sampler</scope><name>Brillouin_sampler</name></member>
+      <member refid="classBrillouin__sampler_1a19730288245645a45697901729eade94" prot="public" virt="non-virtual"><scope>Simple_sampler</scope><name>Brillouin_sampler</name></member>
+      <member refid="classBrillouin__sampler_1aeb921a1c823d456eb561aa6e92f17316" prot="public" virt="non-virtual"><scope>Simple_sampler</scope><name>Brillouin_sampler</name></member>
+      <member refid="classBrillouin__zone__integrator_1a7f770e53b9e1699f0065203ae20e7319" prot="protected" virt="non-virtual"><scope>Simple_sampler</scope><name>Brillouin_zone_integrator</name></member>
+      <member refid="classBrillouin__zone__integrator_1adf83dfa7950b7b71be2a13f981060386" prot="public" virt="non-virtual"><scope>Simple_sampler</scope><name>Brillouin_zone_integrator</name></member>
+      <member refid="classBrillouin__zone__integrator_1aff93d40c825381047fc9efe0ad04ad48" prot="public" virt="non-virtual"><scope>Simple_sampler</scope><name>Brillouin_zone_integrator</name></member>
+      <member refid="classSimple__sampler_1a29cca95be5b1a61676f7a03c61bcedbe" prot="private" virt="virtual"><scope>Simple_sampler</scope><name>delta</name></member>
+      <member refid="classBrillouin__sampler_1ac583b178a091dd13ff816f3ee3a4ba41" prot="public" virt="virtual"><scope>Simple_sampler</scope><name>dos</name></member>
+      <member refid="classSimple__sampler_1a940c42501f40b05edcc02b6753543648" prot="private" virt="non-virtual"><scope>Simple_sampler</scope><name>h_m</name></member>
+      <member refid="classBrillouin__zone__integrator_1a3e972edd2a152675ec74fd9d5856b8aa" prot="public" virt="non-virtual"><scope>Simple_sampler</scope><name>operator=</name></member>
+      <member refid="classBrillouin__zone__integrator_1adac55b04ec1c552efb60c1ad6a1e2152" prot="public" virt="non-virtual"><scope>Simple_sampler</scope><name>operator=</name></member>
+      <member refid="classSimple__sampler_1af24584b10ee5ec3516807db02e9d163e" prot="public" virt="non-virtual"><scope>Simple_sampler</scope><name>Simple_sampler</name></member>
+      <member refid="classSimple__sampler_1ae428ba03870125dc8ab66b6671a889e9" prot="private" virt="virtual"><scope>Simple_sampler</scope><name>theta</name></member>
+      <member refid="classSimple__sampler_1a73bce47724d0fe7a1530bc02dcd45b2c" prot="private" virt="non-virtual"><scope>Simple_sampler</scope><name>tol_m</name></member>
+      <member refid="classBrillouin__sampler_1a40d50d06daedb6fae5831ac8fd1ace7f" prot="public" virt="virtual"><scope>Simple_sampler</scope><name>~Brillouin_sampler</name></member>
+      <member refid="classBrillouin__zone__integrator_1a1684ee4d784984a8d8f9750e4530d029" prot="public" virt="virtual"><scope>Simple_sampler</scope><name>~Brillouin_zone_integrator</name></member>
+      <member refid="classSimple__sampler_1aee09103e677da7036afc09f504e1e525" prot="public" virt="non-virtual"><scope>Simple_sampler</scope><name>~Simple_sampler</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

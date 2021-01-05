@@ -1,0 +1,37 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.20" xml:lang="en-US">
+  <compounddef id="structGSLVecCompare" kind="struct" language="C++" prot="public">
+    <compoundname>GSLVecCompare</compoundname>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="structGSLVecCompare_1a69dd17dde74d7d21707e80b67b108013" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool GSLVecCompare::operator()</definition>
+        <argsstring>(const GSL::Vector &amp;lhs, const GSL::Vector &amp;rhs) const</argsstring>
+        <name>operator()</name>
+        <param>
+          <type>const GSL::Vector &amp;</type>
+          <declname>lhs</declname>
+        </param>
+        <param>
+          <type>const GSL::Vector &amp;</type>
+          <declname>rhs</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/simulation.h" line="16" column="10" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/simulation.h" bodystart="16" bodyend="19"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/simulation.h" line="15" column="1" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/simulation.h" bodystart="15" bodyend="20"/>
+    <listofallmembers>
+      <member refid="structGSLVecCompare_1a69dd17dde74d7d21707e80b67b108013" prot="public" virt="non-virtual"><scope>GSLVecCompare</scope><name>operator()</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

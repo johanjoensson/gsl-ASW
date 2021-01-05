@@ -1,0 +1,582 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.20" xml:lang="en-US">
+  <compounddef id="classCrystal__t" kind="class" language="C++" prot="public">
+    <compoundname>Crystal_t</compoundname>
+    <templateparamlist>
+      <param>
+        <type>size_t</type>
+        <declname>dim</declname>
+        <defname>dim</defname>
+      </param>
+      <param>
+        <type>class <ref refid="classAtom" kindref="compound">Atom</ref></type>
+        <defval><ref refid="classEmpty__t" kindref="compound">Empty_t</ref></defval>
+      </param>
+    </templateparamlist>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classCrystal__t_1a9b4f8c9e82fec085aa076b8030eb5cda" prot="private" static="no" mutable="no">
+        <type><ref refid="classLattice__t" kindref="compound">Lattice_t</ref>&lt; dim &gt;</type>
+        <definition>Lattice_t&lt;dim&gt; Crystal_t&lt; dim, Atom &gt;::lat_m</definition>
+        <argsstring></argsstring>
+        <name>lat_m</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/crystal.h" line="21" column="11" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/crystal.h" bodystart="21" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classCrystal__t_1a710ad4796da9915c6c6ba9eae66242ad" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; <ref refid="classSite__t" kindref="compound">Site_t</ref>&lt; dim &gt; &gt;</type>
+        <definition>std::vector&lt;Site_t&lt;dim&gt; &gt; Crystal_t&lt; dim, Atom &gt;::sites_m</definition>
+        <argsstring></argsstring>
+        <name>sites_m</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/crystal.h" line="22" column="13" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/crystal.h" bodystart="22" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classCrystal__t_1a0804c950a6c790926123454535f255f4" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; size_t &gt;</type>
+        <definition>std::vector&lt;size_t&gt; Crystal_t&lt; dim, Atom &gt;::atom_index_m</definition>
+        <argsstring></argsstring>
+        <name>atom_index_m</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/crystal.h" line="23" column="13" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/crystal.h" bodystart="23" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classCrystal__t_1a501a519e48b833dd0612a0477ceaccc0" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; <ref refid="classAtom" kindref="compound">Atom</ref> &gt;</type>
+        <definition>std::vector&lt;Atom&gt; Crystal_t&lt; dim, Atom &gt;::atoms_m</definition>
+        <argsstring></argsstring>
+        <name>atoms_m</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/crystal.h" line="24" column="13" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/crystal.h" bodystart="24" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classCrystal__t_1af5999b11867c08e80cc356ed8c5667ca" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; GSL::Vector &gt;</type>
+        <definition>std::vector&lt;GSL::Vector&gt; Crystal_t&lt; dim, Atom &gt;::R_m</definition>
+        <argsstring></argsstring>
+        <name>R_m</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/crystal.h" line="27" column="13" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/crystal.h" bodystart="27" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classCrystal__t_1a61ae6bd9761ee79095f9bf645c1b6f2a" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; GSL::Vector &gt;</type>
+        <definition>std::vector&lt;GSL::Vector&gt; Crystal_t&lt; dim, Atom &gt;::K_m</definition>
+        <argsstring></argsstring>
+        <name>K_m</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/crystal.h" line="27" column="17" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/crystal.h" bodystart="27" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classCrystal__t_1a6de7f3c468229c71b80fa2b034b9c6f3" prot="private" static="no" mutable="no">
+        <type>std::array&lt; size_t, dim &gt;</type>
+        <definition>std::array&lt;size_t, dim&gt; Crystal_t&lt; dim, Atom &gt;::size_m</definition>
+        <argsstring></argsstring>
+        <name>size_m</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/crystal.h" line="28" column="12" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/crystal.h" bodystart="28" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classCrystal__t_1abfb00093c91ce1d991331a35218ac0c1" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>Crystal_t&lt; dim, Atom &gt;::Crystal_t</definition>
+        <argsstring>(const Lattice_t&lt; dim &gt; &amp;lat)</argsstring>
+        <name>Crystal_t</name>
+        <param>
+          <type>const <ref refid="classLattice__t" kindref="compound">Lattice_t</ref>&lt; dim &gt; &amp;</type>
+          <declname>lat</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/crystal.h" line="30" column="1" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/crystal.h" bodystart="30" bodyend="30"/>
+      </memberdef>
+      <memberdef kind="function" id="classCrystal__t_1a32e7a33e4faf0687fe33bf41859f488c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Crystal_t&lt; dim, Atom &gt;::add_sites</definition>
+        <argsstring>(const std::vector&lt; GSL::Vector &gt; &amp;)</argsstring>
+        <name>add_sites</name>
+        <param>
+          <type>const std::vector&lt; GSL::Vector &gt; &amp;</type>
+          <defname>positions</defname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/crystal.h" line="31" column="6" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/crystal.h" bodystart="72" bodyend="83"/>
+      </memberdef>
+      <memberdef kind="function" id="classCrystal__t_1aa8184be87321f39773c048a061434b19" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Crystal_t&lt; dim, Atom &gt;::add_basis</definition>
+        <argsstring>(const std::vector&lt; Atom &gt; &amp;)</argsstring>
+        <name>add_basis</name>
+        <param>
+          <type>const std::vector&lt; <ref refid="classAtom" kindref="compound">Atom</ref> &gt; &amp;</type>
+          <defname>basis</defname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/crystal.h" line="33" column="6" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/crystal.h" bodystart="86" bodyend="91"/>
+      </memberdef>
+      <memberdef kind="function" id="classCrystal__t_1a6db196028b5b61970811efab98c75990" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Crystal_t&lt; dim, Atom &gt;::set_Rn</definition>
+        <argsstring>(const double Rmax)</argsstring>
+        <name>set_Rn</name>
+        <param>
+          <type>const double</type>
+          <declname>Rmax</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/crystal.h" line="35" column="6" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/crystal.h" bodystart="113" bodyend="137"/>
+      </memberdef>
+      <memberdef kind="function" id="classCrystal__t_1ac3740b1080875b0f52c19a5b7c020366" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Crystal_t&lt; dim, Atom &gt;::set_Kn</definition>
+        <argsstring>(const double Kmax)</argsstring>
+        <name>set_Kn</name>
+        <param>
+          <type>const double</type>
+          <declname>Kmax</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/crystal.h" line="36" column="6" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/crystal.h" bodystart="140" bodyend="164"/>
+      </memberdef>
+      <memberdef kind="function" id="classCrystal__t_1ad242d2f627a025cf077c2fba0d3c827f" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Crystal_t&lt; dim, Atom &gt;::set_size</definition>
+        <argsstring>(const std::array&lt; size_t, dim &gt; &amp;size)</argsstring>
+        <name>set_size</name>
+        <param>
+          <type>const std::array&lt; size_t, dim &gt; &amp;</type>
+          <declname>size</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/crystal.h" line="37" column="6" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/crystal.h" bodystart="37" bodyend="37"/>
+      </memberdef>
+      <memberdef kind="function" id="classCrystal__t_1a56945bc09171ea4493fee38af4ff257f" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>std::vector&lt; Neighbours&lt; dim &gt; &gt;</type>
+        <definition>std::vector&lt; Neighbours&lt; dim &gt; &gt; Crystal_t&lt; dim, Atom &gt;::calc_nearest_neighbours</definition>
+        <argsstring>() const</argsstring>
+        <name>calc_nearest_neighbours</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/crystal.h" line="38" column="13" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/crystal.h" bodystart="167" bodyend="188"/>
+      </memberdef>
+      <memberdef kind="function" id="classCrystal__t_1a22cd7c125b9691e881bba0bdcfb0d017" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>std::vector&lt; Neighbours&lt; dim &gt; &gt;</type>
+        <definition>std::vector&lt; Neighbours&lt; dim &gt; &gt; Crystal_t&lt; dim, Atom &gt;::calc_nearest_neighbours</definition>
+        <argsstring>(const size_t n_shells) const</argsstring>
+        <name>calc_nearest_neighbours</name>
+        <param>
+          <type>const size_t</type>
+          <declname>n_shells</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/crystal.h" line="39" column="13" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/crystal.h" bodystart="191" bodyend="271"/>
+      </memberdef>
+      <memberdef kind="function" id="classCrystal__t_1a8b841153c33d133ffeb96a99f8bfd22a" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>std::vector&lt; std::vector&lt; Neighbours&lt; dim &gt; &gt; &gt;</type>
+        <definition>std::vector&lt; std::vector&lt; Neighbours&lt; dim &gt; &gt; &gt; Crystal_t&lt; dim, Atom &gt;::determine_nn_shells</definition>
+        <argsstring>(const std::vector&lt; Neighbours&lt; dim &gt;&gt; &amp;nn) const</argsstring>
+        <name>determine_nn_shells</name>
+        <param>
+          <type>const std::vector&lt; Neighbours&lt; dim &gt;&gt; &amp;</type>
+          <declname>nn</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/crystal.h" line="40" column="13" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/crystal.h" bodystart="274" bodyend="297"/>
+      </memberdef>
+      <memberdef kind="function" id="classCrystal__t_1a07d580a921861b1a59674dc3a165cb40" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classLattice__t" kindref="compound">Lattice_t</ref>&lt; dim &gt;</type>
+        <definition>Lattice_t&lt;dim&gt; Crystal_t&lt; dim, Atom &gt;::lat</definition>
+        <argsstring>() const</argsstring>
+        <name>lat</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/crystal.h" line="42" column="11" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/crystal.h" bodystart="42" bodyend="42"/>
+      </memberdef>
+      <memberdef kind="function" id="classCrystal__t_1aa4c890f148ecf7252b7375f2888bf5a5" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::vector&lt; <ref refid="classSite__t" kindref="compound">Site_t</ref>&lt; dim &gt; &gt; &amp;</type>
+        <definition>std::vector&lt;Site_t&lt;dim&gt; &gt;&amp; Crystal_t&lt; dim, Atom &gt;::sites</definition>
+        <argsstring>()</argsstring>
+        <name>sites</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/crystal.h" line="43" column="13" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/crystal.h" bodystart="43" bodyend="43"/>
+      </memberdef>
+      <memberdef kind="function" id="classCrystal__t_1a68c6533d0b7cb1f7d1709f9bd81786a2" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::vector&lt; <ref refid="classSite__t" kindref="compound">Site_t</ref>&lt; dim &gt; &gt;</type>
+        <definition>std::vector&lt;Site_t&lt;dim&gt; &gt; Crystal_t&lt; dim, Atom &gt;::sites</definition>
+        <argsstring>() const</argsstring>
+        <name>sites</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/crystal.h" line="44" column="13" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/crystal.h" bodystart="44" bodyend="44"/>
+      </memberdef>
+      <memberdef kind="function" id="classCrystal__t_1a6c1af47c3f900aef5a3cb68b408fa043" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classSite__t" kindref="compound">Site_t</ref>&lt; dim &gt; &amp;</type>
+        <definition>Site_t&lt;dim&gt;&amp; Crystal_t&lt; dim, Atom &gt;::site</definition>
+        <argsstring>(const size_t i)</argsstring>
+        <name>site</name>
+        <param>
+          <type>const size_t</type>
+          <declname>i</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/crystal.h" line="46" column="8" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/crystal.h" bodystart="46" bodyend="46"/>
+      </memberdef>
+      <memberdef kind="function" id="classCrystal__t_1a64e8895e04cb6ec0ad784d2147b7ad41" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classSite__t" kindref="compound">Site_t</ref>&lt; dim &gt;</type>
+        <definition>Site_t&lt;dim&gt; Crystal_t&lt; dim, Atom &gt;::site</definition>
+        <argsstring>(const size_t i) const</argsstring>
+        <name>site</name>
+        <param>
+          <type>const size_t</type>
+          <declname>i</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/crystal.h" line="47" column="8" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/crystal.h" bodystart="47" bodyend="47"/>
+      </memberdef>
+      <memberdef kind="function" id="classCrystal__t_1a4ca3294351c1951919464c8d7c4c9a94" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::vector&lt; <ref refid="classAtom" kindref="compound">Atom</ref> &gt; &amp;</type>
+        <definition>std::vector&lt;Atom&gt;&amp; Crystal_t&lt; dim, Atom &gt;::atoms</definition>
+        <argsstring>()</argsstring>
+        <name>atoms</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/crystal.h" line="49" column="13" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/crystal.h" bodystart="49" bodyend="49"/>
+      </memberdef>
+      <memberdef kind="function" id="classCrystal__t_1a9767eda08b7439708f573733a0406575" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::vector&lt; <ref refid="classAtom" kindref="compound">Atom</ref> &gt;</type>
+        <definition>std::vector&lt;Atom&gt; Crystal_t&lt; dim, Atom &gt;::atoms</definition>
+        <argsstring>() const</argsstring>
+        <name>atoms</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/crystal.h" line="50" column="13" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/crystal.h" bodystart="50" bodyend="50"/>
+      </memberdef>
+      <memberdef kind="function" id="classCrystal__t_1abe2601f87faa77394f7fbfc33b2e1f9a" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::array&lt; size_t, dim &gt; &amp;</type>
+        <definition>std::array&lt;size_t, dim&gt;&amp; Crystal_t&lt; dim, Atom &gt;::size</definition>
+        <argsstring>()</argsstring>
+        <name>size</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/crystal.h" line="51" column="12" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/crystal.h" bodystart="51" bodyend="51"/>
+      </memberdef>
+      <memberdef kind="function" id="classCrystal__t_1aa2e581e0ff7cd8bc083e5d941fca842b" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classAtom" kindref="compound">Atom</ref> &amp;</type>
+        <definition>Atom&amp; Crystal_t&lt; dim, Atom &gt;::atoms</definition>
+        <argsstring>(const size_t i)</argsstring>
+        <name>atoms</name>
+        <param>
+          <type>const size_t</type>
+          <declname>i</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/crystal.h" line="52" column="6" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/crystal.h" bodystart="52" bodyend="52"/>
+      </memberdef>
+      <memberdef kind="function" id="classCrystal__t_1aac3f9b10c6f304b279b8912191257eee" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classAtom" kindref="compound">Atom</ref></type>
+        <definition>Atom Crystal_t&lt; dim, Atom &gt;::atoms</definition>
+        <argsstring>(const size_t i) const</argsstring>
+        <name>atoms</name>
+        <param>
+          <type>const size_t</type>
+          <declname>i</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/crystal.h" line="53" column="6" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/crystal.h" bodystart="53" bodyend="53"/>
+      </memberdef>
+      <memberdef kind="function" id="classCrystal__t_1a3962cee0afec095daf262cf00e8cd0eb" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classAtom" kindref="compound">Atom</ref> &amp;</type>
+        <definition>Atom&amp; Crystal_t&lt; dim, Atom &gt;::atom</definition>
+        <argsstring>(const Site_t&lt; dim &gt; &amp;s)</argsstring>
+        <name>atom</name>
+        <param>
+          <type>const <ref refid="classSite__t" kindref="compound">Site_t</ref>&lt; dim &gt; &amp;</type>
+          <declname>s</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/crystal.h" line="56" column="6" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/crystal.h" bodystart="56" bodyend="56"/>
+      </memberdef>
+      <memberdef kind="function" id="classCrystal__t_1ae7c59bc3c2e671a12b5e2b53dac40ca5" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classAtom" kindref="compound">Atom</ref></type>
+        <definition>Atom Crystal_t&lt; dim, Atom &gt;::atom</definition>
+        <argsstring>(const Site_t&lt; dim &gt; &amp;s) const</argsstring>
+        <name>atom</name>
+        <param>
+          <type>const <ref refid="classSite__t" kindref="compound">Site_t</ref>&lt; dim &gt; &amp;</type>
+          <declname>s</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/crystal.h" line="57" column="6" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/crystal.h" bodystart="57" bodyend="57"/>
+      </memberdef>
+      <memberdef kind="function" id="classCrystal__t_1a858cbbde8c8ead22491cda98ed1aa88f" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>size_t &amp;</type>
+        <definition>size_t&amp; Crystal_t&lt; dim, Atom &gt;::atom_index</definition>
+        <argsstring>(const Site_t&lt; dim &gt; &amp;s)</argsstring>
+        <name>atom_index</name>
+        <param>
+          <type>const <ref refid="classSite__t" kindref="compound">Site_t</ref>&lt; dim &gt; &amp;</type>
+          <declname>s</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/crystal.h" line="60" column="8" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/crystal.h" bodystart="60" bodyend="60"/>
+      </memberdef>
+      <memberdef kind="function" id="classCrystal__t_1a145b8711716664d81ae88e87fc36673b" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>size_t</type>
+        <definition>size_t Crystal_t&lt; dim, Atom &gt;::atom_index</definition>
+        <argsstring>(const Site_t&lt; dim &gt; &amp;s) const</argsstring>
+        <name>atom_index</name>
+        <param>
+          <type>const <ref refid="classSite__t" kindref="compound">Site_t</ref>&lt; dim &gt; &amp;</type>
+          <declname>s</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/crystal.h" line="61" column="8" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/crystal.h" bodystart="61" bodyend="61"/>
+      </memberdef>
+      <memberdef kind="function" id="classCrystal__t_1aa181a2a46412d794054642ab1080fbd7" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::vector&lt; GSL::Vector &gt; &amp;</type>
+        <definition>std::vector&lt;GSL::Vector&gt;&amp; Crystal_t&lt; dim, Atom &gt;::Rn_vecs</definition>
+        <argsstring>()</argsstring>
+        <name>Rn_vecs</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/crystal.h" line="63" column="13" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/crystal.h" bodystart="63" bodyend="63"/>
+      </memberdef>
+      <memberdef kind="function" id="classCrystal__t_1a54940a69e128265a69a414effb07cec2" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::vector&lt; GSL::Vector &gt;</type>
+        <definition>std::vector&lt;GSL::Vector&gt; Crystal_t&lt; dim, Atom &gt;::Rn_vecs</definition>
+        <argsstring>() const</argsstring>
+        <name>Rn_vecs</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/crystal.h" line="64" column="13" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/crystal.h" bodystart="64" bodyend="64"/>
+      </memberdef>
+      <memberdef kind="function" id="classCrystal__t_1ad4ab8a243de90b71bcc8ed795ceeb76b" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::vector&lt; GSL::Vector &gt; &amp;</type>
+        <definition>std::vector&lt;GSL::Vector&gt;&amp; Crystal_t&lt; dim, Atom &gt;::Kn_vecs</definition>
+        <argsstring>()</argsstring>
+        <name>Kn_vecs</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/crystal.h" line="65" column="13" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/crystal.h" bodystart="65" bodyend="65"/>
+      </memberdef>
+      <memberdef kind="function" id="classCrystal__t_1a61aaf8eb84931b316e0ae61430bc975a" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::vector&lt; GSL::Vector &gt;</type>
+        <definition>std::vector&lt;GSL::Vector&gt; Crystal_t&lt; dim, Atom &gt;::Kn_vecs</definition>
+        <argsstring>() const</argsstring>
+        <name>Kn_vecs</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/crystal.h" line="66" column="13" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/crystal.h" bodystart="66" bodyend="66"/>
+      </memberdef>
+      <memberdef kind="function" id="classCrystal__t_1a19680d5e76d6207f818c325fed4491c0" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>double</type>
+        <definition>double Crystal_t&lt; dim, Atom &gt;::volume</definition>
+        <argsstring>() const</argsstring>
+        <name>volume</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/crystal.h" line="68" column="8" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/crystal.h" bodystart="68" bodyend="68"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/crystal.h" line="20" column="1" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/crystal.h" bodystart="20" bodyend="69"/>
+    <listofallmembers>
+      <member refid="classCrystal__t_1aa8184be87321f39773c048a061434b19" prot="public" virt="non-virtual"><scope>Crystal_t</scope><name>add_basis</name></member>
+      <member refid="classCrystal__t_1a32e7a33e4faf0687fe33bf41859f488c" prot="public" virt="non-virtual"><scope>Crystal_t</scope><name>add_sites</name></member>
+      <member refid="classCrystal__t_1a3962cee0afec095daf262cf00e8cd0eb" prot="public" virt="non-virtual"><scope>Crystal_t</scope><name>atom</name></member>
+      <member refid="classCrystal__t_1ae7c59bc3c2e671a12b5e2b53dac40ca5" prot="public" virt="non-virtual"><scope>Crystal_t</scope><name>atom</name></member>
+      <member refid="classCrystal__t_1a858cbbde8c8ead22491cda98ed1aa88f" prot="public" virt="non-virtual"><scope>Crystal_t</scope><name>atom_index</name></member>
+      <member refid="classCrystal__t_1a145b8711716664d81ae88e87fc36673b" prot="public" virt="non-virtual"><scope>Crystal_t</scope><name>atom_index</name></member>
+      <member refid="classCrystal__t_1a0804c950a6c790926123454535f255f4" prot="private" virt="non-virtual"><scope>Crystal_t</scope><name>atom_index_m</name></member>
+      <member refid="classCrystal__t_1a4ca3294351c1951919464c8d7c4c9a94" prot="public" virt="non-virtual"><scope>Crystal_t</scope><name>atoms</name></member>
+      <member refid="classCrystal__t_1a9767eda08b7439708f573733a0406575" prot="public" virt="non-virtual"><scope>Crystal_t</scope><name>atoms</name></member>
+      <member refid="classCrystal__t_1aa2e581e0ff7cd8bc083e5d941fca842b" prot="public" virt="non-virtual"><scope>Crystal_t</scope><name>atoms</name></member>
+      <member refid="classCrystal__t_1aac3f9b10c6f304b279b8912191257eee" prot="public" virt="non-virtual"><scope>Crystal_t</scope><name>atoms</name></member>
+      <member refid="classCrystal__t_1a501a519e48b833dd0612a0477ceaccc0" prot="private" virt="non-virtual"><scope>Crystal_t</scope><name>atoms_m</name></member>
+      <member refid="classCrystal__t_1a56945bc09171ea4493fee38af4ff257f" prot="public" virt="non-virtual"><scope>Crystal_t</scope><name>calc_nearest_neighbours</name></member>
+      <member refid="classCrystal__t_1a22cd7c125b9691e881bba0bdcfb0d017" prot="public" virt="non-virtual"><scope>Crystal_t</scope><name>calc_nearest_neighbours</name></member>
+      <member refid="classCrystal__t_1abfb00093c91ce1d991331a35218ac0c1" prot="public" virt="non-virtual"><scope>Crystal_t</scope><name>Crystal_t</name></member>
+      <member refid="classCrystal__t_1a8b841153c33d133ffeb96a99f8bfd22a" prot="public" virt="non-virtual"><scope>Crystal_t</scope><name>determine_nn_shells</name></member>
+      <member refid="classCrystal__t_1a61ae6bd9761ee79095f9bf645c1b6f2a" prot="private" virt="non-virtual"><scope>Crystal_t</scope><name>K_m</name></member>
+      <member refid="classCrystal__t_1ad4ab8a243de90b71bcc8ed795ceeb76b" prot="public" virt="non-virtual"><scope>Crystal_t</scope><name>Kn_vecs</name></member>
+      <member refid="classCrystal__t_1a61aaf8eb84931b316e0ae61430bc975a" prot="public" virt="non-virtual"><scope>Crystal_t</scope><name>Kn_vecs</name></member>
+      <member refid="classCrystal__t_1a07d580a921861b1a59674dc3a165cb40" prot="public" virt="non-virtual"><scope>Crystal_t</scope><name>lat</name></member>
+      <member refid="classCrystal__t_1a9b4f8c9e82fec085aa076b8030eb5cda" prot="private" virt="non-virtual"><scope>Crystal_t</scope><name>lat_m</name></member>
+      <member refid="classCrystal__t_1af5999b11867c08e80cc356ed8c5667ca" prot="private" virt="non-virtual"><scope>Crystal_t</scope><name>R_m</name></member>
+      <member refid="classCrystal__t_1aa181a2a46412d794054642ab1080fbd7" prot="public" virt="non-virtual"><scope>Crystal_t</scope><name>Rn_vecs</name></member>
+      <member refid="classCrystal__t_1a54940a69e128265a69a414effb07cec2" prot="public" virt="non-virtual"><scope>Crystal_t</scope><name>Rn_vecs</name></member>
+      <member refid="classCrystal__t_1ac3740b1080875b0f52c19a5b7c020366" prot="public" virt="non-virtual"><scope>Crystal_t</scope><name>set_Kn</name></member>
+      <member refid="classCrystal__t_1a6db196028b5b61970811efab98c75990" prot="public" virt="non-virtual"><scope>Crystal_t</scope><name>set_Rn</name></member>
+      <member refid="classCrystal__t_1ad242d2f627a025cf077c2fba0d3c827f" prot="public" virt="non-virtual"><scope>Crystal_t</scope><name>set_size</name></member>
+      <member refid="classCrystal__t_1a6c1af47c3f900aef5a3cb68b408fa043" prot="public" virt="non-virtual"><scope>Crystal_t</scope><name>site</name></member>
+      <member refid="classCrystal__t_1a64e8895e04cb6ec0ad784d2147b7ad41" prot="public" virt="non-virtual"><scope>Crystal_t</scope><name>site</name></member>
+      <member refid="classCrystal__t_1aa4c890f148ecf7252b7375f2888bf5a5" prot="public" virt="non-virtual"><scope>Crystal_t</scope><name>sites</name></member>
+      <member refid="classCrystal__t_1a68c6533d0b7cb1f7d1709f9bd81786a2" prot="public" virt="non-virtual"><scope>Crystal_t</scope><name>sites</name></member>
+      <member refid="classCrystal__t_1a710ad4796da9915c6c6ba9eae66242ad" prot="private" virt="non-virtual"><scope>Crystal_t</scope><name>sites_m</name></member>
+      <member refid="classCrystal__t_1abe2601f87faa77394f7fbfc33b2e1f9a" prot="public" virt="non-virtual"><scope>Crystal_t</scope><name>size</name></member>
+      <member refid="classCrystal__t_1a6de7f3c468229c71b80fa2b034b9c6f3" prot="private" virt="non-virtual"><scope>Crystal_t</scope><name>size_m</name></member>
+      <member refid="classCrystal__t_1a19680d5e76d6207f818c325fed4491c0" prot="public" virt="non-virtual"><scope>Crystal_t</scope><name>volume</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

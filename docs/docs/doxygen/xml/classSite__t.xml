@@ -1,0 +1,272 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.20" xml:lang="en-US">
+  <compounddef id="classSite__t" kind="class" language="C++" prot="public">
+    <compoundname>Site_t</compoundname>
+    <templateparamlist>
+      <param>
+        <type>size_t</type>
+        <declname>dim</declname>
+        <defname>dim</defname>
+      </param>
+    </templateparamlist>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classSite__t_1a0826ac71b65d53e1dee70d63b8ce7e80" prot="private" static="no" mutable="no">
+        <type>size_t</type>
+        <definition>size_t Site_t&lt; dim &gt;::index_m</definition>
+        <argsstring></argsstring>
+        <name>index_m</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/site.h" line="23" column="8" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/site.h" bodystart="23" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSite__t_1ade8661e71574ccc7b6e6fc499af975c1" prot="private" static="no" mutable="no">
+        <type>std::array&lt; size_t, dim &gt;</type>
+        <definition>std::array&lt;size_t, dim&gt; Site_t&lt; dim &gt;::coord_m</definition>
+        <argsstring></argsstring>
+        <name>coord_m</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/site.h" line="24" column="12" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/site.h" bodystart="24" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSite__t_1abcc2908f6dc7917e587fec1be3f36e96" prot="private" static="no" mutable="no">
+        <type>GSL::Vector</type>
+        <definition>GSL::Vector Site_t&lt; dim &gt;::pos_m</definition>
+        <argsstring></argsstring>
+        <name>pos_m</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/site.h" line="25" column="13" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/site.h" bodystart="25" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classSite__t_1adf50c242b18758aaaed18ed33823d066" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>Site_t&lt; dim &gt;::Site_t</definition>
+        <argsstring>()</argsstring>
+        <name>Site_t</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/site.h" line="27" column="1" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/site.h" bodystart="27" bodyend="27"/>
+      </memberdef>
+      <memberdef kind="function" id="classSite__t_1a740c729f9fdd429f5675a24190513e23" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>Site_t&lt; dim &gt;::Site_t</definition>
+        <argsstring>(const size_t idx, const GSL::Vector &amp;pos, const std::array&lt; size_t, dim &gt; &amp;size)</argsstring>
+        <name>Site_t</name>
+        <param>
+          <type>const size_t</type>
+          <declname>idx</declname>
+        </param>
+        <param>
+          <type>const GSL::Vector &amp;</type>
+          <declname>pos</declname>
+        </param>
+        <param>
+          <type>const std::array&lt; size_t, dim &gt; &amp;</type>
+          <declname>size</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/site.h" line="28" column="1" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/site.h" bodystart="28" bodyend="30"/>
+      </memberdef>
+      <memberdef kind="function" id="classSite__t_1a7e84dcad15c769e12a260808ec55bbf4" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>Site_t&lt; dim &gt;::Site_t</definition>
+        <argsstring>(const std::array&lt; size_t, dim &gt; &amp;coords, const GSL::Vector &amp;pos, const std::array&lt; size_t, dim &gt; &amp;size)</argsstring>
+        <name>Site_t</name>
+        <param>
+          <type>const std::array&lt; size_t, dim &gt; &amp;</type>
+          <declname>coords</declname>
+        </param>
+        <param>
+          <type>const GSL::Vector &amp;</type>
+          <declname>pos</declname>
+        </param>
+        <param>
+          <type>const std::array&lt; size_t, dim &gt; &amp;</type>
+          <declname>size</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/site.h" line="32" column="1" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/site.h" bodystart="32" bodyend="34"/>
+      </memberdef>
+      <memberdef kind="function" id="classSite__t_1a96e418a71ce89a9d982fd6db23936e5a" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::array&lt; size_t, dim &gt;</type>
+        <definition>std::array&lt;size_t, dim&gt; Site_t&lt; dim &gt;::calc_coord</definition>
+        <argsstring>(const size_t index, const std::array&lt; size_t, dim &gt; &amp;size)</argsstring>
+        <name>calc_coord</name>
+        <param>
+          <type>const size_t</type>
+          <declname>index</declname>
+        </param>
+        <param>
+          <type>const std::array&lt; size_t, dim &gt; &amp;</type>
+          <declname>size</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/site.h" line="36" column="12" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/site.h" bodystart="36" bodyend="50"/>
+      </memberdef>
+      <memberdef kind="function" id="classSite__t_1a6d5df3b11a3d2221d21089d7fb92d93d" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>size_t</type>
+        <definition>size_t Site_t&lt; dim &gt;::calc_index</definition>
+        <argsstring>(const std::array&lt; size_t, dim &gt; &amp;coords, const std::array&lt; size_t, dim &gt; &amp;size)</argsstring>
+        <name>calc_index</name>
+        <param>
+          <type>const std::array&lt; size_t, dim &gt; &amp;</type>
+          <declname>coords</declname>
+        </param>
+        <param>
+          <type>const std::array&lt; size_t, dim &gt; &amp;</type>
+          <declname>size</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/site.h" line="52" column="8" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/site.h" bodystart="52" bodyend="64"/>
+      </memberdef>
+      <memberdef kind="function" id="classSite__t_1afb0cc2dea2285b7e5554f2d02a387563" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>size_t</type>
+        <definition>size_t Site_t&lt; dim &gt;::index</definition>
+        <argsstring>() const</argsstring>
+        <name>index</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/site.h" line="66" column="8" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/site.h" bodystart="66" bodyend="66"/>
+      </memberdef>
+      <memberdef kind="function" id="classSite__t_1a623481891e4e40100bde36af559fc8a5" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::array&lt; size_t, dim &gt;</type>
+        <definition>std::array&lt;size_t, dim&gt; Site_t&lt; dim &gt;::coord</definition>
+        <argsstring>() const</argsstring>
+        <name>coord</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/site.h" line="67" column="12" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/site.h" bodystart="67" bodyend="67"/>
+      </memberdef>
+      <memberdef kind="function" id="classSite__t_1ab8e0a7981908af5ef3690718c05c80a5" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>GSL::Vector</type>
+        <definition>GSL::Vector Site_t&lt; dim &gt;::pos</definition>
+        <argsstring>() const</argsstring>
+        <name>pos</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/site.h" line="68" column="13" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/site.h" bodystart="68" bodyend="68"/>
+      </memberdef>
+      <memberdef kind="function" id="classSite__t_1afdec8a55952585b16d9614243ed6e7c5" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Site_t&lt; dim &gt;::set_pos</definition>
+        <argsstring>(const GSL::Vector &amp;pos)</argsstring>
+        <name>set_pos</name>
+        <param>
+          <type>const GSL::Vector &amp;</type>
+          <declname>pos</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/site.h" line="69" column="6" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/site.h" bodystart="69" bodyend="69"/>
+      </memberdef>
+      <memberdef kind="function" id="classSite__t_1afb9bdabccf1b07cdea889688392735cc" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool Site_t&lt; dim &gt;::operator==</definition>
+        <argsstring>(const Site_t&lt; dim &gt; &amp;s) const</argsstring>
+        <name>operator==</name>
+        <param>
+          <type>const <ref refid="classSite__t" kindref="compound">Site_t</ref>&lt; dim &gt; &amp;</type>
+          <declname>s</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/site.h" line="71" column="6" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/site.h" bodystart="71" bodyend="74"/>
+      </memberdef>
+      <memberdef kind="function" id="classSite__t_1acc485e23f07d3963891f7a9b6680bbdd" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool Site_t&lt; dim &gt;::operator!=</definition>
+        <argsstring>(const Site_t&lt; dim &gt; &amp;s) const</argsstring>
+        <name>operator!=</name>
+        <param>
+          <type>const <ref refid="classSite__t" kindref="compound">Site_t</ref>&lt; dim &gt; &amp;</type>
+          <declname>s</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/site.h" line="76" column="6" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/site.h" bodystart="76" bodyend="79"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/site.h" line="21" column="1" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/site.h" bodystart="21" bodyend="80"/>
+    <listofallmembers>
+      <member refid="classSite__t_1a96e418a71ce89a9d982fd6db23936e5a" prot="public" virt="non-virtual"><scope>Site_t</scope><name>calc_coord</name></member>
+      <member refid="classSite__t_1a6d5df3b11a3d2221d21089d7fb92d93d" prot="public" virt="non-virtual"><scope>Site_t</scope><name>calc_index</name></member>
+      <member refid="classSite__t_1a623481891e4e40100bde36af559fc8a5" prot="public" virt="non-virtual"><scope>Site_t</scope><name>coord</name></member>
+      <member refid="classSite__t_1ade8661e71574ccc7b6e6fc499af975c1" prot="private" virt="non-virtual"><scope>Site_t</scope><name>coord_m</name></member>
+      <member refid="classSite__t_1afb0cc2dea2285b7e5554f2d02a387563" prot="public" virt="non-virtual"><scope>Site_t</scope><name>index</name></member>
+      <member refid="classSite__t_1a0826ac71b65d53e1dee70d63b8ce7e80" prot="private" virt="non-virtual"><scope>Site_t</scope><name>index_m</name></member>
+      <member refid="classSite__t_1acc485e23f07d3963891f7a9b6680bbdd" prot="public" virt="non-virtual"><scope>Site_t</scope><name>operator!=</name></member>
+      <member refid="classSite__t_1afb9bdabccf1b07cdea889688392735cc" prot="public" virt="non-virtual"><scope>Site_t</scope><name>operator==</name></member>
+      <member refid="classSite__t_1ab8e0a7981908af5ef3690718c05c80a5" prot="public" virt="non-virtual"><scope>Site_t</scope><name>pos</name></member>
+      <member refid="classSite__t_1abcc2908f6dc7917e587fec1be3f36e96" prot="private" virt="non-virtual"><scope>Site_t</scope><name>pos_m</name></member>
+      <member refid="classSite__t_1afdec8a55952585b16d9614243ed6e7c5" prot="public" virt="non-virtual"><scope>Site_t</scope><name>set_pos</name></member>
+      <member refid="classSite__t_1adf50c242b18758aaaed18ed33823d066" prot="public" virt="non-virtual"><scope>Site_t</scope><name>Site_t</name></member>
+      <member refid="classSite__t_1a740c729f9fdd429f5675a24190513e23" prot="public" virt="non-virtual"><scope>Site_t</scope><name>Site_t</name></member>
+      <member refid="classSite__t_1a7e84dcad15c769e12a260808ec55bbf4" prot="public" virt="non-virtual"><scope>Site_t</scope><name>Site_t</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

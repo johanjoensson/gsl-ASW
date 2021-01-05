@@ -1,0 +1,314 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.20" xml:lang="en-US">
+  <compounddef id="classBessel__container" kind="class" language="C++" prot="public">
+    <compoundname>Bessel_container</compoundname>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classBessel__container_1a774d81c5f2deca1a6dc30fedd4a497fc" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; <ref refid="classAugmented__Bessel" kindref="compound">Augmented_Bessel</ref> &gt;</type>
+        <definition>std::vector&lt;Augmented_Bessel&gt; Bessel_container::functions</definition>
+        <argsstring></argsstring>
+        <name>functions</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/augmented_fun.h" line="187" column="17" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/augmented_fun.h" bodystart="187" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classBessel__container_1ad35ee37f569f6bb8f6fbd395f986b1ed" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>Bessel_container::Bessel_container</definition>
+        <argsstring>()</argsstring>
+        <name>Bessel_container</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/augmented_fun.h" line="189" column="5" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/augmented_fun.h" bodystart="189" bodyend="189"/>
+      </memberdef>
+      <memberdef kind="function" id="classBessel__container_1a1510227c8ea21f2ba06b3e46f3606652" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Bessel_container::add_function</definition>
+        <argsstring>(const Augmented_Bessel &amp;)</argsstring>
+        <name>add_function</name>
+        <param>
+          <type>const <ref refid="classAugmented__Bessel" kindref="compound">Augmented_Bessel</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/augmented_fun.h" line="190" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classBessel__container_1ae1ab7f821a6b6c0d2364d97cccf0c92c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classAugmented__Bessel" kindref="compound">Augmented_Bessel</ref> &amp;</type>
+        <definition>Augmented_Bessel&amp; Bessel_container::get_function</definition>
+        <argsstring>(const lm &amp;l, const double &amp;kappa, const spin &amp;s)</argsstring>
+        <name>get_function</name>
+        <param>
+          <type>const <ref refid="structlm" kindref="compound">lm</ref> &amp;</type>
+          <declname>l</declname>
+        </param>
+        <param>
+          <type>const double &amp;</type>
+          <declname>kappa</declname>
+        </param>
+        <param>
+          <type>const spin &amp;</type>
+          <declname>s</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/augmented_fun.h" line="191" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classBessel__container_1a9dc7da627beb3fbac254a4d67609c098" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classAugmented__Bessel" kindref="compound">Augmented_Bessel</ref> &amp;</type>
+        <definition>Augmented_Bessel&amp; Bessel_container::get_function</definition>
+        <argsstring>(size_t index)</argsstring>
+        <name>get_function</name>
+        <param>
+          <type>size_t</type>
+          <declname>index</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/augmented_fun.h" line="193" column="22" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/augmented_fun.h" bodystart="193" bodyend="193"/>
+      </memberdef>
+      <memberdef kind="function" id="classBessel__container_1a603c0f163ec60bc485fcb35c9397e0b7" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>size_t</type>
+        <definition>size_t Bessel_container::get_index</definition>
+        <argsstring>(const lm &amp;l, const double &amp;kappa, const spin &amp;s) const</argsstring>
+        <name>get_index</name>
+        <param>
+          <type>const <ref refid="structlm" kindref="compound">lm</ref> &amp;</type>
+          <declname>l</declname>
+        </param>
+        <param>
+          <type>const double &amp;</type>
+          <declname>kappa</declname>
+        </param>
+        <param>
+          <type>const spin &amp;</type>
+          <declname>s</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/augmented_fun.h" line="194" column="12"/>
+      </memberdef>
+      <memberdef kind="function" id="classBessel__container_1a5619f95866a4195bf890dea87605fd5a" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structlm" kindref="compound">lm</ref></type>
+        <definition>lm Bessel_container::max_lm</definition>
+        <argsstring>() const</argsstring>
+        <name>max_lm</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/augmented_fun.h" line="197" column="8"/>
+      </memberdef>
+      <memberdef kind="function" id="classBessel__container_1a61369e07d70becabb60b5ef61230b882" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structlm" kindref="compound">lm</ref></type>
+        <definition>lm Bessel_container::min_lm</definition>
+        <argsstring>() const</argsstring>
+        <name>min_lm</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/augmented_fun.h" line="198" column="8"/>
+      </memberdef>
+      <memberdef kind="function" id="classBessel__container_1a2b95855439c25ff908870bfa04980a4a" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::vector&lt; <ref refid="classAugmented__Bessel" kindref="compound">Augmented_Bessel</ref> &gt;::iterator</type>
+        <definition>std::vector&lt;Augmented_Bessel&gt;::iterator Bessel_container::begin</definition>
+        <argsstring>()</argsstring>
+        <name>begin</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/augmented_fun.h" line="200" column="28" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/augmented_fun.h" bodystart="200" bodyend="203"/>
+      </memberdef>
+      <memberdef kind="function" id="classBessel__container_1a8350528de67ad80405d15f3039ddbac7" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::vector&lt; <ref refid="classAugmented__Bessel" kindref="compound">Augmented_Bessel</ref> &gt;::iterator</type>
+        <definition>std::vector&lt;Augmented_Bessel&gt;::iterator Bessel_container::end</definition>
+        <argsstring>()</argsstring>
+        <name>end</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/augmented_fun.h" line="204" column="28" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/augmented_fun.h" bodystart="204" bodyend="207"/>
+      </memberdef>
+      <memberdef kind="function" id="classBessel__container_1a4ceb68d0bf135ffb6ab6b5bfc70c2a9b" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::vector&lt; <ref refid="classAugmented__Bessel" kindref="compound">Augmented_Bessel</ref> &gt;::const_iterator</type>
+        <definition>std::vector&lt;Augmented_Bessel&gt;::const_iterator Bessel_container::begin</definition>
+        <argsstring>() const</argsstring>
+        <name>begin</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/augmented_fun.h" line="208" column="34" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/augmented_fun.h" bodystart="208" bodyend="211"/>
+      </memberdef>
+      <memberdef kind="function" id="classBessel__container_1a5fd07722ee1972c6d49174487c85dd95" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::vector&lt; <ref refid="classAugmented__Bessel" kindref="compound">Augmented_Bessel</ref> &gt;::const_iterator</type>
+        <definition>std::vector&lt;Augmented_Bessel&gt;::const_iterator Bessel_container::end</definition>
+        <argsstring>() const</argsstring>
+        <name>end</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/augmented_fun.h" line="212" column="34" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/augmented_fun.h" bodystart="212" bodyend="215"/>
+      </memberdef>
+      <memberdef kind="function" id="classBessel__container_1ad21fcd6824f313d7247b3433dd6d9fe7" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::vector&lt; <ref refid="classAugmented__Bessel" kindref="compound">Augmented_Bessel</ref> &gt;::const_iterator</type>
+        <definition>std::vector&lt;Augmented_Bessel&gt;::const_iterator Bessel_container::cbegin</definition>
+        <argsstring>()</argsstring>
+        <name>cbegin</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/augmented_fun.h" line="216" column="34" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/augmented_fun.h" bodystart="216" bodyend="219"/>
+      </memberdef>
+      <memberdef kind="function" id="classBessel__container_1a8d58caf8ca613e43e9c9eb2871ea277a" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::vector&lt; <ref refid="classAugmented__Bessel" kindref="compound">Augmented_Bessel</ref> &gt;::const_iterator</type>
+        <definition>std::vector&lt;Augmented_Bessel&gt;::const_iterator Bessel_container::cend</definition>
+        <argsstring>()</argsstring>
+        <name>cend</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/augmented_fun.h" line="220" column="34" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/augmented_fun.h" bodystart="220" bodyend="223"/>
+      </memberdef>
+      <memberdef kind="function" id="classBessel__container_1a04f14d61ee15063b4d183f352dd364a9" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classAugmented__Bessel" kindref="compound">Augmented_Bessel</ref> &amp;</type>
+        <definition>Augmented_Bessel&amp; Bessel_container::front</definition>
+        <argsstring>()</argsstring>
+        <name>front</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/augmented_fun.h" line="224" column="22" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/augmented_fun.h" bodystart="224" bodyend="227"/>
+      </memberdef>
+      <memberdef kind="function" id="classBessel__container_1a7558b135e83982af65c0005f23c6d162" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classAugmented__Bessel" kindref="compound">Augmented_Bessel</ref> &amp;</type>
+        <definition>Augmented_Bessel&amp; Bessel_container::back</definition>
+        <argsstring>()</argsstring>
+        <name>back</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/augmented_fun.h" line="228" column="22" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/augmented_fun.h" bodystart="228" bodyend="231"/>
+      </memberdef>
+      <memberdef kind="function" id="classBessel__container_1ae18851e0487fb0d619ee43510975520e" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>const <ref refid="classAugmented__Bessel" kindref="compound">Augmented_Bessel</ref> &amp;</type>
+        <definition>const Augmented_Bessel&amp; Bessel_container::front</definition>
+        <argsstring>() const</argsstring>
+        <name>front</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/augmented_fun.h" line="232" column="28" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/augmented_fun.h" bodystart="232" bodyend="235"/>
+      </memberdef>
+      <memberdef kind="function" id="classBessel__container_1a98abc515cc84f1a2921a9c41478e0dc7" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>const <ref refid="classAugmented__Bessel" kindref="compound">Augmented_Bessel</ref> &amp;</type>
+        <definition>const Augmented_Bessel&amp; Bessel_container::back</definition>
+        <argsstring>() const</argsstring>
+        <name>back</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/augmented_fun.h" line="236" column="28" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/augmented_fun.h" bodystart="236" bodyend="239"/>
+      </memberdef>
+      <memberdef kind="function" id="classBessel__container_1a1e50b62e903ca8d06b3977db3d340fb4" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>size_t</type>
+        <definition>size_t Bessel_container::size</definition>
+        <argsstring>() const</argsstring>
+        <name>size</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/augmented_fun.h" line="240" column="12" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/augmented_fun.h" bodystart="240" bodyend="241"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/augmented_fun.h" line="184" column="1" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/augmented_fun.h" bodystart="185" bodyend="242"/>
+    <listofallmembers>
+      <member refid="classBessel__container_1a1510227c8ea21f2ba06b3e46f3606652" prot="public" virt="non-virtual"><scope>Bessel_container</scope><name>add_function</name></member>
+      <member refid="classBessel__container_1a7558b135e83982af65c0005f23c6d162" prot="public" virt="non-virtual"><scope>Bessel_container</scope><name>back</name></member>
+      <member refid="classBessel__container_1a98abc515cc84f1a2921a9c41478e0dc7" prot="public" virt="non-virtual"><scope>Bessel_container</scope><name>back</name></member>
+      <member refid="classBessel__container_1a2b95855439c25ff908870bfa04980a4a" prot="public" virt="non-virtual"><scope>Bessel_container</scope><name>begin</name></member>
+      <member refid="classBessel__container_1a4ceb68d0bf135ffb6ab6b5bfc70c2a9b" prot="public" virt="non-virtual"><scope>Bessel_container</scope><name>begin</name></member>
+      <member refid="classBessel__container_1ad35ee37f569f6bb8f6fbd395f986b1ed" prot="public" virt="non-virtual"><scope>Bessel_container</scope><name>Bessel_container</name></member>
+      <member refid="classBessel__container_1ad21fcd6824f313d7247b3433dd6d9fe7" prot="public" virt="non-virtual"><scope>Bessel_container</scope><name>cbegin</name></member>
+      <member refid="classBessel__container_1a8d58caf8ca613e43e9c9eb2871ea277a" prot="public" virt="non-virtual"><scope>Bessel_container</scope><name>cend</name></member>
+      <member refid="classBessel__container_1a8350528de67ad80405d15f3039ddbac7" prot="public" virt="non-virtual"><scope>Bessel_container</scope><name>end</name></member>
+      <member refid="classBessel__container_1a5fd07722ee1972c6d49174487c85dd95" prot="public" virt="non-virtual"><scope>Bessel_container</scope><name>end</name></member>
+      <member refid="classBessel__container_1a04f14d61ee15063b4d183f352dd364a9" prot="public" virt="non-virtual"><scope>Bessel_container</scope><name>front</name></member>
+      <member refid="classBessel__container_1ae18851e0487fb0d619ee43510975520e" prot="public" virt="non-virtual"><scope>Bessel_container</scope><name>front</name></member>
+      <member refid="classBessel__container_1a774d81c5f2deca1a6dc30fedd4a497fc" prot="private" virt="non-virtual"><scope>Bessel_container</scope><name>functions</name></member>
+      <member refid="classBessel__container_1ae1ab7f821a6b6c0d2364d97cccf0c92c" prot="public" virt="non-virtual"><scope>Bessel_container</scope><name>get_function</name></member>
+      <member refid="classBessel__container_1a9dc7da627beb3fbac254a4d67609c098" prot="public" virt="non-virtual"><scope>Bessel_container</scope><name>get_function</name></member>
+      <member refid="classBessel__container_1a603c0f163ec60bc485fcb35c9397e0b7" prot="public" virt="non-virtual"><scope>Bessel_container</scope><name>get_index</name></member>
+      <member refid="classBessel__container_1a5619f95866a4195bf890dea87605fd5a" prot="public" virt="non-virtual"><scope>Bessel_container</scope><name>max_lm</name></member>
+      <member refid="classBessel__container_1a61369e07d70becabb60b5ef61230b882" prot="public" virt="non-virtual"><scope>Bessel_container</scope><name>min_lm</name></member>
+      <member refid="classBessel__container_1a1e50b62e903ca8d06b3977db3d340fb4" prot="public" virt="non-virtual"><scope>Bessel_container</scope><name>size</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

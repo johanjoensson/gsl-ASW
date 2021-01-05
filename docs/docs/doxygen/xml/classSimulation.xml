@@ -1,0 +1,729 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.20" xml:lang="en-US">
+  <compounddef id="classSimulation" kind="class" language="C++" prot="public">
+    <compoundname>Simulation</compoundname>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classSimulation_1a429228e33a8c535052e5986207585390" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; double &gt;</type>
+        <definition>std::vector&lt;double&gt; Simulation::kappas</definition>
+        <argsstring></argsstring>
+        <name>kappas</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/simulation.h" line="23" column="17" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/simulation.h" bodystart="23" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSimulation_1a05f070c061468cf6af3b7ad7657f8afe" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; <ref refid="classHankel__container" kindref="compound">Hankel_container</ref> &gt;</type>
+        <definition>std::vector&lt;Hankel_container&gt; Simulation::Hs_m</definition>
+        <argsstring></argsstring>
+        <name>Hs_m</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/simulation.h" line="24" column="17" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/simulation.h" bodystart="24" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSimulation_1ae05a6d3ff1c581a6c20d476b0bd3282c" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; <ref refid="classBessel__container" kindref="compound">Bessel_container</ref> &gt;</type>
+        <definition>std::vector&lt;Bessel_container&gt; Simulation::Bs_m</definition>
+        <argsstring></argsstring>
+        <name>Bs_m</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/simulation.h" line="25" column="17" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/simulation.h" bodystart="25" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSimulation_1a3cc9ed6e5bc4d0607fff63e616e27383" prot="private" static="no" mutable="no">
+        <type><ref refid="classCrystal__t" kindref="compound">Crystal_t</ref>&lt; 3, <ref refid="classAtom" kindref="compound">Atom</ref> &gt;</type>
+        <definition>Crystal_t&lt;3, Atom&gt; Simulation::cryst</definition>
+        <argsstring></argsstring>
+        <name>cryst</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/simulation.h" line="26" column="15" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/simulation.h" bodystart="26" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSimulation_1ae176484e963aec6f3bcf2e7b88540006" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; <ref refid="classLogarithmic__mesh" kindref="compound">Logarithmic_mesh</ref> &gt;</type>
+        <definition>std::vector&lt;Logarithmic_mesh&gt; Simulation::at_meshes</definition>
+        <argsstring></argsstring>
+        <name>at_meshes</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/simulation.h" line="27" column="17" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/simulation.h" bodystart="27" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSimulation_1ab0d02aa8bcce6c3e6d90ef359ca530c3" prot="private" static="no" mutable="no">
+        <type><ref refid="classPotential" kindref="compound">Potential</ref></type>
+        <definition>Potential Simulation::pot</definition>
+        <argsstring></argsstring>
+        <name>pot</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/simulation.h" line="28" column="15" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/simulation.h" bodystart="28" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSimulation_1a24ed1c22da0c38967ea33e2f2d4d65fd" prot="private" static="no" mutable="no">
+        <type><ref refid="classDensity" kindref="compound">Density</ref></type>
+        <definition>Density Simulation::n_m</definition>
+        <argsstring></argsstring>
+        <name>n_m</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/simulation.h" line="29" column="13" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/simulation.h" bodystart="29" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSimulation_1a7e26a625ede29e8509d7851703ca087d" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; <ref refid="classAugmented__spherical__wave" kindref="compound">Augmented_spherical_wave</ref> &gt;</type>
+        <definition>std::vector&lt;Augmented_spherical_wave&gt; Simulation::basis_valence</definition>
+        <argsstring></argsstring>
+        <name>basis_valence</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/simulation.h" line="30" column="17" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/simulation.h" bodystart="30" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSimulation_1ac68d98c9db4f7dedf397882d8167c45a" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; <ref refid="classAugmented__spherical__wave" kindref="compound">Augmented_spherical_wave</ref> &gt;</type>
+        <definition>std::vector&lt;Augmented_spherical_wave&gt; Simulation::basis_core</definition>
+        <argsstring></argsstring>
+        <name>basis_core</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/simulation.h" line="31" column="17" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/simulation.h" bodystart="31" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSimulation_1a3cfb428eb533edd5d5d97c98d1513f40" prot="private" static="no" mutable="no">
+        <type>std::map&lt; GSL::Vector, std::pair&lt; GSL::Matrix_cx, GSL::Vector &gt;, <ref refid="structGSLVecCompare" kindref="compound">GSLVecCompare</ref> &gt;</type>
+        <definition>std::map&lt;GSL::Vector, std::pair&lt;GSL::Matrix_cx, GSL::Vector&gt;, GSLVecCompare&gt; Simulation::k_eigenvals</definition>
+        <argsstring></argsstring>
+        <name>k_eigenvals</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/simulation.h" line="32" column="14" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/simulation.h" bodystart="32" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSimulation_1a4a3e754c3375afb4f43ca96017151265" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; GSL::Matrix &gt;</type>
+        <definition>std::vector&lt;GSL::Matrix&gt; Simulation::XH1</definition>
+        <argsstring></argsstring>
+        <name>XH1</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/simulation.h" line="33" column="17" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/simulation.h" bodystart="33" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSimulation_1aeea7062671682d810ee2bcdf40ac4dad" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; GSL::Matrix &gt;</type>
+        <definition>std::vector&lt;GSL::Matrix&gt; Simulation::XS1</definition>
+        <argsstring></argsstring>
+        <name>XS1</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/simulation.h" line="33" column="21" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/simulation.h" bodystart="33" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSimulation_1a082512bd08b30107aa0c7baebdfd6f93" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; GSL::Matrix &gt;</type>
+        <definition>std::vector&lt;GSL::Matrix&gt; Simulation::XH2</definition>
+        <argsstring></argsstring>
+        <name>XH2</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/simulation.h" line="33" column="25" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/simulation.h" bodystart="33" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSimulation_1a0c4234ed84a30ee55c857b847bf59f6b" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; GSL::Matrix &gt;</type>
+        <definition>std::vector&lt;GSL::Matrix&gt; Simulation::XS2</definition>
+        <argsstring></argsstring>
+        <name>XS2</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/simulation.h" line="33" column="29" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/simulation.h" bodystart="33" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSimulation_1a1967ba9345efe762bf375b328c6d80e8" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; GSL::Matrix &gt;</type>
+        <definition>std::vector&lt;GSL::Matrix&gt; Simulation::XH3</definition>
+        <argsstring></argsstring>
+        <name>XH3</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/simulation.h" line="33" column="33" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/simulation.h" bodystart="33" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSimulation_1a7f40320b52797e7cc64115d44063f19b" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; GSL::Matrix &gt;</type>
+        <definition>std::vector&lt;GSL::Matrix&gt; Simulation::XS3</definition>
+        <argsstring></argsstring>
+        <name>XS3</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/simulation.h" line="33" column="37" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/simulation.h" bodystart="33" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSimulation_1a3455bd43ba4ebdd0cd2d50876ae556a5" prot="private" static="no" mutable="no">
+        <type><ref refid="classBloch__summed__structure__constant_1_1Container" kindref="compound">Bloch_summed_structure_constant::Container</ref></type>
+        <definition>Bloch_summed_structure_constant::Container Simulation::B_m</definition>
+        <argsstring></argsstring>
+        <name>B_m</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/simulation.h" line="34" column="48" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/simulation.h" bodystart="34" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-func">
+      <memberdef kind="function" id="classSimulation_1ae2ba5678e1b2a22836bf0ee8003c6f5e" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Simulation::set_up_crystal</definition>
+        <argsstring>()</argsstring>
+        <name>set_up_crystal</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/simulation.h" line="36" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classSimulation_1a79d861c8ffecb49556bc672ea7795ac6" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Simulation::set_up_basis</definition>
+        <argsstring>()</argsstring>
+        <name>set_up_basis</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/simulation.h" line="37" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classSimulation_1a06b49cfea5e3f9ecc866a61dd003c0de" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Simulation::set_up_augmented_functions</definition>
+        <argsstring>()</argsstring>
+        <name>set_up_augmented_functions</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/simulation.h" line="38" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classSimulation_1ad8937b0dfde058ea41d47ec8db41aeae" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Simulation::set_up_potential</definition>
+        <argsstring>(const XC_FUN func)</argsstring>
+        <name>set_up_potential</name>
+        <param>
+          <type>const XC_FUN</type>
+          <declname>func</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/simulation.h" line="39" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classSimulation_1a75052abe18726da35fecaf95ce637f76" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Simulation::init_augmented_functions</definition>
+        <argsstring>()</argsstring>
+        <name>init_augmented_functions</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/simulation.h" line="40" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classSimulation_1a24d500fb5e023c9da78825a921ef21f3" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Simulation::add_states</definition>
+        <argsstring>(const Site_t&lt; 3 &gt; &amp;center, const double kappa)</argsstring>
+        <name>add_states</name>
+        <param>
+          <type>const <ref refid="classSite__t" kindref="compound">Site_t</ref>&lt; 3 &gt; &amp;</type>
+          <declname>center</declname>
+        </param>
+        <param>
+          <type>const double</type>
+          <declname>kappa</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/simulation.h" line="43" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classSimulation_1a97e377cc3986cf388bdd0ca7f753a592" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>double</type>
+        <definition>double Simulation::X_H1</definition>
+        <argsstring>(const Augmented_Hankel &amp;Ht1, const Augmented_Hankel &amp;Ht2, const Site_t&lt; 3 &gt; &amp;at)</argsstring>
+        <name>X_H1</name>
+        <param>
+          <type>const <ref refid="classAugmented__Hankel" kindref="compound">Augmented_Hankel</ref> &amp;</type>
+          <declname>Ht1</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classAugmented__Hankel" kindref="compound">Augmented_Hankel</ref> &amp;</type>
+          <declname>Ht2</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classSite__t" kindref="compound">Site_t</ref>&lt; 3 &gt; &amp;</type>
+          <declname>at</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/simulation.h" line="45" column="12"/>
+      </memberdef>
+      <memberdef kind="function" id="classSimulation_1aa8007415eeb682e34fe39c28014d8a28" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>double</type>
+        <definition>double Simulation::X_H2</definition>
+        <argsstring>(const Augmented_Hankel &amp;Ht1, const Augmented_Bessel &amp;Jt2, const Site_t&lt; 3 &gt; &amp;at)</argsstring>
+        <name>X_H2</name>
+        <param>
+          <type>const <ref refid="classAugmented__Hankel" kindref="compound">Augmented_Hankel</ref> &amp;</type>
+          <declname>Ht1</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classAugmented__Bessel" kindref="compound">Augmented_Bessel</ref> &amp;</type>
+          <declname>Jt2</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classSite__t" kindref="compound">Site_t</ref>&lt; 3 &gt; &amp;</type>
+          <declname>at</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/simulation.h" line="46" column="12"/>
+      </memberdef>
+      <memberdef kind="function" id="classSimulation_1a7629bde77e318d14d891e064fd0535ef" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>double</type>
+        <definition>double Simulation::X_H3</definition>
+        <argsstring>(const Augmented_Bessel &amp;Jt1, const Augmented_Bessel &amp;Jt2, const Site_t&lt; 3 &gt; &amp;at)</argsstring>
+        <name>X_H3</name>
+        <param>
+          <type>const <ref refid="classAugmented__Bessel" kindref="compound">Augmented_Bessel</ref> &amp;</type>
+          <declname>Jt1</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classAugmented__Bessel" kindref="compound">Augmented_Bessel</ref> &amp;</type>
+          <declname>Jt2</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classSite__t" kindref="compound">Site_t</ref>&lt; 3 &gt; &amp;</type>
+          <declname>at</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/simulation.h" line="47" column="12"/>
+      </memberdef>
+      <memberdef kind="function" id="classSimulation_1a29b200b693c185087f25bc00dc974c8e" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>double</type>
+        <definition>double Simulation::X_S1</definition>
+        <argsstring>(const Augmented_Hankel &amp;Ht1, const Augmented_Hankel &amp;Ht2, const Site_t&lt; 3 &gt; &amp;at)</argsstring>
+        <name>X_S1</name>
+        <param>
+          <type>const <ref refid="classAugmented__Hankel" kindref="compound">Augmented_Hankel</ref> &amp;</type>
+          <declname>Ht1</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classAugmented__Hankel" kindref="compound">Augmented_Hankel</ref> &amp;</type>
+          <declname>Ht2</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classSite__t" kindref="compound">Site_t</ref>&lt; 3 &gt; &amp;</type>
+          <declname>at</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/simulation.h" line="48" column="12"/>
+      </memberdef>
+      <memberdef kind="function" id="classSimulation_1a2352af431018c2e65289efe23e633f81" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>double</type>
+        <definition>double Simulation::X_S2</definition>
+        <argsstring>(const Augmented_Hankel &amp;Ht1, const Augmented_Bessel &amp;Jt2, const Site_t&lt; 3 &gt; &amp;at)</argsstring>
+        <name>X_S2</name>
+        <param>
+          <type>const <ref refid="classAugmented__Hankel" kindref="compound">Augmented_Hankel</ref> &amp;</type>
+          <declname>Ht1</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classAugmented__Bessel" kindref="compound">Augmented_Bessel</ref> &amp;</type>
+          <declname>Jt2</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classSite__t" kindref="compound">Site_t</ref>&lt; 3 &gt; &amp;</type>
+          <declname>at</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/simulation.h" line="49" column="12"/>
+      </memberdef>
+      <memberdef kind="function" id="classSimulation_1a6cbcdc726437a9411a544fe07a82f557" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>double</type>
+        <definition>double Simulation::X_S3</definition>
+        <argsstring>(const Augmented_Bessel &amp;Jt1, const Augmented_Bessel &amp;Jt2, const Site_t&lt; 3 &gt; &amp;at)</argsstring>
+        <name>X_S3</name>
+        <param>
+          <type>const <ref refid="classAugmented__Bessel" kindref="compound">Augmented_Bessel</ref> &amp;</type>
+          <declname>Jt1</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classAugmented__Bessel" kindref="compound">Augmented_Bessel</ref> &amp;</type>
+          <declname>Jt2</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classSite__t" kindref="compound">Site_t</ref>&lt; 3 &gt; &amp;</type>
+          <declname>at</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/simulation.h" line="50" column="12"/>
+      </memberdef>
+      <memberdef kind="function" id="classSimulation_1a3e976b8029a7e884848ac81a47ef0f80" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>GSL::Complex</type>
+        <definition>GSL::Complex Simulation::H_element</definition>
+        <argsstring>(const size_t i1, const size_t i2, const GSL::Vector &amp;kp)</argsstring>
+        <name>H_element</name>
+        <param>
+          <type>const size_t</type>
+          <declname>i1</declname>
+        </param>
+        <param>
+          <type>const size_t</type>
+          <declname>i2</declname>
+        </param>
+        <param>
+          <type>const GSL::Vector &amp;</type>
+          <declname>kp</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/simulation.h" line="53" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classSimulation_1a1036739fba0dd6ea5cb347ba8f00a0b9" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>GSL::Complex</type>
+        <definition>GSL::Complex Simulation::S_element</definition>
+        <argsstring>(const size_t i1, const size_t i2, const GSL::Vector &amp;kp)</argsstring>
+        <name>S_element</name>
+        <param>
+          <type>const size_t</type>
+          <declname>i1</declname>
+        </param>
+        <param>
+          <type>const size_t</type>
+          <declname>i2</declname>
+        </param>
+        <param>
+          <type>const GSL::Vector &amp;</type>
+          <declname>kp</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/simulation.h" line="54" column="18"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classSimulation_1aa024b116858a0a5a9ac3de802f984620" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Simulation::Simulation</definition>
+        <argsstring>(const Crystal_t&lt; 3, Atom &gt; &amp;crystal, const XC_FUN func, const std::vector&lt; double &gt; kappas_n, std::function&lt; double(const size_t, const double)&gt; at_pot=[](const size_t Z, const double r) { return -2.*static_cast&lt; double &gt;(Z)/r;})</argsstring>
+        <name>Simulation</name>
+        <param>
+          <type>const <ref refid="classCrystal__t" kindref="compound">Crystal_t</ref>&lt; 3, <ref refid="classAtom" kindref="compound">Atom</ref> &gt; &amp;</type>
+          <declname>crystal</declname>
+        </param>
+        <param>
+          <type>const XC_FUN</type>
+          <declname>func</declname>
+        </param>
+        <param>
+          <type>const std::vector&lt; double &gt;</type>
+          <declname>kappas_n</declname>
+        </param>
+        <param>
+          <type>std::function&lt; double(const size_t, const double)&gt;</type>
+          <declname>at_pot</declname>
+          <defval>[](const size_t Z, const double r) { return -2.*static_cast&lt; double &gt;(Z)/r;}</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/simulation.h" line="56" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classSimulation_1a1f15465c56736f2aa7bb9015d57485a8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Simulation::set_up_X_matrices</definition>
+        <argsstring>()</argsstring>
+        <name>set_up_X_matrices</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/simulation.h" line="63" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classSimulation_1a97a40ce3e3ec60d3c01014876d5c97d9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>const GSL::Matrix_cx</type>
+        <definition>const GSL::Matrix_cx Simulation::set_H</definition>
+        <argsstring>(const GSL::Vector &amp;kp)</argsstring>
+        <name>set_H</name>
+        <param>
+          <type>const GSL::Vector &amp;</type>
+          <declname>kp</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/simulation.h" line="64" column="26"/>
+      </memberdef>
+      <memberdef kind="function" id="classSimulation_1aad6acb4cfce16ce7b40cd3068964398b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>const GSL::Matrix_cx</type>
+        <definition>const GSL::Matrix_cx Simulation::set_S</definition>
+        <argsstring>(const GSL::Vector &amp;kp)</argsstring>
+        <name>set_S</name>
+        <param>
+          <type>const GSL::Vector &amp;</type>
+          <declname>kp</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/simulation.h" line="65" column="26"/>
+      </memberdef>
+      <memberdef kind="function" id="classSimulation_1ae5bcc0dac14df2b12eb543c48d2adcf3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Simulation::calc_eigen</definition>
+        <argsstring>(const GSL::Vector &amp;)</argsstring>
+        <name>calc_eigen</name>
+        <param>
+          <type>const GSL::Vector &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/simulation.h" line="67" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classSimulation_1a1945e5d12abe181d2c7d412f0b540ead" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Simulation::add_eigvals</definition>
+        <argsstring>(const GSL::Vector &amp;kp, const GSL::Vector &amp;eigvals)</argsstring>
+        <name>add_eigvals</name>
+        <param>
+          <type>const GSL::Vector &amp;</type>
+          <declname>kp</declname>
+        </param>
+        <param>
+          <type>const GSL::Vector &amp;</type>
+          <declname>eigvals</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/simulation.h" line="69" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classSimulation_1a9b21379e624cee3c33b043040ee14237" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Simulation::print_eigvals</definition>
+        <argsstring>(const K_mesh &amp;k_mesh)</argsstring>
+        <name>print_eigvals</name>
+        <param>
+          <type>const <ref refid="classK__mesh" kindref="compound">K_mesh</ref> &amp;</type>
+          <declname>k_mesh</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/simulation.h" line="70" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classSimulation_1a4d4cc4f18796e866b8195c8d9492d903" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>double</type>
+        <definition>double Simulation::canonical_band</definition>
+        <argsstring>(const lm l, const double kappa, const spin s, const GSL::Vector &amp;kp)</argsstring>
+        <name>canonical_band</name>
+        <param>
+          <type>const <ref refid="structlm" kindref="compound">lm</ref></type>
+          <declname>l</declname>
+        </param>
+        <param>
+          <type>const double</type>
+          <declname>kappa</declname>
+        </param>
+        <param>
+          <type>const spin</type>
+          <declname>s</declname>
+        </param>
+        <param>
+          <type>const GSL::Vector &amp;</type>
+          <declname>kp</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/simulation.h" line="72" column="12"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/simulation.h" line="22" column="1" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/simulation.h" bodystart="22" bodyend="74"/>
+    <listofallmembers>
+      <member refid="classSimulation_1a1945e5d12abe181d2c7d412f0b540ead" prot="public" virt="non-virtual"><scope>Simulation</scope><name>add_eigvals</name></member>
+      <member refid="classSimulation_1a24d500fb5e023c9da78825a921ef21f3" prot="private" virt="non-virtual"><scope>Simulation</scope><name>add_states</name></member>
+      <member refid="classSimulation_1ae176484e963aec6f3bcf2e7b88540006" prot="private" virt="non-virtual"><scope>Simulation</scope><name>at_meshes</name></member>
+      <member refid="classSimulation_1a3455bd43ba4ebdd0cd2d50876ae556a5" prot="private" virt="non-virtual"><scope>Simulation</scope><name>B_m</name></member>
+      <member refid="classSimulation_1ac68d98c9db4f7dedf397882d8167c45a" prot="private" virt="non-virtual"><scope>Simulation</scope><name>basis_core</name></member>
+      <member refid="classSimulation_1a7e26a625ede29e8509d7851703ca087d" prot="private" virt="non-virtual"><scope>Simulation</scope><name>basis_valence</name></member>
+      <member refid="classSimulation_1ae05a6d3ff1c581a6c20d476b0bd3282c" prot="private" virt="non-virtual"><scope>Simulation</scope><name>Bs_m</name></member>
+      <member refid="classSimulation_1ae5bcc0dac14df2b12eb543c48d2adcf3" prot="public" virt="non-virtual"><scope>Simulation</scope><name>calc_eigen</name></member>
+      <member refid="classSimulation_1a4d4cc4f18796e866b8195c8d9492d903" prot="public" virt="non-virtual"><scope>Simulation</scope><name>canonical_band</name></member>
+      <member refid="classSimulation_1a3cc9ed6e5bc4d0607fff63e616e27383" prot="private" virt="non-virtual"><scope>Simulation</scope><name>cryst</name></member>
+      <member refid="classSimulation_1a3e976b8029a7e884848ac81a47ef0f80" prot="private" virt="non-virtual"><scope>Simulation</scope><name>H_element</name></member>
+      <member refid="classSimulation_1a05f070c061468cf6af3b7ad7657f8afe" prot="private" virt="non-virtual"><scope>Simulation</scope><name>Hs_m</name></member>
+      <member refid="classSimulation_1a75052abe18726da35fecaf95ce637f76" prot="private" virt="non-virtual"><scope>Simulation</scope><name>init_augmented_functions</name></member>
+      <member refid="classSimulation_1a3cfb428eb533edd5d5d97c98d1513f40" prot="private" virt="non-virtual"><scope>Simulation</scope><name>k_eigenvals</name></member>
+      <member refid="classSimulation_1a429228e33a8c535052e5986207585390" prot="private" virt="non-virtual"><scope>Simulation</scope><name>kappas</name></member>
+      <member refid="classSimulation_1a24ed1c22da0c38967ea33e2f2d4d65fd" prot="private" virt="non-virtual"><scope>Simulation</scope><name>n_m</name></member>
+      <member refid="classSimulation_1ab0d02aa8bcce6c3e6d90ef359ca530c3" prot="private" virt="non-virtual"><scope>Simulation</scope><name>pot</name></member>
+      <member refid="classSimulation_1a9b21379e624cee3c33b043040ee14237" prot="public" virt="non-virtual"><scope>Simulation</scope><name>print_eigvals</name></member>
+      <member refid="classSimulation_1a1036739fba0dd6ea5cb347ba8f00a0b9" prot="private" virt="non-virtual"><scope>Simulation</scope><name>S_element</name></member>
+      <member refid="classSimulation_1a97a40ce3e3ec60d3c01014876d5c97d9" prot="public" virt="non-virtual"><scope>Simulation</scope><name>set_H</name></member>
+      <member refid="classSimulation_1aad6acb4cfce16ce7b40cd3068964398b" prot="public" virt="non-virtual"><scope>Simulation</scope><name>set_S</name></member>
+      <member refid="classSimulation_1a06b49cfea5e3f9ecc866a61dd003c0de" prot="private" virt="non-virtual"><scope>Simulation</scope><name>set_up_augmented_functions</name></member>
+      <member refid="classSimulation_1a79d861c8ffecb49556bc672ea7795ac6" prot="private" virt="non-virtual"><scope>Simulation</scope><name>set_up_basis</name></member>
+      <member refid="classSimulation_1ae2ba5678e1b2a22836bf0ee8003c6f5e" prot="private" virt="non-virtual"><scope>Simulation</scope><name>set_up_crystal</name></member>
+      <member refid="classSimulation_1ad8937b0dfde058ea41d47ec8db41aeae" prot="private" virt="non-virtual"><scope>Simulation</scope><name>set_up_potential</name></member>
+      <member refid="classSimulation_1a1f15465c56736f2aa7bb9015d57485a8" prot="public" virt="non-virtual"><scope>Simulation</scope><name>set_up_X_matrices</name></member>
+      <member refid="classSimulation_1aa024b116858a0a5a9ac3de802f984620" prot="public" virt="non-virtual"><scope>Simulation</scope><name>Simulation</name></member>
+      <member refid="classSimulation_1a97e377cc3986cf388bdd0ca7f753a592" prot="private" virt="non-virtual"><scope>Simulation</scope><name>X_H1</name></member>
+      <member refid="classSimulation_1aa8007415eeb682e34fe39c28014d8a28" prot="private" virt="non-virtual"><scope>Simulation</scope><name>X_H2</name></member>
+      <member refid="classSimulation_1a7629bde77e318d14d891e064fd0535ef" prot="private" virt="non-virtual"><scope>Simulation</scope><name>X_H3</name></member>
+      <member refid="classSimulation_1a29b200b693c185087f25bc00dc974c8e" prot="private" virt="non-virtual"><scope>Simulation</scope><name>X_S1</name></member>
+      <member refid="classSimulation_1a2352af431018c2e65289efe23e633f81" prot="private" virt="non-virtual"><scope>Simulation</scope><name>X_S2</name></member>
+      <member refid="classSimulation_1a6cbcdc726437a9411a544fe07a82f557" prot="private" virt="non-virtual"><scope>Simulation</scope><name>X_S3</name></member>
+      <member refid="classSimulation_1a4a3e754c3375afb4f43ca96017151265" prot="private" virt="non-virtual"><scope>Simulation</scope><name>XH1</name></member>
+      <member refid="classSimulation_1a082512bd08b30107aa0c7baebdfd6f93" prot="private" virt="non-virtual"><scope>Simulation</scope><name>XH2</name></member>
+      <member refid="classSimulation_1a1967ba9345efe762bf375b328c6d80e8" prot="private" virt="non-virtual"><scope>Simulation</scope><name>XH3</name></member>
+      <member refid="classSimulation_1aeea7062671682d810ee2bcdf40ac4dad" prot="private" virt="non-virtual"><scope>Simulation</scope><name>XS1</name></member>
+      <member refid="classSimulation_1a0c4234ed84a30ee55c857b847bf59f6b" prot="private" virt="non-virtual"><scope>Simulation</scope><name>XS2</name></member>
+      <member refid="classSimulation_1a7f40320b52797e7cc64115d44063f19b" prot="private" virt="non-virtual"><scope>Simulation</scope><name>XS3</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

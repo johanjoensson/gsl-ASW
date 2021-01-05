@@ -1,0 +1,382 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.20" xml:lang="en-US">
+  <compounddef id="simulation_8h" kind="file" language="C++">
+    <compoundname>simulation.h</compoundname>
+    <includes local="no">vector</includes>
+    <includes local="no">map</includes>
+    <includes local="no">functional</includes>
+    <includes refid="atomic__quantity_8h" local="yes">atomic_quantity.h</includes>
+    <includes refid="augmented__spherical__wave_8h" local="yes">augmented_spherical_wave.h</includes>
+    <includes refid="crystal_8h" local="yes">crystal.h</includes>
+    <includes refid="site_8h" local="yes">site.h</includes>
+    <includes refid="xc__func_8h" local="yes">xc_func.h</includes>
+    <includes refid="k-mesh_8h" local="yes">k-mesh.h</includes>
+    <includes refid="log__mesh_8h" local="yes">log_mesh.h</includes>
+    <includes refid="structure__const_8h" local="yes">structure_const.h</includes>
+    <incdepgraph>
+      <node id="4">
+        <label>functional</label>
+      </node>
+      <node id="10">
+        <label>GSLpp/special_functions.h</label>
+      </node>
+      <node id="21">
+        <label>xc.h</label>
+      </node>
+      <node id="24">
+        <label>utils.h</label>
+        <link refid="utils_8h_source"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="25" relation="include">
+        </childnode>
+      </node>
+      <node id="19">
+        <label>site.h</label>
+        <link refid="site_8h_source"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>GSLpp/vector.h</label>
+      </node>
+      <node id="16">
+        <label>lattice.h</label>
+        <link refid="lattice_8h_source"/>
+        <childnode refid="17" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
+      </node>
+      <node id="26">
+        <label>augmented_fun.h</label>
+        <link refid="augmented__fun_8h_source"/>
+        <childnode refid="24" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+      </node>
+      <node id="12">
+        <label>crystal.h</label>
+        <link refid="crystal_8h_source"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
+        <childnode refid="19" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="17" relation="include">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>map</label>
+      </node>
+      <node id="14">
+        <label>unordered_set</label>
+      </node>
+      <node id="18">
+        <label>GSLpp/linalg.h</label>
+      </node>
+      <node id="31">
+        <label>bloch_sum.h</label>
+        <link refid="bloch__sum_8h_source"/>
+        <childnode refid="32" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="35" relation="include">
+        </childnode>
+        <childnode refid="29" relation="include">
+        </childnode>
+        <childnode refid="30" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="32">
+        <label>spherical_fun.h</label>
+        <link refid="spherical__fun_8h_source"/>
+        <childnode refid="33" relation="include">
+        </childnode>
+        <childnode refid="24" relation="include">
+        </childnode>
+        <childnode refid="34" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+      </node>
+      <node id="33">
+        <label>ostream</label>
+      </node>
+      <node id="20">
+        <label>xc_func.h</label>
+        <link refid="xc__func_8h_source"/>
+        <childnode refid="21" relation="include">
+        </childnode>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="22" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="27">
+        <label>k-mesh.h</label>
+        <link refid="k-mesh_8h_source"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="17" relation="include">
+        </childnode>
+      </node>
+      <node id="9">
+        <label>log_mesh.h</label>
+        <link refid="log__mesh_8h_source"/>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+      <node id="7">
+        <label>atom.h</label>
+        <link refid="atom_8h_source"/>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+      </node>
+      <node id="30">
+        <label>tuple</label>
+      </node>
+      <node id="2">
+        <label>vector</label>
+      </node>
+      <node id="5">
+        <label>atomic_quantity.h</label>
+        <link refid="atomic__quantity_8h_source"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="20" relation="include">
+        </childnode>
+        <childnode refid="19" relation="include">
+        </childnode>
+      </node>
+      <node id="35">
+        <label>GSLpp/complex.h</label>
+      </node>
+      <node id="17">
+        <label>GSLpp/matrix.h</label>
+      </node>
+      <node id="34">
+        <label>ewald_int.h</label>
+        <link refid="ewald__int_8h_source"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="24" relation="include">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>simulation.h</label>
+        <link refid="simulation_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="23" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="19" relation="include">
+        </childnode>
+        <childnode refid="20" relation="include">
+        </childnode>
+        <childnode refid="27" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="28" relation="include">
+        </childnode>
+      </node>
+      <node id="25">
+        <label>iostream</label>
+      </node>
+      <node id="11">
+        <label>cstddef</label>
+      </node>
+      <node id="29">
+        <label>unordered_map</label>
+      </node>
+      <node id="8">
+        <label>gsl/gsl_math.h</label>
+      </node>
+      <node id="23">
+        <label>augmented_spherical_wave.h</label>
+        <link refid="augmented__spherical__wave_8h_source"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="24" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="26" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+      </node>
+      <node id="28">
+        <label>structure_const.h</label>
+        <link refid="structure__const_8h_source"/>
+        <childnode refid="25" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="29" relation="include">
+        </childnode>
+        <childnode refid="30" relation="include">
+        </childnode>
+        <childnode refid="24" relation="include">
+        </childnode>
+        <childnode refid="31" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="35" relation="include">
+        </childnode>
+      </node>
+      <node id="15">
+        <label>set</label>
+      </node>
+      <node id="13">
+        <label>algorithm</label>
+      </node>
+      <node id="22">
+        <label>memory</label>
+      </node>
+    </incdepgraph>
+    <innerclass refid="structGSLVecCompare" prot="public">GSLVecCompare</innerclass>
+    <innerclass refid="classSimulation" prot="public">Simulation</innerclass>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#ifndef<sp/>SIMULATION_H</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SIMULATION_H</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;vector&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;map&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;functional&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;atomic_quantity.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;augmented_spherical_wave.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;crystal.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;site.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;xc_func.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;k-mesh.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="12"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;log_mesh.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="13"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;structure_const.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="14"><highlight class="normal"></highlight></codeline>
+<codeline lineno="15" refid="structGSLVecCompare" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structGSLVecCompare" kindref="compound">GSLVecCompare</ref>{</highlight></codeline>
+<codeline lineno="16"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>operator()(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>GSL::Vector&amp;<sp/>lhs,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>GSL::Vector&amp;<sp/>rhs)</highlight><highlight class="keyword"><sp/>const</highlight></codeline>
+<codeline lineno="17"><highlight class="keyword"><sp/><sp/><sp/><sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="18"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>(lhs.norm&lt;</highlight><highlight class="keywordtype">double</highlight><highlight class="normal">&gt;()<sp/>&lt;<sp/>rhs.norm&lt;</highlight><highlight class="keywordtype">double</highlight><highlight class="normal">&gt;());</highlight></codeline>
+<codeline lineno="19"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="20"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="21"><highlight class="normal"></highlight></codeline>
+<codeline lineno="22" refid="classSimulation" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classSimulation" kindref="compound">Simulation</ref>{</highlight></codeline>
+<codeline lineno="23"><highlight class="normal"><sp/><sp/><sp/><sp/>std::vector&lt;double&gt;<sp/>kappas;</highlight></codeline>
+<codeline lineno="24"><highlight class="normal"><sp/><sp/><sp/><sp/>std::vector&lt;Hankel_container&gt;<sp/>Hs_m;</highlight></codeline>
+<codeline lineno="25"><highlight class="normal"><sp/><sp/><sp/><sp/>std::vector&lt;Bessel_container&gt;<sp/>Bs_m;</highlight></codeline>
+<codeline lineno="26"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classCrystal__t" kindref="compound">Crystal_t&lt;3, Atom&gt;</ref><sp/>cryst;</highlight></codeline>
+<codeline lineno="27"><highlight class="normal"><sp/><sp/><sp/><sp/>std::vector&lt;Logarithmic_mesh&gt;<sp/>at_meshes;</highlight></codeline>
+<codeline lineno="28"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classPotential" kindref="compound">Potential</ref><sp/>pot;</highlight></codeline>
+<codeline lineno="29"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classDensity" kindref="compound">Density</ref><sp/>n_m;</highlight></codeline>
+<codeline lineno="30"><highlight class="normal"><sp/><sp/><sp/><sp/>std::vector&lt;Augmented_spherical_wave&gt;<sp/>basis_valence;</highlight></codeline>
+<codeline lineno="31"><highlight class="normal"><sp/><sp/><sp/><sp/>std::vector&lt;Augmented_spherical_wave&gt;<sp/>basis_core;</highlight></codeline>
+<codeline lineno="32"><highlight class="normal"><sp/><sp/><sp/><sp/>std::map&lt;GSL::Vector,<sp/>std::pair&lt;GSL::Matrix_cx,<sp/>GSL::Vector&gt;,<sp/><ref refid="structGSLVecCompare" kindref="compound">GSLVecCompare</ref>&gt;<sp/>k_eigenvals;</highlight></codeline>
+<codeline lineno="33"><highlight class="normal"><sp/><sp/><sp/><sp/>std::vector&lt;GSL::Matrix&gt;<sp/>XH1,<sp/>XS1,<sp/>XH2,<sp/>XS2,<sp/>XH3,<sp/>XS3;</highlight></codeline>
+<codeline lineno="34"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classBloch__summed__structure__constant_1_1Container" kindref="compound">Bloch_summed_structure_constant::Container</ref><sp/>B_m;</highlight></codeline>
+<codeline lineno="35"><highlight class="normal"></highlight></codeline>
+<codeline lineno="36"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>set_up_crystal();</highlight></codeline>
+<codeline lineno="37"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>set_up_basis();</highlight></codeline>
+<codeline lineno="38"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>set_up_augmented_functions();</highlight></codeline>
+<codeline lineno="39"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>set_up_potential(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>XC_FUN<sp/>func);</highlight></codeline>
+<codeline lineno="40"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>init_augmented_functions();</highlight></codeline>
+<codeline lineno="41"><highlight class="normal"></highlight></codeline>
+<codeline lineno="42"><highlight class="normal"></highlight></codeline>
+<codeline lineno="43"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>add_states(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classSite__t" kindref="compound">Site_t&lt;3&gt;</ref>&amp;<sp/>center,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>kappa);</highlight></codeline>
+<codeline lineno="44"><highlight class="normal"></highlight></codeline>
+<codeline lineno="45"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>X_H1(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classAugmented__Hankel" kindref="compound">Augmented_Hankel</ref>&amp;<sp/>Ht1,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classAugmented__Hankel" kindref="compound">Augmented_Hankel</ref>&amp;<sp/>Ht2,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classSite__t" kindref="compound">Site_t&lt;3&gt;</ref>&amp;<sp/>at);</highlight></codeline>
+<codeline lineno="46"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>X_H2(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classAugmented__Hankel" kindref="compound">Augmented_Hankel</ref>&amp;<sp/>Ht1,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classAugmented__Bessel" kindref="compound">Augmented_Bessel</ref>&amp;<sp/>Jt2,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classSite__t" kindref="compound">Site_t&lt;3&gt;</ref>&amp;<sp/>at);</highlight></codeline>
+<codeline lineno="47"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>X_H3(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classAugmented__Bessel" kindref="compound">Augmented_Bessel</ref>&amp;<sp/>Jt1,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classAugmented__Bessel" kindref="compound">Augmented_Bessel</ref>&amp;<sp/>Jt2,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classSite__t" kindref="compound">Site_t&lt;3&gt;</ref>&amp;<sp/>at);</highlight></codeline>
+<codeline lineno="48"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>X_S1(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classAugmented__Hankel" kindref="compound">Augmented_Hankel</ref>&amp;<sp/>Ht1,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classAugmented__Hankel" kindref="compound">Augmented_Hankel</ref>&amp;<sp/>Ht2,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classSite__t" kindref="compound">Site_t&lt;3&gt;</ref>&amp;<sp/>at);</highlight></codeline>
+<codeline lineno="49"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>X_S2(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classAugmented__Hankel" kindref="compound">Augmented_Hankel</ref>&amp;<sp/>Ht1,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classAugmented__Bessel" kindref="compound">Augmented_Bessel</ref>&amp;<sp/>Jt2,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classSite__t" kindref="compound">Site_t&lt;3&gt;</ref>&amp;<sp/>at);</highlight></codeline>
+<codeline lineno="50"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>X_S3(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classAugmented__Bessel" kindref="compound">Augmented_Bessel</ref>&amp;<sp/>Jt1,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classAugmented__Bessel" kindref="compound">Augmented_Bessel</ref>&amp;<sp/>Jt2,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classSite__t" kindref="compound">Site_t&lt;3&gt;</ref>&amp;<sp/>at);</highlight></codeline>
+<codeline lineno="51"><highlight class="normal"></highlight></codeline>
+<codeline lineno="52"><highlight class="normal"></highlight></codeline>
+<codeline lineno="53"><highlight class="normal"><sp/><sp/><sp/><sp/>GSL::Complex<sp/>H_element(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>i1,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>i2,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>GSL::Vector&amp;<sp/>kp);</highlight></codeline>
+<codeline lineno="54"><highlight class="normal"><sp/><sp/><sp/><sp/>GSL::Complex<sp/>S_element(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>i1,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>i2,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>GSL::Vector&amp;<sp/>kp);</highlight></codeline>
+<codeline lineno="55"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="56"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classSimulation" kindref="compound">Simulation</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classCrystal__t" kindref="compound">Crystal_t&lt;3, Atom&gt;</ref>&amp;<sp/>crystal,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>XC_FUN<sp/>func,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::vector&lt;double&gt;<sp/>kappas_n,</highlight></codeline>
+<codeline lineno="57"><highlight class="normal"><sp/><sp/><sp/><sp/>std::function&lt;</highlight><highlight class="keywordtype">double</highlight><highlight class="normal">(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal">)&gt;<sp/>at_pot<sp/>=</highlight></codeline>
+<codeline lineno="58"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>[](</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>Z,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>r)</highlight></codeline>
+<codeline lineno="59"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="60"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>-2.*</highlight><highlight class="keyword">static_cast&lt;</highlight><highlight class="keywordtype">double</highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(Z)/r;</highlight></codeline>
+<codeline lineno="61"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>});</highlight></codeline>
+<codeline lineno="62"><highlight class="normal"></highlight></codeline>
+<codeline lineno="63"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>set_up_X_matrices();</highlight></codeline>
+<codeline lineno="64"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>GSL::Matrix_cx<sp/>set_H(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>GSL::Vector&amp;<sp/>kp);</highlight></codeline>
+<codeline lineno="65"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>GSL::Matrix_cx<sp/>set_S(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>GSL::Vector&amp;<sp/>kp);</highlight></codeline>
+<codeline lineno="66"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>const<sp/>std::pair&lt;GSL::Matrix_cx,<sp/>GSL::Vector&gt;<sp/>calc_eigen(const<sp/>GSL::Vector&amp;)<sp/>const;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="67"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>calc_eigen(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>GSL::Vector&amp;);</highlight></codeline>
+<codeline lineno="68"><highlight class="normal"></highlight></codeline>
+<codeline lineno="69"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>add_eigvals(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>GSL::Vector&amp;<sp/>kp,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>GSL::Vector&amp;<sp/>eigvals);</highlight></codeline>
+<codeline lineno="70"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>print_eigvals(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classK__mesh" kindref="compound">K_mesh</ref>&amp;<sp/>k_mesh);</highlight></codeline>
+<codeline lineno="71"><highlight class="normal"></highlight></codeline>
+<codeline lineno="72"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>canonical_band(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="structlm" kindref="compound">lm</ref><sp/>l,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>kappa,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>spin<sp/>s,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>GSL::Vector&amp;<sp/>kp);</highlight></codeline>
+<codeline lineno="73"><highlight class="normal"></highlight></codeline>
+<codeline lineno="74"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="75"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/>//<sp/>SIMULATION_H</highlight></codeline>
+    </programlisting>
+    <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/simulation.h"/>
+  </compounddef>
+</doxygen>

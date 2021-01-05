@@ -9,8 +9,8 @@ This is a hobby project for me (Johan Jösson), the goal is to create a working 
 * The XCFun DFT library, <http://dftlibs.org/xcfun/>.
 
 ## Documentation
-* [Doxygen](docs/html/index.html)
-* [Sphinx](docs/build/sphinx-index.html)
+* [Doxygen](docs/docs/html/index.html)
+* [Sphinx](docs/docs/sphinx/index.html)
 ### LICENCE
 
     Copyright (C) 2018  Johan Jönsson

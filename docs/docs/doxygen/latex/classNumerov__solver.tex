@@ -1,0 +1,77 @@
+\hypertarget{classNumerov__solver}{}\doxysection{Numerov\+\_\+solver Class Reference}
+\label{classNumerov__solver}\index{Numerov\_solver@{Numerov\_solver}}
+
+
+{\ttfamily \#include $<$numerov\+\_\+solver.\+h$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$class Iter\+\_\+res , class Iter\+\_\+g , class Iter\+\_\+s , class Iter\+\_\+left\+\_\+init , class Iter\+\_\+right\+\_\+init , class T  = double$>$ }\\Iter\+\_\+res \mbox{\hyperlink{classNumerov__solver_a65b9b13d9163fe41de27069f420d8ee3}{solve}} (Iter\+\_\+res res\+\_\+start, Iter\+\_\+res res\+\_\+end, Iter\+\_\+g g\+\_\+start, Iter\+\_\+g g\+\_\+end, Iter\+\_\+s s\+\_\+start, Iter\+\_\+s s\+\_\+end, Iter\+\_\+left\+\_\+init left\+\_\+start, Iter\+\_\+left\+\_\+init left\+\_\+end, Iter\+\_\+right\+\_\+init right\+\_\+start, Iter\+\_\+right\+\_\+init right\+\_\+end, Iter\+\_\+res inv)
+\item 
+{\footnotesize template$<$class Iter\+\_\+res , class Iter\+\_\+g , class Iter\+\_\+s , class Iter\+\_\+left\+\_\+init , class Iter\+\_\+right\+\_\+init , class T  = double$>$ }\\Iter\+\_\+res \mbox{\hyperlink{classNumerov__solver_ad36887819ca68c3ea9033a065c627c6d}{solve}} (Iter\+\_\+res res\+\_\+start, Iter\+\_\+res res\+\_\+end, Iter\+\_\+g g\+\_\+start, Iter\+\_\+g g\+\_\+end, Iter\+\_\+s s\+\_\+start, Iter\+\_\+s s\+\_\+end, Iter\+\_\+left\+\_\+init left\+\_\+start, Iter\+\_\+left\+\_\+init left\+\_\+end)
+\item 
+{\footnotesize template$<$class Iter\+\_\+res , class Iter\+\_\+g , class Iter\+\_\+s , class T  = double$>$ }\\int \mbox{\hyperlink{classNumerov__solver_aa1937256e243d0a408cb71928d857713}{derivative\+\_\+diff}} (Iter\+\_\+res res\+\_\+start, Iter\+\_\+g res\+\_\+end, Iter\+\_\+res inv, Iter\+\_\+g g\+\_\+start, Iter\+\_\+s s\+\_\+start, double tol=1e-\/6)
+\item 
+\mbox{\Hypertarget{classNumerov__solver_aeae9b9ffa364c9e7eb86f5444f839a33}\label{classNumerov__solver_aeae9b9ffa364c9e7eb86f5444f839a33}} 
+{\footnotesize template$<$class Iter\+\_\+res $>$ }\\int {\bfseries count\+\_\+nodes} (Iter\+\_\+res start, Iter\+\_\+res end)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+A class for solving differential equations using the Numerov method 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classNumerov__solver_aa1937256e243d0a408cb71928d857713}\label{classNumerov__solver_aa1937256e243d0a408cb71928d857713}} 
+\index{Numerov\_solver@{Numerov\_solver}!derivative\_diff@{derivative\_diff}}
+\index{derivative\_diff@{derivative\_diff}!Numerov\_solver@{Numerov\_solver}}
+\doxysubsubsection{\texorpdfstring{derivative\_diff()}{derivative\_diff()}}
+{\footnotesize\ttfamily template$<$class Iter\+\_\+res , class Iter\+\_\+g , class Iter\+\_\+s , class T  = double$>$ \\
+int Numerov\+\_\+solver\+::derivative\+\_\+diff (\begin{DoxyParamCaption}\item[{Iter\+\_\+res}]{res\+\_\+start,  }\item[{Iter\+\_\+g}]{res\+\_\+end,  }\item[{Iter\+\_\+res}]{inv,  }\item[{Iter\+\_\+g}]{g\+\_\+start,  }\item[{Iter\+\_\+s}]{s\+\_\+start,  }\item[{double}]{tol = {\ttfamily 1e-\/6} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Use Numerov\textquotesingle{}s algorithm to estimate the difference in derivatives at the matching point. \textbackslash{}t\+\_\+\+\_\+\+Iter\+\_\+res\+\_\+\+\_\+ -\/ iterator to result container (e.\+g. std\+::vector)~\newline
+ \textbackslash{}t\+\_\+\+\_\+\+Iter\+\_\+g\+\_\+\+\_\+ -\/ iterator to g container (e.\+g. std\+::vector)~\newline
+ \textbackslash{}t\+\_\+\+\_\+\+Iter\+\_\+s\+\_\+\+\_\+ -\/ iterator to s container (e.\+g. std\+::vector)~\newline
+ \textbackslash{}t\+\_\+\+\_\+\+T\+\_\+\+\_\+ -\/ Class representing numerical values (e.\+g. double)~\newline
+ Input\+:~\newline
+ \textbackslash{}t\+\_\+\+\_\+res\+\_\+start\+\_\+\+\_\+ -\/ iterator to the first element in the result container~\newline
+ \textbackslash{}t\+\_\+\+\_\+res\+\_\+end\+\_\+\+\_\+ -\/ iterator one step part the last element in the result container~\newline
+ \textbackslash{}t\+\_\+\+\_\+inv\+\_\+\+\_\+ -\/ iterator to result at inversion point~\newline
+ \textbackslash{}t\+\_\+\+\_\+g\+\_\+start\+\_\+\+\_\+ -\/ iterator to the start of the g container~\newline
+ \textbackslash{}t\+\_\+\+\_\+s\+\_\+start\+\_\+\+\_\+ -\/ iterator to the start of the s container~\newline
+Returns\+:~\newline
+\textbackslash{}t Approximation of sign(y\textquotesingle{}\+\_\+\+R(x\+\_\+inv) -\/ y\textquotesingle{}\+\_\+\+L(x\+\_\+inv)), sign of the difference in derivatives.~\newline
+N\+O\+TE \+: The elements of g must be multiplied with the step size squared (h$^\wedge$2). \mbox{\Hypertarget{classNumerov__solver_ad36887819ca68c3ea9033a065c627c6d}\label{classNumerov__solver_ad36887819ca68c3ea9033a065c627c6d}} 
+\index{Numerov\_solver@{Numerov\_solver}!solve@{solve}}
+\index{solve@{solve}!Numerov\_solver@{Numerov\_solver}}
+\doxysubsubsection{\texorpdfstring{solve()}{solve()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$class Iter\+\_\+res , class Iter\+\_\+g , class Iter\+\_\+s , class Iter\+\_\+left\+\_\+init , class Iter\+\_\+right\+\_\+init , class T  = double$>$ \\
+Iter\+\_\+res Numerov\+\_\+solver\+::solve (\begin{DoxyParamCaption}\item[{Iter\+\_\+res}]{res\+\_\+start,  }\item[{Iter\+\_\+res}]{res\+\_\+end,  }\item[{Iter\+\_\+g}]{g\+\_\+start,  }\item[{Iter\+\_\+g}]{g\+\_\+end,  }\item[{Iter\+\_\+s}]{s\+\_\+start,  }\item[{Iter\+\_\+s}]{s\+\_\+end,  }\item[{Iter\+\_\+left\+\_\+init}]{left\+\_\+start,  }\item[{Iter\+\_\+left\+\_\+init}]{left\+\_\+end }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Solve in one direction only. Overloaded version of solve. \mbox{\Hypertarget{classNumerov__solver_a65b9b13d9163fe41de27069f420d8ee3}\label{classNumerov__solver_a65b9b13d9163fe41de27069f420d8ee3}} 
+\index{Numerov\_solver@{Numerov\_solver}!solve@{solve}}
+\index{solve@{solve}!Numerov\_solver@{Numerov\_solver}}
+\doxysubsubsection{\texorpdfstring{solve()}{solve()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$class Iter\+\_\+res , class Iter\+\_\+g , class Iter\+\_\+s , class Iter\+\_\+left\+\_\+init , class Iter\+\_\+right\+\_\+init , class T  = double$>$ \\
+Iter\+\_\+res Numerov\+\_\+solver\+::solve (\begin{DoxyParamCaption}\item[{Iter\+\_\+res}]{res\+\_\+start,  }\item[{Iter\+\_\+res}]{res\+\_\+end,  }\item[{Iter\+\_\+g}]{g\+\_\+start,  }\item[{Iter\+\_\+g}]{g\+\_\+end,  }\item[{Iter\+\_\+s}]{s\+\_\+start,  }\item[{Iter\+\_\+s}]{s\+\_\+end,  }\item[{Iter\+\_\+left\+\_\+init}]{left\+\_\+start,  }\item[{Iter\+\_\+left\+\_\+init}]{left\+\_\+end,  }\item[{Iter\+\_\+right\+\_\+init}]{right\+\_\+start,  }\item[{Iter\+\_\+right\+\_\+init}]{right\+\_\+end,  }\item[{Iter\+\_\+res}]{inv }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Use Numerov\textquotesingle{}s algorithm to solve the differential equation. \textbackslash{}t\+\_\+\+\_\+\+Iter\+\_\+res\+\_\+\+\_\+ -\/ iterator to result container (e.\+g. std\+::vector)~\newline
+ \textbackslash{}t\+\_\+\+\_\+\+Iter\+\_\+g\+\_\+\+\_\+ -\/ iterator to g container (e.\+g. std\+::vector)~\newline
+ Input\+:~\newline
+ \textbackslash{}t\+\_\+\+\_\+res\+\_\+start\+\_\+\+\_\+ -\/ iterator to the first element in the result container~\newline
+ \textbackslash{}t\+\_\+\+\_\+res\+\_\+end\+\_\+\+\_\+ -\/ iterator one step part the last element in the result container~\newline
+ \textbackslash{}t\+\_\+\+\_\+g\+\_\+start\+\_\+\+\_\+ -\/ iterator to the start of the g container~\newline
+ \textbackslash{}t\+\_\+\+\_\+g\+\_\+end\+\_\+\+\_\+ -\/ iterator to one step past the last element of the g container~\newline
+ \textbackslash{}t\+\_\+\+\_\+s\+\_\+start\+\_\+\+\_\+ -\/ iterator to the start of the s container~\newline
+ \textbackslash{}t\+\_\+\+\_\+s\+\_\+end\+\_\+\+\_\+ -\/ iterator to one step past the last element of the s container~\newline
+ \textbackslash{}t\+\_\+\+\_\+left\+\_\+start\+\_\+\+\_\+ -\/ iterator to the start of the container containing the left hand initial conditions~\newline
+ \textbackslash{}t\+\_\+\+\_\+left\+\_\+end\+\_\+\+\_\+ -\/ iterator to one step past the last element of the left boundary conditions container~\newline
+ \textbackslash{}t\+\_\+\+\_\+right\+\_\+start\+\_\+\+\_\+ -\/ iterator to the start of the container containing the right hand initial conditions~\newline
+ \textbackslash{}t\+\_\+\+\_\+right\+\_\+end\+\_\+\+\_\+ -\/ iterator to one step past the last element of the right boundary conditions container~\newline
+Returns\+:~\newline
+\textbackslash{}t Iterator to the matching point.~\newline
+N\+O\+TE \+: The elements of g must be multiplied with the step size squared (h$^\wedge$2). 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+numerov\+\_\+solver.\+h\end{DoxyCompactItemize}

@@ -1,0 +1,175 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.20" xml:lang="en-US">
+  <compounddef id="classK__mesh" kind="class" language="C++" prot="public">
+    <compoundname>K_mesh</compoundname>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classK__mesh_1a34d1394e3fc0e2637a8f0d05079bc210" prot="private" static="no" mutable="no">
+        <type>GSL::Matrix</type>
+        <definition>GSL::Matrix K_mesh::r_lattice</definition>
+        <argsstring></argsstring>
+        <name>r_lattice</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/k-mesh.h" line="10" column="17" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/k-mesh.h" bodystart="10" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="classK__mesh_1af6ccaa330ca8e7daf766c8fb19035e9f" prot="public" static="no" mutable="no">
+        <type>std::vector&lt; GSL::Vector &gt;</type>
+        <definition>std::vector&lt;GSL::Vector&gt; K_mesh::k_points</definition>
+        <argsstring></argsstring>
+        <name>k_points</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/k-mesh.h" line="12" column="17" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/k-mesh.h" bodystart="12" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classK__mesh_1a2c8ae33da67af9e6c89d202157f885d3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>K_mesh::K_mesh</definition>
+        <argsstring>()</argsstring>
+        <name>K_mesh</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/k-mesh.h" line="14" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classK__mesh_1ae119f85ec0e02cbadf924726ae03a433" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>K_mesh::K_mesh</definition>
+        <argsstring>(const GSL::Matrix &amp;r_lat)</argsstring>
+        <name>K_mesh</name>
+        <param>
+          <type>const GSL::Matrix &amp;</type>
+          <declname>r_lat</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/k-mesh.h" line="15" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classK__mesh_1a2edda52dcd88893ddadafa0efe736ea9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void K_mesh::generate_mesh</definition>
+        <argsstring>(const size_t nx, const size_t ny, const size_t nz)</argsstring>
+        <name>generate_mesh</name>
+        <param>
+          <type>const size_t</type>
+          <declname>nx</declname>
+        </param>
+        <param>
+          <type>const size_t</type>
+          <declname>ny</declname>
+        </param>
+        <param>
+          <type>const size_t</type>
+          <declname>nz</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/k-mesh.h" line="16" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classK__mesh_1af022652162f404f4273660db1b892429" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void K_mesh::generate_mesh</definition>
+        <argsstring>(const double r_max)</argsstring>
+        <name>generate_mesh</name>
+        <param>
+          <type>const double</type>
+          <declname>r_max</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/k-mesh.h" line="17" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classK__mesh_1ae25ce52dcb0824502b4ea94d6a27c4b7" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void K_mesh::generate_mesh</definition>
+        <argsstring>(const size_t N)</argsstring>
+        <name>generate_mesh</name>
+        <param>
+          <type>const size_t</type>
+          <declname>N</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/k-mesh.h" line="18" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classK__mesh_1a43a715f175d7ce6ed735cfb97ced8ba4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void K_mesh::generate_mesh</definition>
+        <argsstring>(const std::vector&lt; GSL::Vector &gt; &amp;path, const size_t N_steps)</argsstring>
+        <name>generate_mesh</name>
+        <param>
+          <type>const std::vector&lt; GSL::Vector &gt; &amp;</type>
+          <declname>path</declname>
+        </param>
+        <param>
+          <type>const size_t</type>
+          <declname>N_steps</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/k-mesh.h" line="19" column="10"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="1">
+        <label>K_mesh</label>
+        <link refid="classK__mesh"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>k_points</edgelabel>
+        </childnode>
+      </node>
+      <node id="2">
+        <label>std::vector&lt; GSL::Vector &gt;</label>
+      </node>
+    </collaborationgraph>
+    <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/k-mesh.h" line="8" column="1" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/k-mesh.h" bodystart="8" bodyend="21"/>
+    <listofallmembers>
+      <member refid="classK__mesh_1a2edda52dcd88893ddadafa0efe736ea9" prot="public" virt="non-virtual"><scope>K_mesh</scope><name>generate_mesh</name></member>
+      <member refid="classK__mesh_1af022652162f404f4273660db1b892429" prot="public" virt="non-virtual"><scope>K_mesh</scope><name>generate_mesh</name></member>
+      <member refid="classK__mesh_1ae25ce52dcb0824502b4ea94d6a27c4b7" prot="public" virt="non-virtual"><scope>K_mesh</scope><name>generate_mesh</name></member>
+      <member refid="classK__mesh_1a43a715f175d7ce6ed735cfb97ced8ba4" prot="public" virt="non-virtual"><scope>K_mesh</scope><name>generate_mesh</name></member>
+      <member refid="classK__mesh_1a2c8ae33da67af9e6c89d202157f885d3" prot="public" virt="non-virtual"><scope>K_mesh</scope><name>K_mesh</name></member>
+      <member refid="classK__mesh_1ae119f85ec0e02cbadf924726ae03a433" prot="public" virt="non-virtual"><scope>K_mesh</scope><name>K_mesh</name></member>
+      <member refid="classK__mesh_1af6ccaa330ca8e7daf766c8fb19035e9f" prot="public" virt="non-virtual"><scope>K_mesh</scope><name>k_points</name></member>
+      <member refid="classK__mesh_1a34d1394e3fc0e2637a8f0d05079bc210" prot="private" virt="non-virtual"><scope>K_mesh</scope><name>r_lattice</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,248 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.20" xml:lang="en-US">
+  <compounddef id="classSpherical__function" kind="class" language="C++" prot="public">
+    <compoundname>Spherical_function</compoundname>
+    <derivedcompoundref refid="classBessel__function" prot="public" virt="non-virtual">Bessel_function</derivedcompoundref>
+    <derivedcompoundref refid="classHankel__function" prot="public" virt="non-virtual">Hankel_function</derivedcompoundref>
+    <derivedcompoundref refid="classNeumann__function" prot="public" virt="non-virtual">Neumann_function</derivedcompoundref>
+      <sectiondef kind="protected-attrib">
+      <memberdef kind="variable" id="classSpherical__function_1a68bc3c4a536d458d6b0432d7a48ed282" prot="protected" static="no" mutable="no">
+        <type><ref refid="structlm" kindref="compound">lm</ref></type>
+        <definition>lm Spherical_function::l_m</definition>
+        <argsstring></argsstring>
+        <name>l_m</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/spherical_fun.h" line="12" column="8" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/spherical_fun.h" bodystart="12" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classSpherical__function_1a51088346ab79cbf9b6eb9661a5512352" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>Spherical_function::Spherical_function</definition>
+        <argsstring>()</argsstring>
+        <name>Spherical_function</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/spherical_fun.h" line="14" column="5" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/spherical_fun.h" bodystart="14" bodyend="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSpherical__function_1aaf2d510641ef38d856f97faba997fb8c" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>Spherical_function::Spherical_function</definition>
+        <argsstring>(const lm l_n)</argsstring>
+        <name>Spherical_function</name>
+        <param>
+          <type>const <ref refid="structlm" kindref="compound">lm</ref></type>
+          <declname>l_n</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/spherical_fun.h" line="15" column="5" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/spherical_fun.h" bodystart="15" bodyend="15"/>
+      </memberdef>
+      <memberdef kind="function" id="classSpherical__function_1a8ce17f2efebc998837dbf49a270b0eb9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Spherical_function::Spherical_function</definition>
+        <argsstring>(const Spherical_function &amp;f)=default</argsstring>
+        <name>Spherical_function</name>
+        <param>
+          <type>const <ref refid="classSpherical__function" kindref="compound">Spherical_function</ref> &amp;</type>
+          <declname>f</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/spherical_fun.h" line="16" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classSpherical__function_1a25f1ce863baeabf7707fc6722c6cb701" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Spherical_function::Spherical_function</definition>
+        <argsstring>(Spherical_function &amp;&amp;f)=default</argsstring>
+        <name>Spherical_function</name>
+        <param>
+          <type><ref refid="classSpherical__function" kindref="compound">Spherical_function</ref> &amp;&amp;</type>
+          <declname>f</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/spherical_fun.h" line="17" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classSpherical__function_1aa3d57bcf0f68bfc1736630ed8103e290" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classSpherical__function" kindref="compound">Spherical_function</ref> &amp;</type>
+        <definition>Spherical_function&amp; Spherical_function::operator=</definition>
+        <argsstring>(const Spherical_function &amp;f)=default</argsstring>
+        <name>operator=</name>
+        <param>
+          <type>const <ref refid="classSpherical__function" kindref="compound">Spherical_function</ref> &amp;</type>
+          <declname>f</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/spherical_fun.h" line="19" column="24"/>
+      </memberdef>
+      <memberdef kind="function" id="classSpherical__function_1a542d453e04488bec25693b1bde4dc34e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classSpherical__function" kindref="compound">Spherical_function</ref> &amp;</type>
+        <definition>Spherical_function&amp; Spherical_function::operator=</definition>
+        <argsstring>(Spherical_function &amp;&amp;f)=default</argsstring>
+        <name>operator=</name>
+        <param>
+          <type><ref refid="classSpherical__function" kindref="compound">Spherical_function</ref> &amp;&amp;</type>
+          <declname>f</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/spherical_fun.h" line="20" column="24"/>
+      </memberdef>
+      <memberdef kind="function" id="classSpherical__function_1aca78c8321d098407ac253838ef103a31" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type></type>
+        <definition>virtual Spherical_function::~Spherical_function</definition>
+        <argsstring>()</argsstring>
+        <name>~Spherical_function</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/spherical_fun.h" line="22" column="13" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/spherical_fun.h" bodystart="22" bodyend="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classSpherical__function_1aa8af0f3183f7725ee1f70ce7644ed822" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
+        <type>double</type>
+        <definition>virtual double Spherical_function::operator()</definition>
+        <argsstring>(const double x) const</argsstring>
+        <name>operator()</name>
+        <reimplementedby refid="classHankel__function_1af8df068125dfeb7a44b4c9012aee6cc9">operator()</reimplementedby>
+        <reimplementedby refid="classBessel__function_1a485202c96e43ea1febe221f918ca1739">operator()</reimplementedby>
+        <reimplementedby refid="classNeumann__function_1a69f549add89b25c9d2e08af55c34fcb9">operator()</reimplementedby>
+        <param>
+          <type>const double</type>
+          <declname>x</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/spherical_fun.h" line="23" column="20" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/spherical_fun.h" bodystart="23" bodyend="24"/>
+      </memberdef>
+      <memberdef kind="function" id="classSpherical__function_1a08264bc2e2a8310d8aa0ed496d721ebc" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Spherical_function::set_l</definition>
+        <argsstring>(const lm l_n)</argsstring>
+        <name>set_l</name>
+        <param>
+          <type>const <ref refid="structlm" kindref="compound">lm</ref></type>
+          <declname>l_n</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/spherical_fun.h" line="26" column="10" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/spherical_fun.h" bodystart="26" bodyend="27"/>
+      </memberdef>
+      <memberdef kind="function" id="classSpherical__function_1aa4290f727726c4544d37680df9b10d3f" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="structlm" kindref="compound">lm</ref></type>
+        <definition>lm Spherical_function::l</definition>
+        <argsstring>() const</argsstring>
+        <name>l</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/spherical_fun.h" line="28" column="8" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/spherical_fun.h" bodystart="28" bodyend="29"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="4">
+        <label>Integral_Hankel_function</label>
+        <link refid="classIntegral__Hankel__function"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>Bessel_function</label>
+        <link refid="classBessel__function"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>Hankel_function</label>
+        <link refid="classHankel__function"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>Neumann_function</label>
+        <link refid="classNeumann__function"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>Spherical_function</label>
+        <link refid="classSpherical__function"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>Spherical_function</label>
+        <link refid="classSpherical__function"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>l_m</edgelabel>
+        </childnode>
+      </node>
+      <node id="2">
+        <label>lm</label>
+        <link refid="structlm"/>
+      </node>
+    </collaborationgraph>
+    <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/spherical_fun.h" line="10" column="1" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/spherical_fun.h" bodystart="10" bodyend="30"/>
+    <listofallmembers>
+      <member refid="classSpherical__function_1aa4290f727726c4544d37680df9b10d3f" prot="public" virt="non-virtual"><scope>Spherical_function</scope><name>l</name></member>
+      <member refid="classSpherical__function_1a68bc3c4a536d458d6b0432d7a48ed282" prot="protected" virt="non-virtual"><scope>Spherical_function</scope><name>l_m</name></member>
+      <member refid="classSpherical__function_1aa8af0f3183f7725ee1f70ce7644ed822" prot="public" virt="virtual"><scope>Spherical_function</scope><name>operator()</name></member>
+      <member refid="classSpherical__function_1aa3d57bcf0f68bfc1736630ed8103e290" prot="public" virt="non-virtual"><scope>Spherical_function</scope><name>operator=</name></member>
+      <member refid="classSpherical__function_1a542d453e04488bec25693b1bde4dc34e" prot="public" virt="non-virtual"><scope>Spherical_function</scope><name>operator=</name></member>
+      <member refid="classSpherical__function_1a08264bc2e2a8310d8aa0ed496d721ebc" prot="public" virt="non-virtual"><scope>Spherical_function</scope><name>set_l</name></member>
+      <member refid="classSpherical__function_1a51088346ab79cbf9b6eb9661a5512352" prot="public" virt="non-virtual"><scope>Spherical_function</scope><name>Spherical_function</name></member>
+      <member refid="classSpherical__function_1aaf2d510641ef38d856f97faba997fb8c" prot="public" virt="non-virtual"><scope>Spherical_function</scope><name>Spherical_function</name></member>
+      <member refid="classSpherical__function_1a8ce17f2efebc998837dbf49a270b0eb9" prot="public" virt="non-virtual"><scope>Spherical_function</scope><name>Spherical_function</name></member>
+      <member refid="classSpherical__function_1a25f1ce863baeabf7707fc6722c6cb701" prot="public" virt="non-virtual"><scope>Spherical_function</scope><name>Spherical_function</name></member>
+      <member refid="classSpherical__function_1aca78c8321d098407ac253838ef103a31" prot="public" virt="virtual"><scope>Spherical_function</scope><name>~Spherical_function</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

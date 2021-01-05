@@ -1,0 +1,174 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.20" xml:lang="en-US">
+  <compounddef id="classFermi__sampler" kind="class" language="C++" prot="public">
+    <compoundname>Fermi_sampler</compoundname>
+    <basecompoundref refid="classBrillouin__sampler" prot="public" virt="non-virtual">Brillouin_sampler</basecompoundref>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classFermi__sampler_1af743355a04b7dc9c22813509cad1dd4d" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double Fermi_sampler::sigma_m</definition>
+        <argsstring></argsstring>
+        <name>sigma_m</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/brillouin_zone_integration.h" line="83" column="12" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/brillouin_zone_integration.h" bodystart="83" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-func">
+      <memberdef kind="function" id="classFermi__sampler_1acae020033886bc83d06bb87150e16d50" prot="private" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
+        <type>double</type>
+        <definition>double Fermi_sampler::delta</definition>
+        <argsstring>(const double x) const</argsstring>
+        <name>delta</name>
+        <reimplements refid="classBrillouin__sampler_1a401abedcb55d86450f1cf95eaa361677">delta</reimplements>
+        <param>
+          <type>const double</type>
+          <declname>x</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/brillouin_zone_integration.h" line="84" column="19" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/brillouin_zone_integration.h" bodystart="84" bodyend="87"/>
+      </memberdef>
+      <memberdef kind="function" id="classFermi__sampler_1a0a2a65f8a276a4ed629eae6c7b012e0e" prot="private" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
+        <type>double</type>
+        <definition>double Fermi_sampler::theta</definition>
+        <argsstring>(const double x) const</argsstring>
+        <name>theta</name>
+        <reimplements refid="classBrillouin__sampler_1ad5ca21d092ba351cadf335ae500042a9">theta</reimplements>
+        <param>
+          <type>const double</type>
+          <declname>x</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/brillouin_zone_integration.h" line="88" column="19" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/brillouin_zone_integration.h" bodystart="88" bodyend="91"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classFermi__sampler_1abf9df138357c0dab798e3889625af5cc" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>Fermi_sampler::Fermi_sampler</definition>
+        <argsstring>(const GSL::Matrix &amp;energies, const double sigma)</argsstring>
+        <name>Fermi_sampler</name>
+        <param>
+          <type>const GSL::Matrix &amp;</type>
+          <declname>energies</declname>
+        </param>
+        <param>
+          <type>const double</type>
+          <declname>sigma</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/brillouin_zone_integration.h" line="94" column="5" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/brillouin_zone_integration.h" bodystart="94" bodyend="96"/>
+      </memberdef>
+      <memberdef kind="function" id="classFermi__sampler_1a3eb36f500c469343b63c2e6d14948d30" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Fermi_sampler::~Fermi_sampler</definition>
+        <argsstring>()=default</argsstring>
+        <name>~Fermi_sampler</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/brillouin_zone_integration.h" line="97" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classBrillouin__sampler_1ac583b178a091dd13ff816f3ee3a4ba41" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
+        <type>double</type>
+        <definition>double Brillouin_sampler::dos</definition>
+        <argsstring>(const double E) const override</argsstring>
+        <name>dos</name>
+        <reimplements refid="classBrillouin__zone__integrator_1ac7ef8c2242c25e0e9e982919fac2020c">dos</reimplements>
+        <param>
+          <type>const double</type>
+          <declname>E</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/brillouin_zone_integration.h" line="45" column="12" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/brillouin_zone_integration.h" bodystart="45" bodyend="57"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="3">
+        <label>Brillouin_zone_integrator</label>
+        <link refid="classBrillouin__zone__integrator"/>
+      </node>
+      <node id="2">
+        <label>Brillouin_sampler</label>
+        <link refid="classBrillouin__sampler"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>Fermi_sampler</label>
+        <link refid="classFermi__sampler"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="3">
+        <label>Brillouin_zone_integrator</label>
+        <link refid="classBrillouin__zone__integrator"/>
+      </node>
+      <node id="2">
+        <label>Brillouin_sampler</label>
+        <link refid="classBrillouin__sampler"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>Fermi_sampler</label>
+        <link refid="classFermi__sampler"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/brillouin_zone_integration.h" line="80" column="1" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/brillouin_zone_integration.h" bodystart="81" bodyend="98"/>
+    <listofallmembers>
+      <member refid="classBrillouin__sampler_1a7307bce71980da14baeeac7ff827cd63" prot="public" virt="non-virtual"><scope>Fermi_sampler</scope><name>Brillouin_sampler</name></member>
+      <member refid="classBrillouin__sampler_1a3c9ea1575d92880743709e90881a8a52" prot="public" virt="non-virtual"><scope>Fermi_sampler</scope><name>Brillouin_sampler</name></member>
+      <member refid="classBrillouin__sampler_1a19730288245645a45697901729eade94" prot="public" virt="non-virtual"><scope>Fermi_sampler</scope><name>Brillouin_sampler</name></member>
+      <member refid="classBrillouin__sampler_1aeb921a1c823d456eb561aa6e92f17316" prot="public" virt="non-virtual"><scope>Fermi_sampler</scope><name>Brillouin_sampler</name></member>
+      <member refid="classBrillouin__zone__integrator_1a7f770e53b9e1699f0065203ae20e7319" prot="protected" virt="non-virtual"><scope>Fermi_sampler</scope><name>Brillouin_zone_integrator</name></member>
+      <member refid="classBrillouin__zone__integrator_1adf83dfa7950b7b71be2a13f981060386" prot="public" virt="non-virtual"><scope>Fermi_sampler</scope><name>Brillouin_zone_integrator</name></member>
+      <member refid="classBrillouin__zone__integrator_1aff93d40c825381047fc9efe0ad04ad48" prot="public" virt="non-virtual"><scope>Fermi_sampler</scope><name>Brillouin_zone_integrator</name></member>
+      <member refid="classFermi__sampler_1acae020033886bc83d06bb87150e16d50" prot="private" virt="virtual"><scope>Fermi_sampler</scope><name>delta</name></member>
+      <member refid="classBrillouin__sampler_1ac583b178a091dd13ff816f3ee3a4ba41" prot="public" virt="virtual"><scope>Fermi_sampler</scope><name>dos</name></member>
+      <member refid="classFermi__sampler_1abf9df138357c0dab798e3889625af5cc" prot="public" virt="non-virtual"><scope>Fermi_sampler</scope><name>Fermi_sampler</name></member>
+      <member refid="classBrillouin__zone__integrator_1a3e972edd2a152675ec74fd9d5856b8aa" prot="public" virt="non-virtual"><scope>Fermi_sampler</scope><name>operator=</name></member>
+      <member refid="classBrillouin__zone__integrator_1adac55b04ec1c552efb60c1ad6a1e2152" prot="public" virt="non-virtual"><scope>Fermi_sampler</scope><name>operator=</name></member>
+      <member refid="classFermi__sampler_1af743355a04b7dc9c22813509cad1dd4d" prot="private" virt="non-virtual"><scope>Fermi_sampler</scope><name>sigma_m</name></member>
+      <member refid="classFermi__sampler_1a0a2a65f8a276a4ed629eae6c7b012e0e" prot="private" virt="virtual"><scope>Fermi_sampler</scope><name>theta</name></member>
+      <member refid="classBrillouin__sampler_1a40d50d06daedb6fae5831ac8fd1ace7f" prot="public" virt="virtual"><scope>Fermi_sampler</scope><name>~Brillouin_sampler</name></member>
+      <member refid="classBrillouin__zone__integrator_1a1684ee4d784984a8d8f9750e4530d029" prot="public" virt="virtual"><scope>Fermi_sampler</scope><name>~Brillouin_zone_integrator</name></member>
+      <member refid="classFermi__sampler_1a3eb36f500c469343b63c2e6d14948d30" prot="public" virt="non-virtual"><scope>Fermi_sampler</scope><name>~Fermi_sampler</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

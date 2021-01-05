@@ -1,0 +1,380 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.20" xml:lang="en-US">
+  <compounddef id="classBloch__sum" kind="class" language="C++" prot="public">
+    <compoundname>Bloch_sum</compoundname>
+    <innerclass refid="classBloch__sum_1_1Container" prot="public">Bloch_sum::Container</innerclass>
+      <sectiondef kind="private-type">
+      <memberdef kind="typedef" id="classBloch__sum_1aafb0ff33f0f7bda729a80b2433c5a764" prot="private" static="no">
+        <type>std::tuple&lt; <ref refid="structlm" kindref="compound">lm</ref>, double, GSL::Vector, GSL::Vector &gt;</type>
+        <definition>using Bloch_sum::Key =  std::tuple&lt;lm, double, GSL::Vector, GSL::Vector&gt;</definition>
+        <argsstring></argsstring>
+        <name>Key</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/bloch_sum.h" line="30" column="5" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/bloch_sum.h" bodystart="30" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-func">
+      <memberdef kind="function" id="classBloch__sum_1a16ffd9884b715675e393b4b3675401ec" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>GSL::Complex</type>
+        <definition>GSL::Complex Bloch_sum::calc_d1</definition>
+        <argsstring>(const lm l, const double kappa, const Crystal_t&lt; 3, Atom &gt; &amp;c, const GSL::Vector &amp;tau, const GSL::Vector &amp;kp) const</argsstring>
+        <name>calc_d1</name>
+        <param>
+          <type>const <ref refid="structlm" kindref="compound">lm</ref></type>
+          <declname>l</declname>
+        </param>
+        <param>
+          <type>const double</type>
+          <declname>kappa</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classCrystal__t" kindref="compound">Crystal_t</ref>&lt; 3, <ref refid="classAtom" kindref="compound">Atom</ref> &gt; &amp;</type>
+          <declname>c</declname>
+        </param>
+        <param>
+          <type>const GSL::Vector &amp;</type>
+          <declname>tau</declname>
+        </param>
+        <param>
+          <type>const GSL::Vector &amp;</type>
+          <declname>kp</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/bloch_sum.h" line="31" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classBloch__sum_1a18043ca78ac109730e93f79404b21f86" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>GSL::Complex</type>
+        <definition>GSL::Complex Bloch_sum::calc_d2</definition>
+        <argsstring>(const lm l, const double kappa, const Crystal_t&lt; 3, Atom &gt; &amp;c, const GSL::Vector &amp;tau, const GSL::Vector &amp;kp) const</argsstring>
+        <name>calc_d2</name>
+        <param>
+          <type>const <ref refid="structlm" kindref="compound">lm</ref></type>
+          <declname>l</declname>
+        </param>
+        <param>
+          <type>const double</type>
+          <declname>kappa</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classCrystal__t" kindref="compound">Crystal_t</ref>&lt; 3, <ref refid="classAtom" kindref="compound">Atom</ref> &gt; &amp;</type>
+          <declname>c</declname>
+        </param>
+        <param>
+          <type>const GSL::Vector &amp;</type>
+          <declname>tau</declname>
+        </param>
+        <param>
+          <type>const GSL::Vector &amp;</type>
+          <declname>kp</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/bloch_sum.h" line="32" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classBloch__sum_1af46233e808fd47aa5780af2059aa45cd" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>GSL::Complex</type>
+        <definition>GSL::Complex Bloch_sum::calc_d3</definition>
+        <argsstring>(const lm l, const double kappa, const Crystal_t&lt; 3, Atom &gt; &amp;c, const GSL::Vector &amp;tau) const</argsstring>
+        <name>calc_d3</name>
+        <param>
+          <type>const <ref refid="structlm" kindref="compound">lm</ref></type>
+          <declname>l</declname>
+        </param>
+        <param>
+          <type>const double</type>
+          <declname>kappa</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classCrystal__t" kindref="compound">Crystal_t</ref>&lt; 3, <ref refid="classAtom" kindref="compound">Atom</ref> &gt; &amp;</type>
+          <declname>c</declname>
+        </param>
+        <param>
+          <type>const GSL::Vector &amp;</type>
+          <declname>tau</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/bloch_sum.h" line="33" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classBloch__sum_1ab808fcd28a017e515978e8d6e7a1dbbf" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>GSL::Complex</type>
+        <definition>GSL::Complex Bloch_sum::calc_d1_dot</definition>
+        <argsstring>(const lm l, const double kappa, const Crystal_t&lt; 3, Atom &gt; &amp;c, const GSL::Vector &amp;tau, const GSL::Vector &amp;kp) const</argsstring>
+        <name>calc_d1_dot</name>
+        <param>
+          <type>const <ref refid="structlm" kindref="compound">lm</ref></type>
+          <declname>l</declname>
+        </param>
+        <param>
+          <type>const double</type>
+          <declname>kappa</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classCrystal__t" kindref="compound">Crystal_t</ref>&lt; 3, <ref refid="classAtom" kindref="compound">Atom</ref> &gt; &amp;</type>
+          <declname>c</declname>
+        </param>
+        <param>
+          <type>const GSL::Vector &amp;</type>
+          <declname>tau</declname>
+        </param>
+        <param>
+          <type>const GSL::Vector &amp;</type>
+          <declname>kp</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/bloch_sum.h" line="34" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classBloch__sum_1a3678d43ba422322c597c52716042b173" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>GSL::Complex</type>
+        <definition>GSL::Complex Bloch_sum::calc_d2_dot</definition>
+        <argsstring>(const lm l, const double kappa, const Crystal_t&lt; 3, Atom &gt; &amp;c, const GSL::Vector &amp;tau, const GSL::Vector &amp;kp) const</argsstring>
+        <name>calc_d2_dot</name>
+        <param>
+          <type>const <ref refid="structlm" kindref="compound">lm</ref></type>
+          <declname>l</declname>
+        </param>
+        <param>
+          <type>const double</type>
+          <declname>kappa</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classCrystal__t" kindref="compound">Crystal_t</ref>&lt; 3, <ref refid="classAtom" kindref="compound">Atom</ref> &gt; &amp;</type>
+          <declname>c</declname>
+        </param>
+        <param>
+          <type>const GSL::Vector &amp;</type>
+          <declname>tau</declname>
+        </param>
+        <param>
+          <type>const GSL::Vector &amp;</type>
+          <declname>kp</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/bloch_sum.h" line="35" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classBloch__sum_1abea5fc4f4f4494596fc4507e86e5e041" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>GSL::Complex</type>
+        <definition>GSL::Complex Bloch_sum::calc_d3_dot</definition>
+        <argsstring>(const lm l, const double kappa, const Crystal_t&lt; 3, Atom &gt; &amp;c, const GSL::Vector &amp;tau) const</argsstring>
+        <name>calc_d3_dot</name>
+        <param>
+          <type>const <ref refid="structlm" kindref="compound">lm</ref></type>
+          <declname>l</declname>
+        </param>
+        <param>
+          <type>const double</type>
+          <declname>kappa</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classCrystal__t" kindref="compound">Crystal_t</ref>&lt; 3, <ref refid="classAtom" kindref="compound">Atom</ref> &gt; &amp;</type>
+          <declname>c</declname>
+        </param>
+        <param>
+          <type>const GSL::Vector &amp;</type>
+          <declname>tau</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/bloch_sum.h" line="36" column="18"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classBloch__sum_1a17e65eba4010aeb8e62db557e9943454" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>Bloch_sum::Bloch_sum</definition>
+        <argsstring>()</argsstring>
+        <name>Bloch_sum</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/bloch_sum.h" line="38" column="5" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/bloch_sum.h" bodystart="38" bodyend="38"/>
+      </memberdef>
+      <memberdef kind="function" id="classBloch__sum_1a4d1c7233667a3ff33d69967e1008e1a3" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>GSL::Complex</type>
+        <definition>GSL::Complex Bloch_sum::hankel_envelope</definition>
+        <argsstring>(const lm l, const double kappa, const Crystal_t&lt; 3, Atom &gt; &amp;c, const GSL::Vector &amp;tau, const GSL::Vector &amp;kp) const</argsstring>
+        <name>hankel_envelope</name>
+        <param>
+          <type>const <ref refid="structlm" kindref="compound">lm</ref></type>
+          <declname>l</declname>
+        </param>
+        <param>
+          <type>const double</type>
+          <declname>kappa</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classCrystal__t" kindref="compound">Crystal_t</ref>&lt; 3, <ref refid="classAtom" kindref="compound">Atom</ref> &gt; &amp;</type>
+          <declname>c</declname>
+        </param>
+        <param>
+          <type>const GSL::Vector &amp;</type>
+          <declname>tau</declname>
+        </param>
+        <param>
+          <type>const GSL::Vector &amp;</type>
+          <declname>kp</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/bloch_sum.h" line="40" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classBloch__sum_1a2bd98331105cb8666481eb2d5a068c07" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>GSL::Complex</type>
+        <definition>GSL::Complex Bloch_sum::hankel_envelope_dot</definition>
+        <argsstring>(const lm l, const double kappa, const Crystal_t&lt; 3, Atom &gt; &amp;c, const GSL::Vector &amp;tau, const GSL::Vector &amp;kp) const</argsstring>
+        <name>hankel_envelope_dot</name>
+        <param>
+          <type>const <ref refid="structlm" kindref="compound">lm</ref></type>
+          <declname>l</declname>
+        </param>
+        <param>
+          <type>const double</type>
+          <declname>kappa</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classCrystal__t" kindref="compound">Crystal_t</ref>&lt; 3, <ref refid="classAtom" kindref="compound">Atom</ref> &gt; &amp;</type>
+          <declname>c</declname>
+        </param>
+        <param>
+          <type>const GSL::Vector &amp;</type>
+          <declname>tau</declname>
+        </param>
+        <param>
+          <type>const GSL::Vector &amp;</type>
+          <declname>kp</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/bloch_sum.h" line="41" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classBloch__sum_1a5377d39f79a4a4be3fc7ea7ad53708b9" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>GSL::Complex</type>
+        <definition>GSL::Complex Bloch_sum::operator()</definition>
+        <argsstring>(const lm l, const double kappa, const Crystal_t&lt; 3, Atom &gt; &amp;c, const GSL::Vector &amp;tau, const GSL::Vector &amp;kp) const</argsstring>
+        <name>operator()</name>
+        <param>
+          <type>const <ref refid="structlm" kindref="compound">lm</ref></type>
+          <declname>l</declname>
+        </param>
+        <param>
+          <type>const double</type>
+          <declname>kappa</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classCrystal__t" kindref="compound">Crystal_t</ref>&lt; 3, <ref refid="classAtom" kindref="compound">Atom</ref> &gt; &amp;</type>
+          <declname>c</declname>
+        </param>
+        <param>
+          <type>const GSL::Vector &amp;</type>
+          <declname>tau</declname>
+        </param>
+        <param>
+          <type>const GSL::Vector &amp;</type>
+          <declname>kp</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/bloch_sum.h" line="43" column="18" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/bloch_sum.h" bodystart="43" bodyend="46"/>
+      </memberdef>
+      <memberdef kind="function" id="classBloch__sum_1a06d45cf0fa8b3e9f6e2990a6c552d10a" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>GSL::Complex</type>
+        <definition>GSL::Complex Bloch_sum::dot</definition>
+        <argsstring>(const lm l, const double kappa, const Crystal_t&lt; 3, Atom &gt; &amp;c, const GSL::Vector &amp;tau, const GSL::Vector &amp;kp) const</argsstring>
+        <name>dot</name>
+        <param>
+          <type>const <ref refid="structlm" kindref="compound">lm</ref></type>
+          <declname>l</declname>
+        </param>
+        <param>
+          <type>const double</type>
+          <declname>kappa</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classCrystal__t" kindref="compound">Crystal_t</ref>&lt; 3, <ref refid="classAtom" kindref="compound">Atom</ref> &gt; &amp;</type>
+          <declname>c</declname>
+        </param>
+        <param>
+          <type>const GSL::Vector &amp;</type>
+          <declname>tau</declname>
+        </param>
+        <param>
+          <type>const GSL::Vector &amp;</type>
+          <declname>kp</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/bloch_sum.h" line="47" column="18" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/bloch_sum.h" bodystart="47" bodyend="50"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/bloch_sum.h" line="28" column="1" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/bloch_sum.h" bodystart="28" bodyend="73"/>
+    <listofallmembers>
+      <member refid="classBloch__sum_1a17e65eba4010aeb8e62db557e9943454" prot="public" virt="non-virtual"><scope>Bloch_sum</scope><name>Bloch_sum</name></member>
+      <member refid="classBloch__sum_1a16ffd9884b715675e393b4b3675401ec" prot="private" virt="non-virtual"><scope>Bloch_sum</scope><name>calc_d1</name></member>
+      <member refid="classBloch__sum_1ab808fcd28a017e515978e8d6e7a1dbbf" prot="private" virt="non-virtual"><scope>Bloch_sum</scope><name>calc_d1_dot</name></member>
+      <member refid="classBloch__sum_1a18043ca78ac109730e93f79404b21f86" prot="private" virt="non-virtual"><scope>Bloch_sum</scope><name>calc_d2</name></member>
+      <member refid="classBloch__sum_1a3678d43ba422322c597c52716042b173" prot="private" virt="non-virtual"><scope>Bloch_sum</scope><name>calc_d2_dot</name></member>
+      <member refid="classBloch__sum_1af46233e808fd47aa5780af2059aa45cd" prot="private" virt="non-virtual"><scope>Bloch_sum</scope><name>calc_d3</name></member>
+      <member refid="classBloch__sum_1abea5fc4f4f4494596fc4507e86e5e041" prot="private" virt="non-virtual"><scope>Bloch_sum</scope><name>calc_d3_dot</name></member>
+      <member refid="classBloch__sum_1a06d45cf0fa8b3e9f6e2990a6c552d10a" prot="public" virt="non-virtual"><scope>Bloch_sum</scope><name>dot</name></member>
+      <member refid="classBloch__sum_1a4d1c7233667a3ff33d69967e1008e1a3" prot="public" virt="non-virtual"><scope>Bloch_sum</scope><name>hankel_envelope</name></member>
+      <member refid="classBloch__sum_1a2bd98331105cb8666481eb2d5a068c07" prot="public" virt="non-virtual"><scope>Bloch_sum</scope><name>hankel_envelope_dot</name></member>
+      <member refid="classBloch__sum_1aafb0ff33f0f7bda729a80b2433c5a764" prot="private" virt="non-virtual"><scope>Bloch_sum</scope><name>Key</name></member>
+      <member refid="classBloch__sum_1a5377d39f79a4a4be3fc7ea7ad53708b9" prot="public" virt="non-virtual"><scope>Bloch_sum</scope><name>operator()</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

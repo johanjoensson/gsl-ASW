@@ -1,0 +1,278 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.20" xml:lang="en-US">
+  <compounddef id="bloch__sum_8h" kind="file" language="C++">
+    <compoundname>bloch_sum.h</compoundname>
+    <includes refid="spherical__fun_8h" local="yes">spherical_fun.h</includes>
+    <includes refid="crystal_8h" local="yes">crystal.h</includes>
+    <includes refid="atom_8h" local="yes">atom.h</includes>
+    <includes local="yes">GSLpp/vector.h</includes>
+    <includes local="yes">GSLpp/complex.h</includes>
+    <includes local="no">unordered_map</includes>
+    <includes local="no">tuple</includes>
+    <includes local="no">functional</includes>
+    <includedby refid="structure__const_8h" local="yes">structure_const.h</includedby>
+    <incdepgraph>
+      <node id="5">
+        <label>functional</label>
+      </node>
+      <node id="10">
+        <label>GSLpp/special_functions.h</label>
+      </node>
+      <node id="4">
+        <label>utils.h</label>
+        <link refid="utils_8h_source"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+      </node>
+      <node id="20">
+        <label>site.h</label>
+        <link refid="site_8h_source"/>
+        <childnode refid="12" relation="include">
+        </childnode>
+      </node>
+      <node id="12">
+        <label>GSLpp/vector.h</label>
+      </node>
+      <node id="17">
+        <label>lattice.h</label>
+        <link refid="lattice_8h_source"/>
+        <childnode refid="18" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="19" relation="include">
+        </childnode>
+      </node>
+      <node id="13">
+        <label>crystal.h</label>
+        <link refid="crystal_8h_source"/>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
+        <childnode refid="17" relation="include">
+        </childnode>
+        <childnode refid="20" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
+      </node>
+      <node id="15">
+        <label>unordered_set</label>
+      </node>
+      <node id="19">
+        <label>GSLpp/linalg.h</label>
+      </node>
+      <node id="1">
+        <label>bloch_sum.h</label>
+        <link refid="bloch__sum_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="21" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="23" relation="include">
+        </childnode>
+        <childnode refid="24" relation="include">
+        </childnode>
+        <childnode refid="25" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>spherical_fun.h</label>
+        <link refid="spherical__fun_8h_source"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>ostream</label>
+      </node>
+      <node id="9">
+        <label>log_mesh.h</label>
+        <link refid="log__mesh_8h_source"/>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+      </node>
+      <node id="21">
+        <label>atom.h</label>
+        <link refid="atom_8h_source"/>
+        <childnode refid="22" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+      </node>
+      <node id="25">
+        <label>tuple</label>
+      </node>
+      <node id="8">
+        <label>vector</label>
+      </node>
+      <node id="23">
+        <label>GSLpp/complex.h</label>
+      </node>
+      <node id="18">
+        <label>GSLpp/matrix.h</label>
+      </node>
+      <node id="7">
+        <label>ewald_int.h</label>
+        <link refid="ewald__int_8h_source"/>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>iostream</label>
+      </node>
+      <node id="11">
+        <label>cstddef</label>
+      </node>
+      <node id="24">
+        <label>unordered_map</label>
+      </node>
+      <node id="22">
+        <label>gsl/gsl_math.h</label>
+      </node>
+      <node id="16">
+        <label>set</label>
+      </node>
+      <node id="14">
+        <label>algorithm</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="1">
+        <label>bloch_sum.h</label>
+        <link refid="bloch__sum_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>simulation.h</label>
+        <link refid="simulation_8h_source"/>
+      </node>
+      <node id="2">
+        <label>structure_const.h</label>
+        <link refid="structure__const_8h_source"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="structstd_1_1hash_3_01std_1_1tuple_3_01lm_00_01double_00_01GSL_1_1Vector_00_01GSL_1_1Vector_01_4_01_4" prot="public">std::hash&lt; std::tuple&lt; lm, double, GSL::Vector, GSL::Vector &gt; &gt;</innerclass>
+    <innerclass refid="classBloch__sum" prot="public">Bloch_sum</innerclass>
+    <innerclass refid="classBloch__sum_1_1Container" prot="public">Bloch_sum::Container</innerclass>
+    <innernamespace refid="namespacestd">std</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#ifndef<sp/>BLOCH_SUM_H</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>BLOCH_SUM_H</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;spherical_fun.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;crystal.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;atom.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;GSLpp/vector.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;GSLpp/complex.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;unordered_map&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;tuple&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;functional&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight></codeline>
+<codeline lineno="12"><highlight class="normal"></highlight></codeline>
+<codeline lineno="13"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">std{</highlight></codeline>
+<codeline lineno="14"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;&gt;</highlight></codeline>
+<codeline lineno="15" refid="structstd_1_1hash_3_01std_1_1tuple_3_01lm_00_01double_00_01GSL_1_1Vector_00_01GSL_1_1Vector_01_4_01_4" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">hash&lt;std::tuple&lt;lm,<sp/>double,<sp/>GSL::Vector,<sp/>GSL::Vector&gt;&gt;{</highlight></codeline>
+<codeline lineno="16"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>operator()(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::tuple&lt;lm,<sp/>double,<sp/>GSL::Vector,<sp/>GSL::Vector&gt;&amp;<sp/>key)</highlight><highlight class="keyword"><sp/>const</highlight></codeline>
+<codeline lineno="17"><highlight class="keyword"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="18"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>res<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="19"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>res<sp/>^=<sp/><ref refid="structstd_1_1hash_3_01lm_01_4" kindref="compound">std::hash&lt;lm&gt;</ref>()(std::get&lt;0&gt;(key))<sp/>+<sp/>0x9e3779b9<sp/>+<sp/>(res&lt;&lt;<sp/>6)<sp/>+<sp/>(res&gt;&gt;<sp/>2);</highlight></codeline>
+<codeline lineno="20"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>res<sp/>^=<sp/>std::hash&lt;double&gt;()(std::get&lt;1&gt;(key))<sp/>+<sp/>0x9e3779b9<sp/>+<sp/>(res&lt;&lt;<sp/>6)<sp/>+<sp/>(res&gt;&gt;<sp/>2);</highlight></codeline>
+<codeline lineno="21"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>res<sp/>^=<sp/>std::hash&lt;GSL::Vector&gt;()(std::get&lt;2&gt;(key))<sp/>+<sp/>0x9e3779b9<sp/>+<sp/>(res&lt;&lt;<sp/>6)<sp/>+<sp/>(res&gt;&gt;<sp/>2);</highlight></codeline>
+<codeline lineno="22"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>res<sp/>^=<sp/>std::hash&lt;GSL::Vector&gt;()(std::get&lt;3&gt;(key))<sp/>+<sp/>0x9e3779b9<sp/>+<sp/>(res&lt;&lt;<sp/>6)<sp/>+<sp/>(res&gt;&gt;<sp/>2);</highlight></codeline>
+<codeline lineno="23"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>res;</highlight></codeline>
+<codeline lineno="24"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="25"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="26"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="27"><highlight class="normal"></highlight></codeline>
+<codeline lineno="28" refid="classBloch__sum" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classBloch__sum" kindref="compound">Bloch_sum</ref>{</highlight></codeline>
+<codeline lineno="29"><highlight class="normal"></highlight></codeline>
+<codeline lineno="30"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using</highlight><highlight class="normal"><sp/>Key<sp/>=<sp/>std::tuple&lt;lm,<sp/>double,<sp/>GSL::Vector,<sp/>GSL::Vector&gt;;</highlight></codeline>
+<codeline lineno="31"><highlight class="normal"><sp/><sp/><sp/><sp/>GSL::Complex<sp/>calc_d1(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="structlm" kindref="compound">lm</ref><sp/>l,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>kappa,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classCrystal__t" kindref="compound">Crystal_t&lt;3, Atom&gt;</ref>&amp;<sp/>c,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>GSL::Vector&amp;<sp/>tau,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>GSL::Vector&amp;<sp/>kp)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="32"><highlight class="normal"><sp/><sp/><sp/><sp/>GSL::Complex<sp/>calc_d2(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="structlm" kindref="compound">lm</ref><sp/>l,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>kappa,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classCrystal__t" kindref="compound">Crystal_t&lt;3, Atom&gt;</ref>&amp;<sp/>c,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>GSL::Vector&amp;<sp/>tau,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>GSL::Vector&amp;<sp/>kp)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="33"><highlight class="normal"><sp/><sp/><sp/><sp/>GSL::Complex<sp/>calc_d3(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="structlm" kindref="compound">lm</ref><sp/>l,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>kappa,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classCrystal__t" kindref="compound">Crystal_t&lt;3, Atom&gt;</ref>&amp;<sp/>c,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>GSL::Vector&amp;<sp/>tau)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="34"><highlight class="normal"><sp/><sp/><sp/><sp/>GSL::Complex<sp/>calc_d1_dot(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="structlm" kindref="compound">lm</ref><sp/>l,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>kappa,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classCrystal__t" kindref="compound">Crystal_t&lt;3, Atom&gt;</ref>&amp;<sp/>c,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>GSL::Vector&amp;<sp/>tau,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>GSL::Vector&amp;<sp/>kp)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="35"><highlight class="normal"><sp/><sp/><sp/><sp/>GSL::Complex<sp/>calc_d2_dot(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="structlm" kindref="compound">lm</ref><sp/>l,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>kappa,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classCrystal__t" kindref="compound">Crystal_t&lt;3, Atom&gt;</ref>&amp;<sp/>c,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>GSL::Vector&amp;<sp/>tau,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>GSL::Vector&amp;<sp/>kp)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="36"><highlight class="normal"><sp/><sp/><sp/><sp/>GSL::Complex<sp/>calc_d3_dot(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="structlm" kindref="compound">lm</ref><sp/>l,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>kappa,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classCrystal__t" kindref="compound">Crystal_t&lt;3, Atom&gt;</ref>&amp;<sp/>c,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>GSL::Vector&amp;<sp/>tau)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="37"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="38"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classBloch__sum" kindref="compound">Bloch_sum</ref>(){}</highlight></codeline>
+<codeline lineno="39"><highlight class="normal"></highlight></codeline>
+<codeline lineno="40"><highlight class="normal"><sp/><sp/><sp/><sp/>GSL::Complex<sp/>hankel_envelope(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="structlm" kindref="compound">lm</ref><sp/>l,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>kappa,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classCrystal__t" kindref="compound">Crystal_t&lt;3, Atom&gt;</ref>&amp;<sp/>c,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>GSL::Vector&amp;<sp/>tau,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>GSL::Vector&amp;<sp/>kp)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="41"><highlight class="normal"><sp/><sp/><sp/><sp/>GSL::Complex<sp/>hankel_envelope_dot(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="structlm" kindref="compound">lm</ref><sp/>l,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>kappa,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classCrystal__t" kindref="compound">Crystal_t&lt;3, Atom&gt;</ref>&amp;<sp/>c,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>GSL::Vector&amp;<sp/>tau,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>GSL::Vector&amp;<sp/>kp)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="42"><highlight class="normal"></highlight></codeline>
+<codeline lineno="43"><highlight class="normal"><sp/><sp/><sp/><sp/>GSL::Complex<sp/>operator()(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="structlm" kindref="compound">lm</ref><sp/>l,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>kappa,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classCrystal__t" kindref="compound">Crystal_t&lt;3, Atom&gt;</ref>&amp;<sp/>c,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>GSL::Vector&amp;<sp/>tau,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>GSL::Vector&amp;<sp/>kp)</highlight><highlight class="keyword"><sp/>const</highlight></codeline>
+<codeline lineno="44"><highlight class="keyword"><sp/><sp/><sp/><sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="45"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>hankel_envelope(l,<sp/>kappa,<sp/>c,<sp/>tau,<sp/>kp);</highlight></codeline>
+<codeline lineno="46"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="47"><highlight class="normal"><sp/><sp/><sp/><sp/>GSL::Complex<sp/>dot(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="structlm" kindref="compound">lm</ref><sp/>l,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>kappa,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classCrystal__t" kindref="compound">Crystal_t&lt;3, Atom&gt;</ref>&amp;<sp/>c,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>GSL::Vector&amp;<sp/>tau,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>GSL::Vector&amp;<sp/>kp)</highlight><highlight class="keyword"><sp/>const</highlight></codeline>
+<codeline lineno="48"><highlight class="keyword"><sp/><sp/><sp/><sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="49"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>hankel_envelope_dot(l,<sp/>kappa,<sp/>c,<sp/>tau,<sp/>kp);</highlight></codeline>
+<codeline lineno="50"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="51"><highlight class="normal"></highlight></codeline>
+<codeline lineno="52" refid="classBloch__sum_1_1Container" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classBloch__sum_1_1Container" kindref="compound">Container</ref>{</highlight></codeline>
+<codeline lineno="53"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="54"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::unordered_map&lt;Bloch_sum::Key,<sp/>GSL::Complex&gt;<sp/>values_m;</highlight></codeline>
+<codeline lineno="55"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::unordered_map&lt;Bloch_sum::Key,<sp/>GSL::Complex&gt;<sp/>dot_values_m;</highlight></codeline>
+<codeline lineno="56"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>add(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="structlm" kindref="compound">lm</ref><sp/>l,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>kappa,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classCrystal__t" kindref="compound">Crystal_t&lt;3, Atom&gt;</ref>&amp;<sp/>c,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>GSL::Vector&amp;<sp/>tau,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>GSL::Vector&amp;<sp/>kp);</highlight></codeline>
+<codeline lineno="57"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="58"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classBloch__sum_1_1Container" kindref="compound">Container</ref>()<sp/>:<sp/>values_m(),<sp/>dot_values_m()<sp/>{}</highlight></codeline>
+<codeline lineno="59"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>GSL::Complex<sp/>get(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="structlm" kindref="compound">lm</ref><sp/>l,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>kappa,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classCrystal__t" kindref="compound">Crystal_t&lt;3, Atom&gt;</ref>&amp;<sp/>c,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>GSL::Vector&amp;<sp/>tau,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>GSL::Vector&amp;<sp/>kp);</highlight></codeline>
+<codeline lineno="60"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>GSL::Complex<sp/>operator()(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="structlm" kindref="compound">lm</ref><sp/>l,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>kappa,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classCrystal__t" kindref="compound">Crystal_t&lt;3, Atom&gt;</ref>&amp;<sp/>c,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>GSL::Vector&amp;<sp/>tau,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>GSL::Vector&amp;<sp/>kp)</highlight></codeline>
+<codeline lineno="61"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="62"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>get(l,<sp/>kappa,<sp/>c,<sp/>tau,<sp/>kp);</highlight></codeline>
+<codeline lineno="63"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="64"><highlight class="normal"></highlight></codeline>
+<codeline lineno="65"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>GSL::Complex<sp/>get_dot(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="structlm" kindref="compound">lm</ref><sp/>l,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>kappa,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classCrystal__t" kindref="compound">Crystal_t&lt;3, Atom&gt;</ref>&amp;<sp/>c,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>GSL::Vector&amp;<sp/>tau,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>GSL::Vector&amp;<sp/>kp);</highlight></codeline>
+<codeline lineno="66"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>GSL::Complex<sp/>dot(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="structlm" kindref="compound">lm</ref><sp/>l,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>kappa,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classCrystal__t" kindref="compound">Crystal_t&lt;3, Atom&gt;</ref>&amp;<sp/>c,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>GSL::Vector&amp;<sp/>tau,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>GSL::Vector&amp;<sp/>kp)</highlight></codeline>
+<codeline lineno="67"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="68"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>get_dot(l,<sp/>kappa,<sp/>c,<sp/>tau,<sp/>kp);</highlight></codeline>
+<codeline lineno="69"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="70"><highlight class="normal"></highlight></codeline>
+<codeline lineno="71"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>recalculate_all(<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classCrystal__t" kindref="compound">Crystal_t&lt;3, Atom&gt;</ref>&amp;<sp/>c);</highlight></codeline>
+<codeline lineno="72"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="73"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="74"><highlight class="normal"></highlight></codeline>
+<codeline lineno="75"><highlight class="normal"></highlight></codeline>
+<codeline lineno="76"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/>//<sp/>BLOCH_SUM_H</highlight></codeline>
+    </programlisting>
+    <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/bloch_sum.h"/>
+  </compounddef>
+</doxygen>

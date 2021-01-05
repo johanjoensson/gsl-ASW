@@ -1,0 +1,229 @@
+\hypertarget{classLogarithmic__mesh}{}\doxysection{Logarithmic\+\_\+mesh Class Reference}
+\label{classLogarithmic__mesh}\index{Logarithmic\_mesh@{Logarithmic\_mesh}}
+Inheritance diagram for Logarithmic\+\_\+mesh\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classLogarithmic__mesh}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classLogarithmic__mesh_ad7a04fec84f43113d6baa0805e91160e}\label{classLogarithmic__mesh_ad7a04fec84f43113d6baa0805e91160e}} 
+{\bfseries Logarithmic\+\_\+mesh} (const \mbox{\hyperlink{classLogarithmic__mesh}{Logarithmic\+\_\+mesh}} \&)=default
+\item 
+\mbox{\Hypertarget{classLogarithmic__mesh_a534fb490dd099ab814dbdbc63baa932e}\label{classLogarithmic__mesh_a534fb490dd099ab814dbdbc63baa932e}} 
+{\bfseries Logarithmic\+\_\+mesh} (\mbox{\hyperlink{classLogarithmic__mesh}{Logarithmic\+\_\+mesh}} \&\&)=default
+\item 
+\mbox{\Hypertarget{classLogarithmic__mesh_a58fa08356267fb71b343f2682dae90ff}\label{classLogarithmic__mesh_a58fa08356267fb71b343f2682dae90ff}} 
+{\bfseries Logarithmic\+\_\+mesh} (double radius, size\+\_\+t num\+\_\+points, double A=0.\+01)
+\item 
+\mbox{\Hypertarget{classLogarithmic__mesh_a27f03ff539a7532a6bc299e3d241cadc}\label{classLogarithmic__mesh_a27f03ff539a7532a6bc299e3d241cadc}} 
+\mbox{\hyperlink{classLogarithmic__mesh}{Logarithmic\+\_\+mesh}} \& {\bfseries operator=} (const \mbox{\hyperlink{classLogarithmic__mesh}{Logarithmic\+\_\+mesh}} \&)=default
+\item 
+\mbox{\Hypertarget{classLogarithmic__mesh_aafc21aac43269fbddbd0309eb0ab59b5}\label{classLogarithmic__mesh_aafc21aac43269fbddbd0309eb0ab59b5}} 
+\mbox{\hyperlink{classLogarithmic__mesh}{Logarithmic\+\_\+mesh}} \& {\bfseries operator=} (\mbox{\hyperlink{classLogarithmic__mesh}{Logarithmic\+\_\+mesh}} \&\&)=default
+\item 
+\mbox{\Hypertarget{classLogarithmic__mesh_ac5bcc83573645af1376e40f8519c146e}\label{classLogarithmic__mesh_ac5bcc83573645af1376e40f8519c146e}} 
+double {\bfseries integrate} (const std\+::vector$<$ double $>$ \&f) const override
+\item 
+\mbox{\Hypertarget{classLogarithmic__mesh_aee51394ad007e44c9b8eb8bde21c3e63}\label{classLogarithmic__mesh_aee51394ad007e44c9b8eb8bde21c3e63}} 
+double {\bfseries integrate\+\_\+simpson} (const std\+::vector$<$ double $>$ \&f) const override
+\item 
+\mbox{\Hypertarget{classLogarithmic__mesh_add5bde638650c11bcc500f1bb7114817}\label{classLogarithmic__mesh_add5bde638650c11bcc500f1bb7114817}} 
+double {\bfseries A} () const
+\item 
+\mbox{\Hypertarget{classLogarithmic__mesh_acbfc0fd9de3b2490c713a50647210cc6}\label{classLogarithmic__mesh_acbfc0fd9de3b2490c713a50647210cc6}} 
+double {\bfseries B} () const
+\item 
+\mbox{\Hypertarget{classLogarithmic__mesh_aa56edcfcd4a9290b142fed5dd92b35a7}\label{classLogarithmic__mesh_aa56edcfcd4a9290b142fed5dd92b35a7}} 
+double {\bfseries r} (const size\+\_\+t i) const
+\item 
+\mbox{\Hypertarget{classLogarithmic__mesh_a422984abc64c453b4ae303287f41f4dd}\label{classLogarithmic__mesh_a422984abc64c453b4ae303287f41f4dd}} 
+std\+::vector$<$ double $>$\+::iterator {\bfseries r\+\_\+begin} ()
+\item 
+\mbox{\Hypertarget{classLogarithmic__mesh_a69bf855df5647d75335d4fa4771cc254}\label{classLogarithmic__mesh_a69bf855df5647d75335d4fa4771cc254}} 
+std\+::vector$<$ double $>$\+::const\+\_\+iterator {\bfseries r\+\_\+begin} () const
+\item 
+\mbox{\Hypertarget{classLogarithmic__mesh_a310cb208ec4d9962b792c31c36aac67b}\label{classLogarithmic__mesh_a310cb208ec4d9962b792c31c36aac67b}} 
+std\+::vector$<$ double $>$\+::iterator {\bfseries r\+\_\+end} ()
+\item 
+\mbox{\Hypertarget{classLogarithmic__mesh_a56a6cc6a717c880a8db3ebb163eb6e7d}\label{classLogarithmic__mesh_a56a6cc6a717c880a8db3ebb163eb6e7d}} 
+std\+::vector$<$ double $>$\+::const\+\_\+iterator {\bfseries r\+\_\+end} () const
+\item 
+\mbox{\Hypertarget{classLogarithmic__mesh_af7eccb256d1fefb834571b72c2a63847}\label{classLogarithmic__mesh_af7eccb256d1fefb834571b72c2a63847}} 
+std\+::vector$<$ double $>$\+::reverse\+\_\+iterator {\bfseries r\+\_\+rbegin} ()
+\item 
+\mbox{\Hypertarget{classLogarithmic__mesh_ad3eaf8d98a84f6f577f0d9e939ec48e0}\label{classLogarithmic__mesh_ad3eaf8d98a84f6f577f0d9e939ec48e0}} 
+std\+::vector$<$ double $>$\+::const\+\_\+reverse\+\_\+iterator {\bfseries r\+\_\+rbegin} () const
+\item 
+\mbox{\Hypertarget{classLogarithmic__mesh_a1b6461d4e67b2ff71c393cb2a9bec32e}\label{classLogarithmic__mesh_a1b6461d4e67b2ff71c393cb2a9bec32e}} 
+double {\bfseries r\+\_\+back} () const
+\item 
+\mbox{\Hypertarget{classLogarithmic__mesh_a90e0361a49bae6f1d9f0b40326322d2b}\label{classLogarithmic__mesh_a90e0361a49bae6f1d9f0b40326322d2b}} 
+double {\bfseries r2} (const size\+\_\+t i) const
+\item 
+\mbox{\Hypertarget{classLogarithmic__mesh_a4ef273ae1778bcc9dc9bbe2ac87e750f}\label{classLogarithmic__mesh_a4ef273ae1778bcc9dc9bbe2ac87e750f}} 
+std\+::vector$<$ double $>$\+::iterator {\bfseries r2\+\_\+begin} ()
+\item 
+\mbox{\Hypertarget{classLogarithmic__mesh_a20be5de0c0e2f193477e69289ea99c36}\label{classLogarithmic__mesh_a20be5de0c0e2f193477e69289ea99c36}} 
+std\+::vector$<$ double $>$\+::const\+\_\+iterator {\bfseries r2\+\_\+begin} () const
+\item 
+\mbox{\Hypertarget{classLogarithmic__mesh_a2bf6a309544379aa84a76c1ca10e9b0b}\label{classLogarithmic__mesh_a2bf6a309544379aa84a76c1ca10e9b0b}} 
+std\+::vector$<$ double $>$\+::iterator {\bfseries r2\+\_\+end} ()
+\item 
+\mbox{\Hypertarget{classLogarithmic__mesh_a2a519d9b48b9e35388981d7f0108a955}\label{classLogarithmic__mesh_a2a519d9b48b9e35388981d7f0108a955}} 
+std\+::vector$<$ double $>$\+::const\+\_\+iterator {\bfseries r2\+\_\+end} () const
+\item 
+\mbox{\Hypertarget{classLogarithmic__mesh_a054b66b1f8776c35e2d34b651ffd526f}\label{classLogarithmic__mesh_a054b66b1f8776c35e2d34b651ffd526f}} 
+double {\bfseries r2\+\_\+back} () const
+\item 
+\mbox{\Hypertarget{classLogarithmic__mesh_ad834c8d800c01f55ac09a48b22fb3b90}\label{classLogarithmic__mesh_ad834c8d800c01f55ac09a48b22fb3b90}} 
+double {\bfseries drx} (const size\+\_\+t i) const
+\item 
+\mbox{\Hypertarget{classLogarithmic__mesh_a5156ee23eb1227a7b8b29f4712d72d98}\label{classLogarithmic__mesh_a5156ee23eb1227a7b8b29f4712d72d98}} 
+double {\bfseries drx} (const double x) const
+\item 
+\mbox{\Hypertarget{classLogarithmic__mesh_a9c83fa18d7a0c6788a82de3ddf787029}\label{classLogarithmic__mesh_a9c83fa18d7a0c6788a82de3ddf787029}} 
+std\+::vector$<$ double $>$\+::iterator {\bfseries drx\+\_\+begin} ()
+\item 
+\mbox{\Hypertarget{classLogarithmic__mesh_a14c43e17df3021445e07d8bc46ee16ce}\label{classLogarithmic__mesh_a14c43e17df3021445e07d8bc46ee16ce}} 
+std\+::vector$<$ double $>$\+::const\+\_\+iterator {\bfseries drx\+\_\+begin} () const
+\item 
+\mbox{\Hypertarget{classLogarithmic__mesh_a59650fd627d66110e10b765bafd1a783}\label{classLogarithmic__mesh_a59650fd627d66110e10b765bafd1a783}} 
+std\+::vector$<$ double $>$\+::iterator {\bfseries drx\+\_\+end} ()
+\item 
+\mbox{\Hypertarget{classLogarithmic__mesh_aefda9d8ccbb160a03b7f2b279989c52d}\label{classLogarithmic__mesh_aefda9d8ccbb160a03b7f2b279989c52d}} 
+std\+::vector$<$ double $>$\+::const\+\_\+iterator {\bfseries drx\+\_\+end} () const
+\item 
+\mbox{\Hypertarget{classLogarithmic__mesh_a27bab2e9d3844cb0a034cd15fa8569dd}\label{classLogarithmic__mesh_a27bab2e9d3844cb0a034cd15fa8569dd}} 
+std\+::vector$<$ double $>$\+::reverse\+\_\+iterator {\bfseries drx\+\_\+rbegin} ()
+\item 
+\mbox{\Hypertarget{classLogarithmic__mesh_ab0808302408a51daa9b6c730838a6147}\label{classLogarithmic__mesh_ab0808302408a51daa9b6c730838a6147}} 
+std\+::vector$<$ double $>$\+::const\+\_\+reverse\+\_\+iterator {\bfseries drx\+\_\+rbegin} () const
+\item 
+\mbox{\Hypertarget{classLogarithmic__mesh_a512db0f06749fe7b30920f4fee993884}\label{classLogarithmic__mesh_a512db0f06749fe7b30920f4fee993884}} 
+std\+::vector$<$ double $>$\+::reverse\+\_\+iterator {\bfseries drx\+\_\+rend} ()
+\item 
+\mbox{\Hypertarget{classLogarithmic__mesh_a90a93f0cf6426ee1090e82c5a8f7ca94}\label{classLogarithmic__mesh_a90a93f0cf6426ee1090e82c5a8f7ca94}} 
+std\+::vector$<$ double $>$\+::const\+\_\+reverse\+\_\+iterator {\bfseries drx\+\_\+rend} () const
+\item 
+\mbox{\Hypertarget{classLogarithmic__mesh_a27cd2ce09412c90a42cbb106b19ae9e0}\label{classLogarithmic__mesh_a27cd2ce09412c90a42cbb106b19ae9e0}} 
+double {\bfseries drx\+\_\+back} () const
+\item 
+\mbox{\Hypertarget{classLogarithmic__mesh_ad0306e60876e355481b2804f61c67508}\label{classLogarithmic__mesh_ad0306e60876e355481b2804f61c67508}} 
+double {\bfseries d2rx} (const size\+\_\+t i) const
+\item 
+\mbox{\Hypertarget{classLogarithmic__mesh_a3c826046da6a41e033601beb8e168b25}\label{classLogarithmic__mesh_a3c826046da6a41e033601beb8e168b25}} 
+double {\bfseries d2rx} (const double x) const
+\item 
+\mbox{\Hypertarget{classLogarithmic__mesh_a8f3f91f0518d5b73ce2e671c0034d332}\label{classLogarithmic__mesh_a8f3f91f0518d5b73ce2e671c0034d332}} 
+std\+::vector$<$ double $>$\+::iterator {\bfseries d2rx\+\_\+begin} ()
+\item 
+\mbox{\Hypertarget{classLogarithmic__mesh_a6b705faaa15bc095d7067e60a4711e78}\label{classLogarithmic__mesh_a6b705faaa15bc095d7067e60a4711e78}} 
+std\+::vector$<$ double $>$\+::const\+\_\+iterator {\bfseries d2rx\+\_\+begin} () const
+\item 
+\mbox{\Hypertarget{classLogarithmic__mesh_a69b0100df72ccf4fde5ed24af2b74a0a}\label{classLogarithmic__mesh_a69b0100df72ccf4fde5ed24af2b74a0a}} 
+std\+::vector$<$ double $>$\+::iterator {\bfseries d2rx\+\_\+end} ()
+\item 
+\mbox{\Hypertarget{classLogarithmic__mesh_a5bcaca583fe32e0e1b709185782a1dd6}\label{classLogarithmic__mesh_a5bcaca583fe32e0e1b709185782a1dd6}} 
+std\+::vector$<$ double $>$\+::const\+\_\+iterator {\bfseries d2rx\+\_\+end} () const
+\item 
+\mbox{\Hypertarget{classLogarithmic__mesh_ad2df2e0b175582588cb23809fcc997f8}\label{classLogarithmic__mesh_ad2df2e0b175582588cb23809fcc997f8}} 
+std\+::vector$<$ double $>$\+::reverse\+\_\+iterator {\bfseries d2rx\+\_\+rbegin} ()
+\item 
+\mbox{\Hypertarget{classLogarithmic__mesh_a91482f8e59cdfa77da3a3b0588ea92eb}\label{classLogarithmic__mesh_a91482f8e59cdfa77da3a3b0588ea92eb}} 
+std\+::vector$<$ double $>$\+::const\+\_\+reverse\+\_\+iterator {\bfseries d2rx\+\_\+rbegin} () const
+\item 
+\mbox{\Hypertarget{classLogarithmic__mesh_abc62a8a66ad8f506022d3e06a3e8dae3}\label{classLogarithmic__mesh_abc62a8a66ad8f506022d3e06a3e8dae3}} 
+std\+::vector$<$ double $>$\+::reverse\+\_\+iterator {\bfseries d2rx\+\_\+rend} ()
+\item 
+\mbox{\Hypertarget{classLogarithmic__mesh_ad65e147c207fbefafe113f7794a66369}\label{classLogarithmic__mesh_ad65e147c207fbefafe113f7794a66369}} 
+std\+::vector$<$ double $>$\+::const\+\_\+reverse\+\_\+iterator {\bfseries d2rx\+\_\+rend} () const
+\item 
+\mbox{\Hypertarget{classLogarithmic__mesh_a64d9c9c747ec8ca4c10acee1578e6941}\label{classLogarithmic__mesh_a64d9c9c747ec8ca4c10acee1578e6941}} 
+double {\bfseries d2rx\+\_\+back} () const
+\item 
+\mbox{\Hypertarget{classMesh_ada10825606a4e6491754dd748b89b208}\label{classMesh_ada10825606a4e6491754dd748b89b208}} 
+double {\bfseries x} (const size\+\_\+t i) const
+\item 
+\mbox{\Hypertarget{classMesh_a2b09978ea07e2553e1fdb48e686993b1}\label{classMesh_a2b09978ea07e2553e1fdb48e686993b1}} 
+std\+::vector$<$ double $>$\+::iterator {\bfseries x\+\_\+begin} ()
+\item 
+\mbox{\Hypertarget{classMesh_aaad6ca89f9642e0f253ee1f1c0ed72a5}\label{classMesh_aaad6ca89f9642e0f253ee1f1c0ed72a5}} 
+std\+::vector$<$ double $>$\+::const\+\_\+iterator {\bfseries x\+\_\+begin} () const
+\item 
+\mbox{\Hypertarget{classMesh_a88667b687cbf95f5edef74e7bb4196a4}\label{classMesh_a88667b687cbf95f5edef74e7bb4196a4}} 
+std\+::vector$<$ double $>$\+::iterator {\bfseries x\+\_\+end} ()
+\item 
+\mbox{\Hypertarget{classMesh_aeea40873cdde75ba0f3875d08cfb8ff3}\label{classMesh_aeea40873cdde75ba0f3875d08cfb8ff3}} 
+std\+::vector$<$ double $>$\+::const\+\_\+iterator {\bfseries x\+\_\+end} () const
+\item 
+\mbox{\Hypertarget{classMesh_a06b8a46d4ecea97224775e53f39a2ce1}\label{classMesh_a06b8a46d4ecea97224775e53f39a2ce1}} 
+std\+::vector$<$ double $>$\+::reverse\+\_\+iterator {\bfseries x\+\_\+rbegin} ()
+\item 
+\mbox{\Hypertarget{classMesh_aff4a2f0c46b09ae3c7bd53ef449e1b31}\label{classMesh_aff4a2f0c46b09ae3c7bd53ef449e1b31}} 
+std\+::vector$<$ double $>$\+::const\+\_\+reverse\+\_\+iterator {\bfseries x\+\_\+rbegin} () const
+\item 
+\mbox{\Hypertarget{classMesh_adaa5c8c204c77b144ed4549be280fe4d}\label{classMesh_adaa5c8c204c77b144ed4549be280fe4d}} 
+std\+::vector$<$ double $>$\+::reverse\+\_\+iterator {\bfseries x\+\_\+rend} ()
+\item 
+\mbox{\Hypertarget{classMesh_a99b27d9fa2db350882110ef4cbec8cde}\label{classMesh_a99b27d9fa2db350882110ef4cbec8cde}} 
+std\+::vector$<$ double $>$\+::const\+\_\+reverse\+\_\+iterator {\bfseries x\+\_\+rend} () const
+\item 
+\mbox{\Hypertarget{classMesh_a1b19461734f11611f1a2fbec26f29618}\label{classMesh_a1b19461734f11611f1a2fbec26f29618}} 
+double {\bfseries x\+\_\+back} () const
+\item 
+\mbox{\Hypertarget{classMesh_adde1322a4f7b1e555cac0ee49f114f02}\label{classMesh_adde1322a4f7b1e555cac0ee49f114f02}} 
+double {\bfseries x2} (const size\+\_\+t i) const
+\item 
+\mbox{\Hypertarget{classMesh_ab3351992e91f2507b4bfc7215d765edd}\label{classMesh_ab3351992e91f2507b4bfc7215d765edd}} 
+std\+::vector$<$ double $>$\+::iterator {\bfseries x2\+\_\+begin} ()
+\item 
+\mbox{\Hypertarget{classMesh_a79f11b4417c29635ed48d5bdeed633e8}\label{classMesh_a79f11b4417c29635ed48d5bdeed633e8}} 
+std\+::vector$<$ double $>$\+::const\+\_\+iterator {\bfseries x2\+\_\+begin} () const
+\item 
+\mbox{\Hypertarget{classMesh_a8ba9b8c4f48005c9ed04aeaf38117fd1}\label{classMesh_a8ba9b8c4f48005c9ed04aeaf38117fd1}} 
+std\+::vector$<$ double $>$\+::iterator {\bfseries x2\+\_\+end} ()
+\item 
+\mbox{\Hypertarget{classMesh_a8d3e89e9df4ed82cd4ac8aada66693f4}\label{classMesh_a8d3e89e9df4ed82cd4ac8aada66693f4}} 
+std\+::vector$<$ double $>$\+::const\+\_\+iterator {\bfseries x2\+\_\+end} () const
+\item 
+\mbox{\Hypertarget{classMesh_a054ad7ea2cacfceb5b9993f014d7e3fd}\label{classMesh_a054ad7ea2cacfceb5b9993f014d7e3fd}} 
+std\+::vector$<$ double $>$\+::reverse\+\_\+iterator {\bfseries x2\+\_\+rbegin} ()
+\item 
+\mbox{\Hypertarget{classMesh_a4e12406f9337939435c08c0b96af02fd}\label{classMesh_a4e12406f9337939435c08c0b96af02fd}} 
+std\+::vector$<$ double $>$\+::const\+\_\+reverse\+\_\+iterator {\bfseries x2\+\_\+rbegin} () const
+\item 
+\mbox{\Hypertarget{classMesh_a8b6df8cadda182164e4d9ad64aa58270}\label{classMesh_a8b6df8cadda182164e4d9ad64aa58270}} 
+std\+::vector$<$ double $>$\+::reverse\+\_\+iterator {\bfseries x2\+\_\+rend} ()
+\item 
+\mbox{\Hypertarget{classMesh_a7eaa0d51400f36187b6e04420562bf27}\label{classMesh_a7eaa0d51400f36187b6e04420562bf27}} 
+std\+::vector$<$ double $>$\+::const\+\_\+reverse\+\_\+iterator {\bfseries x2\+\_\+rend} () const
+\item 
+\mbox{\Hypertarget{classMesh_a57f0dfaca412445578fd97dbd9474a1c}\label{classMesh_a57f0dfaca412445578fd97dbd9474a1c}} 
+double {\bfseries x2\+\_\+back} () const
+\item 
+\mbox{\Hypertarget{classMesh_a8c1ea2e3a966ae8f9f23d68951f47310}\label{classMesh_a8c1ea2e3a966ae8f9f23d68951f47310}} 
+double {\bfseries dx} () const
+\item 
+\mbox{\Hypertarget{classMesh_a28e75ba3042956e93ed2fba045b32b39}\label{classMesh_a28e75ba3042956e93ed2fba045b32b39}} 
+size\+\_\+t {\bfseries size} () const
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classMesh_a515b65efe4fbef9b058b9fb7c40ebc50}\label{classMesh_a515b65efe4fbef9b058b9fb7c40ebc50}} 
+std\+::vector$<$ double $>$ {\bfseries x\+\_\+p}
+\item 
+\mbox{\Hypertarget{classMesh_a759618c365642825fd788845e2c46084}\label{classMesh_a759618c365642825fd788845e2c46084}} 
+std\+::vector$<$ double $>$ {\bfseries x2\+\_\+p}
+\item 
+\mbox{\Hypertarget{classMesh_a4d10f1dc561d1b84a3846e0a8ed84591}\label{classMesh_a4d10f1dc561d1b84a3846e0a8ed84591}} 
+double {\bfseries dx\+\_\+p}
+\end{DoxyCompactItemize}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+log\+\_\+mesh.\+h\end{DoxyCompactItemize}

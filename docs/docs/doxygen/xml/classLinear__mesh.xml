@@ -1,0 +1,540 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.20" xml:lang="en-US">
+  <compounddef id="classLinear__mesh" kind="class" language="C++" prot="public" abstract="yes">
+    <compoundname>Linear_mesh</compoundname>
+    <basecompoundref refid="classMesh__base" prot="public" virt="non-virtual">Mesh_base&lt; D, double &gt;</basecompoundref>
+    <templateparamlist>
+      <param>
+        <type>size_t</type>
+        <declname>D</declname>
+        <defname>D</defname>
+      </param>
+      <param>
+        <type>class Scalar</type>
+        <defval>double</defval>
+      </param>
+    </templateparamlist>
+      <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classLinear__mesh_1a1124f280c634153515fddb392ec5d093" prot="public" static="no">
+        <type>std::array&lt; Scalar, D &gt;</type>
+        <definition>using Linear_mesh&lt; D, Scalar &gt;::Arr =  std::array&lt;Scalar, D&gt;</definition>
+        <argsstring></argsstring>
+        <name>Arr</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/numerical-mesh.h" line="243" column="5" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/numerical-mesh.h" bodystart="243" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-func">
+      <memberdef kind="function" id="classLinear__mesh_1a45c93c8ba3bc1f1aad697583e7426da1" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Linear_mesh&lt; D, Scalar &gt;::Linear_mesh</definition>
+        <argsstring>()=default</argsstring>
+        <name>Linear_mesh</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/numerical-mesh.h" line="240" column="5"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classLinear__mesh_1a074f8cdf5c009b89cd074100e42a29d2" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>Linear_mesh&lt; D, Scalar &gt;::Linear_mesh</definition>
+        <argsstring>(const Arr &amp;R_min, const Arr &amp;R_max, const std::array&lt; size_t, D &gt; &amp;N)</argsstring>
+        <name>Linear_mesh</name>
+        <param>
+          <type>const Arr &amp;</type>
+          <declname>R_min</declname>
+        </param>
+        <param>
+          <type>const Arr &amp;</type>
+          <declname>R_max</declname>
+        </param>
+        <param>
+          <type>const std::array&lt; size_t, D &gt; &amp;</type>
+          <declname>N</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/numerical-mesh.h" line="244" column="5" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/numerical-mesh.h" bodystart="244" bodyend="265"/>
+      </memberdef>
+      <memberdef kind="function" id="classLinear__mesh_1a66b8a643e318f7ae34201fbf5f5b2e83" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Linear_mesh&lt; D, Scalar &gt;::~Linear_mesh</definition>
+        <argsstring>()=default</argsstring>
+        <name>~Linear_mesh</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/numerical-mesh.h" line="267" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classLinear__mesh_1aafe1a58017195765c71c18e315e48725" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Linear_mesh&lt; D, Scalar &gt;::Linear_mesh</definition>
+        <argsstring>(const Linear_mesh &amp;)=default</argsstring>
+        <name>Linear_mesh</name>
+        <param>
+          <type>const <ref refid="classLinear__mesh" kindref="compound">Linear_mesh</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/numerical-mesh.h" line="269" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classLinear__mesh_1a26730707a414de9e2864aa85098395c3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Linear_mesh&lt; D, Scalar &gt;::Linear_mesh</definition>
+        <argsstring>(Linear_mesh &amp;&amp;)=default</argsstring>
+        <name>Linear_mesh</name>
+        <param>
+          <type><ref refid="classLinear__mesh" kindref="compound">Linear_mesh</ref> &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/numerical-mesh.h" line="270" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classLinear__mesh_1ad1a22971ca7df814a046383661bff173" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classLinear__mesh" kindref="compound">Linear_mesh</ref> &amp;</type>
+        <definition>Linear_mesh&amp; Linear_mesh&lt; D, Scalar &gt;::operator=</definition>
+        <argsstring>(const Linear_mesh &amp;)=default</argsstring>
+        <name>operator=</name>
+        <param>
+          <type>const <ref refid="classLinear__mesh" kindref="compound">Linear_mesh</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/numerical-mesh.h" line="272" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classLinear__mesh_1adbabf6a489dc4251adb5e13e76d9df47" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classLinear__mesh" kindref="compound">Linear_mesh</ref> &amp;</type>
+        <definition>Linear_mesh&amp; Linear_mesh&lt; D, Scalar &gt;::operator=</definition>
+        <argsstring>(Linear_mesh &amp;&amp;)=default</argsstring>
+        <name>operator=</name>
+        <param>
+          <type><ref refid="classLinear__mesh" kindref="compound">Linear_mesh</ref> &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/numerical-mesh.h" line="273" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classLinear__mesh_1a1b7760691f3ccade504d11d40f4503fa" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>Arr</type>
+        <definition>Arr Linear_mesh&lt; D, Scalar &gt;::r</definition>
+        <argsstring>(const Arr &amp;x) const override</argsstring>
+        <name>r</name>
+        <param>
+          <type>const Arr &amp;</type>
+          <declname>x</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/numerical-mesh.h" line="275" column="9" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/numerical-mesh.h" bodystart="275" bodyend="299"/>
+      </memberdef>
+      <memberdef kind="function" id="classLinear__mesh_1a62811761c01361dad96d7b5a3bcb5258" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>Arr</type>
+        <definition>Arr Linear_mesh&lt; D, Scalar &gt;::r2</definition>
+        <argsstring>(const Arr &amp;x) const override</argsstring>
+        <name>r2</name>
+        <param>
+          <type>const Arr &amp;</type>
+          <declname>x</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/numerical-mesh.h" line="301" column="9" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/numerical-mesh.h" bodystart="301" bodyend="307"/>
+      </memberdef>
+      <memberdef kind="function" id="classLinear__mesh_1a21802d40dac79f0e747a73a890d4668b" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>Arr</type>
+        <definition>Arr Linear_mesh&lt; D, Scalar &gt;::dr</definition>
+        <argsstring>(const Arr &amp;x) const override</argsstring>
+        <name>dr</name>
+        <param>
+          <type>const Arr &amp;</type>
+          <declname>x</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/numerical-mesh.h" line="309" column="9" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/numerical-mesh.h" bodystart="309" bodyend="312"/>
+      </memberdef>
+      <memberdef kind="function" id="classMesh__base_1aa7ee77b844634dec60016fb1eec59033" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>auto</type>
+        <definition>auto Mesh_base&lt; Dim, double  &gt;::parameters</definition>
+        <argsstring>() const</argsstring>
+        <name>parameters</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/numerical-mesh.h" line="148" column="10" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/numerical-mesh.h" bodystart="148" bodyend="148"/>
+      </memberdef>
+      <memberdef kind="function" id="classMesh__base_1af995545134ead5a2016087713d695106" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
+        <type>Arr</type>
+        <definition>virtual Arr Mesh_base&lt; Dim, double  &gt;::r</definition>
+        <argsstring>(const Arr &amp;x) const=0</argsstring>
+        <name>r</name>
+        <param>
+          <type>const Arr &amp;</type>
+          <declname>x</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/numerical-mesh.h" line="150" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classMesh__base_1a94cfa3475faff03cc69356b24c304abb" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::array&lt; std::vector&lt; double &gt;, Dim &gt;</type>
+        <definition>std::array&lt;std::vector&lt;double &gt;, Dim&gt; Mesh_base&lt; Dim, double  &gt;::r</definition>
+        <argsstring>() const</argsstring>
+        <name>r</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/numerical-mesh.h" line="157" column="16"/>
+      </memberdef>
+      <memberdef kind="function" id="classMesh__base_1a54297607ef866c8c78346d9546a4fab6" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
+        <type>Arr</type>
+        <definition>virtual Arr Mesh_base&lt; Dim, double  &gt;::r2</definition>
+        <argsstring>(const Arr &amp;x) const=0</argsstring>
+        <name>r2</name>
+        <param>
+          <type>const Arr &amp;</type>
+          <declname>x</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/numerical-mesh.h" line="151" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classMesh__base_1aae4c7bad5cb05d1a8cf3e37ac171b217" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
+        <type>Arr</type>
+        <definition>virtual Arr Mesh_base&lt; Dim, double  &gt;::dr</definition>
+        <argsstring>(const Arr &amp;x) const=0</argsstring>
+        <name>dr</name>
+        <param>
+          <type>const Arr &amp;</type>
+          <declname>x</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/numerical-mesh.h" line="152" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classMesh__base_1a6d78aa3be7df5503d2323278b3c91e39" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>Arr</type>
+        <definition>Arr Mesh_base&lt; Dim, double  &gt;::operator()</definition>
+        <argsstring>(const Arr &amp;x) const</argsstring>
+        <name>operator()</name>
+        <param>
+          <type>const Arr &amp;</type>
+          <declname>x</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/numerical-mesh.h" line="154" column="9" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/numerical-mesh.h" bodystart="154" bodyend="154"/>
+      </memberdef>
+      <memberdef kind="function" id="classMesh__base_1a1a658cc4289cae0d5bd906e98a025353" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::array&lt; size_t, Dim &gt;</type>
+        <definition>std::array&lt;size_t, Dim&gt; Mesh_base&lt; Dim, double  &gt;::dim</definition>
+        <argsstring>() const</argsstring>
+        <name>dim</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/numerical-mesh.h" line="159" column="16" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/numerical-mesh.h" bodystart="159" bodyend="159"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="protected-attrib">
+      <memberdef kind="variable" id="classMesh__base_1af22e030db937497d998d750a3f3141ce" prot="protected" static="no" mutable="no">
+        <type>Arr</type>
+        <definition>Arr Mesh_base&lt; Dim, double  &gt;::alpha_m</definition>
+        <argsstring></argsstring>
+        <name>alpha_m</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/numerical-mesh.h" line="132" column="9" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/numerical-mesh.h" bodystart="132" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classMesh__base_1a5600057e3fc7b8bba2525e3406483068" prot="protected" static="no" mutable="no">
+        <type>Arr</type>
+        <definition>Arr Mesh_base&lt; Dim, double  &gt;::beta_m</definition>
+        <argsstring></argsstring>
+        <name>beta_m</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/numerical-mesh.h" line="132" column="17" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/numerical-mesh.h" bodystart="132" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classMesh__base_1a496a79ae11c6a1afe1d700e6425c7901" prot="protected" static="no" mutable="no">
+        <type>Arr</type>
+        <definition>Arr Mesh_base&lt; Dim, double  &gt;::gamma_m</definition>
+        <argsstring></argsstring>
+        <name>gamma_m</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/numerical-mesh.h" line="132" column="24" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/numerical-mesh.h" bodystart="132" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classMesh__base_1abe82a61399e70ba0cf23a18aa8800d3d" prot="protected" static="no" mutable="no">
+        <type>std::array&lt; size_t, Dim &gt;</type>
+        <definition>std::array&lt;size_t, Dim&gt; Mesh_base&lt; Dim, double  &gt;::N_m</definition>
+        <argsstring></argsstring>
+        <name>N_m</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/numerical-mesh.h" line="133" column="16" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/numerical-mesh.h" bodystart="133" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="protected-func">
+      <memberdef kind="function" id="classMesh__base_1a2bbdb022643f83c7e42ad0ccb206c836" prot="protected" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::array&lt; std::tuple&lt; A, B &gt;, Dim &gt;</type>
+        <definition>std::array&lt;std::tuple&lt;A, B&gt;, Dim&gt; Mesh_base&lt; Dim, double  &gt;::zip2</definition>
+        <argsstring>(const std::array&lt; A, Dim &gt; &amp;a, const std::array&lt; B, Dim &gt; &amp;b) const</argsstring>
+        <name>zip2</name>
+        <param>
+          <type>const std::array&lt; A, Dim &gt; &amp;</type>
+          <declname>a</declname>
+        </param>
+        <param>
+          <type>const std::array&lt; B, Dim &gt; &amp;</type>
+          <declname>b</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/numerical-mesh.h" line="37" column="16" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/numerical-mesh.h" bodystart="37" bodyend="55"/>
+      </memberdef>
+      <memberdef kind="function" id="classMesh__base_1afd0ed58b89728e3e242c20029041fde0" prot="protected" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::array&lt; std::tuple&lt; A, B, C &gt;, Dim &gt;</type>
+        <definition>std::array&lt;std::tuple&lt;A, B, C&gt;, Dim&gt; Mesh_base&lt; Dim, double  &gt;::zip3</definition>
+        <argsstring>(const std::array&lt; A, Dim &gt; &amp;a, const std::array&lt; B, Dim &gt; &amp;b, std::array&lt; C, Dim &gt; c) const</argsstring>
+        <name>zip3</name>
+        <param>
+          <type>const std::array&lt; A, Dim &gt; &amp;</type>
+          <declname>a</declname>
+        </param>
+        <param>
+          <type>const std::array&lt; B, Dim &gt; &amp;</type>
+          <declname>b</declname>
+        </param>
+        <param>
+          <type>std::array&lt; C, Dim &gt;</type>
+          <declname>c</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/numerical-mesh.h" line="58" column="16" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/numerical-mesh.h" bodystart="58" bodyend="79"/>
+      </memberdef>
+      <memberdef kind="function" id="classMesh__base_1a6e10e4bdab46a13b869fbb21894fe8d2" prot="protected" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::array&lt; std::tuple&lt; A, B, C, D &gt;, Dim &gt;</type>
+        <definition>std::array&lt;std::tuple&lt;A, B, C, D&gt;, Dim&gt; Mesh_base&lt; Dim, double  &gt;::zip4</definition>
+        <argsstring>(const std::array&lt; A, Dim &gt; &amp;a, const std::array&lt; B, Dim &gt; &amp;b, const std::array&lt; C, Dim &gt; &amp;c, const std::array&lt; D, Dim &gt; &amp;d) const</argsstring>
+        <name>zip4</name>
+        <param>
+          <type>const std::array&lt; A, Dim &gt; &amp;</type>
+          <declname>a</declname>
+        </param>
+        <param>
+          <type>const std::array&lt; B, Dim &gt; &amp;</type>
+          <declname>b</declname>
+        </param>
+        <param>
+          <type>const std::array&lt; C, Dim &gt; &amp;</type>
+          <declname>c</declname>
+        </param>
+        <param>
+          <type>const std::array&lt; D, Dim &gt; &amp;</type>
+          <declname>d</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/numerical-mesh.h" line="82" column="16" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/numerical-mesh.h" bodystart="82" bodyend="105"/>
+      </memberdef>
+      <memberdef kind="function" id="classMesh__base_1a329084b98ea9c309ba321e73f11a669e" prot="protected" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::array&lt; std::tuple&lt; A, B, C, D &gt;, Dim &gt;</type>
+        <definition>std::array&lt;std::tuple&lt;A, B, C, D&gt;, Dim&gt; Mesh_base&lt; Dim, double  &gt;::zip4</definition>
+        <argsstring>(const std::array&lt; A, Dim &gt; &amp;a, const std::array&lt; std::tuple&lt; B, C, D &gt;, Dim &gt; &amp;t) const</argsstring>
+        <name>zip4</name>
+        <param>
+          <type>const std::array&lt; A, Dim &gt; &amp;</type>
+          <declname>a</declname>
+        </param>
+        <param>
+          <type>const std::array&lt; std::tuple&lt; B, C, D &gt;, Dim &gt; &amp;</type>
+          <declname>t</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/numerical-mesh.h" line="108" column="16" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/numerical-mesh.h" bodystart="108" bodyend="130"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>Mesh_base&lt; D, double &gt;</label>
+        <link refid="classMesh__base"/>
+      </node>
+      <node id="1">
+        <label>Linear_mesh&lt; D, Scalar &gt;</label>
+        <link refid="classLinear__mesh"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>Mesh_base&lt; D, double &gt;</label>
+        <link refid="classMesh__base"/>
+        <childnode refid="3" relation="usage">
+          <edgelabel>N_m</edgelabel>
+        </childnode>
+        <childnode refid="4" relation="usage">
+          <edgelabel>alpha_m</edgelabel>
+          <edgelabel>beta_m</edgelabel>
+          <edgelabel>gamma_m</edgelabel>
+        </childnode>
+      </node>
+      <node id="3">
+        <label>std::array&lt; size_t, Dim &gt;</label>
+      </node>
+      <node id="1">
+        <label>Linear_mesh&lt; D, Scalar &gt;</label>
+        <link refid="classLinear__mesh"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>std::array&lt; double, Dim &gt;</label>
+      </node>
+    </collaborationgraph>
+    <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/numerical-mesh.h" line="238" column="1" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/numerical-mesh.h" bodystart="238" bodyend="313"/>
+    <listofallmembers>
+      <member refid="classMesh__base_1af22e030db937497d998d750a3f3141ce" prot="protected" virt="non-virtual"><scope>Linear_mesh</scope><name>alpha_m</name></member>
+      <member refid="classLinear__mesh_1a1124f280c634153515fddb392ec5d093" prot="public" virt="non-virtual"><scope>Linear_mesh</scope><name>Arr</name></member>
+      <member refid="classMesh__base_1a5600057e3fc7b8bba2525e3406483068" prot="protected" virt="non-virtual"><scope>Linear_mesh</scope><name>beta_m</name></member>
+      <member refid="classMesh__base_1a1a658cc4289cae0d5bd906e98a025353" prot="public" virt="non-virtual"><scope>Linear_mesh</scope><name>dim</name></member>
+      <member refid="classLinear__mesh_1a21802d40dac79f0e747a73a890d4668b" prot="public" virt="non-virtual"><scope>Linear_mesh</scope><name>dr</name></member>
+      <member refid="classMesh__base_1aae4c7bad5cb05d1a8cf3e37ac171b217" prot="public" virt="pure-virtual" ambiguityscope="Mesh_base&lt; D, double &gt;::"><scope>Linear_mesh</scope><name>dr</name></member>
+      <member refid="classMesh__base_1a496a79ae11c6a1afe1d700e6425c7901" prot="protected" virt="non-virtual"><scope>Linear_mesh</scope><name>gamma_m</name></member>
+      <member refid="classLinear__mesh_1a45c93c8ba3bc1f1aad697583e7426da1" prot="private" virt="non-virtual"><scope>Linear_mesh</scope><name>Linear_mesh</name></member>
+      <member refid="classLinear__mesh_1a074f8cdf5c009b89cd074100e42a29d2" prot="public" virt="non-virtual"><scope>Linear_mesh</scope><name>Linear_mesh</name></member>
+      <member refid="classLinear__mesh_1aafe1a58017195765c71c18e315e48725" prot="public" virt="non-virtual"><scope>Linear_mesh</scope><name>Linear_mesh</name></member>
+      <member refid="classLinear__mesh_1a26730707a414de9e2864aa85098395c3" prot="public" virt="non-virtual"><scope>Linear_mesh</scope><name>Linear_mesh</name></member>
+      <member refid="classMesh__base_1a12662bd8a9c7fe0078ff72f8256e0c8b" prot="protected" virt="non-virtual"><scope>Linear_mesh</scope><name>Mesh_base</name></member>
+      <member refid="classMesh__base_1acd09d9ebcd3dbd3cbfd44cfbbb87ea1d" prot="public" virt="non-virtual"><scope>Linear_mesh</scope><name>Mesh_base</name></member>
+      <member refid="classMesh__base_1ae69565e298263bb7cf4ea6fdaf9079d6" prot="public" virt="non-virtual"><scope>Linear_mesh</scope><name>Mesh_base</name></member>
+      <member refid="classMesh__base_1ac037462dfcc61736df5c3577744080fb" prot="public" virt="non-virtual"><scope>Linear_mesh</scope><name>Mesh_base</name></member>
+      <member refid="classMesh__base_1abe82a61399e70ba0cf23a18aa8800d3d" prot="protected" virt="non-virtual"><scope>Linear_mesh</scope><name>N_m</name></member>
+      <member refid="classMesh__base_1a6d78aa3be7df5503d2323278b3c91e39" prot="public" virt="non-virtual"><scope>Linear_mesh</scope><name>operator()</name></member>
+      <member refid="classLinear__mesh_1ad1a22971ca7df814a046383661bff173" prot="public" virt="non-virtual"><scope>Linear_mesh</scope><name>operator=</name></member>
+      <member refid="classLinear__mesh_1adbabf6a489dc4251adb5e13e76d9df47" prot="public" virt="non-virtual"><scope>Linear_mesh</scope><name>operator=</name></member>
+      <member refid="classMesh__base_1a711382b1923daac36a9d61f404ed0ac3" prot="public" virt="non-virtual" ambiguityscope="Mesh_base&lt; D, double &gt;::"><scope>Linear_mesh</scope><name>operator=</name></member>
+      <member refid="classMesh__base_1ad3c4fa6274bc69a9f2a8a22c76aedbd1" prot="public" virt="non-virtual" ambiguityscope="Mesh_base&lt; D, double &gt;::"><scope>Linear_mesh</scope><name>operator=</name></member>
+      <member refid="classMesh__base_1aa7ee77b844634dec60016fb1eec59033" prot="public" virt="non-virtual"><scope>Linear_mesh</scope><name>parameters</name></member>
+      <member refid="classLinear__mesh_1a1b7760691f3ccade504d11d40f4503fa" prot="public" virt="non-virtual"><scope>Linear_mesh</scope><name>r</name></member>
+      <member refid="classMesh__base_1af995545134ead5a2016087713d695106" prot="public" virt="pure-virtual" ambiguityscope="Mesh_base&lt; D, double &gt;::"><scope>Linear_mesh</scope><name>r</name></member>
+      <member refid="classMesh__base_1a94cfa3475faff03cc69356b24c304abb" prot="public" virt="non-virtual" ambiguityscope="Mesh_base&lt; D, double &gt;::"><scope>Linear_mesh</scope><name>r</name></member>
+      <member refid="classLinear__mesh_1a62811761c01361dad96d7b5a3bcb5258" prot="public" virt="non-virtual"><scope>Linear_mesh</scope><name>r2</name></member>
+      <member refid="classMesh__base_1a54297607ef866c8c78346d9546a4fab6" prot="public" virt="pure-virtual" ambiguityscope="Mesh_base&lt; D, double &gt;::"><scope>Linear_mesh</scope><name>r2</name></member>
+      <member refid="classMesh__base_1a2bbdb022643f83c7e42ad0ccb206c836" prot="protected" virt="non-virtual"><scope>Linear_mesh</scope><name>zip2</name></member>
+      <member refid="classMesh__base_1afd0ed58b89728e3e242c20029041fde0" prot="protected" virt="non-virtual"><scope>Linear_mesh</scope><name>zip3</name></member>
+      <member refid="classMesh__base_1a6e10e4bdab46a13b869fbb21894fe8d2" prot="protected" virt="non-virtual"><scope>Linear_mesh</scope><name>zip4</name></member>
+      <member refid="classMesh__base_1a329084b98ea9c309ba321e73f11a669e" prot="protected" virt="non-virtual"><scope>Linear_mesh</scope><name>zip4</name></member>
+      <member refid="classLinear__mesh_1a66b8a643e318f7ae34201fbf5f5b2e83" prot="public" virt="non-virtual"><scope>Linear_mesh</scope><name>~Linear_mesh</name></member>
+      <member refid="classMesh__base_1ad9545d00f1f97f7115106cde9c54cc24" prot="public" virt="virtual"><scope>Linear_mesh</scope><name>~Mesh_base</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

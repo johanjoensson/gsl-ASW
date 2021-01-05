@@ -1,0 +1,106 @@
+\hypertarget{classRadial__Schroedinger__Equation__Central__Potential}{}\doxysection{Radial\+\_\+\+Schroedinger\+\_\+\+Equation\+\_\+\+Central\+\_\+\+Potential Class Reference}
+\label{classRadial__Schroedinger__Equation__Central__Potential}\index{Radial\_Schroedinger\_Equation\_Central\_Potential@{Radial\_Schroedinger\_Equation\_Central\_Potential}}
+Inheritance diagram for Radial\+\_\+\+Schroedinger\+\_\+\+Equation\+\_\+\+Central\+\_\+\+Potential\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{classRadial__Schroedinger__Equation__Central__Potential}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classRadial__Schroedinger__Equation__Central__Potential_a480964aeb9fd1a3af9daec22524ab0f8}\label{classRadial__Schroedinger__Equation__Central__Potential_a480964aeb9fd1a3af9daec22524ab0f8}} 
+{\bfseries Radial\+\_\+\+Schroedinger\+\_\+\+Equation\+\_\+\+Central\+\_\+\+Potential} (const std\+::vector$<$ double $>$ \&v, const size\+\_\+t l, const std\+::vector$<$ double $>$ \&left\+\_\+init, const std\+::vector$<$ double $>$ \&right\+\_\+init, const \mbox{\hyperlink{classLogarithmic__mesh}{Logarithmic\+\_\+mesh}} \&mesh, const double tol=1e-\/10)
+\item 
+\mbox{\Hypertarget{classRadial__Schroedinger__Equation_a147b7374813125e7189f9507bd46f90d}\label{classRadial__Schroedinger__Equation_a147b7374813125e7189f9507bd46f90d}} 
+void {\bfseries solve} (const size\+\_\+t nodes) override
+\item 
+\mbox{\Hypertarget{classRadial__Schroedinger__Equation_abc90c4b3ec2da877fa2a1a9e9e67b02d}\label{classRadial__Schroedinger__Equation_abc90c4b3ec2da877fa2a1a9e9e67b02d}} 
+void {\bfseries solve} (const size\+\_\+t nodes, const double e\+\_\+guess) override
+\item 
+\mbox{\Hypertarget{classRadial__Schroedinger__Equation_a04280196f993f0b428ef00330ec67589}\label{classRadial__Schroedinger__Equation_a04280196f993f0b428ef00330ec67589}} 
+virtual void {\bfseries solve} ()
+\item 
+\mbox{\Hypertarget{classRadial__Schroedinger__Equation_a636061d408a8fb3173405e2607542209}\label{classRadial__Schroedinger__Equation_a636061d408a8fb3173405e2607542209}} 
+virtual void {\bfseries solve} (size\+\_\+t nodes)
+\item 
+\mbox{\Hypertarget{classRadial__Schroedinger__Equation_a6d82e465f31cdc2217e590b37d964940}\label{classRadial__Schroedinger__Equation_a6d82e465f31cdc2217e590b37d964940}} 
+virtual void {\bfseries solve} (const size\+\_\+t nodes, const double e\+\_\+guess)
+\item 
+\mbox{\Hypertarget{classRadial__Schroedinger__Equation_a7adb3d94bb8a396ee367a2aae0a9c575}\label{classRadial__Schroedinger__Equation_a7adb3d94bb8a396ee367a2aae0a9c575}} 
+double {\bfseries norm} () const override
+\item 
+\mbox{\Hypertarget{classRadial__Schroedinger__Equation_acd5ff230f9cdac08e1fe385b20ee61c5}\label{classRadial__Schroedinger__Equation_acd5ff230f9cdac08e1fe385b20ee61c5}} 
+void {\bfseries normalize} () override
+\item 
+\mbox{\Hypertarget{classSchroedinger__Equation_ac00fea2e607c1cc9b8b0a22521462d84}\label{classSchroedinger__Equation_ac00fea2e607c1cc9b8b0a22521462d84}} 
+std\+::vector$<$ double $>$ \& {\bfseries psi} ()
+\item 
+\mbox{\Hypertarget{classSchroedinger__Equation_a54d7ca479ce22229bd78a2f0dd39aa04}\label{classSchroedinger__Equation_a54d7ca479ce22229bd78a2f0dd39aa04}} 
+std\+::vector$<$ double $>$ \& {\bfseries v} ()
+\item 
+\mbox{\Hypertarget{classSchroedinger__Equation_a309ed38cfd4cf412f133afd89c7eea1e}\label{classSchroedinger__Equation_a309ed38cfd4cf412f133afd89c7eea1e}} 
+double {\bfseries e} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classRadial__Schroedinger__Equation_a4df93cb7b4993fe45836a99dd2af2b61}\label{classRadial__Schroedinger__Equation_a4df93cb7b4993fe45836a99dd2af2b61}} 
+double {\bfseries F\+\_\+norm} () const
+\item 
+\mbox{\Hypertarget{classRadial__Schroedinger__Equation_a61968a06a4fe7dc5446204f76fa7c91b}\label{classRadial__Schroedinger__Equation_a61968a06a4fe7dc5446204f76fa7c91b}} 
+{\footnotesize template$<$class Iter , class T  = double$>$ }\\double {\bfseries variational\+\_\+de} (Iter g\+\_\+start, Iter inv)
+\item 
+{\footnotesize template$<$class Iter\+\_\+res , class Iter\+\_\+v $>$ }\\Iter\+\_\+v \mbox{\hyperlink{classSchroedinger__Equation_a332d6da5c633fd7cb18f59211e93c366}{find\+\_\+inversion\+\_\+point}} (Iter\+\_\+res res\+\_\+start, Iter\+\_\+res res\+\_\+end, Iter\+\_\+v v\+\_\+start)
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classRadial__Schroedinger__Equation_a22a73481cda9a9f46002759c7754c4eb}\label{classRadial__Schroedinger__Equation_a22a73481cda9a9f46002759c7754c4eb}} 
+const \mbox{\hyperlink{classLogarithmic__mesh}{Logarithmic\+\_\+mesh}} \& {\bfseries mesh\+\_\+p}
+\item 
+\mbox{\Hypertarget{classSchroedinger__Equation_a5fc395082349ce5df3b9407568b7cd4d}\label{classSchroedinger__Equation_a5fc395082349ce5df3b9407568b7cd4d}} 
+double {\bfseries energy\+\_\+m}
+\item 
+\mbox{\Hypertarget{classSchroedinger__Equation_a3a2404ae5bff5c53ede30d46b0cdd16e}\label{classSchroedinger__Equation_a3a2404ae5bff5c53ede30d46b0cdd16e}} 
+double {\bfseries e\+\_\+min\+\_\+m}
+\item 
+\mbox{\Hypertarget{classSchroedinger__Equation_a0a0c2bc722316378a67e326c7e9b11a0}\label{classSchroedinger__Equation_a0a0c2bc722316378a67e326c7e9b11a0}} 
+double {\bfseries e\+\_\+max\+\_\+m}
+\item 
+\mbox{\Hypertarget{classSchroedinger__Equation_a0686e3b199849104f2a11f3bc9bab0c4}\label{classSchroedinger__Equation_a0686e3b199849104f2a11f3bc9bab0c4}} 
+std\+::vector$<$ double $>$ {\bfseries v\+\_\+m}
+\item 
+\mbox{\Hypertarget{classSchroedinger__Equation_a7678b45da97c75227b3809f200d81b40}\label{classSchroedinger__Equation_a7678b45da97c75227b3809f200d81b40}} 
+std\+::vector$<$ double $>$ {\bfseries psi\+\_\+m}
+\item 
+\mbox{\Hypertarget{classSchroedinger__Equation_a10e376c4831b22f5337a08fb2cb01724}\label{classSchroedinger__Equation_a10e376c4831b22f5337a08fb2cb01724}} 
+std\+::vector$<$ double $>$ {\bfseries l\+\_\+init\+\_\+m}
+\item 
+\mbox{\Hypertarget{classSchroedinger__Equation_acd6be0fc2e16b0e4e6290dc1fece5e33}\label{classSchroedinger__Equation_acd6be0fc2e16b0e4e6290dc1fece5e33}} 
+std\+::vector$<$ double $>$ {\bfseries r\+\_\+init\+\_\+m}
+\item 
+\mbox{\Hypertarget{classSchroedinger__Equation_ad49fd836c59bca15ad6c7bfe1b26ece7}\label{classSchroedinger__Equation_ad49fd836c59bca15ad6c7bfe1b26ece7}} 
+double {\bfseries tol\+\_\+m}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classSchroedinger__Equation_a332d6da5c633fd7cb18f59211e93c366}\label{classSchroedinger__Equation_a332d6da5c633fd7cb18f59211e93c366}} 
+\index{Radial\_Schroedinger\_Equation\_Central\_Potential@{Radial\_Schroedinger\_Equation\_Central\_Potential}!find\_inversion\_point@{find\_inversion\_point}}
+\index{find\_inversion\_point@{find\_inversion\_point}!Radial\_Schroedinger\_Equation\_Central\_Potential@{Radial\_Schroedinger\_Equation\_Central\_Potential}}
+\doxysubsubsection{\texorpdfstring{find\_inversion\_point()}{find\_inversion\_point()}}
+{\footnotesize\ttfamily template$<$class Iter\+\_\+res , class Iter\+\_\+v $>$ \\
+Iter\+\_\+v Schroedinger\+\_\+\+Equation\+::find\+\_\+inversion\+\_\+point (\begin{DoxyParamCaption}\item[{Iter\+\_\+res}]{res\+\_\+start,  }\item[{Iter\+\_\+res}]{res\+\_\+end,  }\item[{Iter\+\_\+v}]{v\+\_\+start }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [inherited]}}
+
+Find the point where E -\/ v(\+X\+\_\+i) = 0 (classical inversion point).~\newline
+ \textbackslash{}t\+\_\+\+\_\+\+Iter\+\_\+res\+\_\+\+\_\+ -\/ iterator to result container (e.\+g. std\+::vector)~\newline
+ \textbackslash{}t\+\_\+\+\_\+\+Iter\+\_\+v\+\_\+\+\_\+ -\/ iterator to v container (e.\+g. std\+::vector)~\newline
+ Input\+:~\newline
+ \textbackslash{}t\+\_\+\+\_\+res\+\_\+start\+\_\+\+\_\+ -\/ Iterator pointing to the first element of the result container.~\newline
+ \textbackslash{}t\+\_\+\+\_\+res\+\_\+end\+\_\+\+\_\+ -\/ Iterator pointing to the element one past the last element of the result container.~\newline
+\textbackslash{}t\+\_\+\+\_\+v\+\_\+start\+\_\+\+\_\+ -\/ Iterator pointing to the first element of the g container 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+schroedinger.\+h\end{DoxyCompactItemize}

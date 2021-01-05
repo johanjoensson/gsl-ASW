@@ -1,0 +1,271 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.20" xml:lang="en-US">
+  <compounddef id="classEwald__integral" kind="class" language="C++" prot="public">
+    <compoundname>Ewald_integral</compoundname>
+      <sectiondef kind="private-func">
+      <memberdef kind="function" id="classEwald__integral_1a4349a426fa9372fa6cac2e115b9d9ec2" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>double</type>
+        <definition>double Ewald_integral::bar_ew_int</definition>
+        <argsstring>(const double kappa, const double eta, const lm l, const double r) const</argsstring>
+        <name>bar_ew_int</name>
+        <param>
+          <type>const double</type>
+          <declname>kappa</declname>
+        </param>
+        <param>
+          <type>const double</type>
+          <declname>eta</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structlm" kindref="compound">lm</ref></type>
+          <declname>l</declname>
+        </param>
+        <param>
+          <type>const double</type>
+          <declname>r</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/ewald_int.h" line="9" column="16"/>
+      </memberdef>
+      <memberdef kind="function" id="classEwald__integral_1a698eca8841689d82cc6d56e59df6f52d" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>double</type>
+        <definition>double Ewald_integral::bar_comp_ew_int</definition>
+        <argsstring>(const double kappa, const double eta, const lm l, const double r) const</argsstring>
+        <name>bar_comp_ew_int</name>
+        <param>
+          <type>const double</type>
+          <declname>kappa</declname>
+        </param>
+        <param>
+          <type>const double</type>
+          <declname>eta</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structlm" kindref="compound">lm</ref></type>
+          <declname>l</declname>
+        </param>
+        <param>
+          <type>const double</type>
+          <declname>r</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/ewald_int.h" line="10" column="16"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classEwald__integral_1aff373b4c15fcd8ef1dfb3ff3c768c3a1" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>Ewald_integral::Ewald_integral</definition>
+        <argsstring>()</argsstring>
+        <name>Ewald_integral</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/ewald_int.h" line="12" column="9" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/ewald_int.h" bodystart="12" bodyend="12"/>
+      </memberdef>
+      <memberdef kind="function" id="classEwald__integral_1ae8c4bb8f81e5bc8e5bb98832944fa448" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>std::vector&lt; double &gt;</type>
+        <definition>std::vector&lt;double&gt; Ewald_integral::evaluate</definition>
+        <argsstring>(const double kappa, const double eta, const lm l, const Logarithmic_mesh &amp;mesh) const</argsstring>
+        <name>evaluate</name>
+        <param>
+          <type>const double</type>
+          <declname>kappa</declname>
+        </param>
+        <param>
+          <type>const double</type>
+          <declname>eta</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structlm" kindref="compound">lm</ref></type>
+          <declname>l</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classLogarithmic__mesh" kindref="compound">Logarithmic_mesh</ref> &amp;</type>
+          <declname>mesh</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/ewald_int.h" line="13" column="21"/>
+      </memberdef>
+      <memberdef kind="function" id="classEwald__integral_1a37ba1ec4c8873a40ea949d707f8c5098" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>std::vector&lt; double &gt;</type>
+        <definition>std::vector&lt;double&gt; Ewald_integral::evaluate_comp</definition>
+        <argsstring>(const double kappa, const double eta, const lm l, const Logarithmic_mesh &amp;mesh) const</argsstring>
+        <name>evaluate_comp</name>
+        <param>
+          <type>const double</type>
+          <declname>kappa</declname>
+        </param>
+        <param>
+          <type>const double</type>
+          <declname>eta</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structlm" kindref="compound">lm</ref></type>
+          <declname>l</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classLogarithmic__mesh" kindref="compound">Logarithmic_mesh</ref> &amp;</type>
+          <declname>mesh</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/ewald_int.h" line="14" column="21"/>
+      </memberdef>
+      <memberdef kind="function" id="classEwald__integral_1affe574b9a33b5ef70fb35b6200b5e8e2" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>double</type>
+        <definition>double Ewald_integral::ewald_int</definition>
+        <argsstring>(const double kappa, const double eta, const lm l, const double r) const</argsstring>
+        <name>ewald_int</name>
+        <param>
+          <type>const double</type>
+          <declname>kappa</declname>
+        </param>
+        <param>
+          <type>const double</type>
+          <declname>eta</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structlm" kindref="compound">lm</ref></type>
+          <declname>l</declname>
+        </param>
+        <param>
+          <type>const double</type>
+          <declname>r</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/ewald_int.h" line="15" column="16"/>
+      </memberdef>
+      <memberdef kind="function" id="classEwald__integral_1a155f094c866ff587d6316403b18658ac" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>double</type>
+        <definition>double Ewald_integral::comp_ewald_int</definition>
+        <argsstring>(const double kappa, const double eta, const lm l, const double r) const</argsstring>
+        <name>comp_ewald_int</name>
+        <param>
+          <type>const double</type>
+          <declname>kappa</declname>
+        </param>
+        <param>
+          <type>const double</type>
+          <declname>eta</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structlm" kindref="compound">lm</ref></type>
+          <declname>l</declname>
+        </param>
+        <param>
+          <type>const double</type>
+          <declname>r</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/ewald_int.h" line="16" column="16"/>
+      </memberdef>
+      <memberdef kind="function" id="classEwald__integral_1a1d773965c2ba7df33a396c471b103e0d" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>double</type>
+        <definition>double Ewald_integral::operator()</definition>
+        <argsstring>(const double kappa, const double eta, const lm l, const double r) const</argsstring>
+        <name>operator()</name>
+        <param>
+          <type>const double</type>
+          <declname>kappa</declname>
+        </param>
+        <param>
+          <type>const double</type>
+          <declname>eta</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structlm" kindref="compound">lm</ref></type>
+          <declname>l</declname>
+        </param>
+        <param>
+          <type>const double</type>
+          <declname>r</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/ewald_int.h" line="18" column="16" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/ewald_int.h" bodystart="18" bodyend="21"/>
+      </memberdef>
+      <memberdef kind="function" id="classEwald__integral_1ad50d9f28fceb02f973210220ba9afc6e" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>double</type>
+        <definition>double Ewald_integral::comp</definition>
+        <argsstring>(const double kappa, const double eta, const lm l, const double r) const</argsstring>
+        <name>comp</name>
+        <param>
+          <type>const double</type>
+          <declname>kappa</declname>
+        </param>
+        <param>
+          <type>const double</type>
+          <declname>eta</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structlm" kindref="compound">lm</ref></type>
+          <declname>l</declname>
+        </param>
+        <param>
+          <type>const double</type>
+          <declname>r</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/ewald_int.h" line="22" column="16" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/ewald_int.h" bodystart="22" bodyend="25"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/ewald_int.h" line="8" column="1" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/ewald_int.h" bodystart="8" bodyend="26"/>
+    <listofallmembers>
+      <member refid="classEwald__integral_1a698eca8841689d82cc6d56e59df6f52d" prot="private" virt="non-virtual"><scope>Ewald_integral</scope><name>bar_comp_ew_int</name></member>
+      <member refid="classEwald__integral_1a4349a426fa9372fa6cac2e115b9d9ec2" prot="private" virt="non-virtual"><scope>Ewald_integral</scope><name>bar_ew_int</name></member>
+      <member refid="classEwald__integral_1ad50d9f28fceb02f973210220ba9afc6e" prot="public" virt="non-virtual"><scope>Ewald_integral</scope><name>comp</name></member>
+      <member refid="classEwald__integral_1a155f094c866ff587d6316403b18658ac" prot="public" virt="non-virtual"><scope>Ewald_integral</scope><name>comp_ewald_int</name></member>
+      <member refid="classEwald__integral_1ae8c4bb8f81e5bc8e5bb98832944fa448" prot="public" virt="non-virtual"><scope>Ewald_integral</scope><name>evaluate</name></member>
+      <member refid="classEwald__integral_1a37ba1ec4c8873a40ea949d707f8c5098" prot="public" virt="non-virtual"><scope>Ewald_integral</scope><name>evaluate_comp</name></member>
+      <member refid="classEwald__integral_1affe574b9a33b5ef70fb35b6200b5e8e2" prot="public" virt="non-virtual"><scope>Ewald_integral</scope><name>ewald_int</name></member>
+      <member refid="classEwald__integral_1aff373b4c15fcd8ef1dfb3ff3c768c3a1" prot="public" virt="non-virtual"><scope>Ewald_integral</scope><name>Ewald_integral</name></member>
+      <member refid="classEwald__integral_1a1d773965c2ba7df33a396c471b103e0d" prot="public" virt="non-virtual"><scope>Ewald_integral</scope><name>operator()</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

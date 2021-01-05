@@ -1,0 +1,522 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.20" xml:lang="en-US">
+  <compounddef id="classSchroedinger__Equation" kind="class" language="C++" prot="public">
+    <compoundname>Schroedinger_Equation</compoundname>
+    <derivedcompoundref refid="classRadial__Schroedinger__Equation" prot="public" virt="non-virtual">Radial_Schroedinger_Equation</derivedcompoundref>
+      <sectiondef kind="protected-attrib">
+      <memberdef kind="variable" id="classSchroedinger__Equation_1a5fc395082349ce5df3b9407568b7cd4d" prot="protected" static="no" mutable="no">
+        <type>double</type>
+        <definition>double Schroedinger_Equation::energy_m</definition>
+        <argsstring></argsstring>
+        <name>energy_m</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/schroedinger.h" line="13" column="12" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/schroedinger.h" bodystart="13" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSchroedinger__Equation_1a3a2404ae5bff5c53ede30d46b0cdd16e" prot="protected" static="no" mutable="no">
+        <type>double</type>
+        <definition>double Schroedinger_Equation::e_min_m</definition>
+        <argsstring></argsstring>
+        <name>e_min_m</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/schroedinger.h" line="13" column="21" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/schroedinger.h" bodystart="13" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSchroedinger__Equation_1a0a0c2bc722316378a67e326c7e9b11a0" prot="protected" static="no" mutable="no">
+        <type>double</type>
+        <definition>double Schroedinger_Equation::e_max_m</definition>
+        <argsstring></argsstring>
+        <name>e_max_m</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/schroedinger.h" line="13" column="29" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/schroedinger.h" bodystart="13" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSchroedinger__Equation_1a0686e3b199849104f2a11f3bc9bab0c4" prot="protected" static="no" mutable="no">
+        <type>std::vector&lt; double &gt;</type>
+        <definition>std::vector&lt;double&gt; Schroedinger_Equation::v_m</definition>
+        <argsstring></argsstring>
+        <name>v_m</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/schroedinger.h" line="14" column="17" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/schroedinger.h" bodystart="14" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSchroedinger__Equation_1a7678b45da97c75227b3809f200d81b40" prot="protected" static="no" mutable="no">
+        <type>std::vector&lt; double &gt;</type>
+        <definition>std::vector&lt;double&gt; Schroedinger_Equation::psi_m</definition>
+        <argsstring></argsstring>
+        <name>psi_m</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/schroedinger.h" line="15" column="17" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/schroedinger.h" bodystart="15" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSchroedinger__Equation_1a10e376c4831b22f5337a08fb2cb01724" prot="protected" static="no" mutable="no">
+        <type>std::vector&lt; double &gt;</type>
+        <definition>std::vector&lt;double&gt; Schroedinger_Equation::l_init_m</definition>
+        <argsstring></argsstring>
+        <name>l_init_m</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/schroedinger.h" line="15" column="23" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/schroedinger.h" bodystart="15" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSchroedinger__Equation_1acd6be0fc2e16b0e4e6290dc1fece5e33" prot="protected" static="no" mutable="no">
+        <type>std::vector&lt; double &gt;</type>
+        <definition>std::vector&lt;double&gt; Schroedinger_Equation::r_init_m</definition>
+        <argsstring></argsstring>
+        <name>r_init_m</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/schroedinger.h" line="15" column="32" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/schroedinger.h" bodystart="15" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSchroedinger__Equation_1ad49fd836c59bca15ad6c7bfe1b26ece7" prot="protected" static="no" mutable="no">
+        <type>double</type>
+        <definition>double Schroedinger_Equation::tol_m</definition>
+        <argsstring></argsstring>
+        <name>tol_m</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/schroedinger.h" line="16" column="12" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/schroedinger.h" bodystart="16" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classSchroedinger__Equation_1ae088a3e08fdb02bb88099e67db1f636f" prot="private" static="no" mutable="no">
+        <type>const double</type>
+        <definition>const double Schroedinger_Equation::h_m</definition>
+        <argsstring></argsstring>
+        <name>h_m</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/schroedinger.h" line="42" column="18" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/schroedinger.h" bodystart="42" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="protected-func">
+      <memberdef kind="function" id="classSchroedinger__Equation_1a332d6da5c633fd7cb18f59211e93c366" prot="protected" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class Iter_res</type>
+          </param>
+          <param>
+            <type>class Iter_v</type>
+          </param>
+        </templateparamlist>
+        <type>Iter_v</type>
+        <definition>Iter_v Schroedinger_Equation::find_inversion_point</definition>
+        <argsstring>(Iter_res res_start, Iter_res res_end, Iter_v v_start)</argsstring>
+        <name>find_inversion_point</name>
+        <param>
+          <type>Iter_res</type>
+          <declname>res_start</declname>
+        </param>
+        <param>
+          <type>Iter_res</type>
+          <declname>res_end</declname>
+        </param>
+        <param>
+          <type>Iter_v</type>
+          <declname>v_start</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Find the point where E - v(X_i) = 0 (classical inversion point).<linebreak/>
+ \t__Iter_res__ - iterator to result container (e.g. std::vector)<linebreak/>
+ \t__Iter_v__ - iterator to v container (e.g. std::vector)<linebreak/>
+ Input:<linebreak/>
+ \t__res_start__ - Iterator pointing to the first element of the result container.<linebreak/>
+ \t__res_end__ - Iterator pointing to the element one past the last element of the result container.<linebreak/>
+\t__v_start__ - Iterator pointing to the first element of the g container </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/schroedinger.h" line="28" column="8" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/schroedinger.h" bodystart="28" bodyend="39"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classSchroedinger__Equation_1a5b6701dbba3522dcf40a16fd7560a446" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>Schroedinger_Equation::Schroedinger_Equation</definition>
+        <argsstring>(const double e_min, const double e_max, const std::vector&lt; double &gt; &amp;v, const std::vector&lt; double &gt; &amp;left_init, const std::vector&lt; double &gt; &amp;right_init, const double h=1e-3, const double tol=1e-10)</argsstring>
+        <name>Schroedinger_Equation</name>
+        <param>
+          <type>const double</type>
+          <declname>e_min</declname>
+        </param>
+        <param>
+          <type>const double</type>
+          <declname>e_max</declname>
+        </param>
+        <param>
+          <type>const std::vector&lt; double &gt; &amp;</type>
+          <declname>v</declname>
+        </param>
+        <param>
+          <type>const std::vector&lt; double &gt; &amp;</type>
+          <declname>left_init</declname>
+        </param>
+        <param>
+          <type>const std::vector&lt; double &gt; &amp;</type>
+          <declname>right_init</declname>
+        </param>
+        <param>
+          <type>const double</type>
+          <declname>h</declname>
+          <defval>1e-3</defval>
+        </param>
+        <param>
+          <type>const double</type>
+          <declname>tol</declname>
+          <defval>1e-10</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/schroedinger.h" line="46" column="5" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/schroedinger.h" bodystart="46" bodyend="49"/>
+      </memberdef>
+      <memberdef kind="function" id="classSchroedinger__Equation_1a6c127a0a82044fdc6d80e53cc1c912eb" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>Schroedinger_Equation::Schroedinger_Equation</definition>
+        <argsstring>(const double e_min, const double e_max, const std::vector&lt; double &gt; &amp;v, const std::vector&lt; double &gt; &amp;left_init, const std::vector&lt; double &gt; &amp;right_init, const Mesh &amp;mesh, const double tol=1e-10)</argsstring>
+        <name>Schroedinger_Equation</name>
+        <param>
+          <type>const double</type>
+          <declname>e_min</declname>
+        </param>
+        <param>
+          <type>const double</type>
+          <declname>e_max</declname>
+        </param>
+        <param>
+          <type>const std::vector&lt; double &gt; &amp;</type>
+          <declname>v</declname>
+        </param>
+        <param>
+          <type>const std::vector&lt; double &gt; &amp;</type>
+          <declname>left_init</declname>
+        </param>
+        <param>
+          <type>const std::vector&lt; double &gt; &amp;</type>
+          <declname>right_init</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classMesh" kindref="compound">Mesh</ref> &amp;</type>
+          <declname>mesh</declname>
+        </param>
+        <param>
+          <type>const double</type>
+          <declname>tol</declname>
+          <defval>1e-10</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/schroedinger.h" line="51" column="5" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/schroedinger.h" bodystart="51" bodyend="56"/>
+      </memberdef>
+      <memberdef kind="function" id="classSchroedinger__Equation_1ae5553ac0e314aafcfad23c2030c0c2af" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Schroedinger_Equation::Schroedinger_Equation</definition>
+        <argsstring>(const Schroedinger_Equation &amp;)=default</argsstring>
+        <name>Schroedinger_Equation</name>
+        <param>
+          <type>const <ref refid="classSchroedinger__Equation" kindref="compound">Schroedinger_Equation</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/schroedinger.h" line="59" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classSchroedinger__Equation_1af5d191ca9f98c8cc0841bfb833aee94e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Schroedinger_Equation::Schroedinger_Equation</definition>
+        <argsstring>(Schroedinger_Equation &amp;&amp;)=default</argsstring>
+        <name>Schroedinger_Equation</name>
+        <param>
+          <type><ref refid="classSchroedinger__Equation" kindref="compound">Schroedinger_Equation</ref> &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/schroedinger.h" line="60" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classSchroedinger__Equation_1a2cf5828b1ec04655ce7485697781f069" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type></type>
+        <definition>virtual Schroedinger_Equation::~Schroedinger_Equation</definition>
+        <argsstring>()=default</argsstring>
+        <name>~Schroedinger_Equation</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/schroedinger.h" line="61" column="13"/>
+      </memberdef>
+      <memberdef kind="function" id="classSchroedinger__Equation_1ac5bb4bdb2fcdd7401d4735651c39ec4d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classSchroedinger__Equation" kindref="compound">Schroedinger_Equation</ref> &amp;</type>
+        <definition>Schroedinger_Equation&amp; Schroedinger_Equation::operator=</definition>
+        <argsstring>(const Schroedinger_Equation &amp;)=default</argsstring>
+        <name>operator=</name>
+        <param>
+          <type>const <ref refid="classSchroedinger__Equation" kindref="compound">Schroedinger_Equation</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/schroedinger.h" line="63" column="27"/>
+      </memberdef>
+      <memberdef kind="function" id="classSchroedinger__Equation_1a9b6ea0cd4f1d3e25935928f1c238b17a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classSchroedinger__Equation" kindref="compound">Schroedinger_Equation</ref> &amp;</type>
+        <definition>Schroedinger_Equation&amp; Schroedinger_Equation::operator=</definition>
+        <argsstring>(Schroedinger_Equation &amp;&amp;)=default</argsstring>
+        <name>operator=</name>
+        <param>
+          <type><ref refid="classSchroedinger__Equation" kindref="compound">Schroedinger_Equation</ref> &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/schroedinger.h" line="64" column="27"/>
+      </memberdef>
+      <memberdef kind="function" id="classSchroedinger__Equation_1a15abeb8a3ca6b5559ad75df3d55d53d7" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
+        <type>double</type>
+        <definition>virtual double Schroedinger_Equation::norm</definition>
+        <argsstring>() const</argsstring>
+        <name>norm</name>
+        <reimplementedby refid="classRadial__Schroedinger__Equation_1a7adb3d94bb8a396ee367a2aae0a9c575">norm</reimplementedby>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/schroedinger.h" line="66" column="20" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/schroedinger.h" bodystart="66" bodyend="73"/>
+      </memberdef>
+      <memberdef kind="function" id="classSchroedinger__Equation_1a04280196f993f0b428ef00330ec67589" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type>void</type>
+        <definition>virtual void Schroedinger_Equation::solve</definition>
+        <argsstring>()</argsstring>
+        <name>solve</name>
+        <reimplementedby refid="classRadial__Schroedinger__Equation_1a04280196f993f0b428ef00330ec67589">solve</reimplementedby>
+        <reimplementedby refid="classRadial__Schroedinger__Equation_1a6d82e465f31cdc2217e590b37d964940">solve</reimplementedby>
+        <reimplementedby refid="classRadial__Schroedinger__Equation_1a636061d408a8fb3173405e2607542209">solve</reimplementedby>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/schroedinger.h" line="75" column="18" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/schroedinger.h" bodystart="75" bodyend="118"/>
+      </memberdef>
+      <memberdef kind="function" id="classSchroedinger__Equation_1a636061d408a8fb3173405e2607542209" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type>void</type>
+        <definition>virtual void Schroedinger_Equation::solve</definition>
+        <argsstring>(size_t nodes)</argsstring>
+        <name>solve</name>
+        <reimplementedby refid="classRadial__Schroedinger__Equation_1a147b7374813125e7189f9507bd46f90d">solve</reimplementedby>
+        <param>
+          <type>size_t</type>
+          <declname>nodes</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/schroedinger.h" line="120" column="18" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/schroedinger.h" bodystart="120" bodyend="123"/>
+      </memberdef>
+      <memberdef kind="function" id="classSchroedinger__Equation_1a6d82e465f31cdc2217e590b37d964940" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type>void</type>
+        <definition>virtual void Schroedinger_Equation::solve</definition>
+        <argsstring>(const size_t nodes, const double e_guess)</argsstring>
+        <name>solve</name>
+        <reimplementedby refid="classRadial__Schroedinger__Equation_1abc90c4b3ec2da877fa2a1a9e9e67b02d">solve</reimplementedby>
+        <param>
+          <type>const size_t</type>
+          <declname>nodes</declname>
+        </param>
+        <param>
+          <type>const double</type>
+          <declname>e_guess</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/schroedinger.h" line="125" column="18" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/schroedinger.h" bodystart="125" bodyend="178"/>
+      </memberdef>
+      <memberdef kind="function" id="classSchroedinger__Equation_1a4177cba062332b6fd121589eeec5af67" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type>void</type>
+        <definition>virtual void Schroedinger_Equation::normalize</definition>
+        <argsstring>()</argsstring>
+        <name>normalize</name>
+        <reimplementedby refid="classRadial__Schroedinger__Equation_1acd5ff230f9cdac08e1fe385b20ee61c5">normalize</reimplementedby>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/schroedinger.h" line="180" column="18" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/schroedinger.h" bodystart="180" bodyend="186"/>
+      </memberdef>
+      <memberdef kind="function" id="classSchroedinger__Equation_1ac00fea2e607c1cc9b8b0a22521462d84" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::vector&lt; double &gt; &amp;</type>
+        <definition>std::vector&lt;double&gt;&amp; Schroedinger_Equation::psi</definition>
+        <argsstring>()</argsstring>
+        <name>psi</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/schroedinger.h" line="188" column="17" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/schroedinger.h" bodystart="188" bodyend="191"/>
+      </memberdef>
+      <memberdef kind="function" id="classSchroedinger__Equation_1a54d7ca479ce22229bd78a2f0dd39aa04" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::vector&lt; double &gt; &amp;</type>
+        <definition>std::vector&lt;double&gt;&amp; Schroedinger_Equation::v</definition>
+        <argsstring>()</argsstring>
+        <name>v</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/schroedinger.h" line="193" column="17" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/schroedinger.h" bodystart="193" bodyend="196"/>
+      </memberdef>
+      <memberdef kind="function" id="classSchroedinger__Equation_1a309ed38cfd4cf412f133afd89c7eea1e" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>double</type>
+        <definition>double Schroedinger_Equation::e</definition>
+        <argsstring>()</argsstring>
+        <name>e</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/schroedinger.h" line="198" column="12" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/schroedinger.h" bodystart="198" bodyend="201"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>Radial_Schroedinger_Equation</label>
+        <link refid="classRadial__Schroedinger__Equation"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>Schroedinger_Equation</label>
+        <link refid="classSchroedinger__Equation"/>
+      </node>
+      <node id="3">
+        <label>Radial_Schroedinger_Equation_Central_Potential</label>
+        <link refid="classRadial__Schroedinger__Equation__Central__Potential"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>std::vector&lt; double &gt;</label>
+      </node>
+      <node id="1">
+        <label>Schroedinger_Equation</label>
+        <link refid="classSchroedinger__Equation"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>l_init_m</edgelabel>
+          <edgelabel>psi_m</edgelabel>
+          <edgelabel>r_init_m</edgelabel>
+          <edgelabel>v_m</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/schroedinger.h" line="11" column="1" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/schroedinger.h" bodystart="11" bodyend="203"/>
+    <listofallmembers>
+      <member refid="classSchroedinger__Equation_1a309ed38cfd4cf412f133afd89c7eea1e" prot="public" virt="non-virtual"><scope>Schroedinger_Equation</scope><name>e</name></member>
+      <member refid="classSchroedinger__Equation_1a0a0c2bc722316378a67e326c7e9b11a0" prot="protected" virt="non-virtual"><scope>Schroedinger_Equation</scope><name>e_max_m</name></member>
+      <member refid="classSchroedinger__Equation_1a3a2404ae5bff5c53ede30d46b0cdd16e" prot="protected" virt="non-virtual"><scope>Schroedinger_Equation</scope><name>e_min_m</name></member>
+      <member refid="classSchroedinger__Equation_1a5fc395082349ce5df3b9407568b7cd4d" prot="protected" virt="non-virtual"><scope>Schroedinger_Equation</scope><name>energy_m</name></member>
+      <member refid="classSchroedinger__Equation_1a332d6da5c633fd7cb18f59211e93c366" prot="protected" virt="non-virtual"><scope>Schroedinger_Equation</scope><name>find_inversion_point</name></member>
+      <member refid="classSchroedinger__Equation_1ae088a3e08fdb02bb88099e67db1f636f" prot="private" virt="non-virtual"><scope>Schroedinger_Equation</scope><name>h_m</name></member>
+      <member refid="classSchroedinger__Equation_1a10e376c4831b22f5337a08fb2cb01724" prot="protected" virt="non-virtual"><scope>Schroedinger_Equation</scope><name>l_init_m</name></member>
+      <member refid="classSchroedinger__Equation_1a15abeb8a3ca6b5559ad75df3d55d53d7" prot="public" virt="virtual"><scope>Schroedinger_Equation</scope><name>norm</name></member>
+      <member refid="classSchroedinger__Equation_1a4177cba062332b6fd121589eeec5af67" prot="public" virt="virtual"><scope>Schroedinger_Equation</scope><name>normalize</name></member>
+      <member refid="classSchroedinger__Equation_1ac5bb4bdb2fcdd7401d4735651c39ec4d" prot="public" virt="non-virtual"><scope>Schroedinger_Equation</scope><name>operator=</name></member>
+      <member refid="classSchroedinger__Equation_1a9b6ea0cd4f1d3e25935928f1c238b17a" prot="public" virt="non-virtual"><scope>Schroedinger_Equation</scope><name>operator=</name></member>
+      <member refid="classSchroedinger__Equation_1ac00fea2e607c1cc9b8b0a22521462d84" prot="public" virt="non-virtual"><scope>Schroedinger_Equation</scope><name>psi</name></member>
+      <member refid="classSchroedinger__Equation_1a7678b45da97c75227b3809f200d81b40" prot="protected" virt="non-virtual"><scope>Schroedinger_Equation</scope><name>psi_m</name></member>
+      <member refid="classSchroedinger__Equation_1acd6be0fc2e16b0e4e6290dc1fece5e33" prot="protected" virt="non-virtual"><scope>Schroedinger_Equation</scope><name>r_init_m</name></member>
+      <member refid="classSchroedinger__Equation_1a5b6701dbba3522dcf40a16fd7560a446" prot="public" virt="non-virtual"><scope>Schroedinger_Equation</scope><name>Schroedinger_Equation</name></member>
+      <member refid="classSchroedinger__Equation_1a6c127a0a82044fdc6d80e53cc1c912eb" prot="public" virt="non-virtual"><scope>Schroedinger_Equation</scope><name>Schroedinger_Equation</name></member>
+      <member refid="classSchroedinger__Equation_1ae5553ac0e314aafcfad23c2030c0c2af" prot="public" virt="non-virtual"><scope>Schroedinger_Equation</scope><name>Schroedinger_Equation</name></member>
+      <member refid="classSchroedinger__Equation_1af5d191ca9f98c8cc0841bfb833aee94e" prot="public" virt="non-virtual"><scope>Schroedinger_Equation</scope><name>Schroedinger_Equation</name></member>
+      <member refid="classSchroedinger__Equation_1a04280196f993f0b428ef00330ec67589" prot="public" virt="virtual"><scope>Schroedinger_Equation</scope><name>solve</name></member>
+      <member refid="classSchroedinger__Equation_1a636061d408a8fb3173405e2607542209" prot="public" virt="virtual"><scope>Schroedinger_Equation</scope><name>solve</name></member>
+      <member refid="classSchroedinger__Equation_1a6d82e465f31cdc2217e590b37d964940" prot="public" virt="virtual"><scope>Schroedinger_Equation</scope><name>solve</name></member>
+      <member refid="classSchroedinger__Equation_1ad49fd836c59bca15ad6c7bfe1b26ece7" prot="protected" virt="non-virtual"><scope>Schroedinger_Equation</scope><name>tol_m</name></member>
+      <member refid="classSchroedinger__Equation_1a54d7ca479ce22229bd78a2f0dd39aa04" prot="public" virt="non-virtual"><scope>Schroedinger_Equation</scope><name>v</name></member>
+      <member refid="classSchroedinger__Equation_1a0686e3b199849104f2a11f3bc9bab0c4" prot="protected" virt="non-virtual"><scope>Schroedinger_Equation</scope><name>v_m</name></member>
+      <member refid="classSchroedinger__Equation_1a2cf5828b1ec04655ce7485697781f069" prot="public" virt="virtual"><scope>Schroedinger_Equation</scope><name>~Schroedinger_Equation</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

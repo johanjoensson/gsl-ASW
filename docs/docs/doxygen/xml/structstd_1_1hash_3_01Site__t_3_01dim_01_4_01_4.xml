@@ -1,0 +1,54 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.20" xml:lang="en-US">
+  <compounddef id="structstd_1_1hash_3_01Site__t_3_01dim_01_4_01_4" kind="struct" language="C++" prot="public">
+    <compoundname>std::hash&lt; Site_t&lt; dim &gt; &gt;</compoundname>
+    <templateparamlist>
+      <param>
+        <type>size_t</type>
+        <declname>dim</declname>
+        <defname>dim</defname>
+      </param>
+    </templateparamlist>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="structstd_1_1hash_3_01Site__t_3_01dim_01_4_01_4_1a64232912a335200935e61e7b9dc771d8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>std::hash&lt; Site_t&lt; dim &gt; &gt;::hash</definition>
+        <argsstring>()=default</argsstring>
+        <name>hash</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/site.h" line="11" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="structstd_1_1hash_3_01Site__t_3_01dim_01_4_01_4_1ab1595ab7dd15811decb25fc815b1dc46" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>size_t</type>
+        <definition>size_t std::hash&lt; Site_t&lt; dim &gt; &gt;::operator()</definition>
+        <argsstring>(Site_t&lt; dim &gt; &amp;s) const</argsstring>
+        <name>operator()</name>
+        <param>
+          <type><ref refid="classSite__t" kindref="compound">Site_t</ref>&lt; dim &gt; &amp;</type>
+          <declname>s</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/site.h" line="12" column="8" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/site.h" bodystart="12" bodyend="16"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/site.h" line="10" column="1" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/site.h" bodystart="10" bodyend="17"/>
+    <listofallmembers>
+      <member refid="structstd_1_1hash_3_01Site__t_3_01dim_01_4_01_4_1a64232912a335200935e61e7b9dc771d8" prot="public" virt="non-virtual"><scope>std::hash&lt; Site_t&lt; dim &gt; &gt;</scope><name>hash</name></member>
+      <member refid="structstd_1_1hash_3_01Site__t_3_01dim_01_4_01_4_1ab1595ab7dd15811decb25fc815b1dc46" prot="public" virt="non-virtual"><scope>std::hash&lt; Site_t&lt; dim &gt; &gt;</scope><name>operator()</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

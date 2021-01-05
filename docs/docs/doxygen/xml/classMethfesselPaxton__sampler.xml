@@ -1,0 +1,211 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.20" xml:lang="en-US">
+  <compounddef id="classMethfesselPaxton__sampler" kind="class" language="C++" prot="public">
+    <compoundname>MethfesselPaxton_sampler</compoundname>
+    <basecompoundref refid="classBrillouin__sampler" prot="public" virt="non-virtual">Brillouin_sampler</basecompoundref>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classMethfesselPaxton__sampler_1a0a8c719027fd7df3af9322c342058a28" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double MethfesselPaxton_sampler::sigma_m</definition>
+        <argsstring></argsstring>
+        <name>sigma_m</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/brillouin_zone_integration.h" line="145" column="12" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/brillouin_zone_integration.h" bodystart="145" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classMethfesselPaxton__sampler_1a45c69f688cfe9e267d00d0fb3091fab5" prot="private" static="no" mutable="no">
+        <type>unsigned int</type>
+        <definition>unsigned int MethfesselPaxton_sampler::order_m</definition>
+        <argsstring></argsstring>
+        <name>order_m</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/brillouin_zone_integration.h" line="146" column="18" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/brillouin_zone_integration.h" bodystart="146" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-func">
+      <memberdef kind="function" id="classMethfesselPaxton__sampler_1ab24284f82fb07f43155f91661cff5508" prot="private" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>double</type>
+        <definition>double MethfesselPaxton_sampler::alpha</definition>
+        <argsstring>(const unsigned int n) const</argsstring>
+        <name>alpha</name>
+        <param>
+          <type>const unsigned int</type>
+          <declname>n</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/brillouin_zone_integration.h" line="147" column="19" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/brillouin_zone_integration.h" bodystart="147" bodyend="151"/>
+      </memberdef>
+      <memberdef kind="function" id="classMethfesselPaxton__sampler_1adf653b05192ee2a1fe0a461054668bf3" prot="private" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
+        <type>double</type>
+        <definition>double MethfesselPaxton_sampler::delta</definition>
+        <argsstring>(const double x) const</argsstring>
+        <name>delta</name>
+        <reimplements refid="classBrillouin__sampler_1a401abedcb55d86450f1cf95eaa361677">delta</reimplements>
+        <param>
+          <type>const double</type>
+          <declname>x</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/brillouin_zone_integration.h" line="152" column="19" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/brillouin_zone_integration.h" bodystart="152" bodyend="161"/>
+      </memberdef>
+      <memberdef kind="function" id="classMethfesselPaxton__sampler_1a1adfacde271b004c878e62a29b61d834" prot="private" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
+        <type>double</type>
+        <definition>double MethfesselPaxton_sampler::theta</definition>
+        <argsstring>(const double x) const</argsstring>
+        <name>theta</name>
+        <reimplements refid="classBrillouin__sampler_1ad5ca21d092ba351cadf335ae500042a9">theta</reimplements>
+        <param>
+          <type>const double</type>
+          <declname>x</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/brillouin_zone_integration.h" line="162" column="19" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/brillouin_zone_integration.h" bodystart="162" bodyend="171"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classMethfesselPaxton__sampler_1a65dfa83fec64aba2467bc6be7d81413f" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>MethfesselPaxton_sampler::MethfesselPaxton_sampler</definition>
+        <argsstring>(const GSL::Matrix &amp;energies, const double sigma, const unsigned int order=1)</argsstring>
+        <name>MethfesselPaxton_sampler</name>
+        <param>
+          <type>const GSL::Matrix &amp;</type>
+          <declname>energies</declname>
+        </param>
+        <param>
+          <type>const double</type>
+          <declname>sigma</declname>
+        </param>
+        <param>
+          <type>const unsigned int</type>
+          <declname>order</declname>
+          <defval>1</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/brillouin_zone_integration.h" line="174" column="5" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/brillouin_zone_integration.h" bodystart="174" bodyend="176"/>
+      </memberdef>
+      <memberdef kind="function" id="classMethfesselPaxton__sampler_1a9474c0e9193bcf62e2140e4f278f7530" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>MethfesselPaxton_sampler::~MethfesselPaxton_sampler</definition>
+        <argsstring>()=default</argsstring>
+        <name>~MethfesselPaxton_sampler</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/brillouin_zone_integration.h" line="177" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classBrillouin__sampler_1ac583b178a091dd13ff816f3ee3a4ba41" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
+        <type>double</type>
+        <definition>double Brillouin_sampler::dos</definition>
+        <argsstring>(const double E) const override</argsstring>
+        <name>dos</name>
+        <reimplements refid="classBrillouin__zone__integrator_1ac7ef8c2242c25e0e9e982919fac2020c">dos</reimplements>
+        <param>
+          <type>const double</type>
+          <declname>E</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/brillouin_zone_integration.h" line="45" column="12" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/brillouin_zone_integration.h" bodystart="45" bodyend="57"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="3">
+        <label>Brillouin_zone_integrator</label>
+        <link refid="classBrillouin__zone__integrator"/>
+      </node>
+      <node id="1">
+        <label>MethfesselPaxton_sampler</label>
+        <link refid="classMethfesselPaxton__sampler"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>Brillouin_sampler</label>
+        <link refid="classBrillouin__sampler"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="3">
+        <label>Brillouin_zone_integrator</label>
+        <link refid="classBrillouin__zone__integrator"/>
+      </node>
+      <node id="1">
+        <label>MethfesselPaxton_sampler</label>
+        <link refid="classMethfesselPaxton__sampler"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>Brillouin_sampler</label>
+        <link refid="classBrillouin__sampler"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/brillouin_zone_integration.h" line="142" column="1" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/brillouin_zone_integration.h" bodystart="143" bodyend="178"/>
+    <listofallmembers>
+      <member refid="classMethfesselPaxton__sampler_1ab24284f82fb07f43155f91661cff5508" prot="private" virt="non-virtual"><scope>MethfesselPaxton_sampler</scope><name>alpha</name></member>
+      <member refid="classBrillouin__sampler_1a7307bce71980da14baeeac7ff827cd63" prot="public" virt="non-virtual"><scope>MethfesselPaxton_sampler</scope><name>Brillouin_sampler</name></member>
+      <member refid="classBrillouin__sampler_1a3c9ea1575d92880743709e90881a8a52" prot="public" virt="non-virtual"><scope>MethfesselPaxton_sampler</scope><name>Brillouin_sampler</name></member>
+      <member refid="classBrillouin__sampler_1a19730288245645a45697901729eade94" prot="public" virt="non-virtual"><scope>MethfesselPaxton_sampler</scope><name>Brillouin_sampler</name></member>
+      <member refid="classBrillouin__sampler_1aeb921a1c823d456eb561aa6e92f17316" prot="public" virt="non-virtual"><scope>MethfesselPaxton_sampler</scope><name>Brillouin_sampler</name></member>
+      <member refid="classBrillouin__zone__integrator_1a7f770e53b9e1699f0065203ae20e7319" prot="protected" virt="non-virtual"><scope>MethfesselPaxton_sampler</scope><name>Brillouin_zone_integrator</name></member>
+      <member refid="classBrillouin__zone__integrator_1adf83dfa7950b7b71be2a13f981060386" prot="public" virt="non-virtual"><scope>MethfesselPaxton_sampler</scope><name>Brillouin_zone_integrator</name></member>
+      <member refid="classBrillouin__zone__integrator_1aff93d40c825381047fc9efe0ad04ad48" prot="public" virt="non-virtual"><scope>MethfesselPaxton_sampler</scope><name>Brillouin_zone_integrator</name></member>
+      <member refid="classMethfesselPaxton__sampler_1adf653b05192ee2a1fe0a461054668bf3" prot="private" virt="virtual"><scope>MethfesselPaxton_sampler</scope><name>delta</name></member>
+      <member refid="classBrillouin__sampler_1ac583b178a091dd13ff816f3ee3a4ba41" prot="public" virt="virtual"><scope>MethfesselPaxton_sampler</scope><name>dos</name></member>
+      <member refid="classMethfesselPaxton__sampler_1a65dfa83fec64aba2467bc6be7d81413f" prot="public" virt="non-virtual"><scope>MethfesselPaxton_sampler</scope><name>MethfesselPaxton_sampler</name></member>
+      <member refid="classBrillouin__zone__integrator_1a3e972edd2a152675ec74fd9d5856b8aa" prot="public" virt="non-virtual"><scope>MethfesselPaxton_sampler</scope><name>operator=</name></member>
+      <member refid="classBrillouin__zone__integrator_1adac55b04ec1c552efb60c1ad6a1e2152" prot="public" virt="non-virtual"><scope>MethfesselPaxton_sampler</scope><name>operator=</name></member>
+      <member refid="classMethfesselPaxton__sampler_1a45c69f688cfe9e267d00d0fb3091fab5" prot="private" virt="non-virtual"><scope>MethfesselPaxton_sampler</scope><name>order_m</name></member>
+      <member refid="classMethfesselPaxton__sampler_1a0a8c719027fd7df3af9322c342058a28" prot="private" virt="non-virtual"><scope>MethfesselPaxton_sampler</scope><name>sigma_m</name></member>
+      <member refid="classMethfesselPaxton__sampler_1a1adfacde271b004c878e62a29b61d834" prot="private" virt="virtual"><scope>MethfesselPaxton_sampler</scope><name>theta</name></member>
+      <member refid="classBrillouin__sampler_1a40d50d06daedb6fae5831ac8fd1ace7f" prot="public" virt="virtual"><scope>MethfesselPaxton_sampler</scope><name>~Brillouin_sampler</name></member>
+      <member refid="classBrillouin__zone__integrator_1a1684ee4d784984a8d8f9750e4530d029" prot="public" virt="virtual"><scope>MethfesselPaxton_sampler</scope><name>~Brillouin_zone_integrator</name></member>
+      <member refid="classMethfesselPaxton__sampler_1a9474c0e9193bcf62e2140e4f278f7530" prot="public" virt="non-virtual"><scope>MethfesselPaxton_sampler</scope><name>~MethfesselPaxton_sampler</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

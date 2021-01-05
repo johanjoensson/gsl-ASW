@@ -1,0 +1,605 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.20" xml:lang="en-US">
+  <compounddef id="classMesh" kind="class" language="C++" prot="public" abstract="yes">
+    <compoundname>Mesh</compoundname>
+    <derivedcompoundref refid="classLogarithmic__mesh" prot="public" virt="non-virtual">Logarithmic_mesh</derivedcompoundref>
+      <sectiondef kind="protected-attrib">
+      <memberdef kind="variable" id="classMesh_1a515b65efe4fbef9b058b9fb7c40ebc50" prot="protected" static="no" mutable="no">
+        <type>std::vector&lt; double &gt;</type>
+        <definition>std::vector&lt;double&gt; Mesh::x_p</definition>
+        <argsstring></argsstring>
+        <name>x_p</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/log_mesh.h" line="10" column="13" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/log_mesh.h" bodystart="10" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classMesh_1a759618c365642825fd788845e2c46084" prot="protected" static="no" mutable="no">
+        <type>std::vector&lt; double &gt;</type>
+        <definition>std::vector&lt;double&gt; Mesh::x2_p</definition>
+        <argsstring></argsstring>
+        <name>x2_p</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/log_mesh.h" line="11" column="13" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/log_mesh.h" bodystart="11" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classMesh_1a4d10f1dc561d1b84a3846e0a8ed84591" prot="protected" static="no" mutable="no">
+        <type>double</type>
+        <definition>double Mesh::dx_p</definition>
+        <argsstring></argsstring>
+        <name>dx_p</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/log_mesh.h" line="12" column="8" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/log_mesh.h" bodystart="12" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classMesh_1a2af137f1571af89172b9c102302c416b" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>Mesh::Mesh</definition>
+        <argsstring>()</argsstring>
+        <name>Mesh</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/log_mesh.h" line="14" column="1" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/log_mesh.h" bodystart="14" bodyend="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classMesh_1a182bab27228d1b69ad4352d896b36225" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Mesh::Mesh</definition>
+        <argsstring>(const Mesh &amp;)=default</argsstring>
+        <name>Mesh</name>
+        <param>
+          <type>const <ref refid="classMesh" kindref="compound">Mesh</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/log_mesh.h" line="15" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="classMesh_1a9320a207f0acff24ba80b6af1cc3d5aa" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Mesh::Mesh</definition>
+        <argsstring>(Mesh &amp;&amp;)=default</argsstring>
+        <name>Mesh</name>
+        <param>
+          <type><ref refid="classMesh" kindref="compound">Mesh</ref> &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/log_mesh.h" line="16" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="classMesh_1a651347a4a847da7d491641c66c7904c5" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type></type>
+        <definition>virtual Mesh::~Mesh</definition>
+        <argsstring>()=default</argsstring>
+        <name>~Mesh</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/log_mesh.h" line="18" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classMesh_1af06ecafd1b7cf16c687666dbfce53657" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classMesh" kindref="compound">Mesh</ref> &amp;</type>
+        <definition>Mesh&amp; Mesh::operator=</definition>
+        <argsstring>(const Mesh &amp;)=default</argsstring>
+        <name>operator=</name>
+        <param>
+          <type>const <ref refid="classMesh" kindref="compound">Mesh</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/log_mesh.h" line="20" column="6"/>
+      </memberdef>
+      <memberdef kind="function" id="classMesh_1ad79a428470d24816a0a3bfff72d5231d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classMesh" kindref="compound">Mesh</ref> &amp;</type>
+        <definition>Mesh&amp; Mesh::operator=</definition>
+        <argsstring>(Mesh &amp;&amp;)=default</argsstring>
+        <name>operator=</name>
+        <param>
+          <type><ref refid="classMesh" kindref="compound">Mesh</ref> &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/log_mesh.h" line="21" column="6"/>
+      </memberdef>
+      <memberdef kind="function" id="classMesh_1ab5b9b800768354b0489f2cdc83c0c991" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>Mesh::Mesh</definition>
+        <argsstring>(double x0, double x1, double dx)</argsstring>
+        <name>Mesh</name>
+        <param>
+          <type>double</type>
+          <declname>x0</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>x1</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>dx</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/log_mesh.h" line="22" column="1" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/log_mesh.h" bodystart="22" bodyend="29"/>
+      </memberdef>
+      <memberdef kind="function" id="classMesh_1a0b900c5d80b72b8aeedd9c3049336110" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>Mesh::Mesh</definition>
+        <argsstring>(size_t n)</argsstring>
+        <name>Mesh</name>
+        <param>
+          <type>size_t</type>
+          <declname>n</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/log_mesh.h" line="31" column="1" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/log_mesh.h" bodystart="31" bodyend="31"/>
+      </memberdef>
+      <memberdef kind="function" id="classMesh_1a60ce7ae6427f3d28a13871b18f087a18" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>Mesh::Mesh</definition>
+        <argsstring>(double x0, double x1, size_t n)</argsstring>
+        <name>Mesh</name>
+        <param>
+          <type>double</type>
+          <declname>x0</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>x1</declname>
+        </param>
+        <param>
+          <type>size_t</type>
+          <declname>n</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/log_mesh.h" line="32" column="1" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/log_mesh.h" bodystart="32" bodyend="32"/>
+      </memberdef>
+      <memberdef kind="function" id="classMesh_1ada10825606a4e6491754dd748b89b208" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>double</type>
+        <definition>double Mesh::x</definition>
+        <argsstring>(const size_t i) const</argsstring>
+        <name>x</name>
+        <param>
+          <type>const size_t</type>
+          <declname>i</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/log_mesh.h" line="35" column="8" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/log_mesh.h" bodystart="35" bodyend="35"/>
+      </memberdef>
+      <memberdef kind="function" id="classMesh_1a2b09978ea07e2553e1fdb48e686993b1" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::vector&lt; double &gt;::iterator</type>
+        <definition>std::vector&lt;double&gt;::iterator Mesh::x_begin</definition>
+        <argsstring>()</argsstring>
+        <name>x_begin</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/log_mesh.h" line="36" column="24" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/log_mesh.h" bodystart="36" bodyend="36"/>
+      </memberdef>
+      <memberdef kind="function" id="classMesh_1aaad6ca89f9642e0f253ee1f1c0ed72a5" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::vector&lt; double &gt;::const_iterator</type>
+        <definition>std::vector&lt;double&gt;::const_iterator Mesh::x_begin</definition>
+        <argsstring>() const</argsstring>
+        <name>x_begin</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/log_mesh.h" line="37" column="30" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/log_mesh.h" bodystart="37" bodyend="37"/>
+      </memberdef>
+      <memberdef kind="function" id="classMesh_1a88667b687cbf95f5edef74e7bb4196a4" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::vector&lt; double &gt;::iterator</type>
+        <definition>std::vector&lt;double&gt;::iterator Mesh::x_end</definition>
+        <argsstring>()</argsstring>
+        <name>x_end</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/log_mesh.h" line="38" column="24" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/log_mesh.h" bodystart="38" bodyend="38"/>
+      </memberdef>
+      <memberdef kind="function" id="classMesh_1aeea40873cdde75ba0f3875d08cfb8ff3" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::vector&lt; double &gt;::const_iterator</type>
+        <definition>std::vector&lt;double&gt;::const_iterator Mesh::x_end</definition>
+        <argsstring>() const</argsstring>
+        <name>x_end</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/log_mesh.h" line="39" column="30" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/log_mesh.h" bodystart="39" bodyend="39"/>
+      </memberdef>
+      <memberdef kind="function" id="classMesh_1a06b8a46d4ecea97224775e53f39a2ce1" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::vector&lt; double &gt;::reverse_iterator</type>
+        <definition>std::vector&lt;double&gt;::reverse_iterator Mesh::x_rbegin</definition>
+        <argsstring>()</argsstring>
+        <name>x_rbegin</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/log_mesh.h" line="40" column="32" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/log_mesh.h" bodystart="40" bodyend="40"/>
+      </memberdef>
+      <memberdef kind="function" id="classMesh_1aff4a2f0c46b09ae3c7bd53ef449e1b31" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::vector&lt; double &gt;::const_reverse_iterator</type>
+        <definition>std::vector&lt;double&gt;::const_reverse_iterator Mesh::x_rbegin</definition>
+        <argsstring>() const</argsstring>
+        <name>x_rbegin</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/log_mesh.h" line="41" column="38" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/log_mesh.h" bodystart="41" bodyend="41"/>
+      </memberdef>
+      <memberdef kind="function" id="classMesh_1adaa5c8c204c77b144ed4549be280fe4d" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::vector&lt; double &gt;::reverse_iterator</type>
+        <definition>std::vector&lt;double&gt;::reverse_iterator Mesh::x_rend</definition>
+        <argsstring>()</argsstring>
+        <name>x_rend</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/log_mesh.h" line="42" column="32" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/log_mesh.h" bodystart="42" bodyend="42"/>
+      </memberdef>
+      <memberdef kind="function" id="classMesh_1a99b27d9fa2db350882110ef4cbec8cde" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::vector&lt; double &gt;::const_reverse_iterator</type>
+        <definition>std::vector&lt;double&gt;::const_reverse_iterator Mesh::x_rend</definition>
+        <argsstring>() const</argsstring>
+        <name>x_rend</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/log_mesh.h" line="43" column="38" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/log_mesh.h" bodystart="43" bodyend="43"/>
+      </memberdef>
+      <memberdef kind="function" id="classMesh_1a1b19461734f11611f1a2fbec26f29618" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>double</type>
+        <definition>double Mesh::x_back</definition>
+        <argsstring>() const</argsstring>
+        <name>x_back</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/log_mesh.h" line="44" column="8" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/log_mesh.h" bodystart="44" bodyend="44"/>
+      </memberdef>
+      <memberdef kind="function" id="classMesh_1adde1322a4f7b1e555cac0ee49f114f02" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>double</type>
+        <definition>double Mesh::x2</definition>
+        <argsstring>(const size_t i) const</argsstring>
+        <name>x2</name>
+        <param>
+          <type>const size_t</type>
+          <declname>i</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/log_mesh.h" line="45" column="8" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/log_mesh.h" bodystart="45" bodyend="45"/>
+      </memberdef>
+      <memberdef kind="function" id="classMesh_1ab3351992e91f2507b4bfc7215d765edd" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::vector&lt; double &gt;::iterator</type>
+        <definition>std::vector&lt;double&gt;::iterator Mesh::x2_begin</definition>
+        <argsstring>()</argsstring>
+        <name>x2_begin</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/log_mesh.h" line="46" column="24" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/log_mesh.h" bodystart="46" bodyend="46"/>
+      </memberdef>
+      <memberdef kind="function" id="classMesh_1a79f11b4417c29635ed48d5bdeed633e8" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::vector&lt; double &gt;::const_iterator</type>
+        <definition>std::vector&lt;double&gt;::const_iterator Mesh::x2_begin</definition>
+        <argsstring>() const</argsstring>
+        <name>x2_begin</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/log_mesh.h" line="47" column="30" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/log_mesh.h" bodystart="47" bodyend="47"/>
+      </memberdef>
+      <memberdef kind="function" id="classMesh_1a8ba9b8c4f48005c9ed04aeaf38117fd1" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::vector&lt; double &gt;::iterator</type>
+        <definition>std::vector&lt;double&gt;::iterator Mesh::x2_end</definition>
+        <argsstring>()</argsstring>
+        <name>x2_end</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/log_mesh.h" line="48" column="24" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/log_mesh.h" bodystart="48" bodyend="48"/>
+      </memberdef>
+      <memberdef kind="function" id="classMesh_1a8d3e89e9df4ed82cd4ac8aada66693f4" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::vector&lt; double &gt;::const_iterator</type>
+        <definition>std::vector&lt;double&gt;::const_iterator Mesh::x2_end</definition>
+        <argsstring>() const</argsstring>
+        <name>x2_end</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/log_mesh.h" line="49" column="30" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/log_mesh.h" bodystart="49" bodyend="49"/>
+      </memberdef>
+      <memberdef kind="function" id="classMesh_1a054ad7ea2cacfceb5b9993f014d7e3fd" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::vector&lt; double &gt;::reverse_iterator</type>
+        <definition>std::vector&lt;double&gt;::reverse_iterator Mesh::x2_rbegin</definition>
+        <argsstring>()</argsstring>
+        <name>x2_rbegin</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/log_mesh.h" line="50" column="32" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/log_mesh.h" bodystart="50" bodyend="50"/>
+      </memberdef>
+      <memberdef kind="function" id="classMesh_1a4e12406f9337939435c08c0b96af02fd" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::vector&lt; double &gt;::const_reverse_iterator</type>
+        <definition>std::vector&lt;double&gt;::const_reverse_iterator Mesh::x2_rbegin</definition>
+        <argsstring>() const</argsstring>
+        <name>x2_rbegin</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/log_mesh.h" line="51" column="38" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/log_mesh.h" bodystart="51" bodyend="51"/>
+      </memberdef>
+      <memberdef kind="function" id="classMesh_1a8b6df8cadda182164e4d9ad64aa58270" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::vector&lt; double &gt;::reverse_iterator</type>
+        <definition>std::vector&lt;double&gt;::reverse_iterator Mesh::x2_rend</definition>
+        <argsstring>()</argsstring>
+        <name>x2_rend</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/log_mesh.h" line="52" column="32" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/log_mesh.h" bodystart="52" bodyend="52"/>
+      </memberdef>
+      <memberdef kind="function" id="classMesh_1a7eaa0d51400f36187b6e04420562bf27" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::vector&lt; double &gt;::const_reverse_iterator</type>
+        <definition>std::vector&lt;double&gt;::const_reverse_iterator Mesh::x2_rend</definition>
+        <argsstring>() const</argsstring>
+        <name>x2_rend</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/log_mesh.h" line="53" column="38" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/log_mesh.h" bodystart="53" bodyend="53"/>
+      </memberdef>
+      <memberdef kind="function" id="classMesh_1a57f0dfaca412445578fd97dbd9474a1c" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>double</type>
+        <definition>double Mesh::x2_back</definition>
+        <argsstring>() const</argsstring>
+        <name>x2_back</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/log_mesh.h" line="54" column="8" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/log_mesh.h" bodystart="54" bodyend="54"/>
+      </memberdef>
+      <memberdef kind="function" id="classMesh_1a8c1ea2e3a966ae8f9f23d68951f47310" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>double</type>
+        <definition>double Mesh::dx</definition>
+        <argsstring>() const</argsstring>
+        <name>dx</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/log_mesh.h" line="55" column="8" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/log_mesh.h" bodystart="55" bodyend="55"/>
+      </memberdef>
+      <memberdef kind="function" id="classMesh_1a28e75ba3042956e93ed2fba045b32b39" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>size_t</type>
+        <definition>size_t Mesh::size</definition>
+        <argsstring>() const</argsstring>
+        <name>size</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/log_mesh.h" line="57" column="8" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/log_mesh.h" bodystart="57" bodyend="57"/>
+      </memberdef>
+      <memberdef kind="function" id="classMesh_1a5905f4657c786188b6b737c87c27ca06" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
+        <type>double</type>
+        <definition>virtual double Mesh::integrate</definition>
+        <argsstring>(const std::vector&lt; double &gt; &amp;f) const =0</argsstring>
+        <name>integrate</name>
+        <reimplementedby refid="classLogarithmic__mesh_1ac5bcc83573645af1376e40f8519c146e">integrate</reimplementedby>
+        <param>
+          <type>const std::vector&lt; double &gt; &amp;</type>
+          <declname>f</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/log_mesh.h" line="59" column="16"/>
+      </memberdef>
+      <memberdef kind="function" id="classMesh_1ad508abca406bb55f8914a74c2e05e8ef" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
+        <type>double</type>
+        <definition>virtual double Mesh::integrate_simpson</definition>
+        <argsstring>(const std::vector&lt; double &gt; &amp;f) const =0</argsstring>
+        <name>integrate_simpson</name>
+        <reimplementedby refid="classLogarithmic__mesh_1aee51394ad007e44c9b8eb8bde21c3e63">integrate_simpson</reimplementedby>
+        <param>
+          <type>const std::vector&lt; double &gt; &amp;</type>
+          <declname>f</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/log_mesh.h" line="60" column="16"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>Logarithmic_mesh</label>
+        <link refid="classLogarithmic__mesh"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>Mesh</label>
+        <link refid="classMesh"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>Mesh</label>
+        <link refid="classMesh"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>x2_p</edgelabel>
+          <edgelabel>x_p</edgelabel>
+        </childnode>
+      </node>
+      <node id="2">
+        <label>std::vector&lt; double &gt;</label>
+      </node>
+    </collaborationgraph>
+    <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/log_mesh.h" line="8" column="1" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/log_mesh.h" bodystart="8" bodyend="61"/>
+    <listofallmembers>
+      <member refid="classMesh_1a8c1ea2e3a966ae8f9f23d68951f47310" prot="public" virt="non-virtual"><scope>Mesh</scope><name>dx</name></member>
+      <member refid="classMesh_1a4d10f1dc561d1b84a3846e0a8ed84591" prot="protected" virt="non-virtual"><scope>Mesh</scope><name>dx_p</name></member>
+      <member refid="classMesh_1a5905f4657c786188b6b737c87c27ca06" prot="public" virt="pure-virtual"><scope>Mesh</scope><name>integrate</name></member>
+      <member refid="classMesh_1ad508abca406bb55f8914a74c2e05e8ef" prot="public" virt="pure-virtual"><scope>Mesh</scope><name>integrate_simpson</name></member>
+      <member refid="classMesh_1a2af137f1571af89172b9c102302c416b" prot="public" virt="non-virtual"><scope>Mesh</scope><name>Mesh</name></member>
+      <member refid="classMesh_1a182bab27228d1b69ad4352d896b36225" prot="public" virt="non-virtual"><scope>Mesh</scope><name>Mesh</name></member>
+      <member refid="classMesh_1a9320a207f0acff24ba80b6af1cc3d5aa" prot="public" virt="non-virtual"><scope>Mesh</scope><name>Mesh</name></member>
+      <member refid="classMesh_1ab5b9b800768354b0489f2cdc83c0c991" prot="public" virt="non-virtual"><scope>Mesh</scope><name>Mesh</name></member>
+      <member refid="classMesh_1a0b900c5d80b72b8aeedd9c3049336110" prot="public" virt="non-virtual"><scope>Mesh</scope><name>Mesh</name></member>
+      <member refid="classMesh_1a60ce7ae6427f3d28a13871b18f087a18" prot="public" virt="non-virtual"><scope>Mesh</scope><name>Mesh</name></member>
+      <member refid="classMesh_1af06ecafd1b7cf16c687666dbfce53657" prot="public" virt="non-virtual"><scope>Mesh</scope><name>operator=</name></member>
+      <member refid="classMesh_1ad79a428470d24816a0a3bfff72d5231d" prot="public" virt="non-virtual"><scope>Mesh</scope><name>operator=</name></member>
+      <member refid="classMesh_1a28e75ba3042956e93ed2fba045b32b39" prot="public" virt="non-virtual"><scope>Mesh</scope><name>size</name></member>
+      <member refid="classMesh_1ada10825606a4e6491754dd748b89b208" prot="public" virt="non-virtual"><scope>Mesh</scope><name>x</name></member>
+      <member refid="classMesh_1adde1322a4f7b1e555cac0ee49f114f02" prot="public" virt="non-virtual"><scope>Mesh</scope><name>x2</name></member>
+      <member refid="classMesh_1a57f0dfaca412445578fd97dbd9474a1c" prot="public" virt="non-virtual"><scope>Mesh</scope><name>x2_back</name></member>
+      <member refid="classMesh_1ab3351992e91f2507b4bfc7215d765edd" prot="public" virt="non-virtual"><scope>Mesh</scope><name>x2_begin</name></member>
+      <member refid="classMesh_1a79f11b4417c29635ed48d5bdeed633e8" prot="public" virt="non-virtual"><scope>Mesh</scope><name>x2_begin</name></member>
+      <member refid="classMesh_1a8ba9b8c4f48005c9ed04aeaf38117fd1" prot="public" virt="non-virtual"><scope>Mesh</scope><name>x2_end</name></member>
+      <member refid="classMesh_1a8d3e89e9df4ed82cd4ac8aada66693f4" prot="public" virt="non-virtual"><scope>Mesh</scope><name>x2_end</name></member>
+      <member refid="classMesh_1a759618c365642825fd788845e2c46084" prot="protected" virt="non-virtual"><scope>Mesh</scope><name>x2_p</name></member>
+      <member refid="classMesh_1a054ad7ea2cacfceb5b9993f014d7e3fd" prot="public" virt="non-virtual"><scope>Mesh</scope><name>x2_rbegin</name></member>
+      <member refid="classMesh_1a4e12406f9337939435c08c0b96af02fd" prot="public" virt="non-virtual"><scope>Mesh</scope><name>x2_rbegin</name></member>
+      <member refid="classMesh_1a8b6df8cadda182164e4d9ad64aa58270" prot="public" virt="non-virtual"><scope>Mesh</scope><name>x2_rend</name></member>
+      <member refid="classMesh_1a7eaa0d51400f36187b6e04420562bf27" prot="public" virt="non-virtual"><scope>Mesh</scope><name>x2_rend</name></member>
+      <member refid="classMesh_1a1b19461734f11611f1a2fbec26f29618" prot="public" virt="non-virtual"><scope>Mesh</scope><name>x_back</name></member>
+      <member refid="classMesh_1a2b09978ea07e2553e1fdb48e686993b1" prot="public" virt="non-virtual"><scope>Mesh</scope><name>x_begin</name></member>
+      <member refid="classMesh_1aaad6ca89f9642e0f253ee1f1c0ed72a5" prot="public" virt="non-virtual"><scope>Mesh</scope><name>x_begin</name></member>
+      <member refid="classMesh_1a88667b687cbf95f5edef74e7bb4196a4" prot="public" virt="non-virtual"><scope>Mesh</scope><name>x_end</name></member>
+      <member refid="classMesh_1aeea40873cdde75ba0f3875d08cfb8ff3" prot="public" virt="non-virtual"><scope>Mesh</scope><name>x_end</name></member>
+      <member refid="classMesh_1a515b65efe4fbef9b058b9fb7c40ebc50" prot="protected" virt="non-virtual"><scope>Mesh</scope><name>x_p</name></member>
+      <member refid="classMesh_1a06b8a46d4ecea97224775e53f39a2ce1" prot="public" virt="non-virtual"><scope>Mesh</scope><name>x_rbegin</name></member>
+      <member refid="classMesh_1aff4a2f0c46b09ae3c7bd53ef449e1b31" prot="public" virt="non-virtual"><scope>Mesh</scope><name>x_rbegin</name></member>
+      <member refid="classMesh_1adaa5c8c204c77b144ed4549be280fe4d" prot="public" virt="non-virtual"><scope>Mesh</scope><name>x_rend</name></member>
+      <member refid="classMesh_1a99b27d9fa2db350882110ef4cbec8cde" prot="public" virt="non-virtual"><scope>Mesh</scope><name>x_rend</name></member>
+      <member refid="classMesh_1a651347a4a847da7d491641c66c7904c5" prot="public" virt="virtual"><scope>Mesh</scope><name>~Mesh</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

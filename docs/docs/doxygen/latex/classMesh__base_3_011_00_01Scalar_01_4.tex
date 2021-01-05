@@ -1,0 +1,76 @@
+\hypertarget{classMesh__base_3_011_00_01Scalar_01_4}{}\doxysection{Mesh\+\_\+base$<$ 1, Scalar $>$ Class Template Reference}
+\label{classMesh__base_3_011_00_01Scalar_01_4}\index{Mesh\_base$<$ 1, Scalar $>$@{Mesh\_base$<$ 1, Scalar $>$}}
+Inheritance diagram for Mesh\+\_\+base$<$ 1, Scalar $>$\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=1.885522cm]{classMesh__base_3_011_00_01Scalar_01_4}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classMesh__base_3_011_00_01Scalar_01_4_afb07d75a05829b7c0c386f9f8f99e6f9}\label{classMesh__base_3_011_00_01Scalar_01_4_afb07d75a05829b7c0c386f9f8f99e6f9}} 
+{\bfseries Mesh\+\_\+base} (const Scalar alpha, const Scalar beta, const Scalar gamma, const size\+\_\+t N)
+\item 
+\mbox{\Hypertarget{classMesh__base_3_011_00_01Scalar_01_4_a703bfe89ed388e55be6c0fe6727b704d}\label{classMesh__base_3_011_00_01Scalar_01_4_a703bfe89ed388e55be6c0fe6727b704d}} 
+{\bfseries Mesh\+\_\+base} (const \mbox{\hyperlink{classMesh__base}{Mesh\+\_\+base}} \&)=default
+\item 
+\mbox{\Hypertarget{classMesh__base_3_011_00_01Scalar_01_4_a3620539d65ebabf6864e4f5258ee2af3}\label{classMesh__base_3_011_00_01Scalar_01_4_a3620539d65ebabf6864e4f5258ee2af3}} 
+{\bfseries Mesh\+\_\+base} (\mbox{\hyperlink{classMesh__base}{Mesh\+\_\+base}} \&\&)=default
+\item 
+\mbox{\Hypertarget{classMesh__base_3_011_00_01Scalar_01_4_ad99fc65d728b66a0bd3bbbb3300631d3}\label{classMesh__base_3_011_00_01Scalar_01_4_ad99fc65d728b66a0bd3bbbb3300631d3}} 
+\mbox{\hyperlink{classMesh__base}{Mesh\+\_\+base}} \& {\bfseries operator=} (const \mbox{\hyperlink{classMesh__base}{Mesh\+\_\+base}} \&)=default
+\item 
+\mbox{\Hypertarget{classMesh__base_3_011_00_01Scalar_01_4_a5f5b0a02a9bc6279a575183458e75a45}\label{classMesh__base_3_011_00_01Scalar_01_4_a5f5b0a02a9bc6279a575183458e75a45}} 
+\mbox{\hyperlink{classMesh__base}{Mesh\+\_\+base}} \& {\bfseries operator=} (\mbox{\hyperlink{classMesh__base}{Mesh\+\_\+base}} \&\&)=default
+\item 
+\mbox{\Hypertarget{classMesh__base_3_011_00_01Scalar_01_4_a5544719321cf874549b8172477560dc4}\label{classMesh__base_3_011_00_01Scalar_01_4_a5544719321cf874549b8172477560dc4}} 
+virtual Scalar {\bfseries r} (const Scalar \&x) const =0
+\item 
+\mbox{\Hypertarget{classMesh__base_3_011_00_01Scalar_01_4_adfa57ed7cf2880ad2bcadbbb7843c5de}\label{classMesh__base_3_011_00_01Scalar_01_4_adfa57ed7cf2880ad2bcadbbb7843c5de}} 
+virtual Scalar {\bfseries r2} (const Scalar \&x) const =0
+\item 
+\mbox{\Hypertarget{classMesh__base_3_011_00_01Scalar_01_4_a2c061ad771f1e0242de6e80fabd9fdbb}\label{classMesh__base_3_011_00_01Scalar_01_4_a2c061ad771f1e0242de6e80fabd9fdbb}} 
+virtual Scalar {\bfseries dr} (const Scalar \&x) const =0
+\item 
+\mbox{\Hypertarget{classMesh__base_3_011_00_01Scalar_01_4_a4d5a0335fd88ee521c5d97663673c8b8}\label{classMesh__base_3_011_00_01Scalar_01_4_a4d5a0335fd88ee521c5d97663673c8b8}} 
+Scalar {\bfseries operator()} (const Scalar \&x) const
+\item 
+\mbox{\Hypertarget{classMesh__base_3_011_00_01Scalar_01_4_ac513eb350f3638a5e4d88299fda9e3cf}\label{classMesh__base_3_011_00_01Scalar_01_4_ac513eb350f3638a5e4d88299fda9e3cf}} 
+virtual std\+::vector$<$ Scalar $>$ {\bfseries r} () const
+\item 
+\mbox{\Hypertarget{classMesh__base_3_011_00_01Scalar_01_4_a607b07f006226169b08cf0a1b2f707a7}\label{classMesh__base_3_011_00_01Scalar_01_4_a607b07f006226169b08cf0a1b2f707a7}} 
+virtual std\+::vector$<$ Scalar $>$ {\bfseries r2} () const
+\item 
+\mbox{\Hypertarget{classMesh__base_3_011_00_01Scalar_01_4_a3632f85fe9e1fb93e1f77396ccb2376f}\label{classMesh__base_3_011_00_01Scalar_01_4_a3632f85fe9e1fb93e1f77396ccb2376f}} 
+virtual std\+::vector$<$ Scalar $>$ {\bfseries dr} () const
+\item 
+\mbox{\Hypertarget{classMesh__base_3_011_00_01Scalar_01_4_a855155611eee132eac1443688fafbbb8}\label{classMesh__base_3_011_00_01Scalar_01_4_a855155611eee132eac1443688fafbbb8}} 
+{\footnotesize template$<$class Func $>$ }\\std\+::vector$<$ Scalar $>$ {\bfseries evaluate} (Func f, size\+\_\+t h=1)
+\item 
+\mbox{\Hypertarget{classMesh__base_3_011_00_01Scalar_01_4_a85455dfa05bffdecf73612662978dfb1}\label{classMesh__base_3_011_00_01Scalar_01_4_a85455dfa05bffdecf73612662978dfb1}} 
+{\footnotesize template$<$class Func $>$ }\\std\+::vector$<$ Scalar $>$ {\bfseries evaluate} (Func f, Scalar x0, Scalar x1, Scalar h)
+\item 
+\mbox{\Hypertarget{classMesh__base_3_011_00_01Scalar_01_4_ac7bd5dadab1c50e41a2afb9fd6710f49}\label{classMesh__base_3_011_00_01Scalar_01_4_ac7bd5dadab1c50e41a2afb9fd6710f49}} 
+size\+\_\+t {\bfseries dim} () const
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classMesh__base_3_011_00_01Scalar_01_4_ad569061c2555235d59c839ec544c90ab}\label{classMesh__base_3_011_00_01Scalar_01_4_ad569061c2555235d59c839ec544c90ab}} 
+Scalar {\bfseries alpha\+\_\+m}
+\item 
+\mbox{\Hypertarget{classMesh__base_3_011_00_01Scalar_01_4_af212e5a4ce35f6fabd517ab3c7d389b1}\label{classMesh__base_3_011_00_01Scalar_01_4_af212e5a4ce35f6fabd517ab3c7d389b1}} 
+Scalar {\bfseries beta\+\_\+m}
+\item 
+\mbox{\Hypertarget{classMesh__base_3_011_00_01Scalar_01_4_a56df16c984709647136c6741670b5cfe}\label{classMesh__base_3_011_00_01Scalar_01_4_a56df16c984709647136c6741670b5cfe}} 
+Scalar {\bfseries gamma\+\_\+m}
+\item 
+\mbox{\Hypertarget{classMesh__base_3_011_00_01Scalar_01_4_a9227637ef9758ec1cccf1e5e2b8c1589}\label{classMesh__base_3_011_00_01Scalar_01_4_a9227637ef9758ec1cccf1e5e2b8c1589}} 
+size\+\_\+t {\bfseries N\+\_\+m}
+\end{DoxyCompactItemize}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+numerical-\/mesh.\+h\end{DoxyCompactItemize}

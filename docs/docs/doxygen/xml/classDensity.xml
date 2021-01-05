@@ -1,0 +1,210 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.20" xml:lang="en-US">
+  <compounddef id="classDensity" kind="class" language="C++" prot="public">
+    <compoundname>Density</compoundname>
+    <basecompoundref refid="classAtomic__quantity" prot="public" virt="non-virtual">Atomic_quantity</basecompoundref>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classDensity_1a7580a6d13a88db7c2706cd29a42dbe87" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; double &gt;</type>
+        <definition>std::vector&lt;double&gt; Density::valence</definition>
+        <argsstring></argsstring>
+        <name>valence</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/atomic_quantity.h" line="50" column="17" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/atomic_quantity.h" bodystart="50" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classDensity_1a7d2deb6573ec0be577b50eb520545f8a" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; double &gt;</type>
+        <definition>std::vector&lt;double&gt; Density::core</definition>
+        <argsstring></argsstring>
+        <name>core</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/atomic_quantity.h" line="50" column="25" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/atomic_quantity.h" bodystart="50" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classDensity_1a079163224ba7bc092120e19194eafece" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Density::Density</definition>
+        <argsstring>(const Crystal_t&lt; 3, Atom &gt; &amp;, std::vector&lt; Logarithmic_mesh &gt; &amp;)</argsstring>
+        <name>Density</name>
+        <param>
+          <type>const <ref refid="classCrystal__t" kindref="compound">Crystal_t</ref>&lt; 3, <ref refid="classAtom" kindref="compound">Atom</ref> &gt; &amp;</type>
+        </param>
+        <param>
+          <type>std::vector&lt; <ref refid="classLogarithmic__mesh" kindref="compound">Logarithmic_mesh</ref> &gt; &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/atomic_quantity.h" line="53" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classAtomic__quantity_1a5bd9055fdf94e57e54a355d5aa818b6c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>double</type>
+        <definition>double Atomic_quantity::operator()</definition>
+        <argsstring>(const GSL::Vector &amp;r)</argsstring>
+        <name>operator()</name>
+        <param>
+          <type>const GSL::Vector &amp;</type>
+          <declname>r</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/atomic_quantity.h" line="22" column="12"/>
+      </memberdef>
+      <memberdef kind="function" id="classAtomic__quantity_1adfdeab2507a0b975643b53b1df2319b1" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::vector&lt; double &gt; &amp;</type>
+        <definition>std::vector&lt;double&gt;&amp; Atomic_quantity::sphere</definition>
+        <argsstring>(const size_t i)</argsstring>
+        <name>sphere</name>
+        <param>
+          <type>const size_t</type>
+          <declname>i</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/atomic_quantity.h" line="24" column="17" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/atomic_quantity.h" bodystart="24" bodyend="24"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="protected-attrib">
+      <memberdef kind="variable" id="classAtomic__quantity_1a0fb317241d287bde4bbee6cade84a45f" prot="protected" static="no" mutable="no">
+        <type>const <ref refid="classCrystal__t" kindref="compound">Crystal_t</ref>&lt; 3, <ref refid="classAtom" kindref="compound">Atom</ref> &gt; &amp;</type>
+        <definition>const Crystal_t&lt;3,Atom&gt;&amp; Atomic_quantity::cr</definition>
+        <argsstring></argsstring>
+        <name>cr</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/atomic_quantity.h" line="15" column="21" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/atomic_quantity.h" bodystart="15" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAtomic__quantity_1a38619ec6589df0672464f3512243c13f" prot="protected" static="no" mutable="no">
+        <type>const std::vector&lt; <ref refid="classLogarithmic__mesh" kindref="compound">Logarithmic_mesh</ref> &gt; &amp;</type>
+        <definition>const std::vector&lt;Logarithmic_mesh&gt;&amp; Atomic_quantity::at_meshes</definition>
+        <argsstring></argsstring>
+        <name>at_meshes</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/atomic_quantity.h" line="16" column="23" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/atomic_quantity.h" bodystart="16" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAtomic__quantity_1a69f4c5e435c8c32883528b7cf2099616" prot="protected" static="no" mutable="no">
+        <type>std::vector&lt; std::vector&lt; double &gt; &gt;</type>
+        <definition>std::vector&lt;std::vector&lt;double&gt; &gt; Atomic_quantity::val</definition>
+        <argsstring></argsstring>
+        <name>val</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/atomic_quantity.h" line="17" column="17" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/atomic_quantity.h" bodystart="17" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>Atomic_quantity</label>
+        <link refid="classAtomic__quantity"/>
+      </node>
+      <node id="1">
+        <label>Density</label>
+        <link refid="classDensity"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="5">
+        <label>Logarithmic_mesh</label>
+        <link refid="classLogarithmic__mesh"/>
+        <childnode refid="6" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>Mesh</label>
+        <link refid="classMesh"/>
+        <childnode refid="7" relation="usage">
+          <edgelabel>x2_p</edgelabel>
+          <edgelabel>x_p</edgelabel>
+        </childnode>
+      </node>
+      <node id="7">
+        <label>std::vector&lt; double &gt;</label>
+      </node>
+      <node id="2">
+        <label>Atomic_quantity</label>
+        <link refid="classAtomic__quantity"/>
+        <childnode refid="3" relation="usage">
+          <edgelabel>cr</edgelabel>
+        </childnode>
+        <childnode refid="4" relation="usage">
+          <edgelabel>at_meshes</edgelabel>
+        </childnode>
+        <childnode refid="8" relation="usage">
+          <edgelabel>val</edgelabel>
+        </childnode>
+      </node>
+      <node id="4">
+        <label>std::vector&lt; Logarithmic_mesh &gt;</label>
+        <childnode refid="5" relation="usage">
+          <edgelabel>elements</edgelabel>
+        </childnode>
+      </node>
+      <node id="3">
+        <label>Crystal_t&lt; 3, Atom &gt;</label>
+        <link refid="classCrystal__t"/>
+      </node>
+      <node id="8">
+        <label>std::vector&lt; std::vector&lt; double &gt; &gt;</label>
+      </node>
+      <node id="1">
+        <label>Density</label>
+        <link refid="classDensity"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/atomic_quantity.h" line="49" column="1" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/atomic_quantity.h" bodystart="49" bodyend="54"/>
+    <listofallmembers>
+      <member refid="classAtomic__quantity_1a38619ec6589df0672464f3512243c13f" prot="protected" virt="non-virtual"><scope>Density</scope><name>at_meshes</name></member>
+      <member refid="classAtomic__quantity_1ae304531ff42ea30b543a9fb704e0474b" prot="public" virt="non-virtual"><scope>Density</scope><name>Atomic_quantity</name></member>
+      <member refid="classDensity_1a7d2deb6573ec0be577b50eb520545f8a" prot="private" virt="non-virtual"><scope>Density</scope><name>core</name></member>
+      <member refid="classAtomic__quantity_1a0fb317241d287bde4bbee6cade84a45f" prot="protected" virt="non-virtual"><scope>Density</scope><name>cr</name></member>
+      <member refid="classDensity_1a079163224ba7bc092120e19194eafece" prot="public" virt="non-virtual"><scope>Density</scope><name>Density</name></member>
+      <member refid="classAtomic__quantity_1a5bd9055fdf94e57e54a355d5aa818b6c" prot="public" virt="non-virtual"><scope>Density</scope><name>operator()</name></member>
+      <member refid="classAtomic__quantity_1adfdeab2507a0b975643b53b1df2319b1" prot="public" virt="non-virtual"><scope>Density</scope><name>sphere</name></member>
+      <member refid="classAtomic__quantity_1a69f4c5e435c8c32883528b7cf2099616" prot="protected" virt="non-virtual"><scope>Density</scope><name>val</name></member>
+      <member refid="classDensity_1a7580a6d13a88db7c2706cd29a42dbe87" prot="private" virt="non-virtual"><scope>Density</scope><name>valence</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,474 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.20" xml:lang="en-US">
+  <compounddef id="structlm" kind="struct" language="C++" prot="public">
+    <compoundname>lm</compoundname>
+    <includes refid="utils_8h" local="no">utils.h</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structlm_1a7c13de5779ddbdd1a7be25514ecc6bad" prot="public" static="no" mutable="no">
+        <type>int</type>
+        <definition>int lm::n</definition>
+        <argsstring></argsstring>
+        <name>n</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/utils.h" line="26" column="9" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/utils.h" bodystart="26" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structlm_1a7b9984283d01c4d8e720fea5412bd498" prot="public" static="no" mutable="no">
+        <type>int</type>
+        <definition>int lm::l</definition>
+        <argsstring></argsstring>
+        <name>l</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/utils.h" line="27" column="9" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/utils.h" bodystart="27" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structlm_1a2884b87159292304e4ee24c9e5c8c507" prot="public" static="no" mutable="no">
+        <type>int</type>
+        <definition>int lm::m</definition>
+        <argsstring></argsstring>
+        <name>m</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/utils.h" line="28" column="5" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/utils.h" bodystart="28" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="structlm_1a2a378741c95381ec02339aad4804816c" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>lm::lm</definition>
+        <argsstring>(const int &amp;l_n, const int &amp;m_n)</argsstring>
+        <name>lm</name>
+        <param>
+          <type>const int &amp;</type>
+          <declname>l_n</declname>
+        </param>
+        <param>
+          <type>const int &amp;</type>
+          <declname>m_n</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/utils.h" line="16" column="5" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/utils.h" bodystart="16" bodyend="16"/>
+      </memberdef>
+      <memberdef kind="function" id="structlm_1afc5f91892e7258682499a4aaa003aa37" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>lm::lm</definition>
+        <argsstring>(const int &amp;n_n, const int &amp;l_n, const int &amp;m_n)</argsstring>
+        <name>lm</name>
+        <param>
+          <type>const int &amp;</type>
+          <declname>n_n</declname>
+        </param>
+        <param>
+          <type>const int &amp;</type>
+          <declname>l_n</declname>
+        </param>
+        <param>
+          <type>const int &amp;</type>
+          <declname>m_n</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/utils.h" line="17" column="5" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/utils.h" bodystart="17" bodyend="17"/>
+      </memberdef>
+      <memberdef kind="function" id="structlm_1a6672ee5be16ed5ae9fa0fea4b675946c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>lm::lm</definition>
+        <argsstring>()=default</argsstring>
+        <name>lm</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/utils.h" line="18" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="structlm_1a81d606446c787057373e6f38fbb06cb2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>lm::lm</definition>
+        <argsstring>(const lm &amp;)=default</argsstring>
+        <name>lm</name>
+        <param>
+          <type>const <ref refid="structlm" kindref="compound">lm</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/utils.h" line="19" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="structlm_1a63c16a4de0387a237b23f03a4067b92a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>lm::lm</definition>
+        <argsstring>(lm &amp;&amp;)=default</argsstring>
+        <name>lm</name>
+        <param>
+          <type><ref refid="structlm" kindref="compound">lm</ref> &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/utils.h" line="20" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="structlm_1a890650df329af018359b4da78347ea8c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>lm::~lm</definition>
+        <argsstring>()=default</argsstring>
+        <name>~lm</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/utils.h" line="21" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="structlm_1a17ceae4d512a0793b8edc8cbf030e7d0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structlm" kindref="compound">lm</ref> &amp;</type>
+        <definition>lm&amp; lm::operator=</definition>
+        <argsstring>(const lm &amp;)=default</argsstring>
+        <name>operator=</name>
+        <param>
+          <type>const <ref refid="structlm" kindref="compound">lm</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/utils.h" line="23" column="8"/>
+      </memberdef>
+      <memberdef kind="function" id="structlm_1a84d5c2178e009fe8efa00843e752ebed" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structlm" kindref="compound">lm</ref> &amp;</type>
+        <definition>lm&amp; lm::operator=</definition>
+        <argsstring>(lm &amp;&amp;)=default</argsstring>
+        <name>operator=</name>
+        <param>
+          <type><ref refid="structlm" kindref="compound">lm</ref> &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/utils.h" line="24" column="8"/>
+      </memberdef>
+      <memberdef kind="function" id="structlm_1a16a87587580e701f7e2af7c3872afc99" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool lm::operator==</definition>
+        <argsstring>(const lm &amp;a) const</argsstring>
+        <name>operator==</name>
+        <param>
+          <type>const <ref refid="structlm" kindref="compound">lm</ref> &amp;</type>
+          <declname>a</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/utils.h" line="30" column="10" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/utils.h" bodystart="30" bodyend="33"/>
+      </memberdef>
+      <memberdef kind="function" id="structlm_1a173897d3527393fb81eb052d2830bfc6" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool lm::operator!=</definition>
+        <argsstring>(const lm &amp;a) const</argsstring>
+        <name>operator!=</name>
+        <param>
+          <type>const <ref refid="structlm" kindref="compound">lm</ref> &amp;</type>
+          <declname>a</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/utils.h" line="35" column="10" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/utils.h" bodystart="35" bodyend="38"/>
+      </memberdef>
+      <memberdef kind="function" id="structlm_1a6f0967c501d1033c0d588e6346403af2" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool lm::operator&lt;</definition>
+        <argsstring>(const lm &amp;a) const</argsstring>
+        <name>operator&lt;</name>
+        <param>
+          <type>const <ref refid="structlm" kindref="compound">lm</ref> &amp;</type>
+          <declname>a</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Ordering according to the Aufbauprinzip i.e., first according to n + l, if n + l equal, order according to n. If n are equal order according to m (ordering according to m is not part of the Aufbauprinzip). E.g. [1s, 2s, 2p, 3s, 3p, 4s, 3d, 4p, ...]<linebreak/>
+<verbatim>   /
+1s
+   /   /
+2s  2p
+   /   /   /
+3s  3p  3d
+   /   /
+4s  4p  4d  4f
+.
+.
+.
+</verbatim> </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/utils.h" line="59" column="5" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/utils.h" bodystart="59" bodyend="71"/>
+      </memberdef>
+      <memberdef kind="function" id="structlm_1a055ba1083b91cae46285b9165684572f" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool lm::operator&gt;</definition>
+        <argsstring>(const lm &amp;a) const</argsstring>
+        <name>operator&gt;</name>
+        <param>
+          <type>const <ref refid="structlm" kindref="compound">lm</ref> &amp;</type>
+          <declname>a</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/utils.h" line="73" column="10" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/utils.h" bodystart="73" bodyend="85"/>
+      </memberdef>
+      <memberdef kind="function" id="structlm_1aadc1264a4158f254362f35646687b4eb" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool lm::operator&gt;=</definition>
+        <argsstring>(const lm &amp;a) const</argsstring>
+        <name>operator&gt;=</name>
+        <param>
+          <type>const <ref refid="structlm" kindref="compound">lm</ref> &amp;</type>
+          <declname>a</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/utils.h" line="87" column="10" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/utils.h" bodystart="87" bodyend="90"/>
+      </memberdef>
+      <memberdef kind="function" id="structlm_1a9ddad2277739f686023af1810d6d8fba" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool lm::operator&lt;=</definition>
+        <argsstring>(const lm &amp;a) const</argsstring>
+        <name>operator&lt;=</name>
+        <param>
+          <type>const <ref refid="structlm" kindref="compound">lm</ref> &amp;</type>
+          <declname>a</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/utils.h" line="92" column="5" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/utils.h" bodystart="92" bodyend="95"/>
+      </memberdef>
+      <memberdef kind="function" id="structlm_1a70deb5cb54746d0ef14cb51a01fd444e" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="structlm" kindref="compound">lm</ref> &amp;</type>
+        <definition>lm&amp; lm::operator++</definition>
+        <argsstring>()</argsstring>
+        <name>operator++</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/utils.h" line="97" column="8" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/utils.h" bodystart="97" bodyend="107"/>
+      </memberdef>
+      <memberdef kind="function" id="structlm_1a21c3c1a670362a7e9e1ffe5c4a03b205" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="structlm" kindref="compound">lm</ref> &amp;</type>
+        <definition>lm&amp; lm::operator--</definition>
+        <argsstring>()</argsstring>
+        <name>operator--</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/utils.h" line="109" column="8" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/utils.h" bodystart="109" bodyend="119"/>
+      </memberdef>
+      <memberdef kind="function" id="structlm_1a31c2a06fd1c24c9e22b78893dac07f46" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="structlm" kindref="compound">lm</ref></type>
+        <definition>lm lm::operator++</definition>
+        <argsstring>(int)</argsstring>
+        <name>operator++</name>
+        <param>
+          <type>int</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/utils.h" line="121" column="8" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/utils.h" bodystart="121" bodyend="126"/>
+      </memberdef>
+      <memberdef kind="function" id="structlm_1a56b4cc15427fb1a9f7cb236852b2514f" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="structlm" kindref="compound">lm</ref></type>
+        <definition>lm lm::operator--</definition>
+        <argsstring>(int)</argsstring>
+        <name>operator--</name>
+        <param>
+          <type>int</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/utils.h" line="128" column="8" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/utils.h" bodystart="128" bodyend="133"/>
+      </memberdef>
+      <memberdef kind="function" id="structlm_1a85d89b510c8e2a01e756ccceb151ccaf" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="structlm" kindref="compound">lm</ref> &amp;</type>
+        <definition>lm&amp; lm::operator+=</definition>
+        <argsstring>(int a)</argsstring>
+        <name>operator+=</name>
+        <param>
+          <type>int</type>
+          <declname>a</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/utils.h" line="135" column="8" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/utils.h" bodystart="135" bodyend="149"/>
+      </memberdef>
+      <memberdef kind="function" id="structlm_1aeaf092951bf071791a84b6b22e9bdc9f" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="structlm" kindref="compound">lm</ref> &amp;</type>
+        <definition>lm&amp; lm::operator-=</definition>
+        <argsstring>(int a)</argsstring>
+        <name>operator-=</name>
+        <param>
+          <type>int</type>
+          <declname>a</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/utils.h" line="151" column="8" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/utils.h" bodystart="151" bodyend="165"/>
+      </memberdef>
+      <memberdef kind="function" id="structlm_1af3110235576c912f92dbfae74cc0094e" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="structlm" kindref="compound">lm</ref></type>
+        <definition>lm lm::operator+</definition>
+        <argsstring>(int a) const</argsstring>
+        <name>operator+</name>
+        <param>
+          <type>int</type>
+          <declname>a</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/utils.h" line="167" column="8" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/utils.h" bodystart="167" bodyend="171"/>
+      </memberdef>
+      <memberdef kind="function" id="structlm_1addd8448141c7635c55a30b6d20133cf5" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="structlm" kindref="compound">lm</ref></type>
+        <definition>lm lm::operator-</definition>
+        <argsstring>(int a) const</argsstring>
+        <name>operator-</name>
+        <param>
+          <type>int</type>
+          <declname>a</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/utils.h" line="173" column="8" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/utils.h" bodystart="173" bodyend="177"/>
+      </memberdef>
+      <memberdef kind="function" id="structlm_1a519446c1468cfa598179f68314176459" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::string</type>
+        <definition>std::string lm::to_string</definition>
+        <argsstring>() const</argsstring>
+        <name>to_string</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/utils.h" line="178" column="17" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/utils.h" bodystart="178" bodyend="185"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para>Composite quantum numbers, (n, l, m) </para>
+    </detaileddescription>
+    <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/utils.h" line="15" column="1" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/utils.h" bodystart="15" bodyend="186"/>
+    <listofallmembers>
+      <member refid="structlm_1a7b9984283d01c4d8e720fea5412bd498" prot="public" virt="non-virtual"><scope>lm</scope><name>l</name></member>
+      <member refid="structlm_1a2a378741c95381ec02339aad4804816c" prot="public" virt="non-virtual"><scope>lm</scope><name>lm</name></member>
+      <member refid="structlm_1afc5f91892e7258682499a4aaa003aa37" prot="public" virt="non-virtual"><scope>lm</scope><name>lm</name></member>
+      <member refid="structlm_1a6672ee5be16ed5ae9fa0fea4b675946c" prot="public" virt="non-virtual"><scope>lm</scope><name>lm</name></member>
+      <member refid="structlm_1a81d606446c787057373e6f38fbb06cb2" prot="public" virt="non-virtual"><scope>lm</scope><name>lm</name></member>
+      <member refid="structlm_1a63c16a4de0387a237b23f03a4067b92a" prot="public" virt="non-virtual"><scope>lm</scope><name>lm</name></member>
+      <member refid="structlm_1a2884b87159292304e4ee24c9e5c8c507" prot="public" virt="non-virtual"><scope>lm</scope><name>m</name></member>
+      <member refid="structlm_1a7c13de5779ddbdd1a7be25514ecc6bad" prot="public" virt="non-virtual"><scope>lm</scope><name>n</name></member>
+      <member refid="structlm_1a173897d3527393fb81eb052d2830bfc6" prot="public" virt="non-virtual"><scope>lm</scope><name>operator!=</name></member>
+      <member refid="structlm_1af3110235576c912f92dbfae74cc0094e" prot="public" virt="non-virtual"><scope>lm</scope><name>operator+</name></member>
+      <member refid="structlm_1a70deb5cb54746d0ef14cb51a01fd444e" prot="public" virt="non-virtual"><scope>lm</scope><name>operator++</name></member>
+      <member refid="structlm_1a31c2a06fd1c24c9e22b78893dac07f46" prot="public" virt="non-virtual"><scope>lm</scope><name>operator++</name></member>
+      <member refid="structlm_1a85d89b510c8e2a01e756ccceb151ccaf" prot="public" virt="non-virtual"><scope>lm</scope><name>operator+=</name></member>
+      <member refid="structlm_1addd8448141c7635c55a30b6d20133cf5" prot="public" virt="non-virtual"><scope>lm</scope><name>operator-</name></member>
+      <member refid="structlm_1a21c3c1a670362a7e9e1ffe5c4a03b205" prot="public" virt="non-virtual"><scope>lm</scope><name>operator--</name></member>
+      <member refid="structlm_1a56b4cc15427fb1a9f7cb236852b2514f" prot="public" virt="non-virtual"><scope>lm</scope><name>operator--</name></member>
+      <member refid="structlm_1aeaf092951bf071791a84b6b22e9bdc9f" prot="public" virt="non-virtual"><scope>lm</scope><name>operator-=</name></member>
+      <member refid="structlm_1a6f0967c501d1033c0d588e6346403af2" prot="public" virt="non-virtual"><scope>lm</scope><name>operator&lt;</name></member>
+      <member refid="structlm_1a9ddad2277739f686023af1810d6d8fba" prot="public" virt="non-virtual"><scope>lm</scope><name>operator&lt;=</name></member>
+      <member refid="structlm_1a17ceae4d512a0793b8edc8cbf030e7d0" prot="public" virt="non-virtual"><scope>lm</scope><name>operator=</name></member>
+      <member refid="structlm_1a84d5c2178e009fe8efa00843e752ebed" prot="public" virt="non-virtual"><scope>lm</scope><name>operator=</name></member>
+      <member refid="structlm_1a16a87587580e701f7e2af7c3872afc99" prot="public" virt="non-virtual"><scope>lm</scope><name>operator==</name></member>
+      <member refid="structlm_1a055ba1083b91cae46285b9165684572f" prot="public" virt="non-virtual"><scope>lm</scope><name>operator&gt;</name></member>
+      <member refid="structlm_1aadc1264a4158f254362f35646687b4eb" prot="public" virt="non-virtual"><scope>lm</scope><name>operator&gt;=</name></member>
+      <member refid="structlm_1a519446c1468cfa598179f68314176459" prot="public" virt="non-virtual"><scope>lm</scope><name>to_string</name></member>
+      <member refid="structlm_1a890650df329af018359b4da78347ea8c" prot="public" virt="non-virtual"><scope>lm</scope><name>~lm</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,411 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.20" xml:lang="en-US">
+  <compounddef id="numerical-mesh-integration_8h" kind="file" language="C++">
+    <compoundname>numerical-mesh-integration.h</compoundname>
+    <includes refid="numerical-mesh_8h" local="yes">numerical-mesh.h</includes>
+    <includes local="no">functional</includes>
+    <includes local="no">type_traits</includes>
+    <incdepgraph>
+      <node id="10">
+        <label>functional</label>
+      </node>
+      <node id="5">
+        <label>cmath</label>
+      </node>
+      <node id="2">
+        <label>numerical-mesh.h</label>
+        <link refid="numerical-mesh_8h_source"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+      </node>
+      <node id="8">
+        <label>tuple</label>
+      </node>
+      <node id="4">
+        <label>vector</label>
+      </node>
+      <node id="3">
+        <label>array</label>
+      </node>
+      <node id="9">
+        <label>iostream</label>
+      </node>
+      <node id="1">
+        <label>numerical-mesh-integration.h</label>
+        <link refid="numerical-mesh-integration_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+      </node>
+      <node id="7">
+        <label>type_traits</label>
+      </node>
+      <node id="6">
+        <label>algorithm</label>
+      </node>
+    </incdepgraph>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="numerical-mesh-integration_8h_1a8656ba8628d81df5382ff7c60327cbef" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class Scalar</type>
+          </param>
+        </templateparamlist>
+        <type>Scalar</type>
+        <definition>Scalar trapezoidal_integral</definition>
+        <argsstring>(const Mesh_base&lt; 1, Scalar &gt; &amp;mesh, const Scalar &amp;x0, const Scalar &amp;x1, const Scalar &amp;h, const std::function&lt; Scalar(const Scalar &amp;)&gt; &amp;integrand)</argsstring>
+        <name>trapezoidal_integral</name>
+        <param>
+          <type>const <ref refid="classMesh__base" kindref="compound">Mesh_base</ref>&lt; 1, Scalar &gt; &amp;</type>
+          <declname>mesh</declname>
+        </param>
+        <param>
+          <type>const Scalar &amp;</type>
+          <declname>x0</declname>
+        </param>
+        <param>
+          <type>const Scalar &amp;</type>
+          <declname>x1</declname>
+        </param>
+        <param>
+          <type>const Scalar &amp;</type>
+          <declname>h</declname>
+        </param>
+        <param>
+          <type>const std::function&lt; Scalar(const Scalar &amp;)&gt; &amp;</type>
+          <declname>integrand</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/numerical-mesh-integration.h" line="12" column="8" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/numerical-mesh-integration.h" bodystart="12" bodyend="23"/>
+      </memberdef>
+      <memberdef kind="function" id="numerical-mesh-integration_8h_1a64bf4556f8025808a876a8b9c1cb826d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class Scalar</type>
+          </param>
+        </templateparamlist>
+        <type>Scalar</type>
+        <definition>Scalar trapezoidal_integral</definition>
+        <argsstring>(const Mesh_base&lt; 1, Scalar &gt; &amp;mesh, const std::function&lt; Scalar(const Scalar &amp;)&gt; &amp;integrand)</argsstring>
+        <name>trapezoidal_integral</name>
+        <param>
+          <type>const <ref refid="classMesh__base" kindref="compound">Mesh_base</ref>&lt; 1, Scalar &gt; &amp;</type>
+          <declname>mesh</declname>
+        </param>
+        <param>
+          <type>const std::function&lt; Scalar(const Scalar &amp;)&gt; &amp;</type>
+          <declname>integrand</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/numerical-mesh-integration.h" line="30" column="8" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/numerical-mesh-integration.h" bodystart="30" bodyend="33"/>
+      </memberdef>
+      <memberdef kind="function" id="numerical-mesh-integration_8h_1a0d61c7407f7580e11a573d8112163d31" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class Scalar</type>
+          </param>
+        </templateparamlist>
+        <type>Scalar</type>
+        <definition>Scalar simpson_integral</definition>
+        <argsstring>(const Mesh_base&lt; 1, Scalar &gt; &amp;mesh, const Scalar &amp;x0, const Scalar &amp;x1, const Scalar &amp;h, const std::function&lt; Scalar(const Scalar &amp;)&gt; &amp;integrand)</argsstring>
+        <name>simpson_integral</name>
+        <param>
+          <type>const <ref refid="classMesh__base" kindref="compound">Mesh_base</ref>&lt; 1, Scalar &gt; &amp;</type>
+          <declname>mesh</declname>
+        </param>
+        <param>
+          <type>const Scalar &amp;</type>
+          <declname>x0</declname>
+        </param>
+        <param>
+          <type>const Scalar &amp;</type>
+          <declname>x1</declname>
+        </param>
+        <param>
+          <type>const Scalar &amp;</type>
+          <declname>h</declname>
+        </param>
+        <param>
+          <type>const std::function&lt; Scalar(const Scalar &amp;)&gt; &amp;</type>
+          <declname>integrand</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/numerical-mesh-integration.h" line="41" column="8" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/numerical-mesh-integration.h" bodystart="41" bodyend="53"/>
+      </memberdef>
+      <memberdef kind="function" id="numerical-mesh-integration_8h_1aec7400093288651de2d3f2d7b5d214b9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class Scalar</type>
+          </param>
+        </templateparamlist>
+        <type>Scalar</type>
+        <definition>Scalar simpson_integral</definition>
+        <argsstring>(const Mesh_base&lt; 1, Scalar &gt; &amp;mesh, const std::function&lt; Scalar(const Scalar &amp;)&gt; &amp;integrand)</argsstring>
+        <name>simpson_integral</name>
+        <param>
+          <type>const <ref refid="classMesh__base" kindref="compound">Mesh_base</ref>&lt; 1, Scalar &gt; &amp;</type>
+          <declname>mesh</declname>
+        </param>
+        <param>
+          <type>const std::function&lt; Scalar(const Scalar &amp;)&gt; &amp;</type>
+          <declname>integrand</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/numerical-mesh-integration.h" line="60" column="8" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/numerical-mesh-integration.h" bodystart="60" bodyend="63"/>
+      </memberdef>
+      <memberdef kind="function" id="numerical-mesh-integration_8h_1a21f9a83fa132a605cb98d4c6d1bbdf24" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class Scalar</type>
+          </param>
+          <param>
+            <type>size_t</type>
+            <declname>K</declname>
+            <defname>K</defname>
+            <defval>3</defval>
+          </param>
+        </templateparamlist>
+        <type>std::array&lt; Scalar, K &gt;</type>
+        <definition>std::array&lt;Scalar, K&gt; end_point_corrections</definition>
+        <argsstring>()</argsstring>
+        <name>end_point_corrections</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/numerical-mesh-integration.h" line="70" column="12" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/numerical-mesh-integration.h" bodystart="70" bodyend="73"/>
+      </memberdef>
+      <memberdef kind="function" id="numerical-mesh-integration_8h_1aa663d760ce26a3559886fffce6daf2fd" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class Scalar</type>
+          </param>
+          <param>
+            <type>size_t</type>
+            <declname>K</declname>
+            <defname>K</defname>
+            <defval>3</defval>
+          </param>
+        </templateparamlist>
+        <type>Scalar</type>
+        <definition>Scalar corrected_trapezoidal_integral</definition>
+        <argsstring>(const Mesh_base&lt; 1, Scalar &gt; &amp;mesh, const Scalar &amp;x0, const Scalar &amp;x1, const Scalar &amp;h, const std::function&lt; Scalar(const Scalar &amp;)&gt; &amp;integrand)</argsstring>
+        <name>corrected_trapezoidal_integral</name>
+        <param>
+          <type>const <ref refid="classMesh__base" kindref="compound">Mesh_base</ref>&lt; 1, Scalar &gt; &amp;</type>
+          <declname>mesh</declname>
+        </param>
+        <param>
+          <type>const Scalar &amp;</type>
+          <declname>x0</declname>
+        </param>
+        <param>
+          <type>const Scalar &amp;</type>
+          <declname>x1</declname>
+        </param>
+        <param>
+          <type>const Scalar &amp;</type>
+          <declname>h</declname>
+        </param>
+        <param>
+          <type>const std::function&lt; Scalar(const Scalar &amp;)&gt; &amp;</type>
+          <declname>integrand</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/numerical-mesh-integration.h" line="80" column="8" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/numerical-mesh-integration.h" bodystart="80" bodyend="98"/>
+      </memberdef>
+      <memberdef kind="function" id="numerical-mesh-integration_8h_1aca9c63b59aafd2ab280d7c25cecec9cc" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class Scalar</type>
+          </param>
+          <param>
+            <type>size_t</type>
+            <declname>K</declname>
+            <defname>K</defname>
+            <defval>3</defval>
+          </param>
+        </templateparamlist>
+        <type>Scalar</type>
+        <definition>Scalar corrected_trapezoidal_integral</definition>
+        <argsstring>(const Mesh_base&lt; 1, Scalar &gt; &amp;mesh, const std::function&lt; Scalar(const Scalar &amp;)&gt; &amp;integrand)</argsstring>
+        <name>corrected_trapezoidal_integral</name>
+        <param>
+          <type>const <ref refid="classMesh__base" kindref="compound">Mesh_base</ref>&lt; 1, Scalar &gt; &amp;</type>
+          <declname>mesh</declname>
+        </param>
+        <param>
+          <type>const std::function&lt; Scalar(const Scalar &amp;)&gt; &amp;</type>
+          <declname>integrand</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/numerical-mesh-integration.h" line="105" column="8" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/numerical-mesh-integration.h" bodystart="105" bodyend="108"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#ifndef<sp/>NUMERICAL_MESH_LIB_INTEGRATION_H</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NUMERICAL_MESH_LIB_INTEGRATION_H</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;numerical-mesh.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;functional&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;type_traits&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="preprocessor">#if<sp/>__cplusplus<sp/>&gt;=<sp/>202002L</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;std::</highlight><highlight class="keywordtype">float</highlight><highlight class="normal">ing_po</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>Scalar&gt;</highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight><highlight class="preprocessor">#else</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>Scalar&gt;</highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="12"><highlight class="normal">Scalar<sp/>trapezoidal_integral(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classMesh__base_3_011_00_01Scalar_01_4" kindref="compound">Mesh_base&lt;1, Scalar&gt;</ref>&amp;<sp/>mesh,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>Scalar&amp;<sp/>x0,</highlight></codeline>
+<codeline lineno="13"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>Scalar&amp;<sp/>x1,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>Scalar&amp;<sp/>h,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::function&lt;Scalar(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>Scalar&amp;)&gt;&amp;<sp/>integrand)</highlight></codeline>
+<codeline lineno="14"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="15"><highlight class="normal"><sp/><sp/><sp/><sp/>Scalar<sp/>res<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="16"><highlight class="normal"><sp/><sp/><sp/><sp/>Scalar<sp/>start<sp/>=<sp/>std::min(x0,<sp/>x1),<sp/>end<sp/>=<sp/>std::max(x0,<sp/>x1);</highlight></codeline>
+<codeline lineno="17"><highlight class="normal"><sp/><sp/><sp/><sp/>Scalar<sp/>steps<sp/>=<sp/>(end<sp/>-<sp/>start)/h;</highlight></codeline>
+<codeline lineno="18"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal">(Scalar<sp/>x<sp/>=<sp/>1;<sp/>x<sp/>&lt;=<sp/>steps;<sp/>x++){</highlight></codeline>
+<codeline lineno="19"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>res<sp/>+=<sp/><sp/>integrand(start<sp/>+<sp/>(x<sp/>-<sp/>1)*h)*mesh.dr(start<sp/>+<sp/>(x<sp/>-<sp/>1)*h)<sp/>+</highlight></codeline>
+<codeline lineno="20"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>integrand(start<sp/>+<sp/>x)*mesh.dr(start<sp/>+<sp/>x);</highlight></codeline>
+<codeline lineno="21"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="22"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>res*h/2;</highlight></codeline>
+<codeline lineno="23"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="24"><highlight class="normal"></highlight></codeline>
+<codeline lineno="25"><highlight class="normal"></highlight><highlight class="preprocessor">#if<sp/>__cplusplus<sp/>&gt;=<sp/>202002L</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="26"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;std::</highlight><highlight class="keywordtype">float</highlight><highlight class="normal">ing_po</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>Scalar&gt;</highlight></codeline>
+<codeline lineno="27"><highlight class="normal"></highlight><highlight class="preprocessor">#else</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="28"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>Scalar&gt;</highlight></codeline>
+<codeline lineno="29"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="30"><highlight class="normal">Scalar<sp/>trapezoidal_integral(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classMesh__base_3_011_00_01Scalar_01_4" kindref="compound">Mesh_base&lt;1, Scalar&gt;</ref>&amp;<sp/>mesh,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::function&lt;Scalar(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>Scalar&amp;)&gt;&amp;<sp/>integrand)</highlight></codeline>
+<codeline lineno="31"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="32"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>trapezoidal_integral(mesh,<sp/>0.,<sp/></highlight><highlight class="keyword">static_cast&lt;</highlight><highlight class="normal">Scalar</highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(mesh.dim()<sp/>-<sp/>1),<sp/>1.,<sp/>integrand);</highlight></codeline>
+<codeline lineno="33"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="34"><highlight class="normal"></highlight></codeline>
+<codeline lineno="35"><highlight class="normal"></highlight></codeline>
+<codeline lineno="36"><highlight class="normal"></highlight><highlight class="preprocessor">#if<sp/>__cplusplus<sp/>&gt;=<sp/>202002L</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="37"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;std::</highlight><highlight class="keywordtype">float</highlight><highlight class="normal">ing_po</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>Scalar&gt;</highlight></codeline>
+<codeline lineno="38"><highlight class="normal"></highlight><highlight class="preprocessor">#else</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="39"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>Scalar&gt;</highlight></codeline>
+<codeline lineno="40"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="41"><highlight class="normal">Scalar<sp/>simpson_integral(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classMesh__base_3_011_00_01Scalar_01_4" kindref="compound">Mesh_base&lt;1, Scalar&gt;</ref>&amp;<sp/>mesh,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>Scalar&amp;<sp/>x0,</highlight></codeline>
+<codeline lineno="42"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>Scalar&amp;<sp/>x1,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>Scalar&amp;<sp/>h,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::function&lt;Scalar(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>Scalar&amp;)&gt;&amp;<sp/>integrand)</highlight></codeline>
+<codeline lineno="43"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="44"><highlight class="normal"><sp/><sp/><sp/><sp/>Scalar<sp/>res<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="45"><highlight class="normal"><sp/><sp/><sp/><sp/>Scalar<sp/>start<sp/>=<sp/>std::min(x0,<sp/>x1),<sp/>end<sp/>=<sp/>std::max(x0,<sp/>x1);</highlight></codeline>
+<codeline lineno="46"><highlight class="normal"><sp/><sp/><sp/><sp/>Scalar<sp/>steps<sp/>=<sp/>(end<sp/>-<sp/>start)/h;</highlight></codeline>
+<codeline lineno="47"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal">(Scalar<sp/>x<sp/>=<sp/>1;<sp/>x<sp/>&lt;=<sp/>steps/2;<sp/>x++){</highlight></codeline>
+<codeline lineno="48"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>res<sp/>+=<sp/><sp/>integrand(start<sp/>+<sp/>2*(x<sp/>-<sp/>1)*h)*mesh.dr(start<sp/>+<sp/>2*(x<sp/>-<sp/>1)*h)</highlight></codeline>
+<codeline lineno="49"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>+<sp/>4*integrand(start<sp/>+<sp/>(2*x<sp/>-<sp/>1)*h)*mesh.dr(start<sp/>+<sp/>(2*x<sp/>-<sp/>1)*h)</highlight></codeline>
+<codeline lineno="50"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>+<sp/>integrand(start<sp/>+<sp/>2*x*h)*mesh.dr(start<sp/>+<sp/>2*x*h);</highlight></codeline>
+<codeline lineno="51"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="52"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>res*h/3;</highlight></codeline>
+<codeline lineno="53"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="54"><highlight class="normal"></highlight></codeline>
+<codeline lineno="55"><highlight class="normal"></highlight><highlight class="preprocessor">#if<sp/>__cplusplus<sp/>&gt;=<sp/>202002L</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="56"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;std::</highlight><highlight class="keywordtype">float</highlight><highlight class="normal">ing_po</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>Scalar&gt;</highlight></codeline>
+<codeline lineno="57"><highlight class="normal"></highlight><highlight class="preprocessor">#else</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="58"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>Scalar&gt;</highlight></codeline>
+<codeline lineno="59"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="60"><highlight class="normal">Scalar<sp/>simpson_integral(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classMesh__base_3_011_00_01Scalar_01_4" kindref="compound">Mesh_base&lt;1, Scalar&gt;</ref>&amp;<sp/>mesh,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::function&lt;Scalar(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>Scalar&amp;)&gt;&amp;<sp/>integrand)</highlight></codeline>
+<codeline lineno="61"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="62"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>simpson_integral(mesh,<sp/>0.,<sp/></highlight><highlight class="keyword">static_cast&lt;</highlight><highlight class="normal">Scalar</highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(mesh.dim()<sp/>-<sp/>1),<sp/>1.,<sp/>integrand);</highlight></codeline>
+<codeline lineno="63"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="64"><highlight class="normal"></highlight></codeline>
+<codeline lineno="65"><highlight class="normal"></highlight><highlight class="preprocessor">#if<sp/>__cplusplus<sp/>&gt;=<sp/>202002L</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="66"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;std::</highlight><highlight class="keywordtype">float</highlight><highlight class="normal">ing_po</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>Scalar,<sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>K<sp/>=<sp/>3&gt;</highlight></codeline>
+<codeline lineno="67"><highlight class="normal"></highlight><highlight class="preprocessor">#else</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="68"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>Scalar,<sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>K<sp/>=<sp/>3&gt;</highlight></codeline>
+<codeline lineno="69"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="70"><highlight class="normal">std::array&lt;Scalar,<sp/>K&gt;<sp/>end_point_corrections()</highlight></codeline>
+<codeline lineno="71"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="72"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>{9./24,<sp/>28./24,<sp/>23./24};</highlight></codeline>
+<codeline lineno="73"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="74"><highlight class="normal"></highlight></codeline>
+<codeline lineno="75"><highlight class="normal"></highlight><highlight class="preprocessor">#if<sp/>__cplusplus<sp/>&gt;=<sp/>202002L</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="76"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;std::</highlight><highlight class="keywordtype">float</highlight><highlight class="normal">ing_po</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>Scalar,<sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>K<sp/>=<sp/>3&gt;</highlight></codeline>
+<codeline lineno="77"><highlight class="normal"></highlight><highlight class="preprocessor">#else</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="78"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>Scalar,<sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>K<sp/>=<sp/>3&gt;</highlight></codeline>
+<codeline lineno="79"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="80"><highlight class="normal">Scalar<sp/>corrected_trapezoidal_integral(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classMesh__base_3_011_00_01Scalar_01_4" kindref="compound">Mesh_base&lt;1, Scalar&gt;</ref>&amp;<sp/>mesh,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>Scalar&amp;<sp/>x0,</highlight></codeline>
+<codeline lineno="81"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>Scalar&amp;<sp/>x1,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>Scalar&amp;<sp/>h,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::function&lt;Scalar(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>Scalar&amp;)&gt;&amp;<sp/>integrand)</highlight></codeline>
+<codeline lineno="82"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="83"><highlight class="normal"><sp/><sp/><sp/><sp/>Scalar<sp/>start<sp/>=<sp/>std::min(x0,<sp/>x1),<sp/>end<sp/>=<sp/>std::max(x0,<sp/>x1);</highlight></codeline>
+<codeline lineno="84"><highlight class="normal"><sp/><sp/><sp/><sp/>Scalar<sp/>steps<sp/>=<sp/>(end<sp/>-<sp/>start)/h;</highlight></codeline>
+<codeline lineno="85"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(steps<sp/>&lt;<sp/>2*K){</highlight></codeline>
+<codeline lineno="86"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>0;</highlight></codeline>
+<codeline lineno="87"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="88"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>weights<sp/>=<sp/>end_point_corrections&lt;Scalar,<sp/>K&gt;();</highlight></codeline>
+<codeline lineno="89"><highlight class="normal"><sp/><sp/><sp/><sp/>Scalar<sp/>res<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="90"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal">(Scalar<sp/>i<sp/>=<sp/>0;<sp/>i<sp/>&lt;<sp/>K;<sp/>i++){</highlight></codeline>
+<codeline lineno="91"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>res<sp/>+=<sp/>weights[i]*integrand(start<sp/>+<sp/>i*h)*mesh.dr(start<sp/>+<sp/>i*h);</highlight></codeline>
+<codeline lineno="92"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>res<sp/>+=<sp/>weights[i]*integrand(end<sp/>-<sp/>i*h)*mesh.dr(end<sp/>-<sp/>i*h);</highlight></codeline>
+<codeline lineno="93"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="94"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal">(Scalar<sp/>x<sp/>=<sp/>K;<sp/>x<sp/>&lt;=<sp/>steps<sp/>-<sp/>K;<sp/>x++){</highlight></codeline>
+<codeline lineno="95"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>res<sp/>+=<sp/>integrand(start<sp/>+<sp/>x*h)*mesh.dr(start<sp/>+<sp/>x*h);</highlight></codeline>
+<codeline lineno="96"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="97"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>res*h;</highlight></codeline>
+<codeline lineno="98"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="99"><highlight class="normal"></highlight></codeline>
+<codeline lineno="100"><highlight class="normal"></highlight><highlight class="preprocessor">#if<sp/>__cplusplus<sp/>&gt;=<sp/>202002L</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="101"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;std::</highlight><highlight class="keywordtype">float</highlight><highlight class="normal">ing_po</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>Scalar,<sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>K<sp/>=<sp/>3&gt;</highlight></codeline>
+<codeline lineno="102"><highlight class="normal"></highlight><highlight class="preprocessor">#else</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="103"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>Scalar,<sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>K<sp/>=<sp/>3&gt;</highlight></codeline>
+<codeline lineno="104"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="105"><highlight class="normal">Scalar<sp/>corrected_trapezoidal_integral(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classMesh__base_3_011_00_01Scalar_01_4" kindref="compound">Mesh_base&lt;1, Scalar&gt;</ref>&amp;<sp/>mesh,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::function&lt;Scalar(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>Scalar&amp;)&gt;&amp;<sp/>integrand)</highlight></codeline>
+<codeline lineno="106"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="107"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>corrected_trapezoidal_integral(mesh,<sp/>0.,<sp/></highlight><highlight class="keyword">static_cast&lt;</highlight><highlight class="normal">Scalar</highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(mesh.dim()<sp/>-<sp/>1),<sp/>1.,<sp/>integrand);</highlight></codeline>
+<codeline lineno="108"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="109"><highlight class="normal"></highlight></codeline>
+<codeline lineno="110"><highlight class="normal"></highlight></codeline>
+<codeline lineno="111"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/><sp/>//NUMERICAL_MESH_LIB_INTEGRATION_H</highlight></codeline>
+    </programlisting>
+    <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/numerical-mesh-integration.h"/>
+  </compounddef>
+</doxygen>

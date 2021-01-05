@@ -1,0 +1,34 @@
+\hypertarget{classSimulation}{}\doxysection{Simulation Class Reference}
+\label{classSimulation}\index{Simulation@{Simulation}}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classSimulation_aa024b116858a0a5a9ac3de802f984620}\label{classSimulation_aa024b116858a0a5a9ac3de802f984620}} 
+{\bfseries Simulation} (const \mbox{\hyperlink{classCrystal__t}{Crystal\+\_\+t}}$<$ 3, \mbox{\hyperlink{classAtom}{Atom}} $>$ \&crystal, const X\+C\+\_\+\+F\+UN func, const std\+::vector$<$ double $>$ kappas\+\_\+n, std\+::function$<$ double(const size\+\_\+t, const double)$>$ at\+\_\+pot=\mbox{[}$\,$\mbox{]}(const size\+\_\+t Z, const double r) \{ return -\/2.$\ast$static\+\_\+cast$<$ double $>$(Z)/r;\})
+\item 
+\mbox{\Hypertarget{classSimulation_a1f15465c56736f2aa7bb9015d57485a8}\label{classSimulation_a1f15465c56736f2aa7bb9015d57485a8}} 
+void {\bfseries set\+\_\+up\+\_\+\+X\+\_\+matrices} ()
+\item 
+\mbox{\Hypertarget{classSimulation_a97a40ce3e3ec60d3c01014876d5c97d9}\label{classSimulation_a97a40ce3e3ec60d3c01014876d5c97d9}} 
+const G\+S\+L\+::\+Matrix\+\_\+cx {\bfseries set\+\_\+H} (const G\+S\+L\+::\+Vector \&kp)
+\item 
+\mbox{\Hypertarget{classSimulation_aad6acb4cfce16ce7b40cd3068964398b}\label{classSimulation_aad6acb4cfce16ce7b40cd3068964398b}} 
+const G\+S\+L\+::\+Matrix\+\_\+cx {\bfseries set\+\_\+S} (const G\+S\+L\+::\+Vector \&kp)
+\item 
+\mbox{\Hypertarget{classSimulation_ae5bcc0dac14df2b12eb543c48d2adcf3}\label{classSimulation_ae5bcc0dac14df2b12eb543c48d2adcf3}} 
+void {\bfseries calc\+\_\+eigen} (const G\+S\+L\+::\+Vector \&)
+\item 
+\mbox{\Hypertarget{classSimulation_a1945e5d12abe181d2c7d412f0b540ead}\label{classSimulation_a1945e5d12abe181d2c7d412f0b540ead}} 
+void {\bfseries add\+\_\+eigvals} (const G\+S\+L\+::\+Vector \&kp, const G\+S\+L\+::\+Vector \&eigvals)
+\item 
+\mbox{\Hypertarget{classSimulation_a9b21379e624cee3c33b043040ee14237}\label{classSimulation_a9b21379e624cee3c33b043040ee14237}} 
+void {\bfseries print\+\_\+eigvals} (const \mbox{\hyperlink{classK__mesh}{K\+\_\+mesh}} \&k\+\_\+mesh)
+\item 
+\mbox{\Hypertarget{classSimulation_a4d4cc4f18796e866b8195c8d9492d903}\label{classSimulation_a4d4cc4f18796e866b8195c8d9492d903}} 
+double {\bfseries canonical\+\_\+band} (const \mbox{\hyperlink{structlm}{lm}} l, const double kappa, const spin s, const G\+S\+L\+::\+Vector \&kp)
+\end{DoxyCompactItemize}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+simulation.\+h\end{DoxyCompactItemize}

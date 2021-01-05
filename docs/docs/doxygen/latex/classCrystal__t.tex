@@ -1,0 +1,94 @@
+\hypertarget{classCrystal__t}{}\doxysection{Crystal\+\_\+t$<$ dim, Atom $>$ Class Template Reference}
+\label{classCrystal__t}\index{Crystal\_t$<$ dim, Atom $>$@{Crystal\_t$<$ dim, Atom $>$}}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classCrystal__t_abfb00093c91ce1d991331a35218ac0c1}\label{classCrystal__t_abfb00093c91ce1d991331a35218ac0c1}} 
+{\bfseries Crystal\+\_\+t} (const \mbox{\hyperlink{classLattice__t}{Lattice\+\_\+t}}$<$ dim $>$ \&lat)
+\item 
+\mbox{\Hypertarget{classCrystal__t_a32e7a33e4faf0687fe33bf41859f488c}\label{classCrystal__t_a32e7a33e4faf0687fe33bf41859f488c}} 
+void {\bfseries add\+\_\+sites} (const std\+::vector$<$ G\+S\+L\+::\+Vector $>$ \&)
+\item 
+\mbox{\Hypertarget{classCrystal__t_aa8184be87321f39773c048a061434b19}\label{classCrystal__t_aa8184be87321f39773c048a061434b19}} 
+void {\bfseries add\+\_\+basis} (const std\+::vector$<$ \mbox{\hyperlink{classAtom}{Atom}} $>$ \&)
+\item 
+\mbox{\Hypertarget{classCrystal__t_a6db196028b5b61970811efab98c75990}\label{classCrystal__t_a6db196028b5b61970811efab98c75990}} 
+void {\bfseries set\+\_\+\+Rn} (const double Rmax)
+\item 
+\mbox{\Hypertarget{classCrystal__t_ac3740b1080875b0f52c19a5b7c020366}\label{classCrystal__t_ac3740b1080875b0f52c19a5b7c020366}} 
+void {\bfseries set\+\_\+\+Kn} (const double Kmax)
+\item 
+\mbox{\Hypertarget{classCrystal__t_ad242d2f627a025cf077c2fba0d3c827f}\label{classCrystal__t_ad242d2f627a025cf077c2fba0d3c827f}} 
+void {\bfseries set\+\_\+size} (const std\+::array$<$ size\+\_\+t, dim $>$ \&size)
+\item 
+\mbox{\Hypertarget{classCrystal__t_a56945bc09171ea4493fee38af4ff257f}\label{classCrystal__t_a56945bc09171ea4493fee38af4ff257f}} 
+std\+::vector$<$ Neighbours$<$ dim $>$ $>$ {\bfseries calc\+\_\+nearest\+\_\+neighbours} () const
+\item 
+\mbox{\Hypertarget{classCrystal__t_a22cd7c125b9691e881bba0bdcfb0d017}\label{classCrystal__t_a22cd7c125b9691e881bba0bdcfb0d017}} 
+std\+::vector$<$ Neighbours$<$ dim $>$ $>$ {\bfseries calc\+\_\+nearest\+\_\+neighbours} (const size\+\_\+t n\+\_\+shells) const
+\item 
+\mbox{\Hypertarget{classCrystal__t_a8b841153c33d133ffeb96a99f8bfd22a}\label{classCrystal__t_a8b841153c33d133ffeb96a99f8bfd22a}} 
+std\+::vector$<$ std\+::vector$<$ Neighbours$<$ dim $>$ $>$ $>$ {\bfseries determine\+\_\+nn\+\_\+shells} (const std\+::vector$<$ Neighbours$<$ dim $>$$>$ \&nn) const
+\item 
+\mbox{\Hypertarget{classCrystal__t_a07d580a921861b1a59674dc3a165cb40}\label{classCrystal__t_a07d580a921861b1a59674dc3a165cb40}} 
+\mbox{\hyperlink{classLattice__t}{Lattice\+\_\+t}}$<$ dim $>$ {\bfseries lat} () const
+\item 
+\mbox{\Hypertarget{classCrystal__t_aa4c890f148ecf7252b7375f2888bf5a5}\label{classCrystal__t_aa4c890f148ecf7252b7375f2888bf5a5}} 
+std\+::vector$<$ \mbox{\hyperlink{classSite__t}{Site\+\_\+t}}$<$ dim $>$ $>$ \& {\bfseries sites} ()
+\item 
+\mbox{\Hypertarget{classCrystal__t_a68c6533d0b7cb1f7d1709f9bd81786a2}\label{classCrystal__t_a68c6533d0b7cb1f7d1709f9bd81786a2}} 
+std\+::vector$<$ \mbox{\hyperlink{classSite__t}{Site\+\_\+t}}$<$ dim $>$ $>$ {\bfseries sites} () const
+\item 
+\mbox{\Hypertarget{classCrystal__t_a6c1af47c3f900aef5a3cb68b408fa043}\label{classCrystal__t_a6c1af47c3f900aef5a3cb68b408fa043}} 
+\mbox{\hyperlink{classSite__t}{Site\+\_\+t}}$<$ dim $>$ \& {\bfseries site} (const size\+\_\+t i)
+\item 
+\mbox{\Hypertarget{classCrystal__t_a64e8895e04cb6ec0ad784d2147b7ad41}\label{classCrystal__t_a64e8895e04cb6ec0ad784d2147b7ad41}} 
+\mbox{\hyperlink{classSite__t}{Site\+\_\+t}}$<$ dim $>$ {\bfseries site} (const size\+\_\+t i) const
+\item 
+\mbox{\Hypertarget{classCrystal__t_a4ca3294351c1951919464c8d7c4c9a94}\label{classCrystal__t_a4ca3294351c1951919464c8d7c4c9a94}} 
+std\+::vector$<$ \mbox{\hyperlink{classAtom}{Atom}} $>$ \& {\bfseries atoms} ()
+\item 
+\mbox{\Hypertarget{classCrystal__t_a9767eda08b7439708f573733a0406575}\label{classCrystal__t_a9767eda08b7439708f573733a0406575}} 
+std\+::vector$<$ \mbox{\hyperlink{classAtom}{Atom}} $>$ {\bfseries atoms} () const
+\item 
+\mbox{\Hypertarget{classCrystal__t_abe2601f87faa77394f7fbfc33b2e1f9a}\label{classCrystal__t_abe2601f87faa77394f7fbfc33b2e1f9a}} 
+std\+::array$<$ size\+\_\+t, dim $>$ \& {\bfseries size} ()
+\item 
+\mbox{\Hypertarget{classCrystal__t_aa2e581e0ff7cd8bc083e5d941fca842b}\label{classCrystal__t_aa2e581e0ff7cd8bc083e5d941fca842b}} 
+\mbox{\hyperlink{classAtom}{Atom}} \& {\bfseries atoms} (const size\+\_\+t i)
+\item 
+\mbox{\Hypertarget{classCrystal__t_aac3f9b10c6f304b279b8912191257eee}\label{classCrystal__t_aac3f9b10c6f304b279b8912191257eee}} 
+\mbox{\hyperlink{classAtom}{Atom}} {\bfseries atoms} (const size\+\_\+t i) const
+\item 
+\mbox{\Hypertarget{classCrystal__t_a3962cee0afec095daf262cf00e8cd0eb}\label{classCrystal__t_a3962cee0afec095daf262cf00e8cd0eb}} 
+\mbox{\hyperlink{classAtom}{Atom}} \& {\bfseries atom} (const \mbox{\hyperlink{classSite__t}{Site\+\_\+t}}$<$ dim $>$ \&s)
+\item 
+\mbox{\Hypertarget{classCrystal__t_ae7c59bc3c2e671a12b5e2b53dac40ca5}\label{classCrystal__t_ae7c59bc3c2e671a12b5e2b53dac40ca5}} 
+\mbox{\hyperlink{classAtom}{Atom}} {\bfseries atom} (const \mbox{\hyperlink{classSite__t}{Site\+\_\+t}}$<$ dim $>$ \&s) const
+\item 
+\mbox{\Hypertarget{classCrystal__t_a858cbbde8c8ead22491cda98ed1aa88f}\label{classCrystal__t_a858cbbde8c8ead22491cda98ed1aa88f}} 
+size\+\_\+t \& {\bfseries atom\+\_\+index} (const \mbox{\hyperlink{classSite__t}{Site\+\_\+t}}$<$ dim $>$ \&s)
+\item 
+\mbox{\Hypertarget{classCrystal__t_a145b8711716664d81ae88e87fc36673b}\label{classCrystal__t_a145b8711716664d81ae88e87fc36673b}} 
+size\+\_\+t {\bfseries atom\+\_\+index} (const \mbox{\hyperlink{classSite__t}{Site\+\_\+t}}$<$ dim $>$ \&s) const
+\item 
+\mbox{\Hypertarget{classCrystal__t_aa181a2a46412d794054642ab1080fbd7}\label{classCrystal__t_aa181a2a46412d794054642ab1080fbd7}} 
+std\+::vector$<$ G\+S\+L\+::\+Vector $>$ \& {\bfseries Rn\+\_\+vecs} ()
+\item 
+\mbox{\Hypertarget{classCrystal__t_a54940a69e128265a69a414effb07cec2}\label{classCrystal__t_a54940a69e128265a69a414effb07cec2}} 
+std\+::vector$<$ G\+S\+L\+::\+Vector $>$ {\bfseries Rn\+\_\+vecs} () const
+\item 
+\mbox{\Hypertarget{classCrystal__t_ad4ab8a243de90b71bcc8ed795ceeb76b}\label{classCrystal__t_ad4ab8a243de90b71bcc8ed795ceeb76b}} 
+std\+::vector$<$ G\+S\+L\+::\+Vector $>$ \& {\bfseries Kn\+\_\+vecs} ()
+\item 
+\mbox{\Hypertarget{classCrystal__t_a61aaf8eb84931b316e0ae61430bc975a}\label{classCrystal__t_a61aaf8eb84931b316e0ae61430bc975a}} 
+std\+::vector$<$ G\+S\+L\+::\+Vector $>$ {\bfseries Kn\+\_\+vecs} () const
+\item 
+\mbox{\Hypertarget{classCrystal__t_a19680d5e76d6207f818c325fed4491c0}\label{classCrystal__t_a19680d5e76d6207f818c325fed4491c0}} 
+double {\bfseries volume} () const
+\end{DoxyCompactItemize}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+crystal.\+h\end{DoxyCompactItemize}

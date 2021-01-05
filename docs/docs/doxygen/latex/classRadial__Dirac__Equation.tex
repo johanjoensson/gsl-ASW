@@ -1,0 +1,103 @@
+\hypertarget{classRadial__Dirac__Equation}{}\doxysection{Radial\+\_\+\+Dirac\+\_\+\+Equation Class Reference}
+\label{classRadial__Dirac__Equation}\index{Radial\_Dirac\_Equation@{Radial\_Dirac\_Equation}}
+Inheritance diagram for Radial\+\_\+\+Dirac\+\_\+\+Equation\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{classRadial__Dirac__Equation}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classRadial__Dirac__Equation_a50534f365619fec33cb9226a7b970977}\label{classRadial__Dirac__Equation_a50534f365619fec33cb9226a7b970977}} 
+{\bfseries Radial\+\_\+\+Dirac\+\_\+\+Equation} (const double e\+\_\+min, const double e\+\_\+max, const std\+::vector$<$ double $>$ \&v, const size\+\_\+t l, const std\+::vector$<$ double $>$ \&left\+\_\+init\+\_\+n, const std\+::vector$<$ double $>$ \&right\+\_\+init\+\_\+n, const \mbox{\hyperlink{classLogarithmic__mesh}{Logarithmic\+\_\+mesh}} \&mesh, const double tol=1e-\/10)
+\item 
+\mbox{\Hypertarget{classRadial__Dirac__Equation_a59529222ca2d58fc2b585f481714b998}\label{classRadial__Dirac__Equation_a59529222ca2d58fc2b585f481714b998}} 
+void {\bfseries solve} (const size\+\_\+t nodes) override
+\item 
+\mbox{\Hypertarget{classRadial__Dirac__Equation_ad4957c84196fc39295174c9c129ffb91}\label{classRadial__Dirac__Equation_ad4957c84196fc39295174c9c129ffb91}} 
+void {\bfseries solve} (const size\+\_\+t nodes, const double e\+\_\+guess) override
+\item 
+\mbox{\Hypertarget{classRadial__Dirac__Equation_a8bae0b1044363a7e024b46e631b78aed}\label{classRadial__Dirac__Equation_a8bae0b1044363a7e024b46e631b78aed}} 
+double {\bfseries norm} () const override
+\item 
+\mbox{\Hypertarget{classRadial__Dirac__Equation_a8fd901a23c4a8ec0574e7ab6efa34a8e}\label{classRadial__Dirac__Equation_a8fd901a23c4a8ec0574e7ab6efa34a8e}} 
+void {\bfseries normalize} () override
+\item 
+\mbox{\Hypertarget{classRadial__Dirac__Equation_ac996a933695a76d758a878396de414c4}\label{classRadial__Dirac__Equation_ac996a933695a76d758a878396de414c4}} 
+virtual void {\bfseries solve} ()
+\item 
+\mbox{\Hypertarget{classRadial__Dirac__Equation_abedfa82d40aff78e6811fec453ff36d1}\label{classRadial__Dirac__Equation_abedfa82d40aff78e6811fec453ff36d1}} 
+virtual void {\bfseries solve} (size\+\_\+t nodes)
+\item 
+\mbox{\Hypertarget{classRadial__Dirac__Equation_a09cde000674ef4eae0de5900c3a67507}\label{classRadial__Dirac__Equation_a09cde000674ef4eae0de5900c3a67507}} 
+virtual void {\bfseries solve} (const size\+\_\+t nodes, const double e\+\_\+guess)
+\item 
+\mbox{\Hypertarget{classDirac__Equation_ad7298431a64f736b770c750e99de77f8}\label{classDirac__Equation_ad7298431a64f736b770c750e99de77f8}} 
+std\+::array$<$ std\+::vector$<$ double $>$, 4 $>$ \& {\bfseries psi} ()
+\item 
+\mbox{\Hypertarget{classDirac__Equation_aefaf0c54ed20c7423b3781759d1f3970}\label{classDirac__Equation_aefaf0c54ed20c7423b3781759d1f3970}} 
+std\+::vector$<$ double $>$ \& {\bfseries v} ()
+\item 
+\mbox{\Hypertarget{classDirac__Equation_a6a147e357cf7e9c49ba7224456c8f4b9}\label{classDirac__Equation_a6a147e357cf7e9c49ba7224456c8f4b9}} 
+double {\bfseries e} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classRadial__Dirac__Equation_afe01697273efa9e9cddad47064420de1}\label{classRadial__Dirac__Equation_afe01697273efa9e9cddad47064420de1}} 
+double {\bfseries F\+\_\+norm} () const
+\item 
+\mbox{\Hypertarget{classRadial__Dirac__Equation_a713ab1889e5d9aae50f9299a0f8c01ae}\label{classRadial__Dirac__Equation_a713ab1889e5d9aae50f9299a0f8c01ae}} 
+{\footnotesize template$<$class Iter , class T  = double$>$ }\\double {\bfseries variational\+\_\+de} (Iter inv)
+\item 
+{\footnotesize template$<$class Iter\+\_\+res , class Iter\+\_\+v $>$ }\\std\+::array$<$ Iter\+\_\+res, 4 $>$ \mbox{\hyperlink{classDirac__Equation_a41c7592a265abd9ab19f300db641d614}{find\+\_\+inversion\+\_\+point}} (std\+::array$<$ Iter\+\_\+res, 4 $>$ res\+\_\+start, std\+::array$<$ Iter\+\_\+res, 4 $>$ res\+\_\+end, Iter\+\_\+v v\+\_\+start)
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classRadial__Dirac__Equation_a7dd7d5a73c76353ae044609412912e2c}\label{classRadial__Dirac__Equation_a7dd7d5a73c76353ae044609412912e2c}} 
+const \mbox{\hyperlink{classLogarithmic__mesh}{Logarithmic\+\_\+mesh}} \& {\bfseries mesh\+\_\+p}
+\item 
+\mbox{\Hypertarget{classDirac__Equation_af41f7a8ba5e7a3f9f6471f3420743630}\label{classDirac__Equation_af41f7a8ba5e7a3f9f6471f3420743630}} 
+double {\bfseries energy\+\_\+m}
+\item 
+\mbox{\Hypertarget{classDirac__Equation_aeff140cf472e5123f5d29df703b170d0}\label{classDirac__Equation_aeff140cf472e5123f5d29df703b170d0}} 
+double {\bfseries e\+\_\+min\+\_\+m}
+\item 
+\mbox{\Hypertarget{classDirac__Equation_af2041b9ced54043c8af640165a320ad1}\label{classDirac__Equation_af2041b9ced54043c8af640165a320ad1}} 
+double {\bfseries e\+\_\+max\+\_\+m}
+\item 
+\mbox{\Hypertarget{classDirac__Equation_a5286bf65ce7e21164e50011ec5f3f3fc}\label{classDirac__Equation_a5286bf65ce7e21164e50011ec5f3f3fc}} 
+std\+::vector$<$ double $>$ {\bfseries v\+\_\+m}
+\item 
+\mbox{\Hypertarget{classDirac__Equation_a0ed3134996cb0d3dd9efc3f2071cc12b}\label{classDirac__Equation_a0ed3134996cb0d3dd9efc3f2071cc12b}} 
+std\+::array$<$ std\+::vector$<$ double $>$, 4 $>$ psi\+\_\+m std\+::array$<$ std\+::vector$<$ double $>$, 4 $>$ {\bfseries l\+\_\+init\+\_\+m}
+\item 
+\mbox{\Hypertarget{classDirac__Equation_ae66a369069f64a55fcf643201b95b80a}\label{classDirac__Equation_ae66a369069f64a55fcf643201b95b80a}} 
+std\+::array$<$ std\+::vector$<$ double $>$, 4 $>$ psi\+\_\+m std\+::array$<$ std\+::vector$<$ double $>$, 4 $>$ {\bfseries r\+\_\+init\+\_\+m}
+\item 
+\mbox{\Hypertarget{classDirac__Equation_adeec323c701d465f6dd7bcc3cadff8d3}\label{classDirac__Equation_adeec323c701d465f6dd7bcc3cadff8d3}} 
+double {\bfseries tol\+\_\+m}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classDirac__Equation_a41c7592a265abd9ab19f300db641d614}\label{classDirac__Equation_a41c7592a265abd9ab19f300db641d614}} 
+\index{Radial\_Dirac\_Equation@{Radial\_Dirac\_Equation}!find\_inversion\_point@{find\_inversion\_point}}
+\index{find\_inversion\_point@{find\_inversion\_point}!Radial\_Dirac\_Equation@{Radial\_Dirac\_Equation}}
+\doxysubsubsection{\texorpdfstring{find\_inversion\_point()}{find\_inversion\_point()}}
+{\footnotesize\ttfamily template$<$class Iter\+\_\+res , class Iter\+\_\+v $>$ \\
+std\+::array$<$Iter\+\_\+res, 4$>$ Dirac\+\_\+\+Equation\+::find\+\_\+inversion\+\_\+point (\begin{DoxyParamCaption}\item[{std\+::array$<$ Iter\+\_\+res, 4 $>$}]{res\+\_\+start,  }\item[{std\+::array$<$ Iter\+\_\+res, 4 $>$}]{res\+\_\+end,  }\item[{Iter\+\_\+v}]{v\+\_\+start }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [inherited]}}
+
+Find the point where E -\/ v(\+X\+\_\+i) = 0 (classical inversion point).~\newline
+ \textbackslash{}t\+\_\+\+\_\+\+Iter\+\_\+res\+\_\+\+\_\+ -\/ iterator to result container (e.\+g. std\+::vector)~\newline
+ \textbackslash{}t\+\_\+\+\_\+\+Iter\+\_\+v\+\_\+\+\_\+ -\/ iterator to v container (e.\+g. std\+::vector)~\newline
+ Input\+:~\newline
+ \textbackslash{}t\+\_\+\+\_\+res\+\_\+start\+\_\+\+\_\+ -\/ Iterator pointing to the first element of the result container.~\newline
+ \textbackslash{}t\+\_\+\+\_\+res\+\_\+end\+\_\+\+\_\+ -\/ Iterator pointing to the element one past the last element of the result container.~\newline
+\textbackslash{}t\+\_\+\+\_\+v\+\_\+start\+\_\+\+\_\+ -\/ Iterator pointing to the first element of the g container 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+dirac.\+h\end{DoxyCompactItemize}

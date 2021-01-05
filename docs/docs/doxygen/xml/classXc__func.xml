@@ -1,0 +1,184 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.20" xml:lang="en-US">
+  <compounddef id="classXc__func" kind="class" language="C++" prot="public">
+    <compoundname>Xc_func</compoundname>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classXc__func_1ad7be31cd5b5df202c05c0beec00749f3" prot="private" static="no" mutable="no">
+        <type>std::unique_ptr&lt; xc_func_type, std::function&lt; void(xc_func_type *)&gt; &gt;</type>
+        <definition>std::unique_ptr&lt;xc_func_type, std::function&lt;void(xc_func_type*)&gt; &gt; Xc_func::fun</definition>
+        <argsstring></argsstring>
+        <name>fun</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/xc_func.h" line="18" column="21" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/xc_func.h" bodystart="18" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classXc__func_1a934504b24419262723ef2a458549002e" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>Xc_func::Xc_func</definition>
+        <argsstring>()</argsstring>
+        <name>Xc_func</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/xc_func.h" line="20" column="5" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/xc_func.h" bodystart="20" bodyend="20"/>
+      </memberdef>
+      <memberdef kind="function" id="classXc__func_1a91b592fa3505e42af63cfeabe620a6e2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Xc_func::Xc_func</definition>
+        <argsstring>(const Xc_func &amp;)=default</argsstring>
+        <name>Xc_func</name>
+        <param>
+          <type>const <ref refid="classXc__func" kindref="compound">Xc_func</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/xc_func.h" line="21" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classXc__func_1a3da97de9866c0d64225badb903130e7a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Xc_func::Xc_func</definition>
+        <argsstring>(Xc_func &amp;&amp;other)=default</argsstring>
+        <name>Xc_func</name>
+        <param>
+          <type><ref refid="classXc__func" kindref="compound">Xc_func</ref> &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/xc_func.h" line="22" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classXc__func_1af1ca3a813970389dffaf293c621f4dd1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Xc_func::Xc_func</definition>
+        <argsstring>(XC_FUN xcf)</argsstring>
+        <name>Xc_func</name>
+        <param>
+          <type>XC_FUN</type>
+          <declname>xcf</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/xc_func.h" line="23" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classXc__func_1a5e36f286901f6bb2505a026eadaf0738" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Xc_func::~Xc_func</definition>
+        <argsstring>()=default</argsstring>
+        <name>~Xc_func</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/xc_func.h" line="24" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classXc__func_1a211595e6d679b872cf319c0e71b9c660" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Xc_func::set_xc</definition>
+        <argsstring>(XC_FUN xcf)</argsstring>
+        <name>set_xc</name>
+        <param>
+          <type>XC_FUN</type>
+          <declname>xcf</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/xc_func.h" line="26" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classXc__func_1a95400383bb0ee2963cf495226b8fcac7" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classXc__func" kindref="compound">Xc_func</ref> &amp;</type>
+        <definition>Xc_func&amp; Xc_func::operator=</definition>
+        <argsstring>(const Xc_func &amp;other)</argsstring>
+        <name>operator=</name>
+        <param>
+          <type>const <ref refid="classXc__func" kindref="compound">Xc_func</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/xc_func.h" line="28" column="13" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/xc_func.h" bodystart="28" bodyend="32"/>
+      </memberdef>
+      <memberdef kind="function" id="classXc__func_1ae0046faad51996907fff8322164be20b" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classXc__func" kindref="compound">Xc_func</ref> &amp;</type>
+        <definition>Xc_func&amp; Xc_func::operator=</definition>
+        <argsstring>(Xc_func &amp;&amp;other)</argsstring>
+        <name>operator=</name>
+        <param>
+          <type><ref refid="classXc__func" kindref="compound">Xc_func</ref> &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/xc_func.h" line="33" column="13" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/xc_func.h" bodystart="33" bodyend="37"/>
+      </memberdef>
+      <memberdef kind="function" id="classXc__func_1a897526bda51234a45bc446a71b0f6dd2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::vector&lt; double &gt;</type>
+        <definition>std::vector&lt;double&gt; Xc_func::exc</definition>
+        <argsstring>(std::vector&lt; double &gt; rho)</argsstring>
+        <name>exc</name>
+        <param>
+          <type>std::vector&lt; double &gt;</type>
+          <declname>rho</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/xc_func.h" line="39" column="17"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/xc_func.h" line="16" column="1" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/xc_func.h" bodystart="16" bodyend="40"/>
+    <listofallmembers>
+      <member refid="classXc__func_1a897526bda51234a45bc446a71b0f6dd2" prot="public" virt="non-virtual"><scope>Xc_func</scope><name>exc</name></member>
+      <member refid="classXc__func_1ad7be31cd5b5df202c05c0beec00749f3" prot="private" virt="non-virtual"><scope>Xc_func</scope><name>fun</name></member>
+      <member refid="classXc__func_1a95400383bb0ee2963cf495226b8fcac7" prot="public" virt="non-virtual"><scope>Xc_func</scope><name>operator=</name></member>
+      <member refid="classXc__func_1ae0046faad51996907fff8322164be20b" prot="public" virt="non-virtual"><scope>Xc_func</scope><name>operator=</name></member>
+      <member refid="classXc__func_1a211595e6d679b872cf319c0e71b9c660" prot="public" virt="non-virtual"><scope>Xc_func</scope><name>set_xc</name></member>
+      <member refid="classXc__func_1a934504b24419262723ef2a458549002e" prot="public" virt="non-virtual"><scope>Xc_func</scope><name>Xc_func</name></member>
+      <member refid="classXc__func_1a91b592fa3505e42af63cfeabe620a6e2" prot="public" virt="non-virtual"><scope>Xc_func</scope><name>Xc_func</name></member>
+      <member refid="classXc__func_1a3da97de9866c0d64225badb903130e7a" prot="public" virt="non-virtual"><scope>Xc_func</scope><name>Xc_func</name></member>
+      <member refid="classXc__func_1af1ca3a813970389dffaf293c621f4dd1" prot="public" virt="non-virtual"><scope>Xc_func</scope><name>Xc_func</name></member>
+      <member refid="classXc__func_1a5e36f286901f6bb2505a026eadaf0738" prot="public" virt="non-virtual"><scope>Xc_func</scope><name>~Xc_func</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

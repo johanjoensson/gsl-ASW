@@ -1,0 +1,37 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.20" xml:lang="en-US">
+  <compounddef id="structVector__comp__norm" kind="struct" language="C++" prot="public">
+    <compoundname>Vector_comp_norm</compoundname>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="structVector__comp__norm_1a88fd10e7e1606ea226d0022d3ce46028" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool Vector_comp_norm::operator()</definition>
+        <argsstring>(const GSL::Vector &amp;a, const GSL::Vector &amp;b)</argsstring>
+        <name>operator()</name>
+        <param>
+          <type>const GSL::Vector &amp;</type>
+          <declname>a</declname>
+        </param>
+        <param>
+          <type>const GSL::Vector &amp;</type>
+          <declname>b</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/crystal.h" line="106" column="6" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/crystal.h" bodystart="106" bodyend="108"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/crystal.h" line="105" column="1" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/crystal.h" bodystart="105" bodyend="110"/>
+    <listofallmembers>
+      <member refid="structVector__comp__norm_1a88fd10e7e1606ea226d0022d3ce46028" prot="public" virt="non-virtual"><scope>Vector_comp_norm</scope><name>operator()</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

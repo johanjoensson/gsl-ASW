@@ -1,0 +1,303 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.20" xml:lang="en-US">
+  <compounddef id="classAugmented__spherical__wave" kind="class" language="C++" prot="public">
+    <compoundname>Augmented_spherical_wave</compoundname>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classAugmented__spherical__wave_1ae58720d12c12d75b470680b26dcdc5f7" prot="private" static="no" mutable="no">
+        <type><ref refid="classSite__t" kindref="compound">Site_t</ref>&lt; 3 &gt;</type>
+        <definition>Site_t&lt;3&gt; Augmented_spherical_wave::center_m</definition>
+        <argsstring></argsstring>
+        <name>center_m</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/augmented_spherical_wave.h" line="15" column="12" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/augmented_spherical_wave.h" bodystart="15" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAugmented__spherical__wave_1aa7137721abd1e9fd64bde32384069ca1" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double Augmented_spherical_wave::kappa_m</definition>
+        <argsstring></argsstring>
+        <name>kappa_m</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/augmented_spherical_wave.h" line="16" column="12" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/augmented_spherical_wave.h" bodystart="16" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAugmented__spherical__wave_1a01d37cbbe7f2b14df0708266ddabe3ba" prot="private" static="no" mutable="no">
+        <type><ref refid="structlm" kindref="compound">lm</ref></type>
+        <definition>lm Augmented_spherical_wave::l_m</definition>
+        <argsstring></argsstring>
+        <name>l_m</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/augmented_spherical_wave.h" line="17" column="8" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/augmented_spherical_wave.h" bodystart="17" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAugmented__spherical__wave_1acba4b43def9e563ad68989517965219e" prot="private" static="no" mutable="no">
+        <type>spin</type>
+        <definition>spin Augmented_spherical_wave::s_m</definition>
+        <argsstring></argsstring>
+        <name>s_m</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/augmented_spherical_wave.h" line="18" column="10" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/augmented_spherical_wave.h" bodystart="18" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAugmented__spherical__wave_1ae18e289fa0d4df4306a18fd91e2c9a1b" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool Augmented_spherical_wave::core_state_m</definition>
+        <argsstring></argsstring>
+        <name>core_state_m</name>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/augmented_spherical_wave.h" line="19" column="10" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/augmented_spherical_wave.h" bodystart="19" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classAugmented__spherical__wave_1a4285a8295ae84725e737ef99f0c1c031" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Augmented_spherical_wave::Augmented_spherical_wave</definition>
+        <argsstring>()=default</argsstring>
+        <name>Augmented_spherical_wave</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/augmented_spherical_wave.h" line="22" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classAugmented__spherical__wave_1a3590f819986cb255e98395a65052fac4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Augmented_spherical_wave::Augmented_spherical_wave</definition>
+        <argsstring>(const Augmented_spherical_wave &amp;)=default</argsstring>
+        <name>Augmented_spherical_wave</name>
+        <param>
+          <type>const <ref refid="classAugmented__spherical__wave" kindref="compound">Augmented_spherical_wave</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/augmented_spherical_wave.h" line="23" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classAugmented__spherical__wave_1a90288e34627a1072c8581753af7e15a9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Augmented_spherical_wave::Augmented_spherical_wave</definition>
+        <argsstring>(Augmented_spherical_wave &amp;&amp;)=default</argsstring>
+        <name>Augmented_spherical_wave</name>
+        <param>
+          <type><ref refid="classAugmented__spherical__wave" kindref="compound">Augmented_spherical_wave</ref> &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/augmented_spherical_wave.h" line="24" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classAugmented__spherical__wave_1a27480f16a5d4d0a5341d97736bc1c8cf" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>Augmented_spherical_wave::Augmented_spherical_wave</definition>
+        <argsstring>(Site_t&lt; 3 &gt; center, double kappa, lm l, spin s, bool core_state=false)</argsstring>
+        <name>Augmented_spherical_wave</name>
+        <param>
+          <type><ref refid="classSite__t" kindref="compound">Site_t</ref>&lt; 3 &gt;</type>
+          <declname>center</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>kappa</declname>
+        </param>
+        <param>
+          <type><ref refid="structlm" kindref="compound">lm</ref></type>
+          <declname>l</declname>
+        </param>
+        <param>
+          <type>spin</type>
+          <declname>s</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>core_state</declname>
+          <defval>false</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/augmented_spherical_wave.h" line="27" column="5" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/augmented_spherical_wave.h" bodystart="27" bodyend="29"/>
+      </memberdef>
+      <memberdef kind="function" id="classAugmented__spherical__wave_1aa6890b0df77e5922e341d1d422bb31c2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Augmented_spherical_wave::~Augmented_spherical_wave</definition>
+        <argsstring>()=default</argsstring>
+        <name>~Augmented_spherical_wave</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/augmented_spherical_wave.h" line="31" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classAugmented__spherical__wave_1a25f4adef095771878038446faabad089" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classAugmented__spherical__wave" kindref="compound">Augmented_spherical_wave</ref> &amp;</type>
+        <definition>Augmented_spherical_wave&amp; Augmented_spherical_wave::operator=</definition>
+        <argsstring>(const Augmented_spherical_wave &amp;)=default</argsstring>
+        <name>operator=</name>
+        <param>
+          <type>const <ref refid="classAugmented__spherical__wave" kindref="compound">Augmented_spherical_wave</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/augmented_spherical_wave.h" line="33" column="30"/>
+      </memberdef>
+      <memberdef kind="function" id="classAugmented__spherical__wave_1ab1125d706552f1cfce1897a484aaa9b3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classAugmented__spherical__wave" kindref="compound">Augmented_spherical_wave</ref> &amp;</type>
+        <definition>Augmented_spherical_wave&amp; Augmented_spherical_wave::operator=</definition>
+        <argsstring>(Augmented_spherical_wave &amp;&amp;)=default</argsstring>
+        <name>operator=</name>
+        <param>
+          <type><ref refid="classAugmented__spherical__wave" kindref="compound">Augmented_spherical_wave</ref> &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/augmented_spherical_wave.h" line="34" column="30"/>
+      </memberdef>
+      <memberdef kind="function" id="classAugmented__spherical__wave_1a39c7fe6a3f7a752adb6fd581b94ef533" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classSite__t" kindref="compound">Site_t</ref>&lt; 3 &gt; &amp;</type>
+        <definition>Site_t&lt;3&gt;&amp; Augmented_spherical_wave::center</definition>
+        <argsstring>()</argsstring>
+        <name>center</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/augmented_spherical_wave.h" line="36" column="12" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/augmented_spherical_wave.h" bodystart="36" bodyend="36"/>
+      </memberdef>
+      <memberdef kind="function" id="classAugmented__spherical__wave_1a6c52889c8c1397bdcf8e0f2b74830eb1" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classSite__t" kindref="compound">Site_t</ref>&lt; 3 &gt;</type>
+        <definition>Site_t&lt;3&gt; Augmented_spherical_wave::center</definition>
+        <argsstring>() const</argsstring>
+        <name>center</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/augmented_spherical_wave.h" line="37" column="12" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/augmented_spherical_wave.h" bodystart="37" bodyend="37"/>
+      </memberdef>
+      <memberdef kind="function" id="classAugmented__spherical__wave_1a1a5d94905faa383336a1b1fb45e71682" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>double</type>
+        <definition>double Augmented_spherical_wave::kappa</definition>
+        <argsstring>() const</argsstring>
+        <name>kappa</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/augmented_spherical_wave.h" line="38" column="12" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/augmented_spherical_wave.h" bodystart="38" bodyend="38"/>
+      </memberdef>
+      <memberdef kind="function" id="classAugmented__spherical__wave_1a805aadb619c60113ef9715dd65094ecc" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="structlm" kindref="compound">lm</ref></type>
+        <definition>lm Augmented_spherical_wave::l</definition>
+        <argsstring>() const</argsstring>
+        <name>l</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/augmented_spherical_wave.h" line="39" column="8" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/augmented_spherical_wave.h" bodystart="39" bodyend="39"/>
+      </memberdef>
+      <memberdef kind="function" id="classAugmented__spherical__wave_1ac540c393892f68a4abde993cbac880ac" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>spin</type>
+        <definition>spin Augmented_spherical_wave::s</definition>
+        <argsstring>() const</argsstring>
+        <name>s</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/augmented_spherical_wave.h" line="40" column="10" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/augmented_spherical_wave.h" bodystart="40" bodyend="40"/>
+      </memberdef>
+      <memberdef kind="function" id="classAugmented__spherical__wave_1a8bb547e42384ec44caac77ec584f0cfb" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool Augmented_spherical_wave::core_state</definition>
+        <argsstring>() const</argsstring>
+        <name>core_state</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/augmented_spherical_wave.h" line="41" column="10" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/augmented_spherical_wave.h" bodystart="41" bodyend="41"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/augmented_spherical_wave.h" line="11" column="1" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/augmented_spherical_wave.h" bodystart="11" bodyend="44"/>
+    <listofallmembers>
+      <member refid="classAugmented__spherical__wave_1a4285a8295ae84725e737ef99f0c1c031" prot="public" virt="non-virtual"><scope>Augmented_spherical_wave</scope><name>Augmented_spherical_wave</name></member>
+      <member refid="classAugmented__spherical__wave_1a3590f819986cb255e98395a65052fac4" prot="public" virt="non-virtual"><scope>Augmented_spherical_wave</scope><name>Augmented_spherical_wave</name></member>
+      <member refid="classAugmented__spherical__wave_1a90288e34627a1072c8581753af7e15a9" prot="public" virt="non-virtual"><scope>Augmented_spherical_wave</scope><name>Augmented_spherical_wave</name></member>
+      <member refid="classAugmented__spherical__wave_1a27480f16a5d4d0a5341d97736bc1c8cf" prot="public" virt="non-virtual"><scope>Augmented_spherical_wave</scope><name>Augmented_spherical_wave</name></member>
+      <member refid="classAugmented__spherical__wave_1a39c7fe6a3f7a752adb6fd581b94ef533" prot="public" virt="non-virtual"><scope>Augmented_spherical_wave</scope><name>center</name></member>
+      <member refid="classAugmented__spherical__wave_1a6c52889c8c1397bdcf8e0f2b74830eb1" prot="public" virt="non-virtual"><scope>Augmented_spherical_wave</scope><name>center</name></member>
+      <member refid="classAugmented__spherical__wave_1ae58720d12c12d75b470680b26dcdc5f7" prot="private" virt="non-virtual"><scope>Augmented_spherical_wave</scope><name>center_m</name></member>
+      <member refid="classAugmented__spherical__wave_1a8bb547e42384ec44caac77ec584f0cfb" prot="public" virt="non-virtual"><scope>Augmented_spherical_wave</scope><name>core_state</name></member>
+      <member refid="classAugmented__spherical__wave_1ae18e289fa0d4df4306a18fd91e2c9a1b" prot="private" virt="non-virtual"><scope>Augmented_spherical_wave</scope><name>core_state_m</name></member>
+      <member refid="classAugmented__spherical__wave_1a1a5d94905faa383336a1b1fb45e71682" prot="public" virt="non-virtual"><scope>Augmented_spherical_wave</scope><name>kappa</name></member>
+      <member refid="classAugmented__spherical__wave_1aa7137721abd1e9fd64bde32384069ca1" prot="private" virt="non-virtual"><scope>Augmented_spherical_wave</scope><name>kappa_m</name></member>
+      <member refid="classAugmented__spherical__wave_1a805aadb619c60113ef9715dd65094ecc" prot="public" virt="non-virtual"><scope>Augmented_spherical_wave</scope><name>l</name></member>
+      <member refid="classAugmented__spherical__wave_1a01d37cbbe7f2b14df0708266ddabe3ba" prot="private" virt="non-virtual"><scope>Augmented_spherical_wave</scope><name>l_m</name></member>
+      <member refid="classAugmented__spherical__wave_1a25f4adef095771878038446faabad089" prot="public" virt="non-virtual"><scope>Augmented_spherical_wave</scope><name>operator=</name></member>
+      <member refid="classAugmented__spherical__wave_1ab1125d706552f1cfce1897a484aaa9b3" prot="public" virt="non-virtual"><scope>Augmented_spherical_wave</scope><name>operator=</name></member>
+      <member refid="classAugmented__spherical__wave_1ac540c393892f68a4abde993cbac880ac" prot="public" virt="non-virtual"><scope>Augmented_spherical_wave</scope><name>s</name></member>
+      <member refid="classAugmented__spherical__wave_1acba4b43def9e563ad68989517965219e" prot="private" virt="non-virtual"><scope>Augmented_spherical_wave</scope><name>s_m</name></member>
+      <member refid="classAugmented__spherical__wave_1aa6890b0df77e5922e341d1d422bb31c2" prot="public" virt="non-virtual"><scope>Augmented_spherical_wave</scope><name>~Augmented_spherical_wave</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

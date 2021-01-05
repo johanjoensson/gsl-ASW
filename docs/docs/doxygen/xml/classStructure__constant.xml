@@ -1,0 +1,220 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.20" xml:lang="en-US">
+  <compounddef id="classStructure__constant" kind="class" language="C++" prot="public">
+    <compoundname>Structure_constant</compoundname>
+    <includes refid="structure__const_8h" local="no">structure_const.h</includes>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classStructure__constant_1a2aa85ab46885972db059f498fbcacde5" prot="private" static="no" mutable="no">
+        <type>int</type>
+        <definition>int Structure_constant::l_int</definition>
+        <argsstring></argsstring>
+        <name>l_int</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/structure_const.h" line="26" column="5" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/structure_const.h" bodystart="26" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classStructure__constant_1a7d694c6ae9ede9282558a2b01761766a" prot="private" static="no" mutable="no">
+        <type><ref refid="structlm" kindref="compound">lm</ref></type>
+        <definition>lm Structure_constant::l1</definition>
+        <argsstring></argsstring>
+        <name>l1</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/structure_const.h" line="27" column="8" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/structure_const.h" bodystart="27" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classStructure__constant_1a07ff1fd8d4ceb52957b21b609fdd9bfd" prot="private" static="no" mutable="no">
+        <type><ref refid="structlm" kindref="compound">lm</ref></type>
+        <definition>lm Structure_constant::l2</definition>
+        <argsstring></argsstring>
+        <name>l2</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/structure_const.h" line="27" column="11" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/structure_const.h" bodystart="27" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classStructure__constant_1a9bf39bf20c77c2f5c38dc36ad9e31876" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double Structure_constant::kappa</definition>
+        <argsstring></argsstring>
+        <name>kappa</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/structure_const.h" line="28" column="8" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/structure_const.h" bodystart="28" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classStructure__constant_1ad38bf2c11349857651d0c67ee2036efd" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Structure_constant::Structure_constant</definition>
+        <argsstring>(int l_int_n, double kappa_n, lm l1_n, lm l2_n)</argsstring>
+        <name>Structure_constant</name>
+        <param>
+          <type>int</type>
+          <declname>l_int_n</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>kappa_n</declname>
+        </param>
+        <param>
+          <type><ref refid="structlm" kindref="compound">lm</ref></type>
+          <declname>l1_n</declname>
+        </param>
+        <param>
+          <type><ref refid="structlm" kindref="compound">lm</ref></type>
+          <declname>l2_n</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/structure_const.h" line="30" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="classStructure__constant_1aefebdc7125ae1298588e6f6fcdd0ccbf" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Structure_constant::Structure_constant</definition>
+        <argsstring>(int l_int_n, lm l1_n, lm l2_n)</argsstring>
+        <name>Structure_constant</name>
+        <param>
+          <type>int</type>
+          <declname>l_int_n</declname>
+        </param>
+        <param>
+          <type><ref refid="structlm" kindref="compound">lm</ref></type>
+          <declname>l1_n</declname>
+        </param>
+        <param>
+          <type><ref refid="structlm" kindref="compound">lm</ref></type>
+          <declname>l2_n</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/structure_const.h" line="31" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="classStructure__constant_1a053274a8c755aae6ebf7e6406a0dfe18" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Structure_constant::Structure_constant</definition>
+        <argsstring>(lm l1_n, lm l2_n)</argsstring>
+        <name>Structure_constant</name>
+        <param>
+          <type><ref refid="structlm" kindref="compound">lm</ref></type>
+          <declname>l1_n</declname>
+        </param>
+        <param>
+          <type><ref refid="structlm" kindref="compound">lm</ref></type>
+          <declname>l2_n</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/structure_const.h" line="32" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="classStructure__constant_1a27c245594445a51db301de1beb546e28" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>double</type>
+        <definition>double Structure_constant::operator()</definition>
+        <argsstring>(const GSL::Vector &amp;r) const</argsstring>
+        <name>operator()</name>
+        <param>
+          <type>const GSL::Vector &amp;</type>
+          <declname>r</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/structure_const.h" line="35" column="8"/>
+      </memberdef>
+      <memberdef kind="function" id="classStructure__constant_1aaed3ad0fded3ed0531e73a8b969b974e" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>double</type>
+        <definition>double Structure_constant::dot</definition>
+        <argsstring>(const GSL::Vector &amp;r) const</argsstring>
+        <name>dot</name>
+        <param>
+          <type>const GSL::Vector &amp;</type>
+          <declname>r</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/structure_const.h" line="36" column="8"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="friend">
+      <memberdef kind="friend" id="classStructure__constant_1af633c21967d44869e756f9f33428cb6a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>friend std::ostream &amp;</type>
+        <definition>std::ostream&amp; operator&lt;&lt;</definition>
+        <argsstring>(std::ostream &amp;, const Structure_constant &amp;)</argsstring>
+        <name>operator&lt;&lt;</name>
+        <param>
+          <type>std::ostream &amp;</type>
+        </param>
+        <param>
+          <type>const <ref refid="classStructure__constant" kindref="compound">Structure_constant</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/structure_const.h" line="37" column="8"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para>A class for representing structure constants<linebreak/>
+Contains:<linebreak/>
+<bold>l_int</bold> - Maximum orbital angular momentum to be included for Bessel expansions<linebreak/>
+ <bold>l_low</bold> - Maximumm orbital angular momentum to be included for Hankel expansions<linebreak/>
+ <bold>l1</bold>, <bold>l2</bold> - Orbital angular momenta to couple via the structure constant<linebreak/>
+<bold>kappa</bold> - Energy parameter used (usually kappa^2 = -0.015)<linebreak/>
+<bold>r</bold> - Position of atom<linebreak/>
+<bold>val</bold> - Value of the structure constant<linebreak/>
+<bold>dk_val</bold> - Value of energy derivative of the structure constant<linebreak/>
+</para>
+    </detaileddescription>
+    <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/structure_const.h" line="25" column="1" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/structure_const.h" bodystart="25" bodyend="39"/>
+    <listofallmembers>
+      <member refid="classStructure__constant_1aaed3ad0fded3ed0531e73a8b969b974e" prot="public" virt="non-virtual"><scope>Structure_constant</scope><name>dot</name></member>
+      <member refid="classStructure__constant_1a9bf39bf20c77c2f5c38dc36ad9e31876" prot="private" virt="non-virtual"><scope>Structure_constant</scope><name>kappa</name></member>
+      <member refid="classStructure__constant_1a7d694c6ae9ede9282558a2b01761766a" prot="private" virt="non-virtual"><scope>Structure_constant</scope><name>l1</name></member>
+      <member refid="classStructure__constant_1a07ff1fd8d4ceb52957b21b609fdd9bfd" prot="private" virt="non-virtual"><scope>Structure_constant</scope><name>l2</name></member>
+      <member refid="classStructure__constant_1a2aa85ab46885972db059f498fbcacde5" prot="private" virt="non-virtual"><scope>Structure_constant</scope><name>l_int</name></member>
+      <member refid="classStructure__constant_1a27c245594445a51db301de1beb546e28" prot="public" virt="non-virtual"><scope>Structure_constant</scope><name>operator()</name></member>
+      <member refid="classStructure__constant_1af633c21967d44869e756f9f33428cb6a" prot="public" virt="non-virtual"><scope>Structure_constant</scope><name>operator&lt;&lt;</name></member>
+      <member refid="classStructure__constant_1ad38bf2c11349857651d0c67ee2036efd" prot="public" virt="non-virtual"><scope>Structure_constant</scope><name>Structure_constant</name></member>
+      <member refid="classStructure__constant_1aefebdc7125ae1298588e6f6fcdd0ccbf" prot="public" virt="non-virtual"><scope>Structure_constant</scope><name>Structure_constant</name></member>
+      <member refid="classStructure__constant_1a053274a8c755aae6ebf7e6406a0dfe18" prot="public" virt="non-virtual"><scope>Structure_constant</scope><name>Structure_constant</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

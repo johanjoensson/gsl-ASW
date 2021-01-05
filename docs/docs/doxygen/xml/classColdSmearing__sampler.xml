@@ -1,0 +1,174 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.20" xml:lang="en-US">
+  <compounddef id="classColdSmearing__sampler" kind="class" language="C++" prot="public">
+    <compoundname>ColdSmearing_sampler</compoundname>
+    <basecompoundref refid="classBrillouin__sampler" prot="public" virt="non-virtual">Brillouin_sampler</basecompoundref>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classColdSmearing__sampler_1ac6644ec6f66bc9b3ea2951f0881fe9c3" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double ColdSmearing_sampler::sigma_m</definition>
+        <argsstring></argsstring>
+        <name>sigma_m</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/brillouin_zone_integration.h" line="183" column="12" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/brillouin_zone_integration.h" bodystart="183" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-func">
+      <memberdef kind="function" id="classColdSmearing__sampler_1a10dea59f7c4dd2788f7efa1524070a0b" prot="private" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
+        <type>double</type>
+        <definition>double ColdSmearing_sampler::delta</definition>
+        <argsstring>(const double x) const</argsstring>
+        <name>delta</name>
+        <reimplements refid="classBrillouin__sampler_1a401abedcb55d86450f1cf95eaa361677">delta</reimplements>
+        <param>
+          <type>const double</type>
+          <declname>x</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/brillouin_zone_integration.h" line="184" column="19" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/brillouin_zone_integration.h" bodystart="184" bodyend="187"/>
+      </memberdef>
+      <memberdef kind="function" id="classColdSmearing__sampler_1ac0242d8839864b632396845ba43347d2" prot="private" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
+        <type>double</type>
+        <definition>double ColdSmearing_sampler::theta</definition>
+        <argsstring>(const double x) const</argsstring>
+        <name>theta</name>
+        <reimplements refid="classBrillouin__sampler_1ad5ca21d092ba351cadf335ae500042a9">theta</reimplements>
+        <param>
+          <type>const double</type>
+          <declname>x</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/brillouin_zone_integration.h" line="188" column="19" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/brillouin_zone_integration.h" bodystart="188" bodyend="192"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classColdSmearing__sampler_1a0570824fe7543c7afbc70dbd5d0d1f96" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>ColdSmearing_sampler::ColdSmearing_sampler</definition>
+        <argsstring>(const GSL::Matrix &amp;energies, const double sigma)</argsstring>
+        <name>ColdSmearing_sampler</name>
+        <param>
+          <type>const GSL::Matrix &amp;</type>
+          <declname>energies</declname>
+        </param>
+        <param>
+          <type>const double</type>
+          <declname>sigma</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/brillouin_zone_integration.h" line="195" column="5" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/brillouin_zone_integration.h" bodystart="195" bodyend="197"/>
+      </memberdef>
+      <memberdef kind="function" id="classColdSmearing__sampler_1ab139862abcd655cea298f63b9dacfa84" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>ColdSmearing_sampler::~ColdSmearing_sampler</definition>
+        <argsstring>()=default</argsstring>
+        <name>~ColdSmearing_sampler</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/brillouin_zone_integration.h" line="198" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classBrillouin__sampler_1ac583b178a091dd13ff816f3ee3a4ba41" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
+        <type>double</type>
+        <definition>double Brillouin_sampler::dos</definition>
+        <argsstring>(const double E) const override</argsstring>
+        <name>dos</name>
+        <reimplements refid="classBrillouin__zone__integrator_1ac7ef8c2242c25e0e9e982919fac2020c">dos</reimplements>
+        <param>
+          <type>const double</type>
+          <declname>E</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/brillouin_zone_integration.h" line="45" column="12" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/brillouin_zone_integration.h" bodystart="45" bodyend="57"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="3">
+        <label>Brillouin_zone_integrator</label>
+        <link refid="classBrillouin__zone__integrator"/>
+      </node>
+      <node id="1">
+        <label>ColdSmearing_sampler</label>
+        <link refid="classColdSmearing__sampler"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>Brillouin_sampler</label>
+        <link refid="classBrillouin__sampler"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="3">
+        <label>Brillouin_zone_integrator</label>
+        <link refid="classBrillouin__zone__integrator"/>
+      </node>
+      <node id="1">
+        <label>ColdSmearing_sampler</label>
+        <link refid="classColdSmearing__sampler"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>Brillouin_sampler</label>
+        <link refid="classBrillouin__sampler"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/brillouin_zone_integration.h" line="180" column="1" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/brillouin_zone_integration.h" bodystart="181" bodyend="199"/>
+    <listofallmembers>
+      <member refid="classBrillouin__sampler_1a7307bce71980da14baeeac7ff827cd63" prot="public" virt="non-virtual"><scope>ColdSmearing_sampler</scope><name>Brillouin_sampler</name></member>
+      <member refid="classBrillouin__sampler_1a3c9ea1575d92880743709e90881a8a52" prot="public" virt="non-virtual"><scope>ColdSmearing_sampler</scope><name>Brillouin_sampler</name></member>
+      <member refid="classBrillouin__sampler_1a19730288245645a45697901729eade94" prot="public" virt="non-virtual"><scope>ColdSmearing_sampler</scope><name>Brillouin_sampler</name></member>
+      <member refid="classBrillouin__sampler_1aeb921a1c823d456eb561aa6e92f17316" prot="public" virt="non-virtual"><scope>ColdSmearing_sampler</scope><name>Brillouin_sampler</name></member>
+      <member refid="classBrillouin__zone__integrator_1a7f770e53b9e1699f0065203ae20e7319" prot="protected" virt="non-virtual"><scope>ColdSmearing_sampler</scope><name>Brillouin_zone_integrator</name></member>
+      <member refid="classBrillouin__zone__integrator_1adf83dfa7950b7b71be2a13f981060386" prot="public" virt="non-virtual"><scope>ColdSmearing_sampler</scope><name>Brillouin_zone_integrator</name></member>
+      <member refid="classBrillouin__zone__integrator_1aff93d40c825381047fc9efe0ad04ad48" prot="public" virt="non-virtual"><scope>ColdSmearing_sampler</scope><name>Brillouin_zone_integrator</name></member>
+      <member refid="classColdSmearing__sampler_1a0570824fe7543c7afbc70dbd5d0d1f96" prot="public" virt="non-virtual"><scope>ColdSmearing_sampler</scope><name>ColdSmearing_sampler</name></member>
+      <member refid="classColdSmearing__sampler_1a10dea59f7c4dd2788f7efa1524070a0b" prot="private" virt="virtual"><scope>ColdSmearing_sampler</scope><name>delta</name></member>
+      <member refid="classBrillouin__sampler_1ac583b178a091dd13ff816f3ee3a4ba41" prot="public" virt="virtual"><scope>ColdSmearing_sampler</scope><name>dos</name></member>
+      <member refid="classBrillouin__zone__integrator_1a3e972edd2a152675ec74fd9d5856b8aa" prot="public" virt="non-virtual"><scope>ColdSmearing_sampler</scope><name>operator=</name></member>
+      <member refid="classBrillouin__zone__integrator_1adac55b04ec1c552efb60c1ad6a1e2152" prot="public" virt="non-virtual"><scope>ColdSmearing_sampler</scope><name>operator=</name></member>
+      <member refid="classColdSmearing__sampler_1ac6644ec6f66bc9b3ea2951f0881fe9c3" prot="private" virt="non-virtual"><scope>ColdSmearing_sampler</scope><name>sigma_m</name></member>
+      <member refid="classColdSmearing__sampler_1ac0242d8839864b632396845ba43347d2" prot="private" virt="virtual"><scope>ColdSmearing_sampler</scope><name>theta</name></member>
+      <member refid="classBrillouin__sampler_1a40d50d06daedb6fae5831ac8fd1ace7f" prot="public" virt="virtual"><scope>ColdSmearing_sampler</scope><name>~Brillouin_sampler</name></member>
+      <member refid="classBrillouin__zone__integrator_1a1684ee4d784984a8d8f9750e4530d029" prot="public" virt="virtual"><scope>ColdSmearing_sampler</scope><name>~Brillouin_zone_integrator</name></member>
+      <member refid="classColdSmearing__sampler_1ab139862abcd655cea298f63b9dacfa84" prot="public" virt="non-virtual"><scope>ColdSmearing_sampler</scope><name>~ColdSmearing_sampler</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

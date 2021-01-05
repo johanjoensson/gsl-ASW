@@ -1,0 +1,35 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.20" xml:lang="en-US">
+  <compounddef id="structstd_1_1hash_3_01lm_01_4" kind="struct" language="C++" prot="public">
+    <compoundname>std::hash&lt; lm &gt;</compoundname>
+    <templateparamlist>
+    </templateparamlist>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="structstd_1_1hash_3_01lm_01_4_1a9f968c69daf23c9a2d2c8df50462df4f" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>size_t</type>
+        <definition>size_t std::hash&lt; lm &gt;::operator()</definition>
+        <argsstring>(const lm &amp;l)</argsstring>
+        <name>operator()</name>
+        <param>
+          <type>const <ref refid="structlm" kindref="compound">lm</ref> &amp;</type>
+          <declname>l</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/utils.h" line="208" column="16" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/utils.h" bodystart="208" bodyend="215"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/utils.h" line="207" column="5" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/utils.h" bodystart="207" bodyend="216"/>
+    <listofallmembers>
+      <member refid="structstd_1_1hash_3_01lm_01_4_1a9f968c69daf23c9a2d2c8df50462df4f" prot="public" virt="non-virtual"><scope>std::hash&lt; lm &gt;</scope><name>operator()</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

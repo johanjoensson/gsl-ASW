@@ -1,0 +1,278 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.20" xml:lang="en-US">
+  <compounddef id="classEnvelope__Bessel" kind="class" language="C++" prot="public">
+    <compoundname>Envelope_Bessel</compoundname>
+    <basecompoundref refid="classEnvelope__function" prot="public" virt="non-virtual">Envelope_function</basecompoundref>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classEnvelope__Bessel_1ab0423f7c349d4e51186553a6c6a527fa" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>Envelope_Bessel::Envelope_Bessel</definition>
+        <argsstring>(lm l_n, double kappa_n)</argsstring>
+        <name>Envelope_Bessel</name>
+        <param>
+          <type><ref refid="structlm" kindref="compound">lm</ref></type>
+          <declname>l_n</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>kappa_n</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/envelope_fun.h" line="59" column="5" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/envelope_fun.h" bodystart="59" bodyend="61"/>
+      </memberdef>
+      <memberdef kind="function" id="classEnvelope__Bessel_1a8e2399261bcbbfddb84a7f9ea6c7aa32" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>double</type>
+        <definition>double Envelope_Bessel::barred_fun</definition>
+        <argsstring>(const double x) const override</argsstring>
+        <name>barred_fun</name>
+        <reimplements refid="classEnvelope__function_1ad48e077935528c47e81775f6371c7184">barred_fun</reimplements>
+        <param>
+          <type>const double</type>
+          <declname>x</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/envelope_fun.h" line="63" column="12"/>
+      </memberdef>
+      <memberdef kind="function" id="classEnvelope__function_1a21a876fdc33d23725bdb25990d3f6e6a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>double</type>
+        <definition>double Envelope_function::operator()</definition>
+        <argsstring>(const GSL::Vector r)</argsstring>
+        <name>operator()</name>
+        <param>
+          <type>const GSL::Vector</type>
+          <declname>r</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/envelope_fun.h" line="26" column="12"/>
+      </memberdef>
+      <memberdef kind="function" id="classEnvelope__function_1a85cd53700d4090e4c0f6dc2e67d7bb42" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>double</type>
+        <definition>double Envelope_function::kappa</definition>
+        <argsstring>() const</argsstring>
+        <name>kappa</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/envelope_fun.h" line="30" column="12" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/envelope_fun.h" bodystart="30" bodyend="30"/>
+      </memberdef>
+      <memberdef kind="function" id="classEnvelope__function_1a94d64257a361bdbf28e2dd525346ceb7" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>double &amp;</type>
+        <definition>double&amp; Envelope_function::kappa</definition>
+        <argsstring>()</argsstring>
+        <name>kappa</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/envelope_fun.h" line="31" column="12" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/envelope_fun.h" bodystart="31" bodyend="31"/>
+      </memberdef>
+      <memberdef kind="function" id="classEnvelope__function_1a44ac505a0bc963b230a94c0b25d1a61f" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="structlm" kindref="compound">lm</ref></type>
+        <definition>lm Envelope_function::l</definition>
+        <argsstring>() const</argsstring>
+        <name>l</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/envelope_fun.h" line="33" column="8" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/envelope_fun.h" bodystart="33" bodyend="33"/>
+      </memberdef>
+      <memberdef kind="function" id="classEnvelope__function_1a5caa2943467fe3e75bf8047ef062f196" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="structlm" kindref="compound">lm</ref> &amp;</type>
+        <definition>lm&amp; Envelope_function::l</definition>
+        <argsstring>()</argsstring>
+        <name>l</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/envelope_fun.h" line="34" column="8" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/envelope_fun.h" bodystart="34" bodyend="34"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="friend">
+      <memberdef kind="friend" id="classEnvelope__Bessel_1ae3e190b6f367e1f0fd40f9b4318f422e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>friend double</type>
+        <definition>double atomic_integral</definition>
+        <argsstring>(const Envelope_Hankel &amp;H1, const Envelope_Bessel &amp;J2, const double rs)</argsstring>
+        <name>atomic_integral</name>
+        <param>
+          <type>const <ref refid="classEnvelope__Hankel" kindref="compound">Envelope_Hankel</ref> &amp;</type>
+          <declname>H1</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classEnvelope__Bessel" kindref="compound">Envelope_Bessel</ref> &amp;</type>
+          <declname>J2</declname>
+        </param>
+        <param>
+          <type>const double</type>
+          <declname>rs</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/envelope_fun.h" line="64" column="19"/>
+      </memberdef>
+      <memberdef kind="friend" id="classEnvelope__Bessel_1a7edfba8f6f921b0b9523e7aaed9ee6ea" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>friend double</type>
+        <definition>double atomic_integral</definition>
+        <argsstring>(const Envelope_Bessel &amp;J1, const Envelope_Bessel &amp;J2, const double rs)</argsstring>
+        <name>atomic_integral</name>
+        <param>
+          <type>const <ref refid="classEnvelope__Bessel" kindref="compound">Envelope_Bessel</ref> &amp;</type>
+          <declname>J1</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classEnvelope__Bessel" kindref="compound">Envelope_Bessel</ref> &amp;</type>
+          <declname>J2</declname>
+        </param>
+        <param>
+          <type>const double</type>
+          <declname>rs</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/envelope_fun.h" line="65" column="19"/>
+      </memberdef>
+      <memberdef kind="friend" id="classEnvelope__Bessel_1a60510a52b89da071bda3a777586b0a41" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>friend double</type>
+        <definition>double off_atomic_integral</definition>
+        <argsstring>(const Envelope_Hankel &amp;H1, const Envelope_Bessel &amp;J2, const double rs)</argsstring>
+        <name>off_atomic_integral</name>
+        <param>
+          <type>const <ref refid="classEnvelope__Hankel" kindref="compound">Envelope_Hankel</ref> &amp;</type>
+          <declname>H1</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classEnvelope__Bessel" kindref="compound">Envelope_Bessel</ref> &amp;</type>
+          <declname>J2</declname>
+        </param>
+        <param>
+          <type>const double</type>
+          <declname>rs</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/envelope_fun.h" line="66" column="19"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="protected-attrib">
+      <memberdef kind="variable" id="classEnvelope__function_1a41518f3ca4477df62028318dd6c88f86" prot="protected" static="no" mutable="no">
+        <type><ref refid="structlm" kindref="compound">lm</ref></type>
+        <definition>lm Envelope_function::l_m</definition>
+        <argsstring></argsstring>
+        <name>l_m</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/envelope_fun.h" line="12" column="8" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/envelope_fun.h" bodystart="12" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classEnvelope__function_1a14925f5c7ac21806a89fd2b7049d47ed" prot="protected" static="no" mutable="no">
+        <type>double</type>
+        <definition>double Envelope_function::kappa_m</definition>
+        <argsstring></argsstring>
+        <name>kappa_m</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/envelope_fun.h" line="13" column="12" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/envelope_fun.h" bodystart="13" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>Envelope_function</label>
+        <link refid="classEnvelope__function"/>
+      </node>
+      <node id="1">
+        <label>Envelope_Bessel</label>
+        <link refid="classEnvelope__Bessel"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="3">
+        <label>lm</label>
+        <link refid="structlm"/>
+      </node>
+      <node id="2">
+        <label>Envelope_function</label>
+        <link refid="classEnvelope__function"/>
+        <childnode refid="3" relation="usage">
+          <edgelabel>l_m</edgelabel>
+        </childnode>
+      </node>
+      <node id="1">
+        <label>Envelope_Bessel</label>
+        <link refid="classEnvelope__Bessel"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/envelope_fun.h" line="57" column="1" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/envelope_fun.h" bodystart="57" bodyend="67"/>
+    <listofallmembers>
+      <member refid="classEnvelope__Bessel_1ae3e190b6f367e1f0fd40f9b4318f422e" prot="public" virt="non-virtual"><scope>Envelope_Bessel</scope><name>atomic_integral</name></member>
+      <member refid="classEnvelope__Bessel_1a7edfba8f6f921b0b9523e7aaed9ee6ea" prot="public" virt="non-virtual"><scope>Envelope_Bessel</scope><name>atomic_integral</name></member>
+      <member refid="classEnvelope__Bessel_1a8e2399261bcbbfddb84a7f9ea6c7aa32" prot="public" virt="virtual"><scope>Envelope_Bessel</scope><name>barred_fun</name></member>
+      <member refid="classEnvelope__Bessel_1ab0423f7c349d4e51186553a6c6a527fa" prot="public" virt="non-virtual"><scope>Envelope_Bessel</scope><name>Envelope_Bessel</name></member>
+      <member refid="classEnvelope__function_1a4075694daf40dec43b18a7cce9551cfc" prot="public" virt="non-virtual"><scope>Envelope_Bessel</scope><name>Envelope_function</name></member>
+      <member refid="classEnvelope__function_1a2870da644b995b082437c1774f079774" prot="public" virt="non-virtual"><scope>Envelope_Bessel</scope><name>Envelope_function</name></member>
+      <member refid="classEnvelope__function_1a2b4980b7e5866a851316ce87c0edeb75" prot="public" virt="non-virtual"><scope>Envelope_Bessel</scope><name>Envelope_function</name></member>
+      <member refid="classEnvelope__function_1a85cd53700d4090e4c0f6dc2e67d7bb42" prot="public" virt="non-virtual"><scope>Envelope_Bessel</scope><name>kappa</name></member>
+      <member refid="classEnvelope__function_1a94d64257a361bdbf28e2dd525346ceb7" prot="public" virt="non-virtual"><scope>Envelope_Bessel</scope><name>kappa</name></member>
+      <member refid="classEnvelope__function_1a14925f5c7ac21806a89fd2b7049d47ed" prot="protected" virt="non-virtual"><scope>Envelope_Bessel</scope><name>kappa_m</name></member>
+      <member refid="classEnvelope__function_1a44ac505a0bc963b230a94c0b25d1a61f" prot="public" virt="non-virtual"><scope>Envelope_Bessel</scope><name>l</name></member>
+      <member refid="classEnvelope__function_1a5caa2943467fe3e75bf8047ef062f196" prot="public" virt="non-virtual"><scope>Envelope_Bessel</scope><name>l</name></member>
+      <member refid="classEnvelope__function_1a41518f3ca4477df62028318dd6c88f86" prot="protected" virt="non-virtual"><scope>Envelope_Bessel</scope><name>l_m</name></member>
+      <member refid="classEnvelope__Bessel_1a60510a52b89da071bda3a777586b0a41" prot="public" virt="non-virtual"><scope>Envelope_Bessel</scope><name>off_atomic_integral</name></member>
+      <member refid="classEnvelope__function_1a21a876fdc33d23725bdb25990d3f6e6a" prot="public" virt="non-virtual"><scope>Envelope_Bessel</scope><name>operator()</name></member>
+      <member refid="classEnvelope__function_1a5e7ade4f940bd982224c15305b785b80" prot="public" virt="non-virtual"><scope>Envelope_Bessel</scope><name>operator=</name></member>
+      <member refid="classEnvelope__function_1a0e8804f8b1405973c45f991f88ce4cb8" prot="public" virt="non-virtual"><scope>Envelope_Bessel</scope><name>operator=</name></member>
+      <member refid="classEnvelope__function_1a3262d8ef979a989f658b24e4d0f97fdb" prot="public" virt="virtual"><scope>Envelope_Bessel</scope><name>~Envelope_function</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

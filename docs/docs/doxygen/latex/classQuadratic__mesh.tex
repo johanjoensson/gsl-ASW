@@ -1,0 +1,97 @@
+\hypertarget{classQuadratic__mesh}{}\doxysection{Quadratic\+\_\+mesh$<$ D, Scalar $>$ Class Template Reference}
+\label{classQuadratic__mesh}\index{Quadratic\_mesh$<$ D, Scalar $>$@{Quadratic\_mesh$<$ D, Scalar $>$}}
+Inheritance diagram for Quadratic\+\_\+mesh$<$ D, Scalar $>$\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classQuadratic__mesh}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classQuadratic__mesh_a71a59152fdfb2801d9cf51b825c369b5}\label{classQuadratic__mesh_a71a59152fdfb2801d9cf51b825c369b5}} 
+using {\bfseries Arr} = std\+::array$<$ Scalar, D $>$
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classQuadratic__mesh_a55f163ab8c635dc8c246b2b06a954d4f}\label{classQuadratic__mesh_a55f163ab8c635dc8c246b2b06a954d4f}} 
+{\bfseries Quadratic\+\_\+mesh} (const Arr \&R\+\_\+min, const Arr \&R\+\_\+max, const std\+::array$<$ size\+\_\+t, D $>$ \&N)
+\item 
+\mbox{\Hypertarget{classQuadratic__mesh_a465d70d2fddabb5844827c539c96e1b8}\label{classQuadratic__mesh_a465d70d2fddabb5844827c539c96e1b8}} 
+{\bfseries Quadratic\+\_\+mesh} (const \mbox{\hyperlink{classQuadratic__mesh}{Quadratic\+\_\+mesh}} \&)=default
+\item 
+\mbox{\Hypertarget{classQuadratic__mesh_aaa15f21572f9a2d23e24fe1f070b31e5}\label{classQuadratic__mesh_aaa15f21572f9a2d23e24fe1f070b31e5}} 
+{\bfseries Quadratic\+\_\+mesh} (\mbox{\hyperlink{classQuadratic__mesh}{Quadratic\+\_\+mesh}} \&\&)=default
+\item 
+\mbox{\Hypertarget{classQuadratic__mesh_a8874e88264bf20e79aa012f6ed1747af}\label{classQuadratic__mesh_a8874e88264bf20e79aa012f6ed1747af}} 
+\mbox{\hyperlink{classQuadratic__mesh}{Quadratic\+\_\+mesh}} \& {\bfseries operator=} (const \mbox{\hyperlink{classQuadratic__mesh}{Quadratic\+\_\+mesh}} \&)=default
+\item 
+\mbox{\Hypertarget{classQuadratic__mesh_a27f81508c0ec8a0d8d46ab10d58b318a}\label{classQuadratic__mesh_a27f81508c0ec8a0d8d46ab10d58b318a}} 
+\mbox{\hyperlink{classQuadratic__mesh}{Quadratic\+\_\+mesh}} \& {\bfseries operator=} (\mbox{\hyperlink{classQuadratic__mesh}{Quadratic\+\_\+mesh}} \&\&)=default
+\item 
+\mbox{\Hypertarget{classQuadratic__mesh_a74d6a2eb1d7c291ed74d66fa2cc65060}\label{classQuadratic__mesh_a74d6a2eb1d7c291ed74d66fa2cc65060}} 
+Arr {\bfseries r} (const Arr \&x) const override
+\item 
+\mbox{\Hypertarget{classQuadratic__mesh_ad1b531b3603cd3b501b8f67dc18da442}\label{classQuadratic__mesh_ad1b531b3603cd3b501b8f67dc18da442}} 
+Arr {\bfseries r2} (const Arr \&x) const override
+\item 
+\mbox{\Hypertarget{classQuadratic__mesh_a87c84b9214b835ed08e70abe06fe480d}\label{classQuadratic__mesh_a87c84b9214b835ed08e70abe06fe480d}} 
+Arr {\bfseries dr} (const Arr \&x) const override
+\item 
+\mbox{\Hypertarget{classMesh__base_aa7ee77b844634dec60016fb1eec59033}\label{classMesh__base_aa7ee77b844634dec60016fb1eec59033}} 
+auto {\bfseries parameters} () const
+\item 
+\mbox{\Hypertarget{classMesh__base_af995545134ead5a2016087713d695106}\label{classMesh__base_af995545134ead5a2016087713d695106}} 
+virtual Arr {\bfseries r} (const Arr \&x) const=0
+\item 
+\mbox{\Hypertarget{classMesh__base_a94cfa3475faff03cc69356b24c304abb}\label{classMesh__base_a94cfa3475faff03cc69356b24c304abb}} 
+std\+::array$<$ std\+::vector$<$ double $>$, Dim $>$ {\bfseries r} () const
+\item 
+\mbox{\Hypertarget{classMesh__base_a54297607ef866c8c78346d9546a4fab6}\label{classMesh__base_a54297607ef866c8c78346d9546a4fab6}} 
+virtual Arr {\bfseries r2} (const Arr \&x) const=0
+\item 
+\mbox{\Hypertarget{classMesh__base_aae4c7bad5cb05d1a8cf3e37ac171b217}\label{classMesh__base_aae4c7bad5cb05d1a8cf3e37ac171b217}} 
+virtual Arr {\bfseries dr} (const Arr \&x) const=0
+\item 
+\mbox{\Hypertarget{classMesh__base_a6d78aa3be7df5503d2323278b3c91e39}\label{classMesh__base_a6d78aa3be7df5503d2323278b3c91e39}} 
+Arr {\bfseries operator()} (const Arr \&x) const
+\item 
+\mbox{\Hypertarget{classMesh__base_a1a658cc4289cae0d5bd906e98a025353}\label{classMesh__base_a1a658cc4289cae0d5bd906e98a025353}} 
+std\+::array$<$ size\+\_\+t, Dim $>$ {\bfseries dim} () const
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classMesh__base_a2bbdb022643f83c7e42ad0ccb206c836}\label{classMesh__base_a2bbdb022643f83c7e42ad0ccb206c836}} 
+std\+::array$<$ std\+::tuple$<$ A, B $>$, Dim $>$ {\bfseries zip2} (const std\+::array$<$ A, Dim $>$ \&a, const std\+::array$<$ B, Dim $>$ \&b) const
+\item 
+\mbox{\Hypertarget{classMesh__base_afd0ed58b89728e3e242c20029041fde0}\label{classMesh__base_afd0ed58b89728e3e242c20029041fde0}} 
+std\+::array$<$ std\+::tuple$<$ A, B, C $>$, Dim $>$ {\bfseries zip3} (const std\+::array$<$ A, Dim $>$ \&a, const std\+::array$<$ B, Dim $>$ \&b, std\+::array$<$ C, Dim $>$ c) const
+\item 
+\mbox{\Hypertarget{classMesh__base_a6e10e4bdab46a13b869fbb21894fe8d2}\label{classMesh__base_a6e10e4bdab46a13b869fbb21894fe8d2}} 
+std\+::array$<$ std\+::tuple$<$ A, B, C, D $>$, Dim $>$ {\bfseries zip4} (const std\+::array$<$ A, Dim $>$ \&a, const std\+::array$<$ B, Dim $>$ \&b, const std\+::array$<$ C, Dim $>$ \&c, const std\+::array$<$ D, Dim $>$ \&d) const
+\item 
+\mbox{\Hypertarget{classMesh__base_a329084b98ea9c309ba321e73f11a669e}\label{classMesh__base_a329084b98ea9c309ba321e73f11a669e}} 
+std\+::array$<$ std\+::tuple$<$ A, B, C, D $>$, Dim $>$ {\bfseries zip4} (const std\+::array$<$ A, Dim $>$ \&a, const std\+::array$<$ std\+::tuple$<$ B, C, D $>$, Dim $>$ \&t) const
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classMesh__base_af22e030db937497d998d750a3f3141ce}\label{classMesh__base_af22e030db937497d998d750a3f3141ce}} 
+Arr {\bfseries alpha\+\_\+m}
+\item 
+\mbox{\Hypertarget{classMesh__base_a5600057e3fc7b8bba2525e3406483068}\label{classMesh__base_a5600057e3fc7b8bba2525e3406483068}} 
+Arr {\bfseries beta\+\_\+m}
+\item 
+\mbox{\Hypertarget{classMesh__base_a496a79ae11c6a1afe1d700e6425c7901}\label{classMesh__base_a496a79ae11c6a1afe1d700e6425c7901}} 
+Arr {\bfseries gamma\+\_\+m}
+\item 
+\mbox{\Hypertarget{classMesh__base_abe82a61399e70ba0cf23a18aa8800d3d}\label{classMesh__base_abe82a61399e70ba0cf23a18aa8800d3d}} 
+std\+::array$<$ size\+\_\+t, Dim $>$ {\bfseries N\+\_\+m}
+\end{DoxyCompactItemize}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+numerical-\/mesh.\+h\end{DoxyCompactItemize}

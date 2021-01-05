@@ -1,0 +1,191 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.20" xml:lang="en-US">
+  <compounddef id="classIntegral__Hankel__function" kind="class" language="C++" prot="public">
+    <compoundname>Integral_Hankel_function</compoundname>
+    <basecompoundref refid="classHankel__function" prot="public" virt="non-virtual">Hankel_function</basecompoundref>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classIntegral__Hankel__function_1a0a83723fc8622c5a175484a384935f74" prot="private" static="no" mutable="no">
+        <type><ref refid="classEwald__integral" kindref="compound">Ewald_integral</ref></type>
+        <definition>Ewald_integral Integral_Hankel_function::I</definition>
+        <argsstring></argsstring>
+        <name>I</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/spherical_fun.h" line="61" column="20" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/spherical_fun.h" bodystart="61" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classIntegral__Hankel__function_1ae6c8e8f99dbe874b1cf96d02b0f26cdd" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>Integral_Hankel_function::Integral_Hankel_function</definition>
+        <argsstring>()</argsstring>
+        <name>Integral_Hankel_function</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/spherical_fun.h" line="63" column="5" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/spherical_fun.h" bodystart="63" bodyend="63"/>
+      </memberdef>
+      <memberdef kind="function" id="classIntegral__Hankel__function_1a71f654862956285aca1284b814a0e8c0" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>double</type>
+        <definition>double Integral_Hankel_function::operator()</definition>
+        <argsstring>(const double kappa, const double eta, const double x) const</argsstring>
+        <name>operator()</name>
+        <param>
+          <type>const double</type>
+          <declname>kappa</declname>
+        </param>
+        <param>
+          <type>const double</type>
+          <declname>eta</declname>
+        </param>
+        <param>
+          <type>const double</type>
+          <declname>x</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/spherical_fun.h" line="65" column="12"/>
+      </memberdef>
+      <memberdef kind="function" id="classHankel__function_1af8df068125dfeb7a44b4c9012aee6cc9" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>double</type>
+        <definition>double Hankel_function::operator()</definition>
+        <argsstring>(const double x) const override</argsstring>
+        <name>operator()</name>
+        <reimplements refid="classSpherical__function_1aa8af0f3183f7725ee1f70ce7644ed822">operator()</reimplements>
+        <param>
+          <type>const double</type>
+          <declname>x</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/spherical_fun.h" line="39" column="12"/>
+      </memberdef>
+      <memberdef kind="function" id="classSpherical__function_1a08264bc2e2a8310d8aa0ed496d721ebc" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Spherical_function::set_l</definition>
+        <argsstring>(const lm l_n)</argsstring>
+        <name>set_l</name>
+        <param>
+          <type>const <ref refid="structlm" kindref="compound">lm</ref></type>
+          <declname>l_n</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/spherical_fun.h" line="26" column="10" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/spherical_fun.h" bodystart="26" bodyend="27"/>
+      </memberdef>
+      <memberdef kind="function" id="classSpherical__function_1aa4290f727726c4544d37680df9b10d3f" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="structlm" kindref="compound">lm</ref></type>
+        <definition>lm Spherical_function::l</definition>
+        <argsstring>() const</argsstring>
+        <name>l</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/spherical_fun.h" line="28" column="8" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/spherical_fun.h" bodystart="28" bodyend="29"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="protected-attrib">
+      <memberdef kind="variable" id="classSpherical__function_1a68bc3c4a536d458d6b0432d7a48ed282" prot="protected" static="no" mutable="no">
+        <type><ref refid="structlm" kindref="compound">lm</ref></type>
+        <definition>lm Spherical_function::l_m</definition>
+        <argsstring></argsstring>
+        <name>l_m</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/spherical_fun.h" line="12" column="8" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/spherical_fun.h" bodystart="12" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>Integral_Hankel_function</label>
+        <link refid="classIntegral__Hankel__function"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>Hankel_function</label>
+        <link refid="classHankel__function"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>Spherical_function</label>
+        <link refid="classSpherical__function"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>Integral_Hankel_function</label>
+        <link refid="classIntegral__Hankel__function"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>Hankel_function</label>
+        <link refid="classHankel__function"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>Spherical_function</label>
+        <link refid="classSpherical__function"/>
+        <childnode refid="4" relation="usage">
+          <edgelabel>l_m</edgelabel>
+        </childnode>
+      </node>
+      <node id="4">
+        <label>lm</label>
+        <link refid="structlm"/>
+      </node>
+    </collaborationgraph>
+    <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/spherical_fun.h" line="58" column="1" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/spherical_fun.h" bodystart="59" bodyend="66"/>
+    <listofallmembers>
+      <member refid="classHankel__function_1a6301e0c478dbb86f3927662f6129e81e" prot="public" virt="non-virtual"><scope>Integral_Hankel_function</scope><name>Hankel_function</name></member>
+      <member refid="classHankel__function_1a80a7a0145eb1e3e39b5d290244184d66" prot="public" virt="non-virtual"><scope>Integral_Hankel_function</scope><name>Hankel_function</name></member>
+      <member refid="classIntegral__Hankel__function_1a0a83723fc8622c5a175484a384935f74" prot="private" virt="non-virtual"><scope>Integral_Hankel_function</scope><name>I</name></member>
+      <member refid="classIntegral__Hankel__function_1ae6c8e8f99dbe874b1cf96d02b0f26cdd" prot="public" virt="non-virtual"><scope>Integral_Hankel_function</scope><name>Integral_Hankel_function</name></member>
+      <member refid="classSpherical__function_1aa4290f727726c4544d37680df9b10d3f" prot="public" virt="non-virtual"><scope>Integral_Hankel_function</scope><name>l</name></member>
+      <member refid="classSpherical__function_1a68bc3c4a536d458d6b0432d7a48ed282" prot="protected" virt="non-virtual"><scope>Integral_Hankel_function</scope><name>l_m</name></member>
+      <member refid="classIntegral__Hankel__function_1a71f654862956285aca1284b814a0e8c0" prot="public" virt="non-virtual"><scope>Integral_Hankel_function</scope><name>operator()</name></member>
+      <member refid="classHankel__function_1af8df068125dfeb7a44b4c9012aee6cc9" prot="public" virt="virtual" ambiguityscope="Hankel_function::"><scope>Integral_Hankel_function</scope><name>operator()</name></member>
+      <member refid="classSpherical__function_1aa3d57bcf0f68bfc1736630ed8103e290" prot="public" virt="non-virtual"><scope>Integral_Hankel_function</scope><name>operator=</name></member>
+      <member refid="classSpherical__function_1a542d453e04488bec25693b1bde4dc34e" prot="public" virt="non-virtual"><scope>Integral_Hankel_function</scope><name>operator=</name></member>
+      <member refid="classSpherical__function_1a08264bc2e2a8310d8aa0ed496d721ebc" prot="public" virt="non-virtual"><scope>Integral_Hankel_function</scope><name>set_l</name></member>
+      <member refid="classSpherical__function_1a51088346ab79cbf9b6eb9661a5512352" prot="public" virt="non-virtual"><scope>Integral_Hankel_function</scope><name>Spherical_function</name></member>
+      <member refid="classSpherical__function_1aaf2d510641ef38d856f97faba997fb8c" prot="public" virt="non-virtual"><scope>Integral_Hankel_function</scope><name>Spherical_function</name></member>
+      <member refid="classSpherical__function_1a8ce17f2efebc998837dbf49a270b0eb9" prot="public" virt="non-virtual"><scope>Integral_Hankel_function</scope><name>Spherical_function</name></member>
+      <member refid="classSpherical__function_1a25f1ce863baeabf7707fc6722c6cb701" prot="public" virt="non-virtual"><scope>Integral_Hankel_function</scope><name>Spherical_function</name></member>
+      <member refid="classSpherical__function_1aca78c8321d098407ac253838ef103a31" prot="public" virt="virtual"><scope>Integral_Hankel_function</scope><name>~Spherical_function</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

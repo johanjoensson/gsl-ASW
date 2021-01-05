@@ -1,0 +1,35 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.20" xml:lang="en-US">
+  <compounddef id="structstd_1_1hash_3_01Augmented__Bessel_01_4" kind="struct" language="C++" prot="public">
+    <compoundname>std::hash&lt; Augmented_Bessel &gt;</compoundname>
+    <templateparamlist>
+    </templateparamlist>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="structstd_1_1hash_3_01Augmented__Bessel_01_4_1a81662182d4729c33627b6dbd13797962" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>size_t</type>
+        <definition>size_t std::hash&lt; Augmented_Bessel &gt;::operator()</definition>
+        <argsstring>(const Augmented_Bessel &amp;f) const</argsstring>
+        <name>operator()</name>
+        <param>
+          <type>const <ref refid="classAugmented__Bessel" kindref="compound">Augmented_Bessel</ref> &amp;</type>
+          <declname>f</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/augmented_fun.h" line="118" column="8" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/augmented_fun.h" bodystart="118" bodyend="128"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/augmented_fun.h" line="117" column="1" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/augmented_fun.h" bodystart="117" bodyend="129"/>
+    <listofallmembers>
+      <member refid="structstd_1_1hash_3_01Augmented__Bessel_01_4_1a81662182d4729c33627b6dbd13797962" prot="public" virt="non-virtual"><scope>std::hash&lt; Augmented_Bessel &gt;</scope><name>operator()</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

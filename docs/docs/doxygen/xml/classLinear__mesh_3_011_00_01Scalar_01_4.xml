@@ -1,0 +1,428 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.20" xml:lang="en-US">
+  <compounddef id="classLinear__mesh_3_011_00_01Scalar_01_4" kind="class" language="C++" prot="public">
+    <compoundname>Linear_mesh&lt; 1, Scalar &gt;</compoundname>
+    <basecompoundref refid="classMesh__base_3_011_00_01Scalar_01_4" prot="public" virt="non-virtual">Mesh_base&lt; 1, Scalar &gt;</basecompoundref>
+    <templateparamlist>
+      <param>
+        <type>class Scalar</type>
+      </param>
+    </templateparamlist>
+      <sectiondef kind="private-func">
+      <memberdef kind="function" id="classLinear__mesh_3_011_00_01Scalar_01_4_1aad7976a3c90066581963d8e212c4e975" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Linear_mesh&lt; 1, Scalar &gt;::Linear_mesh</definition>
+        <argsstring>()=default</argsstring>
+        <name>Linear_mesh</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/numerical-mesh.h" line="318" column="5"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classLinear__mesh_3_011_00_01Scalar_01_4_1acd915f08b5f809ee0ecb46db35c92d2c" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>Linear_mesh&lt; 1, Scalar &gt;::Linear_mesh</definition>
+        <argsstring>(const Scalar R_min, const Scalar R_max, const size_t N)</argsstring>
+        <name>Linear_mesh</name>
+        <param>
+          <type>const Scalar</type>
+          <declname>R_min</declname>
+        </param>
+        <param>
+          <type>const Scalar</type>
+          <declname>R_max</declname>
+        </param>
+        <param>
+          <type>const size_t</type>
+          <declname>N</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/numerical-mesh.h" line="321" column="5" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/numerical-mesh.h" bodystart="321" bodyend="323"/>
+      </memberdef>
+      <memberdef kind="function" id="classLinear__mesh_3_011_00_01Scalar_01_4_1af9b793d24d20fa53a039362dc7b5d0c0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Linear_mesh&lt; 1, Scalar &gt;::~Linear_mesh</definition>
+        <argsstring>()=default</argsstring>
+        <name>~Linear_mesh</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/numerical-mesh.h" line="325" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classLinear__mesh_3_011_00_01Scalar_01_4_1af8939d099218a5d5f51f67625e8d786c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Linear_mesh&lt; 1, Scalar &gt;::Linear_mesh</definition>
+        <argsstring>(const Linear_mesh &amp;)=default</argsstring>
+        <name>Linear_mesh</name>
+        <param>
+          <type>const <ref refid="classLinear__mesh" kindref="compound">Linear_mesh</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/numerical-mesh.h" line="327" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classLinear__mesh_3_011_00_01Scalar_01_4_1a4ff8d70dc76e0b32f0ff64b52ea04613" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Linear_mesh&lt; 1, Scalar &gt;::Linear_mesh</definition>
+        <argsstring>(Linear_mesh &amp;&amp;)=default</argsstring>
+        <name>Linear_mesh</name>
+        <param>
+          <type><ref refid="classLinear__mesh" kindref="compound">Linear_mesh</ref> &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/numerical-mesh.h" line="328" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classLinear__mesh_3_011_00_01Scalar_01_4_1a1a6d362c6b318395c6e6c12e00a0b234" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classLinear__mesh" kindref="compound">Linear_mesh</ref> &amp;</type>
+        <definition>Linear_mesh&amp; Linear_mesh&lt; 1, Scalar &gt;::operator=</definition>
+        <argsstring>(const Linear_mesh &amp;)=default</argsstring>
+        <name>operator=</name>
+        <param>
+          <type>const <ref refid="classLinear__mesh" kindref="compound">Linear_mesh</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/numerical-mesh.h" line="330" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classLinear__mesh_3_011_00_01Scalar_01_4_1ad97b1eb4745e71fc436ce5badd8baf36" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classLinear__mesh" kindref="compound">Linear_mesh</ref> &amp;</type>
+        <definition>Linear_mesh&amp; Linear_mesh&lt; 1, Scalar &gt;::operator=</definition>
+        <argsstring>(Linear_mesh &amp;&amp;)=default</argsstring>
+        <name>operator=</name>
+        <param>
+          <type><ref refid="classLinear__mesh" kindref="compound">Linear_mesh</ref> &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/numerical-mesh.h" line="331" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classLinear__mesh_3_011_00_01Scalar_01_4_1ab0d89eb07340d483102d331172fcc849" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
+        <type>Scalar</type>
+        <definition>Scalar Linear_mesh&lt; 1, Scalar &gt;::r</definition>
+        <argsstring>(const Scalar &amp;x) const override</argsstring>
+        <name>r</name>
+        <reimplements refid="classMesh__base_3_011_00_01Scalar_01_4_1a5544719321cf874549b8172477560dc4">r</reimplements>
+        <param>
+          <type>const Scalar &amp;</type>
+          <declname>x</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/numerical-mesh.h" line="337" column="12" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/numerical-mesh.h" bodystart="337" bodyend="340"/>
+      </memberdef>
+      <memberdef kind="function" id="classLinear__mesh_3_011_00_01Scalar_01_4_1aaf185f03b99e108d4c62078450d609a5" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
+        <type>Scalar</type>
+        <definition>Scalar Linear_mesh&lt; 1, Scalar &gt;::r2</definition>
+        <argsstring>(const Scalar &amp;x) const override</argsstring>
+        <name>r2</name>
+        <reimplements refid="classMesh__base_3_011_00_01Scalar_01_4_1adfa57ed7cf2880ad2bcadbbb7843c5de">r2</reimplements>
+        <param>
+          <type>const Scalar &amp;</type>
+          <declname>x</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/numerical-mesh.h" line="342" column="12" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/numerical-mesh.h" bodystart="342" bodyend="345"/>
+      </memberdef>
+      <memberdef kind="function" id="classLinear__mesh_3_011_00_01Scalar_01_4_1a709e15348cd377610fd471eda20e2cb8" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
+        <type>Scalar</type>
+        <definition>Scalar Linear_mesh&lt; 1, Scalar &gt;::dr</definition>
+        <argsstring>(const Scalar &amp;x) const override</argsstring>
+        <name>dr</name>
+        <reimplements refid="classMesh__base_3_011_00_01Scalar_01_4_1a2c061ad771f1e0242de6e80fabd9fdbb">dr</reimplements>
+        <param>
+          <type>const Scalar &amp;</type>
+          <declname>x</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/numerical-mesh.h" line="347" column="12" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/numerical-mesh.h" bodystart="347" bodyend="350"/>
+      </memberdef>
+      <memberdef kind="function" id="classMesh__base_3_011_00_01Scalar_01_4_1ac513eb350f3638a5e4d88299fda9e3cf" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
+        <type>std::vector&lt; Scalar &gt;</type>
+        <definition>virtual std::vector&lt;Scalar&gt; Mesh_base&lt; 1, Scalar &gt;::r</definition>
+        <argsstring>() const</argsstring>
+        <name>r</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/numerical-mesh.h" line="187" column="25" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/numerical-mesh.h" bodystart="187" bodyend="194"/>
+      </memberdef>
+      <memberdef kind="function" id="classMesh__base_3_011_00_01Scalar_01_4_1a607b07f006226169b08cf0a1b2f707a7" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
+        <type>std::vector&lt; Scalar &gt;</type>
+        <definition>virtual std::vector&lt;Scalar&gt; Mesh_base&lt; 1, Scalar &gt;::r2</definition>
+        <argsstring>() const</argsstring>
+        <name>r2</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/numerical-mesh.h" line="196" column="25" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/numerical-mesh.h" bodystart="196" bodyend="203"/>
+      </memberdef>
+      <memberdef kind="function" id="classMesh__base_3_011_00_01Scalar_01_4_1a3632f85fe9e1fb93e1f77396ccb2376f" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
+        <type>std::vector&lt; Scalar &gt;</type>
+        <definition>virtual std::vector&lt;Scalar&gt; Mesh_base&lt; 1, Scalar &gt;::dr</definition>
+        <argsstring>() const</argsstring>
+        <name>dr</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/numerical-mesh.h" line="205" column="25" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/numerical-mesh.h" bodystart="205" bodyend="212"/>
+      </memberdef>
+      <memberdef kind="function" id="classMesh__base_3_011_00_01Scalar_01_4_1a4d5a0335fd88ee521c5d97663673c8b8" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>Scalar</type>
+        <definition>Scalar Mesh_base&lt; 1, Scalar &gt;::operator()</definition>
+        <argsstring>(const Scalar &amp;x) const</argsstring>
+        <name>operator()</name>
+        <param>
+          <type>const Scalar &amp;</type>
+          <declname>x</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/numerical-mesh.h" line="185" column="12" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/numerical-mesh.h" bodystart="185" bodyend="185"/>
+      </memberdef>
+      <memberdef kind="function" id="classMesh__base_3_011_00_01Scalar_01_4_1a855155611eee132eac1443688fafbbb8" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class Func</type>
+          </param>
+        </templateparamlist>
+        <type>std::vector&lt; Scalar &gt;</type>
+        <definition>std::vector&lt;Scalar&gt; Mesh_base&lt; 1, Scalar &gt;::evaluate</definition>
+        <argsstring>(Func f, size_t h=1)</argsstring>
+        <name>evaluate</name>
+        <param>
+          <type>Func</type>
+          <declname>f</declname>
+        </param>
+        <param>
+          <type>size_t</type>
+          <declname>h</declname>
+          <defval>1</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/numerical-mesh.h" line="215" column="17" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/numerical-mesh.h" bodystart="215" bodyend="222"/>
+      </memberdef>
+      <memberdef kind="function" id="classMesh__base_3_011_00_01Scalar_01_4_1a85455dfa05bffdecf73612662978dfb1" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class Func</type>
+          </param>
+        </templateparamlist>
+        <type>std::vector&lt; Scalar &gt;</type>
+        <definition>std::vector&lt;Scalar&gt; Mesh_base&lt; 1, Scalar &gt;::evaluate</definition>
+        <argsstring>(Func f, Scalar x0, Scalar x1, Scalar h)</argsstring>
+        <name>evaluate</name>
+        <param>
+          <type>Func</type>
+          <declname>f</declname>
+        </param>
+        <param>
+          <type>Scalar</type>
+          <declname>x0</declname>
+        </param>
+        <param>
+          <type>Scalar</type>
+          <declname>x1</declname>
+        </param>
+        <param>
+          <type>Scalar</type>
+          <declname>h</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/numerical-mesh.h" line="225" column="17" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/numerical-mesh.h" bodystart="225" bodyend="232"/>
+      </memberdef>
+      <memberdef kind="function" id="classMesh__base_3_011_00_01Scalar_01_4_1ac7bd5dadab1c50e41a2afb9fd6710f49" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>size_t</type>
+        <definition>size_t Mesh_base&lt; 1, Scalar &gt;::dim</definition>
+        <argsstring>() const</argsstring>
+        <name>dim</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/numerical-mesh.h" line="234" column="12" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/numerical-mesh.h" bodystart="234" bodyend="234"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="protected-attrib">
+      <memberdef kind="variable" id="classMesh__base_3_011_00_01Scalar_01_4_1ad569061c2555235d59c839ec544c90ab" prot="protected" static="no" mutable="no">
+        <type>Scalar</type>
+        <definition>Scalar Mesh_base&lt; 1, Scalar &gt;::alpha_m</definition>
+        <argsstring></argsstring>
+        <name>alpha_m</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/numerical-mesh.h" line="166" column="12" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/numerical-mesh.h" bodystart="166" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classMesh__base_3_011_00_01Scalar_01_4_1af212e5a4ce35f6fabd517ab3c7d389b1" prot="protected" static="no" mutable="no">
+        <type>Scalar</type>
+        <definition>Scalar Mesh_base&lt; 1, Scalar &gt;::beta_m</definition>
+        <argsstring></argsstring>
+        <name>beta_m</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/numerical-mesh.h" line="166" column="20" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/numerical-mesh.h" bodystart="166" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classMesh__base_3_011_00_01Scalar_01_4_1a56df16c984709647136c6741670b5cfe" prot="protected" static="no" mutable="no">
+        <type>Scalar</type>
+        <definition>Scalar Mesh_base&lt; 1, Scalar &gt;::gamma_m</definition>
+        <argsstring></argsstring>
+        <name>gamma_m</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/numerical-mesh.h" line="166" column="27" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/numerical-mesh.h" bodystart="166" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classMesh__base_3_011_00_01Scalar_01_4_1a9227637ef9758ec1cccf1e5e2b8c1589" prot="protected" static="no" mutable="no">
+        <type>size_t</type>
+        <definition>size_t Mesh_base&lt; 1, Scalar &gt;::N_m</definition>
+        <argsstring></argsstring>
+        <name>N_m</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/numerical-mesh.h" line="167" column="12" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/numerical-mesh.h" bodystart="167" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>Linear_mesh&lt; 1, Scalar &gt;</label>
+        <link refid="classLinear__mesh_3_011_00_01Scalar_01_4"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>Mesh_base&lt; 1, Scalar &gt;</label>
+        <link refid="classMesh__base_3_011_00_01Scalar_01_4"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>Linear_mesh&lt; 1, Scalar &gt;</label>
+        <link refid="classLinear__mesh_3_011_00_01Scalar_01_4"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>Mesh_base&lt; 1, Scalar &gt;</label>
+        <link refid="classMesh__base_3_011_00_01Scalar_01_4"/>
+      </node>
+    </collaborationgraph>
+    <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/numerical-mesh.h" line="316" column="1" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/numerical-mesh.h" bodystart="316" bodyend="351"/>
+    <listofallmembers>
+      <member refid="classMesh__base_3_011_00_01Scalar_01_4_1ad569061c2555235d59c839ec544c90ab" prot="protected" virt="non-virtual"><scope>Linear_mesh&lt; 1, Scalar &gt;</scope><name>alpha_m</name></member>
+      <member refid="classMesh__base_3_011_00_01Scalar_01_4_1af212e5a4ce35f6fabd517ab3c7d389b1" prot="protected" virt="non-virtual"><scope>Linear_mesh&lt; 1, Scalar &gt;</scope><name>beta_m</name></member>
+      <member refid="classMesh__base_3_011_00_01Scalar_01_4_1ac7bd5dadab1c50e41a2afb9fd6710f49" prot="public" virt="non-virtual"><scope>Linear_mesh&lt; 1, Scalar &gt;</scope><name>dim</name></member>
+      <member refid="classLinear__mesh_3_011_00_01Scalar_01_4_1a709e15348cd377610fd471eda20e2cb8" prot="public" virt="virtual"><scope>Linear_mesh&lt; 1, Scalar &gt;</scope><name>dr</name></member>
+      <member refid="classMesh__base_3_011_00_01Scalar_01_4_1a3632f85fe9e1fb93e1f77396ccb2376f" prot="public" virt="virtual" ambiguityscope="Mesh_base&lt; 1, Scalar &gt;::"><scope>Linear_mesh&lt; 1, Scalar &gt;</scope><name>dr</name></member>
+      <member refid="classMesh__base_3_011_00_01Scalar_01_4_1a855155611eee132eac1443688fafbbb8" prot="public" virt="non-virtual"><scope>Linear_mesh&lt; 1, Scalar &gt;</scope><name>evaluate</name></member>
+      <member refid="classMesh__base_3_011_00_01Scalar_01_4_1a85455dfa05bffdecf73612662978dfb1" prot="public" virt="non-virtual"><scope>Linear_mesh&lt; 1, Scalar &gt;</scope><name>evaluate</name></member>
+      <member refid="classMesh__base_3_011_00_01Scalar_01_4_1a56df16c984709647136c6741670b5cfe" prot="protected" virt="non-virtual"><scope>Linear_mesh&lt; 1, Scalar &gt;</scope><name>gamma_m</name></member>
+      <member refid="classLinear__mesh_3_011_00_01Scalar_01_4_1aad7976a3c90066581963d8e212c4e975" prot="private" virt="non-virtual"><scope>Linear_mesh&lt; 1, Scalar &gt;</scope><name>Linear_mesh</name></member>
+      <member refid="classLinear__mesh_3_011_00_01Scalar_01_4_1acd915f08b5f809ee0ecb46db35c92d2c" prot="public" virt="non-virtual"><scope>Linear_mesh&lt; 1, Scalar &gt;</scope><name>Linear_mesh</name></member>
+      <member refid="classLinear__mesh_3_011_00_01Scalar_01_4_1af8939d099218a5d5f51f67625e8d786c" prot="public" virt="non-virtual"><scope>Linear_mesh&lt; 1, Scalar &gt;</scope><name>Linear_mesh</name></member>
+      <member refid="classLinear__mesh_3_011_00_01Scalar_01_4_1a4ff8d70dc76e0b32f0ff64b52ea04613" prot="public" virt="non-virtual"><scope>Linear_mesh&lt; 1, Scalar &gt;</scope><name>Linear_mesh</name></member>
+      <member refid="classMesh__base_3_011_00_01Scalar_01_4_1a1de4ff128718c3c0bb5655ec1f091867" prot="protected" virt="non-virtual"><scope>Linear_mesh&lt; 1, Scalar &gt;</scope><name>Mesh_base</name></member>
+      <member refid="classMesh__base_3_011_00_01Scalar_01_4_1afb07d75a05829b7c0c386f9f8f99e6f9" prot="public" virt="non-virtual"><scope>Linear_mesh&lt; 1, Scalar &gt;</scope><name>Mesh_base</name></member>
+      <member refid="classMesh__base_3_011_00_01Scalar_01_4_1a703bfe89ed388e55be6c0fe6727b704d" prot="public" virt="non-virtual"><scope>Linear_mesh&lt; 1, Scalar &gt;</scope><name>Mesh_base</name></member>
+      <member refid="classMesh__base_3_011_00_01Scalar_01_4_1a3620539d65ebabf6864e4f5258ee2af3" prot="public" virt="non-virtual"><scope>Linear_mesh&lt; 1, Scalar &gt;</scope><name>Mesh_base</name></member>
+      <member refid="classMesh__base_3_011_00_01Scalar_01_4_1a9227637ef9758ec1cccf1e5e2b8c1589" prot="protected" virt="non-virtual"><scope>Linear_mesh&lt; 1, Scalar &gt;</scope><name>N_m</name></member>
+      <member refid="classMesh__base_3_011_00_01Scalar_01_4_1a4d5a0335fd88ee521c5d97663673c8b8" prot="public" virt="non-virtual"><scope>Linear_mesh&lt; 1, Scalar &gt;</scope><name>operator()</name></member>
+      <member refid="classLinear__mesh_3_011_00_01Scalar_01_4_1a1a6d362c6b318395c6e6c12e00a0b234" prot="public" virt="non-virtual"><scope>Linear_mesh&lt; 1, Scalar &gt;</scope><name>operator=</name></member>
+      <member refid="classLinear__mesh_3_011_00_01Scalar_01_4_1ad97b1eb4745e71fc436ce5badd8baf36" prot="public" virt="non-virtual"><scope>Linear_mesh&lt; 1, Scalar &gt;</scope><name>operator=</name></member>
+      <member refid="classMesh__base_3_011_00_01Scalar_01_4_1ad99fc65d728b66a0bd3bbbb3300631d3" prot="public" virt="non-virtual" ambiguityscope="Mesh_base&lt; 1, Scalar &gt;::"><scope>Linear_mesh&lt; 1, Scalar &gt;</scope><name>operator=</name></member>
+      <member refid="classMesh__base_3_011_00_01Scalar_01_4_1a5f5b0a02a9bc6279a575183458e75a45" prot="public" virt="non-virtual" ambiguityscope="Mesh_base&lt; 1, Scalar &gt;::"><scope>Linear_mesh&lt; 1, Scalar &gt;</scope><name>operator=</name></member>
+      <member refid="classLinear__mesh_3_011_00_01Scalar_01_4_1ab0d89eb07340d483102d331172fcc849" prot="public" virt="virtual"><scope>Linear_mesh&lt; 1, Scalar &gt;</scope><name>r</name></member>
+      <member refid="classMesh__base_3_011_00_01Scalar_01_4_1ac513eb350f3638a5e4d88299fda9e3cf" prot="public" virt="virtual" ambiguityscope="Mesh_base&lt; 1, Scalar &gt;::"><scope>Linear_mesh&lt; 1, Scalar &gt;</scope><name>r</name></member>
+      <member refid="classLinear__mesh_3_011_00_01Scalar_01_4_1aaf185f03b99e108d4c62078450d609a5" prot="public" virt="virtual"><scope>Linear_mesh&lt; 1, Scalar &gt;</scope><name>r2</name></member>
+      <member refid="classMesh__base_3_011_00_01Scalar_01_4_1a607b07f006226169b08cf0a1b2f707a7" prot="public" virt="virtual" ambiguityscope="Mesh_base&lt; 1, Scalar &gt;::"><scope>Linear_mesh&lt; 1, Scalar &gt;</scope><name>r2</name></member>
+      <member refid="classLinear__mesh_3_011_00_01Scalar_01_4_1af9b793d24d20fa53a039362dc7b5d0c0" prot="public" virt="non-virtual"><scope>Linear_mesh&lt; 1, Scalar &gt;</scope><name>~Linear_mesh</name></member>
+      <member refid="classMesh__base_3_011_00_01Scalar_01_4_1abbe0b687ffd10e27b580237b304f4c85" prot="public" virt="virtual"><scope>Linear_mesh&lt; 1, Scalar &gt;</scope><name>~Mesh_base</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

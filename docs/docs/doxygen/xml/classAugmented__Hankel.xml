@@ -1,0 +1,534 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.20" xml:lang="en-US">
+  <compounddef id="classAugmented__Hankel" kind="class" language="C++" prot="public">
+    <compoundname>Augmented_Hankel</compoundname>
+    <basecompoundref refid="classAugmented__function" prot="public" virt="non-virtual">Augmented_function</basecompoundref>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classAugmented__Hankel_1a2166c885748647c20c85b6b8650b60d6" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>double &amp;</type>
+        <definition>double&amp; Augmented_Hankel::EH</definition>
+        <argsstring>()</argsstring>
+        <name>EH</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/augmented_fun.h" line="66" column="12" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/augmented_fun.h" bodystart="66" bodyend="66"/>
+      </memberdef>
+      <memberdef kind="function" id="classAugmented__Hankel_1a123e55c1f47cad472228ae6699658933" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>double</type>
+        <definition>double Augmented_Hankel::EH</definition>
+        <argsstring>() const</argsstring>
+        <name>EH</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/augmented_fun.h" line="67" column="12" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/augmented_fun.h" bodystart="67" bodyend="67"/>
+      </memberdef>
+      <memberdef kind="function" id="classAugmented__Hankel_1a6c4694502e2e6988fe3c33eab1edfc85" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Augmented_Hankel::Augmented_Hankel</definition>
+        <argsstring>()=default</argsstring>
+        <name>Augmented_Hankel</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/augmented_fun.h" line="68" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classAugmented__Hankel_1a757ca15b1d6dc78f27ac698c719d4110" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Augmented_Hankel::Augmented_Hankel</definition>
+        <argsstring>(const Augmented_Hankel &amp;)=default</argsstring>
+        <name>Augmented_Hankel</name>
+        <param>
+          <type>const <ref refid="classAugmented__Hankel" kindref="compound">Augmented_Hankel</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/augmented_fun.h" line="69" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classAugmented__Hankel_1a9beb74b4e540535b9132c39db6d5c2c1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Augmented_Hankel::Augmented_Hankel</definition>
+        <argsstring>(Augmented_Hankel &amp;&amp;)=default</argsstring>
+        <name>Augmented_Hankel</name>
+        <param>
+          <type><ref refid="classAugmented__Hankel" kindref="compound">Augmented_Hankel</ref> &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/augmented_fun.h" line="70" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classAugmented__Hankel_1aafee8408aef1bfdf0ba41176c812f08e" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>Augmented_Hankel::~Augmented_Hankel</definition>
+        <argsstring>()</argsstring>
+        <name>~Augmented_Hankel</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/augmented_fun.h" line="71" column="5" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/augmented_fun.h" bodystart="71" bodyend="71"/>
+      </memberdef>
+      <memberdef kind="function" id="classAugmented__Hankel_1a646e8e0ce28a2b46e34aa9dd68098d9c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Augmented_Hankel::Augmented_Hankel</definition>
+        <argsstring>(const lm l, const double kappa, const spin s, const Logarithmic_mesh &amp;mesh)</argsstring>
+        <name>Augmented_Hankel</name>
+        <param>
+          <type>const <ref refid="structlm" kindref="compound">lm</ref></type>
+          <declname>l</declname>
+        </param>
+        <param>
+          <type>const double</type>
+          <declname>kappa</declname>
+        </param>
+        <param>
+          <type>const spin</type>
+          <declname>s</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classLogarithmic__mesh" kindref="compound">Logarithmic_mesh</ref> &amp;</type>
+          <declname>mesh</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/augmented_fun.h" line="73" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classAugmented__Hankel_1a03a33067937521c34dc46168f4245667" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classAugmented__Hankel" kindref="compound">Augmented_Hankel</ref> &amp;</type>
+        <definition>Augmented_Hankel&amp; Augmented_Hankel::operator=</definition>
+        <argsstring>(const Augmented_Hankel &amp;a)=default</argsstring>
+        <name>operator=</name>
+        <param>
+          <type>const <ref refid="classAugmented__Hankel" kindref="compound">Augmented_Hankel</ref> &amp;</type>
+          <declname>a</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/augmented_fun.h" line="76" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classAugmented__Hankel_1ab07d268668283bbe97c6b11eb120a473" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classAugmented__Hankel" kindref="compound">Augmented_Hankel</ref> &amp;</type>
+        <definition>Augmented_Hankel&amp; Augmented_Hankel::operator=</definition>
+        <argsstring>(Augmented_Hankel &amp;&amp;a)=default</argsstring>
+        <name>operator=</name>
+        <param>
+          <type><ref refid="classAugmented__Hankel" kindref="compound">Augmented_Hankel</ref> &amp;&amp;</type>
+          <declname>a</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/augmented_fun.h" line="77" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classAugmented__Hankel_1a051db9bea46932612e984df7eddbe295" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void Augmented_Hankel::update</definition>
+        <argsstring>(std::vector&lt; double &gt; &amp;v, const double en, const bool core) override</argsstring>
+        <name>update</name>
+        <reimplements refid="classAugmented__function_1acfab355994fb7d16c742535fe8972922">update</reimplements>
+        <param>
+          <type>std::vector&lt; double &gt; &amp;</type>
+          <declname>v</declname>
+        </param>
+        <param>
+          <type>const double</type>
+          <declname>en</declname>
+        </param>
+        <param>
+          <type>const bool</type>
+          <declname>core</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/augmented_fun.h" line="79" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classAugmented__function_1af09e1c0c2c10638bcf058b13e5683daf" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>double</type>
+        <definition>double Augmented_function::operator()</definition>
+        <argsstring>(const GSL::Vector &amp;r) const</argsstring>
+        <name>operator()</name>
+        <param>
+          <type>const GSL::Vector &amp;</type>
+          <declname>r</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/augmented_fun.h" line="18" column="12"/>
+      </memberdef>
+      <memberdef kind="function" id="classAugmented__function_1a8a340605b6020c71a6fef5a0b8f1251b" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="structlm" kindref="compound">lm</ref></type>
+        <definition>lm Augmented_function::l</definition>
+        <argsstring>() const</argsstring>
+        <name>l</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/augmented_fun.h" line="37" column="8" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/augmented_fun.h" bodystart="37" bodyend="37"/>
+      </memberdef>
+      <memberdef kind="function" id="classAugmented__function_1a5569c661561a7a35bfc59148431726f2" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="structlm" kindref="compound">lm</ref> &amp;</type>
+        <definition>lm&amp; Augmented_function::l</definition>
+        <argsstring>()</argsstring>
+        <name>l</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/augmented_fun.h" line="38" column="8" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/augmented_fun.h" bodystart="38" bodyend="38"/>
+      </memberdef>
+      <memberdef kind="function" id="classAugmented__function_1af7f62a70d0293f36ad033b2c3a104a0b" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>double</type>
+        <definition>double Augmented_function::kappa</definition>
+        <argsstring>() const</argsstring>
+        <name>kappa</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/augmented_fun.h" line="40" column="12" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/augmented_fun.h" bodystart="40" bodyend="40"/>
+      </memberdef>
+      <memberdef kind="function" id="classAugmented__function_1a4a3fbc697571fe19a55fb8c8e9409364" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>double &amp;</type>
+        <definition>double&amp; Augmented_function::kappa</definition>
+        <argsstring>()</argsstring>
+        <name>kappa</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/augmented_fun.h" line="41" column="12" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/augmented_fun.h" bodystart="41" bodyend="41"/>
+      </memberdef>
+      <memberdef kind="function" id="classAugmented__function_1abb7a989dc1a09060bbd9b4bd147df6fe" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>spin</type>
+        <definition>spin Augmented_function::s</definition>
+        <argsstring>() const</argsstring>
+        <name>s</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/augmented_fun.h" line="43" column="10" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/augmented_fun.h" bodystart="43" bodyend="43"/>
+      </memberdef>
+      <memberdef kind="function" id="classAugmented__function_1a9fc4ade6a5f4e4a81b8a8577817821f9" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>spin &amp;</type>
+        <definition>spin&amp; Augmented_function::s</definition>
+        <argsstring>()</argsstring>
+        <name>s</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/augmented_fun.h" line="44" column="10" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/augmented_fun.h" bodystart="44" bodyend="44"/>
+      </memberdef>
+      <memberdef kind="function" id="classAugmented__function_1a52cfb9e9ff3023d4e24a87abfe8433b4" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classLogarithmic__mesh" kindref="compound">Logarithmic_mesh</ref></type>
+        <definition>Logarithmic_mesh Augmented_function::mesh</definition>
+        <argsstring>() const</argsstring>
+        <name>mesh</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/augmented_fun.h" line="46" column="22" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/augmented_fun.h" bodystart="46" bodyend="46"/>
+      </memberdef>
+      <memberdef kind="function" id="classAugmented__function_1a220205d71230400be2aa804fddb57cfe" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classLogarithmic__mesh" kindref="compound">Logarithmic_mesh</ref> &amp;</type>
+        <definition>Logarithmic_mesh&amp; Augmented_function::mesh</definition>
+        <argsstring>()</argsstring>
+        <name>mesh</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/augmented_fun.h" line="47" column="22" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/augmented_fun.h" bodystart="47" bodyend="47"/>
+      </memberdef>
+      <memberdef kind="function" id="classAugmented__function_1a27e866d6841096928ea6bba2ebbba613" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::vector&lt; double &gt;</type>
+        <definition>std::vector&lt;double&gt; Augmented_function::val</definition>
+        <argsstring>() const</argsstring>
+        <name>val</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/augmented_fun.h" line="49" column="17" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/augmented_fun.h" bodystart="49" bodyend="49"/>
+      </memberdef>
+      <memberdef kind="function" id="classAugmented__function_1af6b1d2919a83f30567958f99ff528922" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::vector&lt; double &gt; &amp;</type>
+        <definition>std::vector&lt;double&gt;&amp; Augmented_function::val</definition>
+        <argsstring>()</argsstring>
+        <name>val</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/augmented_fun.h" line="50" column="17" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/augmented_fun.h" bodystart="50" bodyend="50"/>
+      </memberdef>
+      <memberdef kind="function" id="classAugmented__function_1a164b2a3ab60e4c89a4ca0b3ac2a011c1" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>double</type>
+        <definition>double Augmented_function::En</definition>
+        <argsstring>() const</argsstring>
+        <name>En</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/augmented_fun.h" line="52" column="12" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/augmented_fun.h" bodystart="52" bodyend="52"/>
+      </memberdef>
+      <memberdef kind="function" id="classAugmented__function_1a655bc4251b7417aa2f82f69b9a839e57" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>double &amp;</type>
+        <definition>double&amp; Augmented_function::En</definition>
+        <argsstring>()</argsstring>
+        <name>En</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/augmented_fun.h" line="53" column="12" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/augmented_fun.h" bodystart="53" bodyend="53"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="protected-attrib">
+      <memberdef kind="variable" id="classAugmented__function_1a87d9bedb5104d916f2d8e4520202ba44" prot="protected" static="no" mutable="no">
+        <type>double</type>
+        <definition>double Augmented_function::En_m</definition>
+        <argsstring></argsstring>
+        <name>En_m</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/augmented_fun.h" line="10" column="12" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/augmented_fun.h" bodystart="10" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="classAugmented__function_1a68aa65cf592852db5d8aa591faed66a3" prot="public" static="no" mutable="no">
+        <type><ref refid="structlm" kindref="compound">lm</ref></type>
+        <definition>lm Augmented_function::l_m</definition>
+        <argsstring></argsstring>
+        <name>l_m</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/augmented_fun.h" line="12" column="8" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/augmented_fun.h" bodystart="12" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAugmented__function_1a084ed4531435bf6c9404f74906bbd675" prot="public" static="no" mutable="no">
+        <type>double</type>
+        <definition>double Augmented_function::kappa_m</definition>
+        <argsstring></argsstring>
+        <name>kappa_m</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/augmented_fun.h" line="13" column="12" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/augmented_fun.h" bodystart="13" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAugmented__function_1ac85d56583de04209d492bb278be988e7" prot="public" static="no" mutable="no">
+        <type>spin</type>
+        <definition>spin Augmented_function::s_m</definition>
+        <argsstring></argsstring>
+        <name>s_m</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/augmented_fun.h" line="14" column="10" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/augmented_fun.h" bodystart="14" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAugmented__function_1aa065dcae53178ad8d13373d1a232a3cb" prot="public" static="no" mutable="no">
+        <type><ref refid="classLogarithmic__mesh" kindref="compound">Logarithmic_mesh</ref></type>
+        <definition>Logarithmic_mesh Augmented_function::mesh_m</definition>
+        <argsstring></argsstring>
+        <name>mesh_m</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/augmented_fun.h" line="15" column="22" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/augmented_fun.h" bodystart="15" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAugmented__function_1a1558390db0687d110c4ef3779dff4a70" prot="public" static="no" mutable="no">
+        <type>std::vector&lt; double &gt;</type>
+        <definition>std::vector&lt;double&gt; Augmented_function::val_m</definition>
+        <argsstring></argsstring>
+        <name>val_m</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/augmented_fun.h" line="16" column="17" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/augmented_fun.h" bodystart="16" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>Augmented_function</label>
+        <link refid="classAugmented__function"/>
+      </node>
+      <node id="1">
+        <label>Augmented_Hankel</label>
+        <link refid="classAugmented__Hankel"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="4">
+        <label>Logarithmic_mesh</label>
+        <link refid="classLogarithmic__mesh"/>
+        <childnode refid="5" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>Mesh</label>
+        <link refid="classMesh"/>
+        <childnode refid="6" relation="usage">
+          <edgelabel>x2_p</edgelabel>
+          <edgelabel>x_p</edgelabel>
+        </childnode>
+      </node>
+      <node id="6">
+        <label>std::vector&lt; double &gt;</label>
+      </node>
+      <node id="3">
+        <label>lm</label>
+        <link refid="structlm"/>
+      </node>
+      <node id="2">
+        <label>Augmented_function</label>
+        <link refid="classAugmented__function"/>
+        <childnode refid="3" relation="usage">
+          <edgelabel>l_m</edgelabel>
+        </childnode>
+        <childnode refid="4" relation="usage">
+          <edgelabel>mesh_m</edgelabel>
+        </childnode>
+        <childnode refid="6" relation="usage">
+          <edgelabel>val_m</edgelabel>
+        </childnode>
+      </node>
+      <node id="1">
+        <label>Augmented_Hankel</label>
+        <link refid="classAugmented__Hankel"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/augmented_fun.h" line="64" column="1" bodyfile="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/augmented_fun.h" bodystart="64" bodyend="80"/>
+    <listofallmembers>
+      <member refid="classAugmented__function_1ae3c0d5144179738e9e6c97a6676b9e1a" prot="public" virt="non-virtual"><scope>Augmented_Hankel</scope><name>Augmented_function</name></member>
+      <member refid="classAugmented__function_1a57e7a245188fa18976933132ba1b5ba2" prot="public" virt="non-virtual"><scope>Augmented_Hankel</scope><name>Augmented_function</name></member>
+      <member refid="classAugmented__function_1abdd342c840ed9a0ae2575567d4ace3a6" prot="public" virt="non-virtual"><scope>Augmented_Hankel</scope><name>Augmented_function</name></member>
+      <member refid="classAugmented__function_1a3e03404aa146bfec18293143dfa1762e" prot="public" virt="non-virtual"><scope>Augmented_Hankel</scope><name>Augmented_function</name></member>
+      <member refid="classAugmented__Hankel_1a6c4694502e2e6988fe3c33eab1edfc85" prot="public" virt="non-virtual"><scope>Augmented_Hankel</scope><name>Augmented_Hankel</name></member>
+      <member refid="classAugmented__Hankel_1a757ca15b1d6dc78f27ac698c719d4110" prot="public" virt="non-virtual"><scope>Augmented_Hankel</scope><name>Augmented_Hankel</name></member>
+      <member refid="classAugmented__Hankel_1a9beb74b4e540535b9132c39db6d5c2c1" prot="public" virt="non-virtual"><scope>Augmented_Hankel</scope><name>Augmented_Hankel</name></member>
+      <member refid="classAugmented__Hankel_1a646e8e0ce28a2b46e34aa9dd68098d9c" prot="public" virt="non-virtual"><scope>Augmented_Hankel</scope><name>Augmented_Hankel</name></member>
+      <member refid="classAugmented__Hankel_1a2166c885748647c20c85b6b8650b60d6" prot="public" virt="non-virtual"><scope>Augmented_Hankel</scope><name>EH</name></member>
+      <member refid="classAugmented__Hankel_1a123e55c1f47cad472228ae6699658933" prot="public" virt="non-virtual"><scope>Augmented_Hankel</scope><name>EH</name></member>
+      <member refid="classAugmented__function_1a164b2a3ab60e4c89a4ca0b3ac2a011c1" prot="public" virt="non-virtual"><scope>Augmented_Hankel</scope><name>En</name></member>
+      <member refid="classAugmented__function_1a655bc4251b7417aa2f82f69b9a839e57" prot="public" virt="non-virtual"><scope>Augmented_Hankel</scope><name>En</name></member>
+      <member refid="classAugmented__function_1a87d9bedb5104d916f2d8e4520202ba44" prot="protected" virt="non-virtual"><scope>Augmented_Hankel</scope><name>En_m</name></member>
+      <member refid="classAugmented__function_1af7f62a70d0293f36ad033b2c3a104a0b" prot="public" virt="non-virtual"><scope>Augmented_Hankel</scope><name>kappa</name></member>
+      <member refid="classAugmented__function_1a4a3fbc697571fe19a55fb8c8e9409364" prot="public" virt="non-virtual"><scope>Augmented_Hankel</scope><name>kappa</name></member>
+      <member refid="classAugmented__function_1a084ed4531435bf6c9404f74906bbd675" prot="public" virt="non-virtual"><scope>Augmented_Hankel</scope><name>kappa_m</name></member>
+      <member refid="classAugmented__function_1a8a340605b6020c71a6fef5a0b8f1251b" prot="public" virt="non-virtual"><scope>Augmented_Hankel</scope><name>l</name></member>
+      <member refid="classAugmented__function_1a5569c661561a7a35bfc59148431726f2" prot="public" virt="non-virtual"><scope>Augmented_Hankel</scope><name>l</name></member>
+      <member refid="classAugmented__function_1a68aa65cf592852db5d8aa591faed66a3" prot="public" virt="non-virtual"><scope>Augmented_Hankel</scope><name>l_m</name></member>
+      <member refid="classAugmented__function_1a52cfb9e9ff3023d4e24a87abfe8433b4" prot="public" virt="non-virtual"><scope>Augmented_Hankel</scope><name>mesh</name></member>
+      <member refid="classAugmented__function_1a220205d71230400be2aa804fddb57cfe" prot="public" virt="non-virtual"><scope>Augmented_Hankel</scope><name>mesh</name></member>
+      <member refid="classAugmented__function_1aa065dcae53178ad8d13373d1a232a3cb" prot="public" virt="non-virtual"><scope>Augmented_Hankel</scope><name>mesh_m</name></member>
+      <member refid="classAugmented__function_1af09e1c0c2c10638bcf058b13e5683daf" prot="public" virt="non-virtual"><scope>Augmented_Hankel</scope><name>operator()</name></member>
+      <member refid="classAugmented__Hankel_1a03a33067937521c34dc46168f4245667" prot="public" virt="non-virtual"><scope>Augmented_Hankel</scope><name>operator=</name></member>
+      <member refid="classAugmented__Hankel_1ab07d268668283bbe97c6b11eb120a473" prot="public" virt="non-virtual"><scope>Augmented_Hankel</scope><name>operator=</name></member>
+      <member refid="classAugmented__function_1a954583b48744cd2eae4caf3520719c5a" prot="public" virt="non-virtual" ambiguityscope="Augmented_function::"><scope>Augmented_Hankel</scope><name>operator=</name></member>
+      <member refid="classAugmented__function_1a09db8b7894174cd6c67b3ad7d3bb7edc" prot="public" virt="non-virtual" ambiguityscope="Augmented_function::"><scope>Augmented_Hankel</scope><name>operator=</name></member>
+      <member refid="classAugmented__function_1abb7a989dc1a09060bbd9b4bd147df6fe" prot="public" virt="non-virtual"><scope>Augmented_Hankel</scope><name>s</name></member>
+      <member refid="classAugmented__function_1a9fc4ade6a5f4e4a81b8a8577817821f9" prot="public" virt="non-virtual"><scope>Augmented_Hankel</scope><name>s</name></member>
+      <member refid="classAugmented__function_1ac85d56583de04209d492bb278be988e7" prot="public" virt="non-virtual"><scope>Augmented_Hankel</scope><name>s_m</name></member>
+      <member refid="classAugmented__Hankel_1a051db9bea46932612e984df7eddbe295" prot="public" virt="virtual"><scope>Augmented_Hankel</scope><name>update</name></member>
+      <member refid="classAugmented__function_1a27e866d6841096928ea6bba2ebbba613" prot="public" virt="non-virtual"><scope>Augmented_Hankel</scope><name>val</name></member>
+      <member refid="classAugmented__function_1af6b1d2919a83f30567958f99ff528922" prot="public" virt="non-virtual"><scope>Augmented_Hankel</scope><name>val</name></member>
+      <member refid="classAugmented__function_1a1558390db0687d110c4ef3779dff4a70" prot="public" virt="non-virtual"><scope>Augmented_Hankel</scope><name>val_m</name></member>
+      <member refid="classAugmented__function_1a05554ea4222a99cbd5edda6b09babcf9" prot="public" virt="virtual"><scope>Augmented_Hankel</scope><name>~Augmented_function</name></member>
+      <member refid="classAugmented__Hankel_1aafee8408aef1bfdf0ba41176c812f08e" prot="public" virt="non-virtual"><scope>Augmented_Hankel</scope><name>~Augmented_Hankel</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,52 @@
+\hypertarget{classPotential}{}\doxysection{Potential Class Reference}
+\label{classPotential}\index{Potential@{Potential}}
+Inheritance diagram for Potential\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classPotential}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classPotential_afff42668a768c6309d94d069ae34824d}\label{classPotential_afff42668a768c6309d94d069ae34824d}} 
+void {\bfseries initial\+\_\+pot} (double vol)
+\item 
+\mbox{\Hypertarget{classPotential_a2e233e4d4bec88f4961cb1b2e2b81890}\label{classPotential_a2e233e4d4bec88f4961cb1b2e2b81890}} 
+double {\bfseries M\+T0} ()
+\item 
+\mbox{\Hypertarget{classPotential_a688eff314106f0421254da2c77288d00}\label{classPotential_a688eff314106f0421254da2c77288d00}} 
+{\bfseries Potential} (const \mbox{\hyperlink{classCrystal__t}{Crystal\+\_\+t}}$<$ 3, \mbox{\hyperlink{classAtom}{Atom}} $>$ \&cryst, const std\+::vector$<$ \mbox{\hyperlink{classLogarithmic__mesh}{Logarithmic\+\_\+mesh}} $>$ \&at\+\_\+meshes, std\+::function$<$ double(const size\+\_\+t Z, const double r)$>$ atomic\+\_\+potential=\mbox{[}$\,$\mbox{]}(const size\+\_\+t Z, const double r)\{ return -\/2.$\ast$static\+\_\+cast$<$ double $>$(Z)/r;\})
+\item 
+\mbox{\Hypertarget{classPotential_a6a6eca1dc9b32494f6189404e503eb38}\label{classPotential_a6a6eca1dc9b32494f6189404e503eb38}} 
+void {\bfseries set\+\_\+xc\+\_\+fun} (X\+C\+\_\+\+F\+UN xc\+\_\+func)
+\item 
+\mbox{\Hypertarget{classAtomic__quantity_a5bd9055fdf94e57e54a355d5aa818b6c}\label{classAtomic__quantity_a5bd9055fdf94e57e54a355d5aa818b6c}} 
+double {\bfseries operator()} (const G\+S\+L\+::\+Vector \&r)
+\item 
+\mbox{\Hypertarget{classAtomic__quantity_adfdeab2507a0b975643b53b1df2319b1}\label{classAtomic__quantity_adfdeab2507a0b975643b53b1df2319b1}} 
+std\+::vector$<$ double $>$ \& {\bfseries sphere} (const size\+\_\+t i)
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classPotential_a6a99f6673af280be1d6eb3d6e0a963bb}\label{classPotential_a6a99f6673af280be1d6eb3d6e0a963bb}} 
+\mbox{\hyperlink{classXc__func}{Xc\+\_\+func}} {\bfseries xc\+\_\+fun}
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classAtomic__quantity_a0fb317241d287bde4bbee6cade84a45f}\label{classAtomic__quantity_a0fb317241d287bde4bbee6cade84a45f}} 
+const \mbox{\hyperlink{classCrystal__t}{Crystal\+\_\+t}}$<$ 3, \mbox{\hyperlink{classAtom}{Atom}} $>$ \& {\bfseries cr}
+\item 
+\mbox{\Hypertarget{classAtomic__quantity_a38619ec6589df0672464f3512243c13f}\label{classAtomic__quantity_a38619ec6589df0672464f3512243c13f}} 
+const std\+::vector$<$ \mbox{\hyperlink{classLogarithmic__mesh}{Logarithmic\+\_\+mesh}} $>$ \& {\bfseries at\+\_\+meshes}
+\item 
+\mbox{\Hypertarget{classAtomic__quantity_a69f4c5e435c8c32883528b7cf2099616}\label{classAtomic__quantity_a69f4c5e435c8c32883528b7cf2099616}} 
+std\+::vector$<$ std\+::vector$<$ double $>$ $>$ {\bfseries val}
+\end{DoxyCompactItemize}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+atomic\+\_\+quantity.\+h\end{DoxyCompactItemize}

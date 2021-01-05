@@ -1,0 +1,42 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.20" xml:lang="en-US">
+  <compounddef id="dir_f6e63d8bf351938ed4ae10d1274c9b07" kind="dir">
+    <compoundname>gsl-asw</compoundname>
+    <innerfile refid="atom_8h">atom.h</innerfile>
+    <innerfile refid="atomic__quantity_8h">atomic_quantity.h</innerfile>
+    <innerfile refid="augmented__fun_8h">augmented_fun.h</innerfile>
+    <innerfile refid="augmented__spherical__wave_8h">augmented_spherical_wave.h</innerfile>
+    <innerfile refid="bloch__sum_8h">bloch_sum.h</innerfile>
+    <innerfile refid="brillouin__zone__integration_8h">brillouin_zone_integration.h</innerfile>
+    <innerfile refid="crystal_8h">crystal.h</innerfile>
+    <innerfile refid="dirac_8h">dirac.h</innerfile>
+    <innerfile refid="eff__pot_8h">eff_pot.h</innerfile>
+    <innerfile refid="envelope__fun_8h">envelope_fun.h</innerfile>
+    <innerfile refid="ewald__int_8h">ewald_int.h</innerfile>
+    <innerfile refid="gaunt_8h">gaunt.h</innerfile>
+    <innerfile refid="k-mesh_8h">k-mesh.h</innerfile>
+    <innerfile refid="lattice_8h">lattice.h</innerfile>
+    <innerfile refid="log__mesh_8h">log_mesh.h</innerfile>
+    <innerfile refid="main_8h">main.h</innerfile>
+    <innerfile refid="numerical-mesh-integration_8h">numerical-mesh-integration.h</innerfile>
+    <innerfile refid="numerical-mesh_8h">numerical-mesh.h</innerfile>
+    <innerfile refid="numerov__solver_8h">numerov_solver.h</innerfile>
+    <innerfile refid="schroedinger_8h">schroedinger.h</innerfile>
+    <innerfile refid="simulation_8h">simulation.h</innerfile>
+    <innerfile refid="site_8h">site.h</innerfile>
+    <innerfile refid="spherical__fun_8h">spherical_fun.h</innerfile>
+    <innerfile refid="structure__const_8h">structure_const.h</innerfile>
+    <innerfile refid="tb_8h">tb.h</innerfile>
+    <innerfile refid="test__cubic_8h">test_cubic.h</innerfile>
+    <innerfile refid="test__mesh_8h">test_mesh.h</innerfile>
+    <innerfile refid="test__new__numerov_8h">test_new_numerov.h</innerfile>
+    <innerfile refid="test__schroedinger_8h">test_schroedinger.h</innerfile>
+    <innerfile refid="utils_8h">utils.h</innerfile>
+    <innerfile refid="xc__func_8h">xc_func.h</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/jjonsson/Programming/gsl-ASW/include/gsl-asw/"/>
+  </compounddef>
+</doxygen>
