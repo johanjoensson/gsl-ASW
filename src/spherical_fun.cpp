@@ -1,102 +1,92 @@
 #include <cmath>
 #include <string>
-#include "spherical_fun.h"
-#include "../../GSL-lib/src/complex.h"
+#include <spherical_fun.h>
+#include <GSLpp/complex.h>
 
 #include <iostream>
-
-Spherical_function::Spherical_function()
- : l()
-{}
-
-Spherical_function::Spherical_function(lm l)
- : l(l)
-{}
 
 double wronskian(Spherical_function a, Spherical_function b, double r)
 {
     double res = 0.;
     double fl = a(r);
-    a.l.l += 1;
+    a.set_l(lm {a.l().l + 1, a.l().m});
     double flp1 = a(r);
     double gl = b(r);
-    b.l.l += 1;
+    b.set_l(lm {b.l().l + 1, b.l().m});
     double glp1 = b(r);
     res = flp1*gl - fl*glp1;
 
     return res;
 }
 
-double Hankel_function::operator()(const double x)
+double Hankel_function::operator()(const double x) const
 {
-  GSL::Result exp = GSL::exp(-x);
-  GSL::Result k = 2./M_PI * GSL::bessel_kn_scaled(l.l, x);
-
-  return (exp*k).val;
+    GSL::Result exp = GSL::exp(-x);
+    GSL::Result k;
+    k = GSL::bessel_kn_scaled(l_m.l, x);
+    return 2./M_PI*(exp*k).val;
 }
 
-double Bessel_function::operator()(const double x)
+double Bessel_function::operator()(const double x) const
 {
-  return GSL::bessel_jn(l.l, x).val;
+    GSL::Result exp = GSL::exp(std::abs(x));
+    GSL::Result i = GSL::bessel_in_scaled(l_m.l, x);
+
+  return (exp*i).val;
 }
 
-double Neumann_function::operator()(const double x)
+double Neumann_function::operator()(const double x) const
 {
-  return GSL::bessel_yn(l.l, x).val;
+    return GSL::bessel_yn(l_m.l, x).val;
 }
 
-unsigned long int factorial(int n)
+double Integral_Hankel_function::operator()(const double kappa, const double eta, const double x) const
 {
-	unsigned long int res = 1;
-	for (int i = 1; i <= n; i++){
-		res *= i;
-	}
-
-	return res;
-
+	return GSL::pow_int(2*x, l_m.l)*( I.ewald_int(kappa, eta, l_m, x) +
+	  2./M_SQRTPI*I.comp_ewald_int(kappa, eta, l_m, x));
 }
 
-GSL::Result cubic_harmonic(lm l, const GSL::Vector& r)
+GSL::Result cubic_harmonic(const lm& l, GSL::Vector&& r)
 {
-	int m_eff = l.m;
-	double r_norm = r.norm();
-	int c = 1;
-	if (l.m < 0){
-		m_eff = -l.m;
-	}
-	if(l.m % 2 != 0){
-		c = -1;
-	}
-	if(r_norm < 1e-16){
-		GSL::Result res(0., 0.);
-		return res;
-	}
+    if(l.l == 0 && l.m == 0){
+        return GSL::Result(1./std::sqrt(4*M_PI), 0);
+    }
+    if(std::abs(r.norm()) < 1e-15){
+        return GSL::Result(0, 0);
+    }
 
-	GSL::Vector tmp(3);
-	tmp.copy(r);
-	tmp.normalize();
-	double x = tmp[0];
-	double y = tmp[1];
-	double z = tmp[2];
-	GSL::Result phi, cos_theta, res;
-
-
-	phi = GSL::Result(GSL::Complex(x, y).arg(), 0.);
-	cos_theta = GSL::Result(z, 0);
-
-
-	if(l.m > 0){
-		res = GSL::cos(m_eff*phi)*sqrt(2.);
-	}else if (l.m == 0){
-		res = GSL::Result(1., 0.);
-	}else{
-		res = GSL::sin(m_eff*phi)*sqrt(2.);
-	}
-
-	return c*GSL::legendre_sphPlm(l.l, m_eff, cos_theta.val)*res;
+    return GSL::pow_int(r.norm(), l.l)*cubic_harmonic(l.l, l.m,
+                            r[2]/r.norm(), GSL::Complex(r[0], r[1]).arg());
 }
 
-std::ostream& operator << ( std::ostream& os, const lm& l)
+GSL::Result cubic_harmonic(const lm& l, const GSL::Vector& r)
 {
-	return os << "(" << l.l << ", " << l.m << ")";
+    if(l.l == 0){
+        return GSL::Result(1./std::sqrt(4*M_PI), 0);
+    }
+
+    if(std::abs(r.norm()) < 1e-15){
+        return GSL::Result(0, 0);
+    }
+	return GSL::pow_int(r.norm(), l.l)*cubic_harmonic(l.l, l.m,
+                            r[2]/r.norm(), GSL::Complex(r[0], r[1]).arg());
+}
+
+GSL::Result cubic_harmonic(const int l, const int m, const double cos_theta, const double phi)
+{
+	int m_eff = std::abs(m);
+    int sign = 1;
+    if(m_eff % 2 == 1){
+        sign = -1;
+    }
+    double fac = 1;
+	if(m > 0){
+		fac = GSL::cos(m_eff*phi).val;
+	}else if (m < 0){
+		fac = GSL::sin(m_eff*phi).val;
+	}
+    if(m != 0){
+        fac *= std::sqrt(2.);
+    }
+	return sign*GSL::legendre_sphPlm(l, m_eff, cos_theta)*fac;
 }

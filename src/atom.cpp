@@ -1,13 +1,13 @@
-#include "atom.h"
+#include <gsl-asw/atom.h>
 
-int Atom::get_Z()
+size_t Atom::get_Z() const
 {
 	return Z;
 }
 
-void Atom::set_Z(const int Z)
+void Atom::set_Z(const size_t Z_n)
 {
-	this->Z = Z;
+	this->Z = Z_n;
 }
 
 void Atom::set_MT(const double mt)
@@ -22,54 +22,45 @@ void Atom::set_AS(const double as)
 
 void Atom::set_pos(const GSL::Vector &r)
 {
-	this->pos.copy(r);
-}
-GSL::Vector Atom::get_pos()
-{
-	return (this->pos);
+	this->pos = r;
 }
 
-double Atom::get_MT()
+/*
+void Atom::set_mesh(const Logarithmic_mesh& mesh_n)
+{
+	this->mesh = mesh_n;
+}
+*/
+
+GSL::Vector Atom::get_pos() const
+{
+	return this->pos;
+}
+
+double Atom::get_MT() const
 {
 	return this->MT;
 }
 
-double Atom::get_AS()
+double Atom::get_AS() const
 {
 	return this->AS;
 }
 
+/*
 Atom::Atom()
- : Z(), MT(), AS(), pos(), mesh()
+ : Z(), MT(), AS(), pos(3), mesh()
+{}
+*/
+
+Atom::Atom(const double mt, const double as, const size_t z,
+	/*const Logarithmic_mesh &mesh_n,*/ const GSL::Vector &r)
+	: Z(z), MT(mt), AS(as), pos(r)/*, mesh(mesh_n)*/
 {}
 
-Atom::Atom(double mt, double as, double z, Logarithmic_mesh &mesh,
-	GSL::Vector &r)
-	: pos(r), mesh(mesh)
-{
-	this->MT = mt;
-	this->AS = as;
-	this->Z = z;
-}
-
-Atom::Atom(const double mt, const double as, const double z,
-	const Logarithmic_mesh &mesh, const GSL::Vector &r)
-	: pos(r), mesh(mesh)
-{
-	this->MT = mt;
-	this->AS = as;
-	this->Z = z;
-}
-
-Atom::Atom(Logarithmic_mesh &mesh, GSL::Vector &r)
-	: Atom(1, 1, 0, mesh, r)
-{
-}
-
-Atom::Atom(const Logarithmic_mesh &mesh, const GSL::Vector &r)
-	: Atom(1, 1, 0, mesh, r)
-{
-}
+Atom::Atom(/*const Logarithmic_mesh &mesh_n,*/ const GSL::Vector &r)
+	: Atom(1, 1, 0,/* mesh_n, */r)
+{}
 
 bool operator==(const Atom &a, const Atom &b)
 {

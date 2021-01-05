@@ -11,9 +11,9 @@
 
 # Compilers to use
 #CXX = clang++
-CXX = g++
+CXX ?= g++
 #CC  = clang
-CC  = gcc
+CC  ?= gcc
 
 CXXCHECK = clang-tidy
 
@@ -23,16 +23,20 @@ SRC_DIR = src
 # Build directory
 BUILD_DIR = build
 
+# Test directory
+TEST_DIR = tests
+GSLLIBROOT=../GSL-lib
+OLEVEL = -Ofast
+WFLAGS = -Wall -Wextra -pedantic -Wshadow -Wnon-virtual-dtor -Wold-style-cast -Wcast-align -Wunused -Woverloaded-virtual -Wpedantic -Wconversion -Wsign-conversion -Wnull-dereference -Wdouble-promotion -Wformat=2 -Weffc++ -Wmisleading-indentation -Wduplicated-cond -Wduplicated-branches -Wlogical-op  -Wuseless-cast -Werror
 # Flags for the above defined compilers
-CXXFLAGS = -g -std=c++11 -Wall -Wextra -Werror -W -pedantic -I $(SRC_DIR) -DDEBUG
-CFLAGS = -g -std=c11 -Wall -Wextra -Werror -W -pedantic -I $(SRC_DIR) -DDEBUG
+CXXFLAGS = -std=c++11 $(WFLAGS) -I $(SRC_DIR) -I $(GSLLIBROOT)/include $(OLEVEL) -flto -DDEBUG #-g -pg
 
-CXXCHECKS =clang-analyzer-*,-clang-analyzer-cplusplus*,cppcoreguidelines-*,bugprone-* 
-CXXCHECKFLAGS = -checks=$(CXXCHECKS) -header-filter=.* -- -std=c++11
+CXXCHECKS =clang-analyzer-*,-clang-analyzer-cplusplus*,cppcoreguidelines-*,bugprone-*
+CXXCHECKFLAGS = -checks=$(CXXCHECKS) -header-filter=.* -- -std=c++11 -I$(GSLLIBROOT)/include
 
 # Libraries to link against
-GSLLIBDIR="../GSL-lib"
-LDFLAGS = -L$(GSLLIBDIR) -Wl,-rpath=$(GSLLIBDIR) -lgsl -lgslcblas -lm -lgsl-lib -lxc
+GSLLIBDIR=$(GSLLIBROOT)/lib/GSLpp
+LDFLAGS = -pg -L$(GSLLIBDIR) -L. -Wl,-rpath=$(GSLLIBDIR) -lGSLpp -lxc -lm -lpthread $(OLEVEL) -flto
 
 # Source files directory
 SRC_DIR = src
@@ -43,9 +47,28 @@ BUILD_DIR = build
 # List of all executables in this project
 EXE = gsl-asw
 
-NUMEROV_OBJ = numerov_solver.o\
-	      spherical_fun.o\
+ASW_OBJ =     bloch_sum.o\
+	      gaunt.o\
+	      structure_const.o\
+	      augmented_fun.o\
+	      augmented_spherical_wave.o\
+	      atomic_quantity.o\
+	      atom.o\
+	      lattice.o\
+	      ewald_int.o\
+	      utils.o\
+	      xc_func.o\
+	      envelope_fun.o\
+	      simulation.o\
+	      k-mesh.o\
 	      log_mesh.o\
+	      spherical_fun.o\
+
+ASW_HEADERS = numerov_solver.h\
+	      schroedinger.h\
+
+
+TB_OBJS =     tb.o\
 	      bloch_sum.o\
 	      gaunt.o\
 	      structure_const.o\
@@ -59,35 +82,78 @@ NUMEROV_OBJ = numerov_solver.o\
 	      utils.o\
 	      xc_func.o\
 	      envelope_fun.o\
-	      main.o
-OBJS = $(addprefix $(BUILD_DIR)/, $(NUMEROV_OBJ))
+	      simulation.o\
+	      k-mesh.o\
+	      log_mesh.o\
+	      spherical_fun.o\
 
-OBJS = $(addprefix $(BUILD_DIR)/, $(NUMEROV_OBJ))
+TB_HEADERS =  numerov_solver.h\
+	      schroedinger.h\
+
+TEST_OBJ = $(ASW_OBJ)\
+	   spherical_functions_test.o\
+	   bloch_sum_test.o\
+	   bloch_summed_structure_constants.o
+
+
+OBJS = $(addprefix $(BUILD_DIR)/, $(ASW_OBJ)) $(BUILD_DIR)/main.o
+TEST_OBJS = $(addprefix $(BUILD_DIR)/, $(TEST_OBJ)) $(BUILD_DIR)/main_test.o
 
 # Targets to always execute, even if new files with the same names exists
-.PHONY: all clean cleanall
+.PHONY: build all clean cleanall
 
 # Build all executables
-all: $(EXE)
+all: build $(EXE)
 
 # Create object files from c++ sources
-$(BUILD_DIR)/%.o: $(SRC_DIR)/%.cpp
+$(BUILD_DIR)/%.o: $(SRC_DIR)/%.cpp $(SRC_DIR)/%.h
+	$(CXX) $(CXXFLAGS) -c $< -o $@
+
+$(BUILD_DIR)/%.o: $(TEST_DIR)/%.cpp
 	$(CXX) $(CXXFLAGS) -c $? -o $@
 
 # Create object files from c sources
-$(BUILD_DIR)/%.o: $(SRC_DIR)/%.c
+$(BUILD_DIR)/%.o: $(SRC_DIR)/%.c $(SRC_DIR)/%.h
 	$(CC) $(CFLAGS) -c $? -o $@
 
 # Link numerov_test
 gsl-asw: $(OBJS)
-	$(CXX) $(LDFLAGS) $? -o $@
+	$(CXX) $^ -o $@ $(LDFLAGS)
 
-checkall: $(addprefix $(SRC_DIR)/, $(NUMEROV_OBJ:o=cpp))
+TB: $(addprefix $(BUILD_DIR)/, $(TB_OBJS))
+	$(CXX) $^ -o $@ $(LDFLAGS)
+
+checkall: $(addprefix $(SRC_DIR)/, $(ASW_OBJ:o=cpp))
 	$(CXXCHECK) $^ $(CXXCHECKFLAGS)
+
+travis: GSLLIBROOT = GSL-lib-master
+travis: GSLLIBDIR = $(GSLLIBROOT)/lib/GSLpp
+travis: CXXFLAGS = -std=c++11 -I $(SRC_DIR) -I $(GSLLIBROOT)/include -O0
+travis: all
+
+test: 	CXXFLAGS = -std=c++11 -I $(SRC_DIR) -I $(GSLLIBROOT)/include -I$(TEST_DIR) -O1 -fprofile-arcs -ftest-coverage
+test:  LDFLAGS = -lgcov -lgtest -L$(GSLLIBDIR) -L. -Wl,-rpath=$(GSLLIBDIR) -lGSLpp -lgsl -lxc -lm -lpthread
+test: 	clean $(TEST_OBJS)
+	$(CXX) $(TEST_OBJS) -o $@  $(LDFLAGS)
+
+test_mesh: $(BUILD_DIR)/test_mesh.o $(BUILD_DIR)/log_mesh.o
+	$(CXX) $^ -o $@ $(LDFLAGS)
+
+test_cubic: $(BUILD_DIR)/test_cubic.o $(BUILD_DIR)/spherical_fun.o $(BUILD_DIR)/ewald_int.o
+	$(CXX) $^ -o $@ $(LDFLAGS)
+
+test_numerov: $(BUILD_DIR)/test_new_numerov.o
+	$(CXX) $^ -o $@ $(LDFLAGS)
+
+test_schroedinger: $(BUILD_DIR)/test_schroedinger.o $(BUILD_DIR)/log_mesh.o
+	$(CXX) $^ -o $@ $(LDFLAGS)
+
+build :
+	mkdir -p build
 
 # Remove object files
 clean:
-	rm -f $(BUILD_DIR)/*.o
+	rm -f $(BUILD_DIR)/*.o $(BUILD_DIR)/*.gcno $(BUILD_DIR)/*.gcda
 
 # Remove executables and object files
 cleanall:

@@ -1,106 +1,57 @@
-#include "augmented_fun.h"
-#include "spherical_fun.h"
-#include "numerov_solver.h"
+#include <augmented_fun.h>
+#include <spherical_fun.h>
+#include <schroedinger.h>
+#include <envelope_fun.h>
 
-Augmented_function::Augmented_function()
- : n(), l(), kappa(), radius(), center(), mesh(), val()
+#include <numeric>
+#include <fstream>
+#include <exception>
+
+
+Augmented_function::Augmented_function( const lm l_n, const double kappa_n, const spin s_n,
+    const Logarithmic_mesh& mesh_n)
+ : En_m(0), l_m(l_n), kappa_m(kappa_n), s_m(s_n), mesh_m(mesh_n),
+ val_m(mesh_n.size())
 {}
 
-Augmented_function::Augmented_function(const Augmented_function &a)
- : n(a.n), l(a.l), kappa(a.kappa), radius(a.radius), center(a.center), mesh(a.mesh), val(a.val)
-{}
-
-Augmented_function::Augmented_function(Augmented_function &&a)
- : Augmented_function()
+double Augmented_function::operator()(const GSL::Vector& r) const
 {
-    std::swap(n, a.n);
-    std::swap(l, a.l);
-    std::swap(kappa, a.kappa);
-    std::swap(radius, a.radius);
-
-    std::swap(center, a.center);
-    std::swap(mesh, a.mesh);
-    std::swap(val, a.val);
-}
-
-Augmented_function::Augmented_function(const int n, const lm l, const double kappa,
-    const GSL::Vector center, const Logarithmic_mesh mesh)
- : n(n), l(l), kappa(kappa), radius(mesh.r.back()), center(center), mesh(mesh),
- val(mesh.r.size())
-{
-}
-
-Augmented_function::~Augmented_function()
-= default;
-
-double Augmented_function::operator()(const GSL::Vector r)
-{
-    double res = 0;
-    GSL::Vector ri = r - center;
+    double res = 0, radius = mesh_m.r_back();
     size_t t = 1;
-    if(ri.norm() <= radius){
-        while(mesh.r[t] < ri.norm() && t < mesh.r.size()){
+    if(r.norm<double>() <= radius){
+        while(mesh().r(t) < r.norm<double>() && t < mesh().size()){
             t++;
         }
         // r[t - 1] < |ri| and r[t] > |ri|
-        if(t < mesh.r.size()){
-            res = lerp(ri.norm(), mesh.r[t - 1], mesh.r[t], val[t - 1]*mesh.drx[t-1], val[t]*mesh.drx[t]);
+        if(t < mesh().size()){
+            res = lerp(r.norm<double>(), mesh().r(t - 1), mesh().r(t),
+            val_m[t - 1]*std::sqrt(mesh().drx(t-1))*mesh().drx(t-1), val_m[t]*std::sqrt(mesh().drx(t))*mesh().drx(t));
         }
     }
     return res;
 }
 
-Augmented_function& Augmented_function::operator=(const Augmented_function& a)
+double augmented_integral(const Augmented_function &a, const Augmented_function &b)
 {
-    n = a.n;
-    l = a.l;
-    kappa = a.kappa;
-    radius = a.radius;
-    center = a.center;
-    mesh = a.mesh;
-    val = a.val;
+    if(std::abs(a.kappa() - b.kappa()) < 1e-10){
+	    Logarithmic_mesh mesh = a.mesh();
+	    std::vector<double> integrand(a.val().size(), 0);
 
-    return *this;
+	    for(size_t i = 0; i < integrand.size(); i++){
+		    integrand[i] = a.val()[i]*b.val()[i];
+	    }
+	    return mesh.integrate_simpson(integrand);
+	    // return mesh.integrate(integrand);
 
-}
-
-Augmented_function& Augmented_function::operator=(Augmented_function&& a)
-{
-    std::swap(n, a.n);
-    std::swap(l, a.l);
-    std::swap(kappa, a.kappa);
-    std::swap(radius, a.radius);
-    std::swap(center, a.center);
-    std::swap(mesh, a.mesh);
-    std::swap(val, a.val);
-
-    return *this;
-
-}
-
-double augmented_integral(Augmented_function &a, Augmented_function &b)
-{
-    double res = 0.;
-    Logarithmic_mesh mesh = a.mesh;
-    int N = mesh.r.size();
-    // Make sure both funcions are centered on the same site
-    if(a.center != b.center){
-        return 0.;
+    }else{
+	    Envelope_Hankel h1(a.l(), a.kappa()), h2(b.l(), b.kappa());
+	    return 1./(a.En() - b.En()) * wronskian(h1, h2, a.mesh().r_back());
     }
-    // Use Simpsons rule for integration
-    for(int i = 1; i < (N - 1)/2.; i++){
-        res += a.val[2*i - 1]*b.val[2*i - 1]/**mesh.r2[2*1 - 1]*mesh.drx[2*i-2]*/;
-        res += 4*a.val[2*i]*b.val[2*i]/**mesh.r2[2*1]*mesh.drx[2*i-1]*/;
-        res += a.val[2*i + 1]*b.val[2*i + 1]/**mesh.r2[2*1 + 1]*mesh.drx[2*i]*/;
-    }
-
-    res = 1./3 * res;
-    return res;
 }
 
 bool operator==(const Augmented_function &a, const Augmented_function &b)
 {
-    return a.n == b.n && a.l == b.l && a.center == b.center;
+    return a.l() == b.l();
 }
 
 bool operator!=(const Augmented_function &a, const Augmented_function &b)
@@ -108,199 +59,257 @@ bool operator!=(const Augmented_function &a, const Augmented_function &b)
     return !(a == b);
 }
 
-Augmented_Hankel::Augmented_Hankel()
- : Augmented_function(), EH()
+Augmented_Hankel::Augmented_Hankel(const lm l_n, const double kappa_n, const spin s_n,
+    const Logarithmic_mesh& mesh_n)
+ : Augmented_function(l_n, kappa_n, s_n, mesh_n)
 {}
 
-Augmented_Hankel::Augmented_Hankel(const Augmented_Hankel& a)
- : Augmented_function(a)
-{
-    n = a.n;
-    l = a.l;
-    kappa = a.kappa;
-    radius = a.radius;
-    center = a.center;
-    mesh = a.mesh;
-    val = a.val;
-
-    EH = a.EH;
-
-}
-
-Augmented_Hankel::Augmented_Hankel(Augmented_Hankel&& a)
- : Augmented_function(a), EH()
-{
-    std::swap(n, a.n);
-    std::swap(l, a.l);
-    std::swap(kappa, a.kappa);
-    std::swap(radius, a.radius);
-
-    std::swap(center, a.center);
-    std::swap(mesh, a.mesh);
-    std::swap(val, a.val);
-
-    std::swap(EH, a.EH);
-}
-
-Augmented_Hankel::Augmented_Hankel(const int n, const lm l, const double kappa,
-    const GSL::Vector center, const Logarithmic_mesh mesh)
- : Augmented_function(n, l, kappa, center, mesh), EH()
-{}
-
-Augmented_Hankel::~Augmented_Hankel()
-{}
-
-void Augmented_Hankel::update(std::vector<double> v, const double en
+void Augmented_Hankel::update(std::vector<double>& v, const double en
     , const bool core)
 {
-    EH = en;
-    Numerov_solver sol;
-    int nodes = std::max(0, n - l.l - 1);
-    int last = mesh.r.size() - 1, lastbutone = mesh.r.size() - 2;
+    EH() = en;
+    size_t nodes = static_cast<size_t>(std::max(0, l_m.n - l_m.l - 1));
+    size_t last = mesh_m.size() - 1, lastbutone = mesh_m.size() - 2;
 
-    Hankel_function H(l);
+    Envelope_Hankel H(l_m, kappa_m);
 
-    std::vector<double> l_init = {GSL::pow_int(mesh.r[0], l.l+1)/sqrt(mesh.drx[0]),
-        GSL::pow_int(mesh.r[1], l.l+1)/sqrt(mesh.drx[1]),
-        GSL::pow_int(mesh.r[2], l.l+1)/sqrt(mesh.drx[2])};
+    std::vector<double> l_init = {
+        0,
+        GSL::pow_int(mesh_m.r(1), l_m.l + 1),
+        GSL::pow_int(mesh_m.r(2), l_m.l + 1)};
     std::vector<double> r_init;
     if(core){
-        r_init = {1e-24, 0.};
+        r_init = {1e-8, 0.};
     }else{
-        r_init = {-GSL::pow_int(kappa, l.l + 1)*mesh.r[last]*
-            H(kappa*mesh.r[last])/sqrt(mesh.drx[last]),
-                  -GSL::pow_int(kappa, l.l+1)*mesh.r[lastbutone]*
-            H(kappa*mesh.r[lastbutone])/sqrt(mesh.drx[lastbutone])};
+        r_init = {mesh_m.r(lastbutone)*H.barred_fun(mesh_m.r(lastbutone)),
+                  mesh_m.r(last)*H.barred_fun(mesh_m.r(last))};
     }
-    val = sol.solve(mesh, v, l_init, r_init, EH, nodes);
+    Radial_Schroedinger_Equation_Central_Potential se(v, static_cast<size_t>(l_m.l), l_init, r_init, mesh_m, 1e-10);
+    se.solve(nodes, EH());
+    if(core){
+        se.normalize();
+    }else{
+        double scale = 1;
+        if(std::abs(se.psi().back()) > 1e-12){
+            scale = r_init.back()/se.psi().back();
+        }
+        for(size_t i = 0; i < mesh_m.size(); i++){
+            se.psi()[i] *= scale;
+        }
+    }
+    val_m = se.psi();
+    EH() = se.e();
+#ifdef DEBUG
+    std::ofstream out_file("check_Hankel.dat", std::ios::app);
+    for(size_t i = 0; i < mesh_m.size(); i++){
+        out_file << mesh_m.r(i) << " " << val_m[i] << " " << v[i] << "\n";
+    }
+    out_file << "\n\n";
+#endif //DEBUG
 }
 
-Augmented_Hankel& Augmented_Hankel::operator=(const Augmented_Hankel& a)
-{
-    n = a.n;
-    l = a.l;
-    kappa = a.kappa;
-    radius = a.radius;
-
-    center = a.center;
-    mesh = a.mesh;
-    val = a.val;
-
-    EH = a.EH;
-
-    return *this;
-}
-
-Augmented_Hankel& Augmented_Hankel::operator=(Augmented_Hankel&& a)
-{
-    std::swap(n, a.n);
-    std::swap(l, a.l);
-    std::swap(kappa, a.kappa);
-    std::swap(radius, a.radius);
-
-    std::swap(center, a.center);
-    std::swap(mesh, a.mesh);
-    std::swap(val, a.val);
-
-    std::swap(EH, a.EH);
-
-    return *this;
-}
-
-Augmented_Bessel::Augmented_Bessel()
- : Augmented_function(), EJ()
+Augmented_Bessel::Augmented_Bessel(const lm l_n, const double kappa_n, const spin s_n,
+    const Logarithmic_mesh& mesh_n)
+ : Augmented_function(l_n, kappa_n, s_n, mesh_n)
 {}
 
-Augmented_Bessel::Augmented_Bessel(const Augmented_Bessel& a)
- : Augmented_function(a)
-{
-    n = a.n;
-    l = a.l;
-    kappa = a.kappa;
-    radius = a.radius;
-    EJ = a.EJ;
-
-    center = a.center;
-    mesh = a.mesh;
-    val = a.val;
-}
-
-Augmented_Bessel::Augmented_Bessel(Augmented_Bessel&& a)
- : Augmented_function(a), EJ()
-{
-    std::swap(n, a.n);
-    std::swap(l, a.l);
-    std::swap(kappa, a.kappa);
-    std::swap(radius, a.radius);
-
-    std::swap(center, a.center);
-    std::swap(mesh, a.mesh);
-    std::swap(val, a.val);
-
-    std::swap(EJ, a.EJ);
-}
-
-Augmented_Bessel::Augmented_Bessel(const int n, const lm l, const double kappa,
-    const GSL::Vector center, const Logarithmic_mesh mesh)
- : Augmented_function(n, l, kappa, center, mesh), EJ()
-{}
-
-Augmented_Bessel::~Augmented_Bessel()
-{}
-
-void Augmented_Bessel::update(std::vector<double> v, const double en
+void Augmented_Bessel::update(std::vector<double>& v, const double en
     , const bool core)
 {
-    EJ = en;
-    Numerov_solver sol;
-    int nodes = std::max(0,n - l.l - 1);
-    int last = mesh.r.size() - 1, lastbutone = mesh.r.size() - 2;
-    Bessel_function J(l);
+    EJ() = en;
+    size_t nodes = static_cast<size_t>(std::max(0, l_m.n - l_m.l - 1));
+    size_t last = mesh_m.size() - 1, lastbutone = mesh_m.size() - 2;
+    Envelope_Bessel I(l_m, kappa_m);
 
     if(!core){
-        std::vector<double> l_init = {GSL::pow_int(mesh.r[0], l.l+1)/sqrt(mesh.drx[0]),
-            GSL::pow_int(mesh.r[1], l.l+1)/sqrt(mesh.drx[1]),
-            GSL::pow_int(mesh.r[2], l.l+1)/sqrt(mesh.drx[2])};
+        std::vector<double> l_init = {
+            0,
+            GSL::pow_int(mesh_m.r(1), l_m.l+1),
+            GSL::pow_int(mesh_m.r(2), l_m.l+1)};
 
-        std::vector<double> r_init = {GSL::pow_int(1./kappa, l.l)*mesh.r[last]*
-            J(kappa*mesh.r[last])/sqrt(mesh.drx[last]),
-                  GSL::pow_int(1./kappa, l.l)*mesh.r[lastbutone]*
-            J(kappa*mesh.r[lastbutone])/sqrt(mesh.drx[lastbutone])};
+        std::vector<double> r_init = {
+            I.barred_fun(mesh_m.r(lastbutone))
+		        *mesh_m.r(lastbutone),
+		    I.barred_fun(mesh_m.r(last))
+		        *mesh_m.r(last)};
 
-        val = sol.solve(mesh, v, l_init, r_init, EJ, nodes);
+        Radial_Schroedinger_Equation_Central_Potential se(v, static_cast<size_t>(l_m.l), l_init, r_init, mesh_m, 1e-10);
+        se.solve(nodes, EJ());
+        double scale = r_init.back()/se.psi().back();
+        for(size_t i = 0; i < mesh_m.size(); i++){
+            se.psi()[i] *= scale;
+        }
+        val_m = se.psi();
+        EJ() = se.e();
     }else{
-        EJ = 0.;
-        val = std::vector<double>(val.size(), 0.);
+        EJ() = 0.;
+        val_m = std::vector<double>(val_m.size(), 0.);
     }
+#ifdef DEBUG
+    std::ofstream out_file("check_Bessel.dat", std::ios::app);
+    for(size_t i = 0; i < mesh_m.size(); i++){
+        out_file << mesh_m.r(i) << " " << val_m[i] << " " << v[i] << "\n";
+    }
+    out_file << "\n\n";
+#endif //DEBUG
 }
 
-Augmented_Bessel& Augmented_Bessel::operator=(const Augmented_Bessel& a)
+void Hankel_container::add_function(const Augmented_Hankel& H)
 {
-    n = a.n;
-    l = a.l;
-    kappa = a.kappa;
-    radius = a.radius;
-    EJ = a.EJ;
-
-    center = a.center;
-    mesh = a.mesh;
-    val = a.val;
-
-    return *this;
+    auto cmp = [](const Augmented_Hankel& H1, const Augmented_Hankel& H2)
+    {
+        if(H1.s() == H2.s()){
+            if(H1.kappa() == H2.kappa()){
+                return H1.l() < H2.l();
+            }else{
+                return H1.kappa() < H2.kappa();
+            }
+        }else{
+            return H1.s() < H2.s();
+        }
+        return false;
+    };
+    auto it = std::upper_bound(functions.begin(), functions.end(), H, cmp);
+    functions.insert(it, H);
 }
 
-Augmented_Bessel& Augmented_Bessel::operator=(Augmented_Bessel&& a)
+Augmented_Hankel& Hankel_container::get_function(const lm& l, const double& kappa, const spin& s)
 {
-    std::swap(n, a.n);
-    std::swap(l, a.l);
-    std::swap(kappa, a.kappa);
-    std::swap(radius, a.radius);
+    auto cmp = [](const Augmented_Hankel& H1, const Augmented_Hankel& H2)
+    {
+        if(H1.s() == H2.s()){
+            if(H1.kappa() == H2.kappa()){
+                return H1.l() < H2.l();
+            }else{
+                return H1.kappa() < H2.kappa();
+            }
+        }else{
+            return H1.s() < H2.s();
+        }
+        return false;
+    };
+    auto it = std::lower_bound(functions.begin(), functions.end(),
+        Augmented_Hankel ({l.n, l.l, -l.l}, kappa, s, Logarithmic_mesh()), cmp);
+    if(it == functions.end()){
+        throw std::runtime_error("Hankel function, " + l.to_string() + ", not found!\n");
+    }
+    return *it;
+}
 
-    std::swap(center, a.center);
-    std::swap(mesh, a.mesh);
-    std::swap(val, a.val);
+size_t Hankel_container::get_index(const lm& l, const double& kappa, const spin& s) const
+{
+    auto cmp = [](const Augmented_Hankel& H1, const Augmented_Hankel& H2)
+    {
+        if(H1.s() == H2.s()){
+            if(H1.kappa() == H2.kappa()){
+                return H1.l() < H2.l();
+            }else{
+                return H1.kappa() < H2.kappa();
+            }
+        }else{
+            return H1.s() < H2.s();
+        }
+        return false;
+    };
+    auto it = std::lower_bound(functions.begin(), functions.end(),
+            Augmented_Hankel ({l.n, l.l, -l.l}, kappa, s, Logarithmic_mesh()), cmp);
+    if(it == functions.end()){
+        throw std::runtime_error("Hankel function, " + l.to_string() + ", not found!\n");
+    }
+    return static_cast<size_t>(std::distance(functions.begin(), it));
+}
 
-    std::swap(EJ, a.EJ);
+void Bessel_container::add_function(const Augmented_Bessel& J)
+{
+    auto cmp = [](const Augmented_Bessel& J1, const Augmented_Bessel& J2)
+    {
+        if(J1.s() == J2.s()){
+            if(J1.kappa() == J2.kappa()){
+                return J1.l() < J2.l();
+            }else{
+                return J1.kappa() < J2.kappa();
+            }
+        }else{
+            return J1.s() < J2.s();
+        }
+        return false;
+    };
+    auto it = std::upper_bound(functions.begin(), functions.end(), J, cmp);
+    functions.insert(it, J);
+}
 
-    return *this;
+Augmented_Bessel& Bessel_container::get_function(const lm& l, const double& kappa, const spin& s)
+{
+    auto cmp = [](const Augmented_Bessel& J1, const Augmented_Bessel& J2)
+    {
+        if(J1.s() == J2.s()){
+            if(J1.kappa() == J2.kappa()){
+                return J1.l() < J2.l();
+            }else{
+                return J1.kappa() < J2.kappa();
+            }
+        }else{
+            return J1.s() < J2.s();
+        }
+        return false;
+    };
+    auto it = std::lower_bound(functions.begin(), functions.end(),
+        Augmented_Bessel ({l.n, l.l, -l.l}, kappa, s, Logarithmic_mesh()), cmp);
+    if(it == functions.end()){
+        throw std::runtime_error("Bessel function, " + l.to_string() + ", not found!\n");
+    }
+    return *it;
+}
+
+size_t Bessel_container::get_index(const lm& l, const double& kappa, const spin& s) const
+{
+    auto cmp = [](const Augmented_Bessel& J1, const Augmented_Bessel& J2)
+    {
+        if(J1.s() == J2.s()){
+            if(J1.kappa() == J2.kappa()){
+                return J1.l() < J2.l();
+            }else{
+                return J1.kappa() < J2.kappa();
+            }
+        }else{
+            return J1.s() < J2.s();
+        }
+        return false;
+    };
+    Augmented_Bessel J({l.n, l.l, -l.l}, kappa, s, Logarithmic_mesh());
+    auto it = std::lower_bound(functions.begin(), functions.end(),
+            Augmented_Bessel ({l.n, l.l, -l.l}, kappa, s, Logarithmic_mesh()), cmp);
+    if(it == functions.end()){
+        throw std::runtime_error("Bessel function, " + l.to_string() + ", not found!\n");
+    }
+    return static_cast<size_t>(std::distance(functions.begin(), it));
+}
+
+lm Bessel_container::min_lm() const
+{
+    auto cmp = [](const Augmented_Bessel& J1, const Augmented_Bessel& J2)
+        {
+            return J1.l() < J2.l();
+        };
+    auto it = std::min_element(functions.begin(), functions.end(), cmp);
+    if(it == functions.end()){
+        throw std::runtime_error("Minimum element not found!\n");
+    }
+    return it->l();
+
+}
+
+
+lm Bessel_container::max_lm() const
+{
+    auto cmp = [](const Augmented_Bessel& J1, const Augmented_Bessel& J2)
+        {
+            return J1.l() < J2.l();
+        };
+    auto it = std::max_element(functions.begin(), functions.end(), cmp);
+    if(it == functions.end()){
+        throw std::runtime_error("Maximum element not found!\n");
+    }
+    return it->l();
+
 }
