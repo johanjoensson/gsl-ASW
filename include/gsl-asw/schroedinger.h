@@ -3,7 +3,6 @@
 #include <vector>
 #include <iomanip>
 #include "numerov_solver.h"
-#include "log_mesh.h"
 #include "numerical-mesh.h"
 #include "numerical-mesh-integration.h"
 #include <GSLpp/special_functions.h>
