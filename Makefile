@@ -21,15 +21,15 @@ CXXCHECK = clang-tidy
 SRC_DIR = src
 
 # Build directory
-BUILD_DIR = build
+BUILD_DIR = tmp
 
 # Test directory
 TEST_DIR = tests
 GSLLIBROOT=../GSL-lib
-OLEVEL = -Ofast
+OLEVEL = -O0
 WFLAGS = -Wall -Wextra -pedantic -Wshadow -Wnon-virtual-dtor -Wold-style-cast -Wcast-align -Wunused -Woverloaded-virtual -Wpedantic -Wconversion -Wsign-conversion -Wnull-dereference -Wdouble-promotion -Wformat=2 -Weffc++ -Wmisleading-indentation -Wduplicated-cond -Wduplicated-branches -Wlogical-op  -Wuseless-cast -Werror
 # Flags for the above defined compilers
-CXXFLAGS = -std=c++11 $(WFLAGS) -I $(SRC_DIR) -I $(GSLLIBROOT)/include $(OLEVEL) -flto -DDEBUG #-g -pg 
+CXXFLAGS = -std=c++11 $(WFLAGS) -I include/gsl-asw -I $(GSLLIBROOT)/include $(OLEVEL) -DDEBUG -g -pg #  -flto
 
 CXXCHECKS =clang-analyzer-*,-clang-analyzer-cplusplus*,cppcoreguidelines-*,bugprone-* 
 CXXCHECKFLAGS = -checks=$(CXXCHECKS) -header-filter=.* -- -std=c++11 -I$(GSLLIBROOT)/include
@@ -100,14 +100,14 @@ TEST_OBJS = $(addprefix $(BUILD_DIR)/, $(TEST_OBJ)) $(BUILD_DIR)/main_test.o
 all: build $(EXE)
 
 # Create object files from c++ sources
-$(BUILD_DIR)/%.o: $(SRC_DIR)/%.cpp $(SRC_DIR)/%.h
+$(BUILD_DIR)/%.o: $(SRC_DIR)/%.cpp
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
 $(BUILD_DIR)/%.o: $(TEST_DIR)/%.cpp
 	$(CXX) $(CXXFLAGS) -c $? -o $@
 
 # Create object files from c sources
-$(BUILD_DIR)/%.o: $(SRC_DIR)/%.c $(SRC_DIR)/%.h
+$(BUILD_DIR)/%.o: $(SRC_DIR)/%.c
 	$(CC) $(CFLAGS) -c $? -o $@
 
 # Link numerov_test
@@ -143,7 +143,7 @@ test_schroedinger: $(BUILD_DIR)/test_schroedinger.o $(BUILD_DIR)/log_mesh.o
 	$(CXX) $^ -o $@ $(LDFLAGS)
 
 build : 
-	mkdir -p build
+	mkdir -p ${BUILD_DIR}
 
 # Remove object files
 clean:

@@ -14,52 +14,51 @@
 * @param mesh Logarithmic mesh to use in intraatomic calculations\n
 *******************************************************************************/
 class Atom {
-	public:
+private:
 	// Nuclear charge
-	size_t Z;
+	size_t Z_m;
 	// Muffin tin radius (MT) &
 	// Atomic sphere radius (AS)
-	double MT, AS;
+	double MT_m, AS_m;
 
-	// Atomic position, cartesian coordinates
-	GSL::Vector pos;
-//	Logarithmic_mesh mesh;
-	void set_Z(const size_t Z_n);
+public:
 	//! Get nuclear charge
-	size_t get_Z() const;
-	//! Set atom position (cartersian)
-	void set_pos(const GSL::Vector &r);
-	//! Set muffin tin radius
-	void set_MT(double mt);
-	//! Set atomic sphere radius
-	void set_AS(double as);
-	void set_mesh(const Logarithmic_mesh& mesh);
-	//! Get atomic position (cartesian)
-	GSL::Vector get_pos() const;
+	size_t Z() const {return Z_m;}
+	size_t& Z() {return Z_m;}
 	//! Get muffin tin radius
-	double get_MT() const;
+	double MT() const {return MT_m;}
+	double& MT() {return MT_m;}
 	//! Get atomic sphere radius
-	double get_AS() const;
+	double AS() const {return AS_m;}
+	double& AS() {return AS_m;}
 
-
-/*
 	Atom() = default;
 	Atom(const Atom&) = default;
 	Atom(Atom&&) = default;
+
+	Atom(const double mt, const double as, const size_t z)
+	 : Z_m(z), MT_m(mt), AS_m(as)
+	{}
+
+
 	~Atom() = default;
-*/
-	Atom(/*const Logarithmic_mesh &mesh,*/ const GSL::Vector &r);
-	Atom(const double mt, const double as, const size_t z,
-		/*const Logarithmic_mesh &mesh,*/ const GSL::Vector &r);
 
+	Atom& operator=(const Atom&) = default;
+	Atom& operator=(Atom&&) = default;
 
-	// Atom& operator=(const Atom&) = default;
-	// Atom& operator=(Atom&&) = default;
 	friend bool operator==(const Atom &a, const Atom &b);
 	friend bool operator!=(const Atom &a, const Atom &b);
 
 };
 
-bool operator==(const Atom &a, const Atom &b);
-bool operator!=(const Atom &a, const Atom &b);
+inline bool operator==(const Atom &a, const Atom &b)
+{
+	return a.MT() == b.MT() && a.AS() == b.AS() && a.Z() == b.Z();
+}
+
+inline bool operator!=(const Atom &a, const Atom &b)
+{
+	return !(a == b);
+}
+
 #endif //ATOM_H

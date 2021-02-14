@@ -3,6 +3,7 @@
 #include "utils.h"
 #include "log_mesh.h"
 #include "atomic_quantity.h"
+#include <numerical-mesh.h>
 #include "GSLpp/vector.h"
 
 class Augmented_function{
@@ -12,8 +13,11 @@ public:
     lm l_m;
     double kappa_m;
     spin s_m;
-    Logarithmic_mesh mesh_m;
-    std::vector<double> val_m;
+    Exponential_mesh<1, double> mesh_m;
+
+    double S_m;
+
+    // std::vector<double> val_m;
 
     double operator()(const GSL::Vector& r) const;
 
@@ -23,7 +27,7 @@ public:
     virtual ~Augmented_function(){}
 
     Augmented_function(const lm l, const double kappa, const spin s,
-        const Logarithmic_mesh& mesh);
+        const Exponential_mesh<1, double>& mesh);
 
     Augmented_function& operator=(const Augmented_function&) = default;
     Augmented_function& operator=(Augmented_function&&) = default;
@@ -43,18 +47,20 @@ public:
     spin s() const {return s_m;}
     spin& s() {return s_m;}
 
-    Logarithmic_mesh mesh() const {return mesh_m;}
-    Logarithmic_mesh& mesh() {return mesh_m;}
+    Exponential_mesh<1, double> mesh() const {return mesh_m;}
+    Exponential_mesh<1, double>& mesh() {return mesh_m;}
 
-    std::vector<double> val() const {return val_m;}
-    std::vector<double>& val() {return val_m;}
+    double S() const {return S_m;}
+    // double& S() {return S_m;}
 
-    double En() const { return En_m;}
-    double& En() { return En_m;}
+    // std::vector<double> val() const {return val_m;}
+    // std::vector<double>& val() {return val_m;}
+
+    double En() const {return En_m;}
+    double& En() {return En_m;}
 };
 
-// Use Simpsons rule to calculate integrals over atomic spheres of augmented functions
-double augmented_integral(const Augmented_function &a, const Augmented_function &b);
+// double augmented_integral(const Augmented_function &a, const Augmented_function &b);
 
 // Compare equality of different augmented funcitons
 // Two agumented functions are equal if they are centered on the same site and have identical quantum numbers
@@ -65,13 +71,16 @@ class Augmented_Hankel: public Augmented_function{
 public:
     double& EH(){return En_m;}
     double EH() const {return En_m;}
+
+    double SH() const {return S_m;}
+
     Augmented_Hankel() = default;
     Augmented_Hankel(const Augmented_Hankel&) = default;
     Augmented_Hankel(Augmented_Hankel&&) = default;
     ~Augmented_Hankel(){}
 
     Augmented_Hankel(const lm l, const double kappa, const spin s,
-        const Logarithmic_mesh& mesh);
+        const Exponential_mesh<1, double>& mesh);
 
     Augmented_Hankel& operator=(const Augmented_Hankel& a) = default;
     Augmented_Hankel& operator=(Augmented_Hankel&& a) = default;
@@ -83,13 +92,14 @@ class Augmented_Bessel: public Augmented_function{
 public:
     double& EJ(){return En_m;}
     double EJ() const {return En_m;}
+    double SJ() const {return S_m;}
     Augmented_Bessel() = default;
     Augmented_Bessel(const Augmented_Bessel&) = default;
     Augmented_Bessel(Augmented_Bessel&&) = default;
     ~Augmented_Bessel(){}
 
     Augmented_Bessel(const lm l, const double kappa, const spin s,
-        const Logarithmic_mesh& mesh);
+        const Exponential_mesh<1, double>& mesh);
 
 
     Augmented_Bessel& operator=(const Augmented_Bessel& a) = default;
@@ -240,5 +250,11 @@ public:
     size_t size() const
     {return functions.size();}
 };
+
+// Use Simpsons rule to calculate integrals over atomic spheres of augmented functions
+double augmented_integral(const Augmented_Hankel &a, const Augmented_Hankel &b);
+double augmented_integral(const Augmented_Bessel &a, const Augmented_Bessel &b);
+double augmented_integral(const Augmented_Hankel &a, const Augmented_Bessel &b);
+double augmented_integral(const Augmented_Bessel &a, const Augmented_Hankel &b);
 
 #endif // AUGMENTED_FUN_H

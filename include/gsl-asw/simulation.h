@@ -11,6 +11,8 @@
 #include "k-mesh.h"
 #include "log_mesh.h"
 #include "structure_const.h"
+#include <numerical-mesh.h>
+
 
 struct GSLVecCompare{
     bool operator()(const GSL::Vector& lhs, const GSL::Vector& rhs) const
@@ -24,7 +26,7 @@ class Simulation{
     std::vector<Hankel_container> Hs_m;
     std::vector<Bessel_container> Bs_m;
     Crystal_t<3, Atom> cryst;
-    std::vector<Logarithmic_mesh> at_meshes;
+    std::vector<Exponential_mesh<1, double>> at_meshes;
     Potential pot;
     Density n_m;
     std::vector<Augmented_spherical_wave> basis_valence;

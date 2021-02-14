@@ -52,13 +52,13 @@ numerov_debug.close();
 	double kappa = std::sqrt(0.015);
 
 
-	GSL::Vector a = {0.0, 0.5, 0.5}, b = {0.5, 0.0, 0.5}, c = {0.5, 0.5, 0.0};
-	// GSL::Vector a = {1.0, 0.0, 0.0}, b = {0.0, 1.0, 0.0}, c = {0.0, 0.0, 1.0};
+	// GSL::Vector a = {0.0, 0.5, 0.5}, b = {0.5, 0.0, 0.5}, c = {0.5, 0.5, 0.0};
+	GSL::Vector a = {1.0, 0.0, 0.0}, b = {0.0, 1.0, 0.0}, c = {0.0, 0.0, 1.0};
 	std::cout << a << "\n";
 	std::cout << b << "\n";
 	std::cout << c << "\n";
 	// Crystal_t<3, Atom> cr(Lattice_t<3>({16*a, 16*b, 16*c}));
-	Crystal_t<3, Atom> cr(Lattice_t<3>({7*a, 7*b, 7*c}));
+	Crystal_t<3, Atom> cr(Lattice_t<3>({5*a, 5*b, 5*c}));
 	for(auto row : cr.lat().recip_lat()){
 		std::cout << row <<"\n";
 	}
@@ -84,38 +84,38 @@ numerov_debug.close();
 
 	std::cout << "Setting up atoms" << std::endl;
 	GSL::Vector tau(3);
-	Atom C1(/*Logarithmic_mesh(),*/ tau*cr.lat().lat());
+	Atom C1;
 
 	tau[0] = 0.25;
 	tau[1] = 0.25;
 	tau[2] = 0.25;
-	Atom C2(/*Logarithmic_mesh(),*/ tau*cr.lat().lat());
+	Atom C2;
 
 	tau[0] = 0.;
 	tau[1] = 0.5;
 	tau[2] = 0.5;
-	Atom C3(/*Logarithmic_mesh(),*/ tau*cr.lat().lat());
+	Atom C3;
 
 	tau[0] = 0.5;
 	tau[1] = 0.;
 	tau[2] = 0.5;
-	Atom C4(/*Logarithmic_mesh(),*/ tau*cr.lat().lat());
-	Atom C5(/*Logarithmic_mesh(),*/ tau*cr.lat().lat());
-	Atom C6(/*Logarithmic_mesh(),*/ tau*cr.lat().lat());
-	Atom C7(/*Logarithmic_mesh(),*/ tau*cr.lat().lat());
-	Atom C8(/*Logarithmic_mesh(),*/ tau*cr.lat().lat());
+	Atom C4;
+	Atom C5;
+	Atom C6;
+	Atom C7;
+	Atom C8;
 
-	C1.set_Z(6);
-	C2.set_Z(6);
-	C3.set_Z(6);
-	C4.set_Z(6);
-	C5.set_Z(6);
-	C6.set_Z(6);
-	C7.set_Z(6);
-	C8.set_Z(6);
+	C1.Z() = 6;
+	C2.Z() = 6;
+	C3.Z() = 6;
+	C4.Z() = 6;
+	C5.Z() = 6;
+	C6.Z() = 6;
+	C7.Z() = 6;
+	C8.Z() = 6;
 
 	cr.set_size({1, 1, 1});
-	cr.add_basis({C1, C2});//, C3, C4, C5, C6, C7, C8});
+	cr.add_basis({C1});//, C3, C4, C5, C6, C7, C8});
 	// cr.add_sites({{0, 0, 0}, {0.5, 0, 0}, {0, 0.5, 0}, {0, 0, 0.5}, {0.5, 0.5, 0}, {0.5, 0, 0.5}, {0, 0.5, 0.5}, {0.5, 0.5, 0.5}});
 	cr.add_sites({{0, 0, 0}, {0.5, 0.5, 0.5}});
 
@@ -129,20 +129,6 @@ numerov_debug.close();
 	std::cout << "Initialising K-mesh" << std::endl;
 	K_mesh kmesh(cr.lat().recip_lat());
 
-
-/*
-	std::cout << "Testing Gaunt coefficients\n";
-	for(lm l1 = {2, 1, -1}; l1 != lm {3, 0, 0}; l1++){
-		for(lm l2 = {2, 1, -1}; l2 != lm {3, 0, 0}; l2++){
-			for(lm l3 = {4, 0, 0}; l3 != lm {5, 0, 0}; l3++){
-				std::cout << "l1 = " << l1 << "\n";
-				std::cout << "l2 = " << l2 << "\n";
-				std::cout << "l3 = " << l3 << "\n";
-				std::cout << "\tGaunt coefficient = " << gaunt(l1, l2, l3) << "\n";
-			}
-		}
-	}
-*/
 
 	// kmesh.generate_mesh(10, 10, 10);
 	// kmesh.generate_mesh({{0,0,0}, {1,1,1}}, 1);
@@ -164,8 +150,6 @@ numerov_debug.close();
 		of << "\n";
 	}
 	of.close();
-
-	// return 0;
 
 	std::cout << "Loop ove k-points\n" << std::endl;
 	for(const auto& kp : kmesh.k_points){

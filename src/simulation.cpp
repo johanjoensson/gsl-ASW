@@ -15,32 +15,20 @@
 
 void Simulation::set_up_crystal()
 {
-
-
     double at_vol = 0;
     std::vector<std::vector<Site_t<3>>> nn = cryst.calc_nearest_neighbours();
     // Calculate MT radii
     for(const auto& site : cryst.sites()){
         std::cout << "Nearest neighbor " << nn[site.index()][0].pos() << std::endl;
-        cryst.atom(site).set_MT(nn[site.index()][0].pos().norm<double>()/2);
-        at_vol += GSL::pow_int(cryst.atom(site).get_MT(), 3);
-        std::cout << "RMT = " << cryst.atom(site).get_MT() << "\n";
+        cryst.atom(site).MT() = nn[site.index()][0].pos().norm<double>()/2;
+        at_vol += GSL::pow_int(cryst.atom(site).MT(), 3);
+        std::cout << "RMT = " << cryst.atom(site).MT() << "\n";
     }
     at_vol *= 4*M_PI/3;
     // Set AS radii, atomic sphere volumes should add up to the crystal volume
     for(const auto& site : cryst.sites()){
-        cryst.atom(site).set_AS( std::cbrt(cryst.volume()/at_vol) *
-        cryst.atom(site).get_MT());
+        cryst.atom(site).AS() = std::cbrt(cryst.volume()/at_vol) * cryst.atom(site).MT();
     }
-
-
-/*
-    for(const auto& site : cryst.sites()){
-        cryst.atom(site).set_AS( 1.2407 );
-        cryst.atom(site).set_MT( 1.2407 );
-
-    }
-*/
 }
 
 void Simulation::add_states(const Site_t<3>& center, const double kappa)
@@ -48,7 +36,7 @@ void Simulation::add_states(const Site_t<3>& center, const double kappa)
     std::set<lm> p;
     lm l = {1, 0, 0};
     size_t nel = 0;
-    size_t Z = cryst.atom(center).get_Z();
+    size_t Z = cryst.atom(center).Z();
     for(; nel < Z || /*l.l > 0*/ l.m > -l.l; l++, nel += 2){
         p.insert(l);
     }
@@ -95,11 +83,11 @@ void Simulation::set_up_basis()
     for(size_t i = 0; i < cryst.atoms().size(); i++){
         // auto index = std::distance(cryst.atoms().begin(), std::find(cryst.atoms().begin(), cryst.atoms().end(), at));
         // at_meshes[static_cast<size_t>(index)] = Logarithmic_mesh(at.get_AS(),
-        size_t np = static_cast<size_t>(1000*(0.5 + static_cast<double>(cryst.atoms(i).get_Z())/118));
+        size_t np = static_cast<size_t>(1000*(0.5 + static_cast<double>(cryst.atoms(i).Z())/118));
         if (np % 2 == 0) {
             np++;
         }
-        at_meshes[i] = Logarithmic_mesh(cryst.atoms(i).get_AS(), np);
+        at_meshes[i] = Exponential_mesh<1, double>(0,cryst.atoms(i).AS(), 0.02, np);
     }
     set_up_augmented_functions();
     // Divide electrons into core and valence states
@@ -117,7 +105,7 @@ void Simulation::set_up_augmented_functions()
     lm lH{1, 0, 0};
     size_t nel = 0;
     for(size_t i = 0; i < cryst.atoms().size(); i++){;
-        size_t z = cryst.atoms(i).get_Z();
+        size_t z = cryst.atoms(i).Z();
         Hs_m.push_back(Hankel_container());
         Bs_m.push_back(Bessel_container());
         while(nel < z){
@@ -183,7 +171,7 @@ void Simulation::init_augmented_functions()
             }else{
                 core = H.l() < basis_valence[N/2].l();
             }
-            H.update(pot.sphere(i), -GSL::pow_int(static_cast<double>(cryst.atoms(i).get_Z())/H.l().n, 2), core);
+            H.update(pot.sphere(i), -GSL::pow_int(static_cast<double>(cryst.atoms(i).Z())/H.l().n, 2), core);
             H.EH() -= pot.MT0();
             std::cout << ", EH = " << H.EH() << "\n";
         }
@@ -196,7 +184,7 @@ void Simulation::init_augmented_functions()
                 std::cout << "Unexpected\n";
                 continue;
             }
-            J.update(pot.sphere(i), -GSL::pow_int(static_cast<double>(cryst.atoms(i).get_Z())/J.l().n, 2), false);
+            J.update(pot.sphere(i), -GSL::pow_int(static_cast<double>(cryst.atoms(i).Z())/J.l().n, 2), false);
             J.EJ() -= pot.MT0();
             std::cout << "J " << J.l() << ", JH = " << J.EJ() << "\n";
         }
@@ -205,7 +193,7 @@ void Simulation::init_augmented_functions()
 
 Simulation::Simulation(const Crystal_t<3, Atom>& crystal, const XC_FUN func, const std::vector<double> kappas_n,
  std::function<double(const size_t, const double)> at_pot)
- : kappas(kappas_n), Hs_m(), Bs_m(), cryst(crystal), at_meshes(cryst.atoms().size()), pot(cryst, at_meshes, at_pot), n_m(cryst, at_meshes), basis_valence(), basis_core(), k_eigenvals(), XH1(),
+ : kappas(kappas_n), Hs_m(), Bs_m(), cryst(crystal), at_meshes(cryst.atoms().size(), {0, 0, 0, 1}), pot(cryst, at_meshes, at_pot), n_m(cryst, at_meshes), basis_valence(), basis_core(), k_eigenvals(), XH1(),
    XS1(), XH2(), XS2(), XH3(), XS3(), B_m()
 {
 
@@ -244,7 +232,7 @@ double Simulation::X_H1(const Augmented_Hankel& Ht1, const Augmented_Hankel& Ht2
     const Envelope_Hankel H1(Ht1.l(), k1);
     const Envelope_Hankel H2(Ht2.l(), k2);
     res += Ht2.EH()*augmented_integral(Ht1, Ht2);
-    res += -k2*k2*off_atomic_integral(H1, H2, at_meshes[cryst.atom_index(site)].r_back());
+    res += -k2*k2*off_atomic_integral(H1, H2, at_meshes[cryst.atom_index(site)].r().back());
     return res;
 }
 
@@ -257,12 +245,12 @@ double Simulation::X_H2(const Augmented_Hankel& Ht1, const Augmented_Bessel& Jt2
     if(std::abs(Ht1.EH() - Jt2.EJ()) < 5e-4){
         res += Jt2.EJ()*augmented_integral(Ht1, Ht1);
     }else{
-//        std::cout << "Error in interal = " << ( 1./(Ht1.EH() - Jt2.EJ()) - augmented_integral(Ht1, Jt2) ) * ( Ht1.EH() - Jt2.EJ() ) << "\n";
+        std::cout << "Error in interal = " << ( 1./(Ht1.EH() - Jt2.EJ()) - augmented_integral(Ht1, Jt2) ) * ( Ht1.EH() - Jt2.EJ() ) << "\n";
         // res += Jt2.EJ()/(Ht1.EH() - Jt2.EJ());
         res += Jt2.EJ()*augmented_integral(Ht1, Jt2);
 
     }
-    res -= -k2*k2*atomic_integral(H1, J2, at_meshes[cryst.atom_index(site)].r_back());
+    res -= -k2*k2*atomic_integral(H1, J2, at_meshes[cryst.atom_index(site)].r().back());
     if(std::abs(k1 - k2) > 1e-10){
         res += -k2*k2/(-k2*k2 + k1*k1);
     }
@@ -277,7 +265,7 @@ double Simulation::X_H3(const Augmented_Bessel& Jt1, const Augmented_Bessel& Jt2
     const Envelope_Bessel J1(Jt1.l(), k1);
     const Envelope_Bessel J2(Jt2.l(), k2);
     res += Jt2.EJ()*augmented_integral(Jt1, Jt2);
-    res -= -k2*k2*atomic_integral(J1, J2, at_meshes[cryst.atom_index(site)].r_back());
+    res -= -k2*k2*atomic_integral(J1, J2, at_meshes[cryst.atom_index(site)].r().back());
     return res;
 }
 
@@ -334,7 +322,7 @@ double Simulation::X_S1(const Augmented_Hankel& Ht1, const Augmented_Hankel& Ht2
     const double k1 = Ht1.kappa(), k2 = Ht2.kappa();
     const Envelope_Hankel H1(Ht1.l(), k1);
     const Envelope_Hankel H2(Ht2.l(), k2);
-    return augmented_integral(Ht1, Ht2) + off_atomic_integral(H1, H2, at_meshes[cryst.atom_index(site)].r_back());
+    return augmented_integral(Ht1, Ht2) + off_atomic_integral(H1, H2, at_meshes[cryst.atom_index(site)].r().back());
 }
 
 double Simulation::X_S2(const Augmented_Hankel& Ht1, const Augmented_Bessel& Jt2, const Site_t<3>& site)
@@ -348,7 +336,7 @@ double Simulation::X_S2(const Augmented_Hankel& Ht1, const Augmented_Bessel& Jt2
     }else{
         res += 1./(Ht1.EH() - Jt2.EJ());
     }
-    res -= atomic_integral(H1, J2, at_meshes[cryst.atom_index(site)].r_back());
+    res -= atomic_integral(H1, J2, at_meshes[cryst.atom_index(site)].r().back());
     if(std::abs(k1 - k2) > 1e-10){
         res += 1./(-k2*k2 + k1*k1);
     }
@@ -360,7 +348,7 @@ double Simulation::X_S3(const Augmented_Bessel& Jt1, const Augmented_Bessel& Jt2
     const double k1 = Jt1.kappa(), k2 = Jt2.kappa();
     const Envelope_Bessel J1(Jt1.l(), k1);
     const Envelope_Bessel J2(Jt2.l(), k2);
-    return augmented_integral(Jt1, Jt2) - atomic_integral(J1, J2, at_meshes[cryst.atom_index(site)].r_back());
+    return augmented_integral(Jt1, Jt2) - atomic_integral(J1, J2, at_meshes[cryst.atom_index(site)].r().back());
 }
 
 GSL::Complex Simulation::S_element(const size_t i1, const size_t i2, const GSL::Vector& kp)
