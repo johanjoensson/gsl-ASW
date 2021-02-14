@@ -34,7 +34,7 @@ void harmonic_oscillator()
 		1./std::sqrt(GSL::pow_int(2, n)*fac(n))*1./std::sqrt(std::sqrt(M_PI))*
 			GSL::exp(-0.5*GSL::pow_int(l/2, 2)).val*GSL::hermite_phys(n, l/2).val
 	 };
-	Schroedinger_Equation se(0, 20, v, left, right, l/static_cast<double>(len - 1), 1e-6);
+	Schroedinger_Equation se(0, 20, v, left, right, {-l/2, l/2, len}, 1e-6);
 	// Schroedinger_Equation se(0, 50, v, left, right, l/static_cast<double>(len - 1), 1e-6);
 	se.solve(static_cast<size_t>(n));
     se.normalize();
@@ -49,37 +49,35 @@ void harmonic_oscillator()
 
 void coulomb_potential()
 {
-    unsigned int len = 1000;
+    unsigned int len = 1001;
     double r0 = 56;
     int z = 1;
-    int n = 2;
-    int l = 4;
+    int n = 4;
+    int l = 0;
     std::vector<double> v(len, r0);
-    Logarithmic_mesh mesh(r0, len);
+    Exponential_mesh<1, double> mesh(0, r0, 0.01, len);
     auto pot = [z](double r){return -2.*z/r;};
-    auto r_c = mesh.r_begin();
-    for(auto it = v.begin(); it != v.end(); it++, r_c++){
-	    *it = pot(*r_c);
+    auto mesh_it = mesh.begin();
+    for(auto it = v.begin(); it != v.end(); it++, mesh_it++){
+	    *it = pot((*mesh_it).r());
     }
     std::vector<double> left = { 0., GSL::pow_int(-1, (n - l - 1))*GSL::pow_int(mesh.r(1), l + 1), GSL::pow_int(-1, (n - l - 1))*GSL::pow_int(mesh.r(2), l + 1)};
     std::vector<double> right = {0.001, 0};
 
     unsigned int nodes = static_cast<unsigned int>(std::max(n - l - 1, 0));
     Radial_Schroedinger_Equation_Central_Potential se(v, static_cast<unsigned int>(l), left, right, mesh, 1e-14);
-    se.solve(nodes, -GSL::pow_int(z/n, 2));
+    se.solve(nodes, -GSL::pow_int(static_cast<double>(z)/n, 2));
     se.normalize();
 
     std::cout << "Found energy : " << se.e() << "\n";
     auto psi_i = se.psi().begin();
     auto v_i = se.v().begin();
-    auto r_i = mesh.r_begin();
-    auto drx_i = mesh.drx_begin();
+    mesh_it = mesh.begin();
     while(psi_i != se.psi().end()){
-	    outfile << *r_i << " " << (*psi_i) << " " << *v_i << "\n";
+	    outfile << (*mesh_it).r() << " " << (*psi_i) << " " << *v_i << "\n";
 	    psi_i++;
 	    v_i++;
-	    r_i++;
-	    drx_i++;
+	    mesh_it++;
     }
     outfile << "\n\n";
 }

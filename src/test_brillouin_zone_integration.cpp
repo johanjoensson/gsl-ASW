@@ -13,12 +13,12 @@ int main()
 {
     GSL::Error_handler e_handler;
     e_handler.off();
-    double T = 100;
+    double T = 300;
     Simple_sampler sbz(eigvals, 5e-5, 1e-2);
     Fermi_sampler fbz(eigvals, kB*T);
     Gaussian_sampler gbz(eigvals, kB*T);
     Lorentzian_sampler lbz(eigvals, kB*T);
-    size_t N = 1;
+    size_t N = 2;
     MethfesselPaxton_sampler mpbz(eigvals, kB*T, N);
     ColdSmearing_sampler csbz(eigvals, kB*T);
 
@@ -29,15 +29,15 @@ int main()
     out << "# Brillouin zone integration test plots\n";
     out << "# Peak at 0 should have double the intensity of the peaks at -1 and +1, who should have double intensity compared to peaks at -1.5, -0.5, 0.5 and, 1.5\n";
     out << "Energy\t";
-    out << "Simple_sampler\t";
-    out << "Fermi_sampler\t";
-    out << "Gaussian_sampler\t";
-    out << "Lorentzian_sampler\t";
-    out << "MethfesselPaxton_sampler_" << N << "\t";
-    out << "ColdSmearing_sampler\n";
+    out << "\"Simple\"\t";
+    out << "\"FermiSampler\"\t";
+    out << "\"GaussianSsampler\"\t";
+    out << "\"LorentzianSampler\"\t";
+    out << "\"MethfesselPaxtonSampler_" << N << "\"\t";
+    out << "\"ColdSmearingSampler\"\n";
 
-    for(double i = 0; i < mesh.dim(); i++){
-        auto e = mesh.r(i);
+    for(auto point : mesh){
+        auto e = point.r();
         out << e << "\t" << sbz.dos(e) << "\t" << fbz.dos(e) << "\t" << gbz.dos(e)
         << "\t" << lbz.dos(e) << "\t" << mpbz.dos(e) << "\t" << csbz.dos(e) << "\n";
     }

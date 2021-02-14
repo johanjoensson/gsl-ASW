@@ -5,9 +5,11 @@
 #include "GSLpp/vector.h"
 #include "GSLpp/matrix.h"
 #include "GSLpp/special_functions.h"
+#include "GSLpp/complex.h"
 #include <vector>
 #include <algorithm>
 #include <numeric>
+#include <stdexcept>
 
 class Brillouin_zone_integrator
 {
@@ -23,6 +25,10 @@ public:
     Brillouin_zone_integrator& operator=(Brillouin_zone_integrator&&) = default;
 
     virtual double dos(const double E) const {return 0*E;}
+    virtual GSL::Complex measure_observable(const double E, const GSL::Matrix A) const
+    {
+        return 0*E*A[0][0];
+    }
 };
 
 class Brillouin_sampler : public Brillouin_zone_integrator
@@ -32,6 +38,23 @@ private:
 protected:
     inline virtual double delta(double x) const = 0;
     inline virtual double theta(double x) const = 0;
+
+    double real_weight(const double enk, const double E)
+     const
+    {
+        size_t n_k = energies_m.dim().first;
+
+        return 1./static_cast<double>(n_k) * 1./(E - enk);
+    }
+
+    double imaginary_weight(const double enk, const double E)
+     const
+    {
+        size_t n_k = energies_m.dim().first;
+
+        return 1./static_cast<double>(n_k) * delta(E - enk);
+    }
+
 public:
     Brillouin_sampler() = delete;
     Brillouin_sampler(const Brillouin_sampler&) = default;
@@ -42,18 +65,77 @@ public:
     {}
     virtual ~Brillouin_sampler() = default;
 
+    double measure_real(const double E, const GSL::Matrix& A) const
+    {
+        double res = 0;
+        if(A.dim().first != energies_m.dim().first){
+            throw(std::runtime_error("Error in measure_real. Matrix A has been "
+            "measured at a dfferents number of k-points than the Kohn-Sham energies."));
+        }
+        if(A.dim().second != energies_m.dim().second){
+            throw(std::runtime_error("Error in measure_real. Matrix A has been "
+            "measured at a dfferents number of bands than the Kohn-Sham energies."));
+        }
+
+        for(size_t row = 0; row < energies_m.dim().first; row++){
+            auto zipped = std::vector<std::pair<double, double>>(energies_m[row].size());
+            std::transform(energies_m[row].begin(), energies_m[row].end(), A[row].begin(), zipped.begin(),
+                [](const double enk, const double Ank)
+                {
+                    return std::pair<double, double>{enk, Ank};
+                });
+            res = std::accumulate(zipped.begin(), zipped.end(), res,
+                [=](const double acc, const std::pair<double, double> eA)
+                {
+                    double enk = eA.first, Ank = eA.second;
+                    return acc + Ank*real_weight(E, enk);
+                });
+        }
+        return res;
+    }
+    double measure_imaginary(const double E, const GSL::Matrix& A) const
+    {
+        double res = 0;
+        if(A.dim().first != energies_m.dim().first){
+            throw(std::runtime_error("Error in measure_imaginary. Matrix A has been "
+            "measured at a dfferents number of k-points than the Kohn-Sham energies."));
+        }
+        if(A.dim().second != energies_m.dim().second){
+            throw(std::runtime_error("Error in measure_imaginary. Matrix A has been "
+            "measured at a dfferents number of bands than the Kohn-Sham energies."));
+        }
+
+        for(size_t row = 0; row < energies_m.dim().first; row++){
+            auto zipped = std::vector<std::pair<double, double>>(energies_m[row].size());
+            std::transform(energies_m[row].begin(), energies_m[row].end(), A[row].begin(), zipped.begin(),
+                [](const double enk, const double Ank)
+                {
+                    return std::pair<double, double>{enk, Ank};
+                });
+            res = std::accumulate(zipped.begin(), zipped.end(), res,
+                [=](const double acc, const std::pair<double, double> eA)
+                {
+                    double enk = eA.first, Ank = eA.second;
+                    return acc + Ank*imaginary_weight(E, enk);
+                });
+        }
+        return res;
+    }
+
     double dos(const double E) const override
     {
-        size_t n_k = energies_m.dim().first;
-        double res = 0;
-        for (auto& row : energies_m){
-            res = std::accumulate(row.begin(), row.end(), res,
-            [=](const double acc, const double enk)
-            {
-                return acc + delta(E - enk);
-            });
+        GSL::Matrix A{energies_m.dim().first, energies_m.dim().second};
+        for(auto row : A){
+            for(auto& elem : row){
+                elem = 1.;
+            }
         }
-        return res/static_cast<double>(n_k);
+        return measure_imaginary(E, A);
+    }
+
+    GSL::Complex measure_observable(const double E, const GSL::Matrix A) const override
+    {
+        return {measure_real(E, A), -M_PI*measure_imaginary(E, A) };
     }
 };
 
