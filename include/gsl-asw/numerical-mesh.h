@@ -302,9 +302,9 @@ public:
     public:
         typedef const Arr difference_type;
         typedef const mesh_point value_type;
-        // typedef const mesh_point reference;
-        // typedef const mesh_point pointer;
-        // typedef std::random_access_iterator_tag iterator_category;
+        typedef const mesh_point reference;
+        typedef const mesh_point pointer;
+        typedef std::random_access_iterator_tag iterator_category;
 
         const_iterator(const const_iterator&) = default;
         const_iterator(const_iterator&&) = default;
@@ -313,7 +313,8 @@ public:
         const_iterator& operator=(const const_iterator&) = default;
         const_iterator& operator=(const_iterator&&) = default;
 
-        value_type operator*() noexcept {return mesh_point(m_m, i_m);}
+        reference operator*() noexcept {return mesh_point(m_m, i_m);}
+        reference operator[](const difference_type n) {return *(*this + n);}
 
         bool operator==(const const_iterator& b)const noexcept{return i_m == b.i_m;}
         bool operator!=(const const_iterator& b)const noexcept{return !(*this == b);}
@@ -368,6 +369,8 @@ public:
         }
 
         const_iterator operator+(const difference_type n)const noexcept{auto res = *this; return (res += n);}
+        friend const_iterator operator+(const difference_type n, const const_iterator& it)
+         noexcept { return it + n; }
         const_iterator operator-(const difference_type n)const noexcept{auto res = *this; return (res -= n);}
         difference_type operator-(const const_iterator& it)
             const noexcept
@@ -425,10 +428,8 @@ public:
         return const_iterator(this, i);
     }
 
-    // reverse_iterator rbegin() noexcept{return reverse_iterator(this->end());}
     const_reverse_iterator rbegin() const noexcept{return const_reverse_iterator(this->end());}
     const_reverse_iterator crbegin() const noexcept{return const_reverse_iterator(this->cend());}
-    // reverse_iterator rend() noexcept{return reverse_iterator(this->begin());}
     const_reverse_iterator rend() const noexcept{return const_reverse_iterator(this->begin());}
     const_reverse_iterator crend() const noexcept{return const_reverse_iterator(this->cbegin());}
 
@@ -570,9 +571,9 @@ public:
     public:
         typedef const Scalar difference_type;
         typedef const mesh_point value_type;
-        // typedef const mesh_point reference;
-        // typedef const mesh_point pointer;
-        // typedef std::random_access_iterator_tag iterator_category;
+        typedef const mesh_point reference;
+        typedef const mesh_point pointer;
+        typedef std::random_access_iterator_tag iterator_category;
 
         const_iterator(const const_iterator&) = default;
         const_iterator(const_iterator&&) = default;
@@ -581,7 +582,8 @@ public:
         const_iterator& operator=(const const_iterator&) = default;
         const_iterator& operator=(const_iterator&&) = default;
 
-        value_type operator*(){return mesh_point(m_m, i_m);}
+        reference operator*(){return mesh_point(m_m, i_m);}
+        reference operator[](const difference_type n){return *(*this + n);}
 
         bool operator==(const const_iterator& b)const noexcept{return i_m == b.i_m;}
         bool operator!=(const const_iterator& b)const noexcept{return !(*this == b);}
