@@ -2,18 +2,28 @@
 #define DIRAC_H
 #include <vector>
 #include <iomanip>
-#include <GSLpp/special_functions.h>
 #include <GSLpp/vector.h>
 #include <GSLpp/matrix.h>
 #include <GSLpp/ode.h>
 #include <GSLpp/interp.h>
+#include <GSLpp/special_functions.h>
 #include <algorithm>
+#include <numeric>
 #include <fstream>
-
+#include<unistd.h>
 #include <numerical-mesh.h>
 #include <numerical-mesh-integration.h>
 
+
+
 class Radial_Dirac_Equation{
+
+	template<class T>
+	static int signum(T val)
+	{
+		return (val > T(0)) - (val < T(0));
+	}
+
     /***********************************************************************//**
     * Find the point where E - v(X_i) = 0 (classical inversion point).\n
     * \t__Iter_res__ - iterator to result container (e.g. std::vector)\n
@@ -24,119 +34,309 @@ class Radial_Dirac_Equation{
     *\t__v_start__ - Iterator pointing to the first element of  the g container
     ***************************************************************************/
     template<class Iter_res, class Iter_v>
-    std::array<Iter_res, 4> find_inversion_point(
-        std::array<Iter_res, 4> res_start,
-        std::array<Iter_res, 4> res_end,
-        Iter_v v_start)
+    Iter_res find_inversion_point(
+        Iter_res res,
+        Iter_res res_end,
+        Iter_v v)
     {
-        int init_sign = signum(energy_m - *v_start);
-        std::array<Iter_res, 4> current = res_start;
-        Iter_v current_v = v_start;
-        while(current != res_end && signum(energy_m - (*current_v)) == init_sign){
-            std::for_each (current.begin(), current.end(), [] (Iter_res it) { it++;});
-            current_v++;
+        int init_sign = signum(energy_m - *v);
+        while(res != res_end && signum(energy_m - (*v)) == init_sign){
+            v++;
+            res++;
         }
-        return current;
+        return res;
     }
+
+    size_t count_nodes(std::vector<double> fun, size_t i_inv)
+    {
+    	size_t n_nodes = 0;
+    	for(size_t i = 1; i < i_inv; i++){
+            if (signum(fun[i + 1]) != signum(fun[i])){
+                n_nodes++;
+            }
+    	}
+    	return n_nodes;
+    }
+
+
 
 protected:
     const Exponential_mesh<1, double>& mesh_m;
+    const std::vector<double>& v_m;
+    const int kappa_m;
     std::vector<double> g_m, f_m;
-    double energy_m;
+	std::vector<double> left_init_g_m, left_init_f_m, right_init_g_m, right_init_f_m;
+    double energy_m, abs_err_m;
 
-    double F_norm() const
+    virtual double norm() const
     {
-        std::vector<double> integrand(mesh_p.size(), 0);
-        for(size_t i = 0; i < mesh_m.size(); i++){
-            integrand[i] = (GSL::pow_int(g_m[i], 2) +
-                            GSL::pow_int(f_m[i], 2))*mesh_m.drx(i);
-        }
-        return simpson_integral(mesh_m, [&](const double& i)
+        double res = simpson_integral<double>(mesh_m,
+            [&](const double& i)
             {
-                return integrand[static_cast<size_t>(i)];
+                return GSL::pow_int(g_m[static_cast<size_t>(i)], 2)*mesh_m.dr(i) +
+                       GSL::pow_int(f_m[static_cast<size_t>(i)], 2)*mesh_m.dr(i);
+            }
+        );
+		std::cout << "N = " << res << "\n";
+        return res;
+    }
+
+    /*!*************************************************************************
+    * Give a variational estimate of the energy correction required to get a
+    * smooth solution, matching value and slope at the inversion point.
+    ***************************************************************************/
+    template<class T = double>
+    T variational_de(T G_inv, T Fout_inv, T Fin_inv, T dr)
+    {
+		const double c = 2*137.035999174;
+        return c*G_inv*(Fout_inv - Fin_inv)/this->norm()*dr;
+    }
+
+public:
+    Radial_Dirac_Equation(const Exponential_mesh<1, double>& mesh, const std::vector<double>& v,
+        const int kappa, std::array<std::vector<double>, 2> left_init, std::array<std::vector<double>, 2> right_init, const double tol = 1e-10)
+      : mesh_m(mesh), v_m(v), kappa_m(kappa), g_m(mesh.size()), f_m(mesh.size()),
+	    left_init_g_m(left_init[0]), left_init_f_m(left_init[1]),
+		right_init_g_m(right_init[0]), right_init_f_m(right_init[1]), abs_err_m(tol)
+    {}
+
+	std::vector<double> g() const noexcept {return g_m;}
+	std::vector<double> f() const noexcept {return f_m;}
+	double g(const size_t i) const noexcept {return g_m[i];}
+	double f(const size_t i) const noexcept {return f_m[i];}
+    /*!*************************************************************************
+    * Solve the radial Dirac equation, starting with an energy guess midway
+    * between e_min and e_max.
+    ***************************************************************************/
+    void solve(const size_t nodes)
+    {
+        // solve(nodes, 0.5*(e_min_m + e_max_m));
+    }
+
+    /*!*************************************************************************
+    * Solve the radial Dirac equations, starting with an energy guess equal to
+    * e_guess, then refine the energy guess by making sure that the large
+    * component of the solution has the required number of nodes. Then
+    * use more refined methods, such as matching derivatives or variational
+    * estimates of the energy, for solving the problem.
+    ***************************************************************************/
+    void solve(const  size_t nodes, const  double e_guess, const double e_min_guess, const double e_max_guess)
+    {
+        const double c = 2*137.035999174;
+
+        double e_min = *std::min_element(std::begin(v_m) + 2, std::end(v_m));
+		e_min = std::max(e_min_guess, e_min);
+        double e_max = std::min(e_max_guess, v_m.back());
+		// GSL::Interpolation Vlinear = GSL::Interpolation(mesh_m.r(), v_m, GSL::Interpolation_type::Linear);
+		// GSL::Interpolation Vspline = GSL::Interpolation(mesh_m.r(), v_m, GSL::Interpolation_type::CSpline);
+
+        energy_m = e_guess;
+        auto func = [=](double x, const std::vector<double>& y, std::vector<double>& f)
+        {
+			size_t i = static_cast<size_t>(x);
+            auto r = mesh_m.r(x);
+			auto dr = mesh_m.dr(x);
+			auto d2r = mesh_m.d2r(x);
+
+			// Radial large component
+			// f[0] = dr*((-kappa_m/r - 0.5*d2r/(dr*dr))*y[0] + 1/c*(energy_m + c*c - V(r))*y[1]);
+			f[0] = dr*((-kappa_m/r - 0.5*d2r/(dr*dr))*y[0] + 1/c*(energy_m + c*c - v_m[i])*y[1]);
+			// Radial small component
+			// f[1] = dr*(-1/c*(energy_m - V(r))*y[0] + (kappa_m/r - 0.5*d2r/(dr*dr))*y[1]);
+			f[1] = dr*(-1/c*(energy_m - v_m[i])*y[0] + (kappa_m/r - 0.5*d2r/(dr*dr))*y[1]);
+        };
+
+/*
+		auto jac = [=](double x, const std::vector<double>& y, std::vector<double>& dfdy, std::vector<double>& dfdt)
+        {
+			std::cout << "Jacobian!" << std::endl;
+            auto r = mesh_m.r(x);
+			auto r2 = mesh_m.r2(x);
+			auto dr = mesh_m.dr(x);
+			auto d2r = mesh_m.d2r(x);
+			auto d3r = mesh_m.d3r(x);
+
+            dfdy[0] = dr*(-kappa_m/r - 0.5*dr*d2r);
+            dfdy[1] = dr*1/c*(energy_m + c*c - V(x));
+            dfdy[2] = dr*(-1/c*(energy_m - V(x)));
+            dfdy[3] = dr*(kappa_m/r - 0.5*dr*d2r);
+
+			// dr*((-kappa_m/r - 0.5*dr*d2r)*y[0] + 1/c*(energy_m + 2*c*c - V(x))*y[1])
+            dfdt[0] = d2r*((-kappa_m/r - 0.5*dr*d2r)*y[0] + 1/c*(energy_m + c*c - V(r))*y[1])
+					+ dr*((kappa_m/r2*dr - 0.5*d2r*d2r - 0.5*dr*d3r)*y[0] - 1/c*V.deriv(r, 1)*dr*y[1]);
+			// dr*(-1/c*(energy_m - V(x))*y[0] + (kappa_m/r - 0.5*dr*d2r)*y[1])
+            dfdt[1] = d2r*(-1/c*(energy_m - V(r))*y[0] + (kappa_m/r - 0.5*dr*d2r)*y[1])
+					+ dr*(1/c*V.deriv(r, 1)*dr*y[0] + (-kappa_m/r2*dr - 0.5*d2r*d2r - 0.5*dr*d3r)*y[1]);
+        };
+*/
+
+        GSL::ODE_solver solver(GSL::Runge_Kutta_Prince_Diamond, 2, abs_err_m, 100);
+		// GSL::ODE_solver solver(GSL::Runge_Kutta_4_implicit, 2, abs_err_m, 0);
+
+        solver.set_rhs(func);
+        // solver.set_jacobian(jac);
+
+		for(auto g_l = left_init_g_m.begin(), g = g_m.begin();
+			g_l != left_init_g_m.end(); g_l++, g++){
+			*g = *g_l;
+		}
+		for(auto f_l = left_init_f_m.begin(), f = f_m.begin();
+			f_l != left_init_f_m.end(); f_l++, f++){
+			*f = *f_l;
+		}
+		for(auto g_r = right_init_g_m.begin(), g = g_m.end() - right_init_g_m.size();
+		 	g_r != right_init_g_m.end(); g_r++, g++){
+			*g = *g_r;
+		}
+		for(auto f_r = right_init_f_m.begin(), f = f_m.end() - right_init_f_m.size();
+		 	f_r != right_init_f_m.end(); f_r++, f++){
+			*f = *f_r;
+		}
+
+
+        double tol = abs_err_m, de = 2*tol;
+        size_t n = nodes - 1;
+        while (n != nodes || (std::abs(de) > tol && std::abs(e_max - e_min) > tol)){
+			// std::cout << "e_guess = " << energy_m << "\n";
+			// std::cout << "Emax = " << e_max << ", Emin = " << e_min << "\n";
+
+
+            size_t turning_index = g_m.size() - std::distance(std::rbegin(g_m),
+                find_inversion_point(std::rbegin(g_m), std::rend(g_m), std::rbegin(v_m)));
+
+
+			std::vector<double> y{left_init_g_m.back(), left_init_f_m.back()};
+            // std::vector<double> y{rb/sqrt(mesh_m.dr(1)), rb*c*(beta + kappa_m)/sqrt(mesh_m.dr(1))};
+            // g_m[1] = y[0];
+            // f_m[1] = y[1];
+			for (size_t i = left_init_g_m.size(); i <= turning_index; i++){
+                double x = i - 1;
+                double h = 1;
+				/*
+			    while (x < i){
+                    solver.apply(x, i, h, y);
+                }
+				*/
+				solver.apply_fixed_step(x, h, y);
+                g_m[i] = y[0];
+                f_m[i] = y[1];
+            }
+			std::vector<double> y_out{y[0], y[1]};
+
+			n = count_nodes(g_m, turning_index);
+
+
+            if (n == nodes) {
+				for (size_t i = turning_index + 1; i < mesh_m.size() - right_init_g_m.size(); i++){
+					double x = i - 1;
+					double h = 1;
+					/*
+					while (x < i){
+						solver.apply(x, i, h, y);
+					}
+					*/
+					solver.apply_fixed_step(x, h, y);
+					g_m[i] = y[0];
+					f_m[i] = y[1];
+					/*
+					if (signum(g_m[i]) != signum(g_m[i - 1])){
+						n++;
+						break;
+					}
+					*/
+				}
+				n = count_nodes(g_m, turning_index);
+				// std::cout << "N nodes = " << n << "\n";
+			}
+			if (n > nodes){
+                e_max = energy_m;
+				energy_m = 0.5*(e_max + e_min);
+            }else if (n < nodes){
+                e_min = energy_m;
+				energy_m = 0.5*(e_max + e_min);
+            } else if (n == nodes){
+
+
+				y[0] = right_init_g_m.front();
+				y[1] = right_init_f_m.front();
+                // y[0] = GSL::exp(-lambda*mesh_m.r(mesh_m.size() - 1)).val/std::sqrt(mesh_m.dr().back());
+				// y[1] = -sqrt(-energy_m/(energy_m + c*c))*y[0];
+                // g_m.back() = y[0];
+                // f_m.back() = y[1];
+
+				solver.reset();
+                for (size_t i = mesh_m.size() - right_init_g_m.size(); i >= turning_index; i--){
+                    double x = i + 1;
+                    double h = -1;
+					/*
+				    while (x > i){
+                        solver.apply(x, i, h, y);
+                    }
+					*/
+					solver.apply_fixed_step(x, h, y);
+                    g_m[i] = y[0];
+                    f_m[i] = y[1];
+                }
+				std::vector<double> y_in{y[0], y[1]};
+				solver.reset();
+
+				auto scale = y_out[0]/y_in[0];
+                for (size_t i = turning_index; i < mesh_m.size(); i++){
+                    g_m[i] *= scale;
+
+                }
+				for (size_t i = turning_index; i < mesh_m.size(); i++){
+					f_m[i] *= scale;
+				}
+
+			    de = variational_de(g_m[turning_index], y_out[1], y_in[1]*scale, mesh_m.dr(turning_index));
+				std::cout << "de = " << de << std::endl;
+                if (de > 0){
+                    e_min = energy_m;
+                }else if (de < 0) {
+                    e_max = energy_m;
+                }
+                energy_m += de;
+                if(energy_m > e_max || energy_m < e_min){
+                    energy_m = 0.5*(e_min + e_max);
+                }
+
+            }
+        }
+		std::cout << "Energy = " << energy_m << "\n";
+    }
+
+    /*!*************************************************************************
+    * Normalize the solution.
+    ***************************************************************************/
+    void normalize()
+    {
+        double n = this->norm();
+
+        std::transform(g_m.begin(), g_m.end(), g_m.begin(),
+            [=](const double val)
+            {
+                return val/std::sqrt(n);
+            });
+            std::transform(f_m.begin(), f_m.end(), f_m.begin(),
+                [=](const double val)
+                {
+                    return val/std::sqrt(n);
             });
     }
 
-    template<class Iter, class T = double>
-    double variational_de(Iter inv)
-    {
-        Iter P = g_m.begin();
-        Iter Q = f_m.begin();
-        for( ; P != inv ; P++, Q++){}
-
-        return 12*(*P)*(*Q);
-    }
-
-public:
-    Radial_Dirac_Equation(const double e_min, const double e_max,
-      const std::vector<double>& v, const size_t l, const std::vector<double>& left_init_n,
-      const std::vector<double>& right_init_n, const Logarithmic_mesh& mesh,
-      const double tol = 1e-10)
-      : Dirac_Equation(e_min, e_max, v, left_init_n, right_init_n, 1., tol),
-        mesh_m(mesh)
-    {
-        if(mesh.size() != v.size()){
-            throw std::runtime_error("Length of potential vector does not match length of radial mesh!");
-        }
-        auto r2 = mesh.r2_begin();
-        auto v_c = v_m.begin();
-        auto r = mesh.r_begin();
-        for( ; v_c != v_m.end(); v_c++, r2++, r++){
-            *v_c += static_cast<double>(l*(l + 1))/(*r2);
-        }
-
-        auto l_i = l_init_m.begin();
-        for(auto  drx_i = mesh.drx_begin(); l_i != l_init_m.end(); l_i++, drx_i++){
-            *l_i /= *drx_i;
-        }
-        auto r_i = r_init_m.rbegin();
-        for(auto drx_i = mesh.drx_rbegin(); r_i != r_init_m.rend(); r_i++, drx_i++){
-            *r_i /= *drx_i;
-        }
-
-    }
-
-    void solve(const  size_t nodes) override
-    {
-        solve(nodes, 0.5*(e_min_m + e_max_m));
-    }
-
-    void solve(const  size_t nodes, const  double e_guess) override
-    {    }
-
-    double norm() const override
-    {
-        std::vector<double> integrand(mesh_p.size());
-        for(size_t i = 0; i < mesh_p.size(); i++){
-            integrand[i] = GSL::pow_int(psi_m[0][i], 2) +
-                           GSL::pow_int(psi_m[2][i], 2);
-        }
-        return mesh_p.integrate_simpson(integrand);
-    }
-
-    void normalize() override
-    {
-        double n = this->norm();
-        auto drx_i = mesh_m.drx_begin();
-        auto g = g_m.begin(), f = f_m.begin();
-        for(; g != g_m.end(), f != f_m.end(); g++, f++, drx_i++){
-            *g /= std::sqrt(n);
-            *f /= std::sqrt(n);
-        }
-    }
-
 };
 
-class Radial_Dirac_Equation_Central_Potential : public Radial_Dirac_Equation{
-public:
-    Radial_Dirac_Equation_Central_Potential(const std::vector<double>& v, const size_t l, const std::vector<double>& left_init,
-      const std::vector<double>& right_init, const Logarithmic_mesh& mesh,
-      const double tol = 1e-10)
-    : Radial_Dirac_Equation(0, 0, v, l, left_init,
-        right_init, mesh, tol)
-    {
-        e_min_m = *std::min_element(v_m.begin()+1, v_m.end());
-        e_max_m = *(v_m.end());
-    }
-};
+// class Radial_Dirac_Equation_Central_Potential : public Radial_Dirac_Equation{
+// public:
+//     Radial_Dirac_Equation_Central_Potential(const std::vector<double>& v, const size_t l, const std::vector<double>& left_init,
+//       const std::vector<double>& right_init, const Exponential_mesh<1, double>& mesh,
+//       const double tol = 1e-10)
+//     : Radial_Dirac_Equation(0, 0, v, l, left_init,
+//         right_init, mesh, tol)
+//     {
+//         e_min_m = *std::min_element(v_m.begin()+1, v_m.end());
+//         e_max_m = *(v_m.end());
+//     }
+// };
 #endif // DIRAC_H

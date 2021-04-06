@@ -10,6 +10,11 @@
 #include <fstream>
 
 class Schroedinger_Equation{
+    template<class T>
+	static int signum(T val)
+	{
+		return (val > T(0)) - (val < T(0));
+	}
 
 protected:
     double energy_m, e_min_m, e_max_m;
@@ -33,11 +38,13 @@ protected:
 		int init_sign = signum(energy_m - *v_start);
 		Iter_res current = res_start;
 		Iter_v current_v = v_start;
-		while(current != res_end && signum(energy_m - (*current_v)) == init_sign){
+		// while(current != res_end && signum(energy_m - (*current_v)) == init_sign){
+        while(current != res_end - 1 && signum(energy_m - (*current_v)) == init_sign){
 			current++;
 			current_v++;
 		}
-		return current;
+		// return current;
+        return ++current;
 	}
 
 private:
@@ -62,11 +69,10 @@ public:
 
     virtual double norm() const
     {
-        // const double h = mesh_m.dr(0);
         double res = simpson_integral<double>(mesh_m,
             [this](const double& i)
             {
-                return GSL::pow_int(psi_m[static_cast<size_t>(i)], 2);
+                return GSL::pow_int(psi_m[static_cast<size_t>(i)], 2)*mesh_m.dr(i);
             }
         );
         return res;
@@ -76,33 +82,36 @@ public:
     {
         std::vector<double> g(v_m.size(), 0), s(v_m.size(), 0);
         Numerov_solver sol;
-        auto inv = psi_m.end();
         auto end_point = psi_m.rbegin();
         for( auto tmp = r_init_m.begin() ; tmp != r_init_m.end(); tmp++,
             end_point++ ){}
-        int de;
+        auto inv = find_inversion_point(end_point, psi_m.rend(),
+                    v_m.rbegin()).base();
+        int de = 0;
 
         const double h = mesh_m.dr(0);
 
         while(std::abs(e_max_m - e_min_m) > tol_m){
 
             energy_m = 0.5*(e_min_m + e_max_m);
-            if(inv != find_inversion_point(end_point, psi_m.rend(),
-                v_m.rbegin()).base()){
-                    throw std::runtime_error("Unexpected change of matching point!");
-                }
             for(auto it = v_m.begin(), g_c = g.begin(); it != v_m.end(); it++,
                 g_c++){
                 *g_c = (energy_m - *it)*GSL::pow_int(h, 2);
             }
-            inv = sol.solve(psi_m.begin(), psi_m.end(), g.begin(), g.end(),
+            inv = find_inversion_point(end_point, psi_m.rend(), v_m.rbegin()).base();
+            if(inv != sol.solve(psi_m.begin(), psi_m.end(), g.begin(), g.end(),
                   s.begin(), s.end(), l_init_m.begin(), l_init_m.end(),
-                  r_init_m.begin(), r_init_m.end(), inv);
+                  r_init_m.begin(), r_init_m.end(), inv)){
+                      throw std::runtime_error("Unexpected change of matching point!");
+                  }
+
+            // inv = sol.solve(psi_m.begin(), psi_m.end(), g.begin(), g.end(),
+            //       s.begin(), s.end(), l_init_m.begin(), l_init_m.end(),
+            //       r_init_m.begin(), r_init_m.end(), inv);
 
             if(inv != psi_m.end()){
                 de = sol.derivative_diff(psi_m.begin(), psi_m.end(), inv,
                 g.begin(), s.begin(), GSL::pow_int(h, 3));
-
             }else{
                 de = 0;
             }
@@ -148,8 +157,7 @@ public:
                   r_init_m.begin(), r_init_m.end(), inv)){
                       throw std::runtime_error("Unexpected change of matching point!");
                   }
-            n = static_cast<size_t>(sol.count_nodes(psi_m.begin(),
-                psi_m.end()));
+            n = static_cast<size_t>(sol.count_nodes(psi_m.begin(), psi_m.end()));
 
 
             if(n > nodes){
@@ -212,14 +220,18 @@ protected:
     double variational_de(Iter g_start, Iter inv)
     {
         Iter g_i = g_start;
-        auto F_i = psi_m.begin();
+        // auto F_i = psi_m.begin();
         auto mesh_i = mesh_m.begin();
-        for( ; F_i != inv; F_i++, g_i++, mesh_i++){}
+        for(auto F_i = psi_m.begin() ; F_i != inv; F_i++, g_i++, mesh_i++){}
         // T n = F_norm();
         T n = this->norm();
-        T Fi = *F_i;
-        T Fm1 = *(F_i - 1);
-        T Fp1 = *(F_i + 1);
+        // T Fi = *(F_i - 1);
+        T Fi = *(inv - 1);
+
+        // T Fm1 = *(F_i - 2);
+        T Fm1 = *(inv - 2);
+        // T Fp1 = *F_i;
+        T Fp1 = *inv;
         T drx = (*mesh_i).dr();
 
         auto f = [](T g)->T{ return 1 + g/12;};
@@ -240,22 +252,22 @@ public:
         mesh_m(mesh)
     {
 
-        if(mesh_m.dim() != v.size()){
+        if(mesh_m.size() != v.size()){
             throw std::runtime_error("Length of potential vector does not match length of radial mesh!");
         }
 
         auto v_c = v_m.begin();
         for(auto mesh_i = mesh_m.begin() ; v_c != v_m.end(); v_c++, mesh_i++){
-            *v_c += static_cast<double>(l*(l + 1))/(*mesh_i).r2();
+            *v_c += static_cast<double>(l*(l + 1))/mesh_i->r2();
         }
 
         auto l_i = l_init_m.begin();
         for(auto  mesh_i = mesh_m.begin(); l_i != l_init_m.end(); l_i++, mesh_i++){
-            *l_i /= std::sqrt((*mesh_i).dr());
+            *l_i /= std::sqrt(mesh_i->dr());
         }
         auto r_i = r_init_m.rbegin();
         for(auto mesh_i = mesh_m.rbegin(); r_i != r_init_m.rend(); r_i++, mesh_i++){
-            *r_i /= std::sqrt((*mesh_i).dr());
+            *r_i /= std::sqrt(mesh_i->dr());
         }
 
     }
@@ -307,16 +319,11 @@ public:
 
             n = static_cast<size_t>(sol.count_nodes(++psi_m.begin(),--psi_m.end()));
 
-            // n = static_cast<size_t>(sol.count_nodes(inv,--psi_m.end()));
-
-
             if(n > nodes){
                 e_max_m = energy_m;
             }else if(n < nodes){
                 e_min_m = energy_m;
-            }
-
-            if(n == nodes){
+            }else if(n == nodes){
                 if(inv != psi_m.end()){
                     de = variational_de(g.begin(), inv);
                 }else{
@@ -337,8 +344,7 @@ public:
                 energy_m = 0.5*(e_min_m + e_max_m);
             }
         }
-        if(std::abs(r_init_m.back() - psi_m.back()) > 1e-12){
-            std::cout << "Rescaling with factor " << r_init_m.back()/psi_m.back() << "\n";
+        if(std::abs(r_init_m.back() - psi_m.back()) > 1e-16){
             auto it = psi_m.begin();
             auto mesh_i = mesh_m.begin();
             for(; it != psi_m.end(); it++, mesh_i++){
