@@ -11,7 +11,10 @@ set(CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/cmake" ${CMAKE_MODULE_PATH})
 
 set(GSLpp_ROOT /home/jjonsson/Programming/GSL-lib)
 
-find_library(GSL_LIB GSLpp ${GSLpp_ROOT}/lib/GSLpp/ REQUIRED)
+find_library (GSL_LIB
+			  NAMES GSLpp
+			  HINTS ${GSLpp_ROOT}/lib/GSLpp/
+			  REQUIRED)
 
 add_subdirectory(src)
 add_subdirectory(bin)

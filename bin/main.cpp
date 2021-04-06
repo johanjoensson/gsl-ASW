@@ -26,6 +26,7 @@
 #include <xc_func.h>
 #include <k-mesh.h>
 #include <brillouin_zone_integration.h>
+#include <dirac.h>
 
 void k_iteration(const GSL::Vector& kp, Simulation& sim)
 {
