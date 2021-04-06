@@ -12,6 +12,7 @@
 #include <type_traits>
 #include <tuple>
 #include <iostream>
+#include <memory>
 
 /*******************************************************************************
 * The __cplusplus macro is used to determine which c++ standard is used for the*
@@ -243,7 +244,13 @@ public:
     ***************************************************************************/
     virtual Arr dr(const Arr& x) const noexcept = 0;
 
-    Arr operator()(const Arr& x) const noexcept {return r(x);}
+    /*!*************************************************************************
+    * Virtual function returning $\frac{d^2r}{dx^2}$.
+    * To be overwritten in subclasses.
+    ***************************************************************************/
+    virtual Arr d2r(const Arr& x) const noexcept = 0;
+
+    virtual Arr d3r(const Arr& x) const noexcept = 0;
 
     //! Get all positions
     /*!*************************************************************************
@@ -261,12 +268,69 @@ public:
         }
         return res;
     }
+    std::vector<Arr> r2()
+        const noexcept
+    {
+        std::vector<Arr> res;
+        Arr coord;
+        coord.fill(0);
+        while(coord.back() <  N_m.back()){
+            res.push_back( r2(coord) );
+            increment(coord, 1);
+        }
+        return res;
+    }
+    std::vector<Arr> dr()
+        const noexcept
+    {
+        std::vector<Arr> res;
+        Arr coord;
+        coord.fill(0);
+        while(coord.back() <  N_m.back()){
+            res.push_back( dr(coord) );
+            increment(coord, 1);
+        }
+        return res;
+    }
+    std::vector<Arr> d2r()
+        const noexcept
+    {
+        std::vector<Arr> res;
+        Arr coord;
+        coord.fill(0);
+        while(coord.back() <  N_m.back()){
+            res.push_back( d2r(coord) );
+            increment(coord, 1);
+        }
+        return res;
+    }
+    std::vector<Arr> d3r()
+        const noexcept
+    {
+        std::vector<Arr> res;
+        Arr coord;
+        coord.fill(0);
+        while(coord.back() <  N_m.back()){
+            res.push_back( d3r(coord) );
+            increment(coord, 1);
+        }
+        return res;
+    }
 
     //! Get mesh dimensions
     /*!*************************************************************************
     * Returns an array containing the number of mesh points along each directon.
     ***************************************************************************/
-    std::array<size_t, Dim> dim() const noexcept { return N_m;}
+    size_t dim() const noexcept { return Dim;}
+    std::array<size_t, Dim> size() const noexcept {
+        std::array<size_t, Dim> res = N_m;
+        std::transform(std::begin(res), std::end(res), std::begin(res),
+            [](const size_t i)
+            {
+                return i;
+            });
+        return res;
+    }
 
     /*!*************************************************************************
     * Class for representing a generic point in a mesh.
@@ -288,7 +352,12 @@ public:
         Arr r() const noexcept {return m_m->r(i_m);}
         Arr r2() const noexcept {return m_m->r2(i_m);}
         Arr dr() const noexcept {return m_m->dr(i_m);}
+        Arr d2r() const noexcept {return m_m->d2r(i_m);}
+        Arr d3r() const noexcept {return m_m->d3r(i_m);}
+
     };
+
+    mesh_point operator()(const Arr& x) const noexcept {return mesh_point(this, x);}
 
 
     /*!*************************************************************************
@@ -303,7 +372,7 @@ public:
         typedef const Arr difference_type;
         typedef const mesh_point value_type;
         typedef const mesh_point reference;
-        typedef const mesh_point pointer;
+        typedef std::unique_ptr<const mesh_point> pointer;
         typedef std::random_access_iterator_tag iterator_category;
 
         const_iterator(const const_iterator&) = default;
@@ -314,6 +383,15 @@ public:
         const_iterator& operator=(const_iterator&&) = default;
 
         reference operator*() noexcept {return mesh_point(m_m, i_m);}
+        pointer operator->()
+            noexcept
+        {
+#if __cplusplus >= 201402L
+            return std::make_unique<mesh_point>(m_m, i_m);
+#else
+            return std::unique_ptr<mesh_point>(new mesh_point{m_m, i_m});
+#endif
+        }
         reference operator[](const difference_type n) {return *(*this + n);}
 
         bool operator==(const const_iterator& b)const noexcept{return i_m == b.i_m;}
@@ -488,7 +566,14 @@ public:
     ***************************************************************************/
     virtual Scalar dr(const Scalar& x) const noexcept = 0;
 
-    Scalar operator()(const Scalar& x) const noexcept {return r(x);}
+    /*!*************************************************************************
+    * Virtual function returning $\frac{d^2r}{dx^2}$.
+    * To be overwritten in subclasses.
+    ***************************************************************************/
+    virtual Scalar d2r(const Scalar& x) const noexcept = 0;
+
+    virtual Scalar d3r(const Scalar& x) const noexcept = 0;
+
 
     //! Get all positions
     /*!*************************************************************************
@@ -532,11 +617,37 @@ public:
         return res;
     }
 
+    //! Get all second derivatives
+    /*!*************************************************************************
+    * Returns a vector containing $\frac{d^2r}{dx^2}$ for all the points in the mesh.
+    ***************************************************************************/
+    std::vector<Scalar> d2r()
+        const noexcept
+    {
+        std::vector<Scalar> res;
+        for(size_t i = 0; i < this->N_m; i++){
+            res.push_back(this->d2r(i));
+        }
+        return res;
+    }
+
+    std::vector<Scalar> d3r()
+        const noexcept
+    {
+        std::vector<Scalar> res;
+        for(size_t i = 0; i < this->N_m; i++){
+            res.push_back(this->d3r(i));
+        }
+        return res;
+    }
+
+
     //! Get mesh dimensions
     /*!*************************************************************************
     * Returns the number of mesh points.
     ***************************************************************************/
-    size_t dim() const noexcept { return N_m; }
+    size_t dim() const noexcept { return 1; }
+    size_t size() const noexcept {return N_m;}
 
     /*!*************************************************************************
     * Class for representing a generic point in a 1D mesh.
@@ -558,6 +669,9 @@ public:
         Scalar r() const noexcept { return m_m->r(i_m);}
         Scalar r2() const noexcept { return m_m->r2(i_m);}
         Scalar dr() const noexcept { return m_m->dr(i_m);}
+        Scalar d2r() const noexcept { return m_m->d2r(i_m);}
+        Scalar d3r() const noexcept { return m_m->d3r(i_m);}
+
     };
 
     /*!*************************************************************************
@@ -572,7 +686,7 @@ public:
         typedef const Scalar difference_type;
         typedef const mesh_point value_type;
         typedef const mesh_point reference;
-        typedef const mesh_point pointer;
+        typedef std::unique_ptr<const mesh_point> pointer;
         typedef std::random_access_iterator_tag iterator_category;
 
         const_iterator(const const_iterator&) = default;
@@ -583,6 +697,14 @@ public:
         const_iterator& operator=(const_iterator&&) = default;
 
         reference operator*(){return mesh_point(m_m, i_m);}
+        pointer operator->()
+        {
+#if __cplusplus >= 201402L
+            return std::make_unique<mesh_point>(m_m, i_m);
+#else
+            return std::unique_ptr<mesh_point>(new mesh_point{m_m, i_m});
+#endif
+        }
         reference operator[](const difference_type n){return *(*this + n);}
 
         bool operator==(const const_iterator& b)const noexcept{return i_m == b.i_m;}
@@ -611,6 +733,8 @@ public:
     * Class for enabling reverse iteration through a mesh, constant version
     ***************************************************************************/
     typedef std::reverse_iterator<const_iterator> const_reverse_iterator;
+
+    mesh_point operator()(const Scalar& x) const noexcept {return mesh_point{this, x};}
 
     const_iterator begin() const noexcept{return const_iterator(this, 0);}
     const_iterator cbegin() const noexcept{return const_iterator(this, 0);}
@@ -749,6 +873,23 @@ public:
     {
         return this->alpha_m;
     }
+
+    Arr d2r(const Arr& x)
+        const noexcept override
+    {
+        Arr res;
+        res.fill(0);
+        return res;
+    }
+
+    Arr d3r(const Arr& x)
+        const noexcept override
+    {
+        Arr res;
+        res.fill(0);
+        return res;
+    }
+
 };
 
 /*!*****************************************************************************
@@ -823,6 +964,19 @@ public:
     {
         return this->alpha_m + 0*x;
     }
+
+    Scalar d2r(const Scalar& x)
+        const noexcept override
+    {
+        return 0*x;
+    }
+
+    Scalar d3r(const Scalar& x)
+        const noexcept override
+    {
+        return 0*x;
+    }
+
 };
 
 
@@ -965,6 +1119,26 @@ public:
 #endif
         return res;
     }
+
+    Arr d2r(const Arr& x)
+        const noexcept override
+    {
+        Arr res;
+        std::transform(std::begin(this->alpha_m), std::end(this->alpha_m), std::begin(res),
+            [](const double a)
+            {
+                return 2*a;
+            });
+        return res;
+    }
+    Arr d3r(const Arr& x)
+        const noexcept override
+    {
+        Arr res;
+        res.fill(0);
+        return res;
+    }
+
 };
 
 /*!*****************************************************************************
@@ -1039,6 +1213,19 @@ public:
     {
         return 2*this->alpha_m*sgn(x)*x;
     }
+
+    Scalar d2r(const Scalar& x)
+        const noexcept override
+    {
+        return 2*this->alpha_m + 0*x;
+    }
+
+    Scalar d3r(const Scalar& x)
+        const noexcept override
+    {
+        return 0*x;
+    }
+
 };
 
 /*!*****************************************************************************
@@ -1191,6 +1378,86 @@ public:
 #endif
         return res;
     }
+
+    Arr d2r(const Arr& x)
+        const noexcept override
+    {
+        Arr x_abs;
+        std::transform(std::begin(x), std::end(x), std::begin(x_abs),
+            [] (const Scalar& xi)
+            {
+                return sgn(xi)*xi;
+            }
+        );
+        Arr r = this->r(x_abs);
+
+        Arr res;
+#if __cplusplus >= 202002L
+        std::transform(std::begin(r), std::end(r), std::begin(this->parameters()), std::begin(res),
+            [] (const Scalar& ri, const std::tuple<Scalar, Scalar, Scalar>& ti)
+            {
+                auto [a, b, c] = ti;
+                return b*b*(ri + a - c);
+            });
+#else
+        auto z4 = this->zip4(r, this->parameters());
+        std::transform(std::begin(z4), std::end(z4), std::begin(res),
+            [] (const std::tuple<Scalar, Scalar, Scalar, Scalar>& ti)
+            {
+#if __cplusplus >= 201703L
+                auto [ri, a, b, c] = ti;
+#else
+                auto ri = std::get<0>(ti);
+                auto a = std::get<1>(ti);
+                auto b = std::get<2>(ti);
+                auto c = std::get<3>(ti);
+#endif
+                return b*b*b*(ri + a - c);
+            });
+#endif
+        return res;
+    }
+
+    Arr d3r(const Arr& x)
+        const noexcept override
+    {
+        Arr x_abs;
+        std::transform(std::begin(x), std::end(x), std::begin(x_abs),
+            [] (const Scalar& xi)
+            {
+                return sgn(xi)*xi;
+            }
+        );
+        Arr r = this->r(x_abs);
+
+        Arr res;
+#if __cplusplus >= 202002L
+        std::transform(std::begin(r), std::end(r), std::begin(this->parameters()), std::begin(res),
+            [] (const Scalar& ri, const std::tuple<Scalar, Scalar, Scalar>& ti)
+            {
+                auto [a, b, c] = ti;
+                return b*b*b*(ri + a - c);
+            });
+#else
+        auto z4 = this->zip4(r, this->parameters());
+        std::transform(std::begin(z4), std::end(z4), std::begin(res),
+            [] (const std::tuple<Scalar, Scalar, Scalar, Scalar>& ti)
+            {
+#if __cplusplus >= 201703L
+                auto [ri, a, b, c] = ti;
+#else
+                auto ri = std::get<0>(ti);
+                auto a = std::get<1>(ti);
+                auto b = std::get<2>(ti);
+                auto c = std::get<3>(ti);
+#endif
+                return b*b*b*(ri + a - c);
+            });
+#endif
+        return res;
+
+    }
+
 };
 
 /*!*****************************************************************************
@@ -1269,6 +1536,21 @@ public:
         Scalar a = this->alpha_m, b = this->beta_m, c = this->gamma_m;
         return b*(this->r(sgn(x)*x) + a - c);
     }
+
+    Scalar d2r(const Scalar& x)
+        const noexcept override
+    {
+        Scalar a = this->alpha_m, b = this->beta_m, c = this->gamma_m;
+        return b*b*(this->r(sgn(x)*x) + a - c);
+    }
+
+    Scalar d3r(const Scalar& x)
+        const noexcept override
+    {
+        Scalar a = this->alpha_m, b = this->beta_m, c = this->gamma_m;
+        return b*b*b*(this->r(sgn(x)*x) + a - c);
+    }
+
 
     Scalar A()
         const noexcept

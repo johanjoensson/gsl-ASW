@@ -54,12 +54,12 @@ void coulomb_potential()
     int z = 1;
     int n = 4;
     int l = 0;
-    std::vector<double> v(len, r0);
+    std::vector<double> v(len);
     Exponential_mesh<1, double> mesh(0, r0, 0.01, len);
     auto pot = [z](double r){return -2.*z/r;};
     auto mesh_it = mesh.begin();
     for(auto it = v.begin(); it != v.end(); it++, mesh_it++){
-	    *it = pot((*mesh_it).r());
+	    *it = pot(mesh_it->r());
     }
     std::vector<double> left = { 0., GSL::pow_int(-1, (n - l - 1))*GSL::pow_int(mesh.r(1), l + 1), GSL::pow_int(-1, (n - l - 1))*GSL::pow_int(mesh.r(2), l + 1)};
     std::vector<double> right = {0.001, 0};
