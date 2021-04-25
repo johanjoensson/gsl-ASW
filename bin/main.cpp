@@ -59,7 +59,7 @@ numerov_debug.close();
 	std::cout << b << "\n";
 	std::cout << c << "\n";
 	// Crystal_t<3, Atom> cr(Lattice_t<3>({16*a, 16*b, 16*c}));
-	Crystal_t<3, Atom> cr(Lattice_t<3>({5*a, 5*b, 5*c}));
+	Crystal_t<3, Atom> cr(Lattice_t<3>({3*a, 3*b, 3*c}));
 	for(auto row : cr.lat().recip_lat()){
 		std::cout << row <<"\n";
 	}
@@ -106,7 +106,7 @@ numerov_debug.close();
 	Atom C7;
 	Atom C8;
 
-	C1.Z() = 6;
+	C1.Z() = 26;
 	C2.Z() = 6;
 	C3.Z() = 6;
 	C4.Z() = 6;
@@ -145,7 +145,7 @@ numerov_debug.close();
 	of.open("canonical_bands.dat", std::ios::trunc);
     for(const auto& kp :  kmesh.k_points){
 		of << kp[0] << " " << kp[1] << " " << kp[2] << " ";
-		for(lm l = {2, 1, -1}; l != lm {3, 0, 0}; l++){
+		for(lm l = {3, 2, -2}; l != lm {4, 0, 0}; l++){
 			of << std::setprecision(10)  << sim.canonical_band(l, kappa, UP, kp) << " ";
 		}
 		of << "\n";

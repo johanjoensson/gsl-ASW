@@ -83,7 +83,7 @@ void Simulation::set_up_basis()
     for(size_t i = 0; i < cryst.atoms().size(); i++){
         // auto index = std::distance(cryst.atoms().begin(), std::find(cryst.atoms().begin(), cryst.atoms().end(), at));
         // at_meshes[static_cast<size_t>(index)] = Logarithmic_mesh(at.get_AS(),
-        size_t np = static_cast<size_t>(1000*(0.5 + static_cast<double>(cryst.atoms(i).Z())/118));
+        size_t np = static_cast<size_t>(700*(0.5 + static_cast<double>(cryst.atoms(i).Z())/118));
         if (np % 2 == 0) {
             np++;
         }

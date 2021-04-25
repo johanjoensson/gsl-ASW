@@ -41,7 +41,7 @@ double augmented_integral(const Augmented_Hankel &a, const Augmented_Hankel &b)
         return a.SH();
     }else{
         Envelope_Hankel ha(a.l(), a.kappa()), hb(b.l(), b.kappa());
-	    return 1./(a.EH() - b.EH()) * wronskian(ha, hb, a.mesh().r(a.mesh().dim() - 1));
+	    return 1./(a.EH() - b.EH()) * wronskian(ha, hb, a.mesh().r(a.mesh().size() - 1));
     }
 }
 
@@ -51,7 +51,7 @@ double augmented_integral(const Augmented_Bessel &a, const Augmented_Bessel &b)
         return a.SJ();
     }else{
         Envelope_Bessel ja(a.l(), a.kappa()), jb(b.l(), b.kappa());
-	    return 1./(a.EJ() - b.EJ()) * wronskian(ja, jb, a.mesh().r(a.mesh().dim() - 1));
+	    return 1./(a.EJ() - b.EJ()) * wronskian(ja, jb, a.mesh().r(a.mesh().size() - 1));
     }
 }
 
@@ -60,7 +60,7 @@ double augmented_integral(const Augmented_Hankel &a, const Augmented_Bessel &b)
     if(std::abs(a.EH() - b.EJ()) > 1e-8){
         Envelope_Hankel ha(a.l(), a.kappa());
         Envelope_Bessel jb(b.l(), b.kappa());
-        return 1./(a.EH() - b.EJ()) * wronskian(ha, jb, a.mesh().r(a.mesh().dim() - 1));
+        return 1./(a.EH() - b.EJ()) * wronskian(ha, jb, a.mesh().r(a.mesh().size() - 1));
     }else{
         return a.S();
     }
@@ -116,22 +116,23 @@ void Augmented_Hankel::update(std::vector<double>& v, const double en
 {
     EH() = en;
     size_t nodes = static_cast<size_t>(std::max(0, l_m.n - l_m.l - 1));
-    size_t last = mesh_m.dim() - 1, lastbutone = mesh_m.dim() - 2;
+    size_t last = mesh_m.size() - 1, lastbutone = mesh_m.size() - 2;
 
     Envelope_Hankel H(l_m, kappa_m);
 
     std::vector<double> l_init = {
-        0,
+        GSL::pow_int(mesh_m.r(0), l_m.l + 1),
         GSL::pow_int(mesh_m.r(1), l_m.l + 1),
         GSL::pow_int(mesh_m.r(2), l_m.l + 1)};
     std::vector<double> r_init;
     if(core){
-        r_init = {1e-8, 0.};
+        r_init = {1e-15, 0.};
     }else{
         r_init = {mesh_m.r(lastbutone)*H.barred_fun(mesh_m.r(lastbutone)),
                   mesh_m.r(last)*H.barred_fun(mesh_m.r(last))};
     }
-    Radial_Schroedinger_Equation_Central_Potential se(v, static_cast<size_t>(l_m.l), l_init, r_init, mesh_m, 1e-10);
+    Radial_Schroedinger_Equation_Central_Potential
+        se(v, static_cast<size_t>(l_m.l), l_init, r_init, mesh_m, 1e-10);
     se.solve(nodes, EH());
     if(core){
         se.normalize();
@@ -151,7 +152,7 @@ void Augmented_Hankel::update(std::vector<double>& v, const double en
     EH() = se.e();
 #ifdef DEBUG
     std::ofstream out_file("check_Hankel.dat", std::ios::app);
-    for(size_t i = 0; i < mesh_m.dim(); i++){
+    for(size_t i = 0; i < mesh_m.size(); i++){
         out_file << mesh_m.r(i) << " " << /*val_m[i] << */ " " << v[i] << "\n";
     }
     out_file << "\n\n";
@@ -168,7 +169,7 @@ void Augmented_Bessel::update(std::vector<double>& v, const double en
 {
     EJ() = en;
     size_t nodes = static_cast<size_t>(std::max(0, l_m.n - l_m.l - 1));
-    size_t last = mesh_m.dim() - 1, lastbutone = mesh_m.dim() - 2;
+    size_t last = mesh_m.size() - 1, lastbutone = mesh_m.size() - 2;
     Envelope_Bessel I(l_m, kappa_m);
 
     if(!core){
@@ -185,13 +186,6 @@ void Augmented_Bessel::update(std::vector<double>& v, const double en
 
         Radial_Schroedinger_Equation_Central_Potential se(v, static_cast<size_t>(l_m.l), l_init, r_init, mesh_m, 1e-10);
         se.solve(nodes, EJ());
-/*
-        double scale = r_init.back()/se.psi().back();
-        for(size_t i = 0; i < mesh_m.dim(); i++){
-            se.psi()[i] *= scale;
-        }
-*/
-        // val_m = se.psi();
         S_m = se.norm();
         EJ() = se.e();
     }else{
@@ -200,7 +194,7 @@ void Augmented_Bessel::update(std::vector<double>& v, const double en
     }
 #ifdef DEBUG
     std::ofstream out_file("check_Bessel.dat", std::ios::app);
-    for(size_t i = 0; i < mesh_m.dim(); i++){
+    for(size_t i = 0; i < mesh_m.size(); i++){
         out_file << mesh_m.r(i) << " " << /*val_m[i] << */ " " << v[i] << "\n";
     }
     out_file << "\n\n";
