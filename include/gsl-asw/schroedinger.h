@@ -17,6 +17,7 @@ class Schroedinger_Equation{
 	}
 
 protected:
+    const Mesh_base<1, double>& mesh_m;
     double energy_m, e_min_m, e_max_m;
     std::vector<double> v_m;
     std::vector<double> psi_m, l_init_m, r_init_m;
@@ -39,7 +40,7 @@ protected:
 		Iter_res current = res_start;
 		Iter_v current_v = v_start;
 		// while(current != res_end && signum(energy_m - (*current_v)) == init_sign){
-        while(current != res_end - 1 && signum(energy_m - (*current_v)) == init_sign){
+        while(current != res_end && signum(energy_m - (*current_v)) == init_sign){
 			current++;
 			current_v++;
 		}
@@ -48,15 +49,15 @@ protected:
 	}
 
 private:
-    const Linear_mesh<1, double> mesh_m;
+    // const Linear_mesh<1, double> mesh_m;
 
 public:
 
     Schroedinger_Equation(const double e_min, const double e_max, const std::vector<double>& v,
-    const std::vector<double>& left_init, const std::vector<double>& right_init, const Linear_mesh<1, double>&
+    const std::vector<double>& left_init, const std::vector<double>& right_init, const Mesh_base<1, double>&
     mesh, const double tol = 1e-10)
-    : energy_m(0), e_min_m(e_min), e_max_m(e_max), v_m(v), psi_m(v.size(), 0),
-      l_init_m(left_init), r_init_m(right_init), tol_m(tol), mesh_m(mesh)
+    : mesh_m(mesh), energy_m(0), e_min_m(e_min), e_max_m(e_max), v_m(v), psi_m(v.size(), 0),
+      l_init_m(left_init), r_init_m(right_init), tol_m(tol)
     {};
 
     // Schroedinger_Equation() = default;
@@ -67,16 +68,6 @@ public:
     Schroedinger_Equation& operator=(const Schroedinger_Equation&) = default;
     Schroedinger_Equation& operator=(Schroedinger_Equation&&) = default;
 
-    virtual double norm() const
-    {
-        double res = simpson_integral<double>(mesh_m,
-            [this](const double& i)
-            {
-                return GSL::pow_int(psi_m[static_cast<size_t>(i)], 2)*mesh_m.dr(i);
-            }
-        );
-        return res;
-    }
 
     virtual void solve()
     {
@@ -187,12 +178,24 @@ public:
         }
     }
 
-    virtual void normalize()
+    /*virtual*/ double norm() const
+    {
+        double res = simpson_integral<double>(mesh_m,
+            [this](const double& i)
+            {
+                return GSL::pow_int(psi_m[static_cast<size_t>(i)], 2);
+            }
+        );
+        return res;
+    }
+
+    /*virtual*/ void normalize(const double N = 1)
     {
         double n = norm();
-        for(auto it = psi_m.begin(); it != psi_m.end(); it++){
-            *it /= n;
-        }
+        std::transform(psi_m.begin(), psi_m.end(), psi_m.begin(),
+        [=](const double val){
+            return val*std::sqrt(N/n);
+        });
     }
 
     std::vector<double>& psi()
@@ -214,7 +217,7 @@ public:
 
 class Radial_Schroedinger_Equation : public Schroedinger_Equation{
 protected:
-    const Exponential_mesh<1, double> mesh_m;
+    // const Exponential_mesh<1, double> mesh_m;
 
     template<class Iter, class T = double>
     double variational_de(Iter g_start, Iter inv)
@@ -224,7 +227,12 @@ protected:
         auto mesh_i = mesh_m.begin();
         for(auto F_i = psi_m.begin() ; F_i != inv; F_i++, g_i++, mesh_i++){}
         // T n = F_norm();
-        T n = this->norm();
+        T n = simpson_integral<double>(mesh_m,
+            [this](const double& i)
+            {
+                return GSL::pow_int(psi_m[static_cast<size_t>(i)], 2)*mesh_m.dr(i);
+            }
+        );
         // T Fi = *(F_i - 1);
         T Fi = *(inv - 1);
 
@@ -232,24 +240,27 @@ protected:
         T Fm1 = *(inv - 2);
         // T Fp1 = *F_i;
         T Fp1 = *inv;
-        T drx = (*mesh_i).dr();
+        // T drx = (mesh_i - 1)->dr();
+        // T r = (mesh_i -1)->r();
 
-        auto f = [](T g)->T{ return 1 + g/12;};
+        auto f = [](T g)->T{ return 1 + g/12.;};
 
         // T Fcusp = (Fm1*f(*(g_i - 1)) + Fp1*f(*(g_i + 1)))/(12 - 10*f(*g_i));
-        T Fcusp = (Fm1*f(*(g_i - 1)) + Fp1*f(*(g_i + 1)) + 10*Fi*f(*g_i))/12.;
-        T df = f(*g_i)*(Fi/Fcusp - 1.);
+        // T Fcusp = (Fm1*f(*(g_i - 1)) + Fp1*f(*(g_i + 1)) + 10*Fi*f(*g_i))/12.;
+        T Fcusp = (Fm1*f(*(g_i - 2)) + Fp1*f(*g_i) + 10*Fi*f(*(g_i - 1)))/12.;
 
-        return 12*Fcusp*Fcusp*df*drx/n;
+        T df = f(*(g_i - 1))*(Fi/Fcusp - 1);
+
+        return 12.*Fcusp*Fcusp*df/n;
     }
 
 public:
     Radial_Schroedinger_Equation(const double e_min, const double e_max,
       const std::vector<double>& v, const size_t l, const std::vector<double>& left_init_n,
-      const std::vector<double>& right_init_n, const Exponential_mesh<1, double>& mesh,
+      const std::vector<double>& right_init_n, const Mesh_base<1, double>& mesh,
       const double tol = 1e-10)
-      : Schroedinger_Equation(e_min, e_max, v, left_init_n, right_init_n, {0,0,1}, tol),
-        mesh_m(mesh)
+      : Schroedinger_Equation(e_min, e_max, v, left_init_n, right_init_n, mesh, tol)
+        //, mesh_m(mesh)
     {
 
         if(mesh_m.size() != v.size()){
@@ -303,14 +314,17 @@ public:
         for(auto tmp = v_m.begin() ; tmp != v_start; tmp++, start_point++){}
 
         size_t variational_steps = 0;
-        while(n != nodes || (std::abs(de) > tol_m && std::abs(e_max_m - e_min_m) > tol_m)){
+        while(n != nodes || (std::abs(de) > tol_m && std::abs((e_max_m*e_max_m - e_min_m*e_min_m)/(e_max_m + e_min_m)) > tol_m)){
             inv = find_inversion_point(start_point, end_point, v_start);
             auto v_i = v_m.begin();
             auto g_i = g.begin();
             auto mesh_i = mesh_m.begin();
             for(; v_i != v_m.end(); v_i++, g_i++, mesh_i++){
-                *g_i = (energy_m - *v_i)*GSL::pow_int((*mesh_i).dr(), 2) -
-                    GSL::pow_int(mesh_m.B(), 2)/4;
+                *g_i =  (energy_m - *v_i)*GSL::pow_int(mesh_i->dr(), 2)+
+                        (
+                            -3./4*GSL::pow_int(mesh_i->d2r()/mesh_i->dr(), 2)
+                            +1./2*mesh_i->d3r()/mesh_i->dr()
+                        );
             }
 
             sol.solve(psi_m.begin(), psi_m.end(), g.begin(), g.end(),
@@ -321,8 +335,12 @@ public:
 
             if(n > nodes){
                 e_max_m = energy_m;
+                energy_m = std::max(0.5*(e_min_m + e_max_m), e_max_m - 1);
+                // energy_m = 0.5*(e_min_m + e_max_m);
             }else if(n < nodes){
                 e_min_m = energy_m;
+                energy_m = std::min(0.5*(e_min_m + e_max_m), e_min_m + 1);
+                // energy_m = 0.5*(e_min_m + e_max_m);
             }else if(n == nodes){
                 if(inv != psi_m.end()){
                     de = variational_de(g.begin(), inv);
@@ -336,30 +354,36 @@ public:
                     e_max_m = energy_m;
                 }
                 energy_m += de;
-                if(energy_m > e_max_m || energy_m < e_min_m){
-                    energy_m = 0.5*(e_min_m + e_max_m);
-                }
+                energy_m = std::min(std::max(energy_m, e_min_m), e_max_m);
                 variational_steps++;
-            }else{
-                energy_m = 0.5*(e_min_m + e_max_m);
+                std::cout << "de = " << de << "\n";
             }
         }
-        if(std::abs(r_init_m.back() - psi_m.back()) > 1e-16){
-            auto it = psi_m.begin();
-            auto mesh_i = mesh_m.begin();
-            for(; it != psi_m.end(); it++, mesh_i++){
-                *it *= r_init_m.back()/psi_m.back()*std::sqrt((*mesh_i).dr());
-            }
+
+        auto scale = 1.;
+        if(std::abs(r_init_m.back() - psi_m.back()) > tol_m){
+            scale = r_init_m.back()/psi_m.back();
+        }
+        auto it = psi_m.begin();
+        auto mesh_i = mesh_m.begin();
+        for(; it != psi_m.end(); it++, mesh_i++){
+            *it *= scale*std::sqrt(mesh_i->dr());
         }
 
     }
 
+/*
+    using Schroedinger_Equation::norm;
+    using Schroedinger_Equation::normalize;
+*/
+
+/*
     double norm() const override
     {
         return simpson_integral<double>(mesh_m,
             [=](const double i)
             {
-                return GSL::pow_int(psi_m[static_cast<size_t>(i)], 2)*mesh_m.dr(i);
+                return GSL::pow_int(psi_m[static_cast<size_t>(i)], 2);
             }
         );
     }
@@ -371,20 +395,19 @@ public:
             *it /= std::sqrt(n);
         }
     }
-
+*/
 };
 
 class Radial_Schroedinger_Equation_Central_Potential : public Radial_Schroedinger_Equation{
 public:
     Radial_Schroedinger_Equation_Central_Potential(const std::vector<double>& v, const size_t l, const std::vector<double>& left_init,
-      const std::vector<double>& right_init, const Exponential_mesh<1, double>& mesh,
+      const std::vector<double>& right_init, const Mesh_base<1, double>& mesh,
       const double tol = 1e-10)
     : Radial_Schroedinger_Equation(0, 0, v, l, left_init,
         right_init, mesh, tol)
     {
         e_min_m = *std::min_element(v_m.begin()+1, v_m.end());
         e_max_m = v_m.back();
-
     }
 };
 #endif // SCHOEDINGER_H

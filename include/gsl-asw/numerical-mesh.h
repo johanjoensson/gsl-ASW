@@ -1505,7 +1505,11 @@ public:
         const noexcept override
     {
         Scalar a = this->alpha_m, b = this->beta_m, c = this->gamma_m;
-        return sgn(x)*a*std::expm1(sgn(x)*b*x) + c;
+        if(std::abs(x*b) < 0.1){
+            return sgn(x)*a*std::expm1(std::abs(b*x)) + c;
+        }else{
+            return sgn(x)*a*(std::exp(std::abs(b*x)) -1.) + c;
+        }
     }
 
     //! Get position squared at coordinate
@@ -1518,7 +1522,7 @@ public:
     Scalar r2(const Scalar& x)
         const noexcept override
     {
-        return std::pow(this->r(sgn(x)*x), 2);
+        return std::pow(this->r(x), 2);
     }
 
     //! Get step size at coordinates
@@ -1540,28 +1544,15 @@ public:
     Scalar d2r(const Scalar& x)
         const noexcept override
     {
-        Scalar a = this->alpha_m, b = this->beta_m, c = this->gamma_m;
-        return b*b*(this->r(sgn(x)*x) + a - c);
+        Scalar b = this->beta_m;
+        return b*this->dr(x);
     }
 
     Scalar d3r(const Scalar& x)
         const noexcept override
     {
-        Scalar a = this->alpha_m, b = this->beta_m, c = this->gamma_m;
-        return b*b*b*(this->r(sgn(x)*x) + a - c);
-    }
-
-
-    Scalar A()
-        const noexcept
-    {
-        return this->alpha_m;
-    }
-
-    Scalar B()
-        const noexcept
-    {
-        return this->beta_m;
+        Scalar b = this->beta_m;
+        return b*this->d2r(x);
     }
 
 };

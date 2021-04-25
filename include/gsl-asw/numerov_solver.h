@@ -122,6 +122,7 @@ class Numerov_solver{
 			for(auto iter = res_start; iter != inv - 1; iter++){
 				*iter *= scale;
 			}
+
 		}
 		return inv;
 	}
@@ -182,7 +183,7 @@ class Numerov_solver{
 	{
 		int res = 0;
 		for(auto current = start, previous = start; current != end; current++){
-			if(signum(*current) != signum(*previous) && signum(*current) != 0){
+			if(signum(*current) != signum(*previous) && (signum(*current) != 0)){
 				res++;
 			}
 			previous = current;
