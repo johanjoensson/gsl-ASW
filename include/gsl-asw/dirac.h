@@ -10,7 +10,7 @@
 #include <algorithm>
 #include <numeric>
 #include <fstream>
-#include<unistd.h>
+#include <unistd.h>
 #include <numerical-mesh.h>
 #include <numerical-mesh-integration.h>
 
@@ -137,30 +137,6 @@ public:
 			f[1] = dr*(-1/c*(energy_m - Vlinear(x))*y[0] + (kappa_m/r - 0.5*d2r/(dr*dr))*y[1]);
         };
 
-/*
-		auto jac = [=](double x, const std::vector<double>& y, std::vector<double>& dfdy, std::vector<double>& dfdt)
-        {
-			std::cout << "Jacobian!" << std::endl;
-            auto r = mesh_m.r(x);
-			auto r2 = mesh_m.r2(x);
-			auto dr = mesh_m.dr(x);
-			auto d2r = mesh_m.d2r(x);
-			auto d3r = mesh_m.d3r(x);
-
-            dfdy[0] = dr*(-kappa_m/r - 0.5*dr*d2r);
-            dfdy[1] = dr*1/c*(energy_m + c*c - V(x));
-            dfdy[2] = dr*(-1/c*(energy_m - V(x)));
-            dfdy[3] = dr*(kappa_m/r - 0.5*dr*d2r);
-
-			// dr*((-kappa_m/r - 0.5*dr*d2r)*y[0] + 1/c*(energy_m + 2*c*c - V(x))*y[1])
-            dfdt[0] = d2r*((-kappa_m/r - 0.5*dr*d2r)*y[0] + 1/c*(energy_m + c*c - V(r))*y[1])
-					+ dr*((kappa_m/r2*dr - 0.5*d2r*d2r - 0.5*dr*d3r)*y[0] - 1/c*V.deriv(r, 1)*dr*y[1]);
-			// dr*(-1/c*(energy_m - V(x))*y[0] + (kappa_m/r - 0.5*dr*d2r)*y[1])
-            dfdt[1] = d2r*(-1/c*(energy_m - V(r))*y[0] + (kappa_m/r - 0.5*dr*d2r)*y[1])
-					+ dr*(1/c*V.deriv(r, 1)*dr*y[0] + (-kappa_m/r2*dr - 0.5*d2r*d2r - 0.5*dr*d3r)*y[1]);
-        };
-*/
-
         GSL::ODE_solver solver(GSL::Runge_Kutta_Prince_Diamond, 2, abs_err_m, 100);
 
         solver.set_rhs(func);
@@ -194,7 +170,6 @@ public:
             size_t turning_index = g_m.size() - std::distance(std::rbegin(g_m),
                 find_inversion_point(std::rbegin(g_m), std::rend(g_m), std::rbegin(v_m)));
 
-
 			std::vector<double> y{left_init_g_m.back(), left_init_f_m.back()};
 			for (size_t i = left_init_g_m.size(); i <= turning_index; i++){
                 double x = i - 1;
@@ -206,7 +181,6 @@ public:
 			std::vector<double> y_out{y[0], y[1]};
 
 			n = count_nodes(g_m, turning_index);
-
 
             if (n == nodes) {
 				for (size_t i = turning_index + 1; i < mesh_m.size() - right_init_g_m.size(); i++){
@@ -242,11 +216,11 @@ public:
 				solver.reset();
 
 				auto scale = y_out[0]/y_in[0];
-                for (size_t i = turning_index; i < mesh_m.size(); i++){
+                for (size_t i = turning_index; i < mesh_m.size() - right_init_g_m.size(); i++){
                     g_m[i] *= scale;
 
                 }
-				for (size_t i = turning_index; i < mesh_m.size(); i++){
+				for (size_t i = turning_index; i < mesh_m.size() - right_init_f_m.size(); i++){
 					f_m[i] *= scale;
 				}
 
@@ -260,7 +234,6 @@ public:
                 if(energy_m > e_max || energy_m < e_min){
                     energy_m = 0.5*(e_min + e_max);
                 }
-
             }
         }
 

@@ -356,13 +356,13 @@ public:
                 energy_m += de;
                 energy_m = std::min(std::max(energy_m, e_min_m), e_max_m);
                 variational_steps++;
-                std::cout << "de = " << de << "\n";
             }
         }
 
         auto scale = 1.;
         if(std::abs(r_init_m.back() - psi_m.back()) > tol_m){
             scale = r_init_m.back()/psi_m.back();
+            std::cout << "Rescaling\n";
         }
         auto it = psi_m.begin();
         auto mesh_i = mesh_m.begin();
