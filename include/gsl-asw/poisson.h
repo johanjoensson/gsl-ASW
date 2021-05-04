@@ -39,10 +39,17 @@ public:
                     return mesh_m.r(i)*rho_m[static_cast<size_t>(i)];
                 }
             ));
+            auto r0 = mesh_m.r(0);
+            auto dr0 = mesh_m.dr(0);
+            auto F0p = v0*std::sqrt(dr0) - 0.5*r0*v0*GSL::pow_int(std::sqrt(dr0), -3);
             init = std::vector<double> {
-                0,
-                // v0*mesh_m.dr(0)/std::sqrt(mesh_m.dr(1))
-                (v0*(1+g[2]/12) + 1./24*(6*s[1] - s[2]) + g[2]/36*2*s[1])/
+                r0*v0,
+                /***************************************************************
+                * O(h^5) estimate of r(x)V(r(x))|x=1, from
+                * L. M. Quiroz González, and D. Thompson
+                * Computers in Physics 11, 514 (1997); doi: 10.1063/1.168593
+                ***************************************************************/
+                (F0p*(1+g[2]/12) + 1./24*(7*s[0] + 6*s[1] - s[2]) + g[2]/36*(s[0] + 2*s[1]))/
                     (1 + g[1]/4 + g[1]*g[2]/18)
             };
 
@@ -74,23 +81,19 @@ public:
                 }
             );
 
-        std::cout << "Right boundary value = " << right_val << "\n";
-        std::cout << "difference at right boundary " << std::abs(right_val - val_m.back()) << "\n";
         double Al = (right_val - val_m.back())/GSL::pow_int(S, l_m + 1);
-        std::cout << "Al = " << Al << "\n";
         v_i = val_m.begin();
         for(auto m_i = mesh_m.begin(); m_i != mesh_m.end(); m_i++, v_i++){
              *v_i += Al*GSL::pow_int(m_i->r(), l_m + 1);
              *v_i /= m_i->r();
         }
         val_m.front() = v0;
-
     }
 
-    std::vector<double> val() const { return this->val_m;}
-    double val(const size_t i) const { return this->val_m[i];}
-    std::vector<double> rho() const { return this->rho_m;}
-    double rho(const size_t i) const { return this->rho_m[i];}
+    std::vector<double> val() const noexcept { return this->val_m;}
+    double val(const size_t i) const noexcept { return this->val_m[i];}
+    std::vector<double> rho() const noexcept { return this->rho_m;}
+    double rho(const size_t i) const noexcept { return this->rho_m[i];}
 
 };
 
