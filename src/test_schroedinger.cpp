@@ -54,10 +54,10 @@ void harmonic_oscillator()
 
 void coulomb_potential()
 {
-    unsigned int len = 501;
-    double rmax = 2;
+    unsigned int len = 1501;
+    double rmax = 16;
     int z = 6;
-    int n = 1;
+    int n = 5;
     int l = 0;
     auto exact_energy = -GSL::pow_int(static_cast<double>(z)/n, 2);
 
@@ -69,19 +69,28 @@ void coulomb_potential()
     for(auto it = v.begin(); it != v.end(); it++, mesh_it++){
 	    *it = pot(mesh_it->r());
     }
-    std::vector<double> left =
-        {
-            GSL::pow_int(-1, (n - l - 1))*GSL::pow_int(mesh.r(0), l + 1),
-            GSL::pow_int(-1, (n - l - 1))*GSL::pow_int(mesh.r(1), l + 1),
-            GSL::pow_int(-1, (n - l - 1))*GSL::pow_int(mesh.r(2), l + 1)
+    std::vector<double> left;
+    if (l == 0){
+        double A = 1, C = 2*z;
+        left = std::vector<double>{
+            GSL::pow_int(-1, (n - l - 1))*(A - C/2*mesh.r(0)),
+            GSL::pow_int(-1, (n - l - 1))*(A - C/2*mesh.r(1)),
+            GSL::pow_int(-1, (n - l - 1))*(A - C/2*mesh.r(2))
         };
+    } else {
+        left = std::vector<double>{
+            GSL::pow_int(-1, (n - l - 1))*GSL::pow_int(mesh.r(0), l),
+            GSL::pow_int(-1, (n - l - 1))*GSL::pow_int(mesh.r(1), l),
+            GSL::pow_int(-1, (n - l - 1))*GSL::pow_int(mesh.r(2), l)
+        };
+    }
 
     std::vector<double> right = {1e-15, 0};
 
     unsigned int nodes = static_cast<unsigned int>(std::max(n - l - 1, 0));
     Radial_Schroedinger_Equation_Central_Potential se(v, static_cast<unsigned int>(l), left, right, mesh, 1e-10);
     se.solve(nodes, -0.01);
-    se.normalize();
+    // se.normalize();
 
     std::cout << "Found energy : " << se.e() << "\n";
     std::cout << "Exact energy = " << exact_energy << "\n";
