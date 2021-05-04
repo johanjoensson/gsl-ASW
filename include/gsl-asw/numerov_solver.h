@@ -10,6 +10,7 @@
 class Numerov_solver{
 	template<class T>
 	static int signum(T val)
+	 noexcept
 	{
 		return (val > T(0)) - (val < T(0));
 	}
@@ -27,6 +28,7 @@ class Numerov_solver{
 	template<class Iter_res, class Iter_g, class Iter_s, class Iter_init>
 	Iter_res solve_direction(Iter_res res_start, Iter_res res_end, Iter_init
 		init_start, Iter_init init_end, Iter_g g_start, Iter_s s_start)
+	 const noexcept
 	{
 		Iter_res current = res_start;
 		Iter_g current_g = g_start;
@@ -84,6 +86,7 @@ class Numerov_solver{
 			Iter_g g_start, Iter_g g_end, Iter_s s_start, Iter_s s_end,
 			Iter_left_init left_start, Iter_left_init left_end,
 			Iter_right_init right_start, Iter_right_init right_end, Iter_res inv)
+	 const noexcept
 	{
 		// If no initial conditions at the right hand side, only solve to the right
 		// Iter_res tmp = res_end;
@@ -110,7 +113,7 @@ class Numerov_solver{
 			// tmp now points to the element after the matching point
 			// Extract value at matching point
 			// T scale = 1/(*(tmp-1));
-			T scale = 1/(*(inv-1));
+			T scale = (*(inv-1));
 			// Solve . <- |
 			auto rinv = solve_direction(std::reverse_iterator<Iter_res>(res_end),
 				// std::reverse_iterator<Iter_res>(inv), right_start, right_end,
@@ -118,8 +121,8 @@ class Numerov_solver{
 				std::reverse_iterator<Iter_g>(g_end),
 				std::reverse_iterator<Iter_s>(s_end));
 			// Match values at matching point
-			scale *= *(rinv - 1);
-			for(auto iter = res_start; iter != inv - 1; iter++){
+			scale /= *(rinv - 1);
+			for(auto iter = inv - 1; iter != res_end; iter++){
 				*iter *= scale;
 			}
 
@@ -136,6 +139,7 @@ class Numerov_solver{
 	Iter_res solve(Iter_res res_start, Iter_res res_end,
 			Iter_g g_start, Iter_g g_end, Iter_s s_start, Iter_s s_end,
 			Iter_left_init left_start, Iter_left_init left_end)
+	 const noexcept
 	{
 		solve(res_start, res_end, g_start, g_end, s_start, s_end, left_start,
 			left_end, res_end, res_end);
@@ -159,7 +163,8 @@ class Numerov_solver{
 	***************************************************************************/
 	template<class Iter_res, class Iter_g, class Iter_s, class T = double>
 	int derivative_diff(Iter_res res_start, Iter_g res_end, Iter_res inv,
-		Iter_g g_start, Iter_s s_start, double tol = 1e-6) const
+		Iter_g g_start, Iter_s s_start, double tol = 1e-6)
+	 const noexcept
 	{
 		T val{0};
 		if(inv == res_end){
@@ -179,7 +184,8 @@ class Numerov_solver{
 	}
 
 	template<class Iter_res>
-	int count_nodes(Iter_res start, Iter_res end) const
+	int count_nodes(Iter_res start, Iter_res end)
+	 const noexcept
 	{
 		int res = 0;
 		for(auto current = start, previous = start; current != end; current++){
