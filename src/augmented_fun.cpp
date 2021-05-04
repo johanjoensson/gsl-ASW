@@ -12,28 +12,7 @@
 Augmented_function::Augmented_function( const lm l_n, const double kappa_n, const spin s_n,
     const Exponential_mesh<1, double>& mesh_n)
  : En_m(0), l_m(l_n), kappa_m(kappa_n), s_m(s_n), mesh_m(mesh_n), S_m(0)
-   // , val_m(mesh_n.dim())
 {}
-
-/*
-double Augmented_function::operator()(const GSL::Vector& r) const
-{
-    double res = 0, radius = mesh_m.r(mesh_m.dim() - 1);
-    size_t t = 1;
-    if(r.norm<double>() <= radius){
-        while(mesh_m.r(t) < r.norm<double>() && t < mesh_m.dim()){
-            t++;
-        }
-        // r[t - 1] < |ri| and r[t] > |ri|
-        if(t < mesh_m.dim()){
-            res = lerp(r.norm<double>(), mesh_m.r(t - 1), mesh_m.r(t),
-            val_m[t - 1]*std::sqrt(mesh_m.dr(t-1))*mesh_m.dr(t-1), val_m[t]*std::sqrt(mesh_m.dr(t))*mesh_m.dr(t));
-        }
-    }
-    return res;
-}
-*/
-
 
 double augmented_integral(const Augmented_Hankel &a, const Augmented_Hankel &b)
 {
@@ -57,12 +36,12 @@ double augmented_integral(const Augmented_Bessel &a, const Augmented_Bessel &b)
 
 double augmented_integral(const Augmented_Hankel &a, const Augmented_Bessel &b)
 {
-    if(std::abs(a.EH() - b.EJ()) > 1e-8){
+    if(std::abs(a.EH() - b.EJ()) < 1e-10){
+        return a.SH();
+    }else{
         Envelope_Hankel ha(a.l(), a.kappa());
         Envelope_Bessel jb(b.l(), b.kappa());
         return 1./(a.EH() - b.EJ()) * wronskian(ha, jb, a.mesh().r(a.mesh().size() - 1));
-    }else{
-        return a.S();
     }
 }
 
@@ -70,31 +49,6 @@ double augmented_integral(const Augmented_Bessel &a, const Augmented_Hankel &b)
 {
     return augmented_integral(b, a);
 }
-
-/*
-double augmented_integral(const Augmented_function &a, const Augmented_function &b)
-{
-    // if(std::abs(a.kappa() - b.kappa()) < 1e-10){
-	    const Exponential_mesh<1, double> mesh = a.mesh();
-
-        return simpson_integral<double>(mesh,
-            [&](const double& i)
-            {
-                size_t idx = static_cast<size_t>(i);
-                return a.val()[idx] * b.val()[idx];
-            }
-        );
-
-        // return a.S();
-	    // return mesh.integrate_simpson(integrand);
-	    // return mesh.integrate(integrand);
-
-    // }else{
-	//     Envelope_Hankel h1(a.l(), a.kappa()), h2(b.l(), b.kappa());
-	//     return 1./(a.En() - b.En()) * wronskian(h1, h2, a.mesh().r(a.mesh().dim() - 1));
-    // }
-}
-*/
 
 bool operator==(const Augmented_function &a, const Augmented_function &b)
 {
@@ -120,40 +74,45 @@ void Augmented_Hankel::update(std::vector<double>& v, const double en
 
     Envelope_Hankel H(l_m, kappa_m);
 
-    std::vector<double> l_init = {
-        GSL::pow_int(mesh_m.r(0), l_m.l + 1),
-        GSL::pow_int(mesh_m.r(1), l_m.l + 1),
-        GSL::pow_int(mesh_m.r(2), l_m.l + 1)};
+    std::vector<double> l_init;
+    if (l_m.l == 0){
+        double A = 1, C = -(v[2] - v[1])/(1./mesh_m.r(2) - 1./mesh_m.r(1));
+        l_init = std::vector<double>{
+            A - C/2*mesh_m.r(0),
+            A - C/2*mesh_m.r(1),
+            A - C/2*mesh_m.r(2)
+        };
+    }else{
+        l_init = std::vector<double>{
+            GSL::pow_int(mesh_m.r(0), l_m.l),
+            GSL::pow_int(mesh_m.r(1), l_m.l),
+            GSL::pow_int(mesh_m.r(2), l_m.l)};
+        };
     std::vector<double> r_init;
     if(core){
         r_init = {1e-15, 0.};
     }else{
-        r_init = {mesh_m.r(lastbutone)*H.barred_fun(mesh_m.r(lastbutone)),
-                  mesh_m.r(last)*H.barred_fun(mesh_m.r(last))};
+        r_init = {
+                H.barred_fun(mesh_m.r(lastbutone)),
+                H.barred_fun(mesh_m.r(last))
+              };
     }
     Radial_Schroedinger_Equation_Central_Potential
         se(v, static_cast<size_t>(l_m.l), l_init, r_init, mesh_m, 1e-10);
     se.solve(nodes, EH());
     if(core){
         se.normalize();
+    }else{
+        std::cout << "Difference at right edge = " << se.psi().back() << ", should be = " << r_init.back() << "\n";
+        std::cout << "Relative error at right edge = " << std::abs(se.psi().back() - r_init.back())/r_init.back() << "\n";
+
     }
-    /*else{
-        double scale = 1;
-        if(std::abs(se.psi().back()) > 1e-12){
-            scale = r_init.back()/se.psi().back();
-        }
-        for(size_t i = 0; i < mesh_m.dim(); i++){
-            se.psi()[i] *= scale;
-        }
-    }
-    */
     S_m = se.norm();
-    // val_m = se.psi();
     EH() = se.e();
 #ifdef DEBUG
     std::ofstream out_file("check_Hankel.dat", std::ios::app);
     for(size_t i = 0; i < mesh_m.size(); i++){
-        out_file << mesh_m.r(i) << " " << /*val_m[i] << */ " " << v[i] << "\n";
+        out_file << mesh_m.r(i) << " " << se.psi(i) << " " << v[i] << "\n";
     }
     out_file << "\n\n";
 #endif //DEBUG
@@ -173,32 +132,41 @@ void Augmented_Bessel::update(std::vector<double>& v, const double en
     Envelope_Bessel I(l_m, kappa_m);
 
     if(!core){
-        std::vector<double> l_init = {
-            0,
-            GSL::pow_int(mesh_m.r(1), l_m.l+1),
-            GSL::pow_int(mesh_m.r(2), l_m.l+1)};
+        std::vector<double> l_init;
+        if (l_m.l == 0){
+            double A = 1, C = (v[2] - v[1])/(mesh_m.r(2) - mesh_m.r(1));
+            l_init = std::vector<double>{
+                A - C/2*mesh_m.r(0),
+                A - C/2*mesh_m.r(1),
+                A - C/2*mesh_m.r(2)
+            };
+        }else{
+            l_init = std::vector<double>{
+                GSL::pow_int(mesh_m.r(0), l_m.l),
+                GSL::pow_int(mesh_m.r(1), l_m.l),
+                GSL::pow_int(mesh_m.r(2), l_m.l)
+            };
+        }
 
         std::vector<double> r_init = {
-            I.barred_fun(mesh_m.r(lastbutone))
-		        *mesh_m.r(lastbutone),
+            I.barred_fun(mesh_m.r(lastbutone)),
 		    I.barred_fun(mesh_m.r(last))
-		        *mesh_m.r(last)};
+		};
 
         Radial_Schroedinger_Equation_Central_Potential se(v, static_cast<size_t>(l_m.l), l_init, r_init, mesh_m, 1e-10);
         se.solve(nodes, EJ());
         S_m = se.norm();
         EJ() = se.e();
+        #ifdef DEBUG
+            std::ofstream out_file("check_Bessel.dat", std::ios::app);
+            for(size_t i = 0; i < mesh_m.size(); i++){
+                out_file << mesh_m.r(i) << " " << se.psi(i) << " " << v[i] << "\n";
+            }
+            out_file << "\n\n";
+        #endif //DEBUG
     }else{
         EJ() = 0.;
-        // val_m = std::vector<double>(val_m.size(), 0.);
     }
-#ifdef DEBUG
-    std::ofstream out_file("check_Bessel.dat", std::ios::app);
-    for(size_t i = 0; i < mesh_m.size(); i++){
-        out_file << mesh_m.r(i) << " " << /*val_m[i] << */ " " << v[i] << "\n";
-    }
-    out_file << "\n\n";
-#endif //DEBUG
 }
 
 void Hankel_container::add_function(const Augmented_Hankel& H)
