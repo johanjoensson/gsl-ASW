@@ -173,7 +173,7 @@ void Simulation::init_augmented_functions()
             }
             H.update(pot.sphere(i), -GSL::pow_int(static_cast<double>(cryst.atoms(i).Z())/H.l().n, 2), core);
             H.EH() -= pot.MT0();
-            std::cout << ", EH = " << H.EH() << "\n";
+            std::cout << ", EH = " << H.EH() << ", SH = " << H.SH() << "\n";
         }
     }
 
@@ -186,7 +186,7 @@ void Simulation::init_augmented_functions()
             }
             J.update(pot.sphere(i), -GSL::pow_int(static_cast<double>(cryst.atoms(i).Z())/J.l().n, 2), false);
             J.EJ() -= pot.MT0();
-            std::cout << "J " << J.l() << ", JH = " << J.EJ() << "\n";
+            std::cout << "J " << J.l() << ", EJ = " << J.EJ() << ", SJ = " << J.SJ() << "\n";
         }
     }
 }
@@ -242,10 +242,12 @@ double Simulation::X_H2(const Augmented_Hankel& Ht1, const Augmented_Bessel& Jt2
     const double k1 = Ht1.kappa(), k2 = Jt2.kappa();
     const Envelope_Hankel H1(Ht1.l(), k1);
     const Envelope_Bessel J2(Jt2.l(), k2);
-    if(std::abs(Ht1.EH() - Jt2.EJ()) < 5e-4){
+    if(std::abs(Ht1.EH() - Jt2.EJ()) < 1e-10){
         res += Jt2.EJ()*augmented_integral(Ht1, Ht1);
     }else{
-        std::cout << "Error in interal = " << ( 1./(Ht1.EH() - Jt2.EJ()) - augmented_integral(Ht1, Jt2) ) * ( Ht1.EH() - Jt2.EJ() ) << "\n";
+        std::cout << "Relative error in integral = " <<
+            ( 1./(Ht1.EH() - Jt2.EJ()) - augmented_integral(Ht1, Jt2) ) *
+            ( Ht1.EH() - Jt2.EJ() ) << "\n";
         // res += Jt2.EJ()/(Ht1.EH() - Jt2.EJ());
         res += Jt2.EJ()*augmented_integral(Ht1, Jt2);
 
