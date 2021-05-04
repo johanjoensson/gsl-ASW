@@ -132,7 +132,7 @@ double wronskian(const Envelope_Hankel& f, const Envelope_Hankel& g, const doubl
 double wronskian(const Envelope_Hankel& f, const Envelope_Bessel& g, const double rs)
 {
 	if(std::abs(f.kappa() - g.kappa()) < 1e-10 && f.l().l == g.l().l){
-		return 0;
+		return 1;
 	}
     double k2 = g.kappa();
 	const Envelope_Hankel fp1(lm{f.l().l + 1, f.l().m}, f.kappa());
