@@ -172,7 +172,7 @@ public:
         }
     }
 
-    double norm()
+    virtual double norm()
      const noexcept
     {
         double res = simpson_integral<double>(mesh_m,
@@ -206,6 +206,18 @@ public:
         return psi_m;
     }
 
+    double& psi(const size_t i)
+     noexcept
+    {
+        return psi_m[i];
+    }
+
+    double psi(const size_t i)
+     const noexcept
+    {
+        return psi_m[i];
+    }
+
     std::vector<double>& v()
      noexcept
     {
@@ -216,6 +228,18 @@ public:
      const noexcept
     {
         return v_m;
+    }
+
+    double& v(const size_t i)
+     noexcept
+    {
+        return v_m[i];
+    }
+
+    double v(const size_t i)
+     const noexcept
+    {
+        return v_m[i];
     }
 
     double e()
@@ -368,11 +392,6 @@ public:
             }
         }
 
-        auto scale = 1.;
-        if(std::abs(right_init.back() - psi_m.back()) > tol_m){
-            scale = right_init.back()/(mesh_m.r().back()*psi_m.back()/*mesh_m.dr().back()*/);
-        }
-
         auto it = psi_m.begin();
         auto mesh_i = mesh_m.begin();
         for(; it != psi_m.end(); it++, mesh_i++){
@@ -384,12 +403,29 @@ public:
             *it = *li;
         }
 
+        auto scale = 1.;
+        if(std::abs(r_init_m.back() - psi_m.back()) > tol_m){
+            scale = r_init_m.back()/psi_m.back();
+        }
+
         it = psi_m.begin();
         mesh_i = mesh_m.begin();
         for(; it != psi_m.end(); it++, mesh_i++){
             *it *= scale;
         }
 
+    }
+
+    virtual double norm()
+     const noexcept override
+    {
+        double res = simpson_integral<double>(mesh_m,
+            [this](const double& i)
+            {
+                return GSL::pow_int(mesh_m.r(i)*psi_m[static_cast<size_t>(i)], 2);
+            }
+        );
+        return res;
     }
 
 };
