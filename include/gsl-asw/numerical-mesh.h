@@ -584,7 +584,7 @@ public:
     {
         std::vector<Scalar> res;
         for(size_t i = 0; i < this->N_m; i++){
-            res.push_back(this->r(i));
+            res.push_back(this->r(static_cast<Scalar>(i)));
         }
         return res;
     }
@@ -726,7 +726,7 @@ public:
         friend const_iterator operator+(const difference_type n, const_iterator it)
          noexcept { return it + n; }
         const_iterator operator-(const difference_type n)const noexcept{auto res = *this; return (res -= n);}
-        difference_type operator-(const const_iterator& it)const noexcept{return this->i_m - it.i_m;}
+        difference_type operator-(const const_iterator& it)const noexcept{return (this->i_m - it.i_m);}
     };
 
     /*!*************************************************************************
@@ -1505,11 +1505,7 @@ public:
         const noexcept override
     {
         Scalar a = this->alpha_m, b = this->beta_m, c = this->gamma_m;
-        if(std::abs(x*b) < 0.1){
-            return sgn(x)*a*std::expm1(std::abs(b*x)) + c;
-        }else{
-            return sgn(x)*a*(std::exp(std::abs(b*x)) -1.) + c;
-        }
+        return sgn(x)*a*std::expm1(std::abs(b*x)) + c;
     }
 
     //! Get position squared at coordinate
@@ -1522,7 +1518,7 @@ public:
     Scalar r2(const Scalar& x)
         const noexcept override
     {
-        return std::pow(this->r(x), 2);
+        return this->r(x)*this->r(x);
     }
 
     //! Get step size at coordinates
