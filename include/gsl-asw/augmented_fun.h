@@ -3,7 +3,7 @@
 #include "utils.h"
 #include "log_mesh.h"
 #include "atomic_quantity.h"
-#include <numerical-mesh.h>
+#include <numerical-mesh/numerical-mesh.h>
 #include "GSLpp/vector.h"
 
 class Augmented_function{
@@ -12,7 +12,7 @@ protected:
 public:
     lm l_m;
     double kappa_m;
-    spin s_m;
+    Spin s_m;
     Exponential_mesh<1, double> mesh_m;
 
     double S_m;
@@ -26,7 +26,7 @@ public:
     Augmented_function(Augmented_function&&) = default;
     virtual ~Augmented_function(){}
 
-    Augmented_function(const lm l, const double kappa, const spin s,
+    Augmented_function(const lm l, const double kappa, const Spin s,
         const Exponential_mesh<1, double>& mesh);
 
     Augmented_function& operator=(const Augmented_function&) = default;
@@ -44,8 +44,8 @@ public:
     double kappa() const {return kappa_m;}
     double& kappa() {return kappa_m;}
 
-    spin s() const {return s_m;}
-    spin& s() {return s_m;}
+    Spin s() const {return s_m;}
+    Spin& s() {return s_m;}
 
     Exponential_mesh<1, double> mesh() const {return mesh_m;}
     Exponential_mesh<1, double>& mesh() {return mesh_m;}
@@ -79,7 +79,7 @@ public:
     Augmented_Hankel(Augmented_Hankel&&) = default;
     ~Augmented_Hankel(){}
 
-    Augmented_Hankel(const lm l, const double kappa, const spin s,
+    Augmented_Hankel(const lm l, const double kappa, const Spin s,
         const Exponential_mesh<1, double>& mesh);
 
     Augmented_Hankel& operator=(const Augmented_Hankel& a) = default;
@@ -98,7 +98,7 @@ public:
     Augmented_Bessel(Augmented_Bessel&&) = default;
     ~Augmented_Bessel(){}
 
-    Augmented_Bessel(const lm l, const double kappa, const spin s,
+    Augmented_Bessel(const lm l, const double kappa, const Spin s,
         const Exponential_mesh<1, double>& mesh);
 
 
@@ -147,10 +147,10 @@ public:
     Hankel_container():functions(){};
     void add_function(const Augmented_Hankel&);
     Augmented_Hankel& get_function(const lm& l, const double& kappa,
-        const spin& s);
+        const Spin& s);
     size_t get_index(const lm& l, const double& kappa,
-        const spin& s) const;
-        Augmented_Hankel& operator()(const lm& l, const double& kappa, const spin& s)
+        const Spin& s) const;
+        Augmented_Hankel& operator()(const lm& l, const double& kappa, const Spin& s)
         {return this->get_function(l, kappa, s);}
 
     std::vector<Augmented_Hankel>::iterator begin()
@@ -199,10 +199,10 @@ public:
     Bessel_container():functions(){};
     void add_function(const Augmented_Bessel&);
     Augmented_Bessel& get_function(const lm& l, const double& kappa,
-        const spin& s);
+        const Spin& s);
     Augmented_Bessel& get_function(size_t index){ return functions[index];}
     size_t get_index(const lm& l, const double& kappa,
-        const spin& s) const;
+        const Spin& s) const;
 
     lm max_lm() const;
     lm min_lm() const;

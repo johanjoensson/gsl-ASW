@@ -27,7 +27,18 @@ class Crystal_t {
 	std::vector<GSL::Vector> R_m, K_m;
 	std::array<size_t, dim> size_m;
 public:
-	Crystal_t(const Lattice_t<dim>& lat):lat_m(lat), sites_m(), atom_index_m(), atoms_m(), R_m(), K_m(), size_m(){}
+	Crystal_t(const Crystal_t&) = default;
+	Crystal_t(Crystal_t&&) = default;
+
+	Crystal_t(Lattice_t<dim>&& lat)
+	 : lat_m(std::move(lat)), sites_m(), atom_index_m(), atoms_m(), R_m(), K_m(), size_m()
+	{}
+
+	~Crystal_t() = default;
+
+	Crystal_t& operator=(const Crystal_t<dim, Atom>&) = default;
+	Crystal_t& operator=(Crystal_t<dim, Atom>&&) = default;
+
 	void add_sites(const std::vector<GSL::Vector>&);
 
 	void add_basis(const std::vector<Atom>&);
@@ -39,12 +50,13 @@ public:
 	std::vector<Neighbours<dim>> calc_nearest_neighbours(const size_t n_shells) const;
 	std::vector<std::vector<Neighbours<dim>>> determine_nn_shells(const std::vector<Neighbours<dim>>& nn) const;
 
-	Lattice_t<dim> lat() const {return lat_m;}
-	std::vector<Site_t<dim>>& sites(){return sites_m;}
-	std::vector<Site_t<dim>> sites() const {return sites_m;}
+	// Lattice_t<dim>& lat() {return lat_m;}
+	const Lattice_t<dim>& lat() const {return lat_m;}
+	// std::vector<Site_t<dim>>& sites(){return sites_m;}
+	const std::vector<Site_t<dim>>& sites() const {return sites_m;}
 
 	Site_t<dim>& site(const size_t i) {return sites_m[i];}
-	Site_t<dim> site(const size_t i) const {return sites_m[i];}
+	const Site_t<dim>& site(const size_t i) const {return sites_m[i];}
 
 	std::vector<Atom>& atoms() {return atoms_m;}
 	std::vector<Atom> atoms() const {return atoms_m;}
@@ -61,11 +73,11 @@ public:
 	size_t atom_index(const Site_t<dim>& s) const {return atom_index_m[s.index()];}
 
 	std::vector<GSL::Vector>& Rn_vecs(){return R_m;}
-	std::vector<GSL::Vector> Rn_vecs() const {return R_m;}
+	const std::vector<GSL::Vector>& Rn_vecs() const {return R_m;}
 	std::vector<GSL::Vector>& Kn_vecs(){return K_m;}
-	std::vector<GSL::Vector> Kn_vecs() const {return K_m;}
+	const std::vector<GSL::Vector>& Kn_vecs() const {return K_m;}
 
-	double volume() const {return lat().lat().det();}
+	double volume() const {return GSL::lu_det(lat().lat());}
 };
 
 template<size_t dim, class Atom>
@@ -73,7 +85,8 @@ void Crystal_t<dim, Atom>::add_sites(const std::vector<GSL::Vector>& positions)
 {
 	size_t offset = sites_m.size();
 	for(size_t i = 0; i < positions.size(); i++){
-		sites_m.push_back(Site_t<dim>(offset + i, positions[i]*lat_m.lat(), size_m));
+		sites_m.push_back(Site_t<dim>(offset + i, GSL::multiply(positions[i], lat_m.lat()), size_m));
+		// std::cout << "Site is at position " << sites_m.back().pos() << "\n";
 		if(offset + i >= atoms_m.size()){
 			atom_index_m.push_back(atoms_m.size() - 1);
 		}else{
@@ -92,13 +105,13 @@ void Crystal_t<dim, Atom>::add_basis(const std::vector<Atom>& basis)
 
 inline bool comp_norm(const GSL::Vector& a, const GSL::Vector& b)
 {
-    return a.norm<double>() < b.norm<double>();
+    return a.norm() < b.norm();
 }
 
 template<size_t dim>
 bool comp_norm_site(const Site_t<dim>& a, const Site_t<dim>& b)
 {
-	const GSL::Vector va = a.pos(), vb = b.pos();
+	GSL::Vector::Const_View va = a.pos(), vb = b.pos();
 	return comp_norm(va, vb);
 }
 
@@ -113,7 +126,8 @@ template<size_t dim, class Atom>
 void Crystal_t<dim, Atom>::set_Rn(const double Rmax)
 {
 	std::array<int, dim> N, n;//, zero;
-	GSL::Matrix a(lat_m.lat()), b(lat_m.recip_lat());
+	const GSL::Matrix a(lat_m.lat()), b(lat_m.recip_lat());
+
 	GSL::Vector tmp(dim);
 	// Calculate limits
 	for(size_t i = 0; i < dim; i++){
@@ -122,8 +136,13 @@ void Crystal_t<dim, Atom>::set_Rn(const double Rmax)
 	}
 
 	while(n != N){
-		tmp.assign(n.begin(), n.end());
-		R_m.push_back(tmp*a);
+		std::transform(n.begin(), n.end(), tmp.view().begin(),
+			[](int i)
+			{
+				return i;
+			}
+		);
+		R_m.push_back(GSL::multiply(tmp,a));
 		n.back()++;
 		for(size_t i = dim - 1; i > 0; i--){
 			if(n[i] > N[i]){
@@ -132,8 +151,13 @@ void Crystal_t<dim, Atom>::set_Rn(const double Rmax)
 			}
 		}
 	}
-	tmp.assign(n.begin(), n.end());
-	R_m.push_back(tmp*a);
+	std::transform(n.begin(), n.end(), tmp.view().begin(),
+		[](int i)
+		{
+			return i;
+		}
+	);
+	R_m.push_back(GSL::multiply(tmp,a));
 }
 
 template<size_t dim, class Atom>
@@ -141,7 +165,7 @@ void Crystal_t<dim, Atom>::set_Kn(const double Kmax)
 {
 	std::array<int, dim> N, n;//, zero;
 	GSL::Vector tmp(dim);
-	GSL::Matrix a(lat_m.lat()), b(lat_m.recip_lat());
+	const GSL::Matrix a(lat_m.lat()), b(lat_m.recip_lat());
 	// Calculate limits
 	for(size_t i = 0; i < dim; i++){
 		N[i] = static_cast<int>(std::ceil(Kmax/b[i].norm()));
@@ -149,8 +173,13 @@ void Crystal_t<dim, Atom>::set_Kn(const double Kmax)
 	}
 	while(n != N){
 
-		tmp.assign(n.begin(), n.end());
-		K_m.push_back(tmp*b);
+		std::transform(n.begin(), n.end(), tmp.view().begin(),
+			[](int i)
+			{
+				return i;
+			}
+		);
+		K_m.push_back(GSL::multiply(tmp, b));
 		n.back()++;
 		for(size_t i = dim - 1; i > 0; i--){
 			if(n[i] > N[i]){
@@ -159,20 +188,24 @@ void Crystal_t<dim, Atom>::set_Kn(const double Kmax)
 			}
 		}
 	}
-	tmp.assign(n.begin(), n.end());
-	K_m.push_back(tmp*b);
+	std::transform(n.begin(), n.end(), tmp.view().begin(),
+		[](int i)
+		{
+			return i;
+		}
+	);
+	K_m.push_back(GSL::multiply(tmp, b));
 }
 
 template<size_t dim, class Atom>
 std::vector<Neighbours<dim>> Crystal_t<dim, Atom>::calc_nearest_neighbours() const
 {
 	std::vector<Neighbours<dim>> res(sites_m.size());
-	GSL::Vector ri, rj/*, zero_v(dim)*/;
 	for(size_t i = 0; i < sites_m.size(); i++){
 		for(size_t j = i; j < sites_m.size(); j++){
 			// Add all lattice vectors
 			for(const auto& R : R_m){
-				if(i == j && R == GSL::Vector(3)){
+				if(i == j && R == GSL::Vector(3, 0)){
 					continue;
 				}
 				// Insert all atoms in the system
@@ -196,8 +229,8 @@ std::vector<Neighbours<dim>> Crystal_t<dim, Atom>:: calc_nearest_neighbours(cons
 	stop.fill(n_steps);
 	bool periodic = (R_m.size() != 0), add;
 
-	GSL::Matrix a = lat_m.lat();
-	GSL::Vector R, rp, zerov(dim);
+	const GSL::Matrix a = lat_m.lat();
+	GSL::Vector zerov(dim, 0);
 	for(size_t i = 0; i < sites().size(); i++){
 		current.fill(0);
 		while(current != stop){
@@ -212,7 +245,7 @@ std::vector<Neighbours<dim>> Crystal_t<dim, Atom>:: calc_nearest_neighbours(cons
 
 			flips.fill(0);
 			while(flips != flip_stop){
-				R = GSL::Vector(dim, 0);;
+				GSL::Vector R = GSL::Vector(dim, 0);;
 				add = false;
 				for(size_t j = 0; j < dim; j++){
 					new_coords[j] = sites_m[i].coord()[j];
@@ -222,7 +255,7 @@ std::vector<Neighbours<dim>> Crystal_t<dim, Atom>:: calc_nearest_neighbours(cons
 					if(flips[j] == 0){
 						if(periodic){
 							new_coords[j] = (sites_m[i].coord()[j] + current[j]) % size_m[j];
-							rp.copy(a[j]);
+							GSL::Vector rp = a[j].clone();
 							rp *= static_cast<double>((sites_m[i].coord()[j] + current[j]) / size_m[j]);
 							R += rp;
 							add = true;
@@ -233,7 +266,7 @@ std::vector<Neighbours<dim>> Crystal_t<dim, Atom>:: calc_nearest_neighbours(cons
 					}else{
 						if(periodic){
 							new_coords[j] = ((current[j]/size_m[j] + 1)*size_m[j] + sites_m[i].coord()[j] - current[j]) % size_m[j];
-							rp.copy(a[j]);
+							GSL::Vector rp = a[j].clone();
 							rp *= static_cast<double>(current[j]/size_m[j] + 1 - (((current[j]/size_m[j] + 1)*size_m[j] + sites_m[i].coord()[j] - current[j])/size_m[j]));
 							R -= rp;
 							add = true;
@@ -245,7 +278,7 @@ std::vector<Neighbours<dim>> Crystal_t<dim, Atom>:: calc_nearest_neighbours(cons
 				}
 				if(add){
 					Site_t<dim> tmp(new_coords, zerov, size_m);
-					rp = sites_m[tmp.index()].pos();
+					GSL::Vector rp = sites_m[tmp.index()].pos().clone();
 					rp += R;
 					rp -= sites_m[i].pos();
 					std::cout << rp << std::endl;

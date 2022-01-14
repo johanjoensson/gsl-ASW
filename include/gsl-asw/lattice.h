@@ -24,15 +24,15 @@ private:
     double scale_m;
 public:
 
-    Lattice_t(const std::initializer_list<GSL::Vector>& l)
-     : lat_m(l), recip_lat_m(), scale_m(l.begin()->norm<double>())
+    Lattice_t(GSL::Matrix&& m)
+     : lat_m(std::move(m)), recip_lat_m(lat_m.num_rows(), lat_m.num_columns()), scale_m(GSL::norm(lat_m[0]))
     {
-        lat_m *= 1./scale_m;
-        recip_lat_m = 2*M_PI*GSL::lu_inverse(lat_m);
+        this->lat_m *= 1./scale_m;
+        this->recip_lat_m.copy( 2*M_PI*GSL::lu_inverse(lat_m) );
     }
 
     double scale() const {return scale_m;}
-    GSL::Matrix lat() const {return scale_m*lat_m;}
-    GSL::Matrix recip_lat() const {return 1/scale_m*recip_lat_m;}
+    GSL::Matrix lat() const {return scale_m*lat_m.cview();}
+    GSL::Matrix recip_lat() const {return 1/scale_m*recip_lat_m.cview();}
 };
 #endif // LATTICE_H

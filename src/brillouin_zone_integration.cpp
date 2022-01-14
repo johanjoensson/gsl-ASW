@@ -1,3 +1,4 @@
+/*
 #include <gsl-asw/brillouin_zone_integration.h>
 
 double simple_delta(const double x)
@@ -13,3 +14,4 @@ std::function<double(const double, const double)>
         case Simple: return simple_delta;
     }
 }
+*/

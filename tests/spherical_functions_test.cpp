@@ -1,6 +1,6 @@
 #include <gtest/gtest.h>
-#include "../src/spherical_fun.h"
-#include "GSLpp/vector.h"
+#include <spherical_fun.h>
+#include <GSLpp/vector.h>
 
 #define TOL 1e-12
 

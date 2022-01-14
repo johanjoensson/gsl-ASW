@@ -2,12 +2,14 @@
 #include <iostream>
 #include <cmath>
 
+/*
 K_mesh::K_mesh()
  : r_lattice(), k_points()
 {}
+*/
 
-K_mesh::K_mesh(const GSL::Matrix& r_lat)
- : r_lattice(r_lat), k_points()
+K_mesh::K_mesh(GSL::Matrix&& r_lat)
+ : r_lattice(std::move(r_lat)), k_points()
 {}
 
 /*******************************************************************************
@@ -15,8 +17,8 @@ K_mesh::K_mesh(const GSL::Matrix& r_lat)
 *******************************************************************************/
 void K_mesh::generate_mesh(const size_t nx, const size_t ny, const size_t nz)
 {
-    const GSL::Vector Gx(r_lattice[0]), Gy(r_lattice[1]), Gz(r_lattice[2]);
-    GSL::Vector kp, tmp;
+    GSL::Vector::Const_View Gx(r_lattice[0]), Gy(r_lattice[1]), Gz(r_lattice[2]);
+    // GSL::Vector kp, tmp;
     double nxd = static_cast<double>(nx);
     double nyd = static_cast<double>(ny);
     double nzd = static_cast<double>(nz);
@@ -36,21 +38,21 @@ void K_mesh::generate_mesh(const size_t nx, const size_t ny, const size_t nz)
 
 void K_mesh::generate_mesh(const double r_max)
 {
-    const GSL::Vector Gx = r_lattice[0], Gy = r_lattice[1], Gz = r_lattice[2];
-    size_t nx = static_cast<size_t>(std::max(r_max/Gx.norm<double>(), 1.));
-    size_t ny = static_cast<size_t>(std::max(r_max/Gy.norm<double>(), 1.));
-    size_t nz = static_cast<size_t>(std::max(r_max/Gz.norm<double>(), 1.));
+    const GSL::Vector::View Gx = r_lattice[0], Gy = r_lattice[1], Gz = r_lattice[2];
+    size_t nx = static_cast<size_t>(std::max(r_max/Gx.norm(), 1.));
+    size_t ny = static_cast<size_t>(std::max(r_max/Gy.norm(), 1.));
+    size_t nz = static_cast<size_t>(std::max(r_max/Gz.norm(), 1.));
     this->generate_mesh(nx, ny, nz);
 }
 
 void K_mesh::generate_mesh(const size_t N)
 {
-    const GSL::Vector Gx = r_lattice[0], Gy = r_lattice[1], Gz = r_lattice[2];
-    double vol = Gx.dot(Gy.cross(Gz));
+    const GSL::Vector::View Gx = r_lattice[0], Gy = r_lattice[1], Gz = r_lattice[2];
+    double vol = GSL::dot(Gx, GSL::cross(Gy, Gz));
     double Nd = static_cast<double>(N);
-    size_t nx = static_cast<size_t>(std::round(std::cbrt(Nd/vol)*Gx.norm<double>()));
-    size_t ny = static_cast<size_t>(std::round(std::cbrt(Nd/vol)*Gy.norm<double>()));
-    size_t nz = static_cast<size_t>(std::round(std::cbrt(Nd/vol)*Gz.norm<double>()));
+    size_t nx = static_cast<size_t>(std::round(std::cbrt(Nd/vol)*Gx.norm()));
+    size_t ny = static_cast<size_t>(std::round(std::cbrt(Nd/vol)*Gy.norm()));
+    size_t nz = static_cast<size_t>(std::round(std::cbrt(Nd/vol)*Gz.norm()));
 
     this->generate_mesh(nx, ny, nz);
 }
@@ -58,10 +60,11 @@ void K_mesh::generate_mesh(const size_t N)
 void K_mesh::generate_mesh(const std::vector<GSL::Vector>& path, const size_t N_steps)
 {
     double dn = 1./static_cast<double>(N_steps);
+    std::cout << "Reciprocal lattice :\n" << r_lattice << "\n";
 	for(size_t i = 0; i < path.size() - 1; i++){
 		for(unsigned int n = 0; n < N_steps; n++ ){
-			k_points.push_back((path[i] -
-					n*dn*(path[i] - path[i + 1]))*r_lattice);
+			k_points.push_back(GSL::multiply((path[i] -
+					n*dn*(path[i] - path[i + 1])), r_lattice));
 		}
 	}
 }

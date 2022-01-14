@@ -2,14 +2,14 @@
 #include <spherical_fun.h>
 #include <schroedinger.h>
 #include <envelope_fun.h>
-#include <numerical-mesh-integration.h>
+#include <numerical-mesh/numerical-mesh-integration.h>
 
 #include <numeric>
 #include <fstream>
 #include <exception>
 
 
-Augmented_function::Augmented_function( const lm l_n, const double kappa_n, const spin s_n,
+Augmented_function::Augmented_function( const lm l_n, const double kappa_n, const Spin s_n,
     const Exponential_mesh<1, double>& mesh_n)
  : En_m(0), l_m(l_n), kappa_m(kappa_n), s_m(s_n), mesh_m(mesh_n), S_m(0)
 {}
@@ -60,7 +60,7 @@ bool operator!=(const Augmented_function &a, const Augmented_function &b)
     return !(a == b);
 }
 
-Augmented_Hankel::Augmented_Hankel(const lm l_n, const double kappa_n, const spin s_n,
+Augmented_Hankel::Augmented_Hankel(const lm l_n, const double kappa_n, const Spin s_n,
     const Exponential_mesh<1, double>& mesh_n)
  : Augmented_function(l_n, kappa_n, s_n, mesh_n)
 {}
@@ -90,7 +90,7 @@ void Augmented_Hankel::update(std::vector<double>& v, const double en
         };
     std::vector<double> r_init;
     if(core){
-        r_init = {1e-15, 0.};
+        r_init = {1e-16, 1e-16};
     }else{
         r_init = {
                 H.barred_fun(mesh_m.r(lastbutone)),
@@ -102,10 +102,6 @@ void Augmented_Hankel::update(std::vector<double>& v, const double en
     se.solve(nodes, EH());
     if(core){
         se.normalize();
-    }else{
-        std::cout << "Difference at right edge = " << se.psi().back() << ", should be = " << r_init.back() << "\n";
-        std::cout << "Relative error at right edge = " << std::abs(se.psi().back() - r_init.back())/r_init.back() << "\n";
-
     }
     S_m = se.norm();
     EH() = se.e();
@@ -118,7 +114,7 @@ void Augmented_Hankel::update(std::vector<double>& v, const double en
 #endif //DEBUG
 }
 
-Augmented_Bessel::Augmented_Bessel(const lm l_n, const double kappa_n, const spin s_n,
+Augmented_Bessel::Augmented_Bessel(const lm l_n, const double kappa_n, const Spin s_n,
     const Exponential_mesh<1, double>& mesh_n)
  : Augmented_function(l_n, kappa_n, s_n, mesh_n)
 {}
@@ -153,7 +149,8 @@ void Augmented_Bessel::update(std::vector<double>& v, const double en
 		    I.barred_fun(mesh_m.r(last))
 		};
 
-        Radial_Schroedinger_Equation_Central_Potential se(v, static_cast<size_t>(l_m.l), l_init, r_init, mesh_m, 1e-10);
+        Radial_Schroedinger_Equation_Central_Potential
+            se(v, static_cast<size_t>(l_m.l), l_init, r_init, mesh_m, 1e-10);
         se.solve(nodes, EJ());
         S_m = se.norm();
         EJ() = se.e();
@@ -188,7 +185,7 @@ void Hankel_container::add_function(const Augmented_Hankel& H)
     functions.insert(it, H);
 }
 
-Augmented_Hankel& Hankel_container::get_function(const lm& l, const double& kappa, const spin& s)
+Augmented_Hankel& Hankel_container::get_function(const lm& l, const double& kappa, const Spin& s)
 {
     auto cmp = [](const Augmented_Hankel& H1, const Augmented_Hankel& H2)
     {
@@ -211,7 +208,7 @@ Augmented_Hankel& Hankel_container::get_function(const lm& l, const double& kapp
     return *it;
 }
 
-size_t Hankel_container::get_index(const lm& l, const double& kappa, const spin& s) const
+size_t Hankel_container::get_index(const lm& l, const double& kappa, const Spin& s) const
 {
     auto cmp = [](const Augmented_Hankel& H1, const Augmented_Hankel& H2)
     {
@@ -253,7 +250,7 @@ void Bessel_container::add_function(const Augmented_Bessel& J)
     functions.insert(it, J);
 }
 
-Augmented_Bessel& Bessel_container::get_function(const lm& l, const double& kappa, const spin& s)
+Augmented_Bessel& Bessel_container::get_function(const lm& l, const double& kappa, const Spin& s)
 {
     auto cmp = [](const Augmented_Bessel& J1, const Augmented_Bessel& J2)
     {
@@ -276,7 +273,7 @@ Augmented_Bessel& Bessel_container::get_function(const lm& l, const double& kapp
     return *it;
 }
 
-size_t Bessel_container::get_index(const lm& l, const double& kappa, const spin& s) const
+size_t Bessel_container::get_index(const lm& l, const double& kappa, const Spin& s) const
 {
     auto cmp = [](const Augmented_Bessel& J1, const Augmented_Bessel& J2)
     {

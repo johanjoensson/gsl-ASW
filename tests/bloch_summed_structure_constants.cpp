@@ -1,8 +1,8 @@
-#include "../src/structure_const.h"
-#include "../src/crystal.h"
-#include "../src/atom.h"
-#include "../src/log_mesh.h"
-#include "GSLpp/vector.h"
+#include <structure_const.h>
+#include <crystal.h>
+#include <atom.h>
+#include <log_mesh.h>
+#include <GSLpp/vector.h>
 #include <gtest/gtest.h>
 #include <array>
 

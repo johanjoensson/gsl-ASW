@@ -47,7 +47,7 @@ numerov_debug.close();
 	std::cout.precision(12);
 
 	GSL::Error_handler e_handler;
-	// e_handler.off();
+	e_handler.off();
 
 
 	double kappa = std::sqrt(0.015);
@@ -55,15 +55,19 @@ numerov_debug.close();
 
 	// GSL::Vector a = {0.0, 0.5, 0.5}, b = {0.5, 0.0, 0.5}, c = {0.5, 0.5, 0.0};
 	GSL::Vector a = {1.0, 0.0, 0.0}, b = {0.0, 1.0, 0.0}, c = {0.0, 0.0, 1.0};
-	std::cout << a << "\n";
-	std::cout << b << "\n";
-	std::cout << c << "\n";
+	// std::cout << a << "\n";
+	// std::cout << b << "\n";
+	// std::cout << c << "\n";
 	// Crystal_t<3, Atom> cr(Lattice_t<3>({16*a, 16*b, 16*c}));
-	Crystal_t<3, Atom> cr(Lattice_t<3>({3*a, 3*b, 3*c}));
-	for(auto row : cr.lat().recip_lat()){
-		std::cout << row <<"\n";
-	}
-	std::cout << "\n";
+	Crystal_t<3, Atom> cr(Lattice_t<3>({7*a, 7*b, 7*c}));
+
+	std::cout << cr.lat().lat() << "\n";
+	// for(auto row : cr.lat().lat().cview()){
+	// 	std::cout << row << "\n";
+	// }
+	// std::cout << "\n";
+	std::cout << cr.lat().recip_lat() << "\n";
+
 
 	std::cout << "Crystal volume = " << cr.volume() << " (a.u.)^3\n";
 
@@ -84,29 +88,19 @@ numerov_debug.close();
 	std::cout << "Number of K-vectors " << cr.Kn_vecs().size() << "\n";
 
 	std::cout << "Setting up atoms" << std::endl;
-	GSL::Vector tau(3);
 	Atom C1;
 
-	tau[0] = 0.25;
-	tau[1] = 0.25;
-	tau[2] = 0.25;
 	Atom C2;
 
-	tau[0] = 0.;
-	tau[1] = 0.5;
-	tau[2] = 0.5;
 	Atom C3;
 
-	tau[0] = 0.5;
-	tau[1] = 0.;
-	tau[2] = 0.5;
 	Atom C4;
 	Atom C5;
 	Atom C6;
 	Atom C7;
 	Atom C8;
 
-	C1.Z() = 26;
+	C1.Z() = 6;
 	C2.Z() = 6;
 	C3.Z() = 6;
 	C4.Z() = 6;
@@ -118,22 +112,39 @@ numerov_debug.close();
 	cr.set_size({1, 1, 1});
 	cr.add_basis({C1});//, C3, C4, C5, C6, C7, C8});
 	// cr.add_sites({{0, 0, 0}, {0.5, 0, 0}, {0, 0.5, 0}, {0, 0, 0.5}, {0.5, 0.5, 0}, {0.5, 0, 0.5}, {0, 0.5, 0.5}, {0.5, 0.5, 0.5}});
-	cr.add_sites({{0, 0, 0}, {0.5, 0.5, 0.5}});
+    std::vector<GSL::Vector> sites;
+	sites.reserve(2);
+	sites.emplace_back(std::move(GSL::Vector{0, 0, 0}));
+	sites.emplace_back(std::move(GSL::Vector{0.5, 0.5, 0.5}));
+	cr.add_sites(sites);
 
 	std::cout << "Crystal contains " << cr.sites().size() << " sites\n";
 	std::cout << "Crystal contains " << cr.atoms().size() << " inequivalent atoms\n";
 
-	Simulation sim(cr, LDA, {kappa});
+	K_mesh kmesh(cr.lat().recip_lat());
+
+	Simulation sim(std::move(cr), LDA, {kappa});
 
 	std::cout << "Setting up X matrices\n" << std::flush;
 	sim.set_up_X_matrices();
 	std::cout << "Initialising K-mesh" << std::endl;
-	K_mesh kmesh(cr.lat().recip_lat());
+	// K_mesh kmesh(cr.lat().recip_lat().cview());
 
 
 	// kmesh.generate_mesh(10, 10, 10);
 	// kmesh.generate_mesh({{0,0,0}, {1,1,1}}, 1);
-	kmesh.generate_mesh({{0.5, 0.5, 0.5}, {0, 0, 0}, {0, 0.5, 0.5}, {0, 0, 0}, {0, 0.5, 0.5}, {0, 0, 0}, {0.5, 0, 0}}, 100);
+	size_t nk = 7;
+	std::vector<GSL::Vector> kps;
+	kps.reserve(nk);
+	kps.emplace_back(GSL::Vector{0.5, 0.5, 0.5});
+	kps.emplace_back(GSL::Vector{0, 0, 0});
+	kps.emplace_back(GSL::Vector{0, 0.5, 0.5});
+	kps.emplace_back(GSL::Vector{0, 0, 0});
+	kps.emplace_back(GSL::Vector{0, 0.5, 0.5});
+	kps.emplace_back(GSL::Vector{0, 0, 0});
+	kps.emplace_back(GSL::Vector{0.5, 0, 0});
+
+	kmesh.generate_mesh( kps, 100);
 	std::cout << "K-mesh generated" << std::endl;
 
 /*
@@ -145,8 +156,8 @@ numerov_debug.close();
 	of.open("canonical_bands.dat", std::ios::trunc);
     for(const auto& kp :  kmesh.k_points){
 		of << kp[0] << " " << kp[1] << " " << kp[2] << " ";
-		for(lm l = {3, 2, -2}; l != lm {4, 0, 0}; l++){
-			of << std::setprecision(10)  << sim.canonical_band(l, kappa, UP, kp) << " ";
+		for(lm l = {2, 1, -1}; l != lm {3, 0, 0}; l++){
+			of << std::setprecision(12)  << sim.canonical_band(l, kappa, UP, kp) << " ";
 		}
 		of << "\n";
 	}

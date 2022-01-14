@@ -9,10 +9,10 @@ double wronskian(Spherical_function a, Spherical_function b, double r)
 {
     double res = 0.;
     double fl = a(r);
-    a.set_l(lm {a.l().l + 1, a.l().m});
+    a.set_l(lm {0, a.l().l + 1, a.l().m});
     double flp1 = a(r);
     double gl = b(r);
-    b.set_l(lm {b.l().l + 1, b.l().m});
+    b.set_l(lm {0, b.l().l + 1, b.l().m});
     double glp1 = b(r);
     res = flp1*gl - fl*glp1;
 
@@ -51,7 +51,7 @@ GSL::Result cubic_harmonic(const lm& l, GSL::Vector&& r)
     if(l.l == 0 && l.m == 0){
         return GSL::Result(1./std::sqrt(4*M_PI), 0);
     }
-    if(std::abs(r.norm()) < 1e-15){
+    if(r.norm() < 1e-16){
         return GSL::Result(0, 0);
     }
 
@@ -59,13 +59,13 @@ GSL::Result cubic_harmonic(const lm& l, GSL::Vector&& r)
                             r[2]/r.norm(), GSL::Complex(r[0], r[1]).arg());
 }
 
-GSL::Result cubic_harmonic(const lm& l, const GSL::Vector& r)
+GSL::Result cubic_harmonic(const lm& l, GSL::Vector::Const_View r)
 {
     if(l.l == 0){
         return GSL::Result(1./std::sqrt(4*M_PI), 0);
     }
 
-    if(std::abs(r.norm()) < 1e-15){
+    if(r.norm() < 1e-16){
         return GSL::Result(0, 0);
     }
 	return GSL::pow_int(r.norm(), l.l)*cubic_harmonic(l.l, l.m,

@@ -9,15 +9,29 @@ project(
 
 set(CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/cmake" ${CMAKE_MODULE_PATH})
 
-set(GSLpp_ROOT /home/jjonsson/Programming/GSL-lib)
+find_package(numerical-mesh
+		HINTS /home/jjonsson/Programming/mesh/build/install
+		REQUIRED)
 
-find_library (GSL_LIB
-			  NAMES GSLpp
-			  HINTS ${GSLpp_ROOT}/lib/GSLpp/
-			  REQUIRED)
+find_package(GSLpp
+		HINTS /home/jjonsson/Programming/GSL-lib/install
+		REQUIRED)
+
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+
+include(CheckIPOSupported)
 
 add_subdirectory(src)
 add_subdirectory(bin)
+
+if(BUILD_PYTHON)
+	find_package(pybind11)
+	if(pybind11_FOUND)
+		add_subdirectory(python)
+	else()
+		message(STATUS "pybind11 not found, not building python bindings.")
+	endif()
+endif()
 
 # Only do these if this is the main project, and not if it is included through add_subdirectory
 if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)

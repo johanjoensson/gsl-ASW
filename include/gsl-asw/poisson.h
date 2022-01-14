@@ -1,49 +1,55 @@
 #ifndef POISSON_EQ_H
 #define POISSON_EQ_H
 #include "numerov_solver.h"
-#include "numerical-mesh.h"
-#include "numerical-mesh-integration.h"
+#include "numerical-mesh/numerical-mesh.h"
+#include "numerical-mesh/numerical-mesh-integration.h"
 #include <vector>
 
 
 class Poisson_equation{
-protected:
-    const Mesh_base<1, double>& mesh_m;
-    std::vector<double> rho_m, val_m;
-    int l_m;
-
 public:
-    Poisson_equation(const Mesh_base<1, double>& mesh, const std::vector<double>& rho, const int l)
-     : mesh_m(mesh), rho_m(rho), val_m(mesh.size()), l_m(l)
-    {}
+    // const Mesh_base<1, double>& mesh_m;
+    std::vector<double> val_m;
+    // int l_m;
 
-    void solve()
+    void solve(const Mesh_base<1, double>& mesh, const std::vector<double>& rho, const int l)
     {
-        std::vector<double> s(mesh_m.size(), 0), g(mesh_m.size(), 0);
-        auto s_i = s.begin(), g_i = g.begin(), rho_i = rho_m.begin();
-        for(auto m_i = mesh_m.begin(); m_i != mesh_m.end(); m_i++){
-            *(s_i++) = -8.*M_PI*m_i->r()*std::sqrt(GSL::pow_int(m_i->dr(), 3))*(*(rho_i++));
+        val_m.resize(mesh.size());
+        std::vector<double> s(mesh.size(), 0), g(mesh.size(), 0);
+        auto s_i = s.begin(), g_i = g.begin();
+        auto rho_i = rho.begin();
+        for(auto m_i = mesh.begin(); m_i != mesh.end(); m_i++){
+            *(s_i++) = -4.*M_PI*2*m_i->r()*std::sqrt(GSL::pow_int(m_i->dr(), 3))*(*(rho_i++));
             *g_i =  1./m_i->dr()*(0.5*m_i->d3r() - 0.75*GSL::pow_int(m_i->d2r(), 2)/m_i->dr());
-            if (l_m != 0){
-                *g_i -= l_m*(l_m + 1)/m_i->r2()*GSL::pow_int(m_i->dr(), 2);
+            if (l != 0){
+                *g_i -= l*(l + 1)/m_i->r2()*GSL::pow_int(m_i->dr(), 2);
             }
             g_i++;
         }
 
         std::vector<double> init;
+        /***********************************************************************
+        * Shift of energy to match boundary condition VH(r(0)) = V0            *
+        ***********************************************************************/
         double v0 = 0;
-        if (l_m == 0){
-            v0 = (8.*M_PI*simpson_integral<double>(mesh_m,
-                [this](const double& i)
+        if (l == 0){
+            /*******************************************************************
+            * Initial value, VH(0) = V0
+            *******************************************************************/
+            v0 = 8.*M_PI*simpson_integral<double>(mesh,
+                [&](const Mesh_base<1, double>::mesh_point& p)
                 {
-                    return mesh_m.r(i)*rho_m[static_cast<size_t>(i)];
+                    return p.r()*rho[static_cast<size_t>(p.i())];
                 }
-            ));
-            auto r0 = mesh_m.r(0);
-            auto dr0 = mesh_m.dr(0);
-            auto F0p = v0*std::sqrt(dr0) - 0.5*r0*v0*GSL::pow_int(std::sqrt(dr0), -3);
+            );
+            auto r0 = mesh.r(0);
+            auto dr0 = mesh.dr(0);
+            auto F0p = 0/*v0*std::sqrt(dr0) - 0.5*r0*v0*GSL::pow_int(std::sqrt(dr0), -3)*/;
             init = std::vector<double> {
-                r0*v0,
+                /***************************************************************
+                * Solve with boundary condition VH(r(0)) = VH'(r(0)) = 0       *
+                ***************************************************************/
+                0,
                 /***************************************************************
                 * O(h^5) estimate of r(x)V(r(x))|x=1, from
                 * L. M. Quiroz González, and D. Thompson
@@ -55,9 +61,9 @@ public:
 
         }else{
             init = std::vector<double> {
-                GSL::pow_int(mesh_m.r(0), l_m + 1)/std::sqrt(mesh_m.dr(0)),
-                GSL::pow_int(mesh_m.r(1), l_m + 1)/std::sqrt(mesh_m.dr(1)),
-                GSL::pow_int(mesh_m.r(2), l_m + 1)/std::sqrt(mesh_m.dr(2))
+                GSL::pow_int(mesh.r(0), l + 1)/std::sqrt(mesh.dr(0)),
+                GSL::pow_int(mesh.r(1), l + 1)/std::sqrt(mesh.dr(1)),
+                GSL::pow_int(mesh.r(2), l + 1)/std::sqrt(mesh.dr(2))
             };
         }
         std::vector<double> empty(0);
@@ -66,34 +72,44 @@ public:
             s.end(), init.begin(), init.end(), empty.begin(), empty.end(),
             val_m.end());
 
-        auto v_i = val_m.begin();
-        for(auto m_i = mesh_m.begin(); m_i != mesh_m.end(); m_i++, v_i++){
-            *v_i *= std::sqrt(m_i->dr());
-        }
-
-        auto S = mesh_m.r(mesh_m.size() - 1);
-        std::cout << "S = " << S << "\n";
-        double right_val = 8.*M_PI/(2*l_m + 1)*GSL::pow_int(1./S, l_m)*
-            simpson_integral<double>(mesh_m,
-                [this](const double& i)
+        auto S = mesh.r(mesh.size() - 1);
+        double right_val = 8.*M_PI/(2*l + 1)*GSL::pow_int(1./S, l)*
+            simpson_integral<double>(mesh,
+                [&](const Mesh_base<1, double>::mesh_point& p)
                 {
-                    return GSL::pow_int(mesh_m.r(i), l_m + 2)*rho_m[static_cast<size_t>(i)];
+                    return GSL::pow_int(p.r(), l + 2)*rho[static_cast<size_t>(p.i())];
                 }
             );
 
-        double Al = (right_val - val_m.back())/GSL::pow_int(S, l_m + 1);
-        v_i = val_m.begin();
-        for(auto m_i = mesh_m.begin(); m_i != mesh_m.end(); m_i++, v_i++){
-             *v_i += Al*GSL::pow_int(m_i->r(), l_m + 1);
-             *v_i /= m_i->r();
+        double Al = (right_val - val_m.back()*std::sqrt(mesh.dr().back()) - S*v0)/GSL::pow_int(S, l + 1);
+        auto v_i = val_m.begin();
+        /***********************************************************************
+        * Transformations : rVH(r)/sqrt(dr) -> rVH(r) -> rVH(r) + Alr^(l + 1) ->
+        * -> VH(r) + Alr^l -> VH(r) + Alr^l + V0
+        ***********************************************************************/
+        for(auto m_i = mesh.begin(); m_i != mesh.end(); m_i++, v_i++){
+            *v_i = (*v_i*std::sqrt(m_i->dr())
+                    + Al*GSL::pow_int(m_i->r(), l + 1))/m_i->r()
+                    + v0;
         }
+        /***********************************************************************
+        * In case r(0) = 0, set VH(0) = V0 explicitly                          *
+        ***********************************************************************/
         val_m.front() = v0;
     }
 
+    Poisson_equation()
+     : val_m()
+    {
+        // solve();
+    }
+
+
+
     std::vector<double> val() const noexcept { return this->val_m;}
     double val(const size_t i) const noexcept { return this->val_m[i];}
-    std::vector<double> rho() const noexcept { return this->rho_m;}
-    double rho(const size_t i) const noexcept { return this->rho_m[i];}
+    // std::vector<double> rho() const noexcept { return this->rho_m;}
+    // double rho(const size_t i) const noexcept { return this->rho_m[i];}
 
 };
 

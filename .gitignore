@@ -41,3 +41,8 @@ build
 
 *.dat
 *log*
+*.bak
+*.*~
+
+include/bak
+src/bak_headers

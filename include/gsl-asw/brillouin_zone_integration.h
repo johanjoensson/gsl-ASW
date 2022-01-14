@@ -25,7 +25,7 @@ public:
     Brillouin_zone_integrator& operator=(Brillouin_zone_integrator&&) = default;
 
     virtual double dos(const double E) const {return 0*E;}
-    virtual GSL::Complex measure_observable(const double E, const GSL::Matrix A) const
+    virtual GSL::Complex measure_observable(const double E, GSL::Matrix::Const_View A) const
     {
         return 0*E*A[0][0];
     }
@@ -60,12 +60,12 @@ public:
     Brillouin_sampler(const Brillouin_sampler&) = default;
     Brillouin_sampler(Brillouin_sampler&&) = default;
 
-    Brillouin_sampler(const GSL::Matrix& energies)
-     : Brillouin_zone_integrator(), energies_m{energies}
+    Brillouin_sampler(GSL::Matrix::Const_View energies)
+     : Brillouin_zone_integrator(), energies_m{energies.clone()}
     {}
     virtual ~Brillouin_sampler() = default;
 
-    double measure_real(const double E, const GSL::Matrix& A) const
+    double measure_real(const double E, GSL::Matrix::Const_View A) const
     {
         double res = 0;
         if(A.dim().first != energies_m.dim().first){
@@ -93,7 +93,7 @@ public:
         }
         return res;
     }
-    double measure_imaginary(const double E, const GSL::Matrix& A) const
+    double measure_imaginary(const double E, GSL::Matrix::Const_View A) const
     {
         double res = 0;
         if(A.dim().first != energies_m.dim().first){
@@ -125,15 +125,15 @@ public:
     double dos(const double E) const override
     {
         GSL::Matrix A{energies_m.dim().first, energies_m.dim().second};
-        for(auto row : A){
+        for(auto row : A.view()){
             for(auto& elem : row){
                 elem = 1.;
             }
         }
-        return measure_imaginary(E, A);
+        return measure_imaginary(E, A.cview());
     }
 
-    GSL::Complex measure_observable(const double E, const GSL::Matrix A) const override
+    GSL::Complex measure_observable(const double E, GSL::Matrix::Const_View A) const override
     {
         return {measure_real(E, A), -M_PI*measure_imaginary(E, A) };
     }
@@ -153,7 +153,7 @@ private:
     }
 
 public:
-    Simple_sampler(const GSL::Matrix& energies, const double tol = 1e-12, const double h = 1)
+    Simple_sampler(GSL::Matrix::Const_View energies, const double tol = 1e-12, const double h = 1)
      : Brillouin_sampler(energies), tol_m(tol), h_m(h)
     {}
     ~Simple_sampler() = default;
@@ -173,7 +173,7 @@ private:
     }
 
 public:
-    Fermi_sampler(const GSL::Matrix& energies, const double sigma)
+    Fermi_sampler(GSL::Matrix::Const_View energies, const double sigma)
      : Brillouin_sampler(energies), sigma_m(sigma)
     {}
     ~Fermi_sampler() = default;
@@ -193,7 +193,7 @@ private:
     }
 
 public:
-    Gaussian_sampler(const GSL::Matrix& energies, const double sigma)
+    Gaussian_sampler(GSL::Matrix::Const_View energies, const double sigma)
      : Brillouin_sampler(energies), sigma_m(sigma)
     {}
     ~Gaussian_sampler() = default;
@@ -213,7 +213,7 @@ private:
     }
 
 public:
-    Lorentzian_sampler(const GSL::Matrix& energies, const double sigma)
+    Lorentzian_sampler(GSL::Matrix::Const_View energies, const double sigma)
      : Brillouin_sampler(energies), sigma_m(sigma)
     {}
     ~Lorentzian_sampler() = default;
@@ -253,7 +253,7 @@ private:
     }
 
 public:
-    MethfesselPaxton_sampler(const GSL::Matrix& energies, const double sigma, const unsigned int order = 1)
+    MethfesselPaxton_sampler(GSL::Matrix::Const_View energies, const double sigma, const unsigned int order = 1)
      : Brillouin_sampler(energies), sigma_m(sigma), order_m(order)
     {}
     ~MethfesselPaxton_sampler() = default;
@@ -274,7 +274,7 @@ private:
     }
 
 public:
-    ColdSmearing_sampler(const GSL::Matrix& energies, const double sigma)
+    ColdSmearing_sampler(GSL::Matrix::Const_View energies, const double sigma)
      : Brillouin_sampler(energies), sigma_m(sigma)
     {}
     ~ColdSmearing_sampler() = default;

@@ -1,5 +1,5 @@
 #include <gtest/gtest.h>
-#include "GSLpp/error.h"
+#include <GSLpp/error.h>
 
 int main(int argc, char **argv)
 {

@@ -54,16 +54,16 @@ void harmonic_oscillator()
 
 void coulomb_potential()
 {
-    unsigned int len = 1501;
-    double rmax = 16;
-    int z = 6;
-    int n = 5;
+    unsigned int len = 50001;
+    double rmax = 52;
+    int z = 92;
+    int n = 1;
     int l = 0;
     auto exact_energy = -GSL::pow_int(static_cast<double>(z)/n, 2);
 
 
     std::vector<double> v(len);
-    Exponential_mesh<1, double> mesh(0, rmax, 0.01, len);
+    Exponential_mesh<1, double> mesh(0, rmax, 1e-3, len);
     auto pot = [z](double r){return -2.*z/r;};
     auto mesh_it = mesh.begin();
     for(auto it = v.begin(); it != v.end(); it++, mesh_it++){
@@ -88,8 +88,8 @@ void coulomb_potential()
     std::vector<double> right = {1e-15, 0};
 
     unsigned int nodes = static_cast<unsigned int>(std::max(n - l - 1, 0));
-    Radial_Schroedinger_Equation_Central_Potential se(v, static_cast<unsigned int>(l), left, right, mesh, 1e-10);
-    se.solve(nodes, -0.01);
+    Radial_Schroedinger_Equation_Central_Potential se(v, static_cast<unsigned int>(l), left, right, mesh, 1e-15);
+    se.solve(nodes, -0.1, true);
     // se.normalize();
 
     std::cout << "Found energy : " << se.e() << "\n";
@@ -101,12 +101,12 @@ void coulomb_potential()
     auto v_i = se.v().begin();
     mesh_it = mesh.begin();
     while(psi_i != se.psi().end()){
-	    outfile << (*mesh_it).r() << " " << (*psi_i) << " " << *v_i << "\n";
+	    outfile << mesh_it->r() << " " << *psi_i << " " << *v_i << "\n";
 	    psi_i++;
 	    v_i++;
 	    mesh_it++;
     }
-    outfile << "\n\n";
+    outfile << "\n\n"<< std::flush;
 }
 
 int main()

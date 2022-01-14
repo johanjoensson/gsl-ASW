@@ -35,8 +35,8 @@ class Numerov_solver{
 		Iter_s current_s = s_start;
 
 		// Set initial conditions
-		for(Iter_init& init = init_start; init != init_end && current !=
-				res_end; init++){
+		for(Iter_init& init = init_start; init != init_end && current != res_end;
+			init++){
 			*current = *init;
 			current++;
 
@@ -89,34 +89,19 @@ class Numerov_solver{
 	 const noexcept
 	{
 		// If no initial conditions at the right hand side, only solve to the right
-		// Iter_res tmp = res_end;
-		// if(right_start != right_end){
 		if(right_start == right_end){
-			// tmp = inv;
 			inv = res_end;
-		}/*else{
-			inv++;
 		}
-		// If we found an inversion point, we want to include it in our
-		// numerical solution
-		if(inv != res_end){
-			tmp++;
-		}
-		*/
 		// Solve | -> .
-		// tmp = solve_direction(res_start, tmp, left_start, left_end,
 		inv = solve_direction(res_start, inv, left_start, left_end,
 			g_start, s_start);
 		// If we found an inversion point, solve in the other direction as well
-		// if(tmp != res_end){
-			if(inv != res_end){
-			// tmp now points to the element after the matching point
+		if(inv != res_end){
+			// inv now points to the element after the matching point
 			// Extract value at matching point
-			// T scale = 1/(*(tmp-1));
 			T scale = (*(inv-1));
 			// Solve . <- |
 			auto rinv = solve_direction(std::reverse_iterator<Iter_res>(res_end),
-				// std::reverse_iterator<Iter_res>(inv), right_start, right_end,
 				std::reverse_iterator<Iter_res>(inv - 1), right_start, right_end,
 				std::reverse_iterator<Iter_g>(g_end),
 				std::reverse_iterator<Iter_s>(s_end));
@@ -183,18 +168,25 @@ class Numerov_solver{
 		return signum(val);
 	}
 
-	template<class Iter_res>
-	int count_nodes(Iter_res start, Iter_res end)
+
+	/***************************************************************************
+	* Derivative expressions found using the same approach as                  *
+	* V.I. Tselyaev,                                                           *
+	* A generalized Numerov method for linear second-order differential        *
+	* equations involving a first derivative term,                             *
+	* Journal of Computational and Applied Mathematics,                        *
+	* Volume 170, Issue 1,                                                     *
+	* 2004,                                                                    *
+	* https://doi.org/10.1016/j.cam.2003.12.042.                               *
+	* (https://www.sciencedirect.com/science/article/pii/S0377042704000159)    *
+	***************************************************************************/
+	template<class Iter_res, class Iter_g, class Iter_s, class Iter_left_init , class Iter_right_init, class T = double>
+	Iter_res derivative(Iter_res f_start, Iter_res f_end,
+			Iter_g g_start, Iter_g g_end, Iter_s s_start, Iter_s s_end,
+			Iter_left_init left_start, Iter_left_init left_end)
 	 const noexcept
 	{
-		int res = 0;
-		for(auto current = start, previous = start; current != end; current++){
-			if(signum(*current) != signum(*previous) && (signum(*current) != 0)){
-				res++;
-			}
-			previous = current;
-		}
-		return res;
+		return f_start;
 	}
 
 };

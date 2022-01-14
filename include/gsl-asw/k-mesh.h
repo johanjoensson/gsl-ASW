@@ -11,8 +11,8 @@ private:
 public:
     std::vector<GSL::Vector> k_points;
 
-    K_mesh();
-    K_mesh(const GSL::Matrix& r_lat);
+    K_mesh() = default;
+    K_mesh(GSL::Matrix&& r_lat);
     void generate_mesh(const size_t nx, const size_t ny, const size_t nz);
     void generate_mesh(const double r_max);
     void generate_mesh(const size_t N);

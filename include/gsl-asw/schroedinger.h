@@ -3,19 +3,15 @@
 #include <vector>
 #include <iomanip>
 #include "numerov_solver.h"
-#include "numerical-mesh.h"
-#include "numerical-mesh-integration.h"
+#include <numerical-mesh/numerical-mesh.h>
+#include <numerical-mesh/numerical-mesh-integration.h>
 #include <GSLpp/special_functions.h>
 #include <algorithm>
 #include <fstream>
+#include <limits>
+
 
 class Schroedinger_Equation{
-    template<class T>
-	static int signum(T val)
-     noexcept
-	{
-		return (val > T(0)) - (val < T(0));
-	}
 
 protected:
     const Mesh_base<1, double>& mesh_m;
@@ -23,6 +19,13 @@ protected:
     std::vector<double> v_m;
     std::vector<double> psi_m, l_init_m, r_init_m;
     double tol_m;
+
+    template<class T>
+	static int signum(T val)
+     noexcept
+	{
+		return (val > T(0)) - (val < T(0));
+	}
 
 	/***********************************************************************//**
 	* Find the point where E - v(X_i) = 0 (classical inversion point).\n
@@ -47,6 +50,21 @@ protected:
 		}
         return ++current;
 	}
+
+    size_t count_nodes(const std::vector<double>& fun, size_t i_start, size_t i_end)
+	 const noexcept
+	{
+        auto start = fun.begin() + i_start, end = fun.begin() + i_end;
+		size_t res = 0;
+		for(auto current = start, previous = start; current != end; current++){
+			if(signum(*current) != signum(*previous) && (signum(*current) != 0)){
+				res++;
+			}
+			previous = current;
+		}
+		return res;
+	}
+
 
 private:
 
@@ -117,7 +135,7 @@ public:
         solve(nodes, 0.5*(e_min_m + e_max_m));
     }
 
-    virtual void solve(const size_t nodes, const double e_guess)
+    virtual void solve(const size_t nodes, const double e_guess, const bool move_right_end = false)
     {
         std::vector<double> g(v_m.size(), 0), s(v_m.size(), 0);
         Numerov_solver sol;
@@ -130,7 +148,8 @@ public:
         const double h = mesh_m.dr(0);
 
         while(n != nodes || std::abs(e_max_m - e_min_m) > tol_m){
-
+            if(move_right_end){
+            }
             for(auto it = v_m.begin(), g_c = g.begin(); it != v_m.end(); it++,
                 g_c++){
 
@@ -142,7 +161,7 @@ public:
                   r_init_m.begin(), r_init_m.end(), inv)){
                       throw std::runtime_error("Unexpected change of matching point!");
                   }
-            n = static_cast<size_t>(sol.count_nodes(psi_m.begin(), psi_m.end()));
+            n = count_nodes(psi_m, 0, psi_m.size());
 
 
             if(n > nodes){
@@ -176,9 +195,9 @@ public:
      const noexcept
     {
         double res = simpson_integral<double>(mesh_m,
-            [this](const double& i)
+            [this](const Mesh_base<1, double>::mesh_point& p)
             {
-                return GSL::pow_int(psi_m[static_cast<size_t>(i)], 2);
+                return GSL::pow_int(psi_m[static_cast<size_t>(p.i())], 2);
             }
         );
         return res;
@@ -261,9 +280,9 @@ protected:
         auto mesh_i = mesh_m.begin();
         for(auto F_i = psi_m.begin() ; F_i != inv; F_i++, g_i++, mesh_i++){}
         T n = simpson_integral<double>(mesh_m,
-            [this](const double& i)
+            [this](const Mesh_base<1, double>::mesh_point& p)
             {
-                return GSL::pow_int(psi_m[static_cast<size_t>(i)], 2)*mesh_m.dr(i);
+                return GSL::pow_int(psi_m[static_cast<size_t>(p.i())], 2)*p.dr();
             }
         );
         T Fi = *(inv - 1);
@@ -305,9 +324,11 @@ public:
         solve(nodes, 0.5*(e_min_m + e_max_m));
     }
 
-    void solve(const  size_t nodes, const  double e_guess)
+    void solve(const  size_t nodes, const  double e_guess, const bool move_right_end = false)
      noexcept override
     {
+        const double m_eps = std::numeric_limits<double>::epsilon();
+
         std::vector<double> g(v_m.size(), 0), s(v_m.size(), 0);
         Numerov_solver sol;
         size_t n = nodes + 1;
@@ -328,7 +349,7 @@ public:
             }
         );
         std::vector<double> right_init;
-        std::transform(r_init_m.begin(), r_init_m.end(), mesh_m.end() - static_cast<double>(r_init_m.size() - 1), std::back_inserter(right_init),
+        std::transform(r_init_m.begin(), r_init_m.end(), mesh_m.end() - static_cast<long int>(r_init_m.size() - 1), std::back_inserter(right_init),
             [=](const double psi, const Mesh_base<1, double>::mesh_point mi)
             {
                 return psi*mi.r()/std::sqrt(mi.dr());
@@ -347,10 +368,26 @@ public:
         for(auto tmp = v_m.begin() ; tmp != v_start; tmp++, start_point++){}
 
 
-
+        auto last_point = mesh_m.end();
         size_t variational_steps = 0;
-        while(n != nodes || (std::abs(de) > tol_m && std::abs((e_max_m*e_max_m - e_min_m*e_min_m)/(e_max_m + e_min_m)) > tol_m)){
-            inv = find_inversion_point(start_point, end_point, v_start);
+        while(/*n != nodes || */(std::abs(de) > tol_m && std::abs(e_max_m - e_min_m) > tol_m)){
+            if(move_right_end){
+                auto lambda = std::sqrt(-energy_m);
+                auto r_max = mesh_m.r(0) - GSL::log(m_eps).val/lambda;
+                end_point = psi_m.end();
+                for(last_point = mesh_m.end();
+                    last_point->r() > r_max; last_point--){
+                    end_point--;
+                }
+            }
+
+            std::transform(end_point, psi_m.end(), end_point,
+                [](const double&){
+                    return 0;
+                });
+
+            inv = find_inversion_point(start_point, end_point - right_init.size(), v_start);
+
             auto v_i = v_m.begin();
             auto g_i = g.begin();
             auto mesh_i = mesh_m.begin();
@@ -362,12 +399,12 @@ public:
                         );
             }
 
-            sol.solve(psi_m.begin(), psi_m.end(), g.begin(), g.end(),
-                s.begin(), s.end(), left_init.begin(), left_init.end(),
+            auto offset = std::distance(psi_m.begin(), end_point);
+            sol.solve(psi_m.begin(), psi_m.begin() + offset, g.begin(), g.begin() + offset,
+                s.begin(), s.begin() + offset, left_init.begin(), left_init.end(),
                 right_init.rbegin(), right_init.rend(), inv);
 
-            n = static_cast<size_t>(sol.count_nodes(++psi_m.begin(),--psi_m.end()));
-
+            n = static_cast<size_t>(count_nodes(psi_m, 1, psi_m.size() - (psi_m.end() - end_point)/*--psi_m.end()*/));
             if(n > nodes){
                 e_max_m = energy_m;
                 energy_m = std::max(0.5*(e_min_m + e_max_m), e_max_m - 1);
@@ -387,7 +424,9 @@ public:
                     e_max_m = energy_m;
                 }
                 energy_m += de;
-                energy_m = std::min(std::max(energy_m, e_min_m), e_max_m);
+                if(energy_m < e_min_m || energy_m > e_max_m){
+                    energy_m = 0.5*(e_min_m + e_max_m);
+                }
                 variational_steps++;
             }
         }
@@ -404,13 +443,13 @@ public:
         }
 
         auto scale = 1.;
-        if(std::abs(r_init_m.back() - psi_m.back()) > tol_m){
-            scale = r_init_m.back()/psi_m.back();
+        if(std::abs(r_init_m.front()) > tol_m){
+            scale = right_init.front()/(*(end_point-right_init.size()));
         }
 
         it = psi_m.begin();
         mesh_i = mesh_m.begin();
-        for(; it != psi_m.end(); it++, mesh_i++){
+        for(; it != end_point; it++, mesh_i++){
             *it *= scale;
         }
 
@@ -420,9 +459,9 @@ public:
      const noexcept override
     {
         double res = simpson_integral<double>(mesh_m,
-            [this](const double& i)
+            [this](const Mesh_base<1, double>::mesh_point& p)
             {
-                return GSL::pow_int(mesh_m.r(i)*psi_m[static_cast<size_t>(i)], 2);
+                return GSL::pow_int(p.r()*psi_m[static_cast<size_t>(p.i())], 2);
             }
         );
         return res;

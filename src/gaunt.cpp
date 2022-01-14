@@ -33,18 +33,18 @@ std::vector<std::pair<GSL::Complex, lm>> get_complex_sph (const lm& l)
 		m2 = -m2;
 		c1 = GSL::Complex(0, 1)/sqrt(2);
 		c2 = GSL::pow_int(-1, m2 + 1)*c1;
-		res.push_back({c1, {l1, m1}});
-		res.push_back({c2, {l2, m2}});
+		res.push_back({c1, {0, l1, m1}});
+		res.push_back({c2, {0, l2, m2}});
 	}else if (m1 > 0){
 		m1 = -m1;
 		c1 = 1/sqrt(2);
 		c2 = GSL::pow_int(-1, m2)*c1;
-		res.push_back({c1, {l1, m1}});
-		res.push_back({c2, {l2, m2}});
+		res.push_back({c1, {0, l1, m1}});
+		res.push_back({c2, {0, l2, m2}});
 	}else{
 		c1 = 1;
 		c2 = 0;
-		res.push_back({c1, {l1, m1}});
+		res.push_back({c1, {0, l1, m1}});
 	}
 	return res;
 }
@@ -73,8 +73,8 @@ GSL::Result real_gaunt(lm l1, lm l2, lm l3)
 			}
 		}
 	}
-	if(abs(res.im()) > 1e-6){
+	if(abs(res.imag()) > 1e-6){
 		std::cerr << "Real Gaunt coefficient is " << res << ", with a rather large imaginary part!\n";
 	}
-	return GSL::Result(res.re(), err);
+	return GSL::Result(res.real(), err);
 }

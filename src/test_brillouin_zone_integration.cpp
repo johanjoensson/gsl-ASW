@@ -1,5 +1,5 @@
 #include <gsl-asw/brillouin_zone_integration.h>
-#include <gsl-asw/numerical-mesh.h>
+#include <numerical-mesh/numerical-mesh.h>
 #include <fstream>
 #include <GSLpp/error.h>
 
@@ -14,13 +14,13 @@ int main()
     GSL::Error_handler e_handler;
     e_handler.off();
     double T = 300;
-    Simple_sampler sbz(eigvals, 5e-5, 1e-2);
-    Fermi_sampler fbz(eigvals, kB*T);
-    Gaussian_sampler gbz(eigvals, kB*T);
-    Lorentzian_sampler lbz(eigvals, kB*T);
+    Simple_sampler sbz(eigvals.cview(), 5e-5, 1e-2);
+    Fermi_sampler fbz(eigvals.cview(), kB*T);
+    Gaussian_sampler gbz(eigvals.cview(), kB*T);
+    Lorentzian_sampler lbz(eigvals.cview(), kB*T);
     size_t N = 2;
-    MethfesselPaxton_sampler mpbz(eigvals, kB*T, N);
-    ColdSmearing_sampler csbz(eigvals, kB*T);
+    MethfesselPaxton_sampler mpbz(eigvals.cview(), kB*T, N);
+    ColdSmearing_sampler csbz(eigvals.cview(), kB*T);
 
     Linear_mesh<1, double> mesh(-5, 5, 1001);
 

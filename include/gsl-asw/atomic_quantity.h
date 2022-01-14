@@ -2,55 +2,117 @@
 #define ATOMIC_QUANTITY_H
 #include <vector>
 #include <functional>
-#include "GSLpp/vector.h"
-#include "atom.h"
-#include "crystal.h"
+#include <GSLpp/block.h>
+#include <GSLpp/matrix.h>
 #include "xc_func.h"
-#include "site.h"
-#include <numerical-mesh.h>
+#include <numerical-mesh/numerical-mesh.h>
+
+class Atomic_quantity;
+class Potential;
+class Density;
 
 class Atomic_quantity{
-    friend class Augmented_spherical_wave;
 protected:
-
-    const Crystal_t<3,Atom>& cr;
-    const std::vector<Exponential_mesh<1, double>>& at_meshes;
-    std::vector<std::vector<double>> val;
+    std::vector<size_t> mesh_lengths_m, lmax_m;
+    bool spinpol_m;
 
 public:
-    Atomic_quantity(const Crystal_t<3, Atom>& cr, const std::vector<Exponential_mesh<1, double>>& at_meshes);
+    Atomic_quantity() = default;
+    Atomic_quantity(const Atomic_quantity&) = default;
+    Atomic_quantity(Atomic_quantity&&) = default;
+    virtual ~Atomic_quantity(){}
 
-    double operator()(const GSL::Vector& r);
+    Atomic_quantity(const std::vector<size_t>& mesh_lengths, const std::vector<size_t>& lmax, bool spinpol)
+     : mesh_lengths_m(mesh_lengths), lmax_m(lmax), spinpol_m(spinpol)
+    {}
 
-    std::vector<double>& sphere(const size_t i){return val[i];}
+    Atomic_quantity& operator=(const Atomic_quantity&) = default;
+    Atomic_quantity& operator=(Atomic_quantity&&) = default;
+    
+    size_t n_at() const {return lmax_m.size();}
+    
+    const std::vector<size_t>& mesh_lengths() const { return mesh_lengths_m;}
+    const std::vector<size_t>& lmax() const { return lmax_m;}
+    
+    bool spinpol() const {return spinpol_m;}
 };
 
 class Potential : public Atomic_quantity{
-    std::vector<std::vector<double>> electrostatic, exchange_correlation;
-    std::function<double(const size_t, const double)> at_pot;
-    double MT_0;
 
-    double Xi0(const Site_t<3>& j, const double r);
+    GSL::Block atomic_m, hartree_m, exchange_correlation_pot_m, exchange_correlation_energy_m;
+    Xc_func xc_fun_m;
+
+    // double Xi0(const Site_t<3>& j, const double r);
+
+    void initial_pot(const std::vector<Exponential_mesh<1, double>>& at_meshes, const std::vector<size_t>& zs, const Density& rho);
+    void calc_atomic(const std::vector<Exponential_mesh<1, double>>& at_meshes, const std::vector<size_t>& zs);
+    void calc_Hartree(const std::vector<Exponential_mesh<1, double>>& at_meshes, const Density& rho);
+    void calc_XC(const Density& rho);
 
 public:
-    Xc_func xc_fun;
-    void initial_pot(double vol);
+    Potential() = default;
+    Potential(const Potential&) = default;
+    Potential(Potential&&) = default;
+    ~Potential(){}
 
-    double MT0(){return MT_0;};
+    Potential(const std::vector<Exponential_mesh<1, double>>& at_meshes, const std::vector<size_t>& zs, const std::vector<size_t>& l_max,
+             const Density& rho, Xc_func xcf, bool spinpol = false);
+    Potential& operator=(const Potential&) = default;
+    Potential& operator=(Potential&&) = default;
 
-    Potential(const Crystal_t<3, Atom>& cryst, const std::vector<Exponential_mesh<1, double>>& at_meshes,
-        std::function<double(const size_t Z, const double r)> atomic_potential =
-        [](const size_t Z, const double r){
-            return -2.*static_cast<double>(Z)/r;
-        });
+    double MT0(){return 0;}
 
-    void set_xc_fun(XC_FUN xc_func);
+    GSL::Vector::View atomic(const size_t i);
+    GSL::Vector::Const_View atomic(const size_t i) const;
+
+    GSL::Matrix::View Hartree(const size_t i);
+    GSL::Matrix::Const_View Hartree(const size_t i) const;
+    GSL::Vector::View Hartree(const size_t i, const size_t l);
+    GSL::Vector::Const_View Hartree(const size_t i, const size_t l) const;
+
+    GSL::Matrix::View Vxc(const size_t i);
+    GSL::Matrix::Const_View Vxc(const size_t i) const;
+    GSL::Vector::View Vxc(const size_t i, const size_t l);
+    GSL::Vector::Const_View Vxc(const size_t i, const size_t l) const;
+
+    const GSL::Matrix tot(const size_t i) const;
+    const GSL::Vector tot(const size_t i, const size_t l) const;
+/**/
+    GSL::Matrix::View exc(const size_t i);
+    GSL::Matrix::Const_View exc(const size_t i) const;
+    GSL::Vector::View exc(const size_t i, const size_t l);
+    GSL::Vector::Const_View exc(const size_t i, const size_t l) const;
+
+    void calc_pot(const std::vector<Exponential_mesh<1, double>>& at_meshes, const Density& rho);
+
 };
 
 class Density : public Atomic_quantity{
-    std::vector<double> valence, core;
-
+    GSL::Block valence_m, core_m;
 public:
-    Density(const Crystal_t<3,Atom>&, std::vector<Exponential_mesh<1, double>>&);
+    Density() = default;
+    Density(const Density&) = default;
+    Density(Density&&) = default;
+    ~Density(){}
+
+    Density(const std::vector<Exponential_mesh<1, double>>& at_meshes, const std::vector<size_t>& l_max,
+            bool spinpol = false);
+
+    Density(const std::vector<size_t>& mesh_lengths, const std::vector<size_t> l_max,
+        bool spinpol = false);
+
+    GSL::Matrix::View valence(size_t i);
+    GSL::Matrix::Const_View valence(size_t i) const;
+    GSL::Vector::View valence(size_t i, size_t l);
+    GSL::Vector::Const_View valence(size_t i, size_t l) const;
+
+    GSL::Vector::View core(size_t i);
+    GSL::Vector::Const_View core(size_t i) const;
+
+    GSL::Vector tot(size_t i) const;
+
+    Density& operator=(const Density&) = default;
+    Density& operator=(Density&&) = default;
+
 };
 #endif // ATOMIC_QUANTITY_H

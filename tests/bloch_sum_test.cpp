@@ -1,8 +1,8 @@
-#include "../src/bloch_sum.h"
-#include "../src/crystal.h"
-#include "../src/atom.h"
-#include "../src/log_mesh.h"
-#include "GSLpp/vector.h"
+#include <bloch_sum.h>
+#include <crystal.h>
+#include <atom.h>
+#include <log_mesh.h>
+#include <GSLpp/vector.h>
 #include <gtest/gtest.h>
 #include <array>
 #include <iostream>
@@ -41,8 +41,8 @@ TEST(BlochSum, Negate)
     Bloch_sum D1, D2;
     for(lm l = {4, 0, 0}; l != lm {5, 0, 0}; l++){
         for(int i = -1000; i <= 1000; i += 50){
-            for(auto tau : R_vecs){
-                for(auto k : K_vecs){
+            for(const auto& tau : R_vecs){
+                for(const auto& k : K_vecs){
                             // EXPECT_DOUBLE_EQ(D(-tau*cr.lat().lat(), k*cr.lat().recip_lat()).re(), D(tau*cr.lat().lat(), -k*cr.lat().recip_lat()).re());
                             // EXPECT_DOUBLE_EQ(D(-tau*cr.lat().lat(), k*cr.lat().recip_lat()).im(), D(tau*cr.lat().lat(), -k*cr.lat().recip_lat()).im());
                             // ASSERT_DOUBLE_EQ(D(-tau*cr.lat().lat(), k*cr.lat().recip_lat()).re(), D(tau*cr.lat().lat(), -k*cr.lat().recip_lat()).re());
